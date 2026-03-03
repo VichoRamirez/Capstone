@@ -1,0 +1,901 @@
+﻿SKU,Descripción SKU,Largo_cm,Ancho_cm,Alto_cm,Volumen_unitario_m3,Peso_unitario_kg,Tipo_embalaje
+SKU-00001,Martillo carpintero,33.4,11.5,4.1,0.001575,1.006,A granel
+SKU-00002,Escalera aluminio 4 peldaños,118.8,44.3,14.5,0.076311,7.662,Embalaje personalizado
+SKU-00003,Cinta aisladora,10.1,9.8,1.9,0.000188,0.131,A granel
+SKU-00004,Silicona cartucho,22.8,4.9,5.1,0.00057,0.29,A granel
+SKU-00005,Lámpara mesa,36.5,24.7,24.7,0.022268,2.362,Caja propia
+SKU-00006,Monitor 24 pulgadas,59.2,46.1,14.7,0.040118,5.129,Caja propia
+SKU-00007,Caja herramientas plástica,51.8,28.7,24.9,0.037018,3.518,Caja propia
+SKU-00008,Manguera jardín 20m,36.7,35.9,14.8,0.019499,3.855,A granel
+SKU-00009,Escalera aluminio 4 peldaños,117.3,43.1,15.5,0.078362,8.18,Embalaje personalizado
+SKU-00010,Router WiFi,24.8,20.0,7.8,0.003869,0.692,Caja propia
+SKU-00011,Router WiFi,25.4,20.1,8.1,0.004135,0.693,Caja propia
+SKU-00012,Taladro eléctrico,37.4,28.5,9.5,0.010126,2.872,Caja propia
+SKU-00013,Reloj pared,35.0,35.0,8.3,0.010167,1.092,Caja propia
+SKU-00014,Florero cerámica,24.9,26.0,39.1,0.025313,2.656,Caja propia
+SKU-00015,Teclado inalámbrico,45.9,17.6,5.1,0.00412,0.865,Caja propia
+SKU-00016,Amoladora angular,38.9,32.8,12.2,0.015566,2.85,Caja propia
+SKU-00017,Llave ajustable 8 pulgadas,24.5,7.9,3.1,0.0006,0.593,A granel
+SKU-00018,Taladro eléctrico,39.9,30.6,9.9,0.012087,3.05,Caja propia
+SKU-00019,Rodillo pintura,31.3,25.1,8.3,0.006521,0.402,A granel
+SKU-00020,Tarugos nylon bolsa 50u,12.3,8.0,3.0,0.000295,0.267,A granel
+SKU-00021,Sierra circular,43.4,35.3,14.6,0.022367,5.344,Caja propia
+SKU-00022,Caja herramientas plástica,50.6,29.3,24.5,0.036323,3.339,Caja propia
+SKU-00023,Martillo carpintero,30.7,11.7,3.8,0.001365,0.944,A granel
+SKU-00024,Taladro eléctrico,36.1,30.5,9.7,0.01068,2.84,Caja propia
+SKU-00025,Manguera jardín 20m,35.1,33.7,14.4,0.017033,4.588,A granel
+SKU-00026,Silicona cartucho,23.9,5.2,5.2,0.000646,0.302,A granel
+SKU-00027,Cuadro decorativo 60x40,66.0,43.4,6.1,0.017473,2.887,Caja propia
+SKU-00028,Espejo pared 80x60,93.2,69.2,8.3,0.05353,7.8,Caja propia
+SKU-00029,Escalera aluminio 4 peldaños,114.2,44.7,15.3,0.078103,7.729,Embalaje personalizado
+SKU-00030,Escalera aluminio 4 peldaños,123.2,43.2,14.9,0.079301,8.327,Embalaje personalizado
+SKU-00031,Cinta aisladora,9.8,9.6,2.0,0.000188,0.111,A granel
+SKU-00032,Parlante Bluetooth,24.1,11.5,11.7,0.003243,1.009,Caja propia
+SKU-00033,Cámara seguridad,20.9,15.5,10.0,0.00324,0.603,Caja propia
+SKU-00034,Monitor 24 pulgadas,59.9,45.7,14.4,0.039419,5.0,Caja propia
+SKU-00035,Cable eléctrico 10m,26.0,26.1,7.8,0.005293,1.13,A granel
+SKU-00036,Monitor 24 pulgadas,61.8,46.6,14.8,0.042622,4.878,Caja propia
+SKU-00037,Cable eléctrico 10m,24.9,26.0,7.6,0.00492,1.126,A granel
+SKU-00038,Florero cerámica,25.4,25.2,38.8,0.024835,2.383,Caja propia
+SKU-00039,Clavos caja 1kg,14.9,10.4,6.1,0.000945,1.001,A granel
+SKU-00040,Teclado inalámbrico,44.1,17.4,5.2,0.00399,0.873,Caja propia
+SKU-00041,Tarugos nylon bolsa 50u,11.5,8.3,2.9,0.000277,0.257,A granel
+SKU-00042,Router WiFi,25.8,19.2,8.2,0.004062,0.698,Caja propia
+SKU-00043,Mouse óptico,14.5,10.0,5.1,0.000739,0.188,Caja propia
+SKU-00044,Escalera aluminio 4 peldaños,124.1,46.2,15.3,0.087721,7.788,Embalaje personalizado
+SKU-00045,Cinta aisladora,9.8,10.0,2.1,0.000206,0.109,A granel
+SKU-00046,Sierra circular,44.6,35.0,15.7,0.024508,5.452,Caja propia
+SKU-00047,Smartphone caja,17.7,10.0,5.1,0.000903,0.581,Caja propia
+SKU-00048,Alicate universal,22.4,6.7,3.1,0.000465,0.346,A granel
+SKU-00049,Notebook 15 pulgadas,38.3,30.1,6.0,0.006917,2.093,Caja propia
+SKU-00050,Tornillos caja 100u,8.3,6.0,3.9,0.000194,0.459,A granel
+SKU-00051,Manguera jardín 20m,34.7,36.1,15.6,0.019542,4.042,A granel
+SKU-00052,Florero cerámica,23.9,25.1,41.3,0.024775,2.52,Caja propia
+SKU-00053,Estantería modular,102.1,47.7,19.3,0.093994,11.995,Caja propia
+SKU-00054,Llave ajustable 8 pulgadas,26.2,8.1,3.1,0.000658,0.54,A granel
+SKU-00055,Router WiFi,25.4,19.3,7.6,0.003726,0.775,Caja propia
+SKU-00056,Parlante Bluetooth,25.2,11.6,11.7,0.00342,0.984,Caja propia
+SKU-00057,Alicate universal,22.0,7.2,3.0,0.000475,0.317,A granel
+SKU-00058,Router WiFi,26.2,19.0,8.0,0.003982,0.801,Caja propia
+SKU-00059,Notebook 15 pulgadas,39.5,28.9,6.0,0.006849,2.145,Caja propia
+SKU-00060,Caja herramientas plástica,49.9,31.2,25.1,0.039078,3.453,Caja propia
+SKU-00061,Alicate universal,23.1,7.0,3.0,0.000485,0.366,A granel
+SKU-00062,Parlante Bluetooth,25.8,12.5,12.4,0.003999,1.038,Caja propia
+SKU-00063,Caja herramientas plástica,52.4,31.0,24.8,0.040285,3.424,Caja propia
+SKU-00064,Florero cerámica,24.5,26.2,40.2,0.025804,2.422,Caja propia
+SKU-00065,Parlante Bluetooth,24.7,12.4,12.3,0.003767,0.9,Caja propia
+SKU-00066,Broca acero 10mm,21.0,5.2,3.1,0.000339,0.179,A granel
+SKU-00067,Mouse óptico,14.8,10.0,5.1,0.000755,0.181,Caja propia
+SKU-00068,Mouse óptico,15.5,10.1,5.0,0.000783,0.201,Caja propia
+SKU-00069,Florero cerámica,25.9,23.9,41.4,0.025627,2.396,Caja propia
+SKU-00070,Cable eléctrico 10m,25.0,26.1,7.7,0.005024,1.271,A granel
+SKU-00071,Manguera jardín 20m,33.8,34.8,15.1,0.017761,3.973,A granel
+SKU-00072,Reloj pared,33.9,34.4,8.4,0.009796,1.189,Caja propia
+SKU-00073,Estantería modular,98.6,49.5,19.6,0.095662,13.199,Caja propia
+SKU-00074,Tablet 10 pulgadas,28.3,20.3,6.1,0.003504,0.984,Caja propia
+SKU-00075,Espejo pared 80x60,90.2,70.1,7.6,0.048055,7.844,Caja propia
+SKU-00076,Notebook 15 pulgadas,38.6,30.5,5.8,0.006828,2.011,Caja propia
+SKU-00077,Taladro eléctrico,38.3,29.2,9.5,0.010624,2.855,Caja propia
+SKU-00078,Martillo carpintero,30.5,12.2,4.0,0.001488,0.902,A granel
+SKU-00079,Alicate universal,21.0,6.7,3.1,0.000436,0.372,A granel
+SKU-00080,Taladro eléctrico,39.0,29.7,9.7,0.011236,3.055,Caja propia
+SKU-00081,Cámara seguridad,20.2,15.5,9.9,0.0031,0.701,Caja propia
+SKU-00082,Llave ajustable 8 pulgadas,24.6,8.0,2.9,0.000571,0.63,A granel
+SKU-00083,Interruptor eléctrico,11.8,8.2,6.3,0.00061,0.164,A granel
+SKU-00084,Sierra circular,43.2,34.4,15.2,0.022588,5.382,Caja propia
+SKU-00085,Smartphone caja,17.4,10.1,5.1,0.000896,0.65,Caja propia
+SKU-00086,Pintura látex 4L,20.3,19.1,23.8,0.009228,4.657,Caja propia
+SKU-00087,Caja herramientas plástica,52.4,31.4,25.6,0.042121,3.28,Caja propia
+SKU-00088,Router WiFi,23.9,19.9,8.4,0.003995,0.798,Caja propia
+SKU-00089,Espejo pared 80x60,86.2,68.8,8.2,0.048631,7.542,Caja propia
+SKU-00090,Lámpara mesa,34.9,26.0,26.1,0.023683,2.365,Caja propia
+SKU-00091,Lámpara mesa,35.6,24.4,26.1,0.022672,2.358,Caja propia
+SKU-00092,Silicona cartucho,22.8,4.9,5.2,0.000581,0.307,A granel
+SKU-00093,Rodillo pintura,30.6,25.3,8.1,0.006271,0.387,A granel
+SKU-00094,Pintura látex 4L,20.1,20.6,24.6,0.010186,4.769,Caja propia
+SKU-00095,Caja herramientas plástica,51.6,28.7,25.6,0.037912,3.706,Caja propia
+SKU-00096,Amoladora angular,39.9,32.0,11.7,0.014939,2.837,Caja propia
+SKU-00097,Cable eléctrico 10m,23.9,25.5,7.9,0.004815,1.208,A granel
+SKU-00098,Cuadro decorativo 60x40,66.3,44.9,6.2,0.018457,2.903,Caja propia
+SKU-00099,Smartphone caja,18.1,10.1,5.0,0.000914,0.597,Caja propia
+SKU-00100,Smart TV 43 pulgadas,107.1,70.0,14.4,0.107957,12.513,Caja propia
+SKU-00101,Cinta aisladora,9.5,10.2,2.0,0.000194,0.123,A granel
+SKU-00102,Estantería modular,102.2,49.1,19.8,0.099357,10.883,Caja propia
+SKU-00103,Pintura látex 1L,12.4,12.2,14.0,0.002118,1.321,Caja propia
+SKU-00104,Estantería modular,95.7,48.8,20.5,0.095738,10.99,Caja propia
+SKU-00105,Interruptor eléctrico,12.2,8.4,6.3,0.000646,0.163,A granel
+SKU-00106,Parlante Bluetooth,25.8,12.1,11.9,0.003715,1.036,Caja propia
+SKU-00107,Silicona cartucho,22.7,4.8,5.2,0.000567,0.328,A granel
+SKU-00108,Espejo pared 80x60,87.9,67.3,8.2,0.048508,7.282,Caja propia
+SKU-00109,Notebook 15 pulgadas,39.6,29.1,6.1,0.007029,1.957,Caja propia
+SKU-00110,Pintura látex 1L,11.9,11.9,14.6,0.002068,1.372,Caja propia
+SKU-00111,Llave ajustable 8 pulgadas,25.6,7.9,2.9,0.000586,0.587,A granel
+SKU-00112,Rodillo pintura,31.0,25.1,8.3,0.006458,0.371,A granel
+SKU-00113,Broca acero 10mm,20.1,4.8,3.0,0.000289,0.168,A granel
+SKU-00114,Martillo carpintero,32.2,11.4,3.9,0.001432,0.969,A granel
+SKU-00115,Interruptor eléctrico,11.9,8.2,6.1,0.000595,0.158,A granel
+SKU-00116,Monitor 24 pulgadas,59.1,44.5,15.2,0.039975,4.474,Caja propia
+SKU-00117,Amoladora angular,39.8,31.0,12.4,0.015299,3.125,Caja propia
+SKU-00118,Broca acero 10mm,20.9,4.8,3.1,0.000311,0.173,A granel
+SKU-00119,Tornillos caja 100u,7.6,6.1,3.9,0.000181,0.454,A granel
+SKU-00120,Smart TV 43 pulgadas,110.4,68.3,14.9,0.112351,12.669,Caja propia
+SKU-00121,Caja herramientas plástica,50.2,30.9,23.8,0.036918,3.67,Caja propia
+SKU-00122,Pintura látex 1L,11.4,11.8,13.7,0.001843,1.288,Caja propia
+SKU-00123,Silicona cartucho,23.4,5.1,4.8,0.000573,0.274,A granel
+SKU-00124,Parlante Bluetooth,25.3,11.5,11.6,0.003375,0.913,Caja propia
+SKU-00125,Notebook 15 pulgadas,38.9,28.6,5.8,0.006453,2.115,Caja propia
+SKU-00126,Tablet 10 pulgadas,27.1,19.9,6.1,0.00329,0.989,Caja propia
+SKU-00127,Clavos caja 1kg,15.5,10.3,5.9,0.000942,1.098,A granel
+SKU-00128,Notebook 15 pulgadas,39.1,30.7,6.3,0.007562,2.267,Caja propia
+SKU-00129,Smartphone caja,17.9,9.7,5.0,0.000868,0.654,Caja propia
+SKU-00130,Notebook 15 pulgadas,40.7,30.5,6.0,0.007448,2.12,Caja propia
+SKU-00131,Espejo pared 80x60,93.6,67.0,7.9,0.049542,7.816,Caja propia
+SKU-00132,Martillo carpintero,30.5,12.3,3.9,0.001463,0.91,A granel
+SKU-00133,Cuadro decorativo 60x40,63.6,44.1,6.0,0.016829,2.608,Caja propia
+SKU-00134,Silicona cartucho,23.5,5.0,4.8,0.000564,0.297,A granel
+SKU-00135,Amoladora angular,41.4,33.4,11.6,0.01604,3.13,Caja propia
+SKU-00136,Tornillos caja 100u,7.9,6.3,3.8,0.000189,0.439,A granel
+SKU-00137,Monitor 24 pulgadas,59.7,46.0,14.9,0.040918,5.07,Caja propia
+SKU-00138,Interruptor eléctrico,12.2,7.9,5.7,0.000549,0.136,A granel
+SKU-00139,Monitor 24 pulgadas,60.7,45.9,14.3,0.039842,4.856,Caja propia
+SKU-00140,Caja herramientas plástica,48.9,29.5,24.8,0.035775,3.446,Caja propia
+SKU-00141,Router WiFi,24.8,19.2,7.6,0.003619,0.793,Caja propia
+SKU-00142,Escalera aluminio 4 peldaños,118.1,46.3,15.4,0.084208,7.637,Embalaje personalizado
+SKU-00143,Estantería modular,100.7,48.4,20.8,0.101377,13.023,Caja propia
+SKU-00144,Manguera jardín 20m,34.5,35.0,15.3,0.018475,4.256,A granel
+SKU-00145,Pintura látex 1L,12.6,11.9,13.5,0.002024,1.22,Caja propia
+SKU-00146,Pintura látex 1L,11.6,11.8,13.6,0.001862,1.319,Caja propia
+SKU-00147,Reloj pared,36.4,36.2,7.8,0.010278,1.094,Caja propia
+SKU-00148,Rodillo pintura,30.1,23.8,7.8,0.005588,0.366,A granel
+SKU-00149,Cuadro decorativo 60x40,62.9,45.4,5.8,0.016563,2.93,Caja propia
+SKU-00150,Florero cerámica,24.7,25.8,41.1,0.026191,2.748,Caja propia
+SKU-00151,Florero cerámica,26.2,24.9,39.1,0.025508,2.568,Caja propia
+SKU-00152,Smart TV 43 pulgadas,107.3,72.7,15.5,0.120911,13.432,Caja propia
+SKU-00153,Mouse óptico,15.6,9.7,5.2,0.000787,0.195,Caja propia
+SKU-00154,Broca acero 10mm,20.6,5.1,3.1,0.000326,0.168,A granel
+SKU-00155,Monitor 24 pulgadas,58.7,46.8,14.3,0.039284,4.776,Caja propia
+SKU-00156,Silicona cartucho,23.3,5.0,5.0,0.000583,0.302,A granel
+SKU-00157,Lámpara mesa,33.5,25.7,25.3,0.021782,2.202,Caja propia
+SKU-00158,Alicate universal,21.5,7.3,3.0,0.000471,0.34,A granel
+SKU-00159,Rodillo pintura,31.2,25.0,7.9,0.006162,0.427,A granel
+SKU-00160,Pintura látex 4L,19.8,20.6,24.8,0.010115,5.332,Caja propia
+SKU-00161,Rodillo pintura,29.0,24.5,8.2,0.005826,0.404,A granel
+SKU-00162,Lámpara mesa,36.5,23.8,24.7,0.021457,2.16,Caja propia
+SKU-00163,Pintura látex 1L,12.1,12.2,13.3,0.001963,1.214,Caja propia
+SKU-00164,Tablet 10 pulgadas,27.2,19.3,5.9,0.003097,0.981,Caja propia
+SKU-00165,Alicate universal,22.1,6.9,3.0,0.000457,0.364,A granel
+SKU-00166,Interruptor eléctrico,11.8,8.3,6.2,0.000607,0.15,A granel
+SKU-00167,Broca acero 10mm,19.6,5.0,2.9,0.000284,0.197,A granel
+SKU-00168,Pintura látex 4L,20.0,19.9,24.5,0.009751,4.893,Caja propia
+SKU-00169,Interruptor eléctrico,11.6,7.9,6.0,0.00055,0.155,A granel
+SKU-00170,Tornillos caja 100u,8.1,5.8,3.9,0.000183,0.481,A granel
+SKU-00171,Taladro eléctrico,39.5,30.7,10.4,0.012612,2.576,Caja propia
+SKU-00172,Sierra circular,42.9,33.7,15.6,0.022553,5.881,Caja propia
+SKU-00173,Cinta aisladora,10.2,9.7,2.0,0.000198,0.128,A granel
+SKU-00174,Cámara seguridad,19.5,14.5,10.5,0.002969,0.667,Caja propia
+SKU-00175,Clavos caja 1kg,15.3,9.6,6.2,0.000911,1.025,A granel
+SKU-00176,Pintura látex 1L,12.4,12.3,14.2,0.002166,1.256,Caja propia
+SKU-00177,Cuadro decorativo 60x40,63.8,45.3,6.1,0.01763,2.898,Caja propia
+SKU-00178,Router WiFi,26.2,20.5,7.7,0.004136,0.787,Caja propia
+SKU-00179,Parlante Bluetooth,25.2,12.5,11.6,0.003654,0.997,Caja propia
+SKU-00180,Mouse óptico,15.2,9.9,5.0,0.000752,0.18,Caja propia
+SKU-00181,Cámara seguridad,20.4,15.1,10.1,0.003111,0.658,Caja propia
+SKU-00182,Caja herramientas plástica,52.0,31.5,25.1,0.041114,3.503,Caja propia
+SKU-00183,Smart TV 43 pulgadas,108.8,71.5,15.6,0.121356,12.811,Caja propia
+SKU-00184,Monitor 24 pulgadas,61.9,42.8,15.3,0.040535,4.752,Caja propia
+SKU-00185,Alicate universal,22.1,6.8,3.1,0.000466,0.343,A granel
+SKU-00186,Cable eléctrico 10m,25.1,24.5,7.9,0.004858,1.316,A granel
+SKU-00187,Espejo pared 80x60,88.0,71.5,8.4,0.052853,7.458,Caja propia
+SKU-00188,Florero cerámica,25.2,26.0,41.5,0.027191,2.586,Caja propia
+SKU-00189,Smartphone caja,18.5,10.4,5.2,0.001,0.588,Caja propia
+SKU-00190,Taladro eléctrico,37.6,30.0,9.7,0.010942,3.02,Caja propia
+SKU-00191,Pintura látex 4L,20.5,19.6,24.2,0.009724,5.118,Caja propia
+SKU-00192,Florero cerámica,25.0,23.8,41.2,0.024514,2.551,Caja propia
+SKU-00193,Florero cerámica,24.2,25.8,38.6,0.0241,2.376,Caja propia
+SKU-00194,Escalera aluminio 4 peldaños,118.1,46.7,15.6,0.086038,8.517,Embalaje personalizado
+SKU-00195,Smart TV 43 pulgadas,108.9,66.8,14.7,0.106935,12.165,Caja propia
+SKU-00196,Tornillos caja 100u,8.1,6.2,4.1,0.000206,0.477,A granel
+SKU-00197,Estantería modular,98.8,48.6,20.2,0.096994,11.722,Caja propia
+SKU-00198,Llave ajustable 8 pulgadas,24.0,8.3,3.1,0.000618,0.595,A granel
+SKU-00199,Mouse óptico,14.7,9.9,5.0,0.000728,0.216,Caja propia
+SKU-00200,Smartphone caja,18.7,10.4,5.1,0.000992,0.656,Caja propia
+SKU-00201,Caja herramientas plástica,47.5,30.0,24.9,0.035483,3.517,Caja propia
+SKU-00202,Tablet 10 pulgadas,29.1,19.4,6.0,0.003387,0.967,Caja propia
+SKU-00203,Silicona cartucho,23.5,5.2,4.9,0.000599,0.272,A granel
+SKU-00204,Tarugos nylon bolsa 50u,12.0,7.8,3.0,0.000281,0.266,A granel
+SKU-00205,Cuadro decorativo 60x40,66.1,43.4,6.1,0.017499,2.593,Caja propia
+SKU-00206,Escalera aluminio 4 peldaños,120.0,45.5,15.6,0.085176,7.543,Embalaje personalizado
+SKU-00207,Cable eléctrico 10m,25.6,25.1,8.3,0.005333,1.18,A granel
+SKU-00208,Clavos caja 1kg,15.0,9.8,6.2,0.000911,1.109,A granel
+SKU-00209,Monitor 24 pulgadas,57.1,45.2,14.3,0.036907,5.266,Caja propia
+SKU-00210,Tablet 10 pulgadas,29.2,19.2,5.8,0.003252,0.831,Caja propia
+SKU-00211,Cinta aisladora,10.3,9.6,2.0,0.000198,0.116,A granel
+SKU-00212,Taladro eléctrico,37.4,30.9,9.5,0.010979,2.656,Caja propia
+SKU-00213,Tarugos nylon bolsa 50u,12.2,8.1,3.1,0.000306,0.226,A granel
+SKU-00214,Pintura látex 1L,12.4,12.5,14.5,0.002247,1.242,Caja propia
+SKU-00215,Router WiFi,24.0,19.8,8.1,0.003849,0.692,Caja propia
+SKU-00216,Smart TV 43 pulgadas,110.5,71.1,14.5,0.11392,12.989,Caja propia
+SKU-00217,Espejo pared 80x60,92.6,71.9,8.3,0.055261,7.168,Caja propia
+SKU-00218,Smart TV 43 pulgadas,108.1,67.4,14.5,0.105646,12.527,Caja propia
+SKU-00219,Escalera aluminio 4 peldaños,117.6,46.3,15.5,0.084396,7.601,Embalaje personalizado
+SKU-00220,Rodillo pintura,28.8,24.7,7.7,0.005477,0.436,A granel
+SKU-00221,Silicona cartucho,23.9,5.0,4.9,0.000586,0.278,A granel
+SKU-00222,Pintura látex 1L,12.0,11.4,13.4,0.001833,1.199,Caja propia
+SKU-00223,Manguera jardín 20m,34.8,34.5,14.7,0.017649,3.993,A granel
+SKU-00224,Cinta aisladora,10.1,10.3,2.0,0.000208,0.131,A granel
+SKU-00225,Amoladora angular,39.0,31.7,12.0,0.014836,3.174,Caja propia
+SKU-00226,Alicate universal,21.9,7.3,3.0,0.00048,0.356,A granel
+SKU-00227,Reloj pared,33.6,33.8,8.3,0.009426,1.087,Caja propia
+SKU-00228,Smartphone caja,18.6,9.8,5.0,0.000911,0.558,Caja propia
+SKU-00229,Notebook 15 pulgadas,41.0,29.5,5.8,0.007015,2.002,Caja propia
+SKU-00230,Cuadro decorativo 60x40,66.3,47.2,5.9,0.018463,2.985,Caja propia
+SKU-00231,Tarugos nylon bolsa 50u,12.3,8.0,2.9,0.000285,0.238,A granel
+SKU-00232,Estantería modular,95.7,52.4,19.5,0.097786,12.13,Caja propia
+SKU-00233,Escalera aluminio 4 peldaños,118.5,44.9,14.9,0.079278,8.662,Embalaje personalizado
+SKU-00234,Alicate universal,21.9,6.9,2.9,0.000438,0.351,A granel
+SKU-00235,Martillo carpintero,32.6,11.7,4.1,0.001564,0.968,A granel
+SKU-00236,Escalera aluminio 4 peldaños,118.2,47.0,14.7,0.081664,8.349,Embalaje personalizado
+SKU-00237,Alicate universal,21.2,6.7,3.0,0.000426,0.383,A granel
+SKU-00238,Tablet 10 pulgadas,27.1,19.5,6.3,0.003329,0.83,Caja propia
+SKU-00239,Manguera jardín 20m,35.2,34.6,15.6,0.019,3.884,A granel
+SKU-00240,Cable eléctrico 10m,26.1,26.0,8.3,0.005632,1.244,A granel
+SKU-00241,Cable eléctrico 10m,25.5,25.7,8.2,0.005374,1.203,A granel
+SKU-00242,Clavos caja 1kg,15.4,10.4,6.2,0.000993,0.98,A granel
+SKU-00243,Pintura látex 4L,19.7,19.8,24.4,0.009517,5.44,Caja propia
+SKU-00244,Pintura látex 1L,12.0,11.9,14.1,0.002013,1.327,Caja propia
+SKU-00245,Espejo pared 80x60,94.3,67.2,8.1,0.051329,7.978,Caja propia
+SKU-00246,Tarugos nylon bolsa 50u,11.6,7.6,3.1,0.000273,0.268,A granel
+SKU-00247,Smart TV 43 pulgadas,105.1,66.7,15.0,0.105153,13.01,Caja propia
+SKU-00248,Amoladora angular,40.8,32.2,12.5,0.016422,3.355,Caja propia
+SKU-00249,Caja herramientas plástica,51.3,29.7,24.6,0.037481,3.213,Caja propia
+SKU-00250,Cuadro decorativo 60x40,67.2,46.7,6.2,0.019457,2.763,Caja propia
+SKU-00251,Broca acero 10mm,20.8,5.0,2.9,0.000302,0.181,A granel
+SKU-00252,Interruptor eléctrico,11.5,8.1,6.2,0.000578,0.139,A granel
+SKU-00253,Caja herramientas plástica,50.4,31.1,24.7,0.038716,3.192,Caja propia
+SKU-00254,Monitor 24 pulgadas,61.2,44.7,14.6,0.03994,4.503,Caja propia
+SKU-00255,Smart TV 43 pulgadas,106.8,70.5,15.2,0.114447,12.272,Caja propia
+SKU-00256,Alicate universal,21.1,6.7,2.9,0.00041,0.342,A granel
+SKU-00257,Llave ajustable 8 pulgadas,26.2,7.6,3.1,0.000617,0.654,A granel
+SKU-00258,Caja herramientas plástica,50.7,30.1,24.9,0.037999,3.475,Caja propia
+SKU-00259,Sierra circular,44.0,36.6,14.9,0.023995,5.162,Caja propia
+SKU-00260,Tablet 10 pulgadas,28.1,19.7,5.8,0.003211,0.823,Caja propia
+SKU-00261,Martillo carpintero,33.2,11.6,4.1,0.001579,0.908,A granel
+SKU-00262,Cable eléctrico 10m,25.0,26.1,7.7,0.005024,1.298,A granel
+SKU-00263,Tablet 10 pulgadas,29.0,20.8,6.0,0.003619,0.888,Caja propia
+SKU-00264,Tornillos caja 100u,8.4,5.9,4.2,0.000208,0.47,A granel
+SKU-00265,Broca acero 10mm,20.2,5.0,3.1,0.000313,0.197,A granel
+SKU-00266,Taladro eléctrico,38.1,29.0,9.9,0.010939,2.835,Caja propia
+SKU-00267,Florero cerámica,24.9,25.7,41.7,0.026685,2.844,Caja propia
+SKU-00268,Manguera jardín 20m,34.8,35.4,15.6,0.019218,3.868,A granel
+SKU-00269,Taladro eléctrico,37.4,28.9,10.2,0.011025,2.725,Caja propia
+SKU-00270,Amoladora angular,41.0,30.6,12.4,0.015557,3.036,Caja propia
+SKU-00271,Cámara seguridad,19.7,15.5,10.0,0.003053,0.629,Caja propia
+SKU-00272,Mouse óptico,15.2,9.6,4.9,0.000715,0.197,Caja propia
+SKU-00273,Manguera jardín 20m,34.2,36.6,14.4,0.018025,3.931,A granel
+SKU-00274,Broca acero 10mm,19.5,5.1,2.9,0.000288,0.181,A granel
+SKU-00275,Llave ajustable 8 pulgadas,24.5,8.4,3.1,0.000638,0.568,A granel
+SKU-00276,Manguera jardín 20m,36.0,34.8,15.0,0.018792,3.823,A granel
+SKU-00277,Pintura látex 1L,11.6,11.6,13.5,0.001817,1.418,Caja propia
+SKU-00278,Cámara seguridad,20.5,15.6,10.0,0.003198,0.612,Caja propia
+SKU-00279,Interruptor eléctrico,11.4,7.8,5.9,0.000525,0.137,A granel
+SKU-00280,Notebook 15 pulgadas,39.7,28.5,5.8,0.006562,1.928,Caja propia
+SKU-00281,Smart TV 43 pulgadas,112.3,68.7,15.7,0.121126,12.064,Caja propia
+SKU-00282,Notebook 15 pulgadas,38.1,29.9,5.7,0.006493,2.169,Caja propia
+SKU-00283,Pintura látex 4L,20.2,20.4,26.1,0.010755,4.911,Caja propia
+SKU-00284,Silicona cartucho,23.1,5.0,5.1,0.000589,0.291,A granel
+SKU-00285,Pintura látex 4L,20.3,20.1,24.5,0.009997,5.4,Caja propia
+SKU-00286,Escalera aluminio 4 peldaños,121.8,44.3,14.6,0.078778,8.579,Embalaje personalizado
+SKU-00287,Rodillo pintura,29.3,24.4,7.9,0.005648,0.43,A granel
+SKU-00288,Llave ajustable 8 pulgadas,25.0,7.8,3.1,0.000605,0.642,A granel
+SKU-00289,Florero cerámica,23.8,23.9,41.5,0.023606,2.53,Caja propia
+SKU-00290,Reloj pared,35.6,36.4,8.3,0.010755,1.169,Caja propia
+SKU-00291,Taladro eléctrico,39.6,30.8,10.3,0.012563,2.92,Caja propia
+SKU-00292,Llave ajustable 8 pulgadas,24.0,7.7,3.1,0.000573,0.573,A granel
+SKU-00293,Clavos caja 1kg,15.4,10.3,6.3,0.000999,1.095,A granel
+SKU-00294,Clavos caja 1kg,14.5,10.3,6.1,0.000911,0.98,A granel
+SKU-00295,Tornillos caja 100u,7.7,6.3,4.1,0.000199,0.406,A granel
+SKU-00296,Espejo pared 80x60,88.8,68.0,7.6,0.045892,6.83,Caja propia
+SKU-00297,Reloj pared,35.3,34.4,8.1,0.009836,1.138,Caja propia
+SKU-00298,Tablet 10 pulgadas,28.3,19.3,6.0,0.003277,0.853,Caja propia
+SKU-00299,Sierra circular,46.0,33.6,15.1,0.023339,5.069,Caja propia
+SKU-00300,Caja herramientas plástica,52.4,29.0,26.1,0.039662,3.205,Caja propia
+SKU-00301,Cable eléctrico 10m,26.0,24.2,7.8,0.004908,1.11,A granel
+SKU-00302,Alicate universal,21.9,6.8,2.9,0.000432,0.372,A granel
+SKU-00303,Pintura látex 1L,12.4,12.6,13.5,0.002109,1.33,Caja propia
+SKU-00304,Mouse óptico,15.0,9.5,5.1,0.000727,0.196,Caja propia
+SKU-00305,Cinta aisladora,10.1,9.6,1.9,0.000184,0.123,A granel
+SKU-00306,Manguera jardín 20m,33.7,36.5,15.4,0.018943,4.01,A granel
+SKU-00307,Broca acero 10mm,20.4,5.0,3.0,0.000306,0.193,A granel
+SKU-00308,Espejo pared 80x60,91.2,70.0,8.0,0.051072,7.304,Caja propia
+SKU-00309,Router WiFi,24.7,20.3,8.0,0.004011,0.698,Caja propia
+SKU-00310,Alicate universal,21.8,6.9,3.1,0.000466,0.36,A granel
+SKU-00311,Smart TV 43 pulgadas,110.3,67.6,14.9,0.111099,11.768,Caja propia
+SKU-00312,Smart TV 43 pulgadas,107.4,68.6,14.5,0.106831,12.838,Caja propia
+SKU-00313,Caja herramientas plástica,48.0,30.1,25.5,0.036842,3.672,Caja propia
+SKU-00314,Interruptor eléctrico,11.7,8.2,5.9,0.000566,0.157,A granel
+SKU-00315,Pintura látex 4L,19.4,20.5,24.6,0.009783,4.831,Caja propia
+SKU-00316,Cinta aisladora,10.4,10.5,2.0,0.000218,0.114,A granel
+SKU-00317,Pintura látex 4L,20.2,20.2,24.2,0.009875,4.781,Caja propia
+SKU-00318,Lámpara mesa,36.1,25.5,25.5,0.023474,2.277,Caja propia
+SKU-00319,Clavos caja 1kg,15.5,9.8,5.9,0.000896,1.055,A granel
+SKU-00320,Martillo carpintero,32.8,11.6,4.1,0.00156,0.928,A granel
+SKU-00321,Pintura látex 1L,12.5,12.1,14.2,0.002148,1.254,Caja propia
+SKU-00322,Notebook 15 pulgadas,39.2,30.3,6.2,0.007364,2.256,Caja propia
+SKU-00323,Estantería modular,102.3,50.5,20.6,0.106423,10.822,Caja propia
+SKU-00324,Pintura látex 4L,19.2,20.2,24.5,0.009502,5.583,Caja propia
+SKU-00325,Silicona cartucho,22.1,5.1,4.9,0.000552,0.328,A granel
+SKU-00326,Martillo carpintero,33.2,12.5,4.0,0.00166,0.863,A granel
+SKU-00327,Teclado inalámbrico,44.0,18.7,5.0,0.004114,0.828,Caja propia
+SKU-00328,Parlante Bluetooth,25.3,12.5,11.4,0.003605,1.011,Caja propia
+SKU-00329,Alicate universal,21.7,6.9,3.0,0.000449,0.358,A granel
+SKU-00330,Alicate universal,21.6,7.3,3.1,0.000489,0.381,A granel
+SKU-00331,Caja herramientas plástica,51.1,30.8,23.9,0.037616,3.28,Caja propia
+SKU-00332,Tablet 10 pulgadas,28.4,19.1,5.9,0.0032,0.827,Caja propia
+SKU-00333,Reloj pared,34.0,36.6,7.7,0.009582,1.054,Caja propia
+SKU-00334,Taladro eléctrico,37.6,31.0,9.8,0.011423,2.792,Caja propia
+SKU-00335,Cinta aisladora,9.6,10.1,2.0,0.000194,0.108,A granel
+SKU-00336,Parlante Bluetooth,26.2,12.4,12.5,0.004061,0.957,Caja propia
+SKU-00337,Sierra circular,44.8,36.5,14.8,0.024201,5.433,Caja propia
+SKU-00338,Cámara seguridad,19.8,14.6,10.0,0.002891,0.635,Caja propia
+SKU-00339,Amoladora angular,38.8,30.7,12.1,0.014413,3.062,Caja propia
+SKU-00340,Caja herramientas plástica,47.5,29.0,25.8,0.035539,3.391,Caja propia
+SKU-00341,Taladro eléctrico,38.1,31.3,9.9,0.011806,2.663,Caja propia
+SKU-00342,Teclado inalámbrico,43.4,18.4,5.2,0.004153,0.77,Caja propia
+SKU-00343,Pintura látex 1L,12.3,11.7,14.3,0.002058,1.332,Caja propia
+SKU-00344,Smartphone caja,18.4,9.9,5.1,0.000929,0.655,Caja propia
+SKU-00345,Estantería modular,95.0,51.1,20.5,0.099517,11.495,Caja propia
+SKU-00346,Espejo pared 80x60,94.4,68.2,8.0,0.051505,7.268,Caja propia
+SKU-00347,Sierra circular,46.5,35.5,14.5,0.023936,5.065,Caja propia
+SKU-00348,Alicate universal,22.0,7.0,3.0,0.000462,0.361,A granel
+SKU-00349,Tarugos nylon bolsa 50u,12.4,8.3,3.0,0.000309,0.274,A granel
+SKU-00350,Notebook 15 pulgadas,41.7,31.0,6.2,0.008015,1.962,Caja propia
+SKU-00351,Pintura látex 1L,12.3,11.8,13.6,0.001974,1.278,Caja propia
+SKU-00352,Reloj pared,33.5,35.2,7.8,0.009198,1.004,Caja propia
+SKU-00353,Cuadro decorativo 60x40,66.9,45.4,5.7,0.017312,2.542,Caja propia
+SKU-00354,Alicate universal,21.0,7.1,3.1,0.000462,0.347,A granel
+SKU-00355,Pintura látex 1L,11.7,11.8,13.3,0.001836,1.24,Caja propia
+SKU-00356,Router WiFi,24.1,20.1,7.7,0.00373,0.779,Caja propia
+SKU-00357,Smart TV 43 pulgadas,113.8,69.5,14.4,0.113891,13.373,Caja propia
+SKU-00358,Monitor 24 pulgadas,60.6,44.6,15.4,0.041623,4.824,Caja propia
+SKU-00359,Espejo pared 80x60,91.7,70.0,8.2,0.052636,7.054,Caja propia
+SKU-00360,Caja herramientas plástica,50.5,28.8,24.6,0.035778,3.45,Caja propia
+SKU-00361,Cámara seguridad,20.9,14.6,9.6,0.002929,0.654,Caja propia
+SKU-00362,Parlante Bluetooth,24.8,11.8,11.5,0.003365,0.929,Caja propia
+SKU-00363,Notebook 15 pulgadas,41.7,30.3,5.8,0.007328,2.169,Caja propia
+SKU-00364,Tarugos nylon bolsa 50u,12.6,8.3,3.0,0.000314,0.26,A granel
+SKU-00365,Pintura látex 1L,12.1,12.4,13.6,0.002041,1.181,Caja propia
+SKU-00366,Sierra circular,45.5,36.6,15.0,0.02498,5.958,Caja propia
+SKU-00367,Rodillo pintura,28.8,25.4,8.1,0.005925,0.436,A granel
+SKU-00368,Llave ajustable 8 pulgadas,24.3,7.9,3.0,0.000576,0.568,A granel
+SKU-00369,Lámpara mesa,35.4,24.3,23.8,0.020473,1.998,Caja propia
+SKU-00370,Rodillo pintura,29.1,24.5,8.4,0.005989,0.417,A granel
+SKU-00371,Cinta aisladora,10.0,9.6,2.0,0.000192,0.128,A granel
+SKU-00372,Tarugos nylon bolsa 50u,11.7,8.1,2.9,0.000275,0.271,A granel
+SKU-00373,Alicate universal,22.5,7.3,2.9,0.000476,0.369,A granel
+SKU-00374,Tarugos nylon bolsa 50u,12.0,7.9,3.0,0.000284,0.255,A granel
+SKU-00375,Tablet 10 pulgadas,29.4,20.0,5.9,0.003469,0.965,Caja propia
+SKU-00376,Espejo pared 80x60,94.0,71.8,8.1,0.054669,6.917,Caja propia
+SKU-00377,Monitor 24 pulgadas,58.3,46.4,15.5,0.041929,4.434,Caja propia
+SKU-00378,Pintura látex 4L,19.1,19.0,25.8,0.009363,4.834,Caja propia
+SKU-00379,Cinta aisladora,10.4,10.2,2.0,0.000212,0.111,A granel
+SKU-00380,Broca acero 10mm,19.4,5.1,3.1,0.000307,0.177,A granel
+SKU-00381,Amoladora angular,38.2,32.2,11.7,0.014391,3.255,Caja propia
+SKU-00382,Tablet 10 pulgadas,28.0,19.1,6.1,0.003262,0.876,Caja propia
+SKU-00383,Estantería modular,104.9,48.1,19.7,0.0994,12.727,Caja propia
+SKU-00384,Martillo carpintero,31.9,12.2,3.8,0.001479,0.901,A granel
+SKU-00385,Reloj pared,36.5,36.1,7.9,0.010409,1.106,Caja propia
+SKU-00386,Cámara seguridad,19.6,14.8,10.4,0.003017,0.659,Caja propia
+SKU-00387,Pintura látex 1L,12.3,12.0,14.3,0.002111,1.251,Caja propia
+SKU-00388,Sierra circular,44.0,33.6,14.3,0.021141,5.126,Caja propia
+SKU-00389,Smart TV 43 pulgadas,105.4,67.5,14.9,0.106006,11.782,Caja propia
+SKU-00390,Espejo pared 80x60,87.4,70.8,7.7,0.047647,7.331,Caja propia
+SKU-00391,Router WiFi,25.7,20.9,7.8,0.00419,0.679,Caja propia
+SKU-00392,Tablet 10 pulgadas,27.4,19.4,6.3,0.003349,0.896,Caja propia
+SKU-00393,Cable eléctrico 10m,24.0,24.4,8.3,0.00486,1.198,A granel
+SKU-00394,Tarugos nylon bolsa 50u,12.3,7.6,3.0,0.00028,0.231,A granel
+SKU-00395,Martillo carpintero,32.4,11.6,4.2,0.001579,0.958,A granel
+SKU-00396,Silicona cartucho,23.3,5.0,5.0,0.000583,0.298,A granel
+SKU-00397,Smart TV 43 pulgadas,111.2,72.5,14.7,0.118511,11.32,Caja propia
+SKU-00398,Tablet 10 pulgadas,28.8,20.6,6.3,0.003738,0.929,Caja propia
+SKU-00399,Cable eléctrico 10m,26.0,25.8,7.9,0.005299,1.211,A granel
+SKU-00400,Smartphone caja,17.2,9.9,4.9,0.000834,0.626,Caja propia
+SKU-00401,Silicona cartucho,22.0,4.9,4.8,0.000517,0.329,A granel
+SKU-00402,Router WiFi,24.7,20.6,7.6,0.003867,0.698,Caja propia
+SKU-00403,Taladro eléctrico,37.8,29.0,10.4,0.0114,2.932,Caja propia
+SKU-00404,Silicona cartucho,22.8,4.9,5.2,0.000581,0.289,A granel
+SKU-00405,Smartphone caja,17.6,9.6,5.0,0.000845,0.612,Caja propia
+SKU-00406,Parlante Bluetooth,24.9,11.4,11.7,0.003321,0.921,Caja propia
+SKU-00407,Tablet 10 pulgadas,28.4,20.9,6.0,0.003561,0.838,Caja propia
+SKU-00408,Cámara seguridad,20.1,15.7,10.1,0.003187,0.643,Caja propia
+SKU-00409,Teclado inalámbrico,45.0,17.9,4.8,0.003866,0.79,Caja propia
+SKU-00410,Alicate universal,21.6,7.2,2.9,0.000451,0.324,A granel
+SKU-00411,Lámpara mesa,34.5,26.2,24.4,0.022055,2.238,Caja propia
+SKU-00412,Mouse óptico,15.3,10.2,5.1,0.000796,0.188,Caja propia
+SKU-00413,Cuadro decorativo 60x40,66.5,44.1,5.8,0.017009,2.934,Caja propia
+SKU-00414,Martillo carpintero,32.3,12.0,3.9,0.001512,0.942,A granel
+SKU-00415,Cinta aisladora,10.1,9.6,2.1,0.000204,0.119,A granel
+SKU-00416,Monitor 24 pulgadas,60.1,45.1,15.0,0.040658,5.005,Caja propia
+SKU-00417,Silicona cartucho,22.7,4.9,5.2,0.000578,0.304,A granel
+SKU-00418,Espejo pared 80x60,91.3,66.9,8.2,0.050085,7.026,Caja propia
+SKU-00419,Tarugos nylon bolsa 50u,11.5,8.2,2.9,0.000273,0.242,A granel
+SKU-00420,Amoladora angular,40.4,33.3,12.4,0.016682,3.049,Caja propia
+SKU-00421,Notebook 15 pulgadas,42.0,29.6,6.3,0.007832,2.162,Caja propia
+SKU-00422,Tarugos nylon bolsa 50u,11.9,8.2,2.9,0.000283,0.259,A granel
+SKU-00423,Tarugos nylon bolsa 50u,12.1,8.3,3.1,0.000311,0.239,A granel
+SKU-00424,Espejo pared 80x60,92.1,70.1,7.8,0.050358,7.846,Caja propia
+SKU-00425,Broca acero 10mm,20.6,5.1,2.9,0.000305,0.198,A granel
+SKU-00426,Tornillos caja 100u,7.7,5.7,4.0,0.000176,0.45,A granel
+SKU-00427,Interruptor eléctrico,12.3,7.8,5.8,0.000556,0.163,A granel
+SKU-00428,Llave ajustable 8 pulgadas,23.9,7.8,3.0,0.000559,0.574,A granel
+SKU-00429,Pintura látex 1L,11.7,12.1,13.6,0.001925,1.407,Caja propia
+SKU-00430,Clavos caja 1kg,15.3,9.6,6.1,0.000896,0.981,A granel
+SKU-00431,Rodillo pintura,28.7,24.8,8.3,0.005908,0.416,A granel
+SKU-00432,Florero cerámica,25.0,25.0,40.2,0.025125,2.737,Caja propia
+SKU-00433,Sierra circular,43.3,35.6,14.7,0.02266,5.12,Caja propia
+SKU-00434,Monitor 24 pulgadas,61.0,44.8,15.5,0.042358,4.79,Caja propia
+SKU-00435,Cuadro decorativo 60x40,66.4,46.8,5.8,0.018024,3.014,Caja propia
+SKU-00436,Lámpara mesa,33.7,25.3,23.8,0.020292,2.113,Caja propia
+SKU-00437,Espejo pared 80x60,89.2,66.7,7.7,0.045812,6.775,Caja propia
+SKU-00438,Reloj pared,35.0,34.4,8.2,0.009873,1.176,Caja propia
+SKU-00439,Estantería modular,97.9,47.7,19.1,0.089194,12.813,Caja propia
+SKU-00440,Manguera jardín 20m,36.2,35.0,15.1,0.019132,4.366,A granel
+SKU-00441,Tablet 10 pulgadas,26.8,19.5,6.1,0.003188,0.963,Caja propia
+SKU-00442,Manguera jardín 20m,33.7,34.0,14.3,0.016385,3.961,A granel
+SKU-00443,Mouse óptico,15.2,9.9,5.1,0.000767,0.2,Caja propia
+SKU-00444,Amoladora angular,41.7,31.6,12.2,0.016076,2.796,Caja propia
+SKU-00445,Cable eléctrico 10m,24.9,26.2,8.3,0.005415,1.177,A granel
+SKU-00446,Taladro eléctrico,37.4,30.4,10.1,0.011483,2.754,Caja propia
+SKU-00447,Smart TV 43 pulgadas,110.3,66.6,14.3,0.105048,13.677,Caja propia
+SKU-00448,Smart TV 43 pulgadas,109.1,71.3,15.5,0.120572,12.191,Caja propia
+SKU-00449,Pintura látex 4L,19.3,20.0,25.2,0.009727,4.631,Caja propia
+SKU-00450,Lámpara mesa,34.5,24.3,24.0,0.02012,2.343,Caja propia
+SKU-00451,Mouse óptico,14.9,9.6,5.1,0.00073,0.189,Caja propia
+SKU-00452,Alicate universal,22.5,6.9,3.0,0.000466,0.374,A granel
+SKU-00453,Florero cerámica,24.8,25.5,39.6,0.025043,2.743,Caja propia
+SKU-00454,Cámara seguridad,19.1,14.3,9.9,0.002704,0.711,Caja propia
+SKU-00455,Smart TV 43 pulgadas,106.1,72.3,15.5,0.118901,13.491,Caja propia
+SKU-00456,Interruptor eléctrico,12.5,8.3,5.8,0.000602,0.146,A granel
+SKU-00457,Interruptor eléctrico,11.5,8.2,5.9,0.000556,0.147,A granel
+SKU-00458,Escalera aluminio 4 peldaños,124.0,46.0,15.0,0.08556,8.038,Embalaje personalizado
+SKU-00459,Espejo pared 80x60,90.2,70.8,8.3,0.053005,7.918,Caja propia
+SKU-00460,Caja herramientas plástica,48.9,29.5,26.0,0.037506,3.544,Caja propia
+SKU-00461,Broca acero 10mm,19.6,5.0,3.0,0.000294,0.195,A granel
+SKU-00462,Tarugos nylon bolsa 50u,12.1,8.2,3.1,0.000308,0.267,A granel
+SKU-00463,Parlante Bluetooth,23.8,12.3,12.4,0.00363,0.892,Caja propia
+SKU-00464,Manguera jardín 20m,34.1,35.9,14.6,0.017873,4.383,A granel
+SKU-00465,Amoladora angular,41.2,33.2,11.5,0.01573,3.217,Caja propia
+SKU-00466,Cinta aisladora,9.7,9.5,2.0,0.000184,0.108,A granel
+SKU-00467,Alicate universal,23.1,7.0,2.9,0.000469,0.347,A granel
+SKU-00468,Cuadro decorativo 60x40,65.2,44.5,6.2,0.017989,2.622,Caja propia
+SKU-00469,Monitor 24 pulgadas,59.1,46.8,15.4,0.042595,5.133,Caja propia
+SKU-00470,Tarugos nylon bolsa 50u,12.5,7.6,3.0,0.000285,0.265,A granel
+SKU-00471,Parlante Bluetooth,24.5,12.1,11.8,0.003498,0.962,Caja propia
+SKU-00472,Taladro eléctrico,36.9,30.7,9.8,0.011102,2.67,Caja propia
+SKU-00473,Estantería modular,100.4,49.3,20.2,0.099984,10.947,Caja propia
+SKU-00474,Teclado inalámbrico,47.0,18.5,4.8,0.004174,0.776,Caja propia
+SKU-00475,Sierra circular,43.4,35.7,14.3,0.022156,5.673,Caja propia
+SKU-00476,Broca acero 10mm,19.5,5.1,2.9,0.000288,0.19,A granel
+SKU-00477,Parlante Bluetooth,24.4,12.2,12.4,0.003691,1.005,Caja propia
+SKU-00478,Parlante Bluetooth,26.2,12.2,11.9,0.003804,0.995,Caja propia
+SKU-00479,Cámara seguridad,20.0,15.1,10.2,0.00308,0.713,Caja propia
+SKU-00480,Escalera aluminio 4 peldaños,125.9,43.4,14.5,0.079229,7.799,Embalaje personalizado
+SKU-00481,Escalera aluminio 4 peldaños,124.4,45.6,15.5,0.087926,7.665,Embalaje personalizado
+SKU-00482,Pintura látex 1L,11.7,12.5,14.1,0.002062,1.39,Caja propia
+SKU-00483,Teclado inalámbrico,47.1,17.5,5.0,0.004121,0.861,Caja propia
+SKU-00484,Interruptor eléctrico,11.4,8.3,6.1,0.000577,0.162,A granel
+SKU-00485,Cámara seguridad,20.0,15.4,10.0,0.00308,0.707,Caja propia
+SKU-00486,Notebook 15 pulgadas,39.4,28.7,6.1,0.006898,1.991,Caja propia
+SKU-00487,Caja herramientas plástica,50.7,30.7,26.0,0.040469,3.825,Caja propia
+SKU-00488,Broca acero 10mm,19.7,5.0,3.0,0.000295,0.165,A granel
+SKU-00489,Interruptor eléctrico,11.6,8.4,6.1,0.000594,0.137,A granel
+SKU-00490,Router WiFi,25.3,21.0,8.3,0.00441,0.8,Caja propia
+SKU-00491,Monitor 24 pulgadas,60.9,42.9,14.5,0.037883,4.557,Caja propia
+SKU-00492,Tarugos nylon bolsa 50u,12.1,8.4,3.0,0.000305,0.271,A granel
+SKU-00493,Espejo pared 80x60,90.5,70.1,7.7,0.048849,7.408,Caja propia
+SKU-00494,Smartphone caja,17.2,9.9,4.8,0.000817,0.611,Caja propia
+SKU-00495,Parlante Bluetooth,23.8,11.8,12.0,0.00337,0.922,Caja propia
+SKU-00496,Mouse óptico,15.2,9.8,5.1,0.00076,0.193,Caja propia
+SKU-00497,Mouse óptico,15.3,10.3,4.8,0.000756,0.211,Caja propia
+SKU-00498,Caja herramientas plástica,51.0,29.1,25.3,0.037548,3.737,Caja propia
+SKU-00499,Smart TV 43 pulgadas,113.7,70.3,15.1,0.120696,13.598,Caja propia
+SKU-00500,Smart TV 43 pulgadas,113.7,69.8,15.0,0.119044,11.343,Caja propia
+SKU-00501,Manguera jardín 20m,33.6,34.6,15.7,0.018252,3.853,A granel
+SKU-00502,Rodillo pintura,30.8,26.0,8.2,0.006567,0.381,A granel
+SKU-00503,Mouse óptico,15.7,9.8,5.2,0.0008,0.181,Caja propia
+SKU-00504,Router WiFi,24.5,20.3,7.8,0.003879,0.755,Caja propia
+SKU-00505,Taladro eléctrico,38.4,29.9,9.8,0.011252,2.542,Caja propia
+SKU-00506,Mouse óptico,14.6,10.3,4.9,0.000737,0.211,Caja propia
+SKU-00507,Manguera jardín 20m,33.4,34.4,15.4,0.017694,3.955,A granel
+SKU-00508,Alicate universal,22.0,7.2,3.1,0.000491,0.355,A granel
+SKU-00509,Reloj pared,33.4,36.4,7.9,0.009605,1.073,Caja propia
+SKU-00510,Rodillo pintura,28.7,25.6,8.1,0.005951,0.434,A granel
+SKU-00511,Manguera jardín 20m,33.3,33.5,14.9,0.016622,4.311,A granel
+SKU-00512,Manguera jardín 20m,35.9,36.5,15.2,0.019917,4.266,A granel
+SKU-00513,Escalera aluminio 4 peldaños,114.8,46.5,14.8,0.079005,8.788,Embalaje personalizado
+SKU-00514,Cuadro decorativo 60x40,61.9,46.4,5.9,0.016946,3.005,Caja propia
+SKU-00515,Sierra circular,45.3,35.2,14.9,0.023759,5.492,Caja propia
+SKU-00516,Sierra circular,46.2,33.7,15.6,0.024288,5.924,Caja propia
+SKU-00517,Tarugos nylon bolsa 50u,11.5,7.8,3.1,0.000278,0.231,A granel
+SKU-00518,Florero cerámica,24.5,25.1,41.9,0.025766,2.738,Caja propia
+SKU-00519,Martillo carpintero,33.2,12.0,4.0,0.001594,0.897,A granel
+SKU-00520,Smartphone caja,17.2,10.0,5.1,0.000877,0.618,Caja propia
+SKU-00521,Cámara seguridad,19.2,15.0,10.4,0.002995,0.598,Caja propia
+SKU-00522,Silicona cartucho,23.9,4.9,5.2,0.000609,0.328,A granel
+SKU-00523,Taladro eléctrico,39.6,29.0,9.8,0.011254,2.686,Caja propia
+SKU-00524,Mouse óptico,15.4,10.4,5.0,0.000801,0.191,Caja propia
+SKU-00525,Interruptor eléctrico,12.4,8.1,6.2,0.000623,0.14,A granel
+SKU-00526,Manguera jardín 20m,33.6,36.0,14.3,0.017297,4.101,A granel
+SKU-00527,Escalera aluminio 4 peldaños,116.7,46.3,15.1,0.081588,7.579,Embalaje personalizado
+SKU-00528,Rodillo pintura,31.5,25.1,7.9,0.006246,0.371,A granel
+SKU-00529,Clavos caja 1kg,14.7,10.4,6.1,0.000933,1.105,A granel
+SKU-00530,Sierra circular,45.1,34.4,14.9,0.023116,5.413,Caja propia
+SKU-00531,Broca acero 10mm,19.0,5.0,3.1,0.000295,0.168,A granel
+SKU-00532,Alicate universal,21.5,7.1,3.0,0.000458,0.379,A granel
+SKU-00533,Amoladora angular,40.0,32.8,11.7,0.01535,2.836,Caja propia
+SKU-00534,Tornillos caja 100u,8.3,5.7,4.1,0.000194,0.418,A granel
+SKU-00535,Taladro eléctrico,37.8,29.0,9.6,0.010524,2.553,Caja propia
+SKU-00536,Escalera aluminio 4 peldaños,122.9,44.1,14.4,0.078046,7.221,Embalaje personalizado
+SKU-00537,Rodillo pintura,31.5,26.1,7.6,0.006248,0.374,A granel
+SKU-00538,Smartphone caja,17.8,10.1,4.8,0.000863,0.556,Caja propia
+SKU-00539,Tablet 10 pulgadas,29.4,19.0,6.2,0.003463,0.924,Caja propia
+SKU-00540,Tarugos nylon bolsa 50u,11.7,8.0,2.9,0.000271,0.266,A granel
+SKU-00541,Smart TV 43 pulgadas,111.5,68.8,15.2,0.116602,13.567,Caja propia
+SKU-00542,Tornillos caja 100u,8.3,5.7,3.8,0.00018,0.483,A granel
+SKU-00543,Sierra circular,45.9,35.7,14.5,0.02376,5.932,Caja propia
+SKU-00544,Pintura látex 1L,12.1,11.6,14.2,0.001993,1.212,Caja propia
+SKU-00545,Espejo pared 80x60,88.4,69.6,8.1,0.049836,7.687,Caja propia
+SKU-00546,Martillo carpintero,31.7,11.4,4.1,0.001482,0.921,A granel
+SKU-00547,Espejo pared 80x60,87.7,69.8,8.1,0.049584,7.353,Caja propia
+SKU-00548,Broca acero 10mm,19.3,5.1,3.0,0.000295,0.175,A granel
+SKU-00549,Tarugos nylon bolsa 50u,12.0,8.3,3.0,0.000299,0.232,A granel
+SKU-00550,Reloj pared,33.9,35.1,8.0,0.009519,1.004,Caja propia
+SKU-00551,Smart TV 43 pulgadas,110.1,70.3,14.6,0.113004,12.067,Caja propia
+SKU-00552,Silicona cartucho,23.8,5.0,5.0,0.000595,0.285,A granel
+SKU-00553,Notebook 15 pulgadas,38.9,28.9,6.1,0.006858,2.01,Caja propia
+SKU-00554,Amoladora angular,41.3,31.9,12.6,0.0166,3.089,Caja propia
+SKU-00555,Clavos caja 1kg,15.2,10.4,5.9,0.000933,1.062,A granel
+SKU-00556,Tarugos nylon bolsa 50u,12.1,8.1,3.1,0.000304,0.242,A granel
+SKU-00557,Cuadro decorativo 60x40,62.0,43.4,6.2,0.016683,3.004,Caja propia
+SKU-00558,Clavos caja 1kg,14.8,9.7,5.7,0.000818,0.988,A granel
+SKU-00559,Lámpara mesa,36.1,24.9,25.1,0.022562,2.379,Caja propia
+SKU-00560,Clavos caja 1kg,15.2,10.2,6.1,0.000946,0.966,A granel
+SKU-00561,Reloj pared,34.9,34.5,7.8,0.009392,1.016,Caja propia
+SKU-00562,Monitor 24 pulgadas,61.2,44.3,15.7,0.042565,5.125,Caja propia
+SKU-00563,Manguera jardín 20m,33.8,34.1,14.8,0.017058,4.326,A granel
+SKU-00564,Tablet 10 pulgadas,28.5,19.1,5.9,0.003212,0.894,Caja propia
+SKU-00565,Cable eléctrico 10m,25.1,25.5,8.2,0.005248,1.169,A granel
+SKU-00566,Cable eléctrico 10m,25.6,24.6,8.3,0.005227,1.247,A granel
+SKU-00567,Florero cerámica,25.9,24.8,39.9,0.025629,2.654,Caja propia
+SKU-00568,Silicona cartucho,22.8,5.0,5.1,0.000581,0.287,A granel
+SKU-00569,Cámara seguridad,20.1,15.1,9.8,0.002974,0.649,Caja propia
+SKU-00570,Sierra circular,46.4,33.9,15.2,0.023909,5.321,Caja propia
+SKU-00571,Cámara seguridad,20.1,14.6,10.4,0.003052,0.608,Caja propia
+SKU-00572,Alicate universal,21.5,7.3,2.9,0.000455,0.316,A granel
+SKU-00573,Alicate universal,22.4,7.1,3.1,0.000493,0.321,A granel
+SKU-00574,Rodillo pintura,31.2,24.3,8.0,0.006065,0.402,A granel
+SKU-00575,Pintura látex 1L,11.5,12.0,14.2,0.00196,1.335,Caja propia
+SKU-00576,Notebook 15 pulgadas,40.7,30.2,6.0,0.007375,2.034,Caja propia
+SKU-00577,Cable eléctrico 10m,25.9,26.0,8.3,0.005589,1.261,A granel
+SKU-00578,Router WiFi,24.5,20.2,8.0,0.003959,0.778,Caja propia
+SKU-00579,Cámara seguridad,19.8,15.4,10.3,0.003141,0.644,Caja propia
+SKU-00580,Espejo pared 80x60,90.6,70.5,7.9,0.05046,7.434,Caja propia
+SKU-00581,Alicate universal,22.5,6.9,2.9,0.00045,0.376,A granel
+SKU-00582,Florero cerámica,23.8,23.9,39.3,0.022355,2.741,Caja propia
+SKU-00583,Sierra circular,45.6,33.6,14.8,0.022676,5.863,Caja propia
+SKU-00584,Teclado inalámbrico,46.6,18.7,5.2,0.004531,0.863,Caja propia
+SKU-00585,Mouse óptico,15.1,10.5,5.0,0.000793,0.195,Caja propia
+SKU-00586,Pintura látex 1L,12.1,11.9,13.7,0.001973,1.344,Caja propia
+SKU-00587,Estantería modular,99.1,52.2,19.3,0.099839,13.195,Caja propia
+SKU-00588,Escalera aluminio 4 peldaños,114.7,44.0,14.5,0.073179,8.603,Embalaje personalizado
+SKU-00589,Tornillos caja 100u,7.8,6.3,4.1,0.000201,0.441,A granel
+SKU-00590,Amoladora angular,40.3,33.3,11.7,0.015701,3.222,Caja propia
+SKU-00591,Teclado inalámbrico,43.6,18.6,4.8,0.003893,0.856,Caja propia
+SKU-00592,Pintura látex 4L,19.2,20.1,24.9,0.009609,4.946,Caja propia
+SKU-00593,Alicate universal,22.4,7.2,3.0,0.000484,0.365,A granel
+SKU-00594,Smartphone caja,17.5,10.3,5.2,0.000937,0.617,Caja propia
+SKU-00595,Pintura látex 1L,12.3,12.0,13.5,0.001993,1.178,Caja propia
+SKU-00596,Cámara seguridad,20.9,15.7,9.9,0.003248,0.626,Caja propia
+SKU-00597,Mouse óptico,14.8,10.2,5.0,0.000755,0.218,Caja propia
+SKU-00598,Escalera aluminio 4 peldaños,118.4,45.6,15.6,0.084225,8.557,Embalaje personalizado
+SKU-00599,Tornillos caja 100u,8.0,6.2,4.0,0.000198,0.431,A granel
+SKU-00600,Escalera aluminio 4 peldaños,123.0,43.0,15.2,0.080393,7.775,Embalaje personalizado
+SKU-00601,Manguera jardín 20m,34.8,35.9,15.2,0.01899,3.943,A granel
+SKU-00602,Pintura látex 4L,19.1,20.4,23.9,0.009312,5.475,Caja propia
+SKU-00603,Notebook 15 pulgadas,42.0,28.7,6.3,0.007594,2.045,Caja propia
+SKU-00604,Smart TV 43 pulgadas,115.3,68.5,14.5,0.114522,13.389,Caja propia
+SKU-00605,Tablet 10 pulgadas,29.0,19.2,6.2,0.003452,0.832,Caja propia
+SKU-00606,Cinta aisladora,10.2,9.7,2.0,0.000198,0.127,A granel
+SKU-00607,Rodillo pintura,29.7,24.9,8.0,0.005916,0.36,A granel
+SKU-00608,Notebook 15 pulgadas,41.9,31.2,6.0,0.007844,2.182,Caja propia
+SKU-00609,Pintura látex 1L,11.6,12.3,14.2,0.002026,1.339,Caja propia
+SKU-00610,Router WiFi,24.8,19.5,7.7,0.003724,0.732,Caja propia
+SKU-00611,Taladro eléctrico,36.3,28.6,10.1,0.010486,2.781,Caja propia
+SKU-00612,Pintura látex 1L,11.6,11.9,14.7,0.002029,1.397,Caja propia
+SKU-00613,Rodillo pintura,28.6,25.4,8.2,0.005957,0.381,A granel
+SKU-00614,Sierra circular,43.4,33.4,15.2,0.022033,5.469,Caja propia
+SKU-00615,Tornillos caja 100u,7.7,5.8,4.1,0.000183,0.419,A granel
+SKU-00616,Notebook 15 pulgadas,40.8,28.7,5.8,0.006792,1.976,Caja propia
+SKU-00617,Escalera aluminio 4 peldaños,115.4,43.2,14.9,0.074281,7.435,Embalaje personalizado
+SKU-00618,Escalera aluminio 4 peldaños,125.1,46.3,15.2,0.08804,7.609,Embalaje personalizado
+SKU-00619,Espejo pared 80x60,93.1,71.9,7.6,0.050874,7.745,Caja propia
+SKU-00620,Cinta aisladora,10.1,10.3,2.1,0.000218,0.12,A granel
+SKU-00621,Pintura látex 1L,11.5,12.0,13.6,0.001877,1.234,Caja propia
+SKU-00622,Martillo carpintero,31.8,12.2,4.1,0.001591,1.004,A granel
+SKU-00623,Cable eléctrico 10m,24.7,25.0,8.1,0.005002,1.091,A granel
+SKU-00624,Cuadro decorativo 60x40,63.9,46.2,6.2,0.018304,2.627,Caja propia
+SKU-00625,Manguera jardín 20m,34.5,34.2,14.4,0.016991,4.531,A granel
+SKU-00626,Pintura látex 1L,12.1,11.5,13.5,0.001879,1.405,Caja propia
+SKU-00627,Pintura látex 1L,12.1,12.2,14.4,0.002126,1.209,Caja propia
+SKU-00628,Cable eléctrico 10m,25.9,26.1,8.4,0.005678,1.255,A granel
+SKU-00629,Amoladora angular,38.5,33.5,12.1,0.015606,2.829,Caja propia
+SKU-00630,Parlante Bluetooth,25.8,12.1,12.2,0.003809,0.865,Caja propia
+SKU-00631,Pintura látex 4L,21.0,20.7,24.8,0.010781,4.644,Caja propia
+SKU-00632,Monitor 24 pulgadas,60.3,45.1,14.6,0.039705,4.478,Caja propia
+SKU-00633,Amoladora angular,39.2,31.1,11.8,0.014386,2.887,Caja propia
+SKU-00634,Smart TV 43 pulgadas,111.6,70.7,15.3,0.120719,13.114,Caja propia
+SKU-00635,Rodillo pintura,29.3,24.5,7.7,0.005527,0.391,A granel
+SKU-00636,Caja herramientas plástica,49.1,29.8,25.7,0.037604,3.685,Caja propia
+SKU-00637,Florero cerámica,25.4,25.6,38.6,0.025099,2.489,Caja propia
+SKU-00638,Pintura látex 4L,19.6,20.5,24.3,0.009764,5.017,Caja propia
+SKU-00639,Estantería modular,97.4,48.4,19.4,0.091455,11.271,Caja propia
+SKU-00640,Llave ajustable 8 pulgadas,24.7,8.0,2.9,0.000573,0.614,A granel
+SKU-00641,Cámara seguridad,20.6,14.6,10.4,0.003128,0.649,Caja propia
+SKU-00642,Cámara seguridad,20.6,14.6,9.9,0.002978,0.648,Caja propia
+SKU-00643,Mouse óptico,14.4,9.8,5.2,0.000734,0.195,Caja propia
+SKU-00644,Espejo pared 80x60,86.0,70.5,7.6,0.046079,8.086,Caja propia
+SKU-00645,Lámpara mesa,35.7,24.8,24.3,0.021514,2.059,Caja propia
+SKU-00646,Broca acero 10mm,19.5,4.8,3.1,0.00029,0.171,A granel
+SKU-00647,Tablet 10 pulgadas,28.7,19.5,6.1,0.003414,0.843,Caja propia
+SKU-00648,Smart TV 43 pulgadas,107.0,69.3,15.1,0.111968,12.386,Caja propia
+SKU-00649,Cable eléctrico 10m,24.9,25.2,8.2,0.005145,1.297,A granel
+SKU-00650,Reloj pared,34.4,34.8,7.8,0.009338,1.183,Caja propia
+SKU-00651,Parlante Bluetooth,24.4,12.2,12.2,0.003632,0.935,Caja propia
+SKU-00652,Caja herramientas plástica,50.4,30.2,25.9,0.039422,3.356,Caja propia
+SKU-00653,Estantería modular,100.6,51.4,20.0,0.103417,12.852,Caja propia
+SKU-00654,Florero cerámica,24.6,25.2,41.6,0.025789,2.524,Caja propia
+SKU-00655,Alicate universal,22.0,7.2,3.0,0.000475,0.324,A granel
+SKU-00656,Pintura látex 1L,12.2,11.6,14.3,0.002024,1.319,Caja propia
+SKU-00657,Estantería modular,103.6,47.9,19.1,0.094783,12.682,Caja propia
+SKU-00658,Taladro eléctrico,37.0,28.8,9.6,0.01023,2.969,Caja propia
+SKU-00659,Pintura látex 4L,19.1,20.3,24.5,0.009499,5.294,Caja propia
+SKU-00660,Notebook 15 pulgadas,40.8,29.7,5.8,0.007028,2.272,Caja propia
+SKU-00661,Tarugos nylon bolsa 50u,11.9,8.1,3.0,0.000289,0.266,A granel
+SKU-00662,Cámara seguridad,19.9,14.6,9.8,0.002847,0.707,Caja propia
+SKU-00663,Escalera aluminio 4 peldaños,120.4,44.6,14.6,0.0784,7.815,Embalaje personalizado
+SKU-00664,Rodillo pintura,28.5,24.9,7.8,0.005535,0.398,A granel
+SKU-00665,Martillo carpintero,31.9,12.1,4.0,0.001544,1.023,A granel
+SKU-00666,Tornillos caja 100u,7.9,6.1,4.2,0.000202,0.461,A granel
+SKU-00667,Florero cerámica,24.2,24.0,38.4,0.022303,2.45,Caja propia
+SKU-00668,Cuadro decorativo 60x40,63.3,46.8,6.0,0.017775,3.01,Caja propia
+SKU-00669,Router WiFi,24.9,21.0,8.0,0.004183,0.735,Caja propia
+SKU-00670,Teclado inalámbrico,44.6,18.3,5.2,0.004244,0.836,Caja propia
+SKU-00671,Taladro eléctrico,38.9,29.2,9.5,0.010791,2.954,Caja propia
+SKU-00672,Amoladora angular,39.0,33.5,12.2,0.015939,3.236,Caja propia
+SKU-00673,Estantería modular,99.4,48.8,20.3,0.09847,11.849,Caja propia
+SKU-00674,Smartphone caja,18.8,10.3,5.0,0.000968,0.602,Caja propia
+SKU-00675,Escalera aluminio 4 peldaños,122.1,43.6,15.1,0.080386,8.676,Embalaje personalizado
+SKU-00676,Broca acero 10mm,20.8,4.9,3.1,0.000316,0.186,A granel
+SKU-00677,Martillo carpintero,31.7,11.4,4.0,0.001446,1.017,A granel
+SKU-00678,Martillo carpintero,33.6,11.5,4.0,0.001546,0.974,A granel
+SKU-00679,Cámara seguridad,19.0,15.7,10.2,0.003043,0.665,Caja propia
+SKU-00680,Estantería modular,96.3,50.1,20.5,0.098905,10.841,Caja propia
+SKU-00681,Tornillos caja 100u,7.7,6.1,4.1,0.000193,0.478,A granel
+SKU-00682,Estantería modular,99.3,50.0,20.4,0.101286,11.726,Caja propia
+SKU-00683,Reloj pared,36.5,35.5,8.3,0.010755,1.163,Caja propia
+SKU-00684,Cable eléctrico 10m,24.9,24.3,8.2,0.004962,1.161,A granel
+SKU-00685,Parlante Bluetooth,25.2,11.6,11.6,0.003391,1.014,Caja propia
+SKU-00686,Estantería modular,99.4,49.7,19.9,0.09831,12.677,Caja propia
+SKU-00687,Sierra circular,47.1,35.1,15.0,0.024798,5.498,Caja propia
+SKU-00688,Interruptor eléctrico,12.0,7.9,6.0,0.000569,0.139,A granel
+SKU-00689,Cámara seguridad,20.3,15.1,10.4,0.003188,0.599,Caja propia
+SKU-00690,Amoladora angular,39.5,32.2,12.5,0.015899,3.287,Caja propia
+SKU-00691,Cinta aisladora,9.9,9.9,2.0,0.000196,0.125,A granel
+SKU-00692,Pintura látex 1L,12.3,11.4,13.6,0.001907,1.39,Caja propia
+SKU-00693,Alicate universal,21.0,7.0,2.9,0.000426,0.372,A granel
+SKU-00694,Cinta aisladora,10.3,9.8,2.0,0.000202,0.122,A granel
+SKU-00695,Monitor 24 pulgadas,57.2,46.3,14.7,0.038931,4.694,Caja propia
+SKU-00696,Lámpara mesa,33.6,24.2,24.2,0.019678,2.196,Caja propia
+SKU-00697,Silicona cartucho,23.5,5.1,5.1,0.000611,0.273,A granel
+SKU-00698,Manguera jardín 20m,35.2,35.6,14.8,0.018546,3.802,A granel
+SKU-00699,Monitor 24 pulgadas,60.4,43.9,14.5,0.038448,4.957,Caja propia
+SKU-00700,Cable eléctrico 10m,23.9,24.3,8.2,0.004762,1.244,A granel
+SKU-00701,Escalera aluminio 4 peldaños,122.0,45.9,15.2,0.085117,8.696,Embalaje personalizado
+SKU-00702,Caja herramientas plástica,51.4,31.0,25.3,0.040313,3.188,Caja propia
+SKU-00703,Pintura látex 4L,20.0,20.7,25.9,0.010723,5.352,Caja propia
+SKU-00704,Cable eléctrico 10m,24.3,25.9,8.4,0.005287,1.241,A granel
+SKU-00705,Router WiFi,24.0,19.2,8.0,0.003686,0.764,Caja propia
+SKU-00706,Parlante Bluetooth,24.5,12.5,12.3,0.003767,0.872,Caja propia
+SKU-00707,Taladro eléctrico,38.3,31.4,9.7,0.011665,2.699,Caja propia
+SKU-00708,Tornillos caja 100u,7.9,5.7,4.0,0.00018,0.414,A granel
+SKU-00709,Interruptor eléctrico,11.7,8.3,6.1,0.000592,0.151,A granel
+SKU-00710,Reloj pared,34.2,35.4,8.3,0.010049,1.043,Caja propia
+SKU-00711,Teclado inalámbrico,46.3,17.9,5.0,0.004144,0.935,Caja propia
+SKU-00712,Espejo pared 80x60,93.5,67.7,8.1,0.051273,7.123,Caja propia
+SKU-00713,Escalera aluminio 4 peldaños,121.7,46.4,15.6,0.088091,7.537,Embalaje personalizado
+SKU-00714,Rodillo pintura,29.2,24.9,7.7,0.005599,0.417,A granel
+SKU-00715,Parlante Bluetooth,24.0,11.5,11.7,0.003229,0.964,Caja propia
+SKU-00716,Taladro eléctrico,38.8,30.4,9.8,0.011559,2.892,Caja propia
+SKU-00717,Estantería modular,97.0,52.2,20.2,0.102281,11.108,Caja propia
+SKU-00718,Alicate universal,23.1,6.7,2.9,0.000449,0.383,A granel
+SKU-00719,Sierra circular,43.4,34.7,15.3,0.023041,5.762,Caja propia
+SKU-00720,Notebook 15 pulgadas,41.4,29.4,5.9,0.007181,2.096,Caja propia
+SKU-00721,Notebook 15 pulgadas,39.2,30.4,6.2,0.007388,1.927,Caja propia
+SKU-00722,Mouse óptico,15.7,9.7,5.0,0.000761,0.21,Caja propia
+SKU-00723,Escalera aluminio 4 peldaños,125.9,44.6,15.6,0.087596,8.243,Embalaje personalizado
+SKU-00724,Escalera aluminio 4 peldaños,125.3,45.0,15.5,0.087397,8.517,Embalaje personalizado
+SKU-00725,Manguera jardín 20m,36.0,34.6,14.6,0.018186,4.494,A granel
+SKU-00726,Broca acero 10mm,19.8,5.1,3.1,0.000313,0.178,A granel
+SKU-00727,Pintura látex 4L,20.3,20.0,26.1,0.010597,4.967,Caja propia
+SKU-00728,Rodillo pintura,30.3,25.1,7.8,0.005932,0.371,A granel
+SKU-00729,Rodillo pintura,30.9,24.0,7.9,0.005859,0.405,A granel
+SKU-00730,Teclado inalámbrico,46.2,17.7,5.0,0.004089,0.915,Caja propia
+SKU-00731,Caja herramientas plástica,52.1,28.9,23.9,0.035986,3.246,Caja propia
+SKU-00732,Notebook 15 pulgadas,41.6,30.0,5.9,0.007363,2.008,Caja propia
+SKU-00733,Tornillos caja 100u,7.9,5.7,3.8,0.000171,0.411,A granel
+SKU-00734,Interruptor eléctrico,12.5,7.8,5.9,0.000575,0.143,A granel
+SKU-00735,Caja herramientas plástica,51.4,28.5,25.0,0.036622,3.622,Caja propia
+SKU-00736,Espejo pared 80x60,87.8,67.4,8.1,0.047934,8.067,Caja propia
+SKU-00737,Tarugos nylon bolsa 50u,12.5,7.7,3.1,0.000298,0.271,A granel
+SKU-00738,Pintura látex 1L,11.5,11.7,13.6,0.00183,1.185,Caja propia
+SKU-00739,Martillo carpintero,31.0,12.4,3.9,0.001499,1.044,A granel
+SKU-00740,Florero cerámica,24.1,25.8,42.0,0.026115,2.498,Caja propia
+SKU-00741,Pintura látex 1L,12.0,11.4,14.4,0.00197,1.187,Caja propia
+SKU-00742,Llave ajustable 8 pulgadas,26.1,7.8,3.1,0.000631,0.645,A granel
+SKU-00743,Monitor 24 pulgadas,59.2,45.6,15.2,0.041033,4.973,Caja propia
+SKU-00744,Cinta aisladora,10.4,9.8,1.9,0.000194,0.119,A granel
+SKU-00745,Cuadro decorativo 60x40,65.6,43.2,5.8,0.016437,3.015,Caja propia
+SKU-00746,Reloj pared,35.3,35.0,7.9,0.00976,1.054,Caja propia
+SKU-00747,Tarugos nylon bolsa 50u,11.7,7.7,3.1,0.000279,0.235,A granel
+SKU-00748,Espejo pared 80x60,89.7,67.4,8.1,0.048971,7.859,Caja propia
+SKU-00749,Pintura látex 4L,20.8,20.1,23.8,0.00995,5.588,Caja propia
+SKU-00750,Pintura látex 4L,19.7,19.8,25.4,0.009908,5.404,Caja propia
+SKU-00751,Sierra circular,46.9,36.0,14.5,0.024482,5.126,Caja propia
+SKU-00752,Martillo carpintero,31.1,12.1,3.9,0.001468,0.978,A granel
+SKU-00753,Cinta aisladora,10.0,10.3,1.9,0.000196,0.11,A granel
+SKU-00754,Reloj pared,36.5,35.7,7.7,0.010033,1.152,Caja propia
+SKU-00755,Pintura látex 4L,20.9,21.0,23.9,0.01049,4.781,Caja propia
+SKU-00756,Amoladora angular,38.0,31.7,11.9,0.014335,3.41,Caja propia
+SKU-00757,Interruptor eléctrico,11.7,8.1,5.8,0.00055,0.15,A granel
+SKU-00758,Martillo carpintero,31.5,11.8,3.8,0.001412,0.973,A granel
+SKU-00759,Espejo pared 80x60,87.1,67.2,8.3,0.048581,6.763,Caja propia
+SKU-00760,Mouse óptico,14.7,9.6,5.2,0.000734,0.195,Caja propia
+SKU-00761,Interruptor eléctrico,12.3,8.2,6.2,0.000625,0.161,A granel
+SKU-00762,Lámpara mesa,34.3,25.6,24.8,0.021776,2.338,Caja propia
+SKU-00763,Estantería modular,97.9,47.5,19.3,0.08975,11.034,Caja propia
+SKU-00764,Estantería modular,98.6,48.3,19.2,0.091438,12.834,Caja propia
+SKU-00765,Pintura látex 1L,12.3,11.7,14.4,0.002072,1.419,Caja propia
+SKU-00766,Pintura látex 1L,12.0,11.9,14.6,0.002085,1.327,Caja propia
+SKU-00767,Cinta aisladora,9.7,10.1,2.0,0.000196,0.128,A granel
+SKU-00768,Broca acero 10mm,19.5,5.0,2.9,0.000283,0.196,A granel
+SKU-00769,Notebook 15 pulgadas,41.8,28.7,6.3,0.007558,2.019,Caja propia
+SKU-00770,Reloj pared,35.4,35.6,8.4,0.010586,1.121,Caja propia
+SKU-00771,Monitor 24 pulgadas,62.2,44.5,15.7,0.043456,4.55,Caja propia
+SKU-00772,Monitor 24 pulgadas,60.8,43.6,15.7,0.041619,4.614,Caja propia
+SKU-00773,Alicate universal,22.6,7.3,3.1,0.000511,0.378,A granel
+SKU-00774,Estantería modular,96.7,52.3,20.2,0.10216,11.453,Caja propia
+SKU-00775,Manguera jardín 20m,34.9,35.3,15.7,0.019342,3.948,A granel
+SKU-00776,Amoladora angular,41.0,33.4,12.4,0.016981,3.113,Caja propia
+SKU-00777,Martillo carpintero,31.6,12.0,4.2,0.001593,0.912,A granel
+SKU-00778,Tarugos nylon bolsa 50u,11.4,8.3,2.9,0.000274,0.261,A granel
+SKU-00779,Martillo carpintero,32.4,12.4,4.2,0.001687,0.906,A granel
+SKU-00780,Tablet 10 pulgadas,28.5,20.2,5.7,0.003281,0.854,Caja propia
+SKU-00781,Llave ajustable 8 pulgadas,24.4,8.0,2.9,0.000566,0.553,A granel
+SKU-00782,Alicate universal,22.6,7.2,3.1,0.000504,0.327,A granel
+SKU-00783,Rodillo pintura,30.9,25.9,8.1,0.006483,0.426,A granel
+SKU-00784,Pintura látex 1L,12.2,11.5,14.2,0.001992,1.274,Caja propia
+SKU-00785,Clavos caja 1kg,14.5,10.4,5.9,0.00089,1.018,A granel
+SKU-00786,Cable eléctrico 10m,24.9,24.3,8.2,0.004962,1.263,A granel
+SKU-00787,Interruptor eléctrico,12.6,8.0,6.2,0.000625,0.137,A granel
+SKU-00788,Smartphone caja,17.8,9.6,4.8,0.00082,0.623,Caja propia
+SKU-00789,Cinta aisladora,9.6,9.6,2.0,0.000184,0.128,A granel
+SKU-00790,Caja herramientas plástica,52.4,29.2,24.0,0.036722,3.301,Caja propia
+SKU-00791,Sierra circular,45.2,35.6,15.6,0.025102,5.72,Caja propia
+SKU-00792,Mouse óptico,14.5,10.4,4.8,0.000724,0.182,Caja propia
+SKU-00793,Manguera jardín 20m,34.8,33.5,15.4,0.017953,3.917,A granel
+SKU-00794,Taladro eléctrico,39.7,30.5,10.1,0.01223,2.596,Caja propia
+SKU-00795,Notebook 15 pulgadas,42.0,29.2,5.8,0.007113,1.952,Caja propia
+SKU-00796,Mouse óptico,14.3,10.0,4.8,0.000686,0.202,Caja propia
+SKU-00797,Caja herramientas plástica,48.6,31.1,24.4,0.03688,3.307,Caja propia
+SKU-00798,Pintura látex 1L,12.1,11.8,14.2,0.002027,1.392,Caja propia
+SKU-00799,Interruptor eléctrico,11.8,8.0,6.0,0.000566,0.149,A granel
+SKU-00800,Alicate universal,21.3,6.7,3.0,0.000428,0.336,A granel
+SKU-00801,Smartphone caja,18.7,10.4,5.0,0.000972,0.632,Caja propia
+SKU-00802,Silicona cartucho,23.4,5.0,5.0,0.000585,0.32,A granel
+SKU-00803,Router WiFi,25.9,19.8,8.2,0.004205,0.8,Caja propia
+SKU-00804,Broca acero 10mm,19.1,4.9,3.1,0.00029,0.169,A granel
+SKU-00805,Estantería modular,102.3,51.1,21.0,0.109778,13.13,Caja propia
+SKU-00806,Sierra circular,44.0,33.4,15.3,0.022485,5.088,Caja propia
+SKU-00807,Escalera aluminio 4 peldaños,114.7,43.0,14.8,0.072995,8.584,Embalaje personalizado
+SKU-00808,Cinta aisladora,10.3,10.1,2.0,0.000208,0.126,A granel
+SKU-00809,Lámpara mesa,33.3,24.6,26.2,0.021463,2.295,Caja propia
+SKU-00810,Alicate universal,21.9,7.0,2.9,0.000445,0.367,A granel
+SKU-00811,Florero cerámica,25.6,25.0,39.7,0.025408,2.753,Caja propia
+SKU-00812,Sierra circular,44.0,36.4,14.7,0.023544,5.583,Caja propia
+SKU-00813,Monitor 24 pulgadas,61.3,46.8,15.1,0.043319,5.189,Caja propia
+SKU-00814,Cámara seguridad,20.8,15.6,9.7,0.003147,0.63,Caja propia
+SKU-00815,Manguera jardín 20m,34.0,36.5,14.6,0.018119,4.527,A granel
+SKU-00816,Smart TV 43 pulgadas,104.8,70.7,14.5,0.107436,12.996,Caja propia
+SKU-00817,Tornillos caja 100u,7.9,6.0,4.1,0.000194,0.46,A granel
+SKU-00818,Smart TV 43 pulgadas,114.7,68.6,15.1,0.118813,12.783,Caja propia
+SKU-00819,Sierra circular,45.8,34.1,14.7,0.022958,5.182,Caja propia
+SKU-00820,Monitor 24 pulgadas,57.8,44.1,14.5,0.03696,4.436,Caja propia
+SKU-00821,Cámara seguridad,19.8,15.4,10.0,0.003049,0.631,Caja propia
+SKU-00822,Clavos caja 1kg,15.1,9.8,5.7,0.000843,1.14,A granel
+SKU-00823,Alicate universal,21.1,7.2,2.9,0.000441,0.317,A granel
+SKU-00824,Cuadro decorativo 60x40,64.2,45.4,5.8,0.016905,2.721,Caja propia
+SKU-00825,Tornillos caja 100u,7.8,6.2,3.8,0.000184,0.449,A granel
+SKU-00826,Router WiFi,24.7,20.9,7.9,0.004078,0.685,Caja propia
+SKU-00827,Llave ajustable 8 pulgadas,25.5,8.0,2.9,0.000592,0.597,A granel
+SKU-00828,Parlante Bluetooth,25.7,12.5,11.8,0.003791,0.918,Caja propia
+SKU-00829,Reloj pared,33.9,36.7,7.7,0.00958,1.153,Caja propia
+SKU-00830,Monitor 24 pulgadas,62.4,46.9,15.3,0.044776,4.87,Caja propia
+SKU-00831,Rodillo pintura,29.5,25.7,8.4,0.006368,0.371,A granel
+SKU-00832,Espejo pared 80x60,91.0,71.7,7.6,0.049588,7.623,Caja propia
+SKU-00833,Llave ajustable 8 pulgadas,25.1,8.2,3.1,0.000638,0.583,A granel
+SKU-00834,Clavos caja 1kg,15.0,10.3,5.9,0.000912,1.101,A granel
+SKU-00835,Pintura látex 4L,20.1,20.4,23.9,0.0098,5.299,Caja propia
+SKU-00836,Tornillos caja 100u,8.0,5.8,3.9,0.000181,0.448,A granel
+SKU-00837,Caja herramientas plástica,48.0,31.5,24.9,0.037649,3.358,Caja propia
+SKU-00838,Notebook 15 pulgadas,41.6,30.2,6.0,0.007538,2.106,Caja propia
+SKU-00839,Router WiFi,24.9,21.0,8.3,0.00434,0.792,Caja propia
+SKU-00840,Alicate universal,21.5,6.7,2.9,0.000418,0.346,A granel
+SKU-00841,Lámpara mesa,36.3,24.3,25.1,0.02214,2.271,Caja propia
+SKU-00842,Silicona cartucho,22.7,4.9,5.2,0.000578,0.276,A granel
+SKU-00843,Notebook 15 pulgadas,41.4,30.4,6.2,0.007803,2.037,Caja propia
+SKU-00844,Notebook 15 pulgadas,41.2,28.6,5.8,0.006834,2.223,Caja propia
+SKU-00845,Interruptor eléctrico,11.8,7.6,6.0,0.000538,0.138,A granel
+SKU-00846,Tablet 10 pulgadas,26.6,19.8,6.3,0.003318,0.904,Caja propia
+SKU-00847,Tornillos caja 100u,8.4,6.3,4.1,0.000217,0.428,A granel
+SKU-00848,Notebook 15 pulgadas,40.0,29.1,5.9,0.006868,1.996,Caja propia
+SKU-00849,Cable eléctrico 10m,24.6,24.0,7.8,0.004605,1.2,A granel
+SKU-00850,Smartphone caja,17.9,9.8,4.9,0.00086,0.581,Caja propia
+SKU-00851,Mouse óptico,14.3,10.3,5.1,0.000751,0.219,Caja propia
+SKU-00852,Llave ajustable 8 pulgadas,24.1,8.2,2.9,0.000573,0.572,A granel
+SKU-00853,Pintura látex 4L,19.5,21.0,25.4,0.010401,5.17,Caja propia
+SKU-00854,Cable eléctrico 10m,23.9,24.3,8.2,0.004762,1.214,A granel
+SKU-00855,Estantería modular,101.5,50.2,20.8,0.105982,11.907,Caja propia
+SKU-00856,Lámpara mesa,33.8,26.1,24.0,0.021172,2.332,Caja propia
+SKU-00857,Escalera aluminio 4 peldaños,125.7,43.4,14.9,0.081285,8.719,Embalaje personalizado
+SKU-00858,Rodillo pintura,28.5,25.5,7.7,0.005596,0.384,A granel
+SKU-00859,Escalera aluminio 4 peldaños,123.5,43.9,15.5,0.084036,8.112,Embalaje personalizado
+SKU-00860,Cámara seguridad,20.2,14.9,10.0,0.00301,0.618,Caja propia
+SKU-00861,Amoladora angular,40.4,33.6,11.9,0.016154,2.912,Caja propia
+SKU-00862,Silicona cartucho,23.9,4.9,4.8,0.000562,0.321,A granel
+SKU-00863,Monitor 24 pulgadas,58.0,44.8,15.4,0.040015,4.816,Caja propia
+SKU-00864,Alicate universal,22.7,6.7,2.9,0.000441,0.377,A granel
+SKU-00865,Amoladora angular,38.7,31.7,11.6,0.014231,3.168,Caja propia
+SKU-00866,Interruptor eléctrico,11.7,7.7,5.9,0.000532,0.156,A granel
+SKU-00867,Alicate universal,22.0,6.7,3.0,0.000442,0.327,A granel
+SKU-00868,Cable eléctrico 10m,25.6,24.9,8.0,0.0051,1.227,A granel
+SKU-00869,Smartphone caja,18.9,10.5,5.2,0.001032,0.64,Caja propia
+SKU-00870,Rodillo pintura,30.9,24.4,7.6,0.00573,0.37,A granel
+SKU-00871,Alicate universal,22.3,6.7,3.1,0.000463,0.345,A granel
+SKU-00872,Cable eléctrico 10m,25.5,25.0,8.1,0.005164,1.319,A granel
+SKU-00873,Tarugos nylon bolsa 50u,12.1,8.2,3.0,0.000298,0.232,A granel
+SKU-00874,Llave ajustable 8 pulgadas,25.6,8.1,3.0,0.000622,0.599,A granel
+SKU-00875,Tornillos caja 100u,8.3,6.1,4.0,0.000203,0.422,A granel
+SKU-00876,Manguera jardín 20m,34.2,34.5,15.4,0.01817,4.123,A granel
+SKU-00877,Cable eléctrico 10m,25.9,24.5,7.8,0.004949,1.131,A granel
+SKU-00878,Cámara seguridad,20.2,15.6,10.3,0.003246,0.593,Caja propia
+SKU-00879,Cámara seguridad,20.7,15.7,9.6,0.00312,0.608,Caja propia
+SKU-00880,Alicate universal,22.2,7.0,3.1,0.000482,0.35,A granel
+SKU-00881,Pintura látex 4L,19.2,19.2,26.2,0.009658,4.879,Caja propia
+SKU-00882,Smartphone caja,18.8,9.6,4.9,0.000884,0.547,Caja propia
+SKU-00883,Lámpara mesa,35.5,24.9,26.1,0.023071,2.418,Caja propia
+SKU-00884,Llave ajustable 8 pulgadas,26.0,8.0,3.0,0.000624,0.63,A granel
+SKU-00885,Martillo carpintero,32.7,12.0,4.0,0.00157,0.925,A granel
+SKU-00886,Amoladora angular,38.8,32.8,11.6,0.014763,2.984,Caja propia
+SKU-00887,Manguera jardín 20m,34.3,36.4,15.7,0.019602,4.174,A granel
+SKU-00888,Escalera aluminio 4 peldaños,124.3,47.0,15.7,0.091721,7.702,Embalaje personalizado
+SKU-00889,Smartphone caja,18.1,10.1,4.9,0.000896,0.543,Caja propia
+SKU-00890,Pintura látex 1L,12.2,11.5,14.1,0.001978,1.315,Caja propia
+SKU-00891,Pintura látex 4L,20.5,21.0,24.9,0.010719,5.184,Caja propia
+SKU-00892,Interruptor eléctrico,12.1,7.8,6.1,0.000576,0.159,A granel
+SKU-00893,Tornillos caja 100u,7.9,6.0,4.1,0.000194,0.417,A granel
+SKU-00894,Taladro eléctrico,36.5,30.8,9.6,0.010792,2.717,Caja propia
+SKU-00895,Tablet 10 pulgadas,29.3,20.3,6.1,0.003628,0.912,Caja propia
+SKU-00896,Rodillo pintura,29.9,24.4,8.4,0.006128,0.385,A granel
+SKU-00897,Lámpara mesa,36.3,23.9,25.9,0.02247,2.239,Caja propia
+SKU-00898,Reloj pared,35.7,35.1,8.0,0.010025,1.08,Caja propia
+SKU-00899,Rodillo pintura,31.0,25.2,8.0,0.00625,0.381,A granel
+SKU-00900,Alicate universal,22.4,7.3,3.1,0.000507,0.351,A granel
