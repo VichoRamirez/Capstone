@@ -10,17 +10,17 @@ import csv
 import os
 from datetime import datetime
 
-from PyQt5.QtWidgets import (
+from PyQt6.QtWidgets import (
     QApplication, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout,
     QLabel, QLineEdit, QPushButton, QFileDialog, QTableWidget,
     QTableWidgetItem, QHeaderView, QFrame, QSplitter, QMessageBox,
     QScrollArea, QSizePolicy, QProgressBar, QStatusBar
 )
-from PyQt5.QtCore import (
+from PyQt6.QtCore import (
     Qt, QThread, pyqtSignal, QPropertyAnimation, QEasingCurve,
     QTimer, QSize
 )
-from PyQt5.QtGui import (
+from PyQt6.QtGui import (
     QFont, QColor, QPalette, QPixmap, QIcon, QPainter,
     QLinearGradient, QBrush, QPen, QFontDatabase
 )
@@ -363,7 +363,7 @@ class FilePickerButton(QPushButton):
         self.setObjectName("filePicker")
         self.setMinimumHeight(36)
         self.path = None
-        self.setCursor(Qt.PointingHandCursor)
+        self.setCursor(Qt.CursorShape.PointingHandCursor)
         self.setAcceptDrops(True)
 
     def dragEnterEvent(self, event):
@@ -459,7 +459,7 @@ class DispatcherWindow(QMainWindow):
         root_layout.addWidget(self.progress)
 
         # Main splitter
-        splitter = QSplitter(Qt.Horizontal)
+        splitter = QSplitter(Qt.Orientation.Horizontal)
         splitter.setHandleWidth(1)
 
         left_results = self._results_panel()
@@ -489,7 +489,7 @@ class DispatcherWindow(QMainWindow):
         hl.setContentsMargins(24, 0, 24, 0)
 
         brand = QLabel("◈  DISPATCH")
-        brand.setFont(QFont(MONO, 15, QFont.Bold))
+        brand.setFont(QFont(MONO, 15, QFont.Weight.Bold))
         brand.setStyleSheet(f"color: {ACCENT}; letter-spacing: 4px;")
 
         subtitle = QLabel("Route Optimizer  /  Fleet Management")
@@ -508,7 +508,7 @@ class DispatcherWindow(QMainWindow):
     def _input_panel(self) -> QWidget:
         scroll = QScrollArea()
         scroll.setWidgetResizable(True)
-        scroll.setFrameShape(QFrame.NoFrame)
+        scroll.setFrameShape(QFrame.Shape.NoFrame)
         scroll.setStyleSheet(f"QScrollArea {{ background: {BG}; border: none; }}")
 
         panel = QWidget()
@@ -564,7 +564,7 @@ class DispatcherWindow(QMainWindow):
         # ── Advanced Params Toggle ──
         self.btn_advanced = QPushButton("Advanced parameters ▼")
         self.btn_advanced.setObjectName("btnSecondary")
-        self.btn_advanced.setCursor(Qt.PointingHandCursor)
+        self.btn_advanced.setCursor(Qt.CursorShape.PointingHandCursor)
         self.btn_advanced.clicked.connect(self._toggle_advanced)
         layout.addWidget(self.btn_advanced)
 
@@ -604,12 +604,12 @@ class DispatcherWindow(QMainWindow):
         btn_row = QHBoxLayout()
         self.btn_clear = QPushButton("CLEAR")
         self.btn_clear.setObjectName("btnSecondary")
-        self.btn_clear.setCursor(Qt.PointingHandCursor)
+        self.btn_clear.setCursor(Qt.CursorShape.PointingHandCursor)
         self.btn_clear.clicked.connect(self._clear)
 
         self.btn_run = QPushButton("RUN OPTIMIZER")
         self.btn_run.setObjectName("btnPrimary")
-        self.btn_run.setCursor(Qt.PointingHandCursor)
+        self.btn_run.setCursor(Qt.CursorShape.PointingHandCursor)
         self.btn_run.setMinimumHeight(44)
         self.btn_run.clicked.connect(self._submit)
 
@@ -647,7 +647,7 @@ class DispatcherWindow(QMainWindow):
 
         self.btn_export = QPushButton("EXPORT CSV")
         self.btn_export.setObjectName("btnSecondary")
-        self.btn_export.setCursor(Qt.PointingHandCursor)
+        self.btn_export.setCursor(Qt.CursorShape.PointingHandCursor)
         self.btn_export.clicked.connect(self._export)
         self.btn_export.setEnabled(False)
         self.btn_export.setFixedHeight(30)
@@ -662,12 +662,12 @@ class DispatcherWindow(QMainWindow):
         # Table
         self.table = QTableWidget(0, 3)
         self.table.setHorizontalHeaderLabels(["TRUCK", "POINT", "HOUR"])
-        self.table.horizontalHeader().setSectionResizeMode(1, QHeaderView.Stretch)
-        self.table.horizontalHeader().setSectionResizeMode(0, QHeaderView.ResizeToContents)
-        self.table.horizontalHeader().setSectionResizeMode(2, QHeaderView.ResizeToContents)
+        self.table.horizontalHeader().setSectionResizeMode(1, QHeaderView.ResizeMode.Stretch)
+        self.table.horizontalHeader().setSectionResizeMode(0, QHeaderView.ResizeMode.ResizeToContents)
+        self.table.horizontalHeader().setSectionResizeMode(2, QHeaderView.ResizeMode.ResizeToContents)
         self.table.verticalHeader().setVisible(False)
-        self.table.setEditTriggers(QTableWidget.NoEditTriggers)
-        self.table.setSelectionBehavior(QTableWidget.SelectRows)
+        self.table.setEditTriggers(QTableWidget.EditTrigger.NoEditTriggers)
+        self.table.setSelectionBehavior(QTableWidget.SelectionBehavior.SelectRows)
         self.table.setShowGrid(False)
         self.table.setAlternatingRowColors(True)
         self.table.setStyleSheet(
@@ -679,7 +679,7 @@ class DispatcherWindow(QMainWindow):
 
         # Empty state
         self.empty_lbl = QLabel("No results yet.\nConfigure parameters and run the optimizer.")
-        self.empty_lbl.setAlignment(Qt.AlignCenter)
+        self.empty_lbl.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.empty_lbl.setStyleSheet(
             f"color: {TEXT_DIM}; font-family: {MONO}; font-size: 13px; line-height: 2;"
         )
@@ -838,8 +838,8 @@ class DispatcherWindow(QMainWindow):
 
             truck_item = QTableWidgetItem(str(row["Truck"]))
             truck_item.setForeground(QColor(ACCENT))
-            truck_item.setFont(QFont(MONO, 12, QFont.Bold))
-            truck_item.setTextAlignment(Qt.AlignCenter)
+            truck_item.setFont(QFont(MONO, 12, QFont.Weight.Bold))
+            truck_item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
 
             point_item = QTableWidgetItem(str(row["Point"]))
             point_item.setForeground(QColor(TEXT))
@@ -847,7 +847,7 @@ class DispatcherWindow(QMainWindow):
             hour_item  = QTableWidgetItem(str(row["Hour"]))
             hour_item.setForeground(QColor(ACCENT2))
             hour_item.setFont(QFont(MONO, 12))
-            hour_item.setTextAlignment(Qt.AlignCenter)
+            hour_item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
 
             self.table.setItem(r, 0, truck_item)
             self.table.setItem(r, 1, point_item)
@@ -887,12 +887,12 @@ def main():
     app.setApplicationName("Dispatcher")
 
     # Smooth font rendering
-    app.setAttribute(Qt.AA_EnableHighDpiScaling, True)
-    app.setAttribute(Qt.AA_UseHighDpiPixmaps, True)
+    
+    
 
     window = DispatcherWindow()
     window.show()
-    sys.exit(app.exec_())
+    sys.exit(app.exec())
 
 
 if __name__ == "__main__":
