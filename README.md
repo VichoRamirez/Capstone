@@ -1,35 +1,39 @@
 # Capstone Analytics
 
 Proyecto con dos componentes separados:
-- **Análisis de datos**: notebooks y scripts de exploración (raíz del proyecto)
-- **Aplicación de escritorio** (`app/`): frontend **PyQt6**, backend Python y base de datos **MySQL** (via SQLAlchemy)
+- **Análisis de datos**: notebooks, scripts de exploración y datasets en la raíz del proyecto
+- **Aplicación de escritorio** (`app/`): frontend **PyQt6**, backend Python, base de datos **MySQL** (via SQLAlchemy) y modelos de optimización/heurísticas para ruteo
 
 ## Estructura del proyecto
 
 ```
 __Capstone analytics/
-├── requirements.txt                # Deps de análisis (pandas, jupyter, etc.)
-├── CapstoneEnv/                    # Entorno virtual (gitignored)
 ├── SCRIPTS/                        # Notebooks de exploración
+│   └── Explorar.ipynb
 ├── RAW_DATA/                       # Datos crudos
+│   ├── catalogo_productos.csv
+│   ├── catalogo_productos.xlsx
+│   ├── detalle_pedidos_santiago_202612.xlsx
+│   ├── ventas_ficticias_santiago_202612.csv
+│   └── ventas_ficticias_santiago_202612.zip
 ├── CLEAN_DATA/                     # Datos limpios
+│   ├── catalogo_productos.csv
+│   ├── detalle_ventas.csv
+│   └── ventas_direcciones.csv
 │
 └── app/                            # Aplicación de escritorio (separada)
     ├── main.py                     # Punto de entrada
     ├── requirements.txt            # Deps de la app (PyQt6, SQLAlchemy, etc.)
-    ├── .env                        # Variables de entorno (NO se sube a git)
     ├── config/
     │   ├── settings.py             # Lee .env y expone configuración
     │   └── .env.example            # Plantilla de variables de entorno
     │
     ├── frontend/                   # Capa de presentación (PyQt6)
     │   ├── app.py                  # Ventana principal (QMainWindow)
+    │   ├── frontend_pyqt.py        # Frontend alternativo para despacho/rutas
     │   ├── views/                  # Pantallas / vistas
     │   │   └── main_view.py
     │   ├── widgets/                # Widgets reutilizables
-    │   └── resources/
-    │       └── styles/
-    │           └── style.qss       # Estilos Qt
     │
     ├── backend/                    # Capa de lógica de negocio
     │   ├── controllers/            # Orquestadores (frontend ↔ servicios)
@@ -37,14 +41,23 @@ __Capstone analytics/
     │   └── services/               # Lógica de negocio pura
     │       └── data_service.py
     │
-    └── database/                   # Capa de acceso a datos (MySQL)
-        ├── connection.py           # Engine y sesiones de SQLAlchemy
-        ├── models/                 # Modelos ORM
-        │   ├── base.py
-        │   └── producto.py
-        └── repositories/           # Consultas y CRUD
-            ├── base_repository.py
-            └── producto_repository.py
+    ├── database/                   # Capa de acceso a datos (MySQL)
+    │   ├── connection.py           # Engine y sesiones de SQLAlchemy
+    │   ├── models/                 # Modelos ORM
+    │   │   ├── base.py
+    │   │   └── producto.py
+    │   └── repositories/           # Consultas y CRUD
+    │       ├── base_repository.py
+    │       └── producto_repository.py
+    │
+    └── models/                     # Modelos analíticos y de optimización
+        ├── Modelo.py               # Modelo exacto VRP con Gurobi
+        ├── Modelo2.py              # Variante del modelo exacto
+        ├── Modelo3.py              # Variante del modelo exacto
+        ├── Modelo4.py              # Variante del modelo exacto
+        ├── Heuristica.py           # Heurística constructiva / ALNS para VRP
+        ├── Metaheuristicas.py      # GA, SA y Tabu Search para VRP/VRPTW
+        └── HeuristicasLiteraturaBenchmark.py  # Benchmarks de heurísticas
 ```
 
 ## Flujo de datos (app)
@@ -55,6 +68,13 @@ Frontend (PyQt6)  →  Controller  →  Service  →  Repository  →  MySQL
       └──────────────────── datos ──────────────────────────────-┘
 ```
 
+## Modelos de optimización
+
+Dentro de `app/models/` se incluyen implementaciones para problemas de ruteo de vehículos (VRP/VRPTW):
+- **Modelos exactos** (`Modelo.py`, `Modelo2.py`, `Modelo3.py`, `Modelo4.py`): formulaciones con **Gurobi**
+- **Heurísticas y metaheurísticas** (`Heuristica.py`, `Metaheuristicas.py`): construcción inicial, búsqueda local, ALNS, algoritmos genéticos, simulated annealing y tabu search
+- **Benchmarks** (`HeuristicasLiteraturaBenchmark.py`): variantes para comparar desempeño de heurísticas reportadas en literatura
+
 ## Instalación
 
 ```bash
@@ -62,17 +82,14 @@ Frontend (PyQt6)  →  Controller  →  Service  →  Repository  →  MySQL
 python -m venv CapstoneEnv
 CapstoneEnv\Scripts\activate
 
-# 2. Instalar dependencias de análisis
-pip install -r requirements.txt
-
-# 3. Instalar dependencias de la app
+# 2. Instalar dependencias de la app
 pip install -r app\requirements.txt
 
-# 4. Configurar variables de entorno
+# 3. Configurar variables de entorno
 copy app\config\.env.example app\.env
 # Editar app\.env con tus credenciales de MySQL
 
-# 5. Ejecutar la aplicación
+# 4. Ejecutar la aplicación
 cd app
 python main.py
 ```
