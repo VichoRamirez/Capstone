@@ -24,3 +24,4 @@ Thumbs.db
 # Jupyter
 .ipynb_checkpoints/
 /venv
+/SCRIPTS/sql_insert.ipynb
