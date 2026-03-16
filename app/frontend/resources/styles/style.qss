@@ -1,41 +1,190 @@
-/* Estilos globales de la aplicación PyQt */
+/* Global Stylesheet (requires string formatting with theme.py colors) */
 
-QMainWindow {
-    background-color: #f5f5f5;
-}
-
-QLabel {
-    color: #333333;
-}
-
-QPushButton {
-    background-color: #0078d4;
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 4px;
+QMainWindow, QWidget {{
+    background-color: {BG};
+    color: {TEXT};
+    font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
     font-size: 13px;
-}
+}}
 
-QPushButton:hover {
-    background-color: #005a9e;
-}
+/* ── Cards ── */
+#card {{
+    background: {CARD};
+    border: 1px solid {BORDER};
+    border-radius: 8px;
+}}
 
-QPushButton:pressed {
-    background-color: #004578;
-}
-
-QTableWidget {
-    border: 1px solid #cccccc;
-    gridline-color: #e0e0e0;
-    background-color: white;
-    alternate-background-color: #f9f9f9;
-}
-
-QHeaderView::section {
-    background-color: #0078d4;
-    color: white;
-    padding: 6px;
-    border: none;
+/* ── Section titles ── */
+#sectionTitle {{
+    color: {ACCENT};
+    font-family: {MONO};
+    font-size: 11px;
     font-weight: bold;
-}
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}}
+
+/* ── Labels ── */
+QLabel#fieldLabel {{
+    color: {TEXT_DIM};
+    font-size: 11px;
+    letter-spacing: 1px;
+}}
+
+/* ── Inputs ── */
+QLineEdit {{
+    background: {SURFACE};
+    border: 1px solid {BORDER};
+    border-radius: 4px;
+    padding: 8px 12px;
+    color: {TEXT};
+    font-family: {MONO};
+    font-size: 13px;
+    selection-background-color: {ACCENT};
+}}
+QLineEdit:focus {{
+    border: 1px solid {ACCENT};
+}}
+QLineEdit:hover {{
+    border: 1px solid #3d4a70;
+}}
+
+/* ── File picker ── */
+#filePicker {{
+    background: {SURFACE};
+    border: 1px solid {BORDER};
+    border-radius: 4px;
+    padding: 8px 12px;
+    color: {TEXT_DIM};
+    font-family: {MONO};
+    font-size: 12px;
+    text-align: left;
+}}
+#filePicker:hover {{
+    border: 1px solid {ACCENT};
+    color: {TEXT};
+}}
+
+/* ── Primary button ── */
+#btnPrimary {{
+    background: {ACCENT};
+    color: #0d0f14;
+    border: none;
+    border-radius: 4px;
+    padding: 12px 32px;
+    font-size: 13px;
+    font-weight: bold;
+    font-family: {MONO};
+    letter-spacing: 2px;
+}}
+#btnPrimary:hover {{
+    background: #ffbb2e;
+}}
+#btnPrimary:pressed {{
+    background: #c98800;
+}}
+#btnPrimary:disabled {{
+    background: #2a3050;
+    color: {TEXT_DIM};
+}}
+
+/* ── Secondary button ── */
+#btnSecondary {{
+    background: transparent;
+    color: {ACCENT2};
+    border: 1px solid {ACCENT2};
+    border-radius: 4px;
+    padding: 8px 20px;
+    font-size: 12px;
+    font-family: {MONO};
+    letter-spacing: 1px;
+}}
+#btnSecondary:hover {{
+    background: rgba(0,201,167,0.1);
+}}
+
+/* ── Table ── */
+QTableWidget {{
+    background: {SURFACE};
+    border: 1px solid {BORDER};
+    border-radius: 6px;
+    gridline-color: {BORDER};
+    color: {TEXT};
+    font-family: {MONO};
+    font-size: 12px;
+    selection-background-color: rgba(240,165,0,0.2);
+}}
+QTableWidget::item {{
+    padding: 6px 12px;
+    border-bottom: 1px solid {BORDER};
+}}
+QTableWidget::item:selected {{
+    background: rgba(240,165,0,0.15);
+    color: {ACCENT};
+}}
+QHeaderView::section {{
+    background: {CARD};
+    color: {ACCENT};
+    border: none;
+    border-bottom: 1px solid {BORDER};
+    padding: 8px 12px;
+    font-family: {MONO};
+    font-size: 11px;
+    letter-spacing: 2px;
+    font-weight: bold;
+}}
+
+/* ── Scrollbar ── */
+QScrollBar:vertical {{
+    background: {SURFACE};
+    width: 8px;
+    border-radius: 4px;
+}}
+QScrollBar::handle:vertical {{
+    background: {BORDER};
+    border-radius: 4px;
+    min-height: 30px;
+}}
+QScrollBar::handle:vertical:hover {{
+    background: {TEXT_DIM};
+}}
+QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {{
+    height: 0;
+}}
+
+/* ── Progress bar ── */
+QProgressBar {{
+    background: {SURFACE};
+    border: 1px solid {BORDER};
+    border-radius: 3px;
+    height: 4px;
+    text-align: center;
+    color: transparent;
+}}
+QProgressBar::chunk {{
+    background: {ACCENT};
+    border-radius: 3px;
+}}
+
+/* ── Status bar ── */
+QStatusBar {{
+    background: {SURFACE};
+    color: {TEXT_DIM};
+    border-top: 1px solid {BORDER};
+    font-family: {MONO};
+    font-size: 11px;
+    padding: 4px 12px;
+}}
+
+/* ── Divider ── */
+#divider {{
+    background: {BORDER};
+    max-height: 1px;
+    min-height: 1px;
+}}
+
+/* ── Splitter ── */
+QSplitter::handle {{
+    background: {BORDER};
+    width: 1px;
+}}

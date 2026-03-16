@@ -1,0 +1,15 @@
+"""
+Theme colors and configuration for the PyQt application.
+"""
+
+BG         = "#0d0f14"
+SURFACE    = "#151821"
+CARD       = "#1c2030"
+BORDER     = "#2a3050"
+ACCENT     = "#f0a500"
+ACCENT2    = "#00c9a7"
+TEXT       = "#e8eaf0"
+TEXT_DIM   = "#6b7399"
+ERROR      = "#ff4d6d"
+SUCCESS    = "#00c9a7"
+MONO       = "Courier New"
