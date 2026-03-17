@@ -34,15 +34,16 @@ class RequestWorker(QThread):
             f'Content-Type: application/json\r\n\r\n'.encode() + json_bytes + b'\r\n'
         )
 
-        # CSV file field
-        with open(self.csv_path, "rb") as f:
-            csv_bytes = f.read()
-        fname = os.path.basename(self.csv_path)
-        body_parts.append(
-            f'--{boundary}\r\n'
-            f'Content-Disposition: form-data; name="orders"; filename="{fname}"\r\n'
-            f'Content-Type: text/csv\r\n\r\n'.encode() + csv_bytes + b'\r\n'
-        )
+        # CSV file field (Optional)
+        if self.csv_path:
+            with open(self.csv_path, "rb") as f:
+                csv_bytes = f.read()
+            fname = os.path.basename(self.csv_path)
+            body_parts.append(
+                f'--{boundary}\r\n'
+                f'Content-Disposition: form-data; name="orders"; filename="{fname}"\r\n'
+                f'Content-Type: text/csv\r\n\r\n'.encode() + csv_bytes + b'\r\n'
+            )
 
         body_parts.append(f'--{boundary}--\r\n'.encode())
         body = b''.join(body_parts)

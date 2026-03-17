@@ -34,6 +34,13 @@ class MainApp(QMainWindow):
         self._init_views()
         self._status_bar()
 
+    def closeEvent(self, event):
+        """Clean up background threads on exit to prevent core dumps."""
+        if hasattr(self, 'main_view') and hasattr(self.main_view, 'health_worker'):
+            if self.main_view.health_worker:
+                self.main_view.health_worker.stop()
+        super().closeEvent(event)
+
     def _load_stylesheet(self):
         """Loads and formats the custom styles/style.qss file."""
         script_dir = os.path.dirname(os.path.abspath(__file__))

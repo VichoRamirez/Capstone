@@ -20,13 +20,29 @@ from frontend.widgets.components import (
     make_input, SectionCard, FilePickerButton, PulsingDot
 )
 from frontend.workers.request_worker import RequestWorker
+from frontend.workers.health_worker import HealthWorker
 
 class MainView(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.worker = None
+        self.health_worker = None
         self._result_rows = []
         self._build_ui()
+        self._start_health_check()
+        
+    def _start_health_check(self):
+        # Starts the background thread to ping the backend health endpoint
+        url = "http://localhost:8000"
+        self.health_worker = HealthWorker(url, parent=self)
+        self.health_worker.connected.connect(self._update_connection_status)
+        self.health_worker.start()
+        
+    def _update_connection_status(self, is_connected: bool):
+        if is_connected:
+            self.dot.set_ok()
+        else:
+            self.dot.set_error()
 
     # ── Layout ────────────────────────────────────────────────────────────────
 
@@ -129,8 +145,20 @@ class MainView(QWidget):
         self.inp_runtime = make_input("e.g. 10")
         general_card.add_row("Model Runtime (seconds)", self.inp_runtime)
 
-        self.inp_worktime = make_input("e.g. 10:30") 
-        general_card.add_row("WorkTime windows", self.inp_worktime)
+        # ── WorkTime Windows Split ──
+        wt_layout = QHBoxLayout()
+        self.inp_worktime_start = make_input("Start (e.g. 09:00)")
+        self.inp_worktime_start.setText("09:00")
+        self.inp_worktime_end = make_input("End (e.g. 17:00)")
+        self.inp_worktime_end.setText("17:00")
+        
+        wt_layout.addWidget(self.inp_worktime_start)
+        wt_layout.addWidget(self.inp_worktime_end)
+
+        wl = QWidget()
+        wl.setLayout(wt_layout)
+        wl.layout().setContentsMargins(0, 0, 0, 0)
+        general_card.add_row("WorkTime windows", wl)
 
         layout.addWidget(general_card)
 
@@ -192,12 +220,14 @@ class MainView(QWidget):
         self.btn_clear = QPushButton("CLEAR")
         self.btn_clear.setObjectName("btnSecondary")
         self.btn_clear.setCursor(Qt.CursorShape.PointingHandCursor)
+        self.btn_clear.setStyleSheet(f"background-color: {theme.ERROR}; color: white; border: none; font-weight: bold; border-radius: 4px;")
         self.btn_clear.clicked.connect(self._clear)
 
-        self.btn_run = QPushButton("RUN OPTIMIZER")
+        self.btn_run = QPushButton("RUN THE MODEL")
         self.btn_run.setObjectName("btnPrimary")
         self.btn_run.setCursor(Qt.CursorShape.PointingHandCursor)
         self.btn_run.setMinimumHeight(44)
+        self.btn_run.setStyleSheet(f"background-color: {theme.SUCCESS}; color: white; border: none; font-weight: bold; border-radius: 4px;")
         self.btn_run.clicked.connect(self._submit)
 
         btn_row.addWidget(self.btn_clear, 1)
@@ -280,8 +310,11 @@ class MainView(QWidget):
             self.parent()._set_status(msg, kind)
 
     def _clear(self):
-        for w in (self.inp_trucks, self.inp_address, self.inp_runtime, self.inp_worktime, self.inp_budget):
+        for w in (self.inp_trucks, self.inp_address, self.inp_runtime, self.inp_budget):
             w.clear()
+            
+        self.inp_worktime_start.setText("09:00")
+        self.inp_worktime_end.setText("17:00")
         
         self.inp_kml.setText("6.4")
         self.inp_space.setText("9")
@@ -339,9 +372,13 @@ class MainView(QWidget):
         if alt_txt and not alt_txt.isdigit():
             errors.append("Alternatives must be an integer.")
 
+        # Runtime input
+
         runtime_txt = self.inp_runtime.text().strip()
         if runtime_txt and not runtime_txt.isdigit():
             errors.append("Runtime must be an integer.")
+
+        # Budget input
 
         budget_txt = self.inp_budget.text().strip()
         if budget_txt:
@@ -350,12 +387,19 @@ class MainView(QWidget):
             except ValueError:
                 errors.append("Budget must be a number.")
 
-        address = self.inp_address.text().strip()
+        # CD Adress input        
+
+        address = self.inp_address.text().strip() # It will be latitude and longitude
+        # Example: "33.4484, -70.6693"
+        try:
+            lat, lon = address.split(",")
+            lat = float(lat)
+            lon = float(lon)
+        except ValueError:
+            errors.append("Address must be in the format 'latitude, longitude'.")
+
         if not address:
             errors.append("Distribution center address is required.")
-
-        if not self.file_btn.path:
-            errors.append("Please select an orders CSV file.")
 
         if errors:
             QMessageBox.warning(self, "Validation Error", "\n".join(errors))
@@ -370,8 +414,8 @@ class MainView(QWidget):
             "alternatives":       int(alt_txt) if alt_txt else 1,
             "budget":             float(budget_txt) if budget_txt else None,
             "model_runtime":      int(runtime_txt) if runtime_txt else None,
-            "worktime_windows":   self.inp_worktime.text().strip(),
-            "depot_address":      address,
+            "worktime_windows":   f"{self.inp_worktime_start.text().strip()}-{self.inp_worktime_end.text().strip()}",
+            "depot_address":      [lat, lon],
         }
 
     # ── Submit ────────────────────────────────────────────────────────────────
@@ -400,7 +444,7 @@ class MainView(QWidget):
     def _on_result(self, rows: list):
         self.progress.hide()
         self.btn_run.setEnabled(True)
-        self.btn_run.setText("RUN OPTIMIZER")
+        self.btn_run.setText("RUN THE MODEL")
         self.dot.set_ok()
         self._set_global_status(f"Optimization complete — {len(rows)} stops returned.", "ok")
 
@@ -435,7 +479,7 @@ class MainView(QWidget):
     def _on_error(self, msg: str):
         self.progress.hide()
         self.btn_run.setEnabled(True)
-        self.btn_run.setText("RUN OPTIMIZER")
+        self.btn_run.setText("RUN THE MODEL")
         self.dot.set_error()
         self._set_global_status(f"Error: {msg}", "err")
         QMessageBox.critical(self, "Backend Error", msg)
