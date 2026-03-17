@@ -4,6 +4,26 @@ Proyecto con dos componentes separados:
 - **Análisis de datos**: notebooks y scripts de exploración (raíz del proyecto)
 - **Aplicación de escritorio** (`app/`): frontend **PyQt6**, backend Python y base de datos **MySQL** (via SQLAlchemy)
 
+## Arquitectura
+### Requisitos
+* Interfaz de progreso
+* Time limit
+* Ingreso de variables:
+  * Cantidad de camiones
+  * Ventana de tiempo
+  * Centro de Distribución
+* Mostrar ruta óptima
+* Retornar CSV con la info (qué camión cubre que puntos)
+* Actualización automática de la base de datos
+  * Tabla Ventas -> entregado y no entregado.
+
+### Restricciones
+* Python.
+* Free Optimizer. 
+* DB relacional.
+* No hay un sistema de coordenadas.
+
+
 ## Estructura del proyecto
 
 ```
