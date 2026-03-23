@@ -3,6 +3,7 @@ Configuración general de la aplicación.
 Lee variables de entorno desde un archivo .env.
 """
 import os
+from urllib.parse import quote_plus
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -16,8 +17,11 @@ DB_CONFIG = {
     "database": os.getenv("DB_NAME", "capstone_db"),
 }
 
+# Encode password to handle special characters like '@'
+encoded_password = quote_plus(DB_CONFIG["password"])
+
 DATABASE_URL = (
-    f"mysql+pymysql://{DB_CONFIG['user']}:{DB_CONFIG['password']}"
+    f"mysql+pymysql://{DB_CONFIG['user']}:{encoded_password}"
     f"@{DB_CONFIG['host']}:{DB_CONFIG['port']}/{DB_CONFIG['database']}"
 )
 

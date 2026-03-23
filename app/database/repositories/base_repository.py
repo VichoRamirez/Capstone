@@ -2,7 +2,7 @@
 Repositorio base con operaciones CRUD genéricas.
 """
 from sqlalchemy.orm import Session
-from database.models.base import Base
+from database.models import Base
 
 
 class BaseRepository:

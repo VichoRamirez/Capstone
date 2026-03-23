@@ -1,7 +1,7 @@
 """
 Repositorio específico para Producto.
 """
-from database.models.producto import Producto
+from database.models import Producto
 from database.repositories.base_repository import BaseRepository
 from sqlalchemy.orm import Session
 

@@ -174,6 +174,14 @@ class MainView(QWidget):
         )
         hint.setWordWrap(True)
         csv_card.add_widget(hint)
+        
+        self.btn_upload = QPushButton("CLEAN & UPDATE DB")
+        self.btn_upload.setObjectName("btnSecondary")
+        self.btn_upload.setCursor(Qt.CursorShape.PointingHandCursor)
+        self.btn_upload.setMinimumHeight(36)
+        self.btn_upload.clicked.connect(self._upload)
+        csv_card.add_widget(self.btn_upload)
+        
         layout.addWidget(csv_card)
 
         # ── Advanced Params Toggle ──
@@ -236,6 +244,34 @@ class MainView(QWidget):
 
         scroll.setWidget(panel)
         return scroll
+
+    def _upload(self):
+        if not self.file_btn.path:
+            QMessageBox.warning(self, "No file", "Please select a CSV file first.")
+            return
+            
+        url = "http://localhost:8000/upload" # Hardcoded for now
+        self.btn_upload.setEnabled(False)
+        self.btn_upload.setText("CLEANING…")
+        self._set_global_status("Uploading and cleaning dataset…", "busy")
+        
+        from frontend.workers.upload_worker import UploadWorker
+        self.upload_worker = UploadWorker(url, self.file_btn.path)
+        self.upload_worker.finished.connect(self._on_upload_done)
+        self.upload_worker.error.connect(self._on_upload_error)
+        self.upload_worker.start()
+
+    def _on_upload_done(self, msg: str):
+        self.btn_upload.setEnabled(True)
+        self.btn_upload.setText("CLEAN & UPDATE DB")
+        self._set_global_status(msg, "ok")
+        QMessageBox.information(self, "Success", msg)
+
+    def _on_upload_error(self, msg: str):
+        self.btn_upload.setEnabled(True)
+        self.btn_upload.setText("CLEAN & UPDATE DB")
+        self._set_global_status(f"Error: {msg}", "err")
+        QMessageBox.critical(self, "Upload Error", msg)
 
     def _toggle_advanced(self):
         is_visible = self.advanced_container.isVisible()

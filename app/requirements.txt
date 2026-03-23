@@ -8,3 +8,5 @@ python-dotenv>=1.0
 fastapi>=0.104.0
 uvicorn[standard]>=0.24.0
 requests>=2.31.0
+osmnx>=1.9.0
+pandas>=2.0.0
