@@ -113,3 +113,13 @@ copy app\config\.env.example app\.env
 cd app
 python main.py
 ```
+###### Falta por hacer
+- Inicio de sesión
+- Crear cuenta (base de datos con correo, y contraseña hasheada)
+- Asociar catálogo a usuarios, dependiendo de quien lo sube.
+- Asociar pedidos a la empresa (usuario)
+- Mostrar pedidos según el usuario.
+- Que la optimización se haga con los pedidos de la empresa (usuario)
+- Actualizar base de datos con los pedidos entregados y no entregados.
+- Cambiar que el valor base de entregado sea Pendiente y no PENDIENTE.
+- Que el modelo priorice los pedidos que están más cerca de la fecha de entrega.
