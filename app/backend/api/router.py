@@ -42,6 +42,7 @@ async def optimize_route(
             csv_text = None
         
         # Run optimizer service which returns exactly the expected CSV string
+        
         result_csv = run_optimization(validated_params, csv_text)
         
         return result_csv
