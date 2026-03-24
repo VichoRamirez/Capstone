@@ -123,3 +123,4 @@ python main.py
 - Actualizar base de datos con los pedidos entregados y no entregados.
 - Cambiar que el valor base de entregado sea Pendiente y no PENDIENTE.
 - Que el modelo priorice los pedidos que están más cerca de la fecha de entrega.
+- Aplicar los mismos cambios que en la app.
