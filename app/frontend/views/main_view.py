@@ -763,11 +763,13 @@ class MainView(QWidget):
             self.file_detalle.path,
         )
         self.worker.finished.connect(self._on_result)
+        self.worker.progress_update.connect(self._on_stage_update) # New signal connection
         self.worker.error.connect(self._on_error)
         self.worker.start()
 
-        # Start progress poller
-        base_url = url.rsplit("/", 1)[0]  # strip the endpoint path
+        # We can keep ProgressWorker for other global stages if needed, 
+        # but for optimization, RequestWorker now handles its own polling.
+        base_url = url.rsplit("/", 1)[0]
         self.progress_worker = ProgressWorker(base_url, parent=self)
         self.progress_worker.stage_updated.connect(self._on_stage_update)
         self.progress_worker.start()

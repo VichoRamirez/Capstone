@@ -2,6 +2,7 @@ import asyncio
 import io
 import json
 import logging
+import uuid
 import pandas as pd
 from fastapi import APIRouter, UploadFile, File, Form, HTTPException, BackgroundTasks
 from fastapi.responses import PlainTextResponse, JSONResponse
@@ -19,6 +20,123 @@ logger = logging.getLogger(__name__)
 
 router = APIRouter()
 cleaning_service = CleaningService()
+
+# In-memory task database
+optimization_tasks = {}
+
+async def _run_optimization_task_internal(
+    task_id: str,
+    ventas_bytes: Optional[bytes],
+    detalle_bytes: Optional[bytes],
+    ventas_filename: Optional[str],
+    detalle_filename: Optional[str],
+    validated_params: OptimizerParams
+):
+    global optimization_tasks
+    try:
+        df_ventas = pd.DataFrame()
+        df_detalle = pd.DataFrame()
+        cleaning_errors = []
+
+        if ventas_bytes and detalle_bytes:
+            optimization_tasks[task_id]["progress"] = "Estandarizando datos..."
+            ventas_text = ventas_bytes.decode("utf-8")
+
+            if detalle_filename and detalle_filename.endswith(".xlsx"):
+                df_det = await asyncio.to_thread(pd.read_excel, io.BytesIO(detalle_bytes))
+                detalle_text = df_det.to_csv(index=False)
+            else:
+                detalle_text = detalle_bytes.decode("utf-8")
+
+            # ── Limpiar + geocodificar ──
+            cleaning = await asyncio.to_thread(
+                run_full_cleaning, ventas_text, detalle_text, True
+            )
+            df_ventas = cleaning.df_ventas
+            df_detalle = cleaning.df_detalle
+            cleaning_errors = cleaning.errores
+        else:
+            optimization_tasks[task_id]["progress"] = "Buscando pedidos pendientes en la base de datos..."
+            df_ventas = await asyncio.to_thread(cleaning_service.get_pending_orders_df)
+            if df_ventas.empty:
+                optimization_tasks[task_id].update({
+                    "status": "completed",
+                    "result": {
+                        "days": [],
+                        "cleaning_errors": [{"origen": "DB", "error": "No hay pedidos Pendiente en la base de datos."}],
+                    }
+                })
+                return
+
+        # ── Join weight/volume totals (solo si vinieron de CSV) ──
+        if not df_detalle.empty and "Número de Orden" in df_detalle.columns:
+            agg_cols = {}
+            if "Peso_total_kg" in df_detalle.columns:
+                agg_cols["Peso_total_kg"] = "sum"
+            elif "Peso_unitario_kg" in df_detalle.columns and "Cantidad" in df_detalle.columns:
+                df_detalle = df_detalle.copy()
+                df_detalle["Peso_total_kg"] = df_detalle["Peso_unitario_kg"] * df_detalle["Cantidad"]
+                agg_cols["Peso_total_kg"] = "sum"
+
+            if "Volumen_total_m3" in df_detalle.columns:
+                agg_cols["Volumen_total_m3"] = "sum"
+            elif "Volumen_unitario_m3" in df_detalle.columns and "Cantidad" in df_detalle.columns:
+                df_detalle = df_detalle.copy()
+                df_detalle["Volumen_total_m3"] = df_detalle["Volumen_unitario_m3"] * df_detalle["Cantidad"]
+                agg_cols["Volumen_total_m3"] = "sum"
+
+            if agg_cols:
+                order_totals = df_detalle.groupby("Número de Orden").agg(agg_cols).reset_index()
+                order_totals = order_totals.rename(columns={
+                    "Peso_total_kg": "Peso_total_pedido",
+                    "Volumen_total_m3": "Volumen_total_pedido",
+                })
+                df_ventas = df_ventas.merge(order_totals, on="Número de Orden", how="left")
+
+        # ── Construir batches por día ──
+        from backend.api.router import _build_day_batches
+        batches = await asyncio.to_thread(
+            _build_day_batches, df_ventas, validated_params.deliveries_per_day
+        )
+
+        # ── Optimizar por día ──
+        day_results = []
+        for idx, (label, batch_df) in enumerate(batches):
+            if batch_df.empty:
+                continue
+            optimization_tasks[task_id]["progress"] = f"Optimizando día {idx + 1}/{len(batches)}: {label} ({len(batch_df)} pedidos)..."
+            try:
+                result = await asyncio.to_thread(run_optimization, validated_params, batch_df)
+                day_results.append({
+                    "date": label,
+                    "routes_csv": result.routes_csv,
+                    "uncovered_csv": result.uncovered_csv,
+                    "map_html": result.map_html,
+                    "stats": result.stats,
+                })
+            except Exception as day_err:
+                logger.error(f"Error optimizando día '{label}': {day_err}")
+                day_results.append({
+                    "date": label,
+                    "routes_csv": "",
+                    "uncovered_csv": "",
+                    "map_html": f"<p>Error al optimizar: {day_err}</p>",
+                    "stats": {},
+                })
+
+        optimization_tasks[task_id].update({
+            "status": "completed",
+            "result": {
+                "days": day_results,
+                "cleaning_errors": cleaning_errors,
+            }
+        })
+    except Exception as e:
+        logger.exception(f"Error en tarea {task_id}")
+        optimization_tasks[task_id].update({
+            "status": "error",
+            "error": str(e)
+        })
 
 # Current processing stage (shown in the UI via GET /progress)
 _stage: str = ""
@@ -144,13 +262,13 @@ def _build_day_batches(
 
 @router.post("/optimize")
 async def optimize_route(
+    background_tasks: BackgroundTasks,
     params: str = Form(..., description="JSON string containing OptimizerParams"),
     ventas: Optional[UploadFile] = File(None, description="CSV de ventas"),
     detalle: Optional[UploadFile] = File(None, description="CSV o XLSX de detalle de pedidos"),
 ):
     """
-    Pipeline completo: limpia → geocodifica → divide por día → optimiza por día.
-    Si no se proveen archivos, busca pedidos 'PENDIENTE' en la base de datos.
+    Inicia el proceso de optimización en segundo plano y devuelve un task_id.
     """
     try:
         params_dict = json.loads(params)
@@ -158,109 +276,46 @@ async def optimize_route(
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"Parámetros JSON inválidos: {str(e)}")
 
-    try:
-        df_ventas = pd.DataFrame()
-        df_detalle = pd.DataFrame()
-        cleaning_errors = []
+    task_id = str(uuid.uuid4())
+    optimization_tasks[task_id] = {"status": "running", "progress": "Iniciando...", "result": None}
 
-        if ventas and detalle:
-            _set_stage("Leyendo archivos...")
-            ventas_bytes = await ventas.read()
-            ventas_text = ventas_bytes.decode("utf-8")
+    # Leer bytes antes de que se cierre el archivo
+    ventas_bytes = await ventas.read() if ventas else None
+    detalle_bytes = await detalle.read() if detalle else None
+    
+    background_tasks.add_task(
+        _run_optimization_task_internal,
+        task_id,
+        ventas_bytes,
+        detalle_bytes,
+        ventas.filename if ventas else None,
+        detalle.filename if detalle else None,
+        validated_params
+    )
 
-            detalle_bytes = await detalle.read()
-            if detalle.filename and detalle.filename.endswith(".xlsx"):
-                df_det = await asyncio.to_thread(pd.read_excel, io.BytesIO(detalle_bytes))
-                detalle_text = df_det.to_csv(index=False)
-            else:
-                detalle_text = detalle_bytes.decode("utf-8")
+    return {"task_id": task_id}
 
-            # ── Limpiar + geocodificar ──
-            _set_stage("Limpiando datos del CSV...")
-            cleaning = await asyncio.to_thread(
-                run_full_cleaning, ventas_text, detalle_text, True
-            )
-            df_ventas = cleaning.df_ventas
-            df_detalle = cleaning.df_detalle
-            cleaning_errors = cleaning.errores
-        else:
-            _set_stage("Buscando pedidos pendientes en la base de datos...")
-            df_ventas = await asyncio.to_thread(cleaning_service.get_pending_orders_df)
-            if df_ventas.empty:
-                _set_stage("")
-                return {
-                    "days": [],
-                    "cleaning_errors": [{"origen": "DB", "error": "No hay pedidos PENDIENTE en la base de datos."}],
-                }
-            # Note: Para datos de DB, los totales ya vienen agregados en df_ventas
-            # por lo que no hace falta el join con detalle aquí.
+@router.get("/optimize/status/{task_id}")
+async def get_optimization_status(task_id: str):
+    """
+    Consulta el estado de una tarea de optimización.
+    """
+    task = optimization_tasks.get(task_id)
+    if not task:
+        raise HTTPException(status_code=404, detail="Tarea no encontrada")
+    return task
 
-        # ── Join weight/volume totals (solo si vinieron de CSV) ──
-        if not df_detalle.empty and "Número de Orden" in df_detalle.columns:
-            agg_cols = {}
-            if "Peso_total_kg" in df_detalle.columns:
-                agg_cols["Peso_total_kg"] = "sum"
-            elif "Peso_unitario_kg" in df_detalle.columns and "Cantidad" in df_detalle.columns:
-                df_detalle = df_detalle.copy()
-                df_detalle["Peso_total_kg"] = df_detalle["Peso_unitario_kg"] * df_detalle["Cantidad"]
-                agg_cols["Peso_total_kg"] = "sum"
-
-            if "Volumen_total_m3" in df_detalle.columns:
-                agg_cols["Volumen_total_m3"] = "sum"
-            elif "Volumen_unitario_m3" in df_detalle.columns and "Cantidad" in df_detalle.columns:
-                df_detalle = df_detalle.copy()
-                df_detalle["Volumen_total_m3"] = df_detalle["Volumen_unitario_m3"] * df_detalle["Cantidad"]
-                agg_cols["Volumen_total_m3"] = "sum"
-
-            if agg_cols:
-                order_totals = df_detalle.groupby("Número de Orden").agg(agg_cols).reset_index()
-                order_totals = order_totals.rename(columns={
-                    "Peso_total_kg": "Peso_total_pedido",
-                    "Volumen_total_m3": "Volumen_total_pedido",
-                })
-                df_ventas = df_ventas.merge(order_totals, on="Número de Orden", how="left")
-
-        # ── Construir batches por día ──
-        _set_stage("Construyendo batches por día...")
-        batches = await asyncio.to_thread(
-            _build_day_batches, df_ventas, validated_params.deliveries_per_day
-        )
-
-        # ── Optimizar por día ──
-        day_results = []
-        for idx, (label, batch_df) in enumerate(batches):
-            if batch_df.empty:
-                continue
-            _set_stage(f"Optimizando día {idx + 1}/{len(batches)}: {label} ({len(batch_df)} pedidos)...")
-            try:
-                result = await asyncio.to_thread(run_optimization, validated_params, batch_df)
-                day_results.append({
-                    "date": label,
-                    "routes_csv": result.routes_csv,
-                    "uncovered_csv": result.uncovered_csv,
-                    "map_html": result.map_html,
-                    "stats": result.stats,
-                })
-            except Exception as day_err:
-                logger.error(f"Error optimizando día '{label}': {day_err}")
-                day_results.append({
-                    "date": label,
-                    "routes_csv": "",
-                    "uncovered_csv": "",
-                    "map_html": f"<p>Error al optimizar: {day_err}</p>",
-                    "stats": {"error": str(day_err), "total_puntos": len(batch_df)},
-                })
-
-        _set_stage("")
-        return {
-            "days": day_results,
-            "cleaning_errors": cleaning_errors,
-        }
-
-    except Exception as e:
-        _set_stage("")
-        logger.exception("Error en optimización")
-        raise HTTPException(status_code=500, detail=f"Optimización falló: {str(e)}")
+@router.get("/optimize/result/{task_id}")
+async def get_optimization_result(task_id: str):
+    """
+    Obtiene el resultado final de la optimización.
+    """
+    task = optimization_tasks.get(task_id)
+    if not task:
+        raise HTTPException(status_code=404, detail="Tarea no encontrada")
+    if task["status"] != "completed":
+        raise HTTPException(status_code=400, detail="La tarea aún no ha terminado")
+    return task["result"]
 
 @router.post("/upload")
 async def upload_ventas(

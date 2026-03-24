@@ -62,7 +62,8 @@ class CleaningService:
 
     def __init__(self):
         self.cache = self._cargar_cache()
-        self.failed_addresses = [] # Reset on each run if needed, but here we'll use it to collect
+        self.failed_addresses = [] 
+        self.nominatim_enabled = True # Circuit breaker
 
     # ── Cache Management ──
     def _cargar_cache(self) -> dict:
@@ -137,7 +138,10 @@ class CleaningService:
 
     # ── Geocoding ──
     def _geocode_query(self, query: str) -> Tuple[Optional[float], Optional[float]]:
-        """Internal helper to hit the Nominatim API."""
+        """Internal helper to hit the Nominatim API with 2s timeout and circuit breaker."""
+        if not self.nominatim_enabled:
+            return (None, None)
+
         try:
             url = NOMINATIM_URL.rstrip("/") + "/search"
             params = {"q": query, "format": "json", "limit": 1, "countrycodes": "cl"}
@@ -146,11 +150,14 @@ class CleaningService:
             if "localhost" not in NOMINATIM_URL:
                 time.sleep(1.0)
                 
-            response = req.get(url, params=params, headers=headers, timeout=10)
+            response = req.get(url, params=params, headers=headers, timeout=2) # Reduced to 2s
             response.raise_for_status()
             results = response.json()
             if results:
                 return (float(results[0]["lat"]), float(results[0]["lon"]))
+        except req.exceptions.ConnectionError:
+            logger.error("No se pudo conectar con el servidor Nominatim. Desactivando para este lote.")
+            self.nominatim_enabled = False
         except Exception as e:
             logger.debug(f"Query '{query}' failed: {e}")
         return (None, None)
