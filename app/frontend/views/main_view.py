@@ -1,5 +1,8 @@
 """
 Main view (DispatcherWindow) logic and layout.
+Two-file upload (ventas + detalle), embedded map, route table, and export.
+Results are shown per calendar day in outer tabs.
+Includes SaaS database upload integration.
 """
 
 import os
@@ -7,13 +10,19 @@ import csv
 from datetime import datetime
 
 from PyQt6.QtWidgets import (
-    QWidget, QVBoxLayout, QHBoxLayout, QLabel, QPushButton, 
-    QTableWidget, QTableWidgetItem, QHeaderView, QFrame, 
-    QSplitter, QMessageBox, QScrollArea, QProgressBar, 
-    QStatusBar, QFileDialog
+    QWidget, QVBoxLayout, QHBoxLayout, QLabel, QPushButton,
+    QTableWidget, QTableWidgetItem, QHeaderView, QFrame,
+    QSplitter, QMessageBox, QScrollArea, QProgressBar,
+    QStatusBar, QFileDialog, QTabWidget,
 )
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QFont, QColor
+
+try:
+    from PyQt6.QtWebEngineWidgets import QWebEngineView
+    HAS_WEBENGINE = True
+except ImportError:
+    HAS_WEBENGINE = False
 
 import frontend.resources.styles.theme as theme
 from frontend.widgets.components import (
@@ -21,23 +30,240 @@ from frontend.widgets.components import (
 )
 from frontend.workers.request_worker import RequestWorker
 from frontend.workers.health_worker import HealthWorker
+from frontend.workers.progress_worker import ProgressWorker
+
+
+# ── Per-Day result widget ─────────────────────────────────────────────────
+
+class DayResultWidget(QWidget):
+    """Shows one day's optimisation results: Route Schedule, Map, Uncovered."""
+
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self._result = None
+        self._route_rows = []
+        self._uncovered_rows = []
+        self._build()
+
+    def _build(self):
+        layout = QVBoxLayout(self)
+        layout.setContentsMargins(0, 8, 0, 0)
+        layout.setSpacing(8)
+
+        # Stats + export row
+        top = QHBoxLayout()
+        self.lbl_stats = QLabel("")
+        self.lbl_stats.setStyleSheet(
+            f"color: {theme.ACCENT2}; font-family: {theme.MONO}; font-size: 11px; padding-left: 4px;"
+        )
+        self.btn_export_routes = QPushButton("EXPORT ROUTES")
+        self.btn_export_routes.setObjectName("btnSecondary")
+        self.btn_export_routes.setCursor(Qt.CursorShape.PointingHandCursor)
+        self.btn_export_routes.setFixedHeight(28)
+        self.btn_export_routes.setEnabled(False)
+        self.btn_export_routes.clicked.connect(self._export_routes)
+
+        self.btn_export_uncovered = QPushButton("EXPORT UNCOVERED")
+        self.btn_export_uncovered.setObjectName("btnSecondary")
+        self.btn_export_uncovered.setCursor(Qt.CursorShape.PointingHandCursor)
+        self.btn_export_uncovered.setFixedHeight(28)
+        self.btn_export_uncovered.setEnabled(False)
+        self.btn_export_uncovered.clicked.connect(self._export_uncovered)
+
+        top.addWidget(self.lbl_stats)
+        top.addStretch()
+        top.addWidget(self.btn_export_routes)
+        top.addSpacing(6)
+        top.addWidget(self.btn_export_uncovered)
+        layout.addLayout(top)
+
+        # Inner tabs
+        self.tabs = QTabWidget()
+        self.tabs.setStyleSheet(f"""
+            QTabWidget::pane {{ border: 1px solid {theme.BORDER}; background: {theme.BG}; }}
+            QTabBar::tab {{ background: {theme.SURFACE}; color: {theme.TEXT_DIM};
+                           padding: 6px 16px; border: 1px solid {theme.BORDER};
+                           font-family: {theme.MONO}; font-size: 11px; }}
+            QTabBar::tab:selected {{ background: {theme.BG}; color: {theme.ACCENT};
+                                    border-bottom: 2px solid {theme.ACCENT}; }}
+        """)
+
+        # Tab 1: Routes table
+        self.table = QTableWidget(0, 7)
+        self.table.setHorizontalHeaderLabels(
+            ["CAMIÓN", "ORDEN", "RUT", "CLIENTE", "DIRECCIÓN", "COMUNA", "HORA"]
+        )
+        for col in range(7):
+            mode = (QHeaderView.ResizeMode.Stretch if col == 4
+                    else QHeaderView.ResizeMode.ResizeToContents)
+            self.table.horizontalHeader().setSectionResizeMode(col, mode)
+        self.table.verticalHeader().setVisible(False)
+        self.table.setEditTriggers(QTableWidget.EditTrigger.NoEditTriggers)
+        self.table.setSelectionBehavior(QTableWidget.SelectionBehavior.SelectRows)
+        self.table.setShowGrid(False)
+        self.table.setAlternatingRowColors(True)
+        self.table.setStyleSheet(
+            self.table.styleSheet() +
+            f"QTableWidget {{ alternate-background-color: rgba(42,48,80,0.3); }}"
+        )
+        self.tabs.addTab(self.table, "📋 Route Schedule")
+
+        # Tab 2: Map
+        self.map_container = QWidget()
+        map_layout = QVBoxLayout(self.map_container)
+        map_layout.setContentsMargins(0, 0, 0, 0)
+        if HAS_WEBENGINE:
+            self.web_view = QWebEngineView()
+            self._set_map_placeholder()
+            map_layout.addWidget(self.web_view)
+        else:
+            no_web = QLabel("PyQt6-WebEngine not installed.")
+            no_web.setAlignment(Qt.AlignmentFlag.AlignCenter)
+            no_web.setStyleSheet(f"color: {theme.TEXT_DIM}; font-family: {theme.MONO};")
+            map_layout.addWidget(no_web)
+        self.tabs.addTab(self.map_container, "🗺️ Map")
+
+        # Tab 3: Uncovered
+        self.table_uncovered = QTableWidget(0, 6)
+        self.table_uncovered.setHorizontalHeaderLabels(
+            ["RUT", "CLIENTE", "DIRECCIÓN", "ORDEN", "MONTO", "MOTIVO"]
+        )
+        for col in range(6):
+            mode = (QHeaderView.ResizeMode.Stretch if col == 2
+                    else QHeaderView.ResizeMode.ResizeToContents)
+            self.table_uncovered.horizontalHeader().setSectionResizeMode(col, mode)
+        self.table_uncovered.verticalHeader().setVisible(False)
+        self.table_uncovered.setEditTriggers(QTableWidget.EditTrigger.NoEditTriggers)
+        self.table_uncovered.setSelectionBehavior(QTableWidget.SelectionBehavior.SelectRows)
+        self.table_uncovered.setShowGrid(False)
+        self.table_uncovered.setAlternatingRowColors(True)
+        self.tabs.addTab(self.table_uncovered, "⚠️ Uncovered")
+
+        layout.addWidget(self.tabs, 1)
+
+    def _set_map_placeholder(self):
+        if HAS_WEBENGINE:
+            self.web_view.setHtml(
+                "<html><body style='background:#0d1117;color:#8b949e;display:flex;"
+                "align-items:center;justify-content:center;height:100vh;font-family:monospace;'>"
+                "<p>Run the model to see the route map.</p></body></html>"
+            )
+
+    def populate(self, day_data: dict):
+        """Fill all three inner tabs from a day result dict."""
+        self._result = day_data
+        stats = day_data.get("stats", {})
+
+        error_msg = stats.get("error")
+        if error_msg:
+            self.lbl_stats.setText(f"❌ {error_msg}")
+            self.lbl_stats.setStyleSheet(
+                f"color: {theme.ERROR}; font-family: {theme.MONO}; font-size: 11px;"
+            )
+            return
+
+        self.lbl_stats.setText(
+            f"{stats.get('cubiertos', 0)} covered  ·  "
+            f"{stats.get('no_cubiertos', 0)} uncovered  ·  "
+            f"{stats.get('camiones_usados', 0)} trucks"
+        )
+        self._populate_routes(day_data.get("routes_csv", ""))
+        self._populate_uncovered(day_data.get("uncovered_csv", ""))
+        map_html = day_data.get("map_html", "")
+        if HAS_WEBENGINE and map_html:
+            self.web_view.setHtml(map_html)
+        self.btn_export_routes.setEnabled(True)
+        self.btn_export_uncovered.setEnabled(True)
+
+    def _populate_routes(self, routes_csv: str):
+        import io as _io
+        self.table.setRowCount(0)
+        self._route_rows = []
+        if not routes_csv:
+            return
+        reader = csv.DictReader(_io.StringIO(routes_csv))
+        for row in reader:
+            r = self.table.rowCount()
+            self.table.insertRow(r)
+            self._route_rows.append(row)
+            fields = ["Camión", "Número de Orden", "RUT", "Nombre cliente",
+                      "Dirección cliente", "Comuna", "Hora estimada"]
+            for col_idx, field in enumerate(fields):
+                val = str(row.get(field, ""))
+                item = QTableWidgetItem(val)
+                if col_idx == 0:
+                    item.setForeground(QColor(theme.ACCENT))
+                    item.setFont(QFont(theme.MONO, 12, QFont.Weight.Bold))
+                    item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
+                elif col_idx == 6:
+                    item.setForeground(QColor(theme.ACCENT2))
+                    item.setFont(QFont(theme.MONO, 12))
+                    item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
+                else:
+                    item.setForeground(QColor(theme.TEXT))
+                self.table.setItem(r, col_idx, item)
+
+    def _populate_uncovered(self, uncovered_csv: str):
+        import io as _io
+        self.table_uncovered.setRowCount(0)
+        self._uncovered_rows = []
+        if not uncovered_csv:
+            return
+        reader = csv.DictReader(_io.StringIO(uncovered_csv))
+        for row in reader:
+            r = self.table_uncovered.rowCount()
+            self.table_uncovered.insertRow(r)
+            self._uncovered_rows.append(row)
+            fields = ["RUT", "Nombre cliente", "Dirección cliente",
+                      "Número de Orden", "Monto Pedido", "Motivo"]
+            for col_idx, field in enumerate(fields):
+                val = str(row.get(field, ""))
+                item = QTableWidgetItem(val)
+                if col_idx == 5: # Motivo is now 5
+                    item.setForeground(QColor(theme.ERROR))
+                else:
+                    item.setForeground(QColor(theme.TEXT))
+                self.table_uncovered.setItem(r, col_idx, item)
+
+    def _export_routes(self):
+        if not self._result:
+            return
+        path, _ = QFileDialog.getSaveFileName(
+            self, "Export Routes", "routes.csv", "CSV Files (*.csv)"
+        )
+        if path:
+            with open(path, "w", newline="", encoding="utf-8") as f:
+                f.write(self._result.get("routes_csv", ""))
+
+    def _export_uncovered(self):
+        if not self._result:
+            return
+        path, _ = QFileDialog.getSaveFileName(
+            self, "Export Uncovered", "uncovered.csv", "CSV Files (*.csv)"
+        )
+        if path:
+            with open(path, "w", newline="", encoding="utf-8") as f:
+                f.write(self._result.get("uncovered_csv", ""))
+
+
+# ── Main view ─────────────────────────────────────────────────────────────
 
 class MainView(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.worker = None
         self.health_worker = None
-        self._result_rows = []
+        self.progress_worker = None
+        self._result_data = None
         self._build_ui()
         self._start_health_check()
-        
+
     def _start_health_check(self):
-        # Starts the background thread to ping the backend health endpoint
         url = "http://localhost:8000"
         self.health_worker = HealthWorker(url, parent=self)
         self.health_worker.connected.connect(self._update_connection_status)
         self.health_worker.start()
-        
+
     def _update_connection_status(self, is_connected: bool):
         if is_connected:
             self.dot.set_ok()
@@ -51,24 +277,20 @@ class MainView(QWidget):
         root_layout.setContentsMargins(0, 0, 0, 0)
         root_layout.setSpacing(0)
 
-        # Header
         root_layout.addWidget(self._header())
 
-        # Progress bar (hidden until running)
         self.progress = QProgressBar()
         self.progress.setRange(0, 0)
         self.progress.setFixedHeight(3)
         self.progress.hide()
         root_layout.addWidget(self.progress)
 
-        # Main splitter
         splitter = QSplitter(Qt.Orientation.Horizontal)
         splitter.setHandleWidth(1)
 
         left_results = self._results_panel()
         right_inputs = self._input_panel()
-        
-        # User requested inputs on the right
+
         splitter.addWidget(left_results)
         splitter.addWidget(right_inputs)
         splitter.setSizes([860, 420])
@@ -123,21 +345,19 @@ class MainView(QWidget):
 
         # ── Fleet params ──
         fleet_card = SectionCard("01 — Fleet Parameters")
-
         self.inp_trucks = make_input("e.g. 5")
         fleet_card.add_row("Number of Trucks", self.inp_trucks)
-
         layout.addWidget(fleet_card)
 
         # ── Origin ──
         origin_card = SectionCard("02 — Distribution Center")
-        self.inp_address = make_input("Full address of the depot")
-        origin_card.add_row("Address", self.inp_address)
+        self.inp_address = make_input("lat, lon  (e.g. -33.4489, -70.6693)")
+        origin_card.add_row("Coordinates", self.inp_address)
         layout.addWidget(origin_card)
 
         # ── General Setup ──
         general_card = SectionCard("03 — General Parameters")
-        
+
         self.inp_url = make_input("http://localhost:8000/optimize")
         self.inp_url.setText("http://localhost:8000/optimize")
         general_card.add_row("API URL", self.inp_url)
@@ -145,16 +365,13 @@ class MainView(QWidget):
         self.inp_runtime = make_input("e.g. 10")
         general_card.add_row("Model Runtime (seconds)", self.inp_runtime)
 
-        # ── WorkTime Windows Split ──
         wt_layout = QHBoxLayout()
         self.inp_worktime_start = make_input("Start (e.g. 09:00)")
         self.inp_worktime_start.setText("09:00")
         self.inp_worktime_end = make_input("End (e.g. 17:00)")
         self.inp_worktime_end.setText("17:00")
-        
         wt_layout.addWidget(self.inp_worktime_start)
         wt_layout.addWidget(self.inp_worktime_end)
-
         wl = QWidget()
         wl.setLayout(wt_layout)
         wl.layout().setContentsMargins(0, 0, 0, 0)
@@ -162,26 +379,48 @@ class MainView(QWidget):
 
         layout.addWidget(general_card)
 
-        # ── CSV ──
-        csv_card = SectionCard("04 — Orders Dataset")
-        self.file_btn = FilePickerButton()
-        csv_card.add_widget(self.file_btn)
+        # ── Datasets (two files) ──
+        csv_card = SectionCard("04 — Datasets")
 
-        hint = QLabel("CSV must include: id, address, demand, time_window (optional)")
+        self.file_ventas = FilePickerButton()
+        self.file_ventas.setText("▸  Ventas CSV (click to select)")
+        csv_card.add_row("Archivo de Ventas", self.file_ventas)
+
+        self.file_detalle = FilePickerButton()
+        self.file_detalle.setText("▸  Detalle CSV/XLSX (click to select)")
+        csv_card.add_row("Archivo de Detalle", self.file_detalle)
+
+        hint = QLabel(
+            "Ventas: RUT, Nombre cliente, Dirección cliente, Fecha de Pedido, "
+            "Número de Orden, Monto Pedido, Fecha de despacho Solicitada\n"
+            "Detalle: Número de Orden, SKU, Cantidad, dimensiones, pesos"
+        )
         hint.setStyleSheet(
-            f"color: {theme.TEXT_DIM}; font-size: 11px; font-family: {theme.MONO};"
+            f"color: {theme.TEXT_DIM}; font-size: 10px; font-family: {theme.MONO};"
             "padding: 4px 0 0 0;"
         )
         hint.setWordWrap(True)
         csv_card.add_widget(hint)
         
-        self.btn_upload = QPushButton("CLEAN & UPDATE DB")
+        # Restoration of SaaS "CLEAN & UPDATE DB" buttons
+        upload_btn_layout = QHBoxLayout()
+        
+        self.btn_upload = QPushButton("UPLOAD VENTAS")
         self.btn_upload.setObjectName("btnSecondary")
         self.btn_upload.setCursor(Qt.CursorShape.PointingHandCursor)
         self.btn_upload.setMinimumHeight(36)
         self.btn_upload.clicked.connect(self._upload)
-        csv_card.add_widget(self.btn_upload)
+        upload_btn_layout.addWidget(self.btn_upload)
         
+        self.btn_upload_det = QPushButton("UPLOAD DETALLE")
+        self.btn_upload_det.setObjectName("btnSecondary")
+        self.btn_upload_det.setCursor(Qt.CursorShape.PointingHandCursor)
+        self.btn_upload_det.setMinimumHeight(36)
+        self.btn_upload_det.clicked.connect(self._upload_detalle)
+        upload_btn_layout.addWidget(self.btn_upload_det)
+        
+        csv_card.add_layout(upload_btn_layout)
+
         layout.addWidget(csv_card)
 
         # ── Advanced Params Toggle ──
@@ -209,14 +448,11 @@ class MainView(QWidget):
 
         self.inp_weight = make_input("e.g. 2000")
         self.inp_weight.setText("2000")
-        adv_card.add_row("Weight of the truck (kg)", self.inp_weight)
+        adv_card.add_row("Weight per truck (kg)", self.inp_weight)
 
-        self.inp_alt = make_input("e.g. 1")
-        self.inp_alt.setText("1")
-        adv_card.add_row("Alternatives", self.inp_alt)
-
-        self.inp_budget = make_input("e.g. 1000")
-        adv_card.add_row("Max Budget", self.inp_budget)
+        self.inp_deliveries = make_input("e.g. 150")
+        self.inp_deliveries.setText("150")
+        adv_card.add_row("Max deliveries / day", self.inp_deliveries)
 
         self.advanced_layout.addWidget(adv_card)
         layout.addWidget(self.advanced_container)
@@ -228,14 +464,18 @@ class MainView(QWidget):
         self.btn_clear = QPushButton("CLEAR")
         self.btn_clear.setObjectName("btnSecondary")
         self.btn_clear.setCursor(Qt.CursorShape.PointingHandCursor)
-        self.btn_clear.setStyleSheet(f"background-color: {theme.ERROR}; color: white; border: none; font-weight: bold; border-radius: 4px;")
+        self.btn_clear.setStyleSheet(
+            f"background-color: {theme.ERROR}; color: white; border: none; font-weight: bold; border-radius: 4px;"
+        )
         self.btn_clear.clicked.connect(self._clear)
 
         self.btn_run = QPushButton("RUN THE MODEL")
         self.btn_run.setObjectName("btnPrimary")
         self.btn_run.setCursor(Qt.CursorShape.PointingHandCursor)
         self.btn_run.setMinimumHeight(44)
-        self.btn_run.setStyleSheet(f"background-color: {theme.SUCCESS}; color: white; border: none; font-weight: bold; border-radius: 4px;")
+        self.btn_run.setStyleSheet(
+            f"background-color: {theme.SUCCESS}; color: white; border: none; font-weight: bold; border-radius: 4px;"
+        )
         self.btn_run.clicked.connect(self._submit)
 
         btn_row.addWidget(self.btn_clear, 1)
@@ -245,41 +485,14 @@ class MainView(QWidget):
         scroll.setWidget(panel)
         return scroll
 
-    def _upload(self):
-        if not self.file_btn.path:
-            QMessageBox.warning(self, "No file", "Please select a CSV file first.")
-            return
-            
-        url = "http://localhost:8000/upload" # Hardcoded for now
-        self.btn_upload.setEnabled(False)
-        self.btn_upload.setText("CLEANING…")
-        self._set_global_status("Uploading and cleaning dataset…", "busy")
-        
-        from frontend.workers.upload_worker import UploadWorker
-        self.upload_worker = UploadWorker(url, self.file_btn.path)
-        self.upload_worker.finished.connect(self._on_upload_done)
-        self.upload_worker.error.connect(self._on_upload_error)
-        self.upload_worker.start()
-
-    def _on_upload_done(self, msg: str):
-        self.btn_upload.setEnabled(True)
-        self.btn_upload.setText("CLEAN & UPDATE DB")
-        self._set_global_status(msg, "ok")
-        QMessageBox.information(self, "Success", msg)
-
-    def _on_upload_error(self, msg: str):
-        self.btn_upload.setEnabled(True)
-        self.btn_upload.setText("CLEAN & UPDATE DB")
-        self._set_global_status(f"Error: {msg}", "err")
-        QMessageBox.critical(self, "Upload Error", msg)
-
     def _toggle_advanced(self):
         is_visible = self.advanced_container.isVisible()
         self.advanced_container.setVisible(not is_visible)
-        if is_visible:
-            self.btn_advanced.setText("Advanced parameters ▼")
-        else:
-            self.btn_advanced.setText("Advanced parameters ▲")
+        self.btn_advanced.setText(
+            "Advanced parameters ▲" if not is_visible else "Advanced parameters ▼"
+        )
+
+    # ── Results panel (outer day tabs) ────────────────────────────────────────
 
     def _results_panel(self) -> QWidget:
         panel = QWidget()
@@ -288,49 +501,40 @@ class MainView(QWidget):
         layout.setContentsMargins(0, 20, 20, 20)
         layout.setSpacing(12)
 
-        # Results header row
+        # Header row
         hdr = QHBoxLayout()
-        results_title = QLabel("    ROUTE SCHEDULE")
+        results_title = QLabel("    RESULTS")
         results_title.setObjectName("sectionTitle")
-
         self.lbl_count = QLabel("")
         self.lbl_count.setStyleSheet(
             f"color: {theme.ACCENT2}; font-family: {theme.MONO}; font-size: 11px;"
         )
-
-        self.btn_export = QPushButton("EXPORT CSV")
-        self.btn_export.setObjectName("btnSecondary")
-        self.btn_export.setCursor(Qt.CursorShape.PointingHandCursor)
-        self.btn_export.clicked.connect(self._export)
-        self.btn_export.setEnabled(False)
-        self.btn_export.setFixedHeight(30)
-
         hdr.addWidget(results_title)
         hdr.addSpacing(16)
         hdr.addWidget(self.lbl_count)
         hdr.addStretch()
-        hdr.addWidget(self.btn_export)
         layout.addLayout(hdr)
 
-        # Table
-        self.table = QTableWidget(0, 3)
-        self.table.setHorizontalHeaderLabels(["TRUCK", "POINT", "HOUR"])
-        self.table.horizontalHeader().setSectionResizeMode(1, QHeaderView.ResizeMode.Stretch)
-        self.table.horizontalHeader().setSectionResizeMode(0, QHeaderView.ResizeMode.ResizeToContents)
-        self.table.horizontalHeader().setSectionResizeMode(2, QHeaderView.ResizeMode.ResizeToContents)
-        self.table.verticalHeader().setVisible(False)
-        self.table.setEditTriggers(QTableWidget.EditTrigger.NoEditTriggers)
-        self.table.setSelectionBehavior(QTableWidget.SelectionBehavior.SelectRows)
-        self.table.setShowGrid(False)
-        self.table.setAlternatingRowColors(True)
-        self.table.setStyleSheet(
-            self.table.styleSheet() +
-            f"QTableWidget {{ alternate-background-color: rgba(42,48,80,0.3); }}"
+        # Live stage label
+        self.lbl_stage = QLabel("")
+        self.lbl_stage.setStyleSheet(
+            f"color: {theme.ACCENT}; font-family: {theme.MONO}; font-size: 11px; padding-left: 4px;"
         )
+        layout.addWidget(self.lbl_stage)
 
-        layout.addWidget(self.table, 1)
+        # Outer day tabs
+        self.day_tabs = QTabWidget()
+        self.day_tabs.setStyleSheet(f"""
+            QTabWidget::pane {{ border: 1px solid {theme.BORDER}; background: {theme.BG}; }}
+            QTabBar::tab {{ background: {theme.SURFACE}; color: {theme.TEXT_DIM};
+                           padding: 8px 18px; border: 1px solid {theme.BORDER};
+                           font-family: {theme.MONO}; font-size: 11px; }}
+            QTabBar::tab:selected {{ background: {theme.BG}; color: {theme.ACCENT2};
+                                    border-bottom: 2px solid {theme.ACCENT2}; }}
+        """)
+        layout.addWidget(self.day_tabs, 1)
 
-        # Empty state
+        # Empty state (shown until first result)
         self.empty_lbl = QLabel("No results yet.\nConfigure parameters and run the optimizer.")
         self.empty_lbl.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.empty_lbl.setStyleSheet(
@@ -340,32 +544,115 @@ class MainView(QWidget):
 
         return panel
 
+    # ── Status ────────────────────────────────────────────────────────────────
+
     def _set_global_status(self, msg: str, kind: str = "idle"):
-        # We need a reference to the main window's status bar setter
         if self.parent() and hasattr(self.parent(), "_set_status"):
             self.parent()._set_status(msg, kind)
 
-    def _clear(self):
-        for w in (self.inp_trucks, self.inp_address, self.inp_runtime, self.inp_budget):
-            w.clear()
+    # ── SaaS DB Upload Methods ───────────────────────────────────────────────
+
+    def _upload(self):
+        if not self.file_ventas.path:
+            QMessageBox.warning(self, "No file", "Please select a Ventas CSV file first.")
+            return
             
+        url = "http://localhost:8000/upload" # Hardcoded for now
+        self.btn_upload.setEnabled(False)
+        self.btn_upload.setText("CLEANING…")
+        self._set_global_status("Uploading and cleaning dataset…", "busy")
+        
+        from frontend.workers.upload_worker import UploadWorker
+        self.upload_worker = UploadWorker(url, self.file_ventas.path)
+        self.upload_worker.finished.connect(self._on_upload_done)
+        self.upload_worker.error.connect(self._on_upload_error)
+        self.upload_worker.start()
+
+    def _on_upload_done(self, res: dict):
+        self.btn_upload.setEnabled(True)
+        self.btn_upload.setText("UPLOAD VENTAS")
+        
+        msg = res.get("message", "Upload complete")
+        self._set_global_status(msg, "ok")
+        
+        success = res.get("success_count", 0)
+        errors = res.get("error_count", 0)
+        details = res.get("details", [])
+        
+        if errors > 0:
+            err_msg = "\n".join([f"• Order {d['numero_orden']}: {d['error']}" for d in details if d['status'] == 'error'][:10])
+            if len([d for d in details if d['status'] == 'error']) > 10:
+                err_msg += "\n... (and more)"
+            
+            QMessageBox.warning(self, "Upload Summary", 
+                               f"{msg}\n\nSome errors occurred:\n{err_msg}")
+        else:
+            QMessageBox.information(self, "Success", msg)
+
+    def _on_upload_error(self, msg: str):
+        self.btn_upload.setEnabled(True)
+        self.btn_upload.setText("UPLOAD VENTAS")
+        self._set_global_status(f"Error: {msg}", "err")
+        QMessageBox.critical(self, "Upload Error", msg)
+
+    def _upload_detalle(self):
+        if not self.file_detalle.path:
+            QMessageBox.warning(self, "No file", "Please select a Detalle CSV/XLSX file first.")
+            return
+            
+        url = "http://localhost:8000/upload-detalle"
+        self.btn_upload_det.setEnabled(False)
+        self.btn_upload_det.setText("CLEANING…")
+        self._set_global_status("Uploading and cleaning details…", "busy")
+        
+        from frontend.workers.upload_worker import UploadWorker
+        self.upload_worker_det = UploadWorker(url, self.file_detalle.path)
+        self.upload_worker_det.finished.connect(self._on_upload_det_done)
+        self.upload_worker_det.error.connect(self._on_upload_det_error)
+        self.upload_worker_det.start()
+
+    def _on_upload_det_done(self, res: dict):
+        self.btn_upload_det.setEnabled(True)
+        self.btn_upload_det.setText("UPLOAD DETALLE")
+        msg = res.get("message", "Upload complete")
+        self._set_global_status(msg, "ok")
+        QMessageBox.information(self, "Success", msg)
+
+    def _on_upload_det_error(self, msg: str):
+        self.btn_upload_det.setEnabled(True)
+        self.btn_upload_det.setText("UPLOAD DETALLE")
+        self._set_global_status(f"Error: {msg}", "err")
+        QMessageBox.critical(self, "Upload Error", msg)
+
+    # ── Clear ─────────────────────────────────────────────────────────────────
+
+    def _clear(self):
+        for w in (self.inp_trucks, self.inp_address, self.inp_runtime):
+            w.clear()
+
         self.inp_worktime_start.setText("09:00")
         self.inp_worktime_end.setText("17:00")
-        
         self.inp_kml.setText("6.4")
         self.inp_space.setText("9")
         self.inp_weight.setText("2000")
-        self.inp_alt.setText("1")
+        self.inp_deliveries.setText("150")
 
-        self.file_btn.path = None
-        self.file_btn.setText("▸  Drop or click to select CSV file")
-        self.file_btn.setStyleSheet("")
-        self.table.setRowCount(0)
+        self.file_ventas.path = None
+        self.file_ventas.setText("▸  Ventas CSV (click to select)")
+        self.file_ventas.setStyleSheet("")
+        self.file_detalle.path = None
+        self.file_detalle.setText("▸  Detalle CSV/XLSX (click to select)")
+        self.file_detalle.setStyleSheet("")
+
+        # Clear day tabs
+        self.day_tabs.clear()
         self.empty_lbl.show()
         self.lbl_count.setText("")
-        self.btn_export.setEnabled(False)
         self.dot.reset()
+        self._result_data = None
         self._set_global_status("Cleared", "idle")
+
+    # ── Validate ──────────────────────────────────────────────────────────────
 
     def _validate(self) -> dict | None:
         errors = []
@@ -404,54 +691,51 @@ class MainView(QWidget):
         else:
             weight = None
 
-        alt_txt = self.inp_alt.text().strip()
-        if alt_txt and not alt_txt.isdigit():
-            errors.append("Alternatives must be an integer.")
-
-        # Runtime input
-
         runtime_txt = self.inp_runtime.text().strip()
         if runtime_txt and not runtime_txt.isdigit():
             errors.append("Runtime must be an integer.")
 
-        # Budget input
-
-        budget_txt = self.inp_budget.text().strip()
-        if budget_txt:
-            try:
-                float(budget_txt)
-            except ValueError:
-                errors.append("Budget must be a number.")
-
-        # CD Adress input        
-
-        address = self.inp_address.text().strip() # It will be latitude and longitude
-        # Example: "33.4484, -70.6693"
+        address = self.inp_address.text().strip()
         try:
             lat, lon = address.split(",")
-            lat = float(lat)
-            lon = float(lon)
+            lat = float(lat.strip())
+            lon = float(lon.strip())
         except ValueError:
-            errors.append("Address must be in the format 'latitude, longitude'.")
+            lat, lon = None, None
+            errors.append("Coordinates must be 'latitude, longitude'.")
 
         if not address:
-            errors.append("Distribution center address is required.")
+            errors.append("Distribution center coordinates are required.")
+
+        deliveries_txt = self.inp_deliveries.text().strip()
+        try:
+            deliveries_per_day = int(deliveries_txt)
+            if deliveries_per_day < 1:
+                raise ValueError
+        except ValueError:
+            deliveries_per_day = 150
+            errors.append("Max deliveries / day must be a positive integer.")
+
+        # SaaS change: Files are optional if the user wants to use database data
+        using_db = False
+        if not self.file_ventas.path and not self.file_detalle.path:
+            using_db = True
+        elif not self.file_ventas.path or not self.file_detalle.path:
+            errors.append("You must select BOTH Ventas and Detalle files, or leave BOTH empty to use database data.")
 
         if errors:
             QMessageBox.warning(self, "Validation Error", "\n".join(errors))
             return None
 
         return {
-            "num_trucks":         int(trucks_txt),
-            "km_per_liter":       kml,
-            "space_per_truck":    space,
-            "capacity_per_truck": space,
-            "weight_per_truck":   weight,
-            "alternatives":       int(alt_txt) if alt_txt else 1,
-            "budget":             float(budget_txt) if budget_txt else None,
-            "model_runtime":      int(runtime_txt) if runtime_txt else None,
-            "worktime_windows":   f"{self.inp_worktime_start.text().strip()}-{self.inp_worktime_end.text().strip()}",
-            "depot_address":      [lat, lon],
+            "num_trucks":        int(trucks_txt),
+            "km_per_liter":      kml,
+            "space_per_truck":   space,
+            "weight_per_truck":  weight,
+            "model_runtime":     int(runtime_txt) if runtime_txt else None,
+            "worktime_windows":  f"{self.inp_worktime_start.text().strip()}-{self.inp_worktime_end.text().strip()}",
+            "depot_address":     [lat, lon],
+            "deliveries_per_day": deliveries_per_day,
         }
 
     # ── Submit ────────────────────────────────────────────────────────────────
@@ -471,48 +755,73 @@ class MainView(QWidget):
         self.progress.show()
         self.dot.start_busy()
         self._set_global_status("Sending request to backend…", "busy")
+        self.lbl_stage.setText("⟳ Connecting…")
 
-        self.worker = RequestWorker(url, params, self.file_btn.path)
+        self.worker = RequestWorker(
+            url, params,
+            self.file_ventas.path,
+            self.file_detalle.path,
+        )
         self.worker.finished.connect(self._on_result)
         self.worker.error.connect(self._on_error)
         self.worker.start()
 
-    def _on_result(self, rows: list):
+        # Start progress poller
+        base_url = url.rsplit("/", 1)[0]  # strip the endpoint path
+        self.progress_worker = ProgressWorker(base_url, parent=self)
+        self.progress_worker.stage_updated.connect(self._on_stage_update)
+        self.progress_worker.start()
+
+    def _on_stage_update(self, stage: str):
+        if stage:
+            self.lbl_stage.setText(f"⟳ {stage}")
+        else:
+            self.lbl_stage.setText("")
+
+    def _stop_progress_worker(self):
+        if self.progress_worker:
+            self.progress_worker.stop()
+            self.progress_worker.wait(3000)
+            self.progress_worker = None
+
+    def _on_result(self, data: dict):
+        self._stop_progress_worker()
+        self.lbl_stage.setText("")
         self.progress.hide()
         self.btn_run.setEnabled(True)
         self.btn_run.setText("RUN THE MODEL")
         self.dot.set_ok()
-        self._set_global_status(f"Optimization complete — {len(rows)} stops returned.", "ok")
+        self._result_data = data
 
+        days = data.get("days", [])
+
+        # Aggregate stats across all days
+        total_covered   = sum(d.get("stats", {}).get("cubiertos", 0) for d in days)
+        total_uncovered = sum(d.get("stats", {}).get("no_cubiertos", 0) for d in days)
+        total_trucks    = max((d.get("stats", {}).get("camiones_usados", 0) for d in days), default=0)
+
+        self._set_global_status(
+            f"Complete — {len(days)} day(s), {total_covered} covered, "
+            f"{total_uncovered} uncovered, {total_trucks} trucks max.",
+            "ok"
+        )
+        self.lbl_count.setText(
+            f"{len(days)} days  ·  {total_covered} covered  ·  {total_uncovered} uncovered"
+        )
+
+        # Clear and rebuild day tabs
+        self.day_tabs.clear()
         self.empty_lbl.hide()
-        self.table.setRowCount(0)
 
-        for row in rows:
-            r = self.table.rowCount()
-            self.table.insertRow(r)
-
-            truck_item = QTableWidgetItem(str(row["Truck"]))
-            truck_item.setForeground(QColor(theme.ACCENT))
-            truck_item.setFont(QFont(theme.MONO, 12, QFont.Weight.Bold))
-            truck_item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
-
-            point_item = QTableWidgetItem(str(row["Point"]))
-            point_item.setForeground(QColor(theme.TEXT))
-
-            hour_item  = QTableWidgetItem(str(row["Hour"]))
-            hour_item.setForeground(QColor(theme.ACCENT2))
-            hour_item.setFont(QFont(theme.MONO, 12))
-            hour_item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
-
-            self.table.setItem(r, 0, truck_item)
-            self.table.setItem(r, 1, point_item)
-            self.table.setItem(r, 2, hour_item)
-
-        self.lbl_count.setText(f"{len(rows)} stops  ·  {rows[-1]['Truck'] if rows else 0} trucks")
-        self.btn_export.setEnabled(True)
-        self._result_rows = rows
+        for day_data in days:
+            label = day_data.get("date", "?")
+            widget = DayResultWidget(parent=self)
+            widget.populate(day_data)
+            self.day_tabs.addTab(widget, f"📅 {label}")
 
     def _on_error(self, msg: str):
+        self._stop_progress_worker()
+        self.lbl_stage.setText("")
         self.progress.hide()
         self.btn_run.setEnabled(True)
         self.btn_run.setText("RUN THE MODEL")
@@ -520,16 +829,16 @@ class MainView(QWidget):
         self._set_global_status(f"Error: {msg}", "err")
         QMessageBox.critical(self, "Backend Error", msg)
 
-    # ── Export ────────────────────────────────────────────────────────────────
 
-    def _export(self):
-        path, _ = QFileDialog.getSaveFileName(
-            self, "Export Results", "routes.csv", "CSV Files (*.csv)"
-        )
-        if not path:
-            return
-        with open(path, "w", newline="", encoding="utf-8") as f:
-            writer = csv.DictWriter(f, fieldnames=["Truck", "Point", "Hour"])
-            writer.writeheader()
-            writer.writerows(self._result_rows)
-        self._set_global_status(f"Results exported → {os.path.basename(path)}", "ok")
+def main():
+    from PyQt6.QtWidgets import QApplication
+    import sys
+    app = QApplication(sys.argv)
+    app.setApplicationName("Dispatcher")
+    window = MainView()
+    window.show()
+    sys.exit(app.exec())
+
+
+if __name__ == "__main__":
+    main()

@@ -5,7 +5,7 @@ import urllib.error
 from PyQt6.QtCore import QThread, pyqtSignal
 
 class UploadWorker(QThread):
-    finished = pyqtSignal(str) # Success message
+    finished = pyqtSignal(dict) # Full response dict
     error    = pyqtSignal(str)
 
     def __init__(self, url: str, csv_path: str):
@@ -41,10 +41,10 @@ class UploadWorker(QThread):
         )
 
         try:
-            with urllib.request.urlopen(req, timeout=30) as resp:
+            with urllib.request.urlopen(req, timeout=120) as resp: # Increased timeout for cleaning
                 import json
                 res = json.loads(resp.read().decode("utf-8"))
-            self.finished.emit(res.get("message", "Upload complete"))
+            self.finished.emit(res)
         except urllib.error.URLError as e:
             self.error.emit(f"Network error: {e.reason}")
         except Exception as e:

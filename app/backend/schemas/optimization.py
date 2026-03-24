@@ -12,3 +12,4 @@ class OptimizerParams(BaseModel):
     model_runtime: Optional[int] = Field(None, description="Time limit for the model in seconds")
     worktime_windows: Optional[str] = Field(None, description="Shift limits/worktime windows")
     depot_address: list[float] = Field(..., description="Coordinates [lat, lon] of the distribution center")
+    deliveries_per_day: Optional[int] = Field(150, description="Max deliveries per day")
