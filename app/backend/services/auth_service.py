@@ -101,3 +101,31 @@ def login_user(identifier: str, password: str) -> dict:
         return {"error": f"Error al iniciar sesión: {str(e)}"}
     finally:
         session.close()
+
+def reset_password(username: str, email: str, new_password: str) -> dict:
+    """
+    Restaura la contraseña de un usuario mediante su nombre de usuario y correo.
+    Retorna un dict con el resultado de la operación.
+    """
+    if not username or not email or not new_password:
+        return {"error": "Todos los campos son obligatorios."}
+
+    session = get_session()
+    try:
+        repo = UsuarioRepository(session)
+        user = repo.get_by_username(username)
+
+        # Validamos que exista y que el email coincida
+        if not user or user.email != email:
+            return {"error": "Los datos proporcionados no coinciden con ningún registro."}
+        
+        hashed_pw = hash_password(new_password)
+        repo.update_password(user, hashed_pw)
+
+        return {
+            "message": "Contraseña actualizada exitosamente."
+        }
+    except Exception as e:
+        return {"error": f"Error al restablecer la contraseña: {str(e)}"}
+    finally:
+        session.close()

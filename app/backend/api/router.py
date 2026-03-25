@@ -189,6 +189,22 @@ async def login(payload: dict):
         raise HTTPException(status_code=401, detail=result["error"])
     return result
 
+
+@router.post("/auth/reset-password")
+async def reset_password(payload: dict):
+    """
+    Restaura la contraseña de un usuario mediante username y correo validado.
+    Espera: {username, email, new_password}
+    """
+    username = payload.get("username", "").strip()
+    email = payload.get("email", "").strip()
+    new_password = payload.get("new_password", "")
+
+    result = auth_service.reset_password(username, email, new_password)
+    if "error" in result:
+        raise HTTPException(status_code=400, detail=result["error"])
+    return result
+
 @router.get("/catalog")
 async def get_catalog():
     """Returns the list of products in the catalog."""
