@@ -11,6 +11,7 @@ from typing import Optional, List
 from backend.schemas import OptimizerParams
 from backend.services.optimizer_service import run_optimization
 from backend.services.cleaning_service import CleaningService, run_full_cleaning
+from backend.services import auth_service
 from database.repositories.venta_repository import VentaRepository
 from database.repositories.detalle_repository import DetalleRepository
 from database.repositories.producto_repository import ProductoRepository
@@ -57,7 +58,7 @@ async def _run_optimization_task_internal(
             cleaning_errors = cleaning.errores
         else:
             optimization_tasks[task_id]["progress"] = "Buscando pedidos pendientes en la base de datos..."
-            df_ventas = await asyncio.to_thread(cleaning_service.get_pending_orders_df)
+            df_ventas = await asyncio.to_thread(cleaning_service.get_pending_orders_df, validated_params.user_id)
             if df_ventas.empty:
                 optimization_tasks[task_id].update({
                     "status": "completed",
@@ -155,6 +156,38 @@ async def get_progress():
 async def health_check():
     """Simple endpoint for the frontend to verify backend connection."""
     return {"status": "ok"}
+
+# ── Auth endpoints ────────────────────────────────────────────────────────
+
+@router.post("/auth/register")
+async def register(payload: dict):
+    """
+    Registra un nuevo usuario.
+    Espera: {username, email, password}
+    """
+    username = payload.get("username", "").strip()
+    email = payload.get("email", "").strip()
+    password = payload.get("password", "")
+
+    result = auth_service.register_user(username, email, password)
+    if "error" in result:
+        raise HTTPException(status_code=400, detail=result["error"])
+    return result
+
+
+@router.post("/auth/login")
+async def login(payload: dict):
+    """
+    Inicia sesión por username o email.
+    Espera: {identifier, password}
+    """
+    identifier = payload.get("identifier", "").strip()
+    password = payload.get("password", "")
+
+    result = auth_service.login_user(identifier, password)
+    if "error" in result:
+        raise HTTPException(status_code=401, detail=result["error"])
+    return result
 
 @router.get("/catalog")
 async def get_catalog():

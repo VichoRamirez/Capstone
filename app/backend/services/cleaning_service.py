@@ -263,7 +263,7 @@ class CleaningService:
             results.append(res)
         return results
 
-    def get_pending_orders_df(self) -> pd.DataFrame:
+    def get_pending_orders_df(self, user_id: Optional[int] = None) -> pd.DataFrame:
         """
         Fetches all 'PENDIENTE' orders from DB joined with their volume/weight totals
         from the 'detalle' table. Returns a DataFrame suitable for the optimizer.
@@ -284,6 +284,9 @@ class CleaningService:
             query = session.query(Venta, stats.c.Peso_total_pedido, stats.c.Volumen_total_pedido)\
                 .outerjoin(stats, Venta.numero_orden == stats.c.numero_orden)\
                 .filter(Venta.estado == "Pendiente")
+            
+            if user_id is not None:
+                query = query.filter(Venta.id_usuario == user_id)
             
             rows = query.all()
             

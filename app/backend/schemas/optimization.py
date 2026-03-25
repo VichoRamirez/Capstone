@@ -13,3 +13,4 @@ class OptimizerParams(BaseModel):
     worktime_windows: Optional[str] = Field(None, description="Shift limits/worktime windows")
     depot_address: list[float] = Field(..., description="Coordinates [lat, lon] of the distribution center")
     deliveries_per_day: Optional[int] = Field(150, description="Max deliveries per day")
+    user_id: Optional[int] = Field(None, description="ID of the user running the optimization")
