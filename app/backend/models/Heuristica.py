@@ -263,8 +263,7 @@ def clarke_wright_initial_solution(J: List[int],
                             best_pos = pos
 
             if best_r is None:
-                ok = False
-                break
+                continue
 
             r = routes[best_r]
             dd, dt = insertion_delta(r.nodes, best_pos, cust, T, d, t)
@@ -274,12 +273,6 @@ def clarke_wright_initial_solution(J: List[int],
             r.dist += dd
             r.time += dt
             inserted = True
-
-        if not ok:
-            raise RuntimeError(
-                "No pude reducir el número de rutas a K (posible infactibilidad con K dado). "
-                "Considera aumentar K o relajar max_route_time / service times."
-            )
 
     return routes
 
