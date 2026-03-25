@@ -102,6 +102,12 @@ class LoginView(QWidget):
         self.btn_login.clicked.connect(self._do_login)
         ll.addWidget(self.btn_login)
 
+        self.btn_to_reset = QPushButton("¿Olvidaste tu contraseña?")
+        self.btn_to_reset.setCursor(Qt.CursorShape.PointingHandCursor)
+        self.btn_to_reset.setStyleSheet(self._link_style())
+        self.btn_to_reset.clicked.connect(lambda: self.form_stack.setCurrentIndex(2))
+        ll.addWidget(self.btn_to_reset)
+
         self.btn_to_register = QPushButton("¿No tienes cuenta? Crear una")
         self.btn_to_register.setCursor(Qt.CursorShape.PointingHandCursor)
         self.btn_to_register.setStyleSheet(self._link_style())
@@ -151,6 +157,48 @@ class LoginView(QWidget):
         rl.addWidget(self.btn_to_login)
 
         self.form_stack.addWidget(reg_page)
+
+        # -- Reset Password form (index 2) --
+        reset_page = QWidget()
+        reset_page.setStyleSheet("border: none;")
+        rel = QVBoxLayout(reset_page)
+        rel.setContentsMargins(0, 0, 0, 0)
+        rel.setSpacing(14)
+
+        reset_lbl = QLabel("RECUPERAR CONTRASEÑA")
+        reset_lbl.setStyleSheet(
+            f"color: {theme.ACCENT2}; font-size: 12px; font-family: {theme.MONO}; "
+            f"font-weight: bold; letter-spacing: 2px; border: none;"
+        )
+        reset_lbl.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        rel.addWidget(reset_lbl)
+
+        self.reset_username = self._make_input("Nombre de usuario")
+        rel.addWidget(self._field("Usuario", self.reset_username))
+
+        self.reset_email = self._make_input("Correo electrónico")
+        rel.addWidget(self._field("Email", self.reset_email))
+
+        self.reset_password = self._make_input("Nueva contraseña", password=True)
+        rel.addWidget(self._field("Nueva Contraseña", self.reset_password))
+
+        self.reset_confirm = self._make_input("Repetir nueva contraseña", password=True)
+        rel.addWidget(self._field("Confirmar Contraseña", self.reset_confirm))
+
+        self.btn_reset = QPushButton("RESTABLECER")
+        self.btn_reset.setCursor(Qt.CursorShape.PointingHandCursor)
+        self.btn_reset.setMinimumHeight(44)
+        self.btn_reset.setStyleSheet(self._btn_style(theme.ACCENT))
+        self.btn_reset.clicked.connect(self._do_reset)
+        rel.addWidget(self.btn_reset)
+
+        self.btn_reset_to_login = QPushButton("Volver a iniciar sesión")
+        self.btn_reset_to_login.setCursor(Qt.CursorShape.PointingHandCursor)
+        self.btn_reset_to_login.setStyleSheet(self._link_style())
+        self.btn_reset_to_login.clicked.connect(lambda: self.form_stack.setCurrentIndex(0))
+        rel.addWidget(self.btn_reset_to_login)
+
+        self.form_stack.addWidget(reset_page)
 
         card_layout.addWidget(self.form_stack)
 
@@ -311,6 +359,43 @@ class LoginView(QWidget):
             user_id = result["user_id"]
             username = result["username"]
             self.login_successful.emit(user_id, username)
+
+    def _do_reset(self):
+        username = self.reset_username.text().strip()
+        email = self.reset_email.text().strip()
+        new_password = self.reset_password.text()
+        confirm = self.reset_confirm.text()
+
+        if not username or not email or not new_password:
+            self._show_status("Todos los campos son obligatorios.", error=True)
+            return
+
+        if new_password != confirm:
+            self._show_status("Las contraseñas no coinciden.", error=True)
+            return
+
+        if len(new_password) < 6:
+            self._show_status("La nueva contraseña debe tener al menos 6 caracteres.", error=True)
+            return
+
+        self.btn_reset.setEnabled(False)
+        self.btn_reset.setText("RESTABLECIENDO...")
+
+        result = self._api_call("/auth/reset-password", {
+            "username": username,
+            "email": email,
+            "new_password": new_password,
+        })
+
+        self.btn_reset.setEnabled(True)
+        self.btn_reset.setText("RESTABLECER")
+
+        if "error" in result:
+            self._show_status(result["error"], error=True)
+        else:
+            self._show_status("Tu contraseña ha sido restablecida.", error=False)
+            self.login_identifier.setText(username)
+            self.form_stack.setCurrentIndex(0)
 
     def _show_status(self, msg: str, error: bool = True):
         color = theme.ERROR if error else theme.SUCCESS
