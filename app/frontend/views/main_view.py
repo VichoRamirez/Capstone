@@ -255,8 +255,18 @@ class MainView(QWidget):
         self.health_worker = None
         self.progress_worker = None
         self._result_data = None
+        self.user_id = None
+        self.username = None
         self._build_ui()
         self._start_health_check()
+
+    def set_user(self, user_id: int, username: str):
+        """Establece el usuario autenticado y actualiza el header."""
+        self.user_id = user_id
+        self.username = username
+        if hasattr(self, 'lbl_user'):
+            self.lbl_user.setText(f"👤 {username}")
+            self.lbl_user.show()
 
     def _start_health_check(self):
         url = "http://localhost:8000"
@@ -322,10 +332,18 @@ class MainView(QWidget):
 
         self.dot = PulsingDot()
 
+        self.lbl_user = QLabel("")
+        self.lbl_user.setStyleSheet(
+            f"color: {theme.ACCENT2}; font-size: 12px; font-family: {theme.MONO}; font-weight: bold;"
+        )
+        self.lbl_user.hide()
+
         hl.addWidget(brand)
         hl.addSpacing(20)
         hl.addWidget(subtitle)
         hl.addStretch()
+        hl.addWidget(self.lbl_user)
+        hl.addSpacing(12)
         hl.addWidget(self.dot)
 
         return header
@@ -744,6 +762,9 @@ class MainView(QWidget):
         params = self._validate()
         if params is None:
             return
+
+        if self.user_id is not None:
+            params["user_id"] = self.user_id
 
         url = self.inp_url.text().strip()
         if not url:

@@ -12,6 +12,7 @@ from datetime import datetime
 from PyQt6.QtWidgets import QApplication, QMainWindow, QStackedWidget, QStatusBar
 from PyQt6.QtGui import QFontDatabase, QFont
 
+from frontend.views.login_view import LoginView
 from frontend.views.main_view import MainView
 import frontend.resources.styles.theme as theme
 
@@ -23,6 +24,10 @@ class MainApp(QMainWindow):
         self.setWindowTitle("DISPATCH — Route Optimizer")
         self.setMinimumSize(1100, 700)
         self.resize(1280, 800)
+
+        # User session
+        self.user_id = None
+        self.username = None
 
         # Load dynamic stylesheet
         self._load_stylesheet()
@@ -70,8 +75,29 @@ class MainApp(QMainWindow):
 
     def _init_views(self):
         """Inicializa y registra las vistas en el stack."""
+        # Index 0: Login view
+        self.login_view = LoginView(parent=self)
+        self.login_view.login_successful.connect(self._on_login_successful)
+        self.stack.addWidget(self.login_view)
+
+        # Index 1: Main view (optimizer)
         self.main_view = MainView(parent=self)
         self.stack.addWidget(self.main_view)
+
+        # Start on login
+        self.stack.setCurrentIndex(0)
+
+    def _on_login_successful(self, user_id: int, username: str):
+        """Callback cuando el usuario inicia sesión exitosamente."""
+        self.user_id = user_id
+        self.username = username
+
+        # Pass user info to main view
+        self.main_view.set_user(user_id, username)
+
+        # Navigate to main view
+        self.stack.setCurrentIndex(1)
+        self._set_status(f"Sesión iniciada como {username}", "ok")
 
     def navigate_to(self, index: int):
         """Cambia la vista visible en el stack."""
