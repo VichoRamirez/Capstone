@@ -36,3 +36,10 @@ class UsuarioRepository(BaseRepository):
         self.session.commit()
         self.session.refresh(user)
         return user
+
+    def update_password(self, user: Usuario, hashed_password: str) -> Usuario:
+        """Actualiza la contraseña hasheada del usuario."""
+        user.password = hashed_password
+        self.session.commit()
+        self.session.refresh(user)
+        return user
