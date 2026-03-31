@@ -28,3 +28,6 @@ Thumbs.db
 
 # OSRM local (datasets y binarios pesados)
 /app/models/Soporte/osrm_local/
+
+# Cache local de rutas (artefactos de ejecución)
+/app/models/Soporte/cache_rutas/
