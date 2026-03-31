@@ -25,3 +25,6 @@ Thumbs.db
 .ipynb_checkpoints/
 /venv
 /SCRIPTS/sql_insert.ipynb
+
+# OSRM local (datasets y binarios pesados)
+/app/models/Soporte/osrm_local/
