@@ -3,6 +3,9 @@
 
 # Variables de entorno
 .env
+.mcp.json
+CLAUDE.md
+.claude/
 
 # Python
 __pycache__/
