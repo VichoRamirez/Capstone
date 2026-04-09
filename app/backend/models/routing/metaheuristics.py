@@ -20,7 +20,7 @@ import time
 from dataclasses import dataclass
 from typing import Dict, Iterable, List, Optional, Sequence, Tuple
 
-from Heuristica import clarke_wright_initial_solution, generate_toy_data
+from backend.models.routing.heuristics import clarke_wright_initial_solution, generate_toy_data
 
 
 EPS = 1e-9

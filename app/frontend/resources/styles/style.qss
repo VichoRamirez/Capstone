@@ -49,6 +49,33 @@ QLineEdit:hover {{
     border: 1px solid #3d4a70;
 }}
 
+/* ── Dataset dropdown ── */
+#datasetCombo {{
+    background: {SURFACE};
+    border: 1px solid {BORDER};
+    border-radius: 4px;
+    padding: 6px 10px;
+    color: {TEXT};
+    font-family: {MONO};
+    font-size: 12px;
+    min-height: 34px;
+}}
+#datasetCombo:hover {{
+    border: 1px solid #3d4a70;
+}}
+#datasetCombo:focus {{
+    border: 1px solid {ACCENT};
+}}
+#datasetCombo QAbstractItemView {{
+    background: {SURFACE};
+    border: 1px solid {BORDER};
+    color: {TEXT};
+    selection-background-color: rgba(240,165,0,0.2);
+    selection-color: {ACCENT};
+    font-family: {MONO};
+    font-size: 12px;
+}}
+
 /* ── File picker ── */
 #filePicker {{
     background: {SURFACE};

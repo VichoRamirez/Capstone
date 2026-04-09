@@ -1,5 +1,6 @@
 # Dependencias de la aplicación PyQt + MySQL
 PyQt6>=6.6.0
+PyQt6-WebEngine>=6.6.0
 SQLAlchemy>=2.0
 PyMySQL>=1.1
 python-dotenv>=1.0
@@ -7,7 +8,16 @@ python-dotenv>=1.0
 # Dependencias del backend FastAPI
 fastapi>=0.104.0
 uvicorn[standard]>=0.24.0
+python-multipart>=0.0.6
 requests>=2.31.0
-osmnx>=1.9.0
+
+# Data processing
 pandas>=2.0.0
+openpyxl>=3.1
+
+# Geocodificación y mapas
+osmnx>=1.9.0
+folium>=0.15
+
+# Auth
 bcrypt>=4.0.0

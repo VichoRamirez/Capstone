@@ -28,3 +28,11 @@ DATABASE_URL = (
 # --- Aplicación ---
 APP_NAME = os.getenv("APP_NAME", "Capstone Analytics")
 DEBUG = os.getenv("DEBUG", "False").lower() == "true"
+
+# --- Backend API ---
+API_HOST = os.getenv("API_HOST", "0.0.0.0")
+API_PORT = int(os.getenv("API_PORT", 8000))
+
+# --- OSRM (codex routing pipeline) ---
+OSRM_LOCAL_BASE_URL = os.getenv("OSRM_LOCAL_BASE_URL", "http://127.0.0.1:5010")
+OSRM_RESERVED_PORTS = os.getenv("OSRM_RESERVED_PORTS", "5000,5001")

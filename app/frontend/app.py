@@ -12,6 +12,7 @@ from datetime import datetime
 from PyQt6.QtWidgets import QApplication, QMainWindow, QStackedWidget, QStatusBar
 from PyQt6.QtGui import QFontDatabase, QFont
 
+from qt_runtime import prepare_qt_platform_plugins
 from frontend.views.login_view import LoginView
 from frontend.views.main_view import MainView
 import frontend.resources.styles.theme as theme
@@ -41,9 +42,12 @@ class MainApp(QMainWindow):
 
     def closeEvent(self, event):
         """Clean up background threads on exit to prevent core dumps."""
-        if hasattr(self, 'main_view') and hasattr(self.main_view, 'health_worker'):
-            if self.main_view.health_worker:
-                self.main_view.health_worker.stop()
+        if hasattr(self, 'main_view') and self.main_view:
+            try:
+                if hasattr(self.main_view, "shutdown"):
+                    self.main_view.shutdown()
+            except Exception:
+                pass
         super().closeEvent(event)
 
     def _load_stylesheet(self):
@@ -120,6 +124,8 @@ class MainApp(QMainWindow):
 
 
 def main():
+    prepare_qt_platform_plugins()
+
     app = QApplication(sys.argv)
     app.setApplicationName("Dispatcher")
 

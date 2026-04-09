@@ -32,8 +32,8 @@ import time
 from dataclasses import dataclass
 from typing import Callable, Dict, Iterable, List, Optional, Sequence, Set, Tuple
 
-from Heuristica import generate_toy_data
-from Metaheuristicas import (
+from backend.models.routing.heuristics import generate_toy_data
+from backend.models.routing.metaheuristics import (
     EPS,
     GAConfig,
     LocalSearchConfig,
@@ -578,4 +578,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-
