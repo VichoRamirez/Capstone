@@ -1684,6 +1684,71 @@ async def upload_detalle(
         raise HTTPException(status_code=500, detail=f"Fallo en la subida: {str(e)}")
 
 
+@router.post("/upload-catalogo")
+async def upload_catalogo(
+    file: UploadFile = File(...),
+    user_id: Optional[int] = Form(None),
+):
+    """
+    Recibe un CSV de CATÁLOGO, rechaza los SKUs que ya existen para el usuario
+    e inserta los nuevos. Requiere user_id.
+    """
+    if user_id is None:
+        raise HTTPException(status_code=400, detail="user_id es requerido.")
+    if not file.filename or not file.filename.lower().endswith(".csv"):
+        raise HTTPException(status_code=400, detail="El archivo debe ser un CSV.")
+
+    try:
+        content = await file.read()
+        text = content.decode("utf-8-sig")
+        df = pd.read_csv(io.StringIO(text))
+
+        col_map = {
+            "SKU": "SKU",
+            "Descripción SKU": "Descripción SKU",
+            "Largo_cm": "Largo_cm",
+            "Ancho_cm": "Ancho_cm",
+            "Alto_cm": "Alto_cm",
+            "Volumen_unitario_m3": "Volumen_unitario_m3",
+            "Peso_unitario_kg": "Peso_unitario_kg",
+            "Tipo_embalaje": "Tipo_embalaje",
+        }
+        missing = [c for c in col_map if c not in df.columns]
+        if missing:
+            raise HTTPException(
+                status_code=400,
+                detail=f"Columnas faltantes en el CSV: {missing}",
+            )
+
+        rows = df.to_dict(orient="records")
+
+        from database.connection import get_session
+        from database.repositories.producto_repository import ProductoRepository
+
+        def _persist():
+            session = get_session()
+            try:
+                repo = ProductoRepository(session)
+                return repo.upsert_for_user(rows, user_id)
+            finally:
+                session.close()
+
+        result = await asyncio.to_thread(_persist)
+        return {
+            "message": (
+                f"Catálogo actualizado: {result['inserted']} insertados, "
+                f"{result['skipped']} omitidos (ya existían)."
+            ),
+            "inserted": result["inserted"],
+            "skipped": result["skipped"],
+        }
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.exception("Error en subida de catálogo")
+        raise HTTPException(status_code=500, detail=f"Fallo en la subida: {str(e)}")
+
+
 # ── Order numbering & simulation ──────────────────────────────────────────
 
 @router.get("/next-order-number")

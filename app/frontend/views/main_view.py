@@ -1423,6 +1423,15 @@ class MainView(QWidget):
         db_row.addWidget(self.btn_db_upload_detalle, 1)
         layout.addLayout(db_row)
 
+        # ── Catálogo ────────────────────────────────────────────────────────
+        cat_row = QHBoxLayout()
+        self.btn_db_upload_catalogo = QPushButton("⇪ Actualizar Catálogo → DB")
+        self.btn_db_upload_catalogo.setObjectName("btnSecondary")
+        self.btn_db_upload_catalogo.setCursor(Qt.CursorShape.PointingHandCursor)
+        self.btn_db_upload_catalogo.clicked.connect(self._db_upload_catalogo)
+        cat_row.addWidget(self.btn_db_upload_catalogo)
+        layout.addLayout(cat_row)
+
         scroll.setWidget(panel)
         return scroll
 
@@ -1435,7 +1444,7 @@ class MainView(QWidget):
         base = self._backend_base_url()
         url = f"{base}/upload"
         from frontend.workers.upload_worker import UploadWorker
-        self._db_upload_worker_v = UploadWorker(url, self.ventas_path)
+        self._db_upload_worker_v = UploadWorker(url, self.ventas_path, {"user_id": self.user_id})
         self._db_upload_worker_v.finished.connect(
             lambda res: self._set_global_status(res.get("message", "Ventas subidas a DB."), "ok")
         )
@@ -1452,7 +1461,7 @@ class MainView(QWidget):
         base = self._backend_base_url()
         url = f"{base}/upload-detalle"
         from frontend.workers.upload_worker import UploadWorker
-        self._db_upload_worker_d = UploadWorker(url, self.detalle_path)
+        self._db_upload_worker_d = UploadWorker(url, self.detalle_path, {"user_id": self.user_id})
         self._db_upload_worker_d.finished.connect(
             lambda res: self._set_global_status(res.get("message", "Detalle subido a DB."), "ok")
         )
@@ -1461,6 +1470,26 @@ class MainView(QWidget):
         )
         self._set_global_status("Subiendo detalle a la base de datos…", "busy")
         self._db_upload_worker_d.start()
+
+    def _db_upload_catalogo(self):
+        from PyQt6.QtWidgets import QFileDialog
+        path, _ = QFileDialog.getOpenFileName(
+            self, "Seleccionar catálogo", "", "CSV (*.csv)"
+        )
+        if not path:
+            return
+        base = self._backend_base_url()
+        url = f"{base}/upload-catalogo"
+        from frontend.workers.upload_worker import UploadWorker
+        self._db_upload_worker_c = UploadWorker(url, path, {"user_id": self.user_id})
+        self._db_upload_worker_c.finished.connect(
+            lambda res: self._set_global_status(res.get("message", "Catálogo actualizado."), "ok")
+        )
+        self._db_upload_worker_c.error.connect(
+            lambda msg: self._set_global_status(f"Upload catálogo falló: {msg}", "err")
+        )
+        self._set_global_status("Actualizando catálogo en la base de datos…", "busy")
+        self._db_upload_worker_c.start()
 
     def _toggle_advanced(self):
         is_visible = self.advanced_container.isVisible()
