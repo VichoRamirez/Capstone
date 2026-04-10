@@ -1,10 +1,10 @@
 {
-  "num_trucks": "16",
-  "depot_query": "Plaza de Armas 951",
-  "validated_depot_query": "Plaza de Armas 951",
+  "num_trucks": "15",
+  "depot_query": "Av. Irarrazabal 2501",
+  "validated_depot_query": "Av. Irarrazabal 2501",
   "validated_depot_coords": [
-    -33.4371206,
-    -70.6506217
+    -33.548073,
+    -70.626071
   ],
   "api_url": "http://localhost:8000/optimize",
   "runtime": "",

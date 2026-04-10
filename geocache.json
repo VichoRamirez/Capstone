@@ -8294,5 +8294,25 @@
   "Avenida Américo Vespucio 419|Santiago": [
     -33.5388301,
     -70.65956
+  ],
+  "Avenida Libertador Bernardo O'Higgins 1234|Santiago": [
+    -33.4436077,
+    -70.6491801
+  ],
+  "Avenida Grecia 750|Ñuñoa": [
+    -33.45861552352942,
+    -70.6233146764706
+  ],
+  "Avenida Departamental 1500|La Florida": [
+    -33.5100215,
+    -70.5912875
+  ],
+  "Calle San Pablo 3200|Pudahuel": [
+    null,
+    null
+  ],
+  "Avenida Pajaritos 1850|Maipú": [
+    -33.50946409081382,
+    -70.75748138061655
   ]
 }
