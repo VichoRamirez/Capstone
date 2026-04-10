@@ -1,0 +1,22 @@
+{
+  "num_trucks": "16",
+  "depot_query": "Plaza de Armas 951",
+  "validated_depot_query": "Plaza de Armas 951",
+  "validated_depot_coords": [
+    -33.4371206,
+    -70.6506217
+  ],
+  "api_url": "http://localhost:8000/optimize",
+  "runtime": "",
+  "worktime_start": "09:00",
+  "worktime_end": "17:00",
+  "km_per_liter": "6.4",
+  "fuel_type": "diesel",
+  "truck_fixed_cost_clp": "20000",
+  "diesel_price_clp": "1546",
+  "space_per_truck": "9",
+  "weight_per_truck": "2000",
+  "deliveries_per_day": "150",
+  "ventas_path": "",
+  "detalle_path": ""
+}

@@ -16,7 +16,7 @@ class Usuario(Base):
 class Producto(Base):
     __tablename__ = "catalogo"
     id_usuario = Column(Integer)
-    sku = Column("SKU", String(10), primary_key=True)
+    sku = Column("SKU", String(10))
     descripcion_sku = Column("Descripción SKU", Text)
     largo_cm = Column("Largo_cm", Float)
     ancho_cm = Column("Ancho_cm", Float)
@@ -25,10 +25,14 @@ class Producto(Base):
     peso_unitario_kg = Column("Peso_unitario_kg", Float)
     tipo_embalaje = Column("Tipo_embalaje", Text)
 
+    __table_args__ = (
+        PrimaryKeyConstraint("SKU", "id_usuario"),
+    )
+
 class Venta(Base):
     __tablename__ = "ventas"
     id_usuario = Column(Integer)
-    numero_orden = Column("Número de Orden", String(50), primary_key=True)
+    numero_orden = Column("Número de Orden", String(50))
     rut = Column("RUT", Text)
     nombre_cliente = Column("Nombre cliente", Text)
     direccion_cliente = Column("Dirección cliente", Text)
@@ -40,11 +44,15 @@ class Venta(Base):
     latitud = Column("Latitud", Float)
     longitud = Column("Longitud", Float)
 
+    __table_args__ = (
+        PrimaryKeyConstraint("Número de Orden", "id_usuario"),
+    )
+
 class Detalle(Base):
     __tablename__ = "detalle"
     id_usuario = Column(Integer)
-    numero_orden = Column("Número de Orden", String(50), primary_key=True)
-    sku = Column("SKU", String(10), primary_key=True)
+    numero_orden = Column("Número de Orden", String(50))
+    sku = Column("SKU", String(10))
     descripcion_sku = Column("Descripción SKU", Text)
     cantidad = Column("Cantidad", BigInteger)
     largo_cm = Column("Largo_cm", Float)
@@ -56,5 +64,5 @@ class Detalle(Base):
     peso_total_kg = Column("Peso_total_kg", Float)
     
     __table_args__ = (
-        PrimaryKeyConstraint("Número de Orden", "SKU"),
+        PrimaryKeyConstraint("Número de Orden", "SKU", "id_usuario"),
     )
