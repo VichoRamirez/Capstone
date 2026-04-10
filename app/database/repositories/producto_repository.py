@@ -1,19 +1,49 @@
-"""
-Repositorio específico para Producto.
-"""
 from database.models import Producto
 from database.repositories.base_repository import BaseRepository
 from sqlalchemy.orm import Session
+from typing import List
 
 
 class ProductoRepository(BaseRepository):
-
     def __init__(self, session: Session):
         super().__init__(session, Producto)
 
-    def get_by_categoria(self, categoria: str) -> list[Producto]:
+    def get_by_sku_and_user(self, sku: str, user_id: int):
         return (
             self.session.query(Producto)
-            .filter(Producto.categoria == categoria)
-            .all()
+            .filter(Producto.sku == sku, Producto.id_usuario == user_id)
+            .first()
         )
+
+    def upsert_for_user(self, rows: List[dict], user_id: int) -> dict:
+        """
+        Inserta los productos que no existen para el usuario.
+        Salta los que ya tienen el mismo (SKU, id_usuario).
+        Retorna conteos de insertados y saltados.
+        """
+        inserted = 0
+        skipped = 0
+        for row in rows:
+            sku = str(row.get("sku") or row.get("SKU") or "").strip()
+            if not sku:
+                skipped += 1
+                continue
+            existing = self.get_by_sku_and_user(sku, user_id)
+            if existing:
+                skipped += 1
+                continue
+            obj = Producto(
+                id_usuario=user_id,
+                sku=sku,
+                descripcion_sku=row.get("descripcion_sku") or row.get("Descripción SKU"),
+                largo_cm=row.get("largo_cm") or row.get("Largo_cm"),
+                ancho_cm=row.get("ancho_cm") or row.get("Ancho_cm"),
+                alto_cm=row.get("alto_cm") or row.get("Alto_cm"),
+                volumen_unitario_m3=row.get("volumen_unitario_m3") or row.get("Volumen_unitario_m3"),
+                peso_unitario_kg=row.get("peso_unitario_kg") or row.get("Peso_unitario_kg"),
+                tipo_embalaje=row.get("tipo_embalaje") or row.get("Tipo_embalaje"),
+            )
+            self.session.add(obj)
+            inserted += 1
+        self.session.commit()
+        return {"inserted": inserted, "skipped": skipped}
