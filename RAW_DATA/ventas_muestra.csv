@@ -1,0 +1,6 @@
+﻿RUT,Nombre cliente,Dirección cliente,Comuna,Fecha de Pedido,Número de Orden,Monto Pedido,Fecha de despacho Solicitada
+12.345.678-9,Ferretería El Martillo,Av. Libertador Bernardo O'Higgins 1234,Santiago,2026-12-01,ORD-TEST-000001,88632,2026-12-03
+9.876.543-2,Constructora Los Andes,Av. Grecia 750,Ñuñoa,2026-12-01,ORD-TEST-000002,454576,2026-12-03
+15.432.109-8,Distribuidora Central,Av. Departamental 1500,La Florida,2026-12-02,ORD-TEST-000003,62256,2026-12-04
+7.654.321-0,Materiales San Pablo,Calle San Pablo 3200,Pudahuel,2026-12-02,ORD-TEST-000004,191768,2026-12-05
+18.901.234-5,Supercenter Maipú,Av. Pajaritos 1850,Maipú,2026-12-03,ORD-TEST-000005,121488,2026-12-05
