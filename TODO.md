@@ -20,3 +20,12 @@
 - [x] **`get_next_order_number` carga toda la tabla en memoria**
 - [x] **Encoding de CSV sin fallback**
 - [x] **`timedelta` importado sin uso**
+
+---
+
+## Trabajo futuro (si se implementa sistema de pedidos)
+
+- [ ] **`get_next_order_number` no filtra por usuario** — `app/database/repositories/venta_repository.py`
+  - El número de orden máximo se calcula sobre toda la tabla, sin distinción por empresa.
+  - Si se crea un flujo para generar órdenes desde la app, el contador debe ser por `user_id`
+    para que cada empresa tenga su propia secuencia independiente.
