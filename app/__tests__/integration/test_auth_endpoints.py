@@ -1,7 +1,8 @@
 """Integration tests for /auth/* endpoints.
 
-Uses `api_client` from conftest.py (FastAPI TestClient + SQLite in-memory).
+Uses `api_client` from conftest.py (FastAPI TestClient + real MySQL).
 Tests cover the full HTTP layer: status codes, response shape, and DB state.
+Test isolation is achieved via UUID-suffixed usernames and emails.
 """
 import uuid
 import pytest

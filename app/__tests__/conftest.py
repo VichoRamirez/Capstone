@@ -1,83 +1,38 @@
 """
 Shared pytest fixtures for the entire test suite.
 
-DB strategy: SQLite in-memory with StaticPool so every session
-shares the same underlying connection and committed data is visible
-across sessions without a real MySQL server.
+DB strategy: uses the real MySQL database configured via .env
+(same connection as the running application).
+Tests are isolated through UUID-based unique identifiers, so test
+data written to MySQL does not collide across runs or test functions.
 """
 import os
 import sys
 import urllib.request
 
 import pytest
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-from sqlalchemy.pool import StaticPool
 
 # ── path: make `app/` the importable root ────────────────────────────────────
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from database.models import Base  # noqa: E402
-
-# ── SQLite engine shared by the whole test run ───────────────────────────────
-_TEST_ENGINE = create_engine(
-    "sqlite:///:memory:",
-    connect_args={"check_same_thread": False},
-    poolclass=StaticPool,
-)
-_TestSession = sessionmaker(bind=_TEST_ENGINE, autocommit=False, autoflush=False)
-
-
-@pytest.fixture(scope="session", autouse=True)
-def _setup_schema():
-    """Create all ORM tables once; drop them at the end."""
-    Base.metadata.create_all(_TEST_ENGINE)
-    yield
-    Base.metadata.drop_all(_TEST_ENGINE)
-
 
 @pytest.fixture
-def db_session(_setup_schema):
-    """Isolated DB session; rolled back after each test."""
-    session = _TestSession()
+def db_session():
+    """
+    Real MySQL session; rolled back after each test.
+    Useful for unit tests that need direct DB access.
+    """
+    from database.connection import get_session
+    session = get_session()
     yield session
     session.rollback()
     session.close()
 
 
-def _new_test_session():
-    """Factory used as side_effect for get_session patches."""
-    return _TestSession()
-
-
-# Modules that call get_session() directly (not via FastAPI DI)
-_GET_SESSION_TARGETS = [
-    "backend.services.auth_service.get_session",
-    "backend.services.db_persistence.get_session",
-    "backend.api.router.get_session",
-]
-
-
 @pytest.fixture
-def patch_db(_setup_schema):
+def api_client():
     """
-    Patch every direct get_session() call in service/router modules
-    to return SQLite sessions instead of MySQL sessions.
-    """
-    from unittest.mock import patch
-
-    patches = [patch(t, side_effect=_new_test_session) for t in _GET_SESSION_TARGETS]
-    for p in patches:
-        p.start()
-    yield
-    for p in patches:
-        p.stop()
-
-
-@pytest.fixture
-def api_client(patch_db):
-    """
-    FastAPI TestClient with DB patched to SQLite in-memory.
+    FastAPI TestClient backed by the real MySQL database.
     External services (Nominatim, OSRM, CNE) must be mocked per-test.
     """
     from fastapi.testclient import TestClient
