@@ -111,6 +111,48 @@ class DataHubDashboardWorker(QThread):
             self.error.emit(str(e))
 
 
+class DataHubDashboardDbWorker(QThread):
+    """GET /data/dashboard-db?user_id={id} y emite el JSON parseado."""
+
+    finished = pyqtSignal(dict)
+    error = pyqtSignal(str)
+
+    def __init__(self, url: str, user_id: int):
+        super().__init__()
+        self.url = str(url or "").strip()
+        self.user_id = int(user_id)
+        self._running = True
+
+    def stop(self):
+        self._running = False
+        self.requestInterruption()
+
+    def run(self):
+        if not self._running or self.isInterruptionRequested():
+            return
+        try:
+            req = urllib.request.Request(
+                f"{self.url}?user_id={self.user_id}",
+                method="GET",
+            )
+            with urllib.request.urlopen(req, timeout=60) as resp:
+                if not self._running or self.isInterruptionRequested():
+                    return
+                payload = json.loads(resp.read().decode("utf-8"))
+            if not isinstance(payload, dict):
+                raise RuntimeError("Respuesta inválida del dashboard DB.")
+            self.finished.emit(payload)
+        except urllib.error.HTTPError as e:
+            try:
+                err = json.loads(e.read().decode("utf-8"))
+                detail = err.get("detail", str(e))
+            except Exception:
+                detail = str(e)
+            self.error.emit(f"HTTP {e.code}: {detail}")
+        except Exception as e:
+            self.error.emit(str(e))
+
+
 class DataHubAddressValidationWorker(QThread):
     """POST /data/validate-addresses with ventas (+optional params)."""
 

@@ -740,6 +740,184 @@ async def data_dashboard(
         raise HTTPException(status_code=500, detail=f"Error construyendo dashboard: {str(e)}")
 
 
+@router.get("/data/dashboard-db")
+async def data_dashboard_db(user_id: int):
+    """
+    Dashboard de Operations cargado desde la BD MySQL.
+    Devuelve el mismo JSON que POST /data/dashboard, filtrado por user_id.
+    """
+    t0 = time.perf_counter()
+    try:
+        from backend.services.db_persistence import get_dashboard_dfs
+        df_ventas, df_detalle = await asyncio.to_thread(get_dashboard_dfs, user_id)
+
+        if df_ventas.empty:
+            return {
+                "kpis": {
+                    "orders_total": 0, "orders_deadline_today": 0, "orders_overdue": 0,
+                    "orders_next_24h": 0, "orders_week_horizon": 0, "comunas_active": 0,
+                    "monetary_total_clp": 0.0, "avg_order_value_clp": 0.0, "customers_total": 0,
+                },
+                "deadline_buckets": [],
+                "deadlines_timeline": [],
+                "comuna_distribution": [],
+                "review_rows": [],
+                "cleaning_errors": [],
+                "meta": {"elapsed_sec": round(float(time.perf_counter() - t0), 4), "source": "db"},
+            }
+
+        today = datetime.now().date()
+        tomorrow = today + timedelta(days=1)
+        next_week = today + timedelta(days=7)
+
+        df_ventas["_monto_clp"] = df_ventas["Monto Pedido"].apply(_parse_clp_number) if "Monto Pedido" in df_ventas.columns else 0.0
+        df_ventas["_comuna"] = (
+            df_ventas["Comuna"].astype(str).fillna("").str.strip().replace({"nan": "", "None": ""})
+            if "Comuna" in df_ventas.columns else ""
+        )
+        df_ventas["_comuna"] = df_ventas["_comuna"].apply(lambda x: x if x else "Sin comuna")
+
+        if "Fecha de despacho Solicitada" in df_ventas.columns:
+            dispatch_ts = pd.to_datetime(df_ventas["Fecha de despacho Solicitada"], errors="coerce")
+            df_ventas["_dispatch_ts"] = dispatch_ts
+            df_ventas["_dispatch_date"] = dispatch_ts.dt.date
+        else:
+            df_ventas["_dispatch_ts"] = pd.NaT
+            df_ventas["_dispatch_date"] = None
+
+        if not df_detalle.empty and "Número de Orden" in df_detalle.columns:
+            if "Cantidad" in df_detalle.columns:
+                qty = pd.to_numeric(df_detalle["Cantidad"], errors="coerce").fillna(0.0)
+                detail_qty = (
+                    pd.DataFrame({"Número de Orden": df_detalle["Número de Orden"], "_qty": qty})
+                    .groupby("Número de Orden", as_index=False)["_qty"].sum()
+                    .rename(columns={"_qty": "items_total"})
+                )
+                df_ventas = df_ventas.merge(detail_qty, on="Número de Orden", how="left")
+            if "SKU" in df_detalle.columns:
+                skus = (
+                    df_detalle.assign(_sku=df_detalle["SKU"].astype(str))
+                    .groupby("Número de Orden", as_index=False)["_sku"].nunique()
+                    .rename(columns={"_sku": "sku_count"})
+                )
+                df_ventas = df_ventas.merge(skus, on="Número de Orden", how="left")
+        if "items_total" not in df_ventas.columns:
+            df_ventas["items_total"] = 0.0
+        if "sku_count" not in df_ventas.columns:
+            df_ventas["sku_count"] = 0
+
+        dispatch_ts = pd.to_datetime(df_ventas["_dispatch_ts"], errors="coerce")
+        today_ts = pd.Timestamp(today)
+        next_week_ts = pd.Timestamp(next_week)
+        deadline_today = int((dispatch_ts.dt.date == today).sum())
+        deadline_overdue = int((dispatch_ts < today_ts).sum())
+        deadline_next_24h = int((dispatch_ts.dt.date == tomorrow).sum())
+        deadline_week = int(((dispatch_ts >= today_ts) & (dispatch_ts <= next_week_ts)).sum())
+
+        monetary_total = float(df_ventas["_monto_clp"].sum())
+        orders_total = int(len(df_ventas))
+        avg_order = float(monetary_total / orders_total) if orders_total > 0 else 0.0
+        customers_total = int(df_ventas["RUT"].astype(str).nunique()) if "RUT" in df_ventas.columns else orders_total
+        comunas_active = int(df_ventas["_comuna"].astype(str).nunique())
+
+        comuna_group = (
+            df_ventas.groupby("_comuna", as_index=False)
+            .agg(pedidos=("Número de Orden", "count"), monto_clp=("_monto_clp", "sum"))
+            .sort_values(["pedidos", "monto_clp"], ascending=[False, False])
+        )
+        comuna_distribution = [
+            {"comuna": str(r["_comuna"]), "pedidos": int(r["pedidos"]), "monto_clp": round(float(r["monto_clp"]), 2)}
+            for _, r in comuna_group.head(60).iterrows()
+        ]
+
+        deadlines_timeline = []
+        timeline = (
+            df_ventas.dropna(subset=["_dispatch_ts"])
+            .groupby("_dispatch_date", as_index=False).size()
+            .sort_values("_dispatch_date")
+        )
+        for _, r in timeline.head(30).iterrows():
+            deadlines_timeline.append({"date": str(r["_dispatch_date"]), "orders": int(r["size"])})
+
+        review_rows = []
+        has_latlon = "Latitud" in df_ventas.columns
+        for _, row in df_ventas.iterrows():
+            order_id = str(row.get("Número de Orden", "") or "")
+            customer = str(row.get("Nombre cliente", "") or "")
+            comuna = str(row.get("_comuna", "") or "")
+            address = str(row.get("Dirección cliente", "") or "")
+            dispatch_date = row.get("_dispatch_date")
+            monto = _safe_float(row.get("_monto_clp"), 0.0)
+            items_total = _safe_float(row.get("items_total"), 0.0)
+            sku_count = _safe_int(row.get("sku_count"), 0)
+
+            lat = row.get("Latitud") if has_latlon else None
+            if lat is not None and not pd.isna(lat):
+                quality_status, action = "validated", "Geocodificación OK"
+            else:
+                quality_status, action = _address_quality_status(address, comuna)
+
+            if dispatch_date is None:
+                deadline_status, deadline_priority = "no_deadline", 3
+            elif dispatch_date < today:
+                deadline_status, deadline_priority = "overdue", 0
+            elif dispatch_date == today:
+                deadline_status, deadline_priority = "today", 1
+            elif dispatch_date == tomorrow:
+                deadline_status, deadline_priority = "next_24h", 2
+            else:
+                deadline_status, deadline_priority = "future", 3
+
+            quality_priority = {"missing_address": 0, "missing_comuna": 0, "low_confidence": 1, "pending_validation": 2}.get(quality_status, 3)
+            review_rows.append({
+                "order_id": order_id, "customer": customer, "comuna": comuna,
+                "address": address, "dispatch_date": str(dispatch_date) if dispatch_date else "",
+                "deadline_status": deadline_status, "quality_status": quality_status,
+                "action_suggestion": action, "monto_clp": round(float(monto), 2),
+                "items_total": round(float(items_total), 2), "sku_count": int(sku_count),
+                "_sort_deadline": int(deadline_priority), "_sort_quality": int(quality_priority),
+            })
+
+        review_rows = sorted(review_rows, key=lambda r: (r["_sort_deadline"], r["_sort_quality"], r.get("dispatch_date", ""), r.get("order_id", "")))
+        for row in review_rows:
+            row.pop("_sort_deadline", None)
+            row.pop("_sort_quality", None)
+        review_rows = review_rows[:200]
+
+        return {
+            "kpis": {
+                "orders_total": int(orders_total),
+                "orders_deadline_today": int(deadline_today),
+                "orders_overdue": int(deadline_overdue),
+                "orders_next_24h": int(deadline_next_24h),
+                "orders_week_horizon": int(deadline_week),
+                "comunas_active": int(comunas_active),
+                "monetary_total_clp": round(float(monetary_total), 2),
+                "avg_order_value_clp": round(float(avg_order), 2),
+                "customers_total": int(customers_total),
+            },
+            "deadline_buckets": [
+                {"bucket": "overdue", "orders": int(deadline_overdue)},
+                {"bucket": "today", "orders": int(deadline_today)},
+                {"bucket": "next_24h", "orders": int(deadline_next_24h)},
+                {"bucket": "week_horizon", "orders": int(deadline_week)},
+            ],
+            "deadlines_timeline": deadlines_timeline,
+            "comuna_distribution": comuna_distribution,
+            "review_rows": review_rows,
+            "cleaning_errors": [],
+            "meta": {
+                "elapsed_sec": round(float(time.perf_counter() - t0), 4),
+                "ventas_rows": int(len(df_ventas)),
+                "detalle_rows": int(len(df_detalle)),
+                "source": "db",
+            },
+        }
+    except Exception as e:
+        logger.exception("Error building DB dashboard")
+        raise HTTPException(status_code=500, detail=f"Error construyendo dashboard desde BD: {str(e)}")
+
+
 @router.post("/data/validate-addresses")
 async def data_validate_addresses(
     ventas: UploadFile = File(..., description="CSV de ventas"),

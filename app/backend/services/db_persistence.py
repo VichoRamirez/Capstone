@@ -147,6 +147,50 @@ def persist_detalle_df(df: pd.DataFrame, user_id: int) -> dict:
     return {"success_count": len(items), "error_count": len(errors), "errors": errors}
 
 
+def get_dashboard_dfs(user_id: int) -> tuple[pd.DataFrame, pd.DataFrame]:
+    """
+    Devuelve (df_ventas, df_detalle) desde MySQL para el dashboard de Operations.
+    Los nombres de columnas coinciden con los que espera el cálculo de KPIs.
+    """
+    from database.models import Venta, Detalle
+
+    session = get_session()
+    try:
+        ventas_rows = session.query(Venta).filter(Venta.id_usuario == user_id).all()
+        detalle_rows = session.query(Detalle).filter(Detalle.id_usuario == user_id).all()
+    finally:
+        session.close()
+
+    ventas_data = [
+        {
+            "Número de Orden": v.numero_orden,
+            "RUT": v.rut,
+            "Nombre cliente": v.nombre_cliente,
+            "Dirección cliente": v.direccion_cliente,
+            "Comuna": v.comuna,
+            "Fecha de Pedido": v.fecha_pedido,
+            "Estado": v.estado,
+            "Monto Pedido": v.monto_pedido,
+            "Fecha de despacho Solicitada": v.fecha_despacho_solicitada,
+            "Latitud": v.latitud,
+            "Longitud": v.longitud,
+        }
+        for v in ventas_rows
+    ]
+    detalle_data = [
+        {
+            "Número de Orden": d.numero_orden,
+            "SKU": d.sku,
+            "Cantidad": d.cantidad,
+        }
+        for d in detalle_rows
+    ]
+
+    df_ventas = pd.DataFrame(ventas_data) if ventas_data else pd.DataFrame()
+    df_detalle = pd.DataFrame(detalle_data) if detalle_data else pd.DataFrame()
+    return df_ventas, df_detalle
+
+
 def get_pending_orders_df(user_id: Optional[int] = None) -> pd.DataFrame:
     """
     Fetch all Pendiente orders joined with weight/volume totals from `detalle`.

@@ -41,7 +41,7 @@ from frontend.widgets.components import (
 from frontend.workers.request_worker import RequestWorker
 from frontend.workers.health_worker import HealthWorker
 from frontend.workers.progress_worker import ProgressWorker
-from frontend.workers.data_hub_worker import DataHubDashboardWorker, DataHubAddressValidationWorker
+from frontend.workers.data_hub_worker import DataHubDashboardWorker, DataHubDashboardDbWorker, DataHubAddressValidationWorker
 
 
 # ── Per-Day result widget ─────────────────────────────────────────────────
@@ -628,6 +628,7 @@ class MainView(QWidget):
         self.health_worker = None
         self.progress_worker = None
         self.datahub_worker = None
+        self.datahub_db_worker = None
         self.datahub_validation_worker = None
         self._validated_depot_coords = None
         self._validated_depot_query = ""
@@ -715,6 +716,18 @@ class MainView(QWidget):
                 pass
             self.datahub_worker.wait(3000)
         self.datahub_worker = None
+
+    def _stop_datahub_db_worker(self):
+        if not self.datahub_db_worker:
+            return
+        if self.datahub_db_worker.isRunning():
+            try:
+                if hasattr(self.datahub_db_worker, "stop"):
+                    self.datahub_db_worker.stop()
+            except Exception:
+                pass
+            self.datahub_db_worker.wait(3000)
+        self.datahub_db_worker = None
 
     def _stop_datahub_validation_worker(self):
         if not self.datahub_validation_worker:
@@ -900,6 +913,12 @@ class MainView(QWidget):
         ingest_card.add_widget(self.lbl_datahub_detail_file)
 
         action_row = QHBoxLayout()
+        self.btn_datahub_load_db = QPushButton("CARGAR DESDE BD")
+        self.btn_datahub_load_db.setObjectName("btnPrimary")
+        self.btn_datahub_load_db.setCursor(Qt.CursorShape.PointingHandCursor)
+        self.btn_datahub_load_db.clicked.connect(self._run_datahub_dashboard_db)
+        action_row.addWidget(self.btn_datahub_load_db)
+
         self.btn_datahub_analyze = QPushButton("ANALYZE CURRENT DATA")
         self.btn_datahub_analyze.setObjectName("btnSecondary")
         self.btn_datahub_analyze.setCursor(Qt.CursorShape.PointingHandCursor)
@@ -1928,6 +1947,26 @@ class MainView(QWidget):
             self.lbl_datahub_deadline.setText("No analysis yet.")
         self._set_datahub_status("Ready. Load files and run analysis.", "info")
 
+    def _run_datahub_dashboard_db(self):
+        if not self.user_id:
+            QMessageBox.warning(self, "Data Hub", "No hay sesión activa. Inicia sesión primero.")
+            return
+
+        base_url = self._backend_base_url() or "http://localhost:8000"
+        url = f"{base_url}/data/dashboard-db"
+
+        self._stop_datahub_db_worker()
+        self._stop_datahub_worker()
+        self.btn_datahub_load_db.setEnabled(False)
+        self.btn_datahub_load_db.setText("CARGANDO…")
+        self.btn_datahub_analyze.setEnabled(False)
+        self._set_datahub_status("Cargando datos desde la base de datos…", "warn")
+
+        self.datahub_db_worker = DataHubDashboardDbWorker(url=url, user_id=self.user_id)
+        self.datahub_db_worker.finished.connect(self._on_datahub_dashboard_result)
+        self.datahub_db_worker.error.connect(self._on_datahub_dashboard_error)
+        self.datahub_db_worker.start()
+
     def _run_datahub_dashboard(self):
         self._sync_datahub_from_optimizer_paths()
         if not self.datahub_ventas_path or not self.datahub_detalle_path:
@@ -1958,8 +1997,11 @@ class MainView(QWidget):
 
     def _on_datahub_dashboard_result(self, payload: dict):
         self._stop_datahub_worker()
+        self._stop_datahub_db_worker()
         self.btn_datahub_analyze.setEnabled(True)
         self.btn_datahub_analyze.setText("ANALYZE CURRENT DATA")
+        self.btn_datahub_load_db.setEnabled(True)
+        self.btn_datahub_load_db.setText("CARGAR DESDE BD")
 
         if not isinstance(payload, dict):
             self._set_datahub_status("Invalid dashboard payload.", "error")
@@ -2020,8 +2062,11 @@ class MainView(QWidget):
 
     def _on_datahub_dashboard_error(self, msg: str):
         self._stop_datahub_worker()
+        self._stop_datahub_db_worker()
         self.btn_datahub_analyze.setEnabled(True)
         self.btn_datahub_analyze.setText("ANALYZE CURRENT DATA")
+        self.btn_datahub_load_db.setEnabled(True)
+        self.btn_datahub_load_db.setText("CARGAR DESDE BD")
         self._set_datahub_status(f"Dashboard failed: {msg}", "error")
         QMessageBox.warning(self, "Data Hub", f"No se pudo analizar la data.\n\n{msg}")
 
