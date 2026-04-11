@@ -1749,7 +1749,7 @@ async def upload_catalogo(
         raise HTTPException(status_code=500, detail=f"Fallo en la subida: {str(e)}")
 
 
-# ── Order numbering & simulation ──────────────────────────────────────────
+# ── Order numbering ───────────────────────────────────────────────────────
 
 @router.get("/next-order-number")
 async def get_next_order_number():
@@ -1758,93 +1758,5 @@ async def get_next_order_number():
     try:
         repo = VentaRepository(session)
         return {"next": repo.get_next_order_number()}
-    finally:
-        session.close()
-
-
-def _process_simulated_order_sync(venta_data: dict):
-    """Limpia + geocodifica una sola venta y la persiste."""
-    try:
-        from backend.services.cleaning_service import (
-            estandarizar_direccion_y_comuna,
-            geocodificar_direccion,
-        )
-
-        raw_addr = venta_data.get("direccion_cliente") or venta_data.get("Dirección cliente", "")
-        raw_comuna = venta_data.get("comuna") or venta_data.get("Comuna", "")
-        street, comuna = estandarizar_direccion_y_comuna(str(raw_addr))
-        final_comuna = comuna or raw_comuna or "Santiago"
-        lat, lon = geocodificar_direccion(street, final_comuna)
-
-        payload = {
-            "numero_orden": str(
-                venta_data.get("numero_orden") or venta_data.get("Número de Orden", "")
-            ),
-            "rut": venta_data.get("rut") or venta_data.get("RUT"),
-            "nombre_cliente": venta_data.get("nombre_cliente")
-            or venta_data.get("Nombre cliente"),
-            "direccion_cliente": f"{street}, {final_comuna}, Chile",
-            "comuna": final_comuna,
-            "fecha_pedido": pd.to_datetime(
-                venta_data.get("fecha_pedido")
-                or venta_data.get("Fecha de Pedido"),
-                errors="coerce",
-            ).date()
-            if (venta_data.get("fecha_pedido") or venta_data.get("Fecha de Pedido"))
-            else None,
-            "estado": venta_data.get("estado") or venta_data.get("Estado", "Pendiente"),
-            "monto_pedido": int(
-                venta_data.get("monto_pedido")
-                or venta_data.get("Monto Pedido", 0)
-                or 0
-            ),
-            "fecha_despacho_solicitada": pd.to_datetime(
-                venta_data.get("fecha_despacho_solicitada")
-                or venta_data.get("Fecha de despacho Solicitada"),
-                errors="coerce",
-            ).date()
-            if (
-                venta_data.get("fecha_despacho_solicitada")
-                or venta_data.get("Fecha de despacho Solicitada")
-            )
-            else None,
-            "latitud": lat,
-            "longitud": lon,
-        }
-
-        session = get_session()
-        try:
-            repo = VentaRepository(session)
-            repo.upsert(payload)
-        finally:
-            session.close()
-    except Exception as exc:
-        logger.exception(f"Error procesando pedido simulado: {exc}")
-
-
-@router.post("/simulation/order")
-async def create_simulated_order(payload: dict, background_tasks: BackgroundTasks):
-    """
-    Recibe una orden completa (header + items), inserta los detalles y agenda
-    la limpieza/geocodificación + persistencia del header en background.
-    """
-    venta_data = payload.get("venta")
-    items_data = payload.get("items")
-
-    if not venta_data or not items_data:
-        raise HTTPException(status_code=400, detail="Missing order header or items.")
-
-    session = get_session()
-    try:
-        d_repo = DetalleRepository(session)
-        for item in items_data:
-            item["numero_orden"] = venta_data["numero_orden"]
-        d_repo.add_items(items_data)
-
-        background_tasks.add_task(_process_simulated_order_sync, venta_data)
-
-        return {"message": "Simulated order received. Cleaning & persist in progress."}
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Failed to create simulated order: {str(e)}")
     finally:
         session.close()
