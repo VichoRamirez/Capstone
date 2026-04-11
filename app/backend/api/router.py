@@ -1578,12 +1578,12 @@ async def reset_password(payload: ResetPasswordRequest):
 # ── Catalog ───────────────────────────────────────────────────────────────
 
 @router.get("/catalog")
-async def get_catalog():
-    """Lista productos del catálogo."""
+async def get_catalog(user_id: int):
+    """Lista productos del catálogo del usuario."""
     session = get_session()
     try:
         repo = ProductoRepository(session)
-        products = repo.get_all()
+        products = repo.get_all_by_user(user_id)
         return [
             {
                 "sku": p.sku,

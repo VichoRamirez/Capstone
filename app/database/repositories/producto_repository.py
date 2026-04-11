@@ -8,6 +8,13 @@ class ProductoRepository(BaseRepository):
     def __init__(self, session: Session):
         super().__init__(session, Producto)
 
+    def get_all_by_user(self, user_id: int) -> list:
+        return (
+            self.session.query(Producto)
+            .filter(Producto.id_usuario == user_id)
+            .all()
+        )
+
     def get_by_sku_and_user(self, sku: str, user_id: int):
         return (
             self.session.query(Producto)
