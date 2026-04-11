@@ -29,3 +29,9 @@
   - El número de orden máximo se calcula sobre toda la tabla, sin distinción por empresa.
   - Si se crea un flujo para generar órdenes desde la app, el contador debe ser por `user_id`
     para que cada empresa tenga su propia secuencia independiente.
+
+## Pruebas unitarias e integrales
+
+- [ ] Implementar pruebas unitarias para los servicios
+- [ ] Implementar pruebas integrales para la API
+- [ ] Implementar pruebas de integración para la API
