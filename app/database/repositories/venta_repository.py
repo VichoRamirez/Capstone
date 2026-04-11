@@ -2,6 +2,7 @@ import re
 from database.models import Venta
 from database.repositories.base_repository import BaseRepository
 from sqlalchemy.orm import Session
+from sqlalchemy import func
 
 
 class VentaRepository(BaseRepository):
@@ -48,15 +49,9 @@ class VentaRepository(BaseRepository):
         return obj
 
     def get_next_order_number(self) -> str:
-        all_orders = self.session.query(Venta.numero_orden).all()
-        max_num = 0
-        for (order_str,) in all_orders:
-            try:
-                numeric_part = re.search(r'(\d+)', order_str)
-                if numeric_part:
-                    num = int(numeric_part.group(1))
-                    if num > max_num:
-                        max_num = num
-            except Exception:
-                continue
+        max_orden = self.session.query(func.max(Venta.numero_orden)).scalar()
+        if not max_orden:
+            return "1"
+        numeric_part = re.search(r'(\d+)', str(max_orden))
+        max_num = int(numeric_part.group(1)) if numeric_part else 0
         return str(max_num + 1)
