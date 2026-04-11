@@ -83,12 +83,8 @@ def login_user(identifier: str, password: str) -> dict:
         if not user:
             user = repo.get_by_email(identifier)
 
-        if not user:
-            return {"error": "Usuario o correo no encontrado."}
-
-        # Verificar contraseña
-        if not verify_password(password, user.password):
-            return {"error": "Contraseña incorrecta."}
+        if not user or not verify_password(password, user.password):
+            return {"error": "Credenciales incorrectas."}
 
         return {
             "user_id": user.id,
