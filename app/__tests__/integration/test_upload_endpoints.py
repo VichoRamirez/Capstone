@@ -45,6 +45,17 @@ def _uid() -> int:
     return abs(uuid.uuid4().int) % 100_000 + 1
 
 
+def _register_user(api_client) -> int:
+    """Register a real user and return their user_id (satisfies FK constraints)."""
+    suffix = uuid.uuid4().hex[:8]
+    resp = api_client.post("/auth/register", json={
+        "username": f"testuser_{suffix}",
+        "email": f"test_{suffix}@test.com",
+        "password": "pw123",
+    })
+    return resp.json()["user_id"]
+
+
 # ── /upload (ventas) ──────────────────────────────────────────────────────────
 
 @pytest.mark.integration
@@ -156,23 +167,25 @@ class TestUploadCatalogo:
         assert resp.status_code == 400
 
     def test_valid_upload_returns_200(self, api_client):
+        uid = _register_user(api_client)
         resp = api_client.post(
             "/upload-catalogo",
-            data={"user_id": str(_uid())},
+            data={"user_id": str(uid)},
             files={"file": ("cat.csv", io.BytesIO(_CATALOGO_CSV), "text/csv")},
         )
         assert resp.status_code == 200
 
     def test_valid_upload_has_processed_count(self, api_client):
+        uid = _register_user(api_client)
         body = api_client.post(
             "/upload-catalogo",
-            data={"user_id": str(_uid())},
+            data={"user_id": str(uid)},
             files={"file": ("cat.csv", io.BytesIO(_CATALOGO_CSV), "text/csv")},
         ).json()
         assert "processed" in body
 
     def test_second_upload_same_user_skips_duplicates(self, api_client):
-        uid = str(_uid())
+        uid = str(_register_user(api_client))
         api_client.post(
             "/upload-catalogo",
             data={"user_id": uid},
@@ -201,7 +214,7 @@ class TestCatalogEndpoint:
         assert resp.json() == []
 
     def test_returns_uploaded_products(self, api_client):
-        uid = str(_uid())
+        uid = str(_register_user(api_client))
         api_client.post(
             "/upload-catalogo",
             data={"user_id": uid},
@@ -213,7 +226,7 @@ class TestCatalogEndpoint:
         assert len(products) >= 1
 
     def test_catalog_items_have_sku_field(self, api_client):
-        uid = str(_uid())
+        uid = str(_register_user(api_client))
         api_client.post(
             "/upload-catalogo",
             data={"user_id": uid},
@@ -224,7 +237,8 @@ class TestCatalogEndpoint:
             assert "sku" in item
 
     def test_catalog_isolated_between_users(self, api_client):
-        uid1, uid2 = str(_uid()), str(_uid())
+        uid1 = str(_register_user(api_client))
+        uid2 = str(_register_user(api_client))
         api_client.post(
             "/upload-catalogo",
             data={"user_id": uid1},

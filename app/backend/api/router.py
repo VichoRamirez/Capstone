@@ -310,7 +310,8 @@ async def get_diesel_price_clp(force_refresh: bool = False):
     """
     try:
         price, meta = await asyncio.to_thread(
-            fetch_diesel_price_clp,
+            fetch_fuel_price_clp,
+            "diesel",
             force_refresh=bool(force_refresh),
             timeout_sec=8.0,
         )
@@ -1560,6 +1561,8 @@ async def register(payload: RegisterRequest):
 @router.post("/auth/login")
 async def login(payload: LoginRequest):
     """Login por username o email. Espera: {identifier, password}"""
+    if not payload.identifier or not payload.password:
+        raise HTTPException(status_code=400, detail="Debe ingresar usuario/correo y contraseña.")
     result = auth_service.login_user(payload.identifier, payload.password)
     if "error" in result:
         raise HTTPException(status_code=401, detail=result["error"])
@@ -1699,17 +1702,13 @@ async def upload_catalogo(
         text = content.decode("utf-8-sig")
         df = pd.read_csv(io.StringIO(text))
 
-        col_map = {
-            "SKU": "SKU",
-            "Descripción SKU": "Descripción SKU",
-            "Largo_cm": "Largo_cm",
-            "Ancho_cm": "Ancho_cm",
-            "Alto_cm": "Alto_cm",
-            "Volumen_unitario_m3": "Volumen_unitario_m3",
-            "Peso_unitario_kg": "Peso_unitario_kg",
-            "Tipo_embalaje": "Tipo_embalaje",
-        }
-        missing = [c for c in col_map if c not in df.columns]
+        # Normalizar "Descripción SKU" → "Descripcion SKU" para compatibilidad
+        if "Descripción SKU" in df.columns:
+            df = df.rename(columns={"Descripción SKU": "Descripcion SKU"})
+
+        required_cols = ["SKU", "Descripcion SKU", "Largo_cm", "Ancho_cm", "Alto_cm",
+                         "Volumen_unitario_m3", "Peso_unitario_kg", "Tipo_embalaje"]
+        missing = [c for c in required_cols if c not in df.columns]
         if missing:
             raise HTTPException(
                 status_code=400,
@@ -1733,10 +1732,13 @@ async def upload_catalogo(
         return {
             "message": (
                 f"Catálogo actualizado: {result['inserted']} insertados, "
-                f"{result['skipped']} omitidos (ya existían)."
+                f"{result['skipped']} omitidos (ya existían), "
+                f"{len(result['errors'])} con errores."
             ),
+            "processed": result["inserted"],
             "inserted": result["inserted"],
             "skipped": result["skipped"],
+            "errors": result["errors"],
         }
     except HTTPException:
         raise

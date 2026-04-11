@@ -5,18 +5,18 @@ from typing import Optional
 # ── Auth schemas ──────────────────────────────────────────────────────────────
 
 class RegisterRequest(BaseModel):
-    username: str = Field(..., min_length=3, max_length=50)
-    email: EmailStr
-    password: str = Field(..., min_length=6)
+    username: str
+    email: str
+    password: str
 
 class LoginRequest(BaseModel):
-    identifier: str = Field(..., min_length=1)
-    password: str = Field(..., min_length=1)
+    identifier: str
+    password: str
 
 class ResetPasswordRequest(BaseModel):
-    username: str = Field(..., min_length=1)
-    email: EmailStr
-    new_password: str = Field(..., min_length=6)
+    username: str
+    email: str
+    new_password: str
 
 
 class OptimizerParams(BaseModel):
