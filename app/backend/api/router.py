@@ -1612,6 +1612,8 @@ async def upload_ventas(
     Recibe un CSV de VENTAS, lo limpia/geocodifica con el pipeline avanzado
     y lo persiste en la tabla `ventas`.
     """
+    if user_id is None:
+        raise HTTPException(status_code=400, detail="user_id es requerido.")
     if not file.filename or not file.filename.lower().endswith(".csv"):
         raise HTTPException(status_code=400, detail="El archivo debe ser un CSV.")
 
@@ -1650,6 +1652,8 @@ async def upload_detalle(
     """
     Recibe un CSV/XLSX de DETALLE, lo limpia y lo persiste en la tabla `detalle`.
     """
+    if user_id is None:
+        raise HTTPException(status_code=400, detail="user_id es requerido.")
     try:
         content = await file.read()
         if file.filename and file.filename.lower().endswith(".xlsx"):
