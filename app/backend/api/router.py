@@ -19,7 +19,7 @@ from fastapi import APIRouter, UploadFile, File, Form, HTTPException
 from fastapi.responses import JSONResponse
 from typing import Optional
 
-from backend.schemas import OptimizerParams, CleaningResponse
+from backend.schemas import OptimizerParams, CleaningResponse, RegisterRequest, LoginRequest, ResetPasswordRequest
 from backend.services.cleaning_service import (
     run_full_cleaning,
     clean_ventas,
@@ -1549,38 +1549,27 @@ from database.repositories.producto_repository import ProductoRepository  # noqa
 # ── Auth ──────────────────────────────────────────────────────────────────
 
 @router.post("/auth/register")
-async def register(payload: dict):
+async def register(payload: RegisterRequest):
     """Registra un usuario. Espera: {username, email, password}"""
-    username = (payload.get("username") or "").strip()
-    email = (payload.get("email") or "").strip()
-    password = payload.get("password") or ""
-
-    result = auth_service.register_user(username, email, password)
+    result = auth_service.register_user(payload.username, payload.email, payload.password)
     if "error" in result:
         raise HTTPException(status_code=400, detail=result["error"])
     return result
 
 
 @router.post("/auth/login")
-async def login(payload: dict):
+async def login(payload: LoginRequest):
     """Login por username o email. Espera: {identifier, password}"""
-    identifier = (payload.get("identifier") or "").strip()
-    password = payload.get("password") or ""
-
-    result = auth_service.login_user(identifier, password)
+    result = auth_service.login_user(payload.identifier, payload.password)
     if "error" in result:
         raise HTTPException(status_code=401, detail=result["error"])
     return result
 
 
 @router.post("/auth/reset-password")
-async def reset_password(payload: dict):
+async def reset_password(payload: ResetPasswordRequest):
     """Reset de password. Espera: {username, email, new_password}"""
-    username = (payload.get("username") or "").strip()
-    email = (payload.get("email") or "").strip()
-    new_password = payload.get("new_password") or ""
-
-    result = auth_service.reset_password(username, email, new_password)
+    result = auth_service.reset_password(payload.username, payload.email, payload.new_password)
     if "error" in result:
         raise HTTPException(status_code=400, detail=result["error"])
     return result
