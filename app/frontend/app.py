@@ -86,6 +86,7 @@ class MainApp(QMainWindow):
 
         # Index 1: Main view (optimizer)
         self.main_view = MainView(parent=self)
+        self.main_view.logout_requested.connect(self._on_logout)
         self.stack.addWidget(self.main_view)
 
         # Start on login
@@ -102,6 +103,14 @@ class MainApp(QMainWindow):
         # Navigate to main view
         self.stack.setCurrentIndex(1)
         self._set_status(f"Sesión iniciada como {username}", "ok")
+
+    def _on_logout(self):
+        """Cierra la sesión y vuelve a la pantalla de login."""
+        self.user_id = None
+        self.username = None
+        self.login_view.reset()
+        self.stack.setCurrentIndex(0)
+        self._set_status("Sesión cerrada.", "idle")
 
     def navigate_to(self, index: int):
         """Cambia la vista visible en el stack."""

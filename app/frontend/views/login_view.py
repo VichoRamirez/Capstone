@@ -213,6 +213,15 @@ class LoginView(QWidget):
 
         outer.addWidget(card)
 
+    def reset(self):
+        """Limpia todos los campos al volver a la pantalla de login."""
+        for field in (
+            self.login_identifier, self.login_password,
+            self.reg_username, self.reg_email, self.reg_password, self.reg_confirm,
+            self.reset_username, self.reset_email, self.reset_password, self.reset_confirm,
+        ):
+            field.clear()
+
     # ── Helpers ───────────────────────────────────────────────────────────
 
     def _make_input(self, placeholder: str, password: bool = False) -> QLineEdit:

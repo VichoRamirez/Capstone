@@ -24,7 +24,7 @@ from PyQt6.QtWidgets import (
     QSplitter, QMessageBox, QScrollArea, QProgressBar, QGridLayout,
     QStatusBar, QFileDialog, QTabWidget, QComboBox,
 )
-from PyQt6.QtCore import Qt, QTimer
+from PyQt6.QtCore import Qt, QTimer, pyqtSignal
 from PyQt6.QtGui import QFont, QColor
 
 try:
@@ -620,6 +620,8 @@ class GlobalSummaryWidget(QWidget):
 # ── Main view ─────────────────────────────────────────────────────────────
 
 class MainView(QWidget):
+    logout_requested = pyqtSignal()
+
     def __init__(self, parent=None):
         super().__init__(parent)
         self.worker = None
@@ -1159,11 +1161,19 @@ class MainView(QWidget):
             f"color: {theme.TEXT_DIM}; font-size: 11px; font-family: {theme.MONO};"
         )
 
+        btn_logout = QPushButton("Cerrar sesión")
+        btn_logout.setObjectName("btnSecondary")
+        btn_logout.setCursor(Qt.CursorShape.PointingHandCursor)
+        btn_logout.setFixedHeight(28)
+        btn_logout.clicked.connect(self.logout_requested.emit)
+
         hl.addWidget(brand)
         hl.addSpacing(20)
         hl.addWidget(self.lbl_header_subtitle)
         hl.addStretch()
         hl.addWidget(self.user_label)
+        hl.addSpacing(12)
+        hl.addWidget(btn_logout)
         hl.addSpacing(12)
         hl.addWidget(self.dot)
 
