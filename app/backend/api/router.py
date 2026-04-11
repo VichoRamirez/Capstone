@@ -12,7 +12,7 @@ import re
 import urllib.error
 import urllib.parse
 import urllib.request
-from datetime import datetime, date, timedelta
+from datetime import datetime, date
 
 import pandas as pd
 from fastapi import APIRouter, UploadFile, File, Form, HTTPException
@@ -1619,7 +1619,10 @@ async def upload_ventas(
 
     try:
         content = await file.read()
-        text = content.decode("utf-8")
+        try:
+            text = content.decode("utf-8")
+        except UnicodeDecodeError:
+            text = content.decode("latin-1")
         df_ventas, errores = await asyncio.to_thread(clean_ventas, text)
 
         # Geocodificar in-thread
