@@ -1600,6 +1600,8 @@ from backend.models.routing.metaheuristics import (
     VRPTWData,
     PenaltyConfig,
     LocalSearchConfig,
+    TabuConfig,
+    tabu_search_vrptw,
 )
 from backend.models.routing.literature_heuristics import heuristic_solomon_i1_style, ProblemContext
 from backend.models.routing.heuristics import Route
@@ -1625,11 +1627,12 @@ def _to_scalar(x) -> float:
 def run_optimization(params: OptimizerParams,
                      df_ventas: pd.DataFrame) -> OptimizationResult:
     """
-    Ejecuta la optimización completa usando la heurística Solomon I1 Style:
+    Ejecuta la optimización completa:
     1. Genera matrices desde datos reales
     2. Construye objeto VRPTWData
-    3. Ejecuta heurística Solomon I1 Style
-    4. Genera CSV de rutas, CSV no cubiertos, mapa HTML
+    3. Ejecuta heurística Solomon I1 Style (solución inicial)
+    4. Mejora la solución con Tabu Search
+    5. Genera CSV de rutas, CSV no cubiertos, mapa HTML
     """
     t_total_0 = time.perf_counter()
 
@@ -1730,13 +1733,24 @@ def run_optimization(params: OptimizerParams,
     )
     model_preparation_sec = time.perf_counter() - t_model_prep_0
 
-    # 3. Ejecutar Solomon I1 Style
+    # 3. Ejecutar Solomon I1 Style (solución inicial)
     t_solver_0 = time.perf_counter()
     seed = 42
-    
+
     ctx = ProblemContext(data=vrp_data, coords=coords)
     sol_nodes, ev = heuristic_solomon_i1_style(ctx, seed=seed)
-    solver_sec = time.perf_counter() - t_solver_0
+    solomon_sec = time.perf_counter() - t_solver_0
+
+    # 4. Mejorar con Tabu Search
+    t_tabu_0 = time.perf_counter()
+    sol_nodes, ev = tabu_search_vrptw(
+        data=vrp_data,
+        initial_solution=sol_nodes,
+        tabu_config=TabuConfig(),
+        seed=seed,
+    )
+    tabu_sec = time.perf_counter() - t_tabu_0
+    solver_sec = solomon_sec + tabu_sec
 
     # Adaptar la solucion de lista de listas a objetos Route para compatibilidad con el resto del pipeline
     t_post_0 = time.perf_counter()
@@ -1884,6 +1898,8 @@ def run_optimization(params: OptimizerParams,
         "timing": {
             "matrix_generation_sec": round(float(matrix_generation_sec), 4),
             "model_preparation_sec": round(float(model_preparation_sec), 4),
+            "solomon_sec": round(float(solomon_sec), 4),
+            "tabu_search_sec": round(float(tabu_sec), 4),
             "solver_sec": round(float(solver_sec), 4),
             "postprocess_sec": round(float(postprocess_sec), 4),
             "output_generation_sec": round(float(output_generation_sec), 4),
