@@ -912,12 +912,14 @@ class MainView(QWidget):
         )
         ingest_card.add_widget(self.lbl_datahub_detail_file)
 
-        self.btn_datahub_load_db = QPushButton("⟳  CARGAR DESDE BD")
-        self.btn_datahub_load_db.setObjectName("btnPrimary")
+        db_row = QHBoxLayout()
+        self.btn_datahub_load_db = QPushButton("CARGAR DESDE BD")
+        self.btn_datahub_load_db.setObjectName("btnSecondary")
         self.btn_datahub_load_db.setCursor(Qt.CursorShape.PointingHandCursor)
-        self.btn_datahub_load_db.setMinimumHeight(38)
         self.btn_datahub_load_db.clicked.connect(self._run_datahub_dashboard_db)
-        ingest_card.add_widget(self.btn_datahub_load_db)
+        db_row.addWidget(self.btn_datahub_load_db)
+        db_row.addStretch()
+        ingest_card.add_layout(db_row)
 
         action_row = QHBoxLayout()
         self.btn_datahub_analyze = QPushButton("ANALYZE CURRENT DATA")
