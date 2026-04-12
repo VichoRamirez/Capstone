@@ -328,7 +328,7 @@ def _compress_routes_postoptimal(
     *,
     shift_minutes: float,
     day_start_minutes: int = 9 * 60,
-    turnaround_min: float = 30.0,
+    turnaround_min: float = 60.0,
     route_context: Optional[list[RouteTrafficContext]] = None,
     use_time_dependent_traffic: bool = True,
 ) -> tuple[list[PostTripAssignment], dict]:
@@ -344,7 +344,7 @@ def _compress_routes_postoptimal(
         }
 
     shift = max(1.0, _safe_float(shift_minutes, 480.0))
-    setup = max(0.0, _safe_float(turnaround_min, 30.0))
+    setup = max(0.0, _safe_float(turnaround_min, 60.0))
     day_start = int(max(0, _safe_int(day_start_minutes, 9 * 60)))
 
     contexts = (
@@ -587,12 +587,12 @@ def _build_route_kpis(
     g: float,
     o: float,
     trip_plan: Optional[list[PostTripAssignment]] = None,
-    turnaround_min: float = 30.0,
+    turnaround_min: float = 60.0,
 ) -> dict:
     den = max(1e-9, float(o))
     fixed_cost = float(c_fixed)
     g_val = float(g)
-    turnaround = max(0.0, _safe_float(turnaround_min, 30.0))
+    turnaround = max(0.0, _safe_float(turnaround_min, 60.0))
 
     route_metrics: dict[int, dict] = {}
     for route_idx, route in enumerate(routes):
@@ -1793,7 +1793,7 @@ def run_optimization(params: OptimizerParams,
     # 4. Reasignación post-óptima de rutas a camiones físicos (múltiples viajes)
     shift_start_min, shift_end_min = _parse_worktime_window_minutes(params_effective.worktime_windows)
     shift_minutes = max(1.0, float(shift_end_min - shift_start_min))
-    turnaround_between_trips_min = 30.0
+    turnaround_between_trips_min = 60.0
     use_time_dependent_traffic = bool(getattr(params_effective, "use_time_dependent_traffic", True))
     traffic_context = _build_route_traffic_context(
         optimized_routes,
