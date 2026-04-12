@@ -11,87 +11,91 @@ Aplicación de escritorio SaaS para **optimización de rutas de reparto (VRP/VRP
 3. [Formato de datos de entrada](#formato-de-datos-de-entrada)
 4. [Instalación paso a paso (local)](#instalación-paso-a-paso-local)
 5. [Servicios externos requeridos](#servicios-externos-requeridos)
-6. [Esquema mínimo de la base de datos](#esquema-mínimo-de-la-base-de-datos)
-7. [Variables de entorno](#variables-de-entorno)
-8. [Cómo ejecutar la app](#cómo-ejecutar-la-app)
+6. [Variables de entorno](#variables-de-entorno)
+7. [Cómo ejecutar la app](#cómo-ejecutar-la-app)
+8. [Tests](#tests)
 
 ---
 
 ## Estructura del repositorio
 
 ```
-Capstone analytics/
+Capstone/
 │
 ├── app/                        # Código fuente de la aplicación
-│   ├── main.py                 # Punto de entrada del frontend PyQt6
+│   ├── main.py                 # Punto de entrada (lanza backend + frontend)
+│   ├── qt_runtime.py           # Configuración del runtime Qt
 │   ├── requirements.txt        # Dependencias Python de la app
-│   ├── .env                    # Variables de entorno (NO se sube a git)
+│   ├── pytest.ini              # Configuración de pytest
 │   │
 │   ├── backend/                # Servidor FastAPI (puerto 8000)
 │   │   ├── main.py             # Punto de entrada del backend
 │   │   ├── api/
 │   │   │   └── router.py       # Todos los endpoints REST
+│   │   ├── controllers/
+│   │   │   └── data_controller.py
 │   │   ├── models/             # Modelos de optimización VRP
-│   │   │   ├── routing/        # Heurísticas activas (ALNS, metaheurísticas)
-│   │   │   ├── Modelo.py       # Formulación exacta VRP (requiere Gurobi)
-│   │   │   ├── Modelo2-4.py    # Variantes del modelo exacto (requieren Gurobi)
+│   │   │   ├── routing/        # Heurísticas activas (ALNS, Clarke-Wright, Tabu Search)
+│   │   │   ├── Modelo*.py      # Formulaciones exactas (requieren Gurobi)
 │   │   │   └── SoluciónHeurística.py
-│   │   ├── schemas/            # Modelos Pydantic para validación de requests
+│   │   ├── schemas/
 │   │   │   └── optimization.py # OptimizerParams + schemas de auth
 │   │   └── services/           # Lógica de negocio
-│   │       ├── auth_service.py          # Registro, login, reset de contraseña
-│   │       ├── cleaning_service.py      # Limpieza y normalización de CSVs
-│   │       ├── db_persistence.py        # Escritura de DataFrames a MySQL
-│   │       ├── fuel_price_service.py    # Consulta precio del diésel (API externa)
-│   │       ├── job_store.py             # Almacén de jobs asincrónicos
-│   │       ├── optimizer_service.py     # Orquesta el pipeline de optimización
-│   │       ├── road_routing.py          # Matrices de distancia/tiempo vía OSRM
+│   │       ├── auth_service.py
+│   │       ├── cleaning_service.py
+│   │       ├── data_service.py
+│   │       ├── db_persistence.py
+│   │       ├── fuel_price_service.py
+│   │       ├── job_store.py
+│   │       ├── optimizer_service.py
+│   │       ├── road_routing.py
 │   │       └── traffic_factor_dataset_builder.py
 │   │
 │   ├── config/
 │   │   ├── settings.py         # Lee .env y expone configuración global
+│   │   ├── .env                # Variables de entorno (NO se sube a git)
 │   │   └── .env.example        # Plantilla de variables de entorno
 │   │
 │   ├── database/
 │   │   ├── connection.py       # Engine SQLAlchemy + get_session()
 │   │   ├── models.py           # Modelos ORM (Usuario, Producto, Venta, Detalle)
-│   │   └── repositories/       # CRUD por tabla (sin lógica de negocio)
+│   │   └── repositories/       # CRUD por tabla
 │   │       ├── base_repository.py
 │   │       ├── usuario_repository.py
 │   │       ├── producto_repository.py
 │   │       ├── venta_repository.py
 │   │       └── detalle_repository.py
 │   │
-│   └── frontend/               # Interfaz de usuario PyQt6
-│       ├── app.py              # QMainWindow + navegación entre pantallas
-│       ├── views/
-│       │   ├── login_view.py   # Pantalla de login, registro y reset de contraseña
-│       │   └── main_view.py    # Workspace principal (optimizer, data hub, resultados)
-│       ├── widgets/            # Componentes visuales reutilizables
-│       ├── resources/          # Estilos QSS y tema de colores
-│       └── workers/            # QThreads para operaciones largas (sin bloquear UI)
-│           ├── upload_worker.py      # Subida de CSVs al backend
-│           ├── request_worker.py     # Polling de jobs asincrónicos
-│           ├── data_hub_worker.py    # Carga del dashboard de datos
-│           ├── health_worker.py      # Verificación de conectividad con el backend
-│           └── progress_worker.py    # Polling de progreso de optimización
+│   ├── frontend/               # Interfaz de usuario PyQt6
+│   │   ├── app.py              # QMainWindow + navegación entre pantallas
+│   │   ├── views/
+│   │   │   ├── login_view.py
+│   │   │   └── main_view.py
+│   │   ├── widgets/
+│   │   │   └── components.py
+│   │   ├── resources/
+│   │   │   └── styles/
+│   │   └── workers/
+│   │       ├── health_worker.py
+│   │       ├── upload_worker.py
+│   │       ├── data_hub_worker.py
+│   │       ├── progress_worker.py
+│   │       └── request_worker.py
+│   │
+│   └── __tests__/              # Suite de pruebas
+│       ├── conftest.py
+│       ├── unit/
+│       ├── integration/
+│       ├── stress/
+│       └── results/            # Reportes generados por pytest y locust
 │
 ├── RAW_DATA/                   # Datasets de ejemplo (datos ficticios de Santiago)
-│   ├── catalogo_productos.csv  # 900 productos con dimensiones y pesos
-│   ├── ventas_ficticias_santiago_202612.csv  # 4180 órdenes de venta
-│   └── detalle_pedidos_santiago_202612.xlsx  # Detalle de líneas por orden
-│
-├── CLEAN_DATA/                 # Versiones pre-limpias de los datasets anteriores
-│   └── ...                     # Útiles para pruebas rápidas sin pasar por el pipeline
-│
-├── SCRIPTS/                    # Notebooks y scripts de exploración y análisis
-│   ├── Explorar.ipynb          # Análisis exploratorio de los datos
-│   └── update_coords.py        # Script auxiliar para actualizar coordenadas en BD
-│
-├── cache/                      # Caché de resultados de OSRM (generado automáticamente)
+├── CLEAN_DATA/                 # Versiones pre-limpias de los datasets
+├── SCRIPTS/                    # Notebooks y scripts de exploración
+├── Pruebas/                    # Scripts de pruebas de instancias VRP (benchmark)
+├── cache/                      # Caché de resultados OSRM (generado automáticamente)
 ├── geocache.json               # Caché persistente de geocodificación Nominatim
-├── TODO.md                     # Deuda técnica y trabajo pendiente
-└── requirements.txt            # Dependencias mínimas (sin PyQt6, solo backend)
+└── TODO.md                     # Deuda técnica y trabajo pendiente
 ```
 
 ### Carpetas que no forman parte del flujo principal
@@ -100,11 +104,11 @@ Capstone analytics/
 |---|---|
 | `SCRIPTS/` | Exploración de datos durante el desarrollo. No es parte de la app. |
 | `RAW_DATA/` | Datasets ficticios para pruebas. Se pueden subir directamente desde la app. |
-| `CLEAN_DATA/` | Versiones ya limpias de los mismos datos, para saltar el pipeline de limpieza en pruebas. |
-| `cache/` | Caché automático de respuestas de OSRM para no recalcular matrices de distancia. |
-| `geocache.json` | Caché de geocodificación. Evita llamadas repetidas a Nominatim para las mismas direcciones. |
-| `requirements.txt` (raíz) | Dependencias mínimas del backend, sin Qt. Mantenido para entornos de servidor. |
-| `app/backend/models/Modelo*.py` | Formulaciones exactas con Gurobi. Solo funcionan con licencia de Gurobi instalada. El optimizador activo usa las heurísticas en `routing/`. |
+| `CLEAN_DATA/` | Versiones ya limpias, para saltar el pipeline de limpieza en pruebas. |
+| `Pruebas/` | Scripts de benchmarking de instancias VRP (local search vs tabu search). |
+| `cache/` | Caché automático de respuestas OSRM para no recalcular matrices de distancia. |
+| `geocache.json` | Caché de geocodificación. Evita llamadas repetidas a Nominatim. |
+| `app/backend/models/Modelo*.py` | Formulaciones exactas con Gurobi. Solo funcionan con licencia instalada. |
 
 ---
 
@@ -112,18 +116,23 @@ Capstone analytics/
 
 ```
 Frontend (PyQt6)
-    │  HTTP requests
+    │  HTTP requests (localhost:8000)
     ▼
-FastAPI Router (puerto 8000)
+FastAPI Router
     │
-    ├── Auth Service       → bcrypt + MySQL
-    ├── Cleaning Service   → normalización CSV + geocodificación Nominatim
-    ├── Optimizer Service  → ALNS + matrices OSRM
-    ├── DB Persistence     → SQLAlchemy + MySQL
-    └── Road Routing       → OSRM local (matrices distancia/tiempo)
+    ├── Auth Service        → bcrypt + MySQL (usuarios)
+    ├── Cleaning Service    → normalización CSV + geocodificación Nominatim
+    ├── Data Service        → lectura/escritura de órdenes y productos
+    ├── Optimizer Service   → ALNS + matrices OSRM → mapa folium
+    ├── DB Persistence      → SQLAlchemy + MySQL
+    ├── Road Routing        → OSRM local (matrices distancia/tiempo)
+    ├── Fuel Price Service  → precios CNE en tiempo real
+    └── Job Store           → tracking de jobs asincrónicos (en memoria)
 ```
 
 **Regla de capas:** el frontend nunca accede a la base de datos directamente. Las operaciones largas (optimización, subida de archivos) corren en `QThread` workers para no bloquear la interfaz.
+
+Ver también: [app/backend/README.md](app/backend/README.md) · [app/frontend/README.md](app/frontend/README.md)
 
 ---
 
@@ -166,34 +175,28 @@ Encoding: **UTF-8** o **Latin-1** (detectado automáticamente).
 
 Acepta **CSV** o **XLSX**.
 
-| Columna | Tipo | Descripción | Ejemplo |
-|---|---|---|---|
-| `Número de Orden` | texto | Debe coincidir con un orden en ventas | `ORD-TEST-000001` |
-| `SKU` | texto | Código de producto del catálogo | `SKU-00229` |
-| `Descripción SKU` | texto | Nombre del producto | `Notebook 15 pulgadas` |
-| `Cantidad` | entero | Unidades del producto en esta orden | `5` |
-| `Largo_cm` | decimal | Largo unitario en cm | `41.0` |
-| `Ancho_cm` | decimal | Ancho unitario en cm | `29.5` |
-| `Alto_cm` | decimal | Alto unitario en cm | `5.8` |
-| `Volumen_unitario_m3` | decimal | Volumen de una unidad en m³ | `0.007015` |
-| `Peso_unitario_kg` | decimal | Peso de una unidad en kg | `2.002` |
-| `Volumen_total_m3` | decimal | `Volumen_unitario_m3 × Cantidad` | `0.035075` |
-| `Peso_total_kg` | decimal | `Peso_unitario_kg × Cantidad` | `10.010` |
+| Columna | Tipo | Descripción |
+|---|---|---|
+| `Número de Orden` | texto | Debe coincidir con una orden en ventas |
+| `SKU` | texto | Código de producto del catálogo |
+| `Cantidad` | entero | Unidades del producto en esta orden |
+
+> Las columnas de dimensiones y pesos se completan automáticamente cruzando con el catálogo.
 
 ---
 
 ### CSV de Catálogo (`catalogo`)
 
-| Columna | Tipo | Descripción | Ejemplo |
-|---|---|---|---|
-| `SKU` | texto | Código único del producto (max 10 chars) | `SKU-00229` |
-| `Descripción SKU` | texto | Nombre del producto | `Notebook 15 pulgadas` |
-| `Largo_cm` | decimal | Largo en cm | `41.0` |
-| `Ancho_cm` | decimal | Ancho en cm | `29.5` |
-| `Alto_cm` | decimal | Alto en cm | `5.8` |
-| `Volumen_unitario_m3` | decimal | Volumen en m³ | `0.007015` |
-| `Peso_unitario_kg` | decimal | Peso en kg | `2.002` |
-| `Tipo_embalaje` | texto | Tipo de embalaje | `A granel` / `Embalaje personalizado` |
+| Columna | Tipo | Descripción |
+|---|---|---|
+| `SKU` | texto | Código único del producto (max 10 chars) |
+| `Descripcion SKU` | texto | Nombre del producto |
+| `Largo_cm` | decimal | Largo en cm |
+| `Ancho_cm` | decimal | Ancho en cm |
+| `Alto_cm` | decimal | Alto en cm |
+| `Volumen_unitario_m3` | decimal | Volumen en m³ |
+| `Peso_unitario_kg` | decimal | Peso en kg |
+| `Tipo_embalaje` | texto | Tipo de embalaje |
 
 > SKUs ya existentes para el mismo usuario son ignorados (no se sobreescriben).
 
@@ -205,7 +208,7 @@ Acepta **CSV** o **XLSX**.
 
 - Python 3.11+
 - MySQL 8.0+
-- Docker Desktop (para Nominatim y OSRM)
+- Docker (para Nominatim y OSRM)
 
 ---
 
@@ -219,19 +222,17 @@ git checkout saas-integration
 
 ---
 
-### 2. Entorno virtual Python (recomendado)
+### 2. Entorno virtual Python
 
 ```bash
-python -m venv CapstoneEnv
+python -m venv venv
 
 # Windows
-CapstoneEnv\Scripts\activate
+venv\Scripts\activate
 
 # macOS / Linux
-source CapstoneEnv/bin/activate
+source venv/bin/activate
 ```
-
-También puedes instalar las dependencias en tu entorno global si prefieres, saltándote la creación del venv.
 
 ---
 
@@ -243,119 +244,69 @@ pip install -r app/requirements.txt
 
 ---
 
-### 4. Base de datos MySQL
-
-Crear la base de datos y las tablas con la siguiente estructura mínima:
-
-```sql
-CREATE DATABASE capstone_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE capstone_db;
-
-CREATE TABLE usuarios (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    fecha_creacion DATETIME,
-    username VARCHAR(50) NOT NULL UNIQUE,
-    email VARCHAR(100) NOT NULL UNIQUE,
-    password VARCHAR(100) NOT NULL,
-    tipo_usuario VARCHAR(255) NOT NULL DEFAULT 'Free'
-);
-
-CREATE TABLE catalogo (
-    SKU VARCHAR(10) NOT NULL,
-    `Descripción SKU` TEXT,
-    Largo_cm DOUBLE,
-    Ancho_cm DOUBLE,
-    Alto_cm DOUBLE,
-    Volumen_unitario_m3 DOUBLE,
-    Peso_unitario_kg DOUBLE,
-    Tipo_embalaje TEXT,
-    id_usuario INT NOT NULL,
-    PRIMARY KEY (SKU, id_usuario)
-);
-
-CREATE TABLE ventas (
-    `Número de Orden` VARCHAR(50) NOT NULL,
-    RUT TEXT,
-    `Nombre cliente` TEXT,
-    `Dirección cliente` TEXT,
-    Comuna TEXT,
-    `Fecha de Pedido` DATE,
-    Estado VARCHAR(15) DEFAULT 'Pendiente',
-    `Monto Pedido` BIGINT,
-    `Fecha de despacho Solicitada` DATE,
-    Latitud FLOAT,
-    Longitud FLOAT,
-    id_usuario INT NOT NULL,
-    PRIMARY KEY (`Número de Orden`, id_usuario)
-);
-
-CREATE TABLE detalle (
-    `Número de Orden` VARCHAR(50) NOT NULL,
-    SKU VARCHAR(10) NOT NULL,
-    `Descripción SKU` TEXT,
-    Cantidad BIGINT,
-    Largo_cm DOUBLE,
-    Ancho_cm DOUBLE,
-    Alto_cm DOUBLE,
-    Volumen_unitario_m3 DOUBLE,
-    Peso_unitario_kg DOUBLE,
-    Volumen_total_m3 DOUBLE,
-    Peso_total_kg DOUBLE,
-    id_usuario INT NOT NULL,
-    PRIMARY KEY (`Número de Orden`, SKU, id_usuario)
-);
-```
-
----
-
-### 5. Variables de entorno
+### 4. Variables de entorno
 
 Copiar la plantilla y completar con tus credenciales:
 
 ```bash
-copy app\config\.env.example app\.env   # Windows
-cp app/config/.env.example app/.env     # macOS / Linux
+cp app/config/.env.example app/config/.env   # macOS / Linux
+copy app\config\.env.example app\config\.env  # Windows
 ```
 
-Editar `app/.env`:
+Editar `app/config/.env`:
 
 ```env
 DB_HOST=localhost
 DB_PORT=3306
-DB_USER=root
+DB_USER=tu_usuario
 DB_PASSWORD=tu_contraseña
 DB_NAME=capstone_db
 
 APP_NAME=Capstone Analytics
 DEBUG=True
 
-NOMINATIM_URL=http://localhost:8088
 OSRM_LOCAL_BASE_URL=http://127.0.0.1:5010
-OSRM_DATASET_PATH=C:/osrm_data/chile-latest.osrm
-OSRM_LOCAL_AUTOSTART=false
+```
+
+---
+
+### 5. Base de datos MySQL
+
+Crear la base de datos (solo la primera vez):
+
+```sql
+CREATE DATABASE capstone_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+```
+
+Crear las tablas con SQLAlchemy (desde `app/`):
+
+```bash
+cd app
+python -c "from database.models import Base; from database.connection import engine; Base.metadata.create_all(engine); print('Tablas creadas')"
 ```
 
 ---
 
 ## Servicios externos requeridos
 
-La app necesita dos servicios corriendo en Docker para funcionar completamente.
+La app necesita dos servicios en Docker para funcionar completamente.
 
 ### Nominatim (geocodificación de direcciones)
 
-Convierte texto de dirección en coordenadas (latitud/longitud).
+**Primera vez** (~20-30 min, descarga el índice de Chile):
 
-**Primera vez** (descarga y construye el índice de Chile, ~20-30 min):
-
-```powershell
-docker run -it -e "PBF_URL=https://download.geofabrik.de/south-america/chile-latest.osm.pbf" -e "REPLICATION_URL=https://download.geofabrik.de/south-america/chile-updates/" -p 8088:8080 --name nominatim mediagis/nominatim:4.4
+```bash
+docker run -it \
+  -e PBF_URL=https://download.geofabrik.de/south-america/chile-latest.osm.pbf \
+  -e REPLICATION_URL=https://download.geofabrik.de/south-america/chile-updates/ \
+  -p 8088:8080 --name nominatim \
+  mediagis/nominatim:4.4
 ```
 
 Esperar hasta ver `Server started` en los logs.
 
 **Usos posteriores:**
-
-```powershell
+```bash
 docker start nominatim
 ```
 
@@ -363,60 +314,61 @@ docker start nominatim
 
 ### OSRM (routing por calles reales)
 
-Calcula rutas reales por calles entre coordenadas (necesario para que el mapa muestre calles, no líneas rectas).
+**Primera vez** — crear carpeta y descargar el PBF:
 
-**Primera vez** — crear carpeta de datos y descargar el PBF:
-
-```powershell
-mkdir C:\osrm_data
-Invoke-WebRequest -Uri "https://download.geofabrik.de/south-america/chile-latest.osm.pbf" -OutFile "C:\osrm_data\chile-latest.osm.pbf"
+```bash
+# Linux / macOS
+mkdir -p ~/osrm_data
+wget -P ~/osrm_data https://download.geofabrik.de/south-america/chile-latest.osm.pbf
 ```
 
-**Preprocesar** (una sola vez, ~5-10 min en total):
+**Preprocesar** (una sola vez, ~5-10 min):
 
-```powershell
-docker run -t -v "C:/osrm_data:/data" ghcr.io/project-osrm/osrm-backend osrm-extract -p /opt/car.lua /data/chile-latest.osm.pbf
+```bash
+docker run -t -v ~/osrm_data:/data ghcr.io/project-osrm/osrm-backend \
+  osrm-extract -p /opt/car.lua /data/chile-latest.osm.pbf
 
-docker run -t -v "C:/osrm_data:/data" ghcr.io/project-osrm/osrm-backend osrm-partition /data/chile-latest.osrm
+docker run -t -v ~/osrm_data:/data ghcr.io/project-osrm/osrm-backend \
+  osrm-partition /data/chile-latest.osrm
 
-docker run -t -v "C:/osrm_data:/data" ghcr.io/project-osrm/osrm-backend osrm-customize /data/chile-latest.osrm
+docker run -t -v ~/osrm_data:/data ghcr.io/project-osrm/osrm-backend \
+  osrm-customize /data/chile-latest.osrm
 ```
 
-**Levantar el servidor** (primera vez crea el contenedor):
+**Levantar el servidor:**
 
-```powershell
-docker run -d -p 5010:5000 -v "C:/osrm_data:/data" --name osrm ghcr.io/project-osrm/osrm-backend osrm-routed --algorithm mld /data/chile-latest.osrm
+```bash
+docker run -d -p 5010:5000 -v ~/osrm_data:/data \
+  --name osrm ghcr.io/project-osrm/osrm-backend \
+  osrm-routed --algorithm mld /data/chile-latest.osrm
 ```
 
 **Usos posteriores:**
-
-```powershell
+```bash
 docker start osrm
 ```
 
 ---
 
-### Verificar que ambos servicios están activos
+### Verificar servicios activos
 
-```powershell
+```bash
 docker ps
+# Deben aparecer: nominatim (8088) y osrm (5010)
 ```
-
-Deben aparecer `nominatim` (puerto 8088) y `osrm` (puerto 5010).
 
 ---
 
 ## Cómo ejecutar la app
 
-Cada vez que quieras usar la app, en este orden:
-
-```powershell
+```bash
 # 1. Levantar servicios Docker
 docker start nominatim
 docker start osrm
 
-# 2. Activar el entorno virtual (si usas uno)
-CapstoneEnv\Scripts\activate
+# 2. Activar entorno virtual
+source venv/bin/activate        # macOS / Linux
+venv\Scripts\activate           # Windows
 
 # 3. Iniciar el backend (terminal 1)
 cd app
@@ -439,3 +391,27 @@ python main.py
    - Número de camiones disponibles
    - Parámetros de ventana horaria y capacidad
 5. Ejecutar la optimización. El sistema geocodifica, calcula matrices de distancia vía OSRM y retorna rutas por día con mapa interactivo.
+
+---
+
+## Tests
+
+Ver [app/__tests__/README.md](app/__tests__/README.md) para instrucciones completas.
+
+```bash
+cd app
+
+# Pruebas unitarias (sin red ni DB)
+pytest __tests__/unit/ -v
+
+# Pruebas de integración (requiere MySQL)
+pytest __tests__/integration/ -v
+
+# Benchmarks de rendimiento
+pytest __tests__/stress/test_benchmarks.py -v --benchmark-sort=mean
+
+# Todo (excepto stress)
+pytest -v -m "not stress"
+```
+
+Los resultados se guardan en `app/__tests__/results/`.
