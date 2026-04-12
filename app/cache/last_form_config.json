@@ -1,10 +1,10 @@
 {
-  "num_trucks": "15",
-  "depot_query": "Av. Irarrazabal 2501",
-  "validated_depot_query": "Av. Irarrazabal 2501",
+  "num_trucks": "5",
+  "depot_query": "Av Libertador Bernardo o'higgins 115",
+  "validated_depot_query": "Av Libertador Bernardo o'higgins 115",
   "validated_depot_coords": [
-    -33.548073,
-    -70.626071
+    -33.4374787,
+    -70.6368867
   ],
   "api_url": "http://localhost:8000/optimize",
   "runtime": "",
@@ -13,10 +13,10 @@
   "km_per_liter": "6.4",
   "fuel_type": "diesel",
   "truck_fixed_cost_clp": "20000",
-  "diesel_price_clp": "1546",
+  "diesel_price_clp": "1547",
   "space_per_truck": "9",
   "weight_per_truck": "2000",
   "deliveries_per_day": "150",
-  "ventas_path": "",
-  "detalle_path": ""
+  "ventas_path": "/home/joaquin/universidad/ramos/capstone_analytics/Capstone/RAW_DATA/ventas_ficticias_santiago_202612.csv",
+  "detalle_path": "/home/joaquin/universidad/ramos/capstone_analytics/Capstone/RAW_DATA/detalle_pedidos_santiago_202612.xlsx"
 }

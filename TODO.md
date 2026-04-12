@@ -32,6 +32,13 @@
 
 ## Pruebas unitarias e integrales
 
-- [ ] Implementar pruebas unitarias para los servicios
-- [ ] Implementar pruebas integrales para la API
-- [ ] Implementar pruebas de integración para la API
+- [x] Implementar pruebas unitarias para los servicios
+- [x] Implementar pruebas integrales para la API
+- [x] Implementar pruebas de integración para la API
+
+## Cambios que hay que hacer (antes de la presentación final)
+
+- [ ] Perfeccionar la UI. Actualmente los textos en los botones se ven cortados, haciendo que sea muy complicado de usar.
+- [ ] Quitar el Roadmap, agregar lo razonable y quitar lo que no lo sea.
+- [ ] Quitar el botón de "Work in Progress" de la UI. (si no lo tenemos, no necesitamos mostrarlo. podemos trabajarlo en una rama del git)
+- [ ] Quitar el input para poner el link de la API. (es un detalle técnico que no aporta nada al usuario)
