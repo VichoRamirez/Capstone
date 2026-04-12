@@ -124,7 +124,7 @@ python -c "from database.models import Base; from database.connection import eng
 └─────────────────────────────┘
 ```
 
-> Las relaciones entre `id_usuario` y `usuarios.id` son **lógicas** — no hay `FOREIGN KEY` declarada en el esquema SQL. El aislamiento por usuario se garantiza a nivel de aplicación filtrando siempre por `id_usuario` en las consultas.
+> Las relaciones entre `id_usuario` y `usuarios.id` están declaradas como `FOREIGN KEY ... ON DELETE CASCADE` en las tres tablas (`fk_catalogo_usuario`, `fk_ventas_usuario`, `fk_detalle_usuario`). Eliminar un usuario borra en cascada todos sus datos.
 
 ---
 
@@ -238,9 +238,17 @@ Toda tabla de datos (`catalogo`, `ventas`, `detalle`) incluye `id_usuario` como 
 - No existe colisión entre órdenes de distintos usuarios con el mismo número.
 - Todas las consultas deben filtrar por `id_usuario` — hacerlo a nivel de repositorio, nunca omitirlo.
 
-### Sin FK declaradas
+### FKs declaradas con CASCADE
 
-Las relaciones `id_usuario → usuarios.id` y `detalle.Número de Orden → ventas.Número de Orden` son **lógicas**: existen como convención de código pero no como `FOREIGN KEY` en el DDL. Esto es intencional para simplificar el upsert masivo de CSVs sin gestionar dependencias de orden de inserción.
+Las tres tablas de datos tienen `FOREIGN KEY (id_usuario) REFERENCES usuarios(id) ON DELETE CASCADE`:
+
+| Constraint | Tabla | Comportamiento |
+|---|---|---|
+| `fk_catalogo_usuario` | `catalogo` | Al borrar un usuario, se eliminan todos sus productos |
+| `fk_ventas_usuario` | `ventas` | Al borrar un usuario, se eliminan todas sus órdenes |
+| `fk_detalle_usuario` | `detalle` | Al borrar un usuario, se eliminan todas sus líneas de detalle |
+
+La relación `detalle.Número de Orden → ventas.Número de Orden` sigue siendo **lógica** (sin FK declarada), para simplificar el upsert masivo de CSVs sin depender del orden de inserción.
 
 ### Join entre `ventas` y `detalle`
 

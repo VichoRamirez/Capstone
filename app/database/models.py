@@ -1,5 +1,5 @@
 from datetime import datetime
-from sqlalchemy import Column, Integer, String, Float, Date, DateTime, BigInteger, Text, PrimaryKeyConstraint
+from sqlalchemy import Column, Integer, String, Float, Date, DateTime, BigInteger, Text, PrimaryKeyConstraint, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
@@ -15,7 +15,7 @@ class Usuario(Base):
 
 class Producto(Base):
     __tablename__ = "catalogo"
-    id_usuario = Column(Integer)
+    id_usuario = Column(Integer, ForeignKey("usuarios.id", ondelete="CASCADE"))
     sku = Column("SKU", String(10))
     descripcion_sku = Column("Descripción SKU", Text)
     largo_cm = Column("Largo_cm", Float)
@@ -31,7 +31,7 @@ class Producto(Base):
 
 class Venta(Base):
     __tablename__ = "ventas"
-    id_usuario = Column(Integer)
+    id_usuario = Column(Integer, ForeignKey("usuarios.id", ondelete="CASCADE"))
     numero_orden = Column("Número de Orden", String(50))
     rut = Column("RUT", Text)
     nombre_cliente = Column("Nombre cliente", Text)
@@ -50,7 +50,7 @@ class Venta(Base):
 
 class Detalle(Base):
     __tablename__ = "detalle"
-    id_usuario = Column(Integer)
+    id_usuario = Column(Integer, ForeignKey("usuarios.id", ondelete="CASCADE"))
     numero_orden = Column("Número de Orden", String(50))
     sku = Column("SKU", String(10))
     descripcion_sku = Column("Descripción SKU", Text)
