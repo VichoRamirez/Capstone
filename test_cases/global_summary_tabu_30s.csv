@@ -1,0 +1,23 @@
+Metric,Value
+Days processed,35
+Days with errors,0
+Orders total,"4,180"
+Covered total,"2,740"
+Uncovered total,"1,440"
+Coverage rate,65.55%
+Trucks peak (day),13
+Cost total,"9,370,080.77"
+Cost average / day,"267,716.59"
+Failed addresses (geocoding),0
+Cleaning errors (total),0
+Execution total,1043.65 s
+Phase - cleaning+geocoding,0.16 s
+Phase - detalle merge,0.00 s
+Phase - batch build,0.04 s
+Phase - optimization days,1043.45 s
+Phase - summary,0.00 s
+Optimization - matrix generation,20.02 s
+Optimization - model preparation,0.00 s
+Optimization - solver,1000.23 s
+Optimization - postprocess,0.00 s
+Optimization - output generation,23.13 s

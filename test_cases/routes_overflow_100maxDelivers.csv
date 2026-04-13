@@ -1,0 +1,1241 @@
+Camión,Número de Orden,RUT,Nombre cliente,Dirección cliente,Comuna,Hora estimada
+Truck-1 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-1 · Trip-1,ORD-CL-202612-004067,14.738.270-9,Cliente Nuevo 14738270,"Calle Arturo Prat 3533, Santiago, Chile",Providencia,09:12
+Truck-1 · Trip-1,ORD-CL-202612-003495,5.433.342-8,Cliente 5433342,"Calle Arturo Prat 4641, Santiago, Chile",La Reina,09:26
+Truck-1 · Trip-1,ORD-CL-202612-003236,10.595.944-8,Cliente Nuevo 10595944,"Calle Arturo Prat 9278, Santiago, Chile",Santiago,09:52
+Truck-1 · Trip-1,ORD-CL-202612-003845,5.923.393-9,Cliente 5923393,"Calle Arturo Prat 2957, Santiago, Chile",Santiago,10:17
+Truck-1 · Trip-1,ORD-CL-202612-003368,5.098.173-6,Cliente 5098173,"Calle Arturo Prat 9979, Santiago, Chile",Providencia,10:39
+Truck-1 · Trip-1,ORD-CL-202612-003739,19.429.781-7,Cliente 19429781,"Calle Arturo Prat 6209, Santiago, Chile",Independencia,11:00
+Truck-1 · Trip-1,ORD-CL-202612-003705,13.676.688-5,Cliente Nuevo 13676688,"Calle Arturo Prat 1559, Santiago, Chile",Recoleta,11:19
+Truck-1 · Trip-1,ORD-CL-202612-004005,6.843.079-6,Cliente Nuevo 6843079,"Calle Arturo Prat 1596, Santiago, Chile",Independencia,12:02
+Truck-1 · Trip-1,ORD-CL-202612-003286,17.984.108-4,Cliente 17984108,"Calle Arturo Prat 6826, Santiago, Chile",Santiago,12:18
+Truck-1 · Trip-1,ORD-CL-202612-003616,7.995.605-2,Cliente Nuevo 7995605,"Avenida La Florida 4780, Santiago, Chile",Santiago,13:08
+Truck-1 · Trip-1,-,-,-,Centro de Distribución,-,13:59
+Truck-1 · Trip-2,-,-,-,Centro de Distribución,-,14:59
+Truck-1 · Trip-2,ORD-CL-202612-003777,8.194.807-7,Cliente Nuevo 8194807,"Avenida Las Condes 3925, Santiago, Chile",Santiago,15:22
+Truck-1 · Trip-2,-,-,-,Centro de Distribución,-,16:12
+Truck-2 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-2 · Trip-1,ORD-CL-202612-004109,22.281.230-0,Cliente 22281230,"Avenida Libertador Bernardo O'Higgins 5480, Santiago, Chile",Recoleta,09:07
+Truck-2 · Trip-1,ORD-CL-202612-003388,14.680.199-8,Cliente Nuevo 14680199,"Avenida Libertador Bernardo O'Higgins 6552, Santiago, Chile",Santiago,09:19
+Truck-2 · Trip-1,ORD-CL-202612-003305,19.109.601-9,Cliente Nuevo 19109601,"Avenida Libertador Bernardo O'Higgins 3892, Santiago, Chile",San Miguel,09:39
+Truck-2 · Trip-1,ORD-CL-202612-003574,17.620.980-6,Cliente Nuevo 17620980,"Avenida Departamental 2987, Santiago, Chile",Vitacura,10:20
+Truck-2 · Trip-1,ORD-CL-202612-003292,17.620.980-6,Cliente Nuevo 17620980,"Avenida Departamental 2987, Santiago, Chile",Vitacura,10:39
+Truck-2 · Trip-1,ORD-CL-202612-003733,19.045.111-0,Cliente 19045111,"Avenida Macul 5144, Santiago, Chile",Providencia,11:03
+Truck-2 · Trip-1,ORD-CL-202612-004062,7.135.296-7,Cliente Nuevo 7135296,"Avenida Américo Vespucio 4295, Santiago, Chile",La Reina,11:27
+Truck-2 · Trip-1,ORD-CL-202612-003596,19.442.394-3,Cliente 19442394,"Avenida Américo Vespucio 3407, Santiago, Chile",Recoleta,11:52
+Truck-2 · Trip-1,ORD-CL-202612-003892,8.336.079-1,Cliente 8336079,"Avenida Américo Vespucio 2795, Santiago, Chile",Santiago,12:14
+Truck-2 · Trip-1,ORD-CL-202612-003822,7.135.296-7,Cliente Nuevo 7135296,"Avenida Américo Vespucio 4295, Santiago, Chile",La Reina,12:35
+Truck-2 · Trip-1,ORD-CL-202612-004146,19.599.888-5,Cliente 19599888,"Avenida Américo Vespucio 4422, Santiago, Chile",Providencia,12:58
+Truck-2 · Trip-1,ORD-CL-202612-003718,16.394.992-7,Cliente Nuevo 16394992,"Avenida Américo Vespucio 9118, Santiago, Chile",Santiago,13:18
+Truck-2 · Trip-1,-,-,-,Centro de Distribución,-,13:58
+Truck-2 · Trip-2,-,-,-,Centro de Distribución,-,14:58
+Truck-2 · Trip-2,ORD-CL-202612-004160,15.682.091-5,Cliente 15682091,"Avenida Tobalaba 3402, Santiago, Chile",Santiago,15:23
+Truck-2 · Trip-2,-,-,-,Centro de Distribución,-,16:11
+Truck-3 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-3 · Trip-1,ORD-CL-202612-003626,13.810.979-2,Cliente Nuevo 13810979,"Avenida Kennedy 7247, Santiago, Chile",Santiago,09:21
+Truck-3 · Trip-1,ORD-CL-202612-003583,8.823.811-3,Cliente 8823811,"Avenida Kennedy 7331, Santiago, Chile",Independencia,09:45
+Truck-3 · Trip-1,ORD-CL-202612-004020,19.737.878-6,Cliente 19737878,"Avenida Vitacura 7559, Santiago, Chile",Estación Central,10:08
+Truck-3 · Trip-1,ORD-CL-202612-003983,17.307.899-4,Cliente Nuevo 17307899,"Avenida Vitacura 7328, Santiago, Chile",La Reina,10:30
+Truck-3 · Trip-1,ORD-CL-202612-004049,10.370.382-5,Cliente 10370382,"Avenida Vitacura 7462, Santiago, Chile",Vitacura,10:53
+Truck-3 · Trip-1,ORD-CL-202612-003639,5.518.697-7,Cliente Nuevo 5518697,"Avenida Vitacura 9543, Santiago, Chile",Peñalolén,11:15
+Truck-3 · Trip-1,ORD-CL-202612-003508,13.755.709-8,Cliente 13755709,"Avenida Kennedy 9990, Santiago, Chile",Santiago,11:38
+Truck-3 · Trip-1,ORD-CL-202612-003391,12.153.457-7,Cliente 12153457,"Avenida Kennedy 9416, Santiago, Chile",Las Condes,11:58
+Truck-3 · Trip-1,ORD-CL-202612-003518,9.965.545-2,Cliente Nuevo 9965545,"Avenida Kennedy 7678, Santiago, Chile",Recoleta,12:20
+Truck-3 · Trip-1,ORD-CL-202612-003791,20.056.956-6,Cliente Nuevo 20056956,"Avenida Las Condes 7569, Santiago, Chile",Quinta Normal,12:51
+Truck-3 · Trip-1,ORD-CL-202612-003353,8.508.000-3,Cliente 8508000,"Avenida Las Condes 3917, Santiago, Chile",Puente Alto,13:11
+Truck-3 · Trip-1,-,-,-,Centro de Distribución,-,13:55
+Truck-3 · Trip-2,-,-,-,Centro de Distribución,-,14:55
+Truck-3 · Trip-2,ORD-CL-202612-003749,5.992.398-0,Cliente Nuevo 5992398,"Avenida Tobalaba 135, Santiago, Chile",Peñalolén,15:19
+Truck-3 · Trip-2,-,-,-,Centro de Distribución,-,16:08
+Truck-4 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-4 · Trip-1,ORD-CL-202612-004030,19.429.781-7,Cliente 19429781,"Calle Arturo Prat 6209, Santiago, Chile",Independencia,09:12
+Truck-4 · Trip-1,ORD-CL-202612-003988,19.337.908-6,Cliente 19337908,"Avenida La Florida 2133, Santiago, Chile",Santiago,10:05
+Truck-4 · Trip-1,ORD-CL-202612-003863,9.146.692-9,Cliente Nuevo 9146692,"Avenida Pajaritos 2476, Santiago, Chile",Santiago,11:10
+Truck-4 · Trip-1,ORD-CL-202612-003373,10.772.894-6,Cliente 10772894,"Avenida Pajaritos 1016, Santiago, Chile",San Miguel,11:27
+Truck-4 · Trip-1,ORD-CL-202612-003220,17.517.740-0,Cliente 17517740,"Avenida Pajaritos 6127, Santiago, Chile",Independencia,11:52
+Truck-4 · Trip-1,ORD-CL-202612-003684,5.048.012-3,Cliente Nuevo 5048012,"Avenida Pajaritos 2168, Santiago, Chile",Santiago,12:15
+Truck-4 · Trip-1,ORD-CL-202612-003161,22.225.428-6,Cliente 22225428,"Avenida Pajaritos 5513, Santiago, Chile",Estación Central,12:38
+Truck-4 · Trip-1,ORD-CL-202612-003538,6.919.530-9,Cliente Nuevo 6919530,"Avenida Pajaritos 2670, Santiago, Chile",Peñalolén,13:00
+Truck-4 · Trip-1,ORD-CL-202612-003399,21.219.636-4,Cliente 21219636,"Avenida Pajaritos 3626, Santiago, Chile",Estación Central,13:21
+Truck-4 · Trip-1,-,-,-,Centro de Distribución,-,13:54
+Truck-4 · Trip-2,-,-,-,Centro de Distribución,-,14:54
+Truck-4 · Trip-2,ORD-CL-202612-003721,19.950.985-0,Cliente Nuevo 19950985,"Avenida Tobalaba 8544, Santiago, Chile",Quinta Normal,15:19
+Truck-4 · Trip-2,-,-,-,Centro de Distribución,-,16:08
+Truck-5 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-5 · Trip-1,ORD-CL-202612-004031,15.020.480-2,Cliente 15020480,"Avenida Santa Rosa 5687, Santiago, Chile",Independencia,09:11
+Truck-5 · Trip-1,ORD-CL-202612-003599,18.957.760-4,Cliente 18957760,"Avenida Santa Rosa 8851, Santiago, Chile",Recoleta,09:50
+Truck-5 · Trip-1,ORD-CL-202612-003613,15.894.431-2,Cliente Nuevo 15894431,"Avenida Santa Rosa 9656, Santiago, Chile",Providencia,10:08
+Truck-5 · Trip-1,ORD-CL-202612-003640,5.545.277-4,Cliente 5545277,"Avenida Santa Rosa 8250, Santiago, Chile",Santiago,10:35
+Truck-5 · Trip-1,ORD-CL-202612-004021,7.705.769-1,Cliente Nuevo 7705769,"Avenida Mapocho 6909, Santiago, Chile",Recoleta,11:18
+Truck-5 · Trip-1,ORD-CL-202612-003713,6.684.177-5,Cliente Nuevo 6684177,"Avenida La Florida 293, Santiago, Chile",Quinta Normal,12:09
+Truck-5 · Trip-1,ORD-CL-202612-003498,14.741.684-1,Cliente Nuevo 14741684,"Avenida Santa Rosa 1070, Santiago, Chile",La Reina,13:09
+Truck-5 · Trip-1,ORD-CL-202612-003762,10.236.670-0,Cliente Nuevo 10236670,"Avenida Matta 1259, Santiago, Chile",Estación Central,13:24
+Truck-5 · Trip-1,-,-,-,Centro de Distribución,-,13:53
+Truck-5 · Trip-2,-,-,-,Centro de Distribución,-,14:53
+Truck-5 · Trip-2,ORD-CL-202612-003561,21.692.042-6,Cliente 21692042,"Avenida Las Condes 1523, Santiago, Chile",Estación Central,15:16
+Truck-5 · Trip-2,-,-,-,Centro de Distribución,-,16:06
+Truck-6 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-6 · Trip-1,ORD-CL-202612-003927,16.600.649-5,Cliente 16600649,"Calle Arturo Prat 1385, Santiago, Chile",Peñalolén,09:12
+Truck-6 · Trip-1,ORD-CL-202612-003494,14.741.684-1,Cliente Nuevo 14741684,"Avenida Santa Rosa 1070, Santiago, Chile",La Reina,09:53
+Truck-6 · Trip-1,ORD-CL-202612-003814,20.486.869-7,Cliente Nuevo 20486869,"Avenida Matta 1017, Santiago, Chile",Santiago,10:19
+Truck-6 · Trip-1,ORD-CL-202612-004143,20.486.869-7,Cliente Nuevo 20486869,"Avenida Matta 1017, Santiago, Chile",Santiago,10:42
+Truck-6 · Trip-1,ORD-CL-202612-003590,22.759.622-2,Cliente 22759622,"Avenida Matta 5603, Santiago, Chile",La Reina,11:08
+Truck-6 · Trip-1,ORD-CL-202612-003677,20.080.354-5,Cliente Nuevo 20080354,"Avenida Matta 2150, Santiago, Chile",La Florida,11:30
+Truck-6 · Trip-1,ORD-CL-202612-003586,14.141.338-0,Cliente 14141338,"Avenida Matta 8464, Santiago, Chile",Independencia,11:50
+Truck-6 · Trip-1,ORD-CL-202612-003767,20.779.131-3,Cliente Nuevo 20779131,"Avenida Matta 4095, Santiago, Chile",Providencia,12:06
+Truck-6 · Trip-1,ORD-CL-202612-003989,21.208.203-8,Cliente Nuevo 21208203,"Avenida La Florida 476, Santiago, Chile",Lo Prado,13:00
+Truck-6 · Trip-1,-,-,-,Centro de Distribución,-,13:51
+Truck-6 · Trip-2,-,-,-,Centro de Distribución,-,14:51
+Truck-6 · Trip-2,ORD-CL-202612-003836,5.802.113-4,Cliente Nuevo 5802113,"Avenida Las Condes 599, Santiago, Chile",San Miguel,15:14
+Truck-6 · Trip-2,-,-,-,Centro de Distribución,-,16:04
+Truck-7 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-7 · Trip-1,ORD-CL-202612-003770,19.246.133-9,Cliente Nuevo 19246133,"Avenida Mapocho 4083, Santiago, Chile",La Florida,09:08
+Truck-7 · Trip-1,ORD-CL-202612-003850,17.096.618-7,Cliente Nuevo 17096618,"Avenida Mapocho 9761, Santiago, Chile",Puente Alto,09:44
+Truck-7 · Trip-1,ORD-CL-202612-003261,15.246.269-4,Cliente Nuevo 15246269,"Avenida Mapocho 8992, Santiago, Chile",Las Condes,10:03
+Truck-7 · Trip-1,ORD-CL-202612-003462,12.725.879-1,Cliente Nuevo 12725879,"Avenida Mapocho 6728, Santiago, Chile",Lo Prado,10:30
+Truck-7 · Trip-1,ORD-CL-202612-003570,17.096.618-7,Cliente Nuevo 17096618,"Avenida Mapocho 9761, Santiago, Chile",Puente Alto,10:54
+Truck-7 · Trip-1,ORD-CL-202612-003895,20.510.095-7,Cliente Nuevo 20510095,"Avenida Libertador Bernardo O'Higgins 5771, Santiago, Chile",Santiago,11:34
+Truck-7 · Trip-1,ORD-CL-202612-003998,8.164.057-6,Cliente Nuevo 8164057,"Avenida Libertador Bernardo O'Higgins 4908, Santiago, Chile",San Miguel,12:11
+Truck-7 · Trip-1,ORD-CL-202612-003722,10.563.003-7,Cliente 10563003,"Avenida La Florida 4625, Santiago, Chile",Santiago,13:04
+Truck-7 · Trip-1,-,-,-,Centro de Distribución,-,13:51
+Truck-7 · Trip-2,-,-,-,Centro de Distribución,-,14:51
+Truck-7 · Trip-2,ORD-CL-202612-003379,5.992.398-0,Cliente Nuevo 5992398,"Avenida Tobalaba 135, Santiago, Chile",Peñalolén,15:15
+Truck-7 · Trip-2,-,-,-,Centro de Distribución,-,16:04
+Truck-8 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-8 · Trip-1,ORD-CL-202612-004040,11.972.250-9,Cliente 11972250,"Avenida Mapocho 159, Santiago, Chile",Peñalolén,09:08
+Truck-8 · Trip-1,ORD-CL-202612-003774,15.290.073-0,Cliente 15290073,"Avenida La Florida 4055, Santiago, Chile",Puente Alto,10:06
+Truck-8 · Trip-1,ORD-CL-202612-003764,5.930.869-0,Cliente Nuevo 5930869,"Avenida Américo Vespucio 1323, Santiago, Chile",Vitacura,11:06
+Truck-8 · Trip-1,ORD-CL-202612-003853,5.930.869-0,Cliente Nuevo 5930869,"Avenida Américo Vespucio 1323, Santiago, Chile",Vitacura,11:23
+Truck-8 · Trip-1,ORD-CL-202612-004011,18.031.371-2,Cliente 18031371,"Avenida Mapocho 1103, Santiago, Chile",Santiago,12:10
+Truck-8 · Trip-1,ORD-CL-202612-004107,6.659.736-1,Cliente Nuevo 6659736,"Avenida Santa Rosa 1724, Santiago, Chile",Santiago,12:58
+Truck-8 · Trip-1,ORD-CL-202612-003584,20.636.095-7,Cliente Nuevo 20636095,"Avenida Santa Rosa 1408, Santiago, Chile",Santiago,13:13
+Truck-8 · Trip-1,-,-,-,Centro de Distribución,-,13:49
+Truck-8 · Trip-2,-,-,-,Centro de Distribución,-,14:49
+Truck-8 · Trip-2,ORD-CL-202612-003807,20.099.306-9,Cliente Nuevo 20099306,"Avenida Tobalaba 3141, Santiago, Chile",Vitacura,15:13
+Truck-8 · Trip-2,-,-,-,Centro de Distribución,-,16:03
+Truck-9 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-9 · Trip-1,ORD-CL-202612-003736,14.381.827-7,Cliente Nuevo 14381827,"Avenida Santa Rosa 3541, Santiago, Chile",La Reina,09:11
+Truck-9 · Trip-1,ORD-CL-202612-004033,5.035.931-6,Cliente Nuevo 5035931,"Avenida Mapocho 1329, Santiago, Chile",Santiago,09:53
+Truck-9 · Trip-1,ORD-CL-202612-003663,8.003.030-7,Cliente 8003030,"Avenida La Florida 9258, Santiago, Chile",Quinta Normal,10:49
+Truck-9 · Trip-1,ORD-CL-202612-003843,8.933.088-4,Cliente 8933088,"Avenida Santa Rosa 9972, Santiago, Chile",Providencia,11:46
+Truck-9 · Trip-1,ORD-CL-202612-003875,12.601.622-7,Cliente Nuevo 12601622,"Calle Arturo Prat 1061, Santiago, Chile",Quinta Normal,12:31
+Truck-9 · Trip-1,ORD-CL-202612-003708,18.986.593-2,Cliente 18986593,"Calle Arturo Prat 6969, Santiago, Chile",Recoleta,12:54
+Truck-9 · Trip-1,ORD-CL-202612-003786,21.420.574-4,Cliente Nuevo 21420574,"Calle Arturo Prat 7625, Santiago, Chile",Peñalolén,13:17
+Truck-9 · Trip-1,-,-,-,Centro de Distribución,-,13:47
+Truck-9 · Trip-2,-,-,-,Centro de Distribución,-,14:47
+Truck-9 · Trip-2,ORD-CL-202612-003906,13.452.771-8,Cliente Nuevo 13452771,"Avenida Las Condes 8964, Santiago, Chile",Las Condes,15:11
+Truck-9 · Trip-2,-,-,-,Centro de Distribución,-,16:01
+Truck-10 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-10 · Trip-1,ORD-CL-202612-003773,18.350.852-6,Cliente Nuevo 18350852,"Avenida Irarrázaval 9904, Santiago, Chile",Providencia,09:13
+Truck-10 · Trip-1,ORD-CL-202612-003625,13.892.478-4,Cliente 13892478,"Avenida Irarrázaval 8356, Santiago, Chile",Vitacura,09:31
+Truck-10 · Trip-1,ORD-CL-202612-004147,14.225.992-2,Cliente 14225992,"Avenida Mapocho 2999, Santiago, Chile",Santiago,10:01
+Truck-10 · Trip-1,ORD-CL-202612-004113,8.418.763-1,Cliente Nuevo 8418763,"Avenida Santa Rosa 9809, Santiago, Chile",Santiago,10:44
+Truck-10 · Trip-1,ORD-CL-202612-003982,17.094.471-5,Cliente 17094471,"Avenida Mapocho 4726, Santiago, Chile",Quinta Normal,11:22
+Truck-10 · Trip-1,ORD-CL-202612-003994,10.976.769-3,Cliente Nuevo 10976769,"Avenida Libertador Bernardo O'Higgins 8781, Santiago, Chile",Puente Alto,12:00
+Truck-10 · Trip-1,ORD-CL-202612-003458,17.313.403-1,Cliente 17313403,"Avenida La Florida 7678, Santiago, Chile",Santiago,12:55
+Truck-10 · Trip-1,-,-,-,Centro de Distribución,-,13:45
+Truck-10 · Trip-2,-,-,-,Centro de Distribución,-,14:45
+Truck-10 · Trip-2,ORD-CL-202612-003826,20.729.316-2,Cliente Nuevo 20729316,"Avenida Tobalaba 8803, Santiago, Chile",Santiago,15:09
+Truck-10 · Trip-2,-,-,-,Centro de Distribución,-,16:00
+Truck-11 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-11 · Trip-1,ORD-CL-202612-003766,13.826.430-9,Cliente Nuevo 13826430,"Avenida Mapocho 1366, Santiago, Chile",Recoleta,09:08
+Truck-11 · Trip-1,ORD-CL-202612-003298,21.662.568-4,Cliente 21662568,"Avenida Mapocho 5583, Santiago, Chile",Santiago,09:18
+Truck-11 · Trip-1,ORD-CL-202612-003547,11.792.673-0,Cliente Nuevo 11792673,"Avenida Mapocho 4034, Santiago, Chile",Quinta Normal,09:40
+Truck-11 · Trip-1,ORD-CL-202612-003516,19.708.724-3,Cliente Nuevo 19708724,"Avenida Mapocho 696, Santiago, Chile",Puente Alto,10:00
+Truck-11 · Trip-1,ORD-CL-202612-003952,18.647.027-7,Cliente Nuevo 18647027,"Avenida La Florida 593, Santiago, Chile",Vitacura,10:54
+Truck-11 · Trip-1,ORD-CL-202612-003185,8.417.738-8,Cliente Nuevo 8417738,"Avenida La Florida 5146, Santiago, Chile",Santiago,11:13
+Truck-11 · Trip-1,ORD-CL-202612-003593,6.281.296-9,Cliente 6281296,"Avenida La Florida 4209, Santiago, Chile",Lo Prado,11:38
+Truck-11 · Trip-1,ORD-CL-202612-003355,19.806.040-6,Cliente 19806040,"Avenida La Florida 1424, Santiago, Chile",Puente Alto,12:02
+Truck-11 · Trip-1,ORD-CL-202612-003549,14.638.216-6,Cliente Nuevo 14638216,"Avenida La Florida 1200, Santiago, Chile",Quinta Normal,12:23
+Truck-11 · Trip-1,ORD-CL-202612-003327,10.469.153-4,Cliente 10469153,"Avenida La Florida 9689, Santiago, Chile",Quinta Normal,12:42
+Truck-11 · Trip-1,ORD-CL-202612-003316,14.089.104-8,Cliente Nuevo 14089104,"Avenida La Florida 9439, Santiago, Chile",Santiago,13:02
+Truck-11 · Trip-1,-,-,-,Centro de Distribución,-,13:44
+Truck-11 · Trip-2,-,-,-,Centro de Distribución,-,14:44
+Truck-11 · Trip-2,ORD-CL-202612-003655,12.417.413-1,Cliente Nuevo 12417413,"Avenida Tobalaba 1937, Santiago, Chile",Recoleta,15:08
+Truck-11 · Trip-2,-,-,-,Centro de Distribución,-,15:59
+Truck-12 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-12 · Trip-1,ORD-CL-202612-003812,7.396.585-3,Cliente 7396585,"Avenida Departamental 2586, Santiago, Chile",Santiago,09:10
+Truck-12 · Trip-1,ORD-CL-202612-004172,14.775.032-2,Cliente 14775032,"Avenida Departamental 2113, Santiago, Chile",Estación Central,09:32
+Truck-12 · Trip-1,ORD-CL-202612-004007,19.886.703-0,Cliente 19886703,"Avenida Departamental 2215, Santiago, Chile",Providencia,09:51
+Truck-12 · Trip-1,ORD-CL-202612-004085,6.613.230-2,Cliente Nuevo 6613230,"Avenida Departamental 2164, Santiago, Chile",Lo Prado,10:20
+Truck-12 · Trip-1,ORD-CL-202612-003600,22.538.782-2,Cliente Nuevo 22538782,"Avenida Departamental 5058, Santiago, Chile",Providencia,10:40
+Truck-12 · Trip-1,ORD-CL-202612-003594,22.600.153-8,Cliente 22600153,"Avenida Departamental 6836, Santiago, Chile",Puente Alto,10:59
+Truck-12 · Trip-1,ORD-CL-202612-003653,22.920.011-9,Cliente Nuevo 22920011,"Avenida Departamental 4187, Santiago, Chile",Lo Prado,11:18
+Truck-12 · Trip-1,ORD-CL-202612-003779,8.346.407-5,Cliente Nuevo 8346407,"Avenida Mapocho 5003, Santiago, Chile",Santiago,11:58
+Truck-12 · Trip-1,ORD-CL-202612-003691,22.046.885-5,Cliente 22046885,"Avenida La Florida 3507, Santiago, Chile",Santiago,12:53
+Truck-12 · Trip-1,-,-,-,Centro de Distribución,-,13:41
+Truck-12 · Trip-2,-,-,-,Centro de Distribución,-,14:41
+Truck-12 · Trip-2,ORD-CL-202612-004081,19.141.286-4,Cliente Nuevo 19141286,"Avenida Tobalaba 454, Santiago, Chile",Santiago,15:05
+Truck-12 · Trip-2,-,-,-,Centro de Distribución,-,15:56
+Truck-13 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-13 · Trip-1,ORD-CL-202612-004148,14.233.701-5,Cliente 14233701,"Avenida Libertador Bernardo O'Higgins 2588, Santiago, Chile",Lo Prado,09:07
+Truck-13 · Trip-1,ORD-CL-202612-003732,22.372.099-5,Cliente Nuevo 22372099,"Avenida Libertador Bernardo O'Higgins 4166, Santiago, Chile",Providencia,09:44
+Truck-13 · Trip-1,ORD-CL-202612-003765,13.247.133-5,Cliente Nuevo 13247133,"Avenida La Florida 2787, Santiago, Chile",Vitacura,10:35
+Truck-13 · Trip-1,ORD-CL-202612-003918,8.933.088-4,Cliente 8933088,"Avenida Santa Rosa 9972, Santiago, Chile",Providencia,11:32
+Truck-13 · Trip-1,ORD-CL-202612-003502,10.884.364-8,Cliente Nuevo 10884364,"Avenida Santa Rosa 5380, Santiago, Chile",La Florida,11:47
+Truck-13 · Trip-1,ORD-CL-202612-003333,17.170.812-3,Cliente Nuevo 17170812,"Avenida Santa Rosa 5583, Santiago, Chile",Santiago,12:12
+Truck-13 · Trip-1,ORD-CL-202612-003449,5.510.620-3,Cliente Nuevo 5510620,"Avenida Santa Rosa 8266, Santiago, Chile",Lo Prado,12:37
+Truck-13 · Trip-1,ORD-CL-202612-003166,17.425.723-2,Cliente Nuevo 17425723,"Avenida Santa Rosa 7595, Santiago, Chile",Independencia,13:01
+Truck-13 · Trip-1,-,-,-,Centro de Distribución,-,13:32
+Truck-13 · Trip-2,-,-,-,Centro de Distribución,-,14:32
+Truck-13 · Trip-2,ORD-CL-202612-003627,8.491.877-8,Cliente Nuevo 8491877,"Avenida Tobalaba 1063, Santiago, Chile",Vitacura,14:57
+Truck-13 · Trip-2,-,-,-,Centro de Distribución,-,15:48
+Truck-14 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-14 · Trip-1,ORD-CL-202612-004163,16.582.233-7,Cliente Nuevo 16582233,"Calle Arturo Prat 9887, Santiago, Chile",Santiago,09:12
+Truck-14 · Trip-1,ORD-CL-202612-003910,14.200.357-4,Cliente Nuevo 14200357,"Avenida Libertador Bernardo O'Higgins 5819, Santiago, Chile",La Reina,09:38
+Truck-14 · Trip-1,ORD-CL-202612-004094,5.801.784-9,Cliente Nuevo 5801784,"Avenida Libertador Bernardo O'Higgins 3471, Santiago, Chile",Santiago,10:13
+Truck-14 · Trip-1,ORD-CL-202612-003775,11.242.159-4,Cliente Nuevo 11242159,"Avenida Libertador Bernardo O'Higgins 3427, Santiago, Chile",Puente Alto,10:31
+Truck-14 · Trip-1,ORD-CL-202612-003240,20.510.095-7,Cliente Nuevo 20510095,"Avenida Libertador Bernardo O'Higgins 5771, Santiago, Chile",Santiago,10:58
+Truck-14 · Trip-1,ORD-CL-202612-003608,17.289.204-6,Cliente Nuevo 17289204,"Avenida Libertador Bernardo O'Higgins 5990, Santiago, Chile",Lo Prado,11:22
+Truck-14 · Trip-1,ORD-CL-202612-003642,6.221.285-6,Cliente 6221285,"Avenida Libertador Bernardo O'Higgins 8974, Santiago, Chile",Estación Central,11:46
+Truck-14 · Trip-1,ORD-CL-202612-003445,22.904.284-0,Cliente 22904284,"Avenida La Florida 934, Santiago, Chile",Peñalolén,12:41
+Truck-14 · Trip-1,-,-,-,Centro de Distribución,-,13:31
+Truck-14 · Trip-2,-,-,-,Centro de Distribución,-,14:31
+Truck-14 · Trip-2,ORD-CL-202612-003660,5.884.281-4,Cliente 5884281,"Avenida Grecia 8422, Santiago, Chile",Peñalolén,14:59
+Truck-14 · Trip-2,-,-,-,Centro de Distribución,-,15:46
+Truck-15 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-15 · Trip-1,ORD-CL-202612-003967,13.077.640-9,Cliente Nuevo 13077640,"Avenida Providencia 772, Santiago, Chile",Las Condes,09:15
+Truck-15 · Trip-1,ORD-CL-202612-003349,16.399.358-6,Cliente 16399358,"Avenida Providencia 4275, Santiago, Chile",Las Condes,09:40
+Truck-15 · Trip-1,ORD-CL-202612-004127,18.136.533-6,Cliente 18136533,"Avenida Libertador Bernardo O'Higgins 1045, Santiago, Chile",Santiago,10:05
+Truck-15 · Trip-1,ORD-CL-202612-003580,20.324.755-0,Cliente Nuevo 20324755,"Avenida Mapocho 8056, Santiago, Chile",San Miguel,10:48
+Truck-15 · Trip-1,ORD-CL-202612-003848,15.290.073-0,Cliente 15290073,"Avenida La Florida 4055, Santiago, Chile",Puente Alto,11:47
+Truck-15 · Trip-1,ORD-CL-202612-003961,10.377.217-3,Cliente Nuevo 10377217,"Avenida Pajaritos 7162, Santiago, Chile",Santiago,12:51
+Truck-15 · Trip-1,-,-,-,Centro de Distribución,-,13:22
+Truck-15 · Trip-2,-,-,-,Centro de Distribución,-,14:22
+Truck-15 · Trip-2,ORD-CL-202612-003842,11.110.125-3,Cliente Nuevo 11110125,"Avenida Grecia 7712, Santiago, Chile",Recoleta,14:49
+Truck-15 · Trip-2,-,-,-,Centro de Distribución,-,15:39
+Truck-16 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-16 · Trip-1,ORD-CL-202612-003878,20.056.956-6,Cliente Nuevo 20056956,"Avenida Las Condes 7569, Santiago, Chile",Quinta Normal,09:23
+Truck-16 · Trip-1,-,-,-,Centro de Distribución,-,10:13
+Truck-16 · Trip-2,-,-,-,Centro de Distribución,-,11:13
+Truck-16 · Trip-2,ORD-CL-202612-004069,22.578.698-3,Cliente 22578698,"Calle Arturo Prat 66, Santiago, Chile",Santiago,11:39
+Truck-16 · Trip-2,-,-,-,Centro de Distribución,-,12:26
+Truck-16 · Trip-3,-,-,-,Centro de Distribución,-,13:26
+Truck-16 · Trip-3,ORD-CL-202612-003501,20.013.765-7,Cliente 20013765,"Avenida Tobalaba 49, Santiago, Chile",Santiago,13:50
+Truck-16 · Trip-3,-,-,-,Centro de Distribución,-,14:38
+Truck-16 · Trip-4,-,-,-,Centro de Distribución,-,15:38
+Truck-16 · Trip-4,ORD-CL-202612-003619,15.510.181-5,Cliente Nuevo 15510181,"Avenida Las Condes 1193, Santiago, Chile",San Miguel,16:01
+Truck-16 · Trip-4,-,-,-,Centro de Distribución,-,16:51
+Truck-17 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-17 · Trip-1,ORD-CL-202612-003358,20.617.357-1,Cliente 20617357,"Avenida Apoquindo 8523, Santiago, Chile",Las Condes,09:22
+Truck-17 · Trip-1,-,-,-,Centro de Distribución,-,10:12
+Truck-17 · Trip-2,-,-,-,Centro de Distribución,-,11:12
+Truck-17 · Trip-2,ORD-CL-202612-003336,14.552.741-6,Cliente 14552741,"Avenida Recoleta 3714, Santiago, Chile",Puente Alto,11:35
+Truck-17 · Trip-2,-,-,-,Centro de Distribución,-,12:25
+Truck-17 · Trip-3,-,-,-,Centro de Distribución,-,13:25
+Truck-17 · Trip-3,ORD-CL-202612-003605,22.934.341-6,Cliente Nuevo 22934341,"Avenida Las Condes 2034, Santiago, Chile",Estación Central,13:48
+Truck-17 · Trip-3,-,-,-,Centro de Distribución,-,14:37
+Truck-17 · Trip-4,-,-,-,Centro de Distribución,-,15:37
+Truck-17 · Trip-4,ORD-CL-202612-003436,11.266.059-7,Cliente Nuevo 11266059,"Avenida Las Condes 3397, Santiago, Chile",San Miguel,16:00
+Truck-17 · Trip-4,-,-,-,Centro de Distribución,-,16:49
+Truck-18 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-18 · Trip-1,ORD-CL-202612-003457,9.689.641-2,Cliente Nuevo 9689641,"Avenida Tobalaba 2551, Santiago, Chile",Independencia,09:24
+Truck-18 · Trip-1,-,-,-,Centro de Distribución,-,10:12
+Truck-18 · Trip-2,-,-,-,Centro de Distribución,-,11:12
+Truck-18 · Trip-2,ORD-CL-202612-003882,12.324.815-4,Cliente Nuevo 12324815,"Avenida Tobalaba 1657, Santiago, Chile",Santiago,11:36
+Truck-18 · Trip-2,-,-,-,Centro de Distribución,-,12:23
+Truck-18 · Trip-3,-,-,-,Centro de Distribución,-,13:23
+Truck-18 · Trip-3,ORD-CL-202612-003728,10.046.343-7,Cliente 10046343,"Avenida Las Condes 6181, Santiago, Chile",Santiago,13:47
+Truck-18 · Trip-3,-,-,-,Centro de Distribución,-,14:35
+Truck-18 · Trip-4,-,-,-,Centro de Distribución,-,15:35
+Truck-18 · Trip-4,ORD-CL-202612-004029,14.236.848-3,Cliente Nuevo 14236848,"Avenida Las Condes 7844, Santiago, Chile",La Reina,15:58
+Truck-18 · Trip-4,-,-,-,Centro de Distribución,-,16:46
+Truck-19 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-19 · Trip-1,ORD-CL-202612-003920,17.518.911-5,Cliente 17518911,"Avenida Recoleta 5351, Santiago, Chile",Estación Central,09:22
+Truck-19 · Trip-1,-,-,-,Centro de Distribución,-,10:11
+Truck-19 · Trip-2,-,-,-,Centro de Distribución,-,11:11
+Truck-19 · Trip-2,ORD-CL-202612-003329,17.835.620-8,Cliente 17835620,"Avenida Apoquindo 6999, Santiago, Chile",Puente Alto,11:34
+Truck-19 · Trip-2,-,-,-,Centro de Distribución,-,12:23
+Truck-19 · Trip-3,-,-,-,Centro de Distribución,-,13:23
+Truck-19 · Trip-3,ORD-CL-202612-003682,14.464.405-0,Cliente Nuevo 14464405,"Avenida Apoquindo 4174, Santiago, Chile",Independencia,13:45
+Truck-19 · Trip-3,-,-,-,Centro de Distribución,-,14:34
+Truck-19 · Trip-4,-,-,-,Centro de Distribución,-,15:34
+Truck-19 · Trip-4,ORD-CL-202612-003869,20.872.116-3,Cliente 20872116,"Avenida Apoquindo 1250, Santiago, Chile",Recoleta,15:56
+Truck-19 · Trip-4,-,-,-,Centro de Distribución,-,16:45
+Truck-20 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-20 · Trip-1,ORD-CL-202612-004058,18.007.218-7,Cliente Nuevo 18007218,"Avenida La Florida 5134, Santiago, Chile",La Reina,09:23
+Truck-20 · Trip-1,-,-,-,Centro de Distribución,-,10:11
+Truck-20 · Trip-2,-,-,-,Centro de Distribución,-,11:11
+Truck-20 · Trip-2,ORD-CL-202612-004022,10.299.661-5,Cliente 10299661,"Avenida Las Condes 3948, Santiago, Chile",San Miguel,11:34
+Truck-20 · Trip-2,-,-,-,Centro de Distribución,-,12:22
+Truck-20 · Trip-3,-,-,-,Centro de Distribución,-,13:22
+Truck-20 · Trip-3,ORD-CL-202612-003964,10.569.358-9,Cliente Nuevo 10569358,"Avenida Apoquindo 595, Santiago, Chile",Santiago,13:44
+Truck-20 · Trip-3,-,-,-,Centro de Distribución,-,14:33
+Truck-20 · Trip-4,-,-,-,Centro de Distribución,-,15:33
+Truck-20 · Trip-4,ORD-CL-202612-003367,6.277.553-9,Cliente Nuevo 6277553,"Avenida Las Condes 8020, Santiago, Chile",Peñalolén,15:56
+Truck-20 · Trip-4,-,-,-,Centro de Distribución,-,16:43
+Truck-21 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-21 · Trip-1,ORD-CL-202612-003404,19.174.623-5,Cliente 19174623,"Avenida Recoleta 598, Santiago, Chile",Peñalolén,09:22
+Truck-21 · Trip-1,-,-,-,Centro de Distribución,-,10:10
+Truck-21 · Trip-2,-,-,-,Centro de Distribución,-,11:10
+Truck-21 · Trip-2,ORD-CL-202612-004087,8.417.738-8,Cliente Nuevo 8417738,"Avenida La Florida 5146, Santiago, Chile",Santiago,11:33
+Truck-21 · Trip-2,-,-,-,Centro de Distribución,-,12:21
+Truck-21 · Trip-3,-,-,-,Centro de Distribución,-,13:21
+Truck-21 · Trip-3,ORD-CL-202612-003818,18.948.815-7,Cliente 18948815,"Avenida Las Condes 2186, Santiago, Chile",Estación Central,13:44
+Truck-21 · Trip-3,-,-,-,Centro de Distribución,-,14:31
+Truck-21 · Trip-4,-,-,-,Centro de Distribución,-,15:31
+Truck-21 · Trip-4,ORD-CL-202612-003556,5.250.649-1,Cliente 5250649,"Avenida Las Condes 3997, Santiago, Chile",Santiago,15:54
+Truck-21 · Trip-4,-,-,-,Centro de Distribución,-,16:41
+Truck-22 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-22 · Trip-1,ORD-CL-202612-003686,18.473.344-9,Cliente Nuevo 18473344,"Avenida Las Condes 2178, Santiago, Chile",Santiago,09:23
+Truck-22 · Trip-1,-,-,-,Centro de Distribución,-,10:10
+Truck-22 · Trip-2,-,-,-,Centro de Distribución,-,11:10
+Truck-22 · Trip-2,ORD-CL-202612-004098,21.785.699-3,Cliente 21785699,"Avenida Apoquindo 4280, Santiago, Chile",Independencia,11:32
+Truck-22 · Trip-2,-,-,-,Centro de Distribución,-,12:20
+Truck-22 · Trip-3,-,-,-,Centro de Distribución,-,13:20
+Truck-22 · Trip-3,ORD-CL-202612-004096,6.782.303-1,Cliente Nuevo 6782303,"Avenida Tobalaba 7894, Santiago, Chile",Estación Central,13:44
+Truck-22 · Trip-3,-,-,-,Centro de Distribución,-,14:30
+Truck-22 · Trip-4,-,-,-,Centro de Distribución,-,15:30
+Truck-22 · Trip-4,ORD-CL-202612-003513,13.513.232-1,Cliente Nuevo 13513232,"Avenida Apoquindo 7403, Santiago, Chile",Independencia,15:52
+Truck-22 · Trip-4,-,-,-,Centro de Distribución,-,16:39
+Truck-23 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-23 · Trip-1,ORD-CL-202612-004108,21.566.255-6,Cliente 21566255,"Avenida Recoleta 7733, Santiago, Chile",Santiago,09:22
+Truck-23 · Trip-1,-,-,-,Centro de Distribución,-,10:10
+Truck-23 · Trip-2,-,-,-,Centro de Distribución,-,11:10
+Truck-23 · Trip-2,ORD-CL-202612-004139,16.845.963-0,Cliente 16845963,"Avenida Américo Vespucio 1428, Santiago, Chile",Providencia,11:32
+Truck-23 · Trip-2,-,-,-,Centro de Distribución,-,12:19
+Truck-23 · Trip-3,-,-,-,Centro de Distribución,-,13:19
+Truck-23 · Trip-3,ORD-CL-202612-004133,17.881.840-5,Cliente 17881840,"Avenida Las Condes 1767, Santiago, Chile",La Florida,13:43
+Truck-23 · Trip-3,-,-,-,Centro de Distribución,-,14:29
+Truck-23 · Trip-4,-,-,-,Centro de Distribución,-,15:29
+Truck-23 · Trip-4,ORD-CL-202612-003951,22.021.731-7,Cliente Nuevo 22021731,"Avenida Grecia 7439, Santiago, Chile",Independencia,15:55
+Truck-23 · Trip-4,-,-,-,Centro de Distribución,-,16:38
+Truck-24 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-24 · Trip-1,ORD-CL-202612-003798,11.212.451-0,Cliente 11212451,"Avenida Américo Vespucio 2037, Santiago, Chile",Las Condes,09:23
+Truck-24 · Trip-1,-,-,-,Centro de Distribución,-,10:09
+Truck-24 · Trip-2,-,-,-,Centro de Distribución,-,11:09
+Truck-24 · Trip-2,ORD-CL-202612-003692,8.613.975-1,Cliente Nuevo 8613975,"Avenida Tobalaba 8129, Santiago, Chile",La Florida,11:34
+Truck-24 · Trip-2,-,-,-,Centro de Distribución,-,12:19
+Truck-24 · Trip-3,-,-,-,Centro de Distribución,-,13:19
+Truck-24 · Trip-3,ORD-CL-202612-004116,17.106.870-6,Cliente 17106870,"Avenida Recoleta 5324, Santiago, Chile",Providencia,13:41
+Truck-24 · Trip-3,-,-,-,Centro de Distribución,-,14:28
+Truck-24 · Trip-4,-,-,-,Centro de Distribución,-,15:28
+Truck-24 · Trip-4,ORD-CL-202612-004118,14.089.104-8,Cliente Nuevo 14089104,"Avenida La Florida 9439, Santiago, Chile",Santiago,15:51
+Truck-24 · Trip-4,-,-,-,Centro de Distribución,-,16:37
+Truck-25 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-25 · Trip-1,ORD-CL-202612-003993,7.815.509-7,Cliente Nuevo 7815509,"Avenida Tobalaba 803, Santiago, Chile",La Reina,09:24
+Truck-25 · Trip-1,-,-,-,Centro de Distribución,-,10:09
+Truck-25 · Trip-2,-,-,-,Centro de Distribución,-,11:09
+Truck-25 · Trip-2,ORD-CL-202612-003507,19.773.132-3,Cliente Nuevo 19773132,"Avenida Apoquindo 3229, Santiago, Chile",La Florida,11:31
+Truck-25 · Trip-2,-,-,-,Centro de Distribución,-,12:18
+Truck-25 · Trip-3,-,-,-,Centro de Distribución,-,13:18
+Truck-25 · Trip-3,ORD-CL-202612-003321,9.554.867-4,Cliente 9554867,"Avenida Tobalaba 5752, Santiago, Chile",Santiago,13:42
+Truck-25 · Trip-3,-,-,-,Centro de Distribución,-,14:27
+Truck-25 · Trip-4,-,-,-,Centro de Distribución,-,15:27
+Truck-25 · Trip-4,ORD-CL-202612-004077,12.627.284-5,Cliente 12627284,"Avenida Recoleta 8980, Santiago, Chile",Recoleta,15:49
+Truck-25 · Trip-4,-,-,-,Centro de Distribución,-,16:35
+Truck-26 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-26 · Trip-1,ORD-CL-202612-003763,5.910.073-3,Cliente Nuevo 5910073,"Avenida Las Condes 5618, Santiago, Chile",Vitacura,09:23
+Truck-26 · Trip-1,-,-,-,Centro de Distribución,-,10:08
+Truck-26 · Trip-2,-,-,-,Centro de Distribución,-,11:08
+Truck-26 · Trip-2,ORD-CL-202612-004101,14.729.367-0,Cliente 14729367,"Avenida Recoleta 1848, Santiago, Chile",Santiago,11:31
+Truck-26 · Trip-2,-,-,-,Centro de Distribución,-,12:16
+Truck-26 · Trip-3,-,-,-,Centro de Distribución,-,13:16
+Truck-26 · Trip-3,ORD-CL-202612-003981,12.627.284-5,Cliente 12627284,"Avenida Recoleta 8980, Santiago, Chile",Recoleta,13:39
+Truck-26 · Trip-3,-,-,-,Centro de Distribución,-,14:25
+Truck-26 · Trip-4,-,-,-,Centro de Distribución,-,15:25
+Truck-26 · Trip-4,ORD-CL-202612-003828,8.402.871-2,Cliente Nuevo 8402871,"Avenida Recoleta 1088, Santiago, Chile",Puente Alto,15:47
+Truck-26 · Trip-4,-,-,-,Centro de Distribución,-,16:33
+Truck-27 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-27 · Trip-1,ORD-CL-202612-004128,16.589.779-7,Cliente Nuevo 16589779,"Avenida Apoquindo 1918, Santiago, Chile",Independencia,09:22
+Truck-27 · Trip-1,-,-,-,Centro de Distribución,-,10:08
+Truck-27 · Trip-2,-,-,-,Centro de Distribución,-,11:08
+Truck-27 · Trip-2,ORD-CL-202612-003947,22.063.182-8,Cliente 22063182,"Avenida Recoleta 6272, Santiago, Chile",Independencia,11:30
+Truck-27 · Trip-2,-,-,-,Centro de Distribución,-,12:16
+Truck-27 · Trip-3,-,-,-,Centro de Distribución,-,13:16
+Truck-27 · Trip-3,ORD-CL-202612-003297,7.486.777-6,Cliente 7486777,"Avenida Recoleta 4097, Santiago, Chile",Estación Central,13:38
+Truck-27 · Trip-3,-,-,-,Centro de Distribución,-,14:24
+Truck-27 · Trip-4,-,-,-,Centro de Distribución,-,15:24
+Truck-27 · Trip-4,ORD-CL-202612-003903,8.880.850-4,Cliente Nuevo 8880850,"Avenida Apoquindo 6717, Santiago, Chile",Santiago,15:46
+Truck-27 · Trip-4,-,-,-,Centro de Distribución,-,16:32
+Truck-28 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-28 · Trip-1,ORD-CL-202612-004099,18.052.817-2,Cliente Nuevo 18052817,"Avenida La Florida 7075, Santiago, Chile",La Florida,09:23
+Truck-28 · Trip-1,-,-,-,Centro de Distribución,-,10:08
+Truck-28 · Trip-2,-,-,-,Centro de Distribución,-,11:08
+Truck-28 · Trip-2,ORD-CL-202612-003956,7.486.777-6,Cliente 7486777,"Avenida Recoleta 4097, Santiago, Chile",Estación Central,11:30
+Truck-28 · Trip-2,-,-,-,Centro de Distribución,-,12:16
+Truck-28 · Trip-3,-,-,-,Centro de Distribución,-,13:16
+Truck-28 · Trip-3,ORD-CL-202612-003966,21.568.398-5,Cliente Nuevo 21568398,"Avenida Américo Vespucio 4227, Santiago, Chile",Estación Central,13:38
+Truck-28 · Trip-3,-,-,-,Centro de Distribución,-,14:23
+Truck-28 · Trip-4,-,-,-,Centro de Distribución,-,15:23
+Truck-28 · Trip-4,ORD-CL-202612-003262,5.937.439-0,Cliente Nuevo 5937439,"Avenida Recoleta 9218, Santiago, Chile",Santiago,15:46
+Truck-28 · Trip-4,-,-,-,Centro de Distribución,-,16:31
+Truck-29 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-29 · Trip-1,ORD-CL-202612-003723,20.801.867-4,Cliente 20801867,"Avenida Apoquindo 1498, Santiago, Chile",Quinta Normal,09:22
+Truck-29 · Trip-1,-,-,-,Centro de Distribución,-,10:07
+Truck-29 · Trip-2,-,-,-,Centro de Distribución,-,11:07
+Truck-29 · Trip-2,ORD-CL-202612-003819,16.589.779-7,Cliente Nuevo 16589779,"Avenida Apoquindo 1918, Santiago, Chile",Independencia,11:30
+Truck-29 · Trip-2,-,-,-,Centro de Distribución,-,12:15
+Truck-29 · Trip-3,-,-,-,Centro de Distribución,-,13:15
+Truck-29 · Trip-3,ORD-CL-202612-003279,12.247.678-3,Cliente 12247678,"Avenida Apoquindo 3809, Santiago, Chile",Santiago,13:37
+Truck-29 · Trip-3,-,-,-,Centro de Distribución,-,14:22
+Truck-29 · Trip-4,-,-,-,Centro de Distribución,-,15:22
+Truck-29 · Trip-4,ORD-CL-202612-003984,11.526.390-0,Cliente Nuevo 11526390,"Avenida La Florida 1468, Santiago, Chile",La Florida,15:45
+Truck-29 · Trip-4,-,-,-,Centro de Distribución,-,16:29
+Truck-30 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-30 · Trip-1,ORD-CL-202612-003902,15.087.591-8,Cliente 15087591,"Avenida Recoleta 9981, Santiago, Chile",Santiago,09:22
+Truck-30 · Trip-1,-,-,-,Centro de Distribución,-,10:07
+Truck-30 · Trip-2,-,-,-,Centro de Distribución,-,11:07
+Truck-30 · Trip-2,ORD-CL-202612-003598,10.109.395-5,Cliente Nuevo 10109395,"Avenida Apoquindo 4985, Santiago, Chile",Santiago,11:29
+Truck-30 · Trip-2,-,-,-,Centro de Distribución,-,12:14
+Truck-30 · Trip-3,-,-,-,Centro de Distribución,-,13:14
+Truck-30 · Trip-3,ORD-CL-202612-003949,6.277.553-9,Cliente Nuevo 6277553,"Avenida Las Condes 8020, Santiago, Chile",Peñalolén,13:38
+Truck-30 · Trip-3,-,-,-,Centro de Distribución,-,14:21
+Truck-30 · Trip-4,-,-,-,Centro de Distribución,-,15:21
+Truck-30 · Trip-4,ORD-CL-202612-003935,8.402.871-2,Cliente Nuevo 8402871,"Avenida Recoleta 1088, Santiago, Chile",Puente Alto,15:44
+Truck-30 · Trip-4,-,-,-,Centro de Distribución,-,16:28
+Truck-31 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-31 · Trip-1,ORD-CL-202612-003645,19.979.903-0,Cliente 19979903,"Avenida Las Condes 6919, Santiago, Chile",Las Condes,09:22
+Truck-31 · Trip-1,-,-,-,Centro de Distribución,-,10:07
+Truck-31 · Trip-2,-,-,-,Centro de Distribución,-,11:07
+Truck-31 · Trip-2,ORD-CL-202612-003971,19.806.040-6,Cliente 19806040,"Avenida La Florida 1424, Santiago, Chile",Puente Alto,11:29
+Truck-31 · Trip-2,-,-,-,Centro de Distribución,-,12:13
+Truck-31 · Trip-3,-,-,-,Centro de Distribución,-,13:13
+Truck-31 · Trip-3,ORD-CL-202612-003656,13.329.712-0,Cliente Nuevo 13329712,"Avenida Macul 969, Santiago, Chile",Santiago,13:33
+Truck-31 · Trip-3,-,-,-,Centro de Distribución,-,14:20
+Truck-31 · Trip-4,-,-,-,Centro de Distribución,-,15:20
+Truck-31 · Trip-4,ORD-CL-202612-004153,14.464.405-0,Cliente Nuevo 14464405,"Avenida Apoquindo 4174, Santiago, Chile",Independencia,15:42
+Truck-31 · Trip-4,-,-,-,Centro de Distribución,-,16:26
+Truck-32 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-32 · Trip-1,ORD-CL-202612-003636,20.374.563-3,Cliente 20374563,"Avenida Kennedy 1795, Santiago, Chile",Providencia,09:20
+Truck-32 · Trip-1,-,-,-,Centro de Distribución,-,10:06
+Truck-32 · Trip-2,-,-,-,Centro de Distribución,-,11:06
+Truck-32 · Trip-2,ORD-CL-202612-004134,12.150.582-5,Cliente 12150582,"Avenida La Florida 7240, Santiago, Chile",Quinta Normal,11:29
+Truck-32 · Trip-2,-,-,-,Centro de Distribución,-,12:13
+Truck-32 · Trip-3,-,-,-,Centro de Distribución,-,13:13
+Truck-32 · Trip-3,ORD-CL-202612-003341,17.518.911-5,Cliente 17518911,"Avenida Recoleta 5351, Santiago, Chile",Estación Central,13:35
+Truck-32 · Trip-3,-,-,-,Centro de Distribución,-,14:19
+Truck-32 · Trip-4,-,-,-,Centro de Distribución,-,15:19
+Truck-32 · Trip-4,ORD-CL-202612-003729,6.366.892-2,Cliente 6366892,"Avenida Vicuña Mackenna 9416, Santiago, Chile",La Reina,15:38
+Truck-32 · Trip-4,-,-,-,Centro de Distribución,-,16:25
+Truck-33 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-33 · Trip-1,ORD-CL-202612-003738,11.421.223-3,Cliente 11421223,"Avenida Tobalaba 205, Santiago, Chile",La Reina,09:24
+Truck-33 · Trip-1,-,-,-,Centro de Distribución,-,10:06
+Truck-33 · Trip-2,-,-,-,Centro de Distribución,-,11:06
+Truck-33 · Trip-2,ORD-CL-202612-003612,22.545.252-1,Cliente 22545252,"Avenida Irarrázaval 4556, Santiago, Chile",Peñalolén,11:28
+Truck-33 · Trip-2,-,-,-,Centro de Distribución,-,12:12
+Truck-33 · Trip-3,-,-,-,Centro de Distribución,-,13:12
+Truck-33 · Trip-3,ORD-CL-202612-004155,7.337.266-2,Cliente Nuevo 7337266,"Avenida Recoleta 5073, Santiago, Chile",Santiago,13:35
+Truck-33 · Trip-3,-,-,-,Centro de Distribución,-,14:18
+Truck-33 · Trip-4,-,-,-,Centro de Distribución,-,15:18
+Truck-33 · Trip-4,ORD-CL-202612-004063,17.374.943-0,Cliente 17374943,"Avenida Las Condes 5061, Santiago, Chile",Lo Prado,15:41
+Truck-33 · Trip-4,-,-,-,Centro de Distribución,-,16:24
+Truck-34 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-34 · Trip-1,ORD-CL-202612-003868,14.065.283-2,Cliente 14065283,"Avenida Macul 9885, Santiago, Chile",Quinta Normal,09:19
+Truck-34 · Trip-1,-,-,-,Centro de Distribución,-,10:06
+Truck-34 · Trip-2,-,-,-,Centro de Distribución,-,11:06
+Truck-34 · Trip-2,ORD-CL-202612-003922,21.285.344-4,Cliente Nuevo 21285344,"Avenida Vitacura 426, Santiago, Chile",La Florida,11:24
+Truck-34 · Trip-2,-,-,-,Centro de Distribución,-,12:11
+Truck-34 · Trip-3,-,-,-,Centro de Distribución,-,13:11
+Truck-34 · Trip-3,ORD-CL-202612-003746,22.182.910-7,Cliente 22182910,"Avenida Pedro De Valdivia 8011, Santiago, Chile",Las Condes,13:29
+Truck-34 · Trip-3,-,-,-,Centro de Distribución,-,14:17
+Truck-34 · Trip-4,-,-,-,Centro de Distribución,-,15:17
+Truck-34 · Trip-4,ORD-CL-202612-003576,5.306.445-1,Cliente Nuevo 5306445,"Avenida Tobalaba 4027, Santiago, Chile",Recoleta,15:41
+Truck-34 · Trip-4,-,-,-,Centro de Distribución,-,16:23
+Truck-35 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-35 · Trip-1,ORD-CL-202612-003750,21.150.603-7,Cliente 21150603,"Avenida Recoleta 4446, Santiago, Chile",Independencia,09:22
+Truck-35 · Trip-1,-,-,-,Centro de Distribución,-,10:06
+Truck-35 · Trip-2,-,-,-,Centro de Distribución,-,11:06
+Truck-35 · Trip-2,ORD-CL-202612-004051,13.862.636-1,Cliente 13862636,"Avenida Kennedy 5716, Santiago, Chile",Vitacura,11:26
+Truck-35 · Trip-2,-,-,-,Centro de Distribución,-,12:11
+Truck-35 · Trip-3,-,-,-,Centro de Distribución,-,13:11
+Truck-35 · Trip-3,ORD-CL-202612-004173,13.168.967-9,Cliente Nuevo 13168967,"Avenida Recoleta 6597, Santiago, Chile",La Reina,13:33
+Truck-35 · Trip-3,-,-,-,Centro de Distribución,-,14:16
+Truck-35 · Trip-4,-,-,-,Centro de Distribución,-,15:16
+Truck-35 · Trip-4,ORD-CL-202612-004080,21.749.736-4,Cliente 21749736,"Avenida Tobalaba 472, Santiago, Chile",Santiago,15:41
+Truck-35 · Trip-4,-,-,-,Centro de Distribución,-,16:22
+Truck-36 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-36 · Trip-1,ORD-CL-202612-004057,17.263.025-1,Cliente 17263025,"Avenida Macul 2073, Santiago, Chile",Lo Prado,09:19
+Truck-36 · Trip-1,-,-,-,Centro de Distribución,-,10:05
+Truck-36 · Trip-2,-,-,-,Centro de Distribución,-,11:05
+Truck-36 · Trip-2,ORD-CL-202612-003673,11.565.193-6,Cliente Nuevo 11565193,"Avenida Américo Vespucio 7510, Santiago, Chile",Las Condes,11:24
+Truck-36 · Trip-2,-,-,-,Centro de Distribución,-,12:09
+Truck-36 · Trip-3,-,-,-,Centro de Distribución,-,13:09
+Truck-36 · Trip-3,ORD-CL-202612-003887,16.936.113-2,Cliente 16936113,"Avenida Las Condes 6073, Santiago, Chile",Estación Central,13:33
+Truck-36 · Trip-3,-,-,-,Centro de Distribución,-,14:14
+Truck-36 · Trip-4,-,-,-,Centro de Distribución,-,15:14
+Truck-36 · Trip-4,ORD-CL-202612-003898,15.077.993-8,Cliente 15077993,"Avenida Kennedy 4559, Santiago, Chile",Las Condes,15:34
+Truck-36 · Trip-4,-,-,-,Centro de Distribución,-,16:19
+Truck-37 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-37 · Trip-1,ORD-CL-202612-003446,5.368.866-0,Cliente Nuevo 5368866,"Avenida Pedro De Valdivia 9478, Santiago, Chile",Puente Alto,09:18
+Truck-37 · Trip-1,-,-,-,Centro de Distribución,-,10:05
+Truck-37 · Trip-2,-,-,-,Centro de Distribución,-,11:05
+Truck-37 · Trip-2,ORD-CL-202612-004088,14.429.807-9,Cliente 14429807,"Avenida Apoquindo 6788, Santiago, Chile",Independencia,11:27
+Truck-37 · Trip-2,-,-,-,Centro de Distribución,-,12:09
+Truck-37 · Trip-3,-,-,-,Centro de Distribución,-,13:09
+Truck-37 · Trip-3,ORD-CL-202612-003877,9.894.037-2,Cliente Nuevo 9894037,"Avenida Macul 3744, Santiago, Chile",Quinta Normal,13:29
+Truck-37 · Trip-3,-,-,-,Centro de Distribución,-,14:13
+Truck-37 · Trip-4,-,-,-,Centro de Distribución,-,15:13
+Truck-37 · Trip-4,ORD-CL-202612-003314,7.959.733-1,Cliente 7959733,"Avenida Kennedy 3031, Santiago, Chile",Vitacura,15:34
+Truck-37 · Trip-4,-,-,-,Centro de Distribución,-,16:18
+Truck-38 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-38 · Trip-1,ORD-CL-202612-003390,20.827.561-3,Cliente 20827561,"Avenida Macul 2508, Santiago, Chile",La Reina,09:20
+Truck-38 · Trip-1,-,-,-,Centro de Distribución,-,10:04
+Truck-38 · Trip-2,-,-,-,Centro de Distribución,-,11:04
+Truck-38 · Trip-2,ORD-CL-202612-004065,6.852.110-4,Cliente 6852110,"Avenida Macul 3599, Santiago, Chile",Recoleta,11:23
+Truck-38 · Trip-2,-,-,-,Centro de Distribución,-,12:08
+Truck-38 · Trip-3,-,-,-,Centro de Distribución,-,13:08
+Truck-38 · Trip-3,ORD-CL-202612-003567,21.187.834-7,Cliente Nuevo 21187834,"Avenida Kennedy 767, Santiago, Chile",Santiago,13:29
+Truck-38 · Trip-3,-,-,-,Centro de Distribución,-,14:13
+Truck-38 · Trip-4,-,-,-,Centro de Distribución,-,15:13
+Truck-38 · Trip-4,ORD-CL-202612-003323,9.490.310-5,Cliente 9490310,"Avenida Vicuña Mackenna 9874, Santiago, Chile",La Florida,15:36
+Truck-38 · Trip-4,-,-,-,Centro de Distribución,-,16:17
+Truck-39 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-39 · Trip-1,ORD-CL-202612-003201,19.045.327-5,Cliente Nuevo 19045327,"Avenida Recoleta 9547, Santiago, Chile",Las Condes,09:22
+Truck-39 · Trip-1,-,-,-,Centro de Distribución,-,10:04
+Truck-39 · Trip-2,-,-,-,Centro de Distribución,-,11:04
+Truck-39 · Trip-2,ORD-CL-202612-003857,11.383.641-2,Cliente Nuevo 11383641,"Avenida Macul 9030, Santiago, Chile",Independencia,11:23
+Truck-39 · Trip-2,-,-,-,Centro de Distribución,-,12:08
+Truck-39 · Trip-3,-,-,-,Centro de Distribución,-,13:08
+Truck-39 · Trip-3,ORD-CL-202612-004157,5.689.412-3,Cliente Nuevo 5689412,"Avenida Pedro De Valdivia 2288, Santiago, Chile",Santiago,13:26
+Truck-39 · Trip-3,-,-,-,Centro de Distribución,-,14:11
+Truck-39 · Trip-4,-,-,-,Centro de Distribución,-,15:11
+Truck-39 · Trip-4,ORD-CL-202612-003694,13.854.802-3,Cliente 13854802,"Avenida Vicuña Mackenna 5428, Santiago, Chile",Peñalolén,15:32
+Truck-39 · Trip-4,-,-,-,Centro de Distribución,-,16:15
+Truck-40 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-40 · Trip-1,ORD-CL-202612-003512,7.521.383-3,Cliente Nuevo 7521383,"Avenida Vicuña Mackenna 8172, Santiago, Chile",Puente Alto,09:19
+Truck-40 · Trip-1,-,-,-,Centro de Distribución,-,10:04
+Truck-40 · Trip-2,-,-,-,Centro de Distribución,-,11:04
+Truck-40 · Trip-2,ORD-CL-202612-003919,20.311.411-5,Cliente 20311411,"Avenida Américo Vespucio 7437, Santiago, Chile",Santiago,11:26
+Truck-40 · Trip-2,-,-,-,Centro de Distribución,-,12:07
+Truck-40 · Trip-3,-,-,-,Centro de Distribución,-,13:07
+Truck-40 · Trip-3,ORD-CL-202612-003921,20.320.443-5,Cliente 20320443,"Avenida Pedro De Valdivia 5965, Santiago, Chile",Quinta Normal,13:26
+Truck-40 · Trip-3,-,-,-,Centro de Distribución,-,14:10
+Truck-40 · Trip-4,-,-,-,Centro de Distribución,-,15:10
+Truck-40 · Trip-4,ORD-CL-202612-004045,7.970.249-2,Cliente Nuevo 7970249,"Avenida Kennedy 1101, Santiago, Chile",San Miguel,15:30
+Truck-40 · Trip-4,-,-,-,Centro de Distribución,-,16:13
+Truck-41 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-41 · Trip-1,ORD-CL-202612-003901,18.208.456-5,Cliente 18208456,"Avenida Irarrázaval 2396, Santiago, Chile",Santiago,09:18
+Truck-41 · Trip-1,-,-,-,Centro de Distribución,-,10:03
+Truck-41 · Trip-2,-,-,-,Centro de Distribución,-,11:03
+Truck-41 · Trip-2,ORD-CL-202612-003523,21.841.892-1,Cliente 21841892,"Avenida Kennedy 9846, Santiago, Chile",La Reina,11:23
+Truck-41 · Trip-2,-,-,-,Centro de Distribución,-,12:06
+Truck-41 · Trip-3,-,-,-,Centro de Distribución,-,13:06
+Truck-41 · Trip-3,ORD-CL-202612-003859,16.489.088-4,Cliente 16489088,"Avenida Macul 8544, Santiago, Chile",Peñalolén,13:25
+Truck-41 · Trip-3,-,-,-,Centro de Distribución,-,14:09
+Truck-41 · Trip-4,-,-,-,Centro de Distribución,-,15:09
+Truck-41 · Trip-4,ORD-CL-202612-003485,22.770.546-0,Cliente Nuevo 22770546,"Avenida Kennedy 2728, Santiago, Chile",Providencia,15:29
+Truck-41 · Trip-4,-,-,-,Centro de Distribución,-,16:12
+Truck-42 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-42 · Trip-1,ORD-CL-202612-003715,20.611.804-1,Cliente 20611804,"Avenida Vitacura 1955, Santiago, Chile",Lo Prado,09:19
+Truck-42 · Trip-1,-,-,-,Centro de Distribución,-,10:03
+Truck-42 · Trip-2,-,-,-,Centro de Distribución,-,11:03
+Truck-42 · Trip-2,ORD-CL-202612-004086,22.949.052-6,Cliente 22949052,"Avenida Kennedy 9275, Santiago, Chile",Estación Central,11:23
+Truck-42 · Trip-2,-,-,-,Centro de Distribución,-,12:05
+Truck-42 · Trip-3,-,-,-,Centro de Distribución,-,13:05
+Truck-42 · Trip-3,ORD-CL-202612-004178,14.065.283-2,Cliente 14065283,"Avenida Macul 9885, Santiago, Chile",Quinta Normal,13:25
+Truck-42 · Trip-3,-,-,-,Centro de Distribución,-,14:08
+Truck-42 · Trip-4,-,-,-,Centro de Distribución,-,15:08
+Truck-42 · Trip-4,ORD-CL-202612-004028,17.657.459-0,Cliente 17657459,"Avenida Macul 5525, Santiago, Chile",La Florida,15:29
+Truck-42 · Trip-4,-,-,-,Centro de Distribución,-,16:10
+Truck-43 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-43 · Trip-1,ORD-CL-202612-003977,12.669.961-2,Cliente Nuevo 12669961,"Avenida Macul 283, Santiago, Chile",Estación Central,09:19
+Truck-43 · Trip-1,-,-,-,Centro de Distribución,-,10:02
+Truck-43 · Trip-2,-,-,-,Centro de Distribución,-,11:02
+Truck-43 · Trip-2,ORD-CL-202612-003454,22.933.193-9,Cliente Nuevo 22933193,"Avenida Vicuña Mackenna 1106, Santiago, Chile",Santiago,11:21
+Truck-43 · Trip-2,-,-,-,Centro de Distribución,-,12:05
+Truck-43 · Trip-3,-,-,-,Centro de Distribución,-,13:05
+Truck-43 · Trip-3,ORD-CL-202612-004024,6.852.110-4,Cliente 6852110,"Avenida Macul 3599, Santiago, Chile",Recoleta,13:24
+Truck-43 · Trip-3,-,-,-,Centro de Distribución,-,14:07
+Truck-43 · Trip-4,-,-,-,Centro de Distribución,-,15:07
+Truck-43 · Trip-4,ORD-CL-202612-003744,15.077.993-8,Cliente 15077993,"Avenida Kennedy 4559, Santiago, Chile",Las Condes,15:27
+Truck-43 · Trip-4,-,-,-,Centro de Distribución,-,16:09
+Truck-44 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-44 · Trip-1,ORD-CL-202612-003177,10.300.189-5,Cliente 10300189,"Avenida Vicuña Mackenna 3766, Santiago, Chile",Puente Alto,09:19
+Truck-44 · Trip-1,-,-,-,Centro de Distribución,-,10:02
+Truck-44 · Trip-2,-,-,-,Centro de Distribución,-,11:02
+Truck-44 · Trip-2,ORD-CL-202612-003714,15.861.894-2,Cliente 15861894,"Avenida Vitacura 4145, Santiago, Chile",Puente Alto,11:21
+Truck-44 · Trip-2,-,-,-,Centro de Distribución,-,12:04
+Truck-44 · Trip-3,-,-,-,Centro de Distribución,-,13:04
+Truck-44 · Trip-3,ORD-CL-202612-003936,8.127.508-3,Cliente Nuevo 8127508,"Avenida Apoquindo 5983, Santiago, Chile",Vitacura,13:26
+Truck-44 · Trip-3,-,-,-,Centro de Distribución,-,14:06
+Truck-44 · Trip-4,-,-,-,Centro de Distribución,-,15:06
+Truck-44 · Trip-4,ORD-CL-202612-003756,15.471.008-1,Cliente Nuevo 15471008,"Avenida Kennedy 4272, Santiago, Chile",Puente Alto,15:26
+Truck-44 · Trip-4,-,-,-,Centro de Distribución,-,16:08
+Truck-45 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-45 · Trip-1,ORD-CL-202612-003969,6.736.303-5,Cliente 6736303,"Avenida Manuel Montt 7039, Santiago, Chile",Santiago,09:16
+Truck-45 · Trip-1,-,-,-,Centro de Distribución,-,10:02
+Truck-45 · Trip-2,-,-,-,Centro de Distribución,-,11:02
+Truck-45 · Trip-2,ORD-CL-202612-004055,22.028.114-7,Cliente Nuevo 22028114,"Avenida Vitacura 6926, Santiago, Chile",Vitacura,11:21
+Truck-45 · Trip-2,-,-,-,Centro de Distribución,-,12:04
+Truck-45 · Trip-3,-,-,-,Centro de Distribución,-,13:04
+Truck-45 · Trip-3,ORD-CL-202612-003751,8.613.975-1,Cliente Nuevo 8613975,"Avenida Tobalaba 8129, Santiago, Chile",La Florida,13:28
+Truck-45 · Trip-3,-,-,-,Centro de Distribución,-,14:05
+Truck-45 · Trip-4,-,-,-,Centro de Distribución,-,15:05
+Truck-45 · Trip-4,ORD-CL-202612-003648,12.601.567-6,Cliente 12601567,"Avenida Manuel Montt 8763, Santiago, Chile",Peñalolén,15:22
+Truck-45 · Trip-4,-,-,-,Centro de Distribución,-,16:07
+Truck-46 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-46 · Trip-1,ORD-CL-202612-003960,19.243.880-6,Cliente Nuevo 19243880,"Avenida Vicuña Mackenna 3016, Santiago, Chile",Vitacura,09:19
+Truck-46 · Trip-1,-,-,-,Centro de Distribución,-,10:02
+Truck-46 · Trip-2,-,-,-,Centro de Distribución,-,11:02
+Truck-46 · Trip-2,ORD-CL-202612-003876,22.182.910-7,Cliente 22182910,"Avenida Pedro De Valdivia 8011, Santiago, Chile",Las Condes,11:19
+Truck-46 · Trip-2,-,-,-,Centro de Distribución,-,12:03
+Truck-46 · Trip-3,-,-,-,Centro de Distribución,-,13:03
+Truck-46 · Trip-3,ORD-CL-202612-003803,16.265.227-8,Cliente 16265227,"Avenida Recoleta 8905, Santiago, Chile",Providencia,13:25
+Truck-46 · Trip-3,-,-,-,Centro de Distribución,-,14:04
+Truck-46 · Trip-4,-,-,-,Centro de Distribución,-,15:04
+Truck-46 · Trip-4,ORD-CL-202612-003815,22.972.209-3,Cliente 22972209,"Avenida Vitacura 8663, Santiago, Chile",La Reina,15:23
+Truck-46 · Trip-4,-,-,-,Centro de Distribución,-,16:05
+Truck-47 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-47 · Trip-1,ORD-CL-202612-003402,9.949.344-7,Cliente Nuevo 9949344,"Avenida Manuel Montt 6884, Santiago, Chile",Las Condes,09:16
+Truck-47 · Trip-1,-,-,-,Centro de Distribución,-,10:01
+Truck-47 · Trip-2,-,-,-,Centro de Distribución,-,11:01
+Truck-47 · Trip-2,ORD-CL-202612-003670,18.358.564-5,Cliente Nuevo 18358564,"Avenida Vitacura 3943, Santiago, Chile",Santiago,11:20
+Truck-47 · Trip-2,-,-,-,Centro de Distribución,-,12:01
+Truck-47 · Trip-3,-,-,-,Centro de Distribución,-,13:01
+Truck-47 · Trip-3,ORD-CL-202612-003564,19.994.164-4,Cliente 19994164,"Avenida Macul 7795, Santiago, Chile",Santiago,13:21
+Truck-47 · Trip-3,-,-,-,Centro de Distribución,-,14:02
+Truck-47 · Trip-4,-,-,-,Centro de Distribución,-,15:02
+Truck-47 · Trip-4,ORD-CL-202612-003870,17.899.172-0,Cliente 17899172,"Avenida Macul 1638, Santiago, Chile",La Florida,15:21
+Truck-47 · Trip-4,-,-,-,Centro de Distribución,-,16:02
+Truck-48 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-48 · Trip-1,ORD-CL-202612-003534,14.918.958-0,Cliente Nuevo 14918958,"Avenida Apoquindo 3829, Santiago, Chile",La Florida,09:22
+Truck-48 · Trip-1,-,-,-,Centro de Distribución,-,10:00
+Truck-48 · Trip-2,-,-,-,Centro de Distribución,-,11:00
+Truck-48 · Trip-2,ORD-CL-202612-003904,9.173.497-6,Cliente 9173497,"Avenida Vitacura 4256, Santiago, Chile",Santiago,11:19
+Truck-48 · Trip-2,-,-,-,Centro de Distribución,-,12:00
+Truck-48 · Trip-3,-,-,-,Centro de Distribución,-,13:00
+Truck-48 · Trip-3,ORD-CL-202612-003685,18.117.500-8,Cliente Nuevo 18117500,"Avenida Kennedy 6923, Santiago, Chile",Quinta Normal,13:21
+Truck-48 · Trip-3,-,-,-,Centro de Distribución,-,14:00
+Truck-48 · Trip-4,-,-,-,Centro de Distribución,-,15:00
+Truck-48 · Trip-4,ORD-CL-202612-003383,13.694.545-4,Cliente 13694545,"Avenida Manuel Montt 6090, Santiago, Chile",San Miguel,15:17
+Truck-48 · Trip-4,-,-,-,Centro de Distribución,-,16:01
+Truck-49 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-49 · Trip-1,ORD-CL-202612-003759,16.523.988-3,Cliente Nuevo 16523988,"Avenida Vitacura 1454, Santiago, Chile",San Miguel,09:19
+Truck-49 · Trip-1,-,-,-,Centro de Distribución,-,10:00
+Truck-49 · Trip-2,-,-,-,Centro de Distribución,-,11:00
+Truck-49 · Trip-2,ORD-CL-202612-003785,20.827.561-3,Cliente 20827561,"Avenida Macul 2508, Santiago, Chile",La Reina,11:20
+Truck-49 · Trip-2,-,-,-,Centro de Distribución,-,11:59
+Truck-49 · Trip-3,-,-,-,Centro de Distribución,-,12:59
+Truck-49 · Trip-3,ORD-CL-202612-003529,9.610.014-7,Cliente Nuevo 9610014,"Avenida Pedro De Valdivia 353, Santiago, Chile",Vitacura,13:17
+Truck-49 · Trip-3,-,-,-,Centro de Distribución,-,13:59
+Truck-49 · Trip-4,-,-,-,Centro de Distribución,-,14:59
+Truck-49 · Trip-4,ORD-CL-202612-003628,12.627.284-5,Cliente 12627284,"Avenida Recoleta 8980, Santiago, Chile",Recoleta,15:21
+Truck-49 · Trip-4,-,-,-,Centro de Distribución,-,15:59
+Truck-50 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-50 · Trip-1,ORD-CL-202612-004092,7.734.479-1,Cliente Nuevo 7734479,"Avenida Manuel Montt 7498, Santiago, Chile",Puente Alto,09:16
+Truck-50 · Trip-1,-,-,-,Centro de Distribución,-,09:59
+Truck-50 · Trip-2,-,-,-,Centro de Distribución,-,10:59
+Truck-50 · Trip-2,ORD-CL-202612-003846,14.485.901-2,Cliente Nuevo 14485901,"Avenida Pedro De Valdivia 3626, Santiago, Chile",Peñalolén,11:18
+Truck-50 · Trip-2,-,-,-,Centro de Distribución,-,11:59
+Truck-50 · Trip-3,-,-,-,Centro de Distribución,-,12:59
+Truck-50 · Trip-3,ORD-CL-202612-003617,20.325.827-9,Cliente 20325827,"Avenida Santa Rosa 7174, Santiago, Chile",Providencia,13:18
+Truck-50 · Trip-3,-,-,-,Centro de Distribución,-,13:58
+Truck-50 · Trip-4,-,-,-,Centro de Distribución,-,14:58
+Truck-50 · Trip-4,ORD-CL-202612-003387,22.933.193-9,Cliente Nuevo 22933193,"Avenida Vicuña Mackenna 1106, Santiago, Chile",Santiago,15:17
+Truck-50 · Trip-4,-,-,-,Centro de Distribución,-,15:57
+Truck-51 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-51 · Trip-1,ORD-CL-202612-004091,17.337.192-6,Cliente Nuevo 17337192,"Avenida Vitacura 1491, Santiago, Chile",San Miguel,09:19
+Truck-51 · Trip-1,-,-,-,Centro de Distribución,-,09:59
+Truck-51 · Trip-2,-,-,-,Centro de Distribución,-,10:59
+Truck-51 · Trip-2,ORD-CL-202612-004151,18.009.133-6,Cliente 18009133,"Avenida Macul 8042, Santiago, Chile",Recoleta,11:18
+Truck-51 · Trip-2,-,-,-,Centro de Distribución,-,11:58
+Truck-51 · Trip-3,-,-,-,Centro de Distribución,-,12:58
+Truck-51 · Trip-3,ORD-CL-202612-003624,15.956.607-5,Cliente 15956607,"Avenida Apoquindo 8025, Santiago, Chile",Peñalolén,13:20
+Truck-51 · Trip-3,-,-,-,Centro de Distribución,-,13:57
+Truck-51 · Trip-4,-,-,-,Centro de Distribución,-,14:57
+Truck-51 · Trip-4,ORD-CL-202612-004073,20.611.804-1,Cliente 20611804,"Avenida Vitacura 1955, Santiago, Chile",Lo Prado,15:16
+Truck-51 · Trip-4,-,-,-,Centro de Distribución,-,15:56
+Truck-52 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-52 · Trip-1,ORD-CL-202612-003675,5.378.590-0,Cliente 5378590,"Avenida Grecia 3165, Santiago, Chile",San Miguel,09:19
+Truck-52 · Trip-1,-,-,-,Centro de Distribución,-,09:58
+Truck-52 · Trip-2,-,-,-,Centro de Distribución,-,10:58
+Truck-52 · Trip-2,ORD-CL-202612-003540,11.735.042-7,Cliente 11735042,"Avenida Vicuña Mackenna 2305, Santiago, Chile",Recoleta,11:17
+Truck-52 · Trip-2,-,-,-,Centro de Distribución,-,11:57
+Truck-52 · Trip-3,-,-,-,Centro de Distribución,-,12:57
+Truck-52 · Trip-3,ORD-CL-202612-003542,7.099.944-3,Cliente 7099944,"Avenida Pedro De Valdivia 2536, Santiago, Chile",Providencia,13:15
+Truck-52 · Trip-3,-,-,-,Centro de Distribución,-,13:55
+Truck-52 · Trip-4,-,-,-,Centro de Distribución,-,14:55
+Truck-52 · Trip-4,ORD-CL-202612-004023,8.191.784-1,Cliente Nuevo 8191784,"Avenida Pajaritos 97, Santiago, Chile",Las Condes,15:13
+Truck-52 · Trip-4,-,-,-,Centro de Distribución,-,15:53
+Truck-53 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-53 · Trip-1,ORD-CL-202612-003839,5.775.258-5,Cliente Nuevo 5775258,"Avenida Macul 922, Santiago, Chile",Santiago,09:19
+Truck-53 · Trip-1,-,-,-,Centro de Distribución,-,09:58
+Truck-53 · Trip-2,-,-,-,Centro de Distribución,-,10:58
+Truck-53 · Trip-2,ORD-CL-202612-003621,21.053.644-9,Cliente Nuevo 21053644,"Avenida Manuel Montt 9891, Santiago, Chile",Las Condes,11:14
+Truck-53 · Trip-2,-,-,-,Centro de Distribución,-,11:56
+Truck-53 · Trip-3,-,-,-,Centro de Distribución,-,12:56
+Truck-53 · Trip-3,ORD-CL-202612-004008,7.686.773-4,Cliente Nuevo 7686773,"Avenida Manuel Montt 4785, Santiago, Chile",Providencia,13:12
+Truck-53 · Trip-3,-,-,-,Centro de Distribución,-,13:54
+Truck-53 · Trip-4,-,-,-,Centro de Distribución,-,14:54
+Truck-53 · Trip-4,ORD-CL-202612-003571,19.955.744-1,Cliente Nuevo 19955744,"Avenida Manuel Montt 4776, Santiago, Chile",Santiago,15:10
+Truck-53 · Trip-4,-,-,-,Centro de Distribución,-,15:51
+Truck-54 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-54 · Trip-1,ORD-CL-202612-004135,19.081.688-6,Cliente Nuevo 19081688,"Avenida Kennedy 5146, Santiago, Chile",Quinta Normal,09:20
+Truck-54 · Trip-1,-,-,-,Centro de Distribución,-,09:58
+Truck-54 · Trip-2,-,-,-,Centro de Distribución,-,10:58
+Truck-54 · Trip-2,ORD-CL-202612-004115,7.883.540-8,Cliente 7883540,"Avenida Pedro De Valdivia 7181, Santiago, Chile",Vitacura,11:16
+Truck-54 · Trip-2,-,-,-,Centro de Distribución,-,11:55
+Truck-54 · Trip-3,-,-,-,Centro de Distribución,-,12:55
+Truck-54 · Trip-3,ORD-CL-202612-003577,7.648.841-2,Cliente Nuevo 7648841,"Avenida Manuel Montt 4025, Santiago, Chile",Santiago,13:11
+Truck-54 · Trip-3,-,-,-,Centro de Distribución,-,13:53
+Truck-54 · Trip-4,-,-,-,Centro de Distribución,-,14:53
+Truck-54 · Trip-4,ORD-CL-202612-003972,9.212.565-7,Cliente Nuevo 9212565,"Avenida Santa Rosa 7074, Santiago, Chile",Lo Prado,15:12
+Truck-54 · Trip-4,-,-,-,Centro de Distribución,-,15:50
+Truck-55 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-55 · Trip-1,ORD-CL-202612-003997,13.033.877-0,Cliente Nuevo 13033877,"Avenida Pedro De Valdivia 9814, Santiago, Chile",Lo Prado,09:18
+Truck-55 · Trip-1,-,-,-,Centro de Distribución,-,09:57
+Truck-55 · Trip-2,-,-,-,Centro de Distribución,-,10:57
+Truck-55 · Trip-2,ORD-CL-202612-003568,12.735.720-5,Cliente Nuevo 12735720,"Avenida Manuel Montt 7945, Santiago, Chile",Providencia,11:13
+Truck-55 · Trip-2,-,-,-,Centro de Distribución,-,11:54
+Truck-55 · Trip-3,-,-,-,Centro de Distribución,-,12:54
+Truck-55 · Trip-3,ORD-CL-202612-004090,11.079.834-9,Cliente 11079834,"Avenida Pajaritos 9628, Santiago, Chile",Estación Central,13:10
+Truck-55 · Trip-3,-,-,-,Centro de Distribución,-,13:51
+Truck-55 · Trip-4,-,-,-,Centro de Distribución,-,14:51
+Truck-55 · Trip-4,ORD-CL-202612-003979,9.989.246-6,Cliente Nuevo 9989246,"Avenida Kennedy 4890, Santiago, Chile",La Reina,15:11
+Truck-55 · Trip-4,-,-,-,Centro de Distribución,-,15:48
+Truck-56 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-56 · Trip-1,ORD-CL-202612-004174,17.408.939-1,Cliente 17408939,"Avenida Independencia 5446, Santiago, Chile",San Miguel,09:16
+Truck-56 · Trip-1,-,-,-,Centro de Distribución,-,09:57
+Truck-56 · Trip-2,-,-,-,Centro de Distribución,-,10:57
+Truck-56 · Trip-2,ORD-CL-202612-003665,11.566.587-1,Cliente Nuevo 11566587,"Avenida Manuel Montt 9695, Santiago, Chile",La Reina,11:13
+Truck-56 · Trip-2,-,-,-,Centro de Distribución,-,11:54
+Truck-56 · Trip-3,-,-,-,Centro de Distribución,-,12:54
+Truck-56 · Trip-3,ORD-CL-202612-003142,9.161.025-8,Cliente Nuevo 9161025,"Avenida Kennedy 5042, Santiago, Chile",Estación Central,13:14
+Truck-56 · Trip-3,-,-,-,Centro de Distribución,-,13:51
+Truck-56 · Trip-4,-,-,-,Centro de Distribución,-,14:51
+Truck-56 · Trip-4,ORD-CL-202612-003647,6.503.837-5,Cliente Nuevo 6503837,"Gran Avenida José Miguel Carrera 7083, Santiago, Chile",Puente Alto,15:07
+Truck-56 · Trip-4,-,-,-,Centro de Distribución,-,15:47
+Truck-57 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-57 · Trip-1,ORD-CL-202612-003917,9.422.030-9,Cliente Nuevo 9422030,"Avenida Pedro De Valdivia 4492, Santiago, Chile",Santiago,09:18
+Truck-57 · Trip-1,-,-,-,Centro de Distribución,-,09:57
+Truck-57 · Trip-2,-,-,-,Centro de Distribución,-,10:57
+Truck-57 · Trip-2,ORD-CL-202612-004048,8.438.148-8,Cliente Nuevo 8438148,"Avenida Kennedy 6569, Santiago, Chile",La Reina,11:17
+Truck-57 · Trip-2,-,-,-,Centro de Distribución,-,11:53
+Truck-57 · Trip-3,-,-,-,Centro de Distribución,-,12:53
+Truck-57 · Trip-3,ORD-CL-202612-004140,13.139.013-9,Cliente Nuevo 13139013,"Avenida Vicuña Mackenna 9865, Santiago, Chile",La Reina,13:12
+Truck-57 · Trip-3,-,-,-,Centro de Distribución,-,13:50
+Truck-57 · Trip-4,-,-,-,Centro de Distribución,-,14:50
+Truck-57 · Trip-4,ORD-CL-202612-003453,19.331.820-7,Cliente Nuevo 19331820,"Avenida Independencia 2414, Santiago, Chile",San Miguel,15:05
+Truck-57 · Trip-4,-,-,-,Centro de Distribución,-,15:47
+Truck-58 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-58 · Trip-1,ORD-CL-202612-003344,18.489.688-3,Cliente 18489688,"Avenida Kennedy 5660, Santiago, Chile",Estación Central,09:20
+Truck-58 · Trip-1,-,-,-,Centro de Distribución,-,09:57
+Truck-58 · Trip-2,-,-,-,Centro de Distribución,-,10:57
+Truck-58 · Trip-2,ORD-CL-202612-003582,18.737.764-9,Cliente 18737764,"Avenida Américo Vespucio 8747, Santiago, Chile",San Miguel,11:16
+Truck-58 · Trip-2,-,-,-,Centro de Distribución,-,11:53
+Truck-58 · Trip-3,-,-,-,Centro de Distribución,-,12:53
+Truck-58 · Trip-3,ORD-CL-202612-003152,20.499.691-9,Cliente 20499691,"Avenida Manuel Montt 4307, Santiago, Chile",San Miguel,13:09
+Truck-58 · Trip-3,-,-,-,Centro de Distribución,-,13:50
+Truck-58 · Trip-4,-,-,-,Centro de Distribución,-,14:50
+Truck-58 · Trip-4,ORD-CL-202612-004066,14.920.120-1,Cliente Nuevo 14920120,"Avenida Matta 9752, Santiago, Chile",San Miguel,15:03
+Truck-58 · Trip-4,-,-,-,Centro de Distribución,-,15:46
+Truck-59 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-59 · Trip-1,ORD-CL-202612-004019,10.068.291-7,Cliente 10068291,"Avenida Independencia 6527, Santiago, Chile",Independencia,09:15
+Truck-59 · Trip-1,-,-,-,Centro de Distribución,-,09:56
+Truck-59 · Trip-2,-,-,-,Centro de Distribución,-,10:56
+Truck-59 · Trip-2,ORD-CL-202612-004072,21.123.205-6,Cliente Nuevo 21123205,"Avenida Independencia 4789, Santiago, Chile",La Reina,11:10
+Truck-59 · Trip-2,-,-,-,Centro de Distribución,-,11:53
+Truck-59 · Trip-3,-,-,-,Centro de Distribución,-,12:53
+Truck-59 · Trip-3,ORD-CL-202612-003824,14.058.676-8,Cliente Nuevo 14058676,"Avenida Pedro De Valdivia 4632, Santiago, Chile",Vitacura,13:11
+Truck-59 · Trip-3,-,-,-,Centro de Distribución,-,13:49
+Truck-59 · Trip-4,-,-,-,Centro de Distribución,-,14:49
+Truck-59 · Trip-4,ORD-CL-202612-003575,6.401.776-8,Cliente 6401776,"Avenida Manuel Montt 2849, Santiago, Chile",Lo Prado,15:05
+Truck-59 · Trip-4,-,-,-,Centro de Distribución,-,15:45
+Truck-60 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-60 · Trip-1,ORD-CL-202612-004046,11.824.078-2,Cliente 11824078,"Avenida Matta 9009, Santiago, Chile",Vitacura,09:13
+Truck-60 · Trip-1,-,-,-,Centro de Distribución,-,09:56
+Truck-60 · Trip-2,-,-,-,Centro de Distribución,-,10:56
+Truck-60 · Trip-2,ORD-CL-202612-003555,10.648.727-7,Cliente 10648727,"Avenida Santa Rosa 9134, Santiago, Chile",Recoleta,11:13
+Truck-60 · Trip-2,-,-,-,Centro de Distribución,-,11:52
+Truck-60 · Trip-3,-,-,-,Centro de Distribución,-,12:52
+Truck-60 · Trip-3,ORD-CL-202612-003671,16.426.911-9,Cliente Nuevo 16426911,"Avenida Independencia 2471, Santiago, Chile",Santiago,13:08
+Truck-60 · Trip-3,-,-,-,Centro de Distribución,-,13:48
+Truck-60 · Trip-4,-,-,-,Centro de Distribución,-,14:48
+Truck-60 · Trip-4,ORD-CL-202612-003666,6.736.303-5,Cliente 6736303,"Avenida Manuel Montt 7039, Santiago, Chile",Santiago,15:04
+Truck-60 · Trip-4,-,-,-,Centro de Distribución,-,15:44
+Truck-61 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-61 · Trip-1,ORD-CL-202612-003953,10.767.619-3,Cliente 10767619,"Avenida Américo Vespucio 506, Santiago, Chile",San Miguel,09:14
+Truck-61 · Trip-1,-,-,-,Centro de Distribución,-,09:56
+Truck-61 · Trip-2,-,-,-,Centro de Distribución,-,10:56
+Truck-61 · Trip-2,ORD-CL-202612-003687,9.652.512-9,Cliente Nuevo 9652512,"Avenida Pajaritos 2777, Santiago, Chile",Independencia,11:11
+Truck-61 · Trip-2,-,-,-,Centro de Distribución,-,11:52
+Truck-61 · Trip-3,-,-,-,Centro de Distribución,-,12:52
+Truck-61 · Trip-3,ORD-CL-202612-003795,12.699.080-4,Cliente Nuevo 12699080,"Avenida Irarrázaval 1789, Santiago, Chile",La Reina,13:08
+Truck-61 · Trip-3,-,-,-,Centro de Distribución,-,13:47
+Truck-61 · Trip-4,-,-,-,Centro de Distribución,-,14:47
+Truck-61 · Trip-4,ORD-CL-202612-003544,18.622.994-3,Cliente Nuevo 18622994,"Avenida Grecia 969, Santiago, Chile",Puente Alto,15:02
+Truck-61 · Trip-4,-,-,-,Centro de Distribución,-,15:42
+Truck-62 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-62 · Trip-1,ORD-CL-202612-003796,11.714.785-7,Cliente Nuevo 11714785,"Avenida Matta 2703, Santiago, Chile",Puente Alto,09:13
+Truck-62 · Trip-1,-,-,-,Centro de Distribución,-,09:55
+Truck-62 · Trip-2,-,-,-,Centro de Distribución,-,10:55
+Truck-62 · Trip-2,ORD-CL-202612-004059,5.880.401-0,Cliente Nuevo 5880401,"Avenida Departamental 8230, Santiago, Chile",Santiago,11:07
+Truck-62 · Trip-2,-,-,-,Centro de Distribución,-,11:50
+Truck-62 · Trip-3,-,-,-,Centro de Distribución,-,12:50
+Truck-62 · Trip-3,ORD-CL-202612-003468,22.576.576-6,Cliente 22576576,"Avenida Grecia 1144, Santiago, Chile",Quinta Normal,13:03
+Truck-62 · Trip-3,-,-,-,Centro de Distribución,-,13:44
+Truck-62 · Trip-4,-,-,-,Centro de Distribución,-,14:44
+Truck-62 · Trip-4,ORD-CL-202612-003832,21.196.886-8,Cliente Nuevo 21196886,"Avenida Matta 3211, Santiago, Chile",Quinta Normal,14:57
+Truck-62 · Trip-4,-,-,-,Centro de Distribución,-,15:39
+Truck-63 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-63 · Trip-1,ORD-CL-202612-003311,15.316.332-9,Cliente Nuevo 15316332,"Avenida Macul 7567, Santiago, Chile",Quinta Normal,09:19
+Truck-63 · Trip-1,-,-,-,Centro de Distribución,-,09:54
+Truck-63 · Trip-2,-,-,-,Centro de Distribución,-,10:54
+Truck-63 · Trip-2,ORD-CL-202612-003533,6.467.242-5,Cliente 6467242,"Avenida Independencia 24, Santiago, Chile",San Miguel,11:09
+Truck-63 · Trip-2,-,-,-,Centro de Distribución,-,11:49
+Truck-63 · Trip-3,-,-,-,Centro de Distribución,-,12:49
+Truck-63 · Trip-3,ORD-CL-202612-003646,11.509.383-8,Cliente 11509383,"Avenida Providencia 1951, Santiago, Chile",Vitacura,13:04
+Truck-63 · Trip-3,-,-,-,Centro de Distribución,-,13:43
+Truck-63 · Trip-4,-,-,-,Centro de Distribución,-,14:43
+Truck-63 · Trip-4,ORD-CL-202612-003781,21.954.365-4,Cliente Nuevo 21954365,"Avenida Irarrázaval 9955, Santiago, Chile",San Miguel,14:56
+Truck-63 · Trip-4,-,-,-,Centro de Distribución,-,15:37
+Truck-64 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-64 · Trip-1,ORD-CL-202612-004156,15.595.095-2,Cliente 15595095,"Avenida Manuel Montt 6241, Santiago, Chile",Quinta Normal,09:16
+Truck-64 · Trip-1,-,-,-,Centro de Distribución,-,09:54
+Truck-64 · Trip-2,-,-,-,Centro de Distribución,-,10:54
+Truck-64 · Trip-2,ORD-CL-202612-003191,17.312.204-2,Cliente Nuevo 17312204,"Gran Avenida José Miguel Carrera 5741, Santiago, Chile",Recoleta,11:08
+Truck-64 · Trip-2,-,-,-,Centro de Distribución,-,11:48
+Truck-64 · Trip-3,-,-,-,Centro de Distribución,-,12:48
+Truck-64 · Trip-3,ORD-CL-202612-003289,20.245.626-0,Cliente Nuevo 20245626,"Avenida Providencia 8825, Santiago, Chile",Santiago,13:04
+Truck-64 · Trip-3,-,-,-,Centro de Distribución,-,13:42
+Truck-64 · Trip-4,-,-,-,Centro de Distribución,-,14:42
+Truck-64 · Trip-4,ORD-CL-202612-004123,15.056.286-5,Cliente 15056286,"Avenida Independencia 6313, Santiago, Chile",Santiago,14:57
+Truck-64 · Trip-4,-,-,-,Centro de Distribución,-,15:36
+Truck-65 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-65 · Trip-1,ORD-CL-202612-003558,10.174.496-0,Cliente Nuevo 10174496,"Avenida Pajaritos 619, Santiago, Chile",Lo Prado,09:18
+Truck-65 · Trip-1,-,-,-,Centro de Distribución,-,09:54
+Truck-65 · Trip-2,-,-,-,Centro de Distribución,-,10:54
+Truck-65 · Trip-2,ORD-CL-202612-003681,20.940.087-2,Cliente Nuevo 20940087,"Avenida Pajaritos 5193, Santiago, Chile",Santiago,11:09
+Truck-65 · Trip-2,-,-,-,Centro de Distribución,-,11:48
+Truck-65 · Trip-3,-,-,-,Centro de Distribución,-,12:48
+Truck-65 · Trip-3,ORD-CL-202612-003914,8.741.826-9,Cliente Nuevo 8741826,"Avenida Providencia 2524, Santiago, Chile",Santiago,13:03
+Truck-65 · Trip-3,-,-,-,Centro de Distribución,-,13:42
+Truck-65 · Trip-4,-,-,-,Centro de Distribución,-,14:42
+Truck-65 · Trip-4,ORD-CL-202612-003825,6.606.107-5,Cliente Nuevo 6606107,"Avenida Providencia 3544, Santiago, Chile",Puente Alto,14:57
+Truck-65 · Trip-4,-,-,-,Centro de Distribución,-,15:36
+Truck-66 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-66 · Trip-1,ORD-CL-202612-004154,19.694.095-4,Cliente 19694095,"Avenida Independencia 2139, Santiago, Chile",Independencia,09:15
+Truck-66 · Trip-1,-,-,-,Centro de Distribución,-,09:54
+Truck-66 · Trip-2,-,-,-,Centro de Distribución,-,10:54
+Truck-66 · Trip-2,ORD-CL-202612-004010,20.054.714-3,Cliente 20054714,"Gran Avenida José Miguel Carrera 3652, Santiago, Chile",Puente Alto,11:07
+Truck-66 · Trip-2,-,-,-,Centro de Distribución,-,11:48
+Truck-66 · Trip-3,-,-,-,Centro de Distribución,-,12:48
+Truck-66 · Trip-3,ORD-CL-202612-003690,12.508.817-7,Cliente 12508817,"Avenida Grecia 5637, Santiago, Chile",Recoleta,13:01
+Truck-66 · Trip-3,-,-,-,Centro de Distribución,-,13:41
+Truck-66 · Trip-4,-,-,-,Centro de Distribución,-,14:41
+Truck-66 · Trip-4,ORD-CL-202612-003719,17.650.281-9,Cliente Nuevo 17650281,"Avenida Irarrázaval 9016, Santiago, Chile",San Miguel,14:55
+Truck-66 · Trip-4,-,-,-,Centro de Distribución,-,15:35
+Truck-67 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-67 · Trip-1,ORD-CL-202612-003154,10.772.894-6,Cliente 10772894,"Avenida Pajaritos 1016, Santiago, Chile",San Miguel,09:15
+Truck-67 · Trip-1,-,-,-,Centro de Distribución,-,09:54
+Truck-67 · Trip-2,-,-,-,Centro de Distribución,-,10:54
+Truck-67 · Trip-2,ORD-CL-202612-004075,13.471.722-9,Cliente Nuevo 13471722,"Avenida Independencia 9382, Santiago, Chile",Santiago,11:08
+Truck-67 · Trip-2,-,-,-,Centro de Distribución,-,11:47
+Truck-67 · Trip-3,-,-,-,Centro de Distribución,-,12:47
+Truck-67 · Trip-3,ORD-CL-202612-003614,21.259.045-6,Cliente 21259045,"Avenida Pajaritos 7853, Santiago, Chile",Peñalolén,13:02
+Truck-67 · Trip-3,-,-,-,Centro de Distribución,-,13:41
+Truck-67 · Trip-4,-,-,-,Centro de Distribución,-,14:41
+Truck-67 · Trip-4,ORD-CL-202612-003620,17.580.302-1,Cliente Nuevo 17580302,"Avenida Grecia 7837, Santiago, Chile",Santiago,14:54
+Truck-67 · Trip-4,-,-,-,Centro de Distribución,-,15:34
+Truck-68 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-68 · Trip-1,ORD-CL-202612-003150,14.004.174-2,Cliente 14004174,"Avenida Kennedy 5560, Santiago, Chile",Santiago,09:20
+Truck-68 · Trip-1,-,-,-,Centro de Distribución,-,09:53
+Truck-68 · Trip-2,-,-,-,Centro de Distribución,-,10:53
+Truck-68 · Trip-2,ORD-CL-202612-004150,12.645.973-0,Cliente Nuevo 12645973,"Avenida Matta 8227, Santiago, Chile",Santiago,11:06
+Truck-68 · Trip-2,-,-,-,Centro de Distribución,-,11:47
+Truck-68 · Trip-3,-,-,-,Centro de Distribución,-,12:47
+Truck-68 · Trip-3,ORD-CL-202612-004047,11.312.538-3,Cliente Nuevo 11312538,"Gran Avenida José Miguel Carrera 4470, Santiago, Chile",Puente Alto,13:01
+Truck-68 · Trip-3,-,-,-,Centro de Distribución,-,13:40
+Truck-68 · Trip-4,-,-,-,Centro de Distribución,-,14:40
+Truck-68 · Trip-4,ORD-CL-202612-004138,6.606.107-5,Cliente Nuevo 6606107,"Avenida Providencia 3544, Santiago, Chile",Puente Alto,14:56
+Truck-68 · Trip-4,-,-,-,Centro de Distribución,-,15:34
+Truck-69 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-69 · Trip-1,ORD-CL-202612-003735,18.274.857-0,Cliente Nuevo 18274857,"Avenida Manuel Montt 5054, Santiago, Chile",Las Condes,09:16
+Truck-69 · Trip-1,-,-,-,Centro de Distribución,-,09:53
+Truck-69 · Trip-2,-,-,-,Centro de Distribución,-,10:53
+Truck-69 · Trip-2,ORD-CL-202612-003712,17.854.674-8,Cliente Nuevo 17854674,"Avenida Santa Rosa 5071, Santiago, Chile",La Florida,11:08
+Truck-69 · Trip-2,-,-,-,Centro de Distribución,-,11:46
+Truck-69 · Trip-3,-,-,-,Centro de Distribución,-,12:46
+Truck-69 · Trip-3,ORD-CL-202612-003745,12.712.976-6,Cliente 12712976,"Avenida Providencia 4190, Santiago, Chile",Santiago,13:02
+Truck-69 · Trip-3,-,-,-,Centro de Distribución,-,13:40
+Truck-69 · Trip-4,-,-,-,Centro de Distribución,-,14:40
+Truck-69 · Trip-4,ORD-CL-202612-003865,11.666.188-2,Cliente 11666188,"Avenida Vicuña Mackenna 1385, Santiago, Chile",Vitacura,14:54
+Truck-69 · Trip-4,-,-,-,Centro de Distribución,-,15:33
+Truck-70 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-70 · Trip-1,ORD-CL-202612-003867,11.509.383-8,Cliente 11509383,"Avenida Providencia 1951, Santiago, Chile",Vitacura,09:15
+Truck-70 · Trip-1,-,-,-,Centro de Distribución,-,09:53
+Truck-70 · Trip-2,-,-,-,Centro de Distribución,-,10:53
+Truck-70 · Trip-2,ORD-CL-202612-003996,9.185.090-5,Cliente Nuevo 9185090,"Avenida Manuel Montt 4351, Santiago, Chile",Vitacura,11:09
+Truck-70 · Trip-2,-,-,-,Centro de Distribución,-,11:46
+Truck-70 · Trip-3,-,-,-,Centro de Distribución,-,12:46
+Truck-70 · Trip-3,ORD-CL-202612-003689,5.242.922-7,Cliente Nuevo 5242922,"Avenida Matta 2130, Santiago, Chile",San Miguel,12:59
+Truck-70 · Trip-3,-,-,-,Centro de Distribución,-,13:39
+Truck-70 · Trip-4,-,-,-,Centro de Distribución,-,14:39
+Truck-70 · Trip-4,ORD-CL-202612-003603,5.463.582-6,Cliente 5463582,"Gran Avenida José Miguel Carrera 9450, Santiago, Chile",La Reina,14:52
+Truck-70 · Trip-4,-,-,-,Centro de Distribución,-,15:32
+Truck-71 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-71 · Trip-1,ORD-CL-202612-003674,22.361.716-4,Cliente Nuevo 22361716,"Avenida Pajaritos 1316, Santiago, Chile",Independencia,09:15
+Truck-71 · Trip-1,-,-,-,Centro de Distribución,-,09:53
+Truck-71 · Trip-2,-,-,-,Centro de Distribución,-,10:53
+Truck-71 · Trip-2,ORD-CL-202612-003193,19.564.805-9,Cliente Nuevo 19564805,"Avenida Santa Rosa 9214, Santiago, Chile",La Florida,11:09
+Truck-71 · Trip-2,-,-,-,Centro de Distribución,-,11:46
+Truck-71 · Trip-3,-,-,-,Centro de Distribución,-,12:46
+Truck-71 · Trip-3,ORD-CL-202612-003758,9.747.941-6,Cliente Nuevo 9747941,"Avenida Providencia 4079, Santiago, Chile",Las Condes,13:01
+Truck-71 · Trip-3,-,-,-,Centro de Distribución,-,13:39
+Truck-71 · Trip-4,-,-,-,Centro de Distribución,-,14:39
+Truck-71 · Trip-4,ORD-CL-202612-003741,10.907.998-7,Cliente 10907998,"Avenida Manuel Montt 2218, Santiago, Chile",San Miguel,14:54
+Truck-71 · Trip-4,-,-,-,Centro de Distribución,-,15:31
+Truck-72 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-72 · Trip-1,ORD-CL-202612-003452,7.595.359-6,Cliente Nuevo 7595359,"Avenida Matta 5065, Santiago, Chile",Independencia,09:13
+Truck-72 · Trip-1,-,-,-,Centro de Distribución,-,09:53
+Truck-72 · Trip-2,-,-,-,Centro de Distribución,-,10:53
+Truck-72 · Trip-2,ORD-CL-202612-004003,13.518.732-9,Cliente 13518732,"Avenida Independencia 6485, Santiago, Chile",La Florida,11:07
+Truck-72 · Trip-2,-,-,-,Centro de Distribución,-,11:46
+Truck-72 · Trip-3,-,-,-,Centro de Distribución,-,12:46
+Truck-72 · Trip-3,ORD-CL-202612-003631,10.436.716-4,Cliente 10436716,"Avenida Manuel Montt 756, Santiago, Chile",Providencia,13:01
+Truck-72 · Trip-3,-,-,-,Centro de Distribución,-,13:38
+Truck-72 · Trip-4,-,-,-,Centro de Distribución,-,14:38
+Truck-72 · Trip-4,ORD-CL-202612-003809,14.331.931-2,Cliente Nuevo 14331931,"Avenida Pedro De Valdivia 8517, Santiago, Chile",Lo Prado,14:56
+Truck-72 · Trip-4,-,-,-,Centro de Distribución,-,15:31
+Truck-73 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-73 · Trip-1,ORD-CL-202612-003913,20.367.303-5,Cliente 20367303,"Avenida Grecia 1728, Santiago, Chile",Peñalolén,09:17
+Truck-73 · Trip-1,-,-,-,Centro de Distribución,-,09:52
+Truck-73 · Trip-2,-,-,-,Centro de Distribución,-,10:52
+Truck-73 · Trip-2,ORD-CL-202612-004044,10.499.637-6,Cliente Nuevo 10499637,"Avenida Independencia 7595, Santiago, Chile",Santiago,11:07
+Truck-73 · Trip-2,-,-,-,Centro de Distribución,-,11:45
+Truck-73 · Trip-3,-,-,-,Centro de Distribución,-,12:45
+Truck-73 · Trip-3,ORD-CL-202612-003938,7.696.193-6,Cliente Nuevo 7696193,"Avenida Providencia 9988, Santiago, Chile",Santiago,13:00
+Truck-73 · Trip-3,-,-,-,Centro de Distribución,-,13:37
+Truck-73 · Trip-4,-,-,-,Centro de Distribución,-,14:37
+Truck-73 · Trip-4,ORD-CL-202612-003941,8.995.743-8,Cliente 8995743,"Avenida Santa Rosa 3654, Santiago, Chile",Santiago,14:52
+Truck-73 · Trip-4,-,-,-,Centro de Distribución,-,15:30
+Truck-74 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-74 · Trip-1,ORD-CL-202612-003800,22.363.837-4,Cliente Nuevo 22363837,"Avenida Providencia 2918, Santiago, Chile",Peñalolén,09:15
+Truck-74 · Trip-1,-,-,-,Centro de Distribución,-,09:52
+Truck-74 · Trip-2,-,-,-,Centro de Distribución,-,10:52
+Truck-74 · Trip-2,ORD-CL-202612-003970,16.353.195-1,Cliente Nuevo 16353195,"Avenida Pajaritos 2107, Santiago, Chile",Providencia,11:08
+Truck-74 · Trip-2,-,-,-,Centro de Distribución,-,11:45
+Truck-74 · Trip-3,-,-,-,Centro de Distribución,-,12:45
+Truck-74 · Trip-3,ORD-CL-202612-003932,22.576.576-6,Cliente 22576576,"Avenida Grecia 1144, Santiago, Chile",Quinta Normal,12:58
+Truck-74 · Trip-3,-,-,-,Centro de Distribución,-,13:37
+Truck-74 · Trip-4,-,-,-,Centro de Distribución,-,14:37
+Truck-74 · Trip-4,ORD-CL-202612-003510,10.070.774-1,Cliente Nuevo 10070774,"Avenida Independencia 822, Santiago, Chile",Estación Central,14:51
+Truck-74 · Trip-4,-,-,-,Centro de Distribución,-,15:29
+Truck-75 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-75 · Trip-1,ORD-CL-202612-003899,6.343.287-3,Cliente Nuevo 6343287,"Avenida Grecia 943, Santiago, Chile",Peñalolén,09:15
+Truck-75 · Trip-1,-,-,-,Centro de Distribución,-,09:52
+Truck-75 · Trip-2,-,-,-,Centro de Distribución,-,10:52
+Truck-75 · Trip-2,ORD-CL-202612-003658,5.964.051-6,Cliente 5964051,"Avenida Independencia 2310, Santiago, Chile",Santiago,11:07
+Truck-75 · Trip-2,-,-,-,Centro de Distribución,-,11:44
+Truck-75 · Trip-3,-,-,-,Centro de Distribución,-,12:44
+Truck-75 · Trip-3,ORD-CL-202612-003551,10.902.419-0,Cliente 10902419,"Avenida Santa Rosa 3238, Santiago, Chile",La Florida,12:57
+Truck-75 · Trip-3,-,-,-,Centro de Distribución,-,13:35
+Truck-75 · Trip-4,-,-,-,Centro de Distribución,-,14:35
+Truck-75 · Trip-4,ORD-CL-202612-003980,19.955.744-1,Cliente Nuevo 19955744,"Avenida Manuel Montt 4776, Santiago, Chile",Santiago,14:52
+Truck-75 · Trip-4,-,-,-,Centro de Distribución,-,15:27
+Truck-76 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-76 · Trip-1,ORD-CL-202612-004034,17.308.796-5,Cliente 17308796,"Avenida Grecia 7261, Santiago, Chile",Santiago,09:14
+Truck-76 · Trip-1,-,-,-,Centro de Distribución,-,09:52
+Truck-76 · Trip-2,-,-,-,Centro de Distribución,-,10:52
+Truck-76 · Trip-2,ORD-CL-202612-004169,9.995.613-2,Cliente Nuevo 9995613,"Avenida Américo Vespucio 419, Santiago, Chile",Independencia,11:06
+Truck-76 · Trip-2,-,-,-,Centro de Distribución,-,11:43
+Truck-76 · Trip-3,-,-,-,Centro de Distribución,-,12:43
+Truck-76 · Trip-3,ORD-CL-202612-004117,9.727.696-0,Cliente Nuevo 9727696,"Avenida Pajaritos 2452, Santiago, Chile",La Florida,12:58
+Truck-76 · Trip-3,-,-,-,Centro de Distribución,-,13:35
+Truck-76 · Trip-4,-,-,-,Centro de Distribución,-,14:35
+Truck-76 · Trip-4,ORD-CL-202612-004165,14.129.991-5,Cliente 14129991,"Avenida Matta 1637, Santiago, Chile",Estación Central,14:48
+Truck-76 · Trip-4,-,-,-,Centro de Distribución,-,15:26
+Truck-77 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-77 · Trip-1,ORD-CL-202612-004126,12.998.113-8,Cliente 12998113,"Avenida Pajaritos 2544, Santiago, Chile",Las Condes,09:15
+Truck-77 · Trip-1,-,-,-,Centro de Distribución,-,09:51
+Truck-77 · Trip-2,-,-,-,Centro de Distribución,-,10:51
+Truck-77 · Trip-2,ORD-CL-202612-003923,18.914.115-9,Cliente 18914115,"Avenida Matta 7753, Santiago, Chile",La Florida,11:04
+Truck-77 · Trip-2,-,-,-,Centro de Distribución,-,11:43
+Truck-77 · Trip-3,-,-,-,Centro de Distribución,-,12:43
+Truck-77 · Trip-3,ORD-CL-202612-004039,14.599.583-8,Cliente Nuevo 14599583,"Avenida Pajaritos 4468, Santiago, Chile",Vitacura,12:58
+Truck-77 · Trip-3,-,-,-,Centro de Distribución,-,13:34
+Truck-77 · Trip-4,-,-,-,Centro de Distribución,-,14:34
+Truck-77 · Trip-4,ORD-CL-202612-004041,18.208.118-9,Cliente 18208118,"Avenida Irarrázaval 2790, Santiago, Chile",Las Condes,14:47
+Truck-77 · Trip-4,-,-,-,Centro de Distribución,-,15:25
+Truck-78 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-78 · Trip-1,ORD-CL-202612-004056,14.319.883-1,Cliente 14319883,"Avenida Matta 5936, Santiago, Chile",Puente Alto,09:13
+Truck-78 · Trip-1,-,-,-,Centro de Distribución,-,09:51
+Truck-78 · Trip-2,-,-,-,Centro de Distribución,-,10:51
+Truck-78 · Trip-2,ORD-CL-202612-004042,10.796.031-2,Cliente 10796031,"Avenida Pajaritos 9591, Santiago, Chile",Santiago,11:06
+Truck-78 · Trip-2,-,-,-,Centro de Distribución,-,11:42
+Truck-78 · Trip-3,-,-,-,Centro de Distribución,-,12:42
+Truck-78 · Trip-3,ORD-CL-202612-003562,15.902.183-1,Cliente Nuevo 15902183,"Calle Arturo Prat 3692, Santiago, Chile",Estación Central,12:55
+Truck-78 · Trip-3,-,-,-,Centro de Distribución,-,13:34
+Truck-78 · Trip-4,-,-,-,Centro de Distribución,-,14:34
+Truck-78 · Trip-4,ORD-CL-202612-004130,16.607.128-7,Cliente 16607128,"Avenida Grecia 9683, Santiago, Chile",Santiago,14:47
+Truck-78 · Trip-4,-,-,-,Centro de Distribución,-,15:25
+Truck-79 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-79 · Trip-1,ORD-CL-202612-003789,5.376.142-9,Cliente 5376142,"Avenida Departamental 5645, Santiago, Chile",Providencia,09:12
+Truck-79 · Trip-1,-,-,-,Centro de Distribución,-,09:51
+Truck-79 · Trip-2,-,-,-,Centro de Distribución,-,10:51
+Truck-79 · Trip-2,ORD-CL-202612-003643,20.562.021-8,Cliente Nuevo 20562021,"Gran Avenida José Miguel Carrera 5359, Santiago, Chile",La Reina,11:04
+Truck-79 · Trip-2,-,-,-,Centro de Distribución,-,11:42
+Truck-79 · Trip-3,-,-,-,Centro de Distribución,-,12:42
+Truck-79 · Trip-3,ORD-CL-202612-003888,14.683.119-6,Cliente Nuevo 14683119,"Avenida Departamental 820, Santiago, Chile",Puente Alto,12:54
+Truck-79 · Trip-3,-,-,-,Centro de Distribución,-,13:33
+Truck-79 · Trip-4,-,-,-,Centro de Distribución,-,14:33
+Truck-79 · Trip-4,ORD-CL-202612-003282,16.513.297-6,Cliente Nuevo 16513297,"Avenida Matta 4483, Santiago, Chile",La Reina,14:46
+Truck-79 · Trip-4,-,-,-,Centro de Distribución,-,15:24
+Truck-80 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-80 · Trip-1,ORD-CL-202612-003727,15.574.438-5,Cliente Nuevo 15574438,"Avenida Irarrázaval 5103, Santiago, Chile",Puente Alto,09:13
+Truck-80 · Trip-1,-,-,-,Centro de Distribución,-,09:51
+Truck-80 · Trip-2,-,-,-,Centro de Distribución,-,10:51
+Truck-80 · Trip-2,ORD-CL-202612-003667,20.940.087-2,Cliente Nuevo 20940087,"Avenida Pajaritos 5193, Santiago, Chile",Santiago,11:06
+Truck-80 · Trip-2,-,-,-,Centro de Distribución,-,11:41
+Truck-80 · Trip-3,-,-,-,Centro de Distribución,-,12:41
+Truck-80 · Trip-3,ORD-CL-202612-003771,10.809.328-8,Cliente Nuevo 10809328,"Avenida Pajaritos 3684, Santiago, Chile",Estación Central,12:57
+Truck-80 · Trip-3,-,-,-,Centro de Distribución,-,13:32
+Truck-80 · Trip-4,-,-,-,Centro de Distribución,-,14:32
+Truck-80 · Trip-4,ORD-CL-202612-003754,15.056.286-5,Cliente 15056286,"Avenida Independencia 6313, Santiago, Chile",Santiago,14:46
+Truck-80 · Trip-4,-,-,-,Centro de Distribución,-,15:23
+Truck-81 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-81 · Trip-1,ORD-CL-202612-004124,6.764.143-8,Cliente Nuevo 6764143,"Avenida Matta 4868, Santiago, Chile",Lo Prado,09:13
+Truck-81 · Trip-1,-,-,-,Centro de Distribución,-,09:51
+Truck-81 · Trip-2,-,-,-,Centro de Distribución,-,10:51
+Truck-81 · Trip-2,ORD-CL-202612-003965,6.735.029-2,Cliente 6735029,"Gran Avenida José Miguel Carrera 5414, Santiago, Chile",Quinta Normal,11:04
+Truck-81 · Trip-2,-,-,-,Centro de Distribución,-,11:41
+Truck-81 · Trip-3,-,-,-,Centro de Distribución,-,12:41
+Truck-81 · Trip-3,ORD-CL-202612-003784,21.015.076-2,Cliente 21015076,"Avenida Departamental 1600, Santiago, Chile",Las Condes,12:53
+Truck-81 · Trip-3,-,-,-,Centro de Distribución,-,13:32
+Truck-81 · Trip-4,-,-,-,Centro de Distribución,-,14:32
+Truck-81 · Trip-4,ORD-CL-202612-003831,12.998.113-8,Cliente 12998113,"Avenida Pajaritos 2544, Santiago, Chile",Las Condes,14:47
+Truck-81 · Trip-4,-,-,-,Centro de Distribución,-,15:22
+Truck-82 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-82 · Trip-1,ORD-CL-202612-003265,12.057.551-7,Cliente Nuevo 12057551,"Avenida Independencia 5913, Santiago, Chile",Las Condes,09:17
+Truck-82 · Trip-1,-,-,-,Centro de Distribución,-,09:50
+Truck-82 · Trip-2,-,-,-,Centro de Distribución,-,10:50
+Truck-82 · Trip-2,ORD-CL-202612-004009,22.261.538-1,Cliente Nuevo 22261538,"Avenida Departamental 7599, Santiago, Chile",Recoleta,11:03
+Truck-82 · Trip-2,-,-,-,Centro de Distribución,-,11:41
+Truck-82 · Trip-3,-,-,-,Centro de Distribución,-,12:41
+Truck-82 · Trip-3,ORD-CL-202612-003515,14.319.883-1,Cliente 14319883,"Avenida Matta 5936, Santiago, Chile",Puente Alto,12:54
+Truck-82 · Trip-3,-,-,-,Centro de Distribución,-,13:31
+Truck-82 · Trip-4,-,-,-,Centro de Distribución,-,14:31
+Truck-82 · Trip-4,ORD-CL-202612-003778,8.578.947-2,Cliente 8578947,"Avenida Independencia 606, Santiago, Chile",La Florida,14:45
+Truck-82 · Trip-4,-,-,-,Centro de Distribución,-,15:21
+Truck-83 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-83 · Trip-1,ORD-CL-202612-003272,13.388.530-8,Cliente Nuevo 13388530,"Avenida Américo Vespucio 136, Santiago, Chile",San Miguel,09:13
+Truck-83 · Trip-1,-,-,-,Centro de Distribución,-,09:50
+Truck-83 · Trip-2,-,-,-,Centro de Distribución,-,10:50
+Truck-83 · Trip-2,ORD-CL-202612-003630,12.910.728-3,Cliente Nuevo 12910728,"Gran Avenida José Miguel Carrera 6169, Santiago, Chile",Lo Prado,11:05
+Truck-83 · Trip-2,-,-,-,Centro de Distribución,-,11:40
+Truck-83 · Trip-3,-,-,-,Centro de Distribución,-,12:40
+Truck-83 · Trip-3,ORD-CL-202612-004076,18.111.233-0,Cliente 18111233,"Gran Avenida José Miguel Carrera 9617, Santiago, Chile",Peñalolén,12:53
+Truck-83 · Trip-3,-,-,-,Centro de Distribución,-,13:30
+Truck-83 · Trip-4,-,-,-,Centro de Distribución,-,14:30
+Truck-83 · Trip-4,ORD-CL-202612-003954,17.255.238-2,Cliente Nuevo 17255238,"Gran Avenida José Miguel Carrera 2391, Santiago, Chile",La Reina,14:43
+Truck-83 · Trip-4,-,-,-,Centro de Distribución,-,15:20
+Truck-84 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-84 · Trip-1,ORD-CL-202612-003896,5.053.024-2,Cliente 5053024,"Avenida Departamental 1018, Santiago, Chile",Quinta Normal,09:12
+Truck-84 · Trip-1,-,-,-,Centro de Distribución,-,09:50
+Truck-84 · Trip-2,-,-,-,Centro de Distribución,-,10:50
+Truck-84 · Trip-2,ORD-CL-202612-003443,18.190.145-8,Cliente Nuevo 18190145,"Avenida Matta 7432, Santiago, Chile",Peñalolén,11:03
+Truck-84 · Trip-2,-,-,-,Centro de Distribución,-,11:39
+Truck-84 · Trip-3,-,-,-,Centro de Distribución,-,12:39
+Truck-84 · Trip-3,ORD-CL-202612-003837,17.446.258-8,Cliente 17446258,"Avenida Departamental 6863, Santiago, Chile",Providencia,12:52
+Truck-84 · Trip-3,-,-,-,Centro de Distribución,-,13:29
+Truck-84 · Trip-4,-,-,-,Centro de Distribución,-,14:29
+Truck-84 · Trip-4,ORD-CL-202612-003623,5.376.142-9,Cliente 5376142,"Avenida Departamental 5645, Santiago, Chile",Providencia,14:41
+Truck-84 · Trip-4,-,-,-,Centro de Distribución,-,15:18
+Truck-85 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-85 · Trip-1,ORD-CL-202612-003946,16.837.009-2,Cliente Nuevo 16837009,"Calle Arturo Prat 2624, Santiago, Chile",La Reina,09:12
+Truck-85 · Trip-1,-,-,-,Centro de Distribución,-,09:49
+Truck-85 · Trip-2,-,-,-,Centro de Distribución,-,10:49
+Truck-85 · Trip-2,ORD-CL-202612-003808,9.711.475-0,Cliente Nuevo 9711475,"Avenida Providencia 4440, Santiago, Chile",Lo Prado,11:05
+Truck-85 · Trip-2,-,-,-,Centro de Distribución,-,11:39
+Truck-85 · Trip-3,-,-,-,Centro de Distribución,-,12:39
+Truck-85 · Trip-3,ORD-CL-202612-004125,22.600.153-8,Cliente 22600153,"Avenida Departamental 6836, Santiago, Chile",Puente Alto,12:51
+Truck-85 · Trip-3,-,-,-,Centro de Distribución,-,13:28
+Truck-85 · Trip-4,-,-,-,Centro de Distribución,-,14:28
+Truck-85 · Trip-4,ORD-CL-202612-004105,11.312.538-3,Cliente Nuevo 11312538,"Gran Avenida José Miguel Carrera 4470, Santiago, Chile",Puente Alto,14:42
+Truck-85 · Trip-4,-,-,-,Centro de Distribución,-,15:17
+Truck-85 · Trip-5,-,-,-,Centro de Distribución,-,16:17
+Truck-85 · Trip-5,ORD-CL-202612-004060,17.308.796-5,Cliente 17308796,"Avenida Grecia 7261, Santiago, Chile",Santiago,16:31
+Truck-85 · Trip-5,-,-,-,Centro de Distribución,-,16:59
+Truck-86 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-86 · Trip-1,ORD-CL-202612-003737,16.205.995-6,Cliente 16205995,"Avenida Providencia 4727, Santiago, Chile",La Florida,09:15
+Truck-86 · Trip-1,-,-,-,Centro de Distribución,-,09:49
+Truck-86 · Trip-2,-,-,-,Centro de Distribución,-,10:49
+Truck-86 · Trip-2,ORD-CL-202612-003500,17.681.406-4,Cliente Nuevo 17681406,"Avenida Independencia 8062, Santiago, Chile",Santiago,11:04
+Truck-86 · Trip-2,-,-,-,Centro de Distribución,-,11:38
+Truck-86 · Trip-3,-,-,-,Centro de Distribución,-,12:38
+Truck-86 · Trip-3,ORD-CL-202612-003638,5.830.906-5,Cliente Nuevo 5830906,"Avenida Irarrázaval 6181, Santiago, Chile",Santiago,12:51
+Truck-86 · Trip-3,-,-,-,Centro de Distribución,-,13:27
+Truck-86 · Trip-4,-,-,-,Centro de Distribución,-,14:27
+Truck-86 · Trip-4,ORD-CL-202612-003873,8.140.990-3,Cliente Nuevo 8140990,"Gran Avenida José Miguel Carrera 9042, Santiago, Chile",San Miguel,14:43
+Truck-86 · Trip-4,-,-,-,Centro de Distribución,-,15:16
+Truck-86 · Trip-5,-,-,-,Centro de Distribución,-,16:16
+Truck-86 · Trip-5,ORD-CL-202612-003907,11.215.414-8,Cliente 11215414,"Avenida Providencia 5667, Santiago, Chile",Santiago,16:32
+Truck-86 · Trip-5,-,-,-,Centro de Distribución,-,17:00
+Truck-87 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-87 · Trip-1,ORD-CL-202612-003585,21.015.076-2,Cliente 21015076,"Avenida Departamental 1600, Santiago, Chile",Las Condes,09:12
+Truck-87 · Trip-1,-,-,-,Centro de Distribución,-,09:49
+Truck-87 · Trip-2,-,-,-,Centro de Distribución,-,10:49
+Truck-87 · Trip-2,ORD-CL-202612-003748,15.893.864-7,Cliente 15893864,"Gran Avenida José Miguel Carrera 572, Santiago, Chile",Recoleta,11:02
+Truck-87 · Trip-2,-,-,-,Centro de Distribución,-,11:38
+Truck-87 · Trip-3,-,-,-,Centro de Distribución,-,12:38
+Truck-87 · Trip-3,ORD-CL-202612-004122,21.079.522-3,Cliente 21079522,"Avenida Irarrázaval 2958, Santiago, Chile",Independencia,12:51
+Truck-87 · Trip-3,-,-,-,Centro de Distribución,-,13:27
+Truck-87 · Trip-4,-,-,-,Centro de Distribución,-,14:27
+Truck-87 · Trip-4,ORD-CL-202612-003911,15.304.873-5,Cliente Nuevo 15304873,"Calle Arturo Prat 9820, Santiago, Chile",Lo Prado,14:39
+Truck-87 · Trip-4,-,-,-,Centro de Distribución,-,15:16
+Truck-87 · Trip-5,-,-,-,Centro de Distribución,-,16:16
+Truck-87 · Trip-5,ORD-CL-202612-003699,18.375.695-7,Cliente Nuevo 18375695,"Avenida Providencia 3018, Santiago, Chile",Santiago,16:31
+Truck-87 · Trip-5,-,-,-,Centro de Distribución,-,17:00
+Truck-88 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-88 · Trip-1,ORD-CL-202612-004137,9.258.545-0,Cliente Nuevo 9258545,"Avenida Providencia 5058, Santiago, Chile",Quinta Normal,09:15
+Truck-88 · Trip-1,-,-,-,Centro de Distribución,-,09:49
+Truck-88 · Trip-2,-,-,-,Centro de Distribución,-,10:49
+Truck-88 · Trip-2,ORD-CL-202612-003950,19.851.650-7,Cliente Nuevo 19851650,"Calle Arturo Prat 5072, Santiago, Chile",Santiago,11:01
+Truck-88 · Trip-2,-,-,-,Centro de Distribución,-,11:37
+Truck-88 · Trip-3,-,-,-,Centro de Distribución,-,12:37
+Truck-88 · Trip-3,ORD-CL-202612-003752,11.565.215-0,Cliente Nuevo 11565215,"Avenida Grecia 5499, Santiago, Chile",Providencia,12:51
+Truck-88 · Trip-3,-,-,-,Centro de Distribución,-,13:26
+Truck-88 · Trip-4,-,-,-,Centro de Distribución,-,14:26
+Truck-88 · Trip-4,ORD-CL-202612-003945,10.406.315-3,Cliente Nuevo 10406315,"Avenida Pedro De Valdivia 1687, Santiago, Chile",Independencia,14:42
+Truck-88 · Trip-4,-,-,-,Centro de Distribución,-,15:14
+Truck-88 · Trip-5,-,-,-,Centro de Distribución,-,16:14
+Truck-88 · Trip-5,ORD-CL-202612-003833,20.441.515-9,Cliente Nuevo 20441515,"Calle Arturo Prat 1187, Santiago, Chile",Santiago,16:27
+Truck-88 · Trip-5,-,-,-,Centro de Distribución,-,17:00
+Truck-89 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-89 · Trip-1,ORD-CL-202612-003844,13.856.747-2,Cliente 13856747,"Avenida Pajaritos 3656, Santiago, Chile",San Miguel,09:15
+Truck-89 · Trip-1,-,-,-,Centro de Distribución,-,09:48
+Truck-89 · Trip-2,-,-,-,Centro de Distribución,-,10:48
+Truck-89 · Trip-2,ORD-CL-202612-004119,8.441.293-4,Cliente Nuevo 8441293,"Avenida Libertador Bernardo O'Higgins 484, Santiago, Chile",Providencia,10:59
+Truck-89 · Trip-2,-,-,-,Centro de Distribución,-,11:37
+Truck-89 · Trip-3,-,-,-,Centro de Distribución,-,12:37
+Truck-89 · Trip-3,ORD-CL-202612-003810,14.976.779-6,Cliente 14976779,"Avenida Irarrázaval 8302, Santiago, Chile",Santiago,12:50
+Truck-89 · Trip-3,-,-,-,Centro de Distribución,-,13:25
+Truck-89 · Trip-4,-,-,-,Centro de Distribución,-,14:25
+Truck-89 · Trip-4,ORD-CL-202612-003371,13.555.003-6,Cliente 13555003,"Avenida Grecia 4946, Santiago, Chile",Santiago,14:39
+Truck-89 · Trip-4,-,-,-,Centro de Distribución,-,15:13
+Truck-89 · Trip-5,-,-,-,Centro de Distribución,-,16:13
+Truck-89 · Trip-5,ORD-CL-202612-003816,21.079.522-3,Cliente 21079522,"Avenida Irarrázaval 2958, Santiago, Chile",Independencia,16:26
+Truck-89 · Trip-5,-,-,-,Centro de Distribución,-,17:00
+Truck-90 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-90 · Trip-1,ORD-CL-202612-003442,14.515.904-7,Cliente Nuevo 14515904,"Avenida Independencia 275, Santiago, Chile",Lo Prado,09:13
+Truck-90 · Trip-1,-,-,-,Centro de Distribución,-,09:48
+Truck-90 · Trip-2,-,-,-,Centro de Distribución,-,10:48
+Truck-90 · Trip-2,ORD-CL-202612-003337,7.744.061-4,Cliente Nuevo 7744061,"Avenida Departamental 8493, Santiago, Chile",Estación Central,11:00
+Truck-90 · Trip-2,-,-,-,Centro de Distribución,-,11:36
+Truck-90 · Trip-3,-,-,-,Centro de Distribución,-,12:36
+Truck-90 · Trip-3,ORD-CL-202612-003794,11.079.834-9,Cliente 11079834,"Avenida Pajaritos 9628, Santiago, Chile",Estación Central,12:51
+Truck-90 · Trip-3,-,-,-,Centro de Distribución,-,13:24
+Truck-90 · Trip-4,-,-,-,Centro de Distribución,-,14:24
+Truck-90 · Trip-4,ORD-CL-202612-003384,12.492.700-8,Cliente 12492700,"Gran Avenida José Miguel Carrera 1240, Santiago, Chile",San Miguel,14:37
+Truck-90 · Trip-4,-,-,-,Centro de Distribución,-,15:11
+Truck-90 · Trip-5,-,-,-,Centro de Distribución,-,16:11
+Truck-90 · Trip-5,ORD-CL-202612-004004,14.319.883-1,Cliente 14319883,"Avenida Matta 5936, Santiago, Chile",Puente Alto,16:24
+Truck-90 · Trip-5,-,-,-,Centro de Distribución,-,16:59
+Truck-91 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-91 · Trip-1,ORD-CL-202612-003325,12.712.976-6,Cliente 12712976,"Avenida Providencia 4190, Santiago, Chile",Santiago,09:15
+Truck-91 · Trip-1,-,-,-,Centro de Distribución,-,09:47
+Truck-91 · Trip-2,-,-,-,Centro de Distribución,-,10:47
+Truck-91 · Trip-2,ORD-CL-202612-003804,7.416.994-3,Cliente Nuevo 7416994,"Avenida Pajaritos 6452, Santiago, Chile",Estación Central,11:03
+Truck-91 · Trip-2,-,-,-,Centro de Distribución,-,11:35
+Truck-91 · Trip-3,-,-,-,Centro de Distribución,-,12:35
+Truck-91 · Trip-3,ORD-CL-202612-004180,14.512.240-4,Cliente Nuevo 14512240,"Avenida Matta 5370, Santiago, Chile",Estación Central,12:48
+Truck-91 · Trip-3,-,-,-,Centro de Distribución,-,13:22
+Truck-91 · Trip-4,-,-,-,Centro de Distribución,-,14:22
+Truck-91 · Trip-4,ORD-CL-202612-003372,5.318.872-4,Cliente Nuevo 5318872,"Gran Avenida José Miguel Carrera 5847, Santiago, Chile",Peñalolén,14:35
+Truck-91 · Trip-4,-,-,-,Centro de Distribución,-,15:09
+Truck-91 · Trip-5,-,-,-,Centro de Distribución,-,16:09
+Truck-91 · Trip-5,ORD-CL-202612-004013,5.053.024-2,Cliente 5053024,"Avenida Departamental 1018, Santiago, Chile",Quinta Normal,16:22
+Truck-91 · Trip-5,-,-,-,Centro de Distribución,-,16:56
+Truck-92 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-92 · Trip-1,ORD-CL-202612-004179,13.905.591-0,Cliente Nuevo 13905591,"Avenida Irarrázaval 7578, Santiago, Chile",Providencia,09:13
+Truck-92 · Trip-1,-,-,-,Centro de Distribución,-,09:47
+Truck-92 · Trip-2,-,-,-,Centro de Distribución,-,10:47
+Truck-92 · Trip-2,ORD-CL-202612-003769,7.442.264-1,Cliente Nuevo 7442264,"Gran Avenida José Miguel Carrera 2598, Santiago, Chile",Providencia,10:59
+Truck-92 · Trip-2,-,-,-,Centro de Distribución,-,11:34
+Truck-92 · Trip-3,-,-,-,Centro de Distribución,-,12:34
+Truck-92 · Trip-3,ORD-CL-202612-003841,17.604.610-9,Cliente Nuevo 17604610,"Gran Avenida José Miguel Carrera 9698, Santiago, Chile",Lo Prado,12:47
+Truck-92 · Trip-3,-,-,-,Centro de Distribución,-,13:21
+Truck-92 · Trip-4,-,-,-,Centro de Distribución,-,14:21
+Truck-92 · Trip-4,ORD-CL-202612-003886,7.211.057-1,Cliente 7211057,"Avenida Matta 1936, Santiago, Chile",Lo Prado,14:34
+Truck-92 · Trip-4,-,-,-,Centro de Distribución,-,15:07
+Truck-92 · Trip-5,-,-,-,Centro de Distribución,-,16:07
+Truck-92 · Trip-5,ORD-CL-202612-003897,5.923.393-9,Cliente 5923393,"Calle Arturo Prat 2957, Santiago, Chile",Santiago,16:20
+Truck-92 · Trip-5,-,-,-,Centro de Distribución,-,16:54
+Truck-93 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-93 · Trip-1,ORD-CL-202612-003827,7.506.373-2,Cliente 7506373,"Avenida Vicuña Mackenna 2974, Santiago, Chile",Las Condes,09:19
+Truck-93 · Trip-1,-,-,-,Centro de Distribución,-,09:46
+Truck-93 · Trip-2,-,-,-,Centro de Distribución,-,10:46
+Truck-93 · Trip-2,ORD-CL-202612-004054,9.212.917-4,Cliente 9212917,"Gran Avenida José Miguel Carrera 9844, Santiago, Chile",Quinta Normal,11:00
+Truck-93 · Trip-2,-,-,-,Centro de Distribución,-,11:33
+Truck-93 · Trip-3,-,-,-,Centro de Distribución,-,12:33
+Truck-93 · Trip-3,ORD-CL-202612-003432,7.828.785-0,Cliente Nuevo 7828785,"Avenida Irarrázaval 9489, Santiago, Chile",Santiago,12:46
+Truck-93 · Trip-3,-,-,-,Centro de Distribución,-,13:19
+Truck-93 · Trip-4,-,-,-,Centro de Distribución,-,14:19
+Truck-93 · Trip-4,ORD-CL-202612-003563,10.412.066-2,Cliente 10412066,"Gran Avenida José Miguel Carrera 3362, Santiago, Chile",Santiago,14:32
+Truck-93 · Trip-4,-,-,-,Centro de Distribución,-,15:05
+Truck-93 · Trip-5,-,-,-,Centro de Distribución,-,16:05
+Truck-93 · Trip-5,ORD-CL-202612-003641,15.604.724-1,Cliente 15604724,"Avenida Independencia 9638, Santiago, Chile",Santiago,16:20
+Truck-93 · Trip-5,-,-,-,Centro de Distribución,-,16:52
+Truck-94 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-94 · Trip-1,ORD-CL-202612-004032,22.702.021-8,Cliente 22702021,"Avenida Matta 2957, Santiago, Chile",Santiago,09:13
+Truck-94 · Trip-1,-,-,-,Centro de Distribución,-,09:46
+Truck-94 · Trip-2,-,-,-,Centro de Distribución,-,10:46
+Truck-94 · Trip-2,ORD-CL-202612-003679,20.791.707-4,Cliente Nuevo 20791707,"Avenida Irarrázaval 8053, Santiago, Chile",La Reina,10:59
+Truck-94 · Trip-2,-,-,-,Centro de Distribución,-,11:32
+Truck-94 · Trip-3,-,-,-,Centro de Distribución,-,12:32
+Truck-94 · Trip-3,ORD-CL-202612-003700,16.513.123-9,Cliente Nuevo 16513123,"Calle Arturo Prat 4053, Santiago, Chile",Independencia,12:45
+Truck-94 · Trip-3,-,-,-,Centro de Distribución,-,13:18
+Truck-94 · Trip-4,-,-,-,Centro de Distribución,-,14:18
+Truck-94 · Trip-4,ORD-CL-202612-003740,6.899.986-8,Cliente Nuevo 6899986,"Avenida Mapocho 1251, Santiago, Chile",La Reina,14:27
+Truck-94 · Trip-4,-,-,-,Centro de Distribución,-,15:04
+Truck-94 · Trip-5,-,-,-,Centro de Distribución,-,16:04
+Truck-94 · Trip-5,ORD-CL-202612-003943,17.094.471-5,Cliente 17094471,"Avenida Mapocho 4726, Santiago, Chile",Quinta Normal,16:12
+Truck-94 · Trip-5,-,-,-,Centro de Distribución,-,16:49
+Truck-95 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-95 · Trip-1,ORD-CL-202612-003720,21.891.734-5,Cliente Nuevo 21891734,"Avenida Pajaritos 933, Santiago, Chile",Vitacura,09:12
+Truck-95 · Trip-1,-,-,-,Centro de Distribución,-,09:45
+Truck-95 · Trip-2,-,-,-,Centro de Distribución,-,10:45
+Truck-95 · Trip-2,ORD-CL-202612-003725,6.808.972-3,Cliente Nuevo 6808972,"Avenida Independencia 7555, Santiago, Chile",Puente Alto,10:59
+Truck-95 · Trip-2,-,-,-,Centro de Distribución,-,11:29
+Truck-95 · Trip-3,-,-,-,Centro de Distribución,-,12:29
+Truck-95 · Trip-3,ORD-CL-202612-004000,8.798.160-9,Cliente 8798160,"Calle Arturo Prat 7627, Santiago, Chile",Las Condes,12:42
+Truck-95 · Trip-3,-,-,-,Centro de Distribución,-,13:14
+Truck-95 · Trip-4,-,-,-,Centro de Distribución,-,14:14
+Truck-95 · Trip-4,ORD-CL-202612-004079,16.774.922-8,Cliente Nuevo 16774922,"Avenida Independencia 9113, Santiago, Chile",Quinta Normal,14:29
+Truck-95 · Trip-4,-,-,-,Centro de Distribución,-,14:59
+Truck-95 · Trip-5,-,-,-,Centro de Distribución,-,15:59
+Truck-95 · Trip-5,ORD-CL-202612-003768,11.867.941-0,Cliente Nuevo 11867941,"Avenida Matta 6279, Santiago, Chile",Independencia,16:12
+Truck-95 · Trip-5,-,-,-,Centro de Distribución,-,16:43
+Truck-96 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-96 · Trip-1,ORD-CL-202612-003963,7.211.057-1,Cliente 7211057,"Avenida Matta 1936, Santiago, Chile",Lo Prado,09:13
+Truck-96 · Trip-1,-,-,-,Centro de Distribución,-,09:44
+Truck-96 · Trip-2,-,-,-,Centro de Distribución,-,10:44
+Truck-96 · Trip-2,ORD-CL-202612-003847,21.797.860-5,Cliente Nuevo 21797860,"Calle Arturo Prat 2118, Santiago, Chile",Vitacura,10:56
+Truck-96 · Trip-2,-,-,-,Centro de Distribución,-,11:28
+Truck-96 · Trip-3,-,-,-,Centro de Distribución,-,12:28
+Truck-96 · Trip-3,ORD-CL-202612-004001,19.059.699-3,Cliente Nuevo 19059699,"Gran Avenida José Miguel Carrera 3758, Santiago, Chile",Recoleta,12:41
+Truck-96 · Trip-3,-,-,-,Centro de Distribución,-,13:12
+Truck-96 · Trip-4,-,-,-,Centro de Distribución,-,14:12
+Truck-96 · Trip-4,ORD-CL-202612-004175,5.433.342-8,Cliente 5433342,"Calle Arturo Prat 4641, Santiago, Chile",La Reina,14:25
+Truck-96 · Trip-4,-,-,-,Centro de Distribución,-,14:56
+Truck-96 · Trip-5,-,-,-,Centro de Distribución,-,15:56
+Truck-96 · Trip-5,ORD-CL-202612-004064,14.819.473-1,Cliente 14819473,"Avenida Grecia 6127, Santiago, Chile",Puente Alto,16:10
+Truck-96 · Trip-5,-,-,-,Centro de Distribución,-,16:40
+Truck-97 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-97 · Trip-1,ORD-CL-202612-003959,6.885.336-2,Cliente Nuevo 6885336,"Avenida Independencia 8803, Santiago, Chile",La Florida,09:15
+Truck-97 · Trip-1,-,-,-,Centro de Distribución,-,09:44
+Truck-97 · Trip-2,-,-,-,Centro de Distribución,-,10:44
+Truck-97 · Trip-2,ORD-CL-202612-003306,15.893.864-7,Cliente 15893864,"Gran Avenida José Miguel Carrera 572, Santiago, Chile",Recoleta,10:57
+Truck-97 · Trip-2,-,-,-,Centro de Distribución,-,11:27
+Truck-97 · Trip-3,-,-,-,Centro de Distribución,-,12:27
+Truck-97 · Trip-3,ORD-CL-202612-004149,22.692.685-2,Cliente 22692685,"Calle Arturo Prat 5100, Santiago, Chile",Santiago,12:39
+Truck-97 · Trip-3,-,-,-,Centro de Distribución,-,13:10
+Truck-97 · Trip-4,-,-,-,Centro de Distribución,-,14:10
+Truck-97 · Trip-4,ORD-CL-202612-004176,21.020.259-3,Cliente 21020259,"Calle Arturo Prat 4349, Santiago, Chile",Independencia,14:22
+Truck-97 · Trip-4,-,-,-,Centro de Distribución,-,14:53
+Truck-97 · Trip-5,-,-,-,Centro de Distribución,-,15:53
+Truck-97 · Trip-5,ORD-CL-202612-003669,21.891.734-5,Cliente Nuevo 21891734,"Avenida Pajaritos 933, Santiago, Chile",Vitacura,16:05
+Truck-97 · Trip-5,-,-,-,Centro de Distribución,-,16:35
+Truck-98 · Trip-1,-,-,-,Centro de Distribución,-,09:00
+Truck-98 · Trip-1,ORD-CL-202612-003578,8.578.947-2,Cliente 8578947,"Avenida Independencia 606, Santiago, Chile",La Florida,09:15
+Truck-98 · Trip-1,-,-,-,Centro de Distribución,-,09:42
+Truck-98 · Trip-2,-,-,-,Centro de Distribución,-,10:42
+Truck-98 · Trip-2,ORD-CL-202612-003587,10.412.066-2,Cliente 10412066,"Gran Avenida José Miguel Carrera 3362, Santiago, Chile",Santiago,10:56
+Truck-98 · Trip-2,-,-,-,Centro de Distribución,-,11:24
+Truck-98 · Trip-3,-,-,-,Centro de Distribución,-,12:24
+Truck-98 · Trip-3,ORD-CL-202612-004145,11.560.240-5,Cliente Nuevo 11560240,"Avenida Independencia 7786, Santiago, Chile",San Miguel,12:38
+Truck-98 · Trip-3,-,-,-,Centro de Distribución,-,13:05
+Truck-98 · Trip-4,-,-,-,Centro de Distribución,-,14:05
+Truck-98 · Trip-4,ORD-CL-202612-003880,9.657.778-2,Cliente Nuevo 9657778,"Avenida Independencia 6663, Santiago, Chile",Peñalolén,14:20
+Truck-98 · Trip-4,-,-,-,Centro de Distribución,-,14:45
