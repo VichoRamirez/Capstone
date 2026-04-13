@@ -73,63 +73,24 @@ HARD_FLEET_PENALTIES = PenaltyConfig(
 )
 
 
-def _force_min_cost_insert(
-    routes: SolutionRoutes,
-    customer: int,
-    data: VRPTWData,
-) -> None:
-    """
-    Inserta *customer* en la posición de menor costo adicional en distancia,
-    sin verificar factibilidad. Si no hay rutas, abre una singleton.
-    """
-    if not routes:
-        routes.append([data.depot, customer, data.depot])
-        return
-
-    best_ridx = -1
-    best_pos = 0
-    best_delta = float("inf")
-
-    for ridx, route in enumerate(routes):
-        # Skip routes already at the per-route client limit
-        if len(route) - 2 >= MAX_CLIENTS_PER_ROUTE:
-            continue
-        base_dist = evaluate_route(route, data).distance
-        for pos in range(len(route) - 1):
-            cand = route[: pos + 1] + [customer] + route[pos + 1 :]
-            delta = evaluate_route(cand, data).distance - base_dist
-            if delta < best_delta:
-                best_delta = delta
-                best_ridx = ridx
-                best_pos = pos
-
-    if best_ridx == -1:
-        # All routes at capacity — open a new singleton (fallback)
-        routes.append([data.depot, customer, data.depot])
-        return
-
-    routes[best_ridx].insert(best_pos + 1, customer)
-
-
 def solomon_hard_fleet(
     ctx: ProblemContext,
     seed: int = 42,
-) -> SolutionRoutes:
+) -> Tuple[SolutionRoutes, List[int]]:
     """
-    Solomon I1 con restricción dura de flota.
+    Solomon I1 con restricciones duras de flota, tiempo y capacidad.
 
-    Fases:
-      1. Itera igual que heuristic_solomon_i1_style: selecciona semilla
-         (nodo más lejano al depósito) y rellena cada ruta con
-         inserciones factibles según criterio c2 de Solomon.
-      2. Cuando len(routes) == K_max y quedan clientes sin asignar:
-         los fuerza uno a uno en la posición de mínimo costo extra
-         (ignorando factibilidad de capacidad/tiempo).
-      3. Retorna la solución cruda (SolutionRoutes) sin post-procesado,
-         para que el caller la pase a tabu_search_vrptw con
-         HARD_FLEET_PENALTIES.
+    Retorna (routes, unserved):
+      routes   — lista de rutas factibles, len(routes) <= K_max.
+      unserved — clientes que no pudieron ser asignados a ninguna ruta
+                 factible (flota agotada o ninguna ruta tiene hueco).
 
-    Garantía: len(rutas_activas) <= K_max siempre.
+    Restricciones duras en la construcción:
+      - Flota: cuando len(routes) == K_max, los clientes restantes
+        se dejan sin servicio (no hay inserción forzada).
+      - Tiempo: cand_eval.feasible ya verifica route_time <= max_route_time.
+      - Capacidad: ídem.
+      - Clientes por ruta: <= MAX_CLIENTS_PER_ROUTE.
     """
     rng = random.Random(seed)
     data = ctx.data
@@ -137,12 +98,8 @@ def solomon_hard_fleet(
     routes: SolutionRoutes = []
 
     while unserved:
-        # ── Restricción dura: K agotado ──────────────────────────────────
+        # ── Restricción dura: K agotado → clientes restantes sin servicio ─
         if len(routes) >= data.K_max:
-            # Ordena por distancia al depósito (desc) para insertar primero
-            # los nodos más lejanos, que son los más costosos de dejar solos.
-            for j in sorted(unserved, key=lambda x: -data.d[data.depot, x]):
-                _force_min_cost_insert(routes, j, data)
             break
 
         # ── Selección de semilla: nodo más lejano al depósito ────────────
@@ -198,4 +155,4 @@ def solomon_hard_fleet(
 
         routes.append(route)
 
-    return routes
+    return routes, list(unserved)
