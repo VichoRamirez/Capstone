@@ -1741,14 +1741,17 @@ def run_optimization(params: OptimizerParams,
     sol_nodes, ev = heuristic_solomon_i1_style(ctx, seed=seed)
     solomon_sec = time.perf_counter() - t_solver_0
 
-    # 4. Mejorar con Tabu Search
+    # 4. Mejorar con Tabu Search (opcional)
     t_tabu_0 = time.perf_counter()
-    sol_nodes, ev = tabu_search_vrptw(
-        data=vrp_data,
-        initial_solution=sol_nodes,
-        tabu_config=TabuConfig(),
-        seed=seed,
-    )
+    use_tabu = bool(getattr(params_effective, "use_tabu_search", True))
+    tabu_seconds = max(1.0, _safe_float(getattr(params_effective, "tabu_seconds", 20.0), 20.0))
+    if use_tabu:
+        sol_nodes, ev = tabu_search_vrptw(
+            data=vrp_data,
+            initial_solution=sol_nodes,
+            tabu_config=TabuConfig(max_seconds=tabu_seconds),
+            seed=seed,
+        )
     tabu_sec = time.perf_counter() - t_tabu_0
     solver_sec = solomon_sec + tabu_sec
 

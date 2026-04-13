@@ -48,6 +48,8 @@ class OptimizerParams(BaseModel):
     depot_address: list[float] = Field(..., description="Coordinates [lat, lon] of the distribution center")
     deliveries_per_day: int = Field(150, gt=0, description="Max deliveries to assign per calendar day")
     user_id: Optional[int] = Field(None, description="ID of the user running the optimization (SaaS DB filtering)")
+    use_tabu_search: bool = Field(True, description="Whether to run Tabu Search improvement after Solomon I1")
+    tabu_seconds: float = Field(20.0, gt=0, description="Time limit for Tabu Search in seconds")
 
 
 class CleaningError(BaseModel):

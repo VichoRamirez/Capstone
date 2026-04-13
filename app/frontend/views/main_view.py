@@ -22,7 +22,7 @@ from PyQt6.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QLabel, QPushButton,
     QTableWidget, QTableWidgetItem, QHeaderView, QFrame,
     QSplitter, QMessageBox, QScrollArea, QProgressBar, QGridLayout,
-    QStatusBar, QFileDialog, QTabWidget, QComboBox,
+    QStatusBar, QFileDialog, QTabWidget, QComboBox, QCheckBox,
 )
 from PyQt6.QtCore import Qt, QTimer, pyqtSignal
 from PyQt6.QtGui import QFont, QColor
@@ -477,7 +477,8 @@ class DayResultWidget(QWidget):
         if not self._result:
             return
         path, _ = QFileDialog.getSaveFileName(
-            self, "Export Routes", "routes.csv", "CSV Files (*.csv)"
+            self, "Export Routes", "routes.csv", "CSV Files (*.csv)",
+            options=QFileDialog.Option.DontUseNativeDialog,
         )
         if path:
             with open(path, "w", newline="", encoding="utf-8") as f:
@@ -487,7 +488,8 @@ class DayResultWidget(QWidget):
         if not self._result:
             return
         path, _ = QFileDialog.getSaveFileName(
-            self, "Export Uncovered", "uncovered.csv", "CSV Files (*.csv)"
+            self, "Export Uncovered", "uncovered.csv", "CSV Files (*.csv)",
+            options=QFileDialog.Option.DontUseNativeDialog,
         )
         if path:
             with open(path, "w", newline="", encoding="utf-8") as f:
@@ -506,11 +508,22 @@ class GlobalSummaryWidget(QWidget):
         layout.setContentsMargins(0, 8, 0, 0)
         layout.setSpacing(8)
 
+        # Header row
+        top = QHBoxLayout()
         self.lbl_head = QLabel("Global summary for current optimization run")
         self.lbl_head.setStyleSheet(
             f"color: {theme.ACCENT2}; font-family: {theme.MONO}; font-size: 11px; padding-left: 4px;"
         )
-        layout.addWidget(self.lbl_head)
+        self.btn_export_global = QPushButton("EXPORT GLOBAL")
+        self.btn_export_global.setObjectName("btnSecondary")
+        self.btn_export_global.setCursor(Qt.CursorShape.PointingHandCursor)
+        self.btn_export_global.setFixedHeight(28)
+        self.btn_export_global.setEnabled(False)
+        self.btn_export_global.clicked.connect(self._export_global)
+        top.addWidget(self.lbl_head)
+        top.addStretch()
+        top.addWidget(self.btn_export_global)
+        layout.addLayout(top)
 
         self.table = QTableWidget(0, 2)
         self.table.setHorizontalHeaderLabels(["METRIC", "VALUE"])
@@ -549,6 +562,7 @@ class GlobalSummaryWidget(QWidget):
             return "0.00 s"
 
     def _set_rows(self, rows: list[tuple[str, str]]):
+        self._rows = rows
         self.table.setRowCount(0)
         for metric, value in rows:
             r = self.table.rowCount()
@@ -615,6 +629,20 @@ class GlobalSummaryWidget(QWidget):
         ]
 
         self._set_rows(rows)
+        self.btn_export_global.setEnabled(True)
+
+    def _export_global(self):
+        if not getattr(self, "_rows", None):
+            return
+        path, _ = QFileDialog.getSaveFileName(
+            self, "Export Global Summary", "global_summary.csv", "CSV Files (*.csv)",
+            options=QFileDialog.Option.DontUseNativeDialog,
+        )
+        if path:
+            with open(path, "w", newline="", encoding="utf-8") as f:
+                writer = csv.writer(f)
+                writer.writerow(["Metric", "Value"])
+                writer.writerows(self._rows)
 
 
 # ── Main view ─────────────────────────────────────────────────────────────
@@ -1404,6 +1432,34 @@ class MainView(QWidget):
         )
         adv_card.add_widget(self.lbl_diesel_api_status)
 
+        # ── Tabu Search ──
+        tabu_row = QHBoxLayout()
+        self.chk_tabu = QCheckBox("Activar Tabu Search")
+        self.chk_tabu.setChecked(True)
+        self.chk_tabu.setCursor(Qt.CursorShape.PointingHandCursor)
+        self.chk_tabu.toggled.connect(self._on_tabu_toggled)
+
+        _TABU_OPTIONS = [
+            ("5 s  (~3 min / 35 días)",   5.0),
+            ("10 s (~6 min / 35 días)",   10.0),
+            ("20 s (~12 min / 35 días)",  20.0),
+            ("30 s (~18 min / 35 días)",  30.0),
+            ("60 s (~35 min / 35 días)",  60.0),
+        ]
+        self.cmb_tabu_seconds = QComboBox()
+        self.cmb_tabu_seconds.setObjectName("datasetCombo")
+        self.cmb_tabu_seconds.setCursor(Qt.CursorShape.PointingHandCursor)
+        tooltip_lines = ["Tiempo de Tabu Search por día de despacho:\n"]
+        for label, val in _TABU_OPTIONS:
+            self.cmb_tabu_seconds.addItem(label, val)
+            tooltip_lines.append(f"  • {label}")
+        self.cmb_tabu_seconds.setCurrentIndex(2)  # default: 20 s
+        self.cmb_tabu_seconds.setToolTip("\n".join(tooltip_lines))
+
+        tabu_row.addWidget(self.chk_tabu)
+        tabu_row.addWidget(self.cmb_tabu_seconds, 1)
+        adv_card.add_layout(tabu_row)
+
         self.advanced_layout.addWidget(adv_card)
         layout.addWidget(self.advanced_container)
 
@@ -1638,6 +1694,9 @@ class MainView(QWidget):
             "gasoline_97": "Gasoline 97",
         }
         return labels.get(fuel_type, fuel_type)
+
+    def _on_tabu_toggled(self, checked: bool):
+        self.cmb_tabu_seconds.setEnabled(checked)
 
     def _on_fuel_type_changed(self, _idx: int):
         self._set_diesel_api_status(
@@ -2429,6 +2488,8 @@ class MainView(QWidget):
             "space_per_truck": self.inp_space.text().strip(),
             "weight_per_truck": self.inp_weight.text().strip(),
             "deliveries_per_day": self.inp_deliveries.text().strip(),
+            "use_tabu_search": self.chk_tabu.isChecked(),
+            "tabu_seconds": self.cmb_tabu_seconds.currentData(),
             "ventas_path": self.ventas_path or "",
             "detalle_path": self.detalle_path or "",
         }
@@ -2463,6 +2524,10 @@ class MainView(QWidget):
         self.inp_space.setText(str(data.get("space_per_truck", "") or "9"))
         self.inp_weight.setText(str(data.get("weight_per_truck", "") or "2000"))
         self.inp_deliveries.setText(str(data.get("deliveries_per_day", "") or "150"))
+        self.chk_tabu.setChecked(bool(data.get("use_tabu_search", True)))
+        saved_tabu_sec = data.get("tabu_seconds", 20.0)
+        tabu_idx = self.cmb_tabu_seconds.findData(saved_tabu_sec)
+        self.cmb_tabu_seconds.setCurrentIndex(tabu_idx if tabu_idx >= 0 else 2)
         if self.inp_diesel_price.text().strip():
             self._set_diesel_api_status(
                 f"{self._selected_fuel_label()} loaded from last config: {self.inp_diesel_price.text().strip()} CLP/L",
@@ -2749,6 +2814,8 @@ class MainView(QWidget):
         self.inp_space.setText("9")
         self.inp_weight.setText("2000")
         self.inp_deliveries.setText("150")
+        self.chk_tabu.setChecked(True)
+        self.cmb_tabu_seconds.setCurrentIndex(2)  # 20 s
 
         self._set_dataset_path("ventas", None)
         self._set_dataset_path("detalle", None)
@@ -2882,6 +2949,8 @@ class MainView(QWidget):
             "depot_address":     [lat, lon],
             "deliveries_per_day": deliveries_per_day,
             "user_id":           self.user_id,
+            "use_tabu_search":   self.chk_tabu.isChecked(),
+            "tabu_seconds":      float(self.cmb_tabu_seconds.currentData() or 20.0),
         }
 
     # ── Submit ────────────────────────────────────────────────────────────────

@@ -1,10 +1,10 @@
 {
-  "num_trucks": "5",
-  "depot_query": "Av Libertador Bernardo o'higgins 115",
-  "validated_depot_query": "Av Libertador Bernardo o'higgins 115",
+  "num_trucks": "15",
+  "depot_query": "Av. Libertador Bernardo o'higgins 4850",
+  "validated_depot_query": "Av. Libertador Bernardo o'higgins 4850",
   "validated_depot_coords": [
-    -33.4374787,
-    -70.6368867
+    -33.457119,
+    -70.7018142
   ],
   "api_url": "http://localhost:8000/optimize",
   "runtime": "",
@@ -14,9 +14,11 @@
   "fuel_type": "diesel",
   "truck_fixed_cost_clp": "20000",
   "diesel_price_clp": "1547",
-  "space_per_truck": "9",
+  "space_per_truck": "12",
   "weight_per_truck": "2000",
   "deliveries_per_day": "150",
-  "ventas_path": "/home/joaquin/universidad/ramos/capstone_analytics/Capstone/RAW_DATA/ventas_ficticias_santiago_202612.csv",
-  "detalle_path": "/home/joaquin/universidad/ramos/capstone_analytics/Capstone/RAW_DATA/detalle_pedidos_santiago_202612.xlsx"
+  "use_tabu_search": true,
+  "tabu_seconds": 20.0,
+  "ventas_path": "",
+  "detalle_path": ""
 }
