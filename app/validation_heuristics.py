@@ -1,6 +1,12 @@
 """
 validation_heuristics.py — Solomon I1 con restricción dura de flota y tiempo.
 
+Este módulo implementa una variante estricta de la heurística constructiva
+Solomon I1 donde las restricciones de flota, tiempo y capacidad se tratan como
+duras (hard constraints): ningún cliente se inserta si viola alguna de ellas.
+Los clientes que no caben en ninguna ruta factible se devuelven en una lista
+``unserved`` y son reagendados al día siguiente por el optimizador principal.
+
 Restricciones duras aplicadas:
   1. Flota: nunca se abren más de K rutas. Cuando K se agota, los clientes
      restantes quedan sin servicio (unserved) — NO se fuerza su inserción.
@@ -54,6 +60,9 @@ from backend.models.routing.literature_heuristics import ProblemContext
 # - fleet: astronomicamente alto → TS nunca considera abrir ruta nueva
 # - visit: mantiene la obligacion de visitar todos los nodos
 # ---------------------------------------------------------------------------
+
+# Límite máximo de clientes por ruta para evitar rutas imprácticamente largas.
+# Este valor actúa como restricción dura adicional durante la construcción.
 MAX_CLIENTS_PER_ROUTE = 250
 
 # ---------------------------------------------------------------------------
@@ -64,12 +73,16 @@ MAX_CLIENTS_PER_ROUTE = 250
 #     bajo el límite de tiempo/capacidad, pero no a cualquier precio
 #   fleet: 1 000 000 → TS nunca abre una ruta adicional
 # ---------------------------------------------------------------------------
+
+# Configuración de penalidades usada por el Tabu Search cuando opera sobre
+# la solución construida por solomon_hard_fleet. Los valores extremadamente
+# altos simulan restricciones duras dentro de un marco de penalidades suaves.
 HARD_FLEET_PENALTIES = PenaltyConfig(
-    cap_weight=5_000.0,
-    cap_volume=5_000.0,
-    route_duration=5_000.0,
-    visit=50_000.0,
-    fleet=1_000_000.0,
+    cap_weight=5_000.0,    # Penalidad por kg sobre la capacidad del camión
+    cap_volume=5_000.0,    # Penalidad por m³ sobre la capacidad volumétrica
+    route_duration=5_000.0,  # Penalidad por minuto de exceso en jornada laboral
+    visit=50_000.0,        # Penalidad por cada cliente no atendido
+    fleet=1_000_000.0,     # Penalidad por abrir una ruta adicional (prohibitivo)
 )
 
 
@@ -80,10 +93,23 @@ def solomon_hard_fleet(
     """
     Solomon I1 con restricciones duras de flota, tiempo y capacidad.
 
+    Implementa la heurística constructiva de Solomon (1987) donde en cada
+    iteración se abre una nueva ruta inicializada con el cliente más lejano
+    al depósito y luego se van insertando los clientes restantes en la posición
+    de menor costo c1, priorizando al cliente con mayor beneficio c2 (aquel que
+    más perdería si tuviese que abrir su propia ruta). A diferencia de la versión
+    estándar, esta variante no fuerza ninguna inserción que viole las restricciones:
+    si un cliente no cabe en ninguna ruta factible y el límite de flota está
+    agotado, queda en ``unserved`` para ser reagendado al día siguiente.
+
+    Parámetros:
+        ctx  -- contexto del problema (VRPTWData + coordenadas).
+        seed -- semilla aleatoria para desempate estocástico entre candidatos.
+
     Retorna (routes, unserved):
-      routes   — lista de rutas factibles, len(routes) <= K_max.
-      unserved — clientes que no pudieron ser asignados a ninguna ruta
-                 factible (flota agotada o ninguna ruta tiene hueco).
+      routes   -- lista de rutas factibles, len(routes) <= K_max.
+      unserved -- clientes que no pudieron ser asignados a ninguna ruta
+                  factible (flota agotada o ninguna ruta tiene hueco).
 
     Restricciones duras en la construcción:
       - Flota: cuando len(routes) == K_max, los clientes restantes
@@ -94,33 +120,42 @@ def solomon_hard_fleet(
     """
     rng = random.Random(seed)
     data = ctx.data
+    # Todos los clientes parten sin asignar
     unserved: Set[int] = set(data.J)
     routes: SolutionRoutes = []
 
     while unserved:
         # ── Restricción dura: K agotado → clientes restantes sin servicio ─
+        # Una vez que se usan todos los camiones disponibles, se detiene la
+        # construcción y los clientes no asignados se devuelven como unserved.
         if len(routes) >= data.K_max:
             break
 
         # ── Selección de semilla: nodo más lejano al depósito ────────────
+        # Solomon propone iniciar cada ruta con el cliente más alejado porque
+        # es el que tiene menos oportunidad de ser absorbido por otras rutas.
         seed_customer = max(unserved, key=lambda j: data.d[data.depot, j])
         route: List[int] = [data.depot, seed_customer, data.depot]
         unserved.remove(seed_customer)
 
         # ── Relleno de la ruta actual (igual que Solomon I1 estándar) ────
+        # Se sigue insertando clientes en la ruta hasta que ninguno más quepa
+        # de forma factible (tiempo, capacidad, límite de clientes por ruta).
         while True:
             base_eval = evaluate_route(route, data)
             best_choice = None  # (c2_score, customer, insertion_pos)
 
             for c in list(unserved):
-                best_for_c = None  # (c1_score, pos)
+                best_for_c = None  # (c1_score, pos): mejor posición de inserción para c
 
                 for pos in range(len(route) - 1):
                     i = route[pos]
                     j = route[pos + 1]
+                    # Ruta candidata con c insertado entre i y j
                     cand = route[: pos + 1] + [c] + route[pos + 1 :]
                     cand_eval = evaluate_route(cand, data)
 
+                    # Solo se consideran inserciones estrictamente factibles
                     if not cand_eval.feasible:
                         continue
 
@@ -128,7 +163,10 @@ def solomon_hard_fleet(
                     if len(cand) - 2 > MAX_CLIENTS_PER_ROUTE:
                         continue
 
-                    # Criterio c1 de Solomon (Solomon 1987, eq. 3-4)
+                    # Criterio c1 de Solomon (Solomon 1987, eq. 3-4):
+                    # c11 mide el desvío de distancia al insertar c entre i y j.
+                    # c12 mide el incremento de tiempo total de ruta.
+                    # La combinación ponderada 0.7/0.3 equilibra ambos factores.
                     c11 = data.d[i, c] + data.d[c, j] - data.d[i, j]
                     c12 = cand_eval.route_time - base_eval.route_time
                     c1 = 0.7 * c11 + 0.3 * c12
@@ -137,9 +175,13 @@ def solomon_hard_fleet(
                         best_for_c = (c1, pos)
 
                 if best_for_c is None:
+                    # El cliente c no cabe en ninguna posición de esta ruta
                     continue
 
-                # Criterio c2 de Solomon (maximizar ahorro de abrir ruta propia)
+                # Criterio c2 de Solomon (maximizar ahorro de abrir ruta propia):
+                # c2 = distancia(depósito, c) - c1_star
+                # Un c2 alto significa que c pierde mucho si no entra aquí.
+                # El ruido uniform evita empates deterministas entre candidatos.
                 c1_star, pos_star = best_for_c
                 c2 = data.d[data.depot, c] - c1_star + rng.uniform(0.0, 1e-8)
 
@@ -147,12 +189,14 @@ def solomon_hard_fleet(
                     best_choice = (c2, c, pos_star)
 
             if best_choice is None:
-                break  # ningún cliente puede insertarse factiblemente
+                break  # ningún cliente puede insertarse factiblemente en esta ruta
 
+            # Insertar el cliente con mayor beneficio c2 en su mejor posición
             _, chosen_c, chosen_pos = best_choice
             route.insert(chosen_pos + 1, chosen_c)
             unserved.remove(chosen_c)
 
         routes.append(route)
 
+    # Los clientes que permanecen en unserved serán reagendados al día siguiente
     return routes, list(unserved)

@@ -1,10 +1,13 @@
-"""Routing helpers based on real coordinates and OSRM.
+"""
+Módulo de enrutamiento vial para el optimizador VRP/VRPTW.
 
-This module provides:
-- Real-world distance/time matrices from OSRM table API (with safe fallback).
-- Average speed matrix between nodes.
-- k-nearest selection using Dijkstra.
-- Depot-focused selection using A*.
+Provee:
+- Matrices de distancia/tiempo reales usando la API Table de OSRM.
+- Fallback automático a distancia Haversine si OSRM no está disponible.
+- Velocidad promedio observada entre nodos.
+- Selección de k vecinos más cercanos mediante Dijkstra.
+- Cálculo de distancia al depósito mediante A*.
+- Auto-inicio del servidor OSRM local si está configurado y no responde.
 """
 
 from __future__ import annotations
@@ -46,6 +49,7 @@ _LOCAL_OSRM_DATASET_USED = ""
 
 
 def _env_truthy(name: str, default: bool) -> bool:
+    """Lee una variable de entorno y la interpreta como booleano (0/false/no/off → False)."""
     raw = os.getenv(name)
     if raw is None:
         return bool(default)
@@ -53,6 +57,7 @@ def _env_truthy(name: str, default: bool) -> bool:
 
 
 def _normalize_osrm_base(base: str) -> str:
+    """Elimina barras finales y agrega esquema 'http://' si la URL base no lo tiene."""
     out = (base or "").strip().rstrip("/")
     if not out:
         return ""
@@ -62,10 +67,12 @@ def _normalize_osrm_base(base: str) -> str:
 
 
 def _configured_local_osrm_base() -> str:
+    """Retorna la URL base del servidor OSRM local según la variable de entorno OSRM_LOCAL_BASE_URL."""
     return _normalize_osrm_base(os.getenv("OSRM_LOCAL_BASE_URL", DEFAULT_LOCAL_OSRM_BASE))
 
 
 def _reserved_local_osrm_ports() -> set[int]:
+    """Retorna el conjunto de puertos locales reservados que no deben usarse para OSRM."""
     raw = os.getenv("OSRM_RESERVED_PORTS")
     if raw is None:
         return set(DEFAULT_LOCAL_OSRM_RESERVED_PORTS)
@@ -84,6 +91,7 @@ def _reserved_local_osrm_ports() -> set[int]:
 
 
 def _is_localhost_base(base: str) -> bool:
+    """Verifica si una URL base apunta a localhost (127.0.0.1 o 'localhost')."""
     try:
         host = (urllib.parse.urlparse(_normalize_osrm_base(base)).hostname or "").strip().lower()
     except Exception:
@@ -92,6 +100,7 @@ def _is_localhost_base(base: str) -> bool:
 
 
 def _base_port(base: str) -> int:
+    """Extrae el número de puerto de una URL base OSRM. Retorna 0 si no hay puerto explícito."""
     try:
         parsed = urllib.parse.urlparse(_normalize_osrm_base(base))
         if parsed.port:
@@ -102,12 +111,18 @@ def _base_port(base: str) -> int:
 
 
 def _is_reserved_local_base(base: str) -> bool:
+    """Determina si una URL base local usa un puerto reservado (que no debe usarse para OSRM)."""
     if not _is_localhost_base(base):
         return False
     return _base_port(base) in _reserved_local_osrm_ports()
 
 
 def _local_osrm_base_candidates() -> List[str]:
+    """
+    Genera la lista de URLs base OSRM locales a probar, comenzando por la ya confirmada
+    como activa (_LOCAL_OSRM_READY_BASE), seguida de los puertos candidatos configurados.
+    Excluye puertos reservados y elimina duplicados.
+    """
     configured = _configured_local_osrm_base()
     parsed = urllib.parse.urlparse(configured)
     scheme = parsed.scheme or "http"
@@ -135,12 +150,18 @@ def _local_osrm_base_candidates() -> List[str]:
 
 
 def _local_osrm_base() -> str:
+    """Retorna la URL base del OSRM local: la confirmada como activa o la configurada por defecto."""
     if _LOCAL_OSRM_READY_BASE:
         return _LOCAL_OSRM_READY_BASE
     return _configured_local_osrm_base()
 
 
 def _candidate_osrm_bases(osrm_base_url: str) -> List[str]:
+    """
+    Construye la lista priorizada de endpoints OSRM a intentar. Si OSRM_PREFER_LOCAL=true
+    (por defecto), los servidores locales se colocan primero. Incluye variantes http/https
+    para cada endpoint remoto y elimina duplicados.
+    """
     base = _normalize_osrm_base(osrm_base_url)
     if not base:
         base = DEFAULT_PUBLIC_OSRM_BASE
@@ -152,6 +173,7 @@ def _candidate_osrm_bases(osrm_base_url: str) -> List[str]:
 
     local_bases = _local_osrm_base_candidates()
     prefer_local = _env_truthy("OSRM_PREFER_LOCAL", True)
+    # Poner servidores locales al principio si se prefiere el enrutamiento local
     if prefer_local:
         configured = local_bases + configured
     else:
@@ -203,6 +225,10 @@ def haversine_km(coord_a: Coord, coord_b: Coord) -> float:
 
 
 def _curl_fetch_json(url: str, timeout_sec: float) -> Dict[str, Any]:
+    """
+    Ejecuta curl como subproceso para obtener JSON desde una URL OSRM.
+    Se usa como alternativa cuando urllib no puede resolver conexiones locales en Windows.
+    """
     curl_path = shutil.which("curl")
     if not curl_path:
         raise RuntimeError("curl_not_found")
@@ -241,6 +267,10 @@ def _curl_fetch_json(url: str, timeout_sec: float) -> Dict[str, Any]:
 
 
 def _fetch_json(url: str, timeout_sec: float) -> Dict[str, Any]:
+    """
+    Obtiene JSON desde una URL intentando primero con curl y luego con urllib.
+    Combina los errores de ambos métodos en el mensaje de excepción si ambos fallan.
+    """
     curl_error = ""
     try:
         return _curl_fetch_json(url, timeout_sec=timeout_sec)
@@ -272,11 +302,16 @@ def _fetch_json(url: str, timeout_sec: float) -> Dict[str, Any]:
 
 
 def _local_osrm_probe_url(base: str) -> str:
+    """Construye la URL de sondeo OSRM (nearest) para verificar conectividad del servidor."""
     normalized = _normalize_osrm_base(base)
     return f"{normalized}/nearest/v1/driving/{LOCAL_OSRM_PROBE_COORD}?number=1"
 
 
 def _is_osrm_base_reachable(base: str, timeout_sec: float) -> bool:
+    """
+    Verifica si un endpoint OSRM responde correctamente enviando una petición de prueba
+    al punto de referencia en Santiago. Retorna True solo si la respuesta es 'Ok'.
+    """
     normalized = _normalize_osrm_base(base)
     if not normalized:
         return False
@@ -288,11 +323,16 @@ def _is_osrm_base_reachable(base: str, timeout_sec: float) -> bool:
 
 
 def _prepared_osrm_dataset(path_or_stem: str) -> str:
+    """
+    Verifica si un dataset OSRM está preprocesado (al menos 2 archivos auxiliares presentes).
+    Retorna el path stem si está listo, o '' si faltan archivos de preprocesamiento.
+    """
     stem = (path_or_stem or "").strip()
     if not stem:
         return ""
     if stem.endswith(".osm.pbf"):
         stem = stem[: -len(".osm.pbf")] + ".osrm"
+    # Archivos generados por osrm-partition y osrm-customize (algoritmo MLD)
     suffixes = [".partition", ".cells", ".ebg", ".mldgr"]
     available = 0
     for sx in suffixes:
@@ -302,10 +342,15 @@ def _prepared_osrm_dataset(path_or_stem: str) -> str:
 
 
 def _local_osrm_dataset_candidates() -> List[str]:
+    """
+    Retorna la lista de datasets OSRM locales preprocesados disponibles. Prioriza el
+    configurado en OSRM_LOCAL_DATASET, luego busca nombres predeterminados del mapa de Chile.
+    """
     candidates: List[str] = []
     env_dataset = os.getenv("OSRM_LOCAL_DATASET", "").strip()
     if env_dataset:
         candidates.append(env_dataset)
+    # Nombres predeterminados del dataset de Chile en el directorio de soporte
     candidates.extend(
         [
             str(LOCAL_OSRM_DATA_DIR / "chile-latest.osrm"),
@@ -324,11 +369,17 @@ def _local_osrm_dataset_candidates() -> List[str]:
 
 
 def _find_osrm_routed_binary() -> str:
+    """
+    Localiza el ejecutable osrm-routed en el sistema. Busca primero en OSRM_ROUTED_BIN,
+    luego en el PATH del sistema y finalmente en rutas comunes de Homebrew/Linux.
+    Retorna el path absoluto o '' si no se encuentra.
+    """
     explicit = os.getenv("OSRM_ROUTED_BIN", "").strip()
     candidates = [explicit] if explicit else []
     auto = shutil.which("osrm-routed")
     if auto:
         candidates.append(auto)
+    # Rutas comunes en macOS (Homebrew) y Linux
     candidates.extend(["/opt/homebrew/bin/osrm-routed", "/usr/local/bin/osrm-routed"])
     for path in candidates:
         if not path:
@@ -340,6 +391,7 @@ def _find_osrm_routed_binary() -> str:
 
 
 def _tail_text(path: Path, max_chars: int = 360) -> str:
+    """Lee los últimos max_chars caracteres de un archivo de log para diagnóstico de errores."""
     try:
         txt = path.read_text(encoding="utf-8", errors="ignore").strip()
     except Exception:
@@ -352,6 +404,7 @@ def _tail_text(path: Path, max_chars: int = 360) -> str:
 
 
 def _local_osrm_startup_timeout_sec() -> float:
+    """Retorna el tiempo máximo de espera (segundos) para que OSRM local inicie. Por defecto 24 s."""
     raw = os.getenv("OSRM_LOCAL_STARTUP_TIMEOUT_SEC", "").strip()
     if raw:
         try:
@@ -362,6 +415,7 @@ def _local_osrm_startup_timeout_sec() -> float:
 
 
 def _local_osrm_port(base: str) -> int:
+    """Extrae el puerto de una URL base local. Retorna 5000 si no hay puerto explícito."""
     try:
         parsed = urllib.parse.urlparse(_normalize_osrm_base(base))
         if parsed.port:
@@ -372,6 +426,11 @@ def _local_osrm_port(base: str) -> int:
 
 
 def _maybe_autostart_local_osrm(timeout_sec: float = 2.0) -> Tuple[str, str]:
+    """
+    Intenta iniciar automáticamente el servidor OSRM local si no está corriendo.
+    Solo realiza un intento de inicio por proceso (controlado por _LOCAL_OSRM_START_ATTEMPTED).
+    Retorna (base_url_activa, mensaje_de_error). El inicio es thread-safe via _LOCAL_OSRM_LOCK.
+    """
     global _LOCAL_OSRM_START_ATTEMPTED
     global _LOCAL_OSRM_READY_BASE
     global _LOCAL_OSRM_LAST_ERROR
@@ -474,6 +533,7 @@ def _maybe_autostart_local_osrm(timeout_sec: float = 2.0) -> Tuple[str, str]:
 
 
 def _local_osrm_meta() -> Dict[str, Any]:
+    """Retorna un dict con el estado actual del servidor OSRM local para incluir en metadatos."""
     return {
         "configured_base": _configured_local_osrm_base(),
         "local_base": _local_osrm_base(),
@@ -486,6 +546,7 @@ def _local_osrm_meta() -> Dict[str, Any]:
 
 
 def _looks_like_timeout_error(exc: Exception) -> bool:
+    """Detecta si una excepción es un error de timeout para decidir si reintentar la petición."""
     msg = str(exc).lower()
     return "timed out" in msg or "timeout" in msg
 
@@ -498,6 +559,10 @@ def _fetch_osrm_table(
     source_positions: Optional[Sequence[int]] = None,
     destination_positions: Optional[Sequence[int]] = None,
 ) -> Tuple[List[List[Optional[float]]], List[List[Optional[float]]], str]:
+    """
+    Obtiene las matrices de distancia y duración desde OSRM probando todos los endpoints candidatos.
+    Retorna (matriz_distancias_m, matriz_duraciones_s, endpoint_utilizado).
+    """
     errors: List[str] = []
     for base in _candidate_osrm_bases(osrm_base_url):
         try:
@@ -524,6 +589,10 @@ def _fetch_osrm_table_single_base(
     source_positions: Optional[Sequence[int]] = None,
     destination_positions: Optional[Sequence[int]] = None,
 ) -> Tuple[List[List[Optional[float]]], List[List[Optional[float]]]]:
+    """
+    Llama al endpoint /table/v1/driving de OSRM para un único servidor base.
+    Retorna (matriz_distancias_m, matriz_duraciones_s). Lanza RuntimeError si la respuesta no es 'Ok'.
+    """
     coord_tokens = [f"{coords[n][0]:.6f},{coords[n][1]:.6f}" for n in nodes]
     coord_str = ";".join(coord_tokens)
     params: Dict[str, str] = {"annotations": "distance,duration"}
@@ -549,6 +618,11 @@ def _select_working_osrm_base(
     osrm_base_url: str,
     timeout_sec: float,
 ) -> str:
+    """
+    Selecciona el primer endpoint OSRM candidato que responde correctamente a una petición
+    de prueba con dos nodos. Intenta arrancar el servidor local si está configurado.
+    Lanza RuntimeError si ningún candidato responde.
+    """
     errors: List[str] = []
     _, local_boot_error = _maybe_autostart_local_osrm(timeout_sec=max(1.5, min(float(timeout_sec) * 1.5, 4.5)))
     candidates = _candidate_osrm_bases(osrm_base_url)
@@ -677,6 +751,10 @@ def _fetch_osrm_route_geometry_single(
     osrm_base_url: str,
     timeout_sec: float,
 ) -> Tuple[List[Coord], float, float, str]:
+    """
+    Obtiene la geometría GeoJSON de una ruta desde OSRM para una secuencia de nodos.
+    Retorna (lista_de_coordenadas, distancia_km, duracion_min, endpoint_usado).
+    """
     coord_tokens = [f"{coords[n][0]:.6f},{coords[n][1]:.6f}" for n in route_nodes]
     coord_str = ";".join(coord_tokens)
     query = urllib.parse.urlencode({"overview": "full", "geometries": "geojson", "steps": "false"})
@@ -725,6 +803,11 @@ def _fetch_osrm_route_geometry(
     timeout_sec: float,
     max_waypoints_per_call: int = 90,
 ) -> Tuple[List[Coord], float, float, str]:
+    """
+    Obtiene la geometría completa de una ruta dividiéndola en fragmentos si supera
+    max_waypoints_per_call. Une los segmentos eliminando el punto duplicado en la unión.
+    Retorna (path_completo, distancia_total_km, duracion_total_min, endpoint_usado).
+    """
     normalized_nodes: List[int] = []
     for n in route_nodes:
         node = int(n)
@@ -923,6 +1006,10 @@ def build_real_distance_time_speed_matrices(
 
 
 def _build_adjacency(nodes: List[int], d: Dict[Arc, float]) -> Dict[int, List[Tuple[int, float]]]:
+    """
+    Construye una lista de adyacencia dirigida desde la matriz de distancias.
+    Excluye arcos con distancia negativa, infinita o nula (self-loops).
+    """
     adj: Dict[int, List[Tuple[int, float]]] = {n: [] for n in nodes}
     for i in nodes:
         for j in nodes:
@@ -940,6 +1027,10 @@ def _dijkstra_k_nearest(
     k: int,
     adj: Dict[int, List[Tuple[int, float]]],
 ) -> List[int]:
+    """
+    Encuentra los k nodos más cercanos al nodo fuente usando Dijkstra con cola de prioridad.
+    Retorna los nodos en orden creciente de distancia, excluyendo el propio fuente.
+    """
     if k <= 0:
         return []
 
@@ -974,10 +1065,15 @@ def _astar_shortest_path(
     adj: Dict[int, List[Tuple[int, float]]],
     coords: Dict[int, Coord],
 ) -> float:
+    """
+    Calcula la distancia mínima entre dos nodos usando A* con Haversine como heurística admisible.
+    Retorna inf si no existe camino entre source y target.
+    """
     if source == target:
         return 0.0
 
     g_score: Dict[int, float] = {source: 0.0}
+    # La heurística es la distancia Haversine al destino (subestima la distancia real por carretera)
     open_heap: List[Tuple[float, float, int]] = [(haversine_km(coords[source], coords[target]), 0.0, source)]
     closed = set()
 
@@ -1043,6 +1139,10 @@ def _dijkstra_shortest_paths(
     source: int,
     adj: Dict[int, List[Tuple[int, float]]],
 ) -> Dict[int, float]:
+    """
+    Calcula las distancias mínimas desde un nodo fuente a todos los nodos alcanzables
+    usando Dijkstra. Retorna un dict {nodo: distancia_mínima}.
+    """
     dist: Dict[int, float] = {source: 0.0}
     pq: List[Tuple[float, int]] = [(0.0, source)]
 

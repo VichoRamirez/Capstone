@@ -1,8 +1,15 @@
 """
-Servicio de limpieza de datos.
+Servicio de limpieza y geocodificación de datos para el pipeline VRP/VRPTW.
 
-Extrae la lógica de estandarización del notebook Explorar.ipynb
-y la expone como funciones reutilizables para el pipeline de la app.
+Extrae la lógica de estandarización del notebook Explorar.ipynb y la expone
+como funciones reutilizables para el pipeline de la app. Cubre:
+- Normalización de RUT chileno al formato XX.XXX.XXX-D.
+- Estandarización de direcciones: expansión de abreviaturas, eliminación de
+  datos de departamento, extracción de comuna desde el texto de dirección.
+- Geocodificación de direcciones usando la API HTTP de Nominatim con caché
+  persistente en disco (geocache.json) para evitar consultas redundantes.
+- Limpieza de CSV de ventas y de detalle de pedidos.
+- Pipeline completo (run_full_cleaning) que combina todos los pasos anteriores.
 """
 
 import re
@@ -70,6 +77,7 @@ def estandarizar_rut(rut: str) -> str:
 # ── Dirección ─────────────────────────────────────────────────────────────
 
 def _clean_comuna_value(value: object) -> str:
+    """Limpia un valor de comuna: elimina espacios extra y valores nulos textuales."""
     raw = str(value).strip() if value is not None else ""
     if not raw or raw.lower() in {"nan", "none", "null"}:
         return ""
@@ -77,12 +85,18 @@ def _clean_comuna_value(value: object) -> str:
 
 
 def _normalize_text(value: object) -> str:
+    """
+    Normaliza texto para comparación sin distinción de tildes, mayúsculas ni
+    caracteres especiales. Usado internamente para detectar comunas en strings.
+    """
     raw = str(value or "").strip()
     if not raw:
         return ""
+    # Descomponer caracteres unicode y eliminar diacríticos (tildes, etc.)
     txt = unicodedata.normalize("NFKD", raw)
     txt = txt.encode("ascii", "ignore").decode("ascii")
     txt = txt.lower()
+    # Reemplazar cualquier carácter no alfanumérico por espacio
     txt = re.sub(r"[^a-z0-9]+", " ", txt)
     return re.sub(r"\s+", " ", txt).strip()
 
@@ -114,10 +128,18 @@ _GENERIC_SANTIAGO_ALIASES = {
 
 
 def _is_generic_santiago(value: object) -> bool:
+    """Retorna True si el valor corresponde a un alias genérico de Santiago (sin comuna específica)."""
     return _normalize_text(value) in _GENERIC_SANTIAGO_ALIASES
 
 
 def _extract_comuna_from_text(value: object) -> Optional[str]:
+    """
+    Detecta y retorna la comuna canónica contenida en un texto libre.
+
+    Busca todos los alias conocidos de COMUNAS_SANTIAGO dentro del texto
+    normalizado. Si detecta varias, prioriza la más específica (descarta
+    "Santiago" genérico salvo que venga acompañado de "centro").
+    """
     norm = _normalize_text(value)
     if not norm:
         return None
@@ -132,17 +154,19 @@ def _extract_comuna_from_text(value: object) -> Optional[str]:
     if not matches:
         return None
 
+    # Preferir comunas específicas sobre el genérico "Santiago"
     for comuna in matches:
         if comuna != "Santiago":
             return comuna
 
-    # If only "Santiago" is detected, require explicit center mention.
+    # Si solo se detectó "Santiago", exigir mención explícita de "centro"
     if "santiago centro" in norm:
         return "Santiago"
     return None
 
 
 def _canonicalize_comuna(value: object) -> str:
+    """Limpia y canonicaliza un valor de comuna. Si no reconoce la comuna, retorna el valor limpio original."""
     cleaned = _clean_comuna_value(value)
     if not cleaned:
         return ""
@@ -152,8 +176,12 @@ def _canonicalize_comuna(value: object) -> str:
 
 def estandarizar_direccion_y_comuna(direccion: str) -> tuple[str, Optional[str]]:
     """
-    Estandariza la dirección y extrae la comuna.
-    Retorna (dirección_estandarizada, comuna).
+    Estandariza una dirección y extrae la comuna contenida en ella.
+
+    Aplica en orden: Title Case, eliminación de depto, normalización de
+    alias de Santiago, expansión de abreviaturas, separación calle+número
+    y limpieza de tokens residuales ("Santiago", "Chile", comas).
+    Retorna (dirección_estandarizada, comuna_detectada_o_None).
     """
     if pd.isna(direccion):
         return (direccion, None)
@@ -161,34 +189,36 @@ def estandarizar_direccion_y_comuna(direccion: str) -> tuple[str, Optional[str]]
     d = str(direccion)
     comuna_encontrada = None
 
-    # Normalizar espacios múltiples y Title Case
+    # Normalizar espacios múltiples y aplicar Title Case para consistencia
     d = re.sub(r'\s+', ' ', d).strip().title()
 
-    # Eliminar info de depto/dpto
+    # Eliminar info de departamento que no es parte de la dirección vial
     d = re.sub(r',?\s*(?:Depto|Dpto|Departamento)\.?\s*\d+', '', d, flags=re.IGNORECASE)
 
     # Normalizar "Stgo" -> "Santiago", "Santiago De Chile" -> "Santiago"
     d = re.sub(r'\bStgo\b', 'Santiago', d)
     d = re.sub(r'Santiago\s+De\s+Chile', 'Santiago', d, flags=re.IGNORECASE)
 
-    # Expandir abreviaturas
+    # Expandir abreviaturas comunes (Av., Pje., Gral., etc.)
     for patron, reemplazo in ABREVIATURAS.items():
         d = re.sub(patron, reemplazo, d, flags=re.IGNORECASE)
 
-    # Separar calle+número del resto
+    # Separar "calle + número" del resto (info de comuna, depto, ciudad)
     match = re.match(r'^(.+?\s+\d+)\b(.*)', d)
 
     if match:
         calle_numero = match.group(1).strip()
         resto = match.group(2).strip()
 
+        # Buscar la comuna primero en el "resto" (más específico) y luego en toda la dirección
         comuna_encontrada = _extract_comuna_from_text(resto) or _extract_comuna_from_text(d)
         resultado = calle_numero
     else:
+        # Si no hay número en la dirección, buscar la comuna en el texto completo
         resultado = d
         comuna_encontrada = _extract_comuna_from_text(resultado)
 
-    # Quitar Santiago, Chile y comas residuales
+    # Eliminar tokens "Santiago", "Chile" y comas residuales del string de dirección final
     resultado = re.sub(r',?\s*Santiago(?:\s+Centro)?\b', '', resultado, flags=re.IGNORECASE)
     resultado = re.sub(r',?\s*Chile\b', '', resultado, flags=re.IGNORECASE)
     resultado = re.sub(r'\s+', ' ', resultado).strip().strip(',').strip()
@@ -203,9 +233,12 @@ def estandarizar_direccion_y_comuna(direccion: str) -> tuple[str, Optional[str]]
 
 def geocodificar_direccion(calle_numero: str, comuna: str) -> tuple[Optional[float], Optional[float]]:
     """
-    Obtiene (latitud, longitud) llamando directamente a la API HTTP de Nominatim
-    (NOMINATIM_URL), sin usar osmnx para evitar el rate-limit de 1 seg/req que
-    osmnx impone incluso a instancias locales.
+    Obtiene (latitud, longitud) llamando directamente a la API HTTP de Nominatim.
+
+    Usa NOMINATIM_URL (configurable por variable de entorno) en lugar de osmnx
+    para evitar el rate-limit de 1 seg/req que osmnx impone incluso a instancias
+    locales. Acota la búsqueda a Chile con countrycodes=cl.
+    Retorna (None, None) si la consulta falla o no produce resultados.
     """
     import requests as req
     try:
@@ -214,7 +247,7 @@ def geocodificar_direccion(calle_numero: str, comuna: str) -> tuple[Optional[flo
         params = {
             "q": query,
             "format": "json",
-            "limit": 1,
+            "limit": 1,          # Solo necesitamos el resultado más relevante
             "countrycodes": "cl",
         }
         headers = {"User-Agent": "CapstoneAnalytics/1.0"}
@@ -233,6 +266,7 @@ CACHE_FILE = os.path.join(_SERVICE_DIR, "..", "..", "..", "geocache.json")
 CACHE_FILE = os.path.normpath(CACHE_FILE)  # e.g. /…/Capstone/geocache.json
 
 def cargar_cache() -> dict:
+    """Carga el caché de geocodificación desde disco. Retorna dict vacío si el archivo no existe o está corrupto."""
     if os.path.exists(CACHE_FILE):
         try:
             with open(CACHE_FILE, "r", encoding="utf-8") as f:
@@ -242,17 +276,23 @@ def cargar_cache() -> dict:
     return {}
 
 def guardar_cache(cache: dict):
+    """Persiste el caché de geocodificación en disco como JSON para sobrevivir reinicios."""
     with open(CACHE_FILE, "w", encoding="utf-8") as f:
         json.dump(cache, f, indent=2, ensure_ascii=False)
 
 
 def geocodificar_dataframe(df: pd.DataFrame, col_direccion: str = "Dirección cliente", col_comuna: str = "Comuna") -> pd.DataFrame:
     """
-    Agrega columnas Latitud y Longitud geocodificando direcciones únicas.
+    Agrega columnas Latitud y Longitud al DataFrame geocodificando direcciones únicas.
+
+    Deduplica por (dirección, comuna) antes de consultar la API para minimizar
+    llamadas. Usa caché persistente en geocache.json; solo consulta Nominatim
+    para direcciones no cacheadas o cacheadas como fallidas. Guarda el caché
+    cada 10 consultas nuevas para no perder progreso ante interrupciones.
     """
     cache = cargar_cache()
-    
-    # Crear un string único combinando dirección y comuna para usar de key en el caché
+
+    # Clave compuesta dirección|comuna para identificar unívocamente cada geocodificación
     df['_geo_key'] = df[col_direccion] + "|" + df[col_comuna]
     direcciones_unicas = df[['_geo_key', col_direccion, col_comuna]].drop_duplicates().dropna()
 
@@ -264,14 +304,14 @@ def geocodificar_dataframe(df: pd.DataFrame, col_direccion: str = "Dirección cl
             key = row['_geo_key']
             calle = row[col_direccion]
             comuna = row[col_comuna]
-            
+
             cached = cache.get(key)
             # Re-intentar si no está en caché o si fue cacheado como fallido (None, None)
             if cached is None or cached == [None, None] or cached == (None, None):
                 cache[key] = geocodificar_direccion(calle, comuna)
                 nuevas_consultas += 1
                 if nuevas_consultas % 10 == 0:
-                    guardar_cache(cache) # Guardar progreso
+                    guardar_cache(cache)  # Persistir progreso parcial
                     logger.info(f"  ... {nuevas_consultas} consultadas a la API Nominatim")
         except Exception as e:
             logger.error(f"Error geocodificando dirección '{calle}, {comuna}': {e}")
@@ -279,6 +319,7 @@ def geocodificar_dataframe(df: pd.DataFrame, col_direccion: str = "Dirección cl
 
     guardar_cache(cache)
 
+    # Mapear las coordenadas del caché de vuelta al DataFrame completo (incluye duplicados)
     df["Latitud"] = df['_geo_key'].map(lambda x: cache.get(x, (None, None))[0] if pd.notna(x) else None)
     df["Longitud"] = df['_geo_key'].map(lambda x: cache.get(x, (None, None))[1] if pd.notna(x) else None)
     df = df.drop(columns=['_geo_key'])
@@ -293,7 +334,14 @@ def geocodificar_dataframe(df: pd.DataFrame, col_direccion: str = "Dirección cl
 # ── Pipeline principal ────────────────────────────────────────────────────
 
 class CleaningResult:
-    """Encapsula el resultado de la limpieza con errores encontrados."""
+    """
+    Encapsula el resultado del pipeline completo de limpieza.
+
+    Atributos:
+        df_ventas: DataFrame de ventas limpio y geocodificado.
+        df_detalle: DataFrame de detalle de pedidos deduplicado.
+        errores: Lista de dicts con estructura {origen, fila, campo, valor_original, error}.
+    """
 
     def __init__(self, df_ventas: pd.DataFrame, df_detalle: pd.DataFrame,
                  errores: list[dict]):
@@ -305,6 +353,12 @@ class CleaningResult:
 def clean_ventas(csv_text: str) -> tuple[pd.DataFrame, list[dict]]:
     """
     Pipeline de limpieza para el CSV de ventas.
+
+    Aplica en orden: estandarización de RUT y estandarización de direcciones
+    con resolución de comuna (la columna "Comuna" del CSV tiene prioridad sobre
+    la comuna detectada dentro del texto de la dirección, salvo que sea un alias
+    genérico de Santiago). Los errores se acumulan por fila sin interrumpir el
+    procesamiento del resto del DataFrame.
     Retorna (DataFrame limpio, lista de errores).
     """
     errores = []
@@ -315,7 +369,7 @@ def clean_ventas(csv_text: str) -> tuple[pd.DataFrame, list[dict]]:
         parse_dates=['Fecha de Pedido', 'Fecha de despacho Solicitada']
     )
 
-    # Estandarizar RUT
+    # Paso 1: estandarizar RUT fila por fila
     for idx, row in df.iterrows():
         rut_original = row['RUT']
         try:
@@ -328,13 +382,18 @@ def clean_ventas(csv_text: str) -> tuple[pd.DataFrame, list[dict]]:
                 "error": str(e)
             })
 
-    # Estandarizar direcciones
+    # Paso 2: estandarizar dirección y resolver comuna fila por fila
     for idx, row in df.iterrows():
         dir_original = row.get('Dirección cliente', '')
         comuna_original = _canonicalize_comuna(row.get('Comuna', ''))
         try:
             dir_std, comuna_detectada = estandarizar_direccion_y_comuna(dir_original)
             comuna_detectada = _canonicalize_comuna(comuna_detectada)
+
+            # Prioridad de fuente de comuna:
+            # 1. Columna "Comuna" explícita y específica (no genérico "Santiago")
+            # 2. Comuna extraída del texto de la dirección
+            # 3. Columna "Comuna" original (aunque sea genérica)
             if comuna_original and not _is_generic_santiago(comuna_original):
                 comuna = comuna_original
             elif comuna_detectada:
@@ -356,15 +415,18 @@ def clean_ventas(csv_text: str) -> tuple[pd.DataFrame, list[dict]]:
 
 def clean_detalle(csv_text: str) -> tuple[pd.DataFrame, list[dict]]:
     """
-    Pipeline de limpieza para el CSV/XLSX de detalle de pedidos.
-    Deduplica agrupando por (Orden, SKU) y sumando cantidades.
+    Pipeline de limpieza para el CSV de detalle de pedidos.
+
+    Valida la presencia de columnas requeridas y deduplica filas agrupando por
+    (Número de Orden, SKU): suma Cantidad, Volumen_total_m3 y Peso_total_kg;
+    toma el primer valor para columnas descriptivas/unitarias.
     Retorna (DataFrame limpio, lista de errores).
     """
     errores = []
 
     df = pd.read_csv(io.StringIO(csv_text))
 
-    # Verificar columnas requeridas
+    # Verificar columnas mínimas antes de procesar; abortar si faltan
     required = ['Número de Orden', 'SKU', 'Cantidad']
     missing = [c for c in required if c not in df.columns]
     if missing:
@@ -376,14 +438,15 @@ def clean_detalle(csv_text: str) -> tuple[pd.DataFrame, list[dict]]:
         })
         return df, errores
 
-    # Deduplicar sumando cantidades
+    # Construir el diccionario de agregación dinámicamente según las columnas presentes
     agg_dict = {'Cantidad': 'sum'}
 
-    # Agregar columnas opcionales al groupby
+    # Columnas descriptivas/unitarias: tomar el primer valor del grupo
     optional_first = [
         'Descripción SKU', 'Largo_cm', 'Ancho_cm', 'Alto_cm',
         'Volumen_unitario_m3', 'Peso_unitario_kg'
     ]
+    # Columnas de totales: sumar dentro del grupo para acumular multi-línea
     optional_sum = ['Volumen_total_m3', 'Peso_total_kg']
 
     for col in optional_first:
@@ -401,14 +464,19 @@ def clean_detalle(csv_text: str) -> tuple[pd.DataFrame, list[dict]]:
 def run_full_cleaning(ventas_csv: str, detalle_csv: str,
                       geocode: bool = True) -> CleaningResult:
     """
-    Ejecuta el pipeline completo de limpieza:
-    1. Limpia ventas (RUT, direcciones)
-    2. Limpia detalle (deduplicación)
-    3. Geocodifica direcciones (opcional)
+    Ejecuta el pipeline completo de limpieza y retorna un CleaningResult.
+
+    Pasos:
+    1. Limpia ventas: estandarización de RUT y direcciones (clean_ventas).
+    2. Limpia detalle: validación de columnas y deduplicación (clean_detalle).
+    3. Geocodifica direcciones del CSV de ventas si geocode=True.
+       Las filas que no obtienen coordenadas se registran como errores de
+       geocodificación para que el router pueda informarlas al usuario.
     """
     df_ventas, errores_ventas = clean_ventas(ventas_csv)
     df_detalle, errores_detalle = clean_detalle(detalle_csv)
 
+    # Combinar errores de ambas fuentes, etiquetando su origen para trazabilidad
     all_errors = (
         [{"origen": "ventas", **e} for e in errores_ventas] +
         [{"origen": "detalle", **e} for e in errores_detalle]
@@ -417,7 +485,7 @@ def run_full_cleaning(ventas_csv: str, detalle_csv: str,
     if geocode:
         df_ventas = geocodificar_dataframe(df_ventas)
 
-        # Registrar filas sin coordenadas como errores
+        # Las filas sin coordenadas no pueden ser asignadas a rutas; se reportan como error
         sin_coords = df_ventas[df_ventas['Latitud'].isna()]
         for idx, row in sin_coords.iterrows():
             all_errors.append({

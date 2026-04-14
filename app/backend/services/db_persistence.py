@@ -3,6 +3,12 @@ Servicio de persistencia DB para el SaaS.
 
 Puente entre los DataFrames limpiados (codex pipeline) y los repositorios
 SQLAlchemy del SaaS. Mantiene cleaning_service.py libre de dependencias DB.
+
+Responsabilidades:
+- Convertir filas de DataFrames de pandas en registros ORM y hacer upsert en MySQL.
+- Recuperar datos de ventas y detalle desde la BD para el dashboard de operaciones.
+- Exponer get_pending_orders_df() para que el optimizador obtenga pedidos pendientes
+  con sus totales de peso y volumen calculados desde la tabla `detalle`.
 """
 
 from __future__ import annotations
@@ -20,6 +26,7 @@ logger = logging.getLogger(__name__)
 
 
 def _to_date(val):
+    """Convierte un valor pandas/string a un objeto date de Python. Retorna None si no es parseable."""
     if val is None or (isinstance(val, float) and pd.isna(val)):
         return None
     try:
@@ -32,6 +39,7 @@ def _to_date(val):
 
 
 def _to_float(val):
+    """Convierte un valor a float. Retorna None si es nulo o no convertible."""
     try:
         if val is None or pd.isna(val):
             return None
@@ -41,6 +49,7 @@ def _to_float(val):
 
 
 def _to_int(val, default: int = 0) -> int:
+    """Convierte un valor a int. Retorna `default` si es nulo o no convertible."""
     try:
         if val is None or pd.isna(val):
             return default
@@ -51,8 +60,10 @@ def _to_int(val, default: int = 0) -> int:
 
 def persist_ventas_df(df: pd.DataFrame, user_id: int) -> dict:
     """
-    Upsert cada fila del DataFrame de ventas en la tabla `ventas`.
+    Hace upsert de cada fila del DataFrame de ventas en la tabla `ventas`.
+
     user_id es obligatorio para la PK compuesta (Número de Orden, id_usuario).
+    Retorna un dict con success_count, error_count y lista de errores por fila.
     """
     if df is None or df.empty:
         return {"success_count": 0, "error_count": 0, "errors": []}
@@ -71,6 +82,8 @@ def persist_ventas_df(df: pd.DataFrame, user_id: int) -> dict:
                 numero_orden = str(row.get("Número de Orden", "")).strip()
                 if not numero_orden:
                     raise ValueError("Número de Orden vacío")
+
+                # Construir el payload normalizando tipos antes de enviarlo al repositorio
                 payload = {
                     "numero_orden": numero_orden,
                     "rut": row.get("RUT"),
@@ -78,6 +91,7 @@ def persist_ventas_df(df: pd.DataFrame, user_id: int) -> dict:
                     "direccion_cliente": row.get("Dirección cliente"),
                     "comuna": row.get("Comuna"),
                     "fecha_pedido": _to_date(row.get("Fecha de Pedido")),
+                    # Si no hay estado definido, se asume "Pendiente" por convención del modelo
                     "estado": row.get("Estado") or "Pendiente",
                     "monto_pedido": _to_int(row.get("Monto Pedido"), 0),
                     "fecha_despacho_solicitada": _to_date(row.get("Fecha de despacho Solicitada")),
@@ -87,6 +101,7 @@ def persist_ventas_df(df: pd.DataFrame, user_id: int) -> dict:
                 repo.upsert(payload, user_id)
                 success += 1
             except Exception as e:
+                # Registrar el error por fila sin detener el procesamiento del resto
                 errors.append({
                     "fila": int(idx),
                     "numero_orden": str(row.get("Número de Orden", "")),
@@ -100,8 +115,12 @@ def persist_ventas_df(df: pd.DataFrame, user_id: int) -> dict:
 
 def persist_detalle_df(df: pd.DataFrame, user_id: int) -> dict:
     """
-    Upsert cada fila del DataFrame de detalle en la tabla `detalle`.
+    Hace upsert batch de cada fila del DataFrame de detalle en la tabla `detalle`.
+
     user_id es obligatorio para la PK compuesta (Número de Orden, SKU, id_usuario).
+    A diferencia de persist_ventas_df, construye todos los items primero y luego
+    llama a add_items en una sola operación batch para mayor eficiencia.
+    Retorna un dict con success_count, error_count y lista de errores.
     """
     if df is None or df.empty:
         return {"success_count": 0, "error_count": 0, "errors": []}
@@ -112,6 +131,7 @@ def persist_detalle_df(df: pd.DataFrame, user_id: int) -> dict:
     items: list[dict] = []
     errors: list[dict] = []
 
+    # Primera pasada: construir la lista de items normalizando tipos; errores no detienen el resto
     for idx, row in df.iterrows():
         try:
             items.append({
@@ -133,12 +153,14 @@ def persist_detalle_df(df: pd.DataFrame, user_id: int) -> dict:
     if not items:
         return {"success_count": 0, "error_count": len(errors), "errors": errors}
 
+    # Segunda pasada: persistir el batch completo en una sola llamada al repositorio
     session = get_session()
     try:
         repo = DetalleRepository(session)
         repo.add_items(items, user_id)
     except Exception as e:
         logger.exception("add_items batch failed")
+        # Error fatal de batch: ningún item pudo persistirse
         errors.append({"fila": -1, "error": str(e)})
         return {"success_count": 0, "error_count": len(errors), "errors": errors}
     finally:
@@ -149,8 +171,11 @@ def persist_detalle_df(df: pd.DataFrame, user_id: int) -> dict:
 
 def get_dashboard_dfs(user_id: int) -> tuple[pd.DataFrame, pd.DataFrame]:
     """
-    Devuelve (df_ventas, df_detalle) desde MySQL para el dashboard de Operations.
-    Los nombres de columnas coinciden con los que espera el cálculo de KPIs.
+    Recupera (df_ventas, df_detalle) desde MySQL para el dashboard de Operations.
+
+    Los nombres de columnas en los DataFrames resultantes coinciden con los que
+    espera el cálculo de KPIs en el frontend (ej. "Número de Orden", "Estado").
+    Retorna DataFrames vacíos si el usuario no tiene datos aún.
     """
     from database.models import Venta, Detalle
 
@@ -161,6 +186,7 @@ def get_dashboard_dfs(user_id: int) -> tuple[pd.DataFrame, pd.DataFrame]:
     finally:
         session.close()
 
+    # Mapear atributos ORM a los nombres de columna que espera el dashboard
     ventas_data = [
         {
             "Número de Orden": v.numero_orden,
@@ -177,6 +203,7 @@ def get_dashboard_dfs(user_id: int) -> tuple[pd.DataFrame, pd.DataFrame]:
         }
         for v in ventas_rows
     ]
+    # Solo se exponen las columnas mínimas de detalle que necesita el dashboard de KPIs
     detalle_data = [
         {
             "Número de Orden": d.numero_orden,
@@ -193,14 +220,19 @@ def get_dashboard_dfs(user_id: int) -> tuple[pd.DataFrame, pd.DataFrame]:
 
 def get_pending_orders_df(user_id: Optional[int] = None) -> pd.DataFrame:
     """
-    Fetch all Pendiente orders joined with weight/volume totals from `detalle`.
-    Returns a DataFrame with the same column conventions the optimizer expects.
+    Retorna todos los pedidos con Estado='Pendiente' enriquecidos con peso y volumen totales.
+
+    Realiza un LEFT JOIN entre `ventas` y un subquery agregado de `detalle` para
+    calcular Peso_total_pedido y Volumen_total_pedido por orden. Los nombres de
+    columna resultantes son los que espera el servicio de optimización.
+    Si user_id es None, retorna pedidos de todos los usuarios (uso interno).
     """
     from database.models import Venta, Detalle
     from sqlalchemy import func
 
     session = get_session()
     try:
+        # Subquery: sumar peso y volumen total por (numero_orden, id_usuario) desde detalle
         stats = (
             session.query(
                 Detalle.numero_orden,
@@ -212,6 +244,7 @@ def get_pending_orders_df(user_id: Optional[int] = None) -> pd.DataFrame:
             .subquery()
         )
 
+        # JOIN ventas con el subquery usando PK compuesta para no mezclar usuarios
         q = (
             session.query(
                 Venta,
@@ -243,6 +276,7 @@ def get_pending_orders_df(user_id: Optional[int] = None) -> pd.DataFrame:
                 "Fecha de despacho Solicitada": v.fecha_despacho_solicitada,
                 "Latitud": v.latitud,
                 "Longitud": v.longitud,
+                # Si no hay filas en detalle para esta orden, los totales quedan en 0
                 "Peso_total_pedido": float(peso) if peso is not None else 0.0,
                 "Volumen_total_pedido": float(vol) if vol is not None else 0.0,
             })

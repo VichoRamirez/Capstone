@@ -83,6 +83,7 @@ def login_user(identifier: str, password: str) -> dict:
         if not user:
             user = repo.get_by_email(identifier)
 
+        # Si no existe el usuario o la contraseña no coincide, se rechaza
         if not user or not verify_password(password, user.password):
             return {"error": "Credenciales incorrectas."}
 

@@ -137,21 +137,30 @@ _PRICE_KEYS = ("precio", "valor", "price", "monto", "pventa", "venta")
 
 
 def _normalize_text(value: str) -> str:
+    """Normaliza texto a minúsculas sin acentos ni caracteres especiales para comparaciones robustas."""
     raw = str(value or "").strip().lower()
     if not raw:
         return ""
+    # Elimina diacríticos (acentos, tildes) usando descomposición NFKD
     norm = unicodedata.normalize("NFKD", raw)
     norm = norm.encode("ascii", "ignore").decode("ascii")
+    # Reemplaza todo carácter no alfanumérico por espacio
     norm = "".join(ch if ch.isalnum() else " " for ch in norm)
     return " ".join(norm.split())
 
 
 def normalize_fuel_type(fuel_type: str | None) -> str:
+    """
+    Convierte cualquier variante del nombre de combustible a su clave canónica
+    (ej. 'bencina 95' → 'gasoline_95'). Retorna 'diesel' si no hay coincidencia.
+    """
     text = _normalize_text(str(fuel_type or "diesel"))
     if not text:
         return "diesel"
+    # Búsqueda directa en el diccionario de alias planos
     if text in _FUEL_ALIASES:
         return _FUEL_ALIASES[text]
+    # Búsqueda por alias definidos en _FUEL_DEF (normalización de texto)
     for canonical, cfg in _FUEL_DEF.items():
         aliases = cfg.get("aliases", ())
         for alias in aliases:
@@ -161,11 +170,16 @@ def normalize_fuel_type(fuel_type: str | None) -> str:
 
 
 def _matches_fuel(text: str, fuel_type: str) -> bool:
+    """
+    Determina si un texto (nombre de producto de una API) corresponde al tipo de combustible dado.
+    Incluye reglas especiales para diesel y detección por número de octanos.
+    """
     t = _normalize_text(text)
     if not t:
         return False
     aliases = _FUEL_DEF.get(fuel_type, {}).get("aliases", ())
     alias_norm = [_normalize_text(str(a)) for a in aliases]
+    # Reglas específicas para diesel (incluye variantes con tilde y compuestos)
     if fuel_type == "diesel":
         if "diesel" in t or "petrodiesel" in t:
             return True
@@ -176,6 +190,7 @@ def _matches_fuel(text: str, fuel_type: str) -> bool:
             continue
         if a in t:
             return True
+    # Para gasolinas: detectar por número de octanos junto con la palabra 'gasolina'/'bencina'
     if fuel_type.startswith("gasoline_"):
         octane = fuel_type.split("_")[-1]
         if octane in t and ("gasolina" in t or "bencina" in t):
@@ -184,6 +199,10 @@ def _matches_fuel(text: str, fuel_type: str) -> bool:
 
 
 def _as_float(value: Any) -> float | None:
+    """
+    Convierte un valor a float tolerando formatos numéricos con comas y puntos
+    como separadores (notación europea y americana). Retorna None si no es parseable.
+    """
     if value is None:
         return None
     if isinstance(value, (int, float)):
@@ -194,10 +213,12 @@ def _as_float(value: Any) -> float | None:
     s = value.strip()
     if not s:
         return None
+    # Elimina caracteres no numéricos excepto coma, punto y guión
     s = re.sub(r"[^\d,.\-]", "", s)
     if not s:
         return None
 
+    # Ambos separadores presentes: determinar cuál es el decimal según posición del último
     if "," in s and "." in s:
         if s.rfind(",") > s.rfind("."):
             s = s.replace(".", "")
@@ -238,6 +259,7 @@ def _as_float(value: Any) -> float | None:
 
 
 def _price_in_range(value: float, fuel_type: str) -> bool:
+    """Verifica que un precio en CLP/L esté dentro del rango plausible para el tipo de combustible."""
     cfg = _FUEL_DEF.get(fuel_type, _FUEL_DEF["diesel"])
     lo = float(cfg.get("range_min", 850.0))
     hi = float(cfg.get("range_max", 3200.0))
@@ -245,11 +267,17 @@ def _price_in_range(value: float, fuel_type: str) -> bool:
 
 
 def _robust_center(values: list[float]) -> float:
+    """
+    Calcula la mediana robusta de una lista de precios. Para muestras grandes (>=8),
+    aplica una poda del 10% en cada extremo (media truncada) antes de calcular la mediana,
+    eliminando valores atípicos como precios de estaciones con datos erróneos.
+    """
     vals = sorted(float(v) for v in values)
     if not vals:
         raise ValueError("No values")
     if len(vals) < 8:
         return float(statistics.median(vals))
+    # Poda simétrica del 10% por extremo para descartar outliers
     trim = max(1, int(len(vals) * 0.1))
     trimmed = vals[trim:-trim] if len(vals) > 2 * trim else vals
     return float(statistics.median(trimmed))
@@ -263,6 +291,7 @@ def _http_json(
     headers: dict[str, str] | None = None,
     timeout_sec: float = 10.0,
 ) -> Any:
+    """Realiza una petición HTTP y retorna la respuesta parseada como JSON."""
     req_headers = {"User-Agent": "CapstoneAnalytics/1.0 (fuel-price)"}
     if headers:
         req_headers.update(headers)
@@ -278,6 +307,7 @@ def _http_json(
 
 
 def _http_text(url: str, timeout_sec: float = 10.0) -> str:
+    """Realiza una petición HTTP GET y retorna el cuerpo de la respuesta como texto plano."""
     req = urllib.request.Request(
         url,
         method="GET",
@@ -288,9 +318,14 @@ def _http_text(url: str, timeout_sec: float = 10.0) -> str:
 
 
 def _extract_fuel_prices(payload: Any, fuel_type: str) -> list[float]:
+    """
+    Recorre recursivamente un JSON de respuesta de API y extrae todos los precios en CLP/L
+    que corresponden al tipo de combustible solicitado. Soporta distintas estructuras de respuesta.
+    """
     prices: list[float] = []
 
     def add_if_valid(v: Any):
+        """Agrega un precio a la lista si es numérico y está en el rango válido para el combustible."""
         num = _as_float(v)
         if num is None:
             return
@@ -298,6 +333,7 @@ def _extract_fuel_prices(payload: Any, fuel_type: str) -> list[float]:
             prices.append(float(num))
 
     def scan_price_fields(obj: dict):
+        """Busca campos de precio en un dict usando las claves conocidas de precio (_PRICE_KEYS)."""
         for k, v in obj.items():
             lk = _normalize_text(str(k))
             if any(pk in lk for pk in _PRICE_KEYS):
@@ -342,6 +378,10 @@ def _extract_fuel_prices(payload: Any, fuel_type: str) -> list[float]:
 
 
 def _try_cne_login(base_url: str, email: str, password: str, timeout_sec: float) -> str | None:
+    """
+    Intenta obtener un token de autenticación de la API de la CNE usando email y contraseña.
+    Prueba múltiples variantes del endpoint de login y retorna el token si lo obtiene.
+    """
     login_candidates: list[tuple[str, str, bytes, dict[str, str]]] = [
         (
             f"{base_url.rstrip('/')}/api/login",
@@ -381,11 +421,17 @@ def _try_cne_login(base_url: str, email: str, password: str, timeout_sec: float)
 
 
 def _fetch_from_cne(fuel_type: str, timeout_sec: float = 10.0) -> tuple[float, dict] | None:
+    """
+    Consulta la API oficial de la CNE (v4/estaciones) para obtener el precio de combustible.
+    Admite token de API directo o credenciales para login automático. Prueba endpoints
+    principal y beta. Retorna (precio_clp, metadatos) o None si no hay datos.
+    """
     token = str(os.getenv("CNE_API_TOKEN", "") or "").strip()
     email = str(os.getenv("CNE_API_EMAIL", "") or "").strip()
     password = str(os.getenv("CNE_API_PASSWORD", "") or "").strip()
 
     bases = [_CNE_MAIN, _CNE_BETA]
+    # Si no hay token directo pero sí credenciales, intentar login para obtenerlo
     if not token and email and password:
         for base in bases:
             token = _try_cne_login(base, email, password, timeout_sec) or token
@@ -429,6 +475,10 @@ def _fetch_from_cne(fuel_type: str, timeout_sec: float = 10.0) -> tuple[float, d
 
 
 def _parse_group_ids(raw: Any) -> set[int]:
+    """
+    Extrae un conjunto de IDs enteros desde un campo de respuesta que puede ser un número,
+    string o lista. Usado para identificar el tipo de combustible en la API Bencina en Línea.
+    """
     ids: set[int] = set()
     if raw is None:
         return ids
@@ -441,6 +491,7 @@ def _parse_group_ids(raw: Any) -> set[int]:
     text = str(raw).strip()
     if not text:
         return ids
+    # Extrae todos los números enteros presentes en el string
     for token in re.findall(r"\d+", text):
         try:
             ids.add(int(token))
@@ -453,6 +504,11 @@ def _fetch_from_bencina_en_linea(
     fuel_type: str,
     timeout_sec: float = 10.0,
 ) -> tuple[float, dict] | None:
+    """
+    Consulta el reporte zonal de Bencina en Línea (CNE) para obtener el precio promedio
+    del combustible por zona. Filtra por IDs de tipo de combustible y unidad de cobro por litro.
+    Retorna (precio_clp, metadatos) o None si no hay datos válidos.
+    """
     target_ids = set(_BENCINA_FUEL_IDS.get(fuel_type, set()))
     if not target_ids:
         return None
@@ -473,7 +529,7 @@ def _fetch_from_bencina_en_linea(
             continue
         unit = _normalize_text(str(row.get("unidad_cobro_nombre_corto", "")))
         if "l" not in unit:
-            # Evitar m3 (GLP/GNC) u otras unidades.
+            # Evitar m3 (GLP/GNC) u otras unidades que no son litros
             continue
 
         row_ids = _parse_group_ids(row.get("grupo_tipo_combustible"))
@@ -512,11 +568,17 @@ def _fetch_from_bencina_en_linea(
 
 
 def _fetch_from_global_fallback(fuel_type: str, timeout_sec: float = 10.0) -> tuple[float, dict] | None:
+    """
+    Último recurso: extrae el precio de combustible desde GlobalPetrolPrices.com mediante
+    scraping HTML con expresiones regulares que buscan montos en CLP junto al texto 'Chile'.
+    Retorna (precio_clp, metadatos) o None si no se encuentran valores en rango.
+    """
     cfg = _FUEL_DEF.get(fuel_type, _FUEL_DEF["diesel"])
     url = str(cfg.get("fallback_url"))
     html = _http_text(url, timeout_sec=timeout_sec)
     candidates: list[float] = []
 
+    # Patrones regex para detectar precios en CLP dentro del HTML
     patterns = [
         r"CLP[^0-9]{0,24}([0-9][0-9.,]{2,10})",
         r"([0-9][0-9.,]{2,10})[^0-9]{0,24}CLP",
@@ -552,9 +614,21 @@ def fetch_fuel_price_clp(
     force_refresh: bool = False,
     timeout_sec: float = 10.0,
 ) -> tuple[float, dict]:
+    """
+    Obtiene el precio de combustible en CLP/litro para Chile con estrategia de caché y fallback.
+
+    Orden de fuentes:
+      1. CNE API v4 (principal)
+      2. Bencina en Línea - reporte zonal (secundaria)
+      3. GlobalPetrolPrices.com scraping (último recurso)
+
+    Si el caché aún es válido (TTL configurado en FUEL_PRICE_CACHE_TTL_SEC), se retorna sin
+    hacer peticiones externas. Lanza RuntimeError si ninguna fuente entrega datos.
+    """
     selected = normalize_fuel_type(fuel_type)
     now = time.time()
     entry = _CACHE.get(selected) or {}
+    # Retornar desde caché si no se fuerza actualización y el precio aún es fresco
     if (
         not force_refresh
         and entry.get("price_clp") is not None
@@ -567,6 +641,7 @@ def fetch_fuel_price_clp(
 
     errors: list[str] = []
 
+    # Intento 1: API oficial CNE
     try:
         out = _fetch_from_cne(selected, timeout_sec=timeout_sec)
         if out is not None:
@@ -583,6 +658,7 @@ def fetch_fuel_price_clp(
     except Exception as e:
         errors.append(str(e))
 
+    # Intento 2: Bencina en Línea (reporte zonal CNE)
     try:
         out = _fetch_from_bencina_en_linea(selected, timeout_sec=timeout_sec)
         if out is not None:
@@ -599,6 +675,7 @@ def fetch_fuel_price_clp(
     except Exception as e:
         errors.append(str(e))
 
+    # Intento 3: Scraping de GlobalPetrolPrices.com
     try:
         out = _fetch_from_global_fallback(selected, timeout_sec=timeout_sec)
         if out is not None:
@@ -624,6 +701,7 @@ def fetch_diesel_price_clp(
     force_refresh: bool = False,
     timeout_sec: float = 10.0,
 ) -> tuple[float, dict]:
+    """Atajo que llama a fetch_fuel_price_clp fijando el tipo de combustible en 'diesel'."""
     return fetch_fuel_price_clp(
         "diesel",
         force_refresh=bool(force_refresh),
