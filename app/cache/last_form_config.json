@@ -1,7 +1,7 @@
 {
   "num_trucks": "15",
-  "depot_query": "Av. libertador Bernardo O'Higgins 4850",
-  "validated_depot_query": "Av. libertador Bernardo O'Higgins 4850",
+  "depot_query": "Av. Libertador Bernardo O'Higgins 4850",
+  "validated_depot_query": "Av. Libertador Bernardo O'Higgins 4850",
   "validated_depot_coords": [
     -33.457119,
     -70.7018142
@@ -16,7 +16,7 @@
   "diesel_price_clp": "1547",
   "space_per_truck": "9",
   "weight_per_truck": "2000",
-  "deliveries_per_day": "150",
+  "deliveries_per_day": "200",
   "use_tabu_search": true,
   "tabu_seconds": 20.0,
   "ventas_path": "",
