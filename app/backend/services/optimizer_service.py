@@ -1577,19 +1577,24 @@ def build_uncovered_csv(df_invalid: pd.DataFrame) -> str:
     """Construye el CSV de puntos no cubiertos (sin coordenadas o sin asignar)."""
     output = io.StringIO()
     cols = ["RUT", "Nombre cliente", "Dirección cliente", "Número de Orden",
-            "Monto Pedido", "Motivo"]
+            "Monto Pedido", "Latitud", "Longitud", "Motivo"]
 
     writer = csv.writer(output)
     writer.writerow(cols)
 
     for _, row in df_invalid.iterrows():
+        motivo = str(row.get("Motivo", "")).strip()
+        if not motivo:
+            motivo = "Sin coordenadas (geocodificación fallida)"
         writer.writerow([
             row.get("RUT", ""),
             row.get("Nombre cliente", ""),
             row.get("Dirección cliente", ""),
-            row.get("Número de Orden", ""),
+            str(row.get("Número de Orden", "")).strip(),
             row.get("Monto Pedido", ""),
-            "Sin coordenadas (geocodificación fallida)",
+            row.get("Latitud", ""),
+            row.get("Longitud", ""),
+            motivo,
         ])
 
     return output.getvalue()
@@ -1688,12 +1693,14 @@ def run_optimization(params: OptimizerParams,
 
     if not J:
         total_sec = time.perf_counter() - t_total_0
+        # df_invalid ya contiene todos los pedidos del batch (todos sin coords válidas)
+        # El motivo queda como "Sin coordenadas" — no se arrastran al día siguiente.
         return OptimizationResult(
             routes_csv="",
             uncovered_csv=build_uncovered_csv(df_invalid),
             map_html="<p>No hay puntos válidos para optimizar.</p>",
             stats={
-                "total_puntos": 0,
+                "total_puntos": len(df_ventas),
                 "cubiertos": 0,
                 "no_cubiertos": len(df_invalid),
                 "timing": {
@@ -1811,10 +1818,11 @@ def run_optimization(params: OptimizerParams,
             "Dirección cliente": info.get("Dirección cliente", ""),
             "Número de Orden": info.get("Número de Orden", ""),
             "Monto Pedido": "",
+            "Latitud": info.get("Latitud", ""),
+            "Longitud": info.get("Longitud", ""),
+            "Motivo": "Infactible (Capacidad/Tiempo)",
         }])
         df_invalid = pd.concat([df_invalid, new_row], ignore_index=True)
-        # Actualizar Motivo
-        df_invalid.iloc[-1, df_invalid.columns.get_loc("Motivo") if "Motivo" in df_invalid.columns else -1] = "Infactible (Capacidad/Tiempo)"
     postprocess_sec = time.perf_counter() - t_post_0
 
     # 4. Reasignación post-óptima de rutas a camiones físicos (múltiples viajes)

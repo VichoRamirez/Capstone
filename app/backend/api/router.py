@@ -12,6 +12,7 @@ import re
 import urllib.error
 import urllib.parse
 import urllib.request
+from collections import deque
 from datetime import datetime, date, timedelta
 
 import pandas as pd
@@ -1199,47 +1200,84 @@ async def data_validate_addresses(
 
 def _build_day_batches(
     df: pd.DataFrame,
-    deliveries_per_day: int,
     date_col: str = "Fecha de despacho Solicitada",
-) -> list[tuple[str, pd.DataFrame]]:
+) -> deque:
     """
-    Sort df by date_col, group by calendar day, and build batches of at most
-    deliveries_per_day rows using a carry-over queue.
+    Agrupa df por día calendario y retorna un deque de (label, day_df).
+    NO aplica límite de deliveries_per_day aquí — eso se hace en el loop
+    principal para poder manejar correctamente carry-over y overflow.
 
-    Returns a list of (label, sub_dataframe) pairs.
+    Órdenes sin fecha van al final como ("sin fecha", df).
     """
     if date_col not in df.columns:
-        return [("all", df.copy())]
+        return deque([("all", df.copy())])
 
     df = df.copy()
     df["_dispatch_day"] = pd.to_datetime(df[date_col], errors="coerce").dt.date
 
-    # Separate rows with valid vs null dispatch date
     df_dated = df.dropna(subset=["_dispatch_day"]).sort_values("_dispatch_day")
     df_null  = df[df["_dispatch_day"].isna()].drop(columns=["_dispatch_day"])
 
-    queue = pd.DataFrame(columns=df_dated.columns)
-    batches: list[tuple[str, pd.DataFrame]] = []
-
+    day_queue: deque = deque()
     for day, day_df in df_dated.groupby("_dispatch_day"):
-        queue = pd.concat([queue, day_df], ignore_index=True)
+        day_queue.append((str(day), day_df.drop(columns=["_dispatch_day"])))
 
-        batch = queue.iloc[:deliveries_per_day].copy().drop(columns=["_dispatch_day"])
-        queue = queue.iloc[deliveries_per_day:].copy()
+    if not df_null.empty:
+        day_queue.append(("sin fecha", df_null))
 
-        label = str(day)
-        batches.append((label, batch))
+    return day_queue
 
-    # Remaining queue after all calendar days
-    if len(queue) > 0:
-        overflow = queue.drop(columns=["_dispatch_day"])
-        batches.append(("overflow", overflow))
 
-    # Rows with no dispatch date go last
-    if len(df_null) > 0:
-        batches.append(("sin fecha", df_null))
+def _extract_unserved_valid_orders(
+    uncovered_csv: str,
+    batch_df: pd.DataFrame,
+) -> pd.DataFrame:
+    """
+    Dado el uncovered_csv de un día, retorna las filas del batch original que:
+      - aparecen en uncovered_csv (no fueron servidas), Y
+      - tienen coordenadas válidas (Latitud + Longitud) — es decir, la dirección
+        fue geocodificada correctamente pero el VRP no pudo asignarlas.
 
-    return batches
+    Pedidos sin coordenadas fallaron geocodificación y NO se arrastran al
+    siguiente día (no se puede rutear a una dirección desconocida).
+    """
+    if not uncovered_csv or "Número de Orden" not in batch_df.columns:
+        return pd.DataFrame()
+
+    try:
+        df_uncov = pd.read_csv(io.StringIO(uncovered_csv))
+    except Exception:
+        return pd.DataFrame()
+
+    if "Número de Orden" not in df_uncov.columns:
+        return pd.DataFrame()
+
+    # Solo arrastrar pedidos con coordenadas válidas en el uncovered_csv
+    has_lat_uncov = "Latitud" in df_uncov.columns
+    has_lon_uncov = "Longitud" in df_uncov.columns
+    if has_lat_uncov and has_lon_uncov:
+        df_uncov_valid = df_uncov[
+            df_uncov["Latitud"].notna() & df_uncov["Longitud"].notna()
+        ]
+    else:
+        # CSV sin columnas de coordenadas: fallback a match por orden number
+        # y filtrar por lat/lon en batch_df
+        df_uncov_valid = df_uncov
+
+    unserved_orders = set(
+        df_uncov_valid["Número de Orden"].astype(str).str.strip().dropna()
+    )
+    if not unserved_orders:
+        return pd.DataFrame()
+
+    mask = batch_df["Número de Orden"].astype(str).str.strip().isin(unserved_orders)
+
+    # Fallback: si el uncovered_csv no tenía lat/lon, filtrar por batch_df
+    if not (has_lat_uncov and has_lon_uncov):
+        if "Latitud" in batch_df.columns and "Longitud" in batch_df.columns:
+            mask = mask & batch_df["Latitud"].notna() & batch_df["Longitud"].notna()
+
+    return batch_df[mask].copy()
 
 
 def _safe_float(value, default: float = 0.0) -> float:
@@ -1345,9 +1383,42 @@ def _build_global_stats(
     ok_stats = [s for s in stats_list if not s.get("error")]
     error_days = sum(1 for s in stats_list if s.get("error"))
 
-    total_orders = sum(_safe_int(s.get("total_puntos", 0)) for s in ok_stats)
-    total_covered = sum(_safe_int(s.get("cubiertos", 0)) for s in ok_stats)
-    total_uncovered = sum(_safe_int(s.get("no_cubiertos", 0)) for s in ok_stats)
+    # Deduplicar cubiertos/no_cubiertos usando los CSVs reales para evitar
+    # que un pedido arrastrado (carry-over) se cuente como no-cubierto en el
+    # día original Y como cubierto en el día posterior.
+    # NOTA: en routes_csv, las filas del depósito (salida/retorno) usan
+    # "Número de Orden" = "-" — deben excluirse.
+    _NON_ORDER_VALUES = {"", "-", "nan", "none", "null"}
+
+    def _extract_order_ids(df: pd.DataFrame) -> set[str]:
+        if "Número de Orden" not in df.columns:
+            return set()
+        ids = df["Número de Orden"].dropna().astype(str).str.strip()
+        return {v for v in ids if v.lower() not in _NON_ORDER_VALUES}
+
+    all_covered_orders: set[str] = set()
+    all_uncovered_orders: set[str] = set()
+    for day in day_results:
+        routes_csv = day.get("routes_csv", "") or ""
+        uncovered_csv = day.get("uncovered_csv", "") or ""
+        if routes_csv:
+            try:
+                df_r = pd.read_csv(io.StringIO(routes_csv))
+                all_covered_orders.update(_extract_order_ids(df_r))
+            except Exception:
+                pass
+        if uncovered_csv:
+            try:
+                df_u = pd.read_csv(io.StringIO(uncovered_csv))
+                all_uncovered_orders.update(_extract_order_ids(df_u))
+            except Exception:
+                pass
+
+    # Un pedido cubierto en cualquier día no es "no cubierto" global
+    truly_uncovered_orders = all_uncovered_orders - all_covered_orders
+    total_covered = len(all_covered_orders)
+    total_uncovered = len(truly_uncovered_orders)
+    total_orders = total_covered + total_uncovered
     trucks_peak = max((_safe_int(s.get("camiones_usados", 0)) for s in ok_stats), default=0)
 
     cost_values = []
@@ -1574,24 +1645,74 @@ async def _run_optimization_job(
         n_ok = df_ventas["Latitud"].notna().sum() if "Latitud" in df_ventas.columns else 0
         logger.info(f"Pre-optimización — total: {n_total}, con coords: {n_ok}, sin coords: {n_total - n_ok}")
 
-        # ── Construir batches por día ──
+        # ── Construir grupos por día (sin carry-over interno) ──
         t_batch_0 = time.perf_counter()
         _set_stage("Construyendo batches por día...")
-        batches = await asyncio.to_thread(
-            _build_day_batches, df_ventas, validated_params.deliveries_per_day
-        )
+        day_queue = await asyncio.to_thread(_build_day_batches, df_ventas)
         pipeline_phase_times["batch_build_sec"] = time.perf_counter() - t_batch_0
-        logger.info(f"Batches generados: {[f'{label}({len(df)})' for label, df in batches]}")
+        logger.info(f"Días en cola: {[label for label, _ in day_queue]}")
 
-        # ── Optimizar por día ──
+        # ── Loop de optimización multi-día ──
+        #
+        # Dos tipos de carry-over, ambos solo en DataFrames temporales (no BD):
+        #   priority_df : pedidos geocodificados que el optimizador no pudo asignar
+        #                 → van primero en el siguiente día (máxima prioridad)
+        #   overflow_df : pedidos que no entraron en el límite diario (deliveries_per_day)
+        #                 → se anteponen al siguiente día, después de priority_df
+        #
+        # El loop consume day_queue. Cuando se agota y aún quedan pedidos
+        # en priority_df u overflow_df, se generan días extra (hasta max_extra_days).
         t_opt_days_0 = time.perf_counter()
         day_results = []
-        for idx, (label, batch_df) in enumerate(batches):
-            if batch_df.empty:
+        priority_df: pd.DataFrame = pd.DataFrame()   # carry-over del optimizador
+        overflow_df: pd.DataFrame = pd.DataFrame()   # exceso del límite diario
+        extra_idx = 1
+        max_extra_days = 30
+        day_num = 0
+
+        while day_queue or not priority_df.empty or not overflow_df.empty:
+            # Determinar label y pedidos base del día
+            if day_queue:
+                label, day_df = day_queue.popleft()
+            else:
+                if extra_idx > max_extra_days:
+                    logger.warning("Se alcanzó el límite de días extra. Deteniendo.")
+                    break
+                label = f"extra_{extra_idx}"
+                day_df = pd.DataFrame()
+                extra_idx += 1
+
+            day_num += 1
+
+            # Construir candidatos: prioridad > overflow > pedidos del día
+            candidates = pd.concat(
+                [df for df in [priority_df, overflow_df, day_df] if not df.empty],
+                ignore_index=True,
+            )
+            priority_df = pd.DataFrame()
+            overflow_df = pd.DataFrame()
+
+            if candidates.empty:
                 continue
+
+            # Aplicar límite diario — el exceso pasa al siguiente día
+            lim = validated_params.deliveries_per_day
+            batch_df   = candidates.iloc[:lim].copy()
+            overflow_df = candidates.iloc[lim:].copy()
+
+            if not overflow_df.empty:
+                logger.info(
+                    f"Día '{label}': {len(overflow_df)} pedido(s) exceden el límite"
+                    f" diario ({lim}) — se trasladan al siguiente día."
+                )
+
             t_day_0 = time.perf_counter()
-            _set_stage(f"Optimizando día {idx + 1}/{len(batches)}: {label} ({len(batch_df)} pedidos)...")
+            total_days_est = len(day_queue) + day_num
+            _set_stage(
+                f"Optimizando día {day_num}: {label} ({len(batch_df)} pedidos)..."
+            )
             logger.info(f"Optimizando día '{label}' con {len(batch_df)} pedidos...")
+
             try:
                 result = await asyncio.to_thread(run_optimization, validated_params, batch_df)
                 day_elapsed = time.perf_counter() - t_day_0
@@ -1606,6 +1727,23 @@ async def _run_optimization_job(
                     "map_html": result.map_html,
                     "stats": day_stats,
                 })
+                # Pedidos geocodificados no asignados → máxima prioridad mañana
+                priority_df = _extract_unserved_valid_orders(result.uncovered_csv, batch_df)
+                if not priority_df.empty:
+                    logger.info(
+                        f"Día '{label}': {len(priority_df)} pedido(s) válidos no"
+                        " atendidos — prioridad en el siguiente día."
+                    )
+                    # Si el optimizador no redujo nada en un día extra, marcar
+                    # esos pedidos como inasignables (no reintentar) pero NO
+                    # interrumpir el loop — puede haber overflow_df pendiente.
+                    if label.startswith("extra_") and len(priority_df) >= len(batch_df):
+                        logger.warning(
+                            f"Día '{label}': el optimizador no pudo reducir los"
+                            f" {len(priority_df)} pedido(s). Se descartan del reintento."
+                        )
+                        priority_df = pd.DataFrame()
+
             except Exception as day_err:
                 day_elapsed = time.perf_counter() - t_day_0
                 logger.error(f"Error optimizando día '{label}': {day_err}")
@@ -1620,6 +1758,15 @@ async def _run_optimization_job(
                         "timing": {"wall_sec": round(float(day_elapsed), 4)},
                     },
                 })
+                # En error, pedidos válidos del batch van a priority_df (máxima
+                # prioridad siguiente día). Sin coordenadas quedan como perdidos.
+                has_coords = "Latitud" in batch_df.columns and "Longitud" in batch_df.columns
+                if has_coords:
+                    valid_mask = batch_df["Latitud"].notna() & batch_df["Longitud"].notna()
+                    priority_df = pd.concat(
+                        [priority_df, batch_df[valid_mask]], ignore_index=True
+                    )
+
         pipeline_phase_times["optimization_days_sec"] = time.perf_counter() - t_opt_days_0
 
         t_summary_0 = time.perf_counter()

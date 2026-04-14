@@ -3015,10 +3015,16 @@ class MainView(QWidget):
         global_stats = data.get("global_stats", {}) if isinstance(data, dict) else {}
         cleaning_errors = data.get("cleaning_errors", []) if isinstance(data, dict) else []
 
-        # Aggregate stats across all days
-        total_covered   = sum(d.get("stats", {}).get("cubiertos", 0) for d in days)
-        total_uncovered = sum(d.get("stats", {}).get("no_cubiertos", 0) for d in days)
-        total_trucks    = max((d.get("stats", {}).get("camiones_usados", 0) for d in days), default=0)
+        # Usar global_stats del backend (deduplicados entre días) cuando
+        # están disponibles; los pedidos arrastrados no se cuentan dos veces.
+        if global_stats:
+            total_covered   = int(global_stats.get("covered_total", 0) or 0)
+            total_uncovered = int(global_stats.get("uncovered_total", 0) or 0)
+            total_trucks    = int(global_stats.get("trucks_peak", 0) or 0)
+        else:
+            total_covered   = sum(d.get("stats", {}).get("cubiertos", 0) for d in days)
+            total_uncovered = sum(d.get("stats", {}).get("no_cubiertos", 0) for d in days)
+            total_trucks    = max((d.get("stats", {}).get("camiones_usados", 0) for d in days), default=0)
 
         self._set_global_status(
             f"Complete — {len(days)} day(s), {total_covered} covered, "
