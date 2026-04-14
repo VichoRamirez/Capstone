@@ -1605,6 +1605,7 @@ from backend.models.routing.metaheuristics import (
 )
 from backend.models.routing.literature_heuristics import heuristic_solomon_i1_style, ProblemContext
 from backend.models.routing.heuristics import Route
+from validation_heuristics import HARD_FLEET_PENALTIES
 
 class OptimizationResult:
     """Encapsula los resultados de la optimización."""
@@ -1745,15 +1746,38 @@ def run_optimization(params: OptimizerParams,
     t_tabu_0 = time.perf_counter()
     use_tabu = bool(getattr(params_effective, "use_tabu_search", True))
     tabu_seconds = max(1.0, _safe_float(getattr(params_effective, "tabu_seconds", 20.0), 20.0))
+    k_max = vrp_data.K_max
+    solomon_dist = sum(
+        sum(d[sol_nodes[r][i], sol_nodes[r][i + 1]] for i in range(len(sol_nodes[r]) - 1))
+        for r in range(len(sol_nodes)) if len(sol_nodes[r]) > 2
+    )
+    solomon_fleet_ok = sum(1 for r in sol_nodes if len(r) > 2) <= k_max
     if use_tabu:
-        sol_nodes, ev = tabu_search_vrptw(
+        sol_tabu, ev_tabu = tabu_search_vrptw(
             data=vrp_data,
             initial_solution=sol_nodes,
+            penalties=HARD_FLEET_PENALTIES,
             tabu_config=TabuConfig(max_seconds=tabu_seconds),
             seed=seed,
         )
+        tabu_dist = sum(
+            sum(d[sol_tabu[r][i], sol_tabu[r][i + 1]] for i in range(len(sol_tabu[r]) - 1))
+            for r in range(len(sol_tabu)) if len(sol_tabu[r]) > 2
+        )
+        tabu_fleet_ok = sum(1 for r in sol_tabu if len(r) > 2) <= k_max
+        # Preferir Tabu si respeta flota aunque tenga mayor distancia;
+        # o si ambas soluciones son iguales en flota, elegir por distancia.
+        if (tabu_fleet_ok and not solomon_fleet_ok) or (tabu_dist <= solomon_dist):
+            sol_nodes, ev = sol_tabu, ev_tabu
     tabu_sec = time.perf_counter() - t_tabu_0
     solver_sec = solomon_sec + tabu_sec
+
+    # Cap de flota: si aún excede K_max, eliminar rutas sobrantes por tamaño
+    # (las más pequeñas) y sus pedidos van como no cubiertos al día siguiente.
+    active = [r for r in sol_nodes if len(r) > 2]
+    if len(active) > k_max:
+        active_sorted = sorted(active, key=lambda r: len(r), reverse=True)
+        sol_nodes = active_sorted[:k_max] + [r for r in sol_nodes if len(r) <= 2]
 
     # Adaptar la solucion de lista de listas a objetos Route para compatibilidad con el resto del pipeline
     t_post_0 = time.perf_counter()

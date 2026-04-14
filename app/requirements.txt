@@ -10,6 +10,7 @@ python-multipart>=0.0.6
 # Base de datos
 SQLAlchemy>=2.0.0
 PyMySQL>=1.1.0
+cryptography>=3.0.0
 python-dotenv>=1.0.0
 
 # Validación
