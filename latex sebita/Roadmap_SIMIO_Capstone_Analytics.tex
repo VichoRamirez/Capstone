@@ -1,0 +1,696 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-tabla]{babel}
+\usepackage{lmodern}
+\usepackage{geometry}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{titlesec}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric,calc,backgrounds,fit,babel}
+
+\geometry{margin=2.35cm}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=black,
+  urlcolor=blue,
+  pdftitle={Roadmap SIMIO - Capstone Analytics},
+  pdfauthor={Joaquín Parraud, Sebastián Ramírez y Vicente Ramírez}
+}
+
+\definecolor{uddblue}{HTML}{003B5C}
+\definecolor{uddgray}{HTML}{4D4D4D}
+\definecolor{softgray}{HTML}{F2F4F7}
+\definecolor{linegray}{HTML}{D9DEE7}
+\definecolor{accentgreen}{HTML}{2E7D32}
+\definecolor{accentorange}{HTML}{C75B12}
+\definecolor{accentred}{HTML}{B3261E}
+
+\tikzset{
+  box/.style={draw=uddblue, fill=softgray, rounded corners=2pt, align=center, minimum height=0.78cm, text width=2.45cm, font=\scriptsize},
+  smallbox/.style={draw=uddblue, fill=softgray, rounded corners=2pt, align=center, minimum height=0.65cm, text width=2.05cm, font=\scriptsize},
+  decision/.style={diamond, draw=accentorange, fill=orange!8, aspect=1.8, align=center, inner sep=1.2pt, font=\scriptsize},
+  arrow/.style={-Latex, thick, draw=uddblue},
+  dashedarrow/.style={-Latex, thick, dashed, draw=uddgray},
+  lane/.style={draw=linegray, fill=softgray, rounded corners=3pt},
+  ganttbar/.style={draw=uddblue, fill=uddblue!25, rounded corners=1pt},
+  ganttmilestone/.style={draw=accentred, fill=accentred!75}
+}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.45em}
+\setlist[itemize]{leftmargin=1.2em,itemsep=0.15em,topsep=0.2em}
+\setlist[enumerate]{leftmargin=1.4em,itemsep=0.15em,topsep=0.2em}
+\renewcommand{\arraystretch}{1.18}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+
+\titleformat{\section}{\Large\bfseries\color{uddblue}}{\thesection}{0.75em}{}
+\titleformat{\subsection}{\large\bfseries\color{uddgray}}{\thesubsection}{0.75em}{}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\small Capstone Analytics IIC511AD}
+\rhead{\small Roadmap SIMIO}
+\cfoot{\small Página \thepage\ de \pageref{LastPage}}
+
+\newcommand{\curso}{Capstone Analytics}
+\newcommand{\codigo}{IIC511AD}
+\newcommand{\profesor}{Victor Vera}
+\newcommand{\universidad}{Universidad del Desarrollo}
+\newcommand{\fechaemision}{27 de abril de 2026}
+\newcommand{\horizonte}{22 de abril de 2026 al 22 de mayo de 2026}
+\newcommand{\versiondoc}{v1.0}
+
+\begin{document}
+
+\begin{titlepage}
+  \centering
+  \vspace*{0.5cm}
+  \fbox{%
+    \begin{minipage}[c][2.8cm][c]{0.42\textwidth}
+      \centering
+      \textcolor{uddgray}{Espacio reservado para logo institucional}
+    \end{minipage}
+  }
+
+  \vspace{1.2cm}
+  {\Large \textbf{\universidad}\par}
+  \vspace{0.25cm}
+  {\large \curso\ (\codigo)\par}
+  {\large Profesor: \profesor\par}
+
+  \vspace{1.4cm}
+  {\Huge \textbf{Proyecto Capstone Analytics}\par}
+  \vspace{0.45cm}
+  {\LARGE \textbf{Roadmap profesional de simulación en SIMIO}\par}
+  \vspace{0.3cm}
+  {\Large Simulación de Eventos Discretos: Proceso de Fabricación de Pan\par}
+
+  \vspace{1.0cm}
+  \begin{tabular}{rl}
+    \textbf{Horizonte de ejecución:} & \horizonte \\
+    \textbf{Fecha de emisión:} & \fechaemision \\
+    \textbf{Versión:} & \versiondoc \\
+    \textbf{Rama de trabajo:} & \texttt{Simu/Origin} \\
+  \end{tabular}
+
+  \vfill
+  \begin{tabular}{ll}
+    \toprule
+    \textbf{Integrante} & \textbf{Responsabilidad principal} \\
+    \midrule
+    Joaquín Parraud & Modelo físico, layout operacional y construcción en SIMIO \\
+    Sebastián Ramírez & Flujo lógico, reglas de proceso y verificación estructural \\
+    Vicente Ramírez & Análisis de datos, demanda y triangulación de probabilidades \\
+    \bottomrule
+  \end{tabular}
+
+  \vspace*{0.5cm}
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+\section{Control del Documento}
+
+\begin{tabularx}{\textwidth}{L{2.2cm}L{3.0cm}L{4.0cm}Y}
+  \toprule
+  \textbf{Versión} & \textbf{Fecha} & \textbf{Responsable} & \textbf{Descripción} \\
+  \midrule
+  \versiondoc & \fechaemision & Equipo de proyecto & Reestructuración profesional del roadmap, incorporación de gobernanza, trazabilidad, validación, matriz experimental y responsabilidades nominales. \\
+  \bottomrule
+\end{tabularx}
+
+\textbf{Estado del documento:} planificación ejecutiva y técnica para implementación, validación y defensa del modelo de simulación.
+
+\textbf{Propósito:} establecer una ruta de trabajo verificable para construir un modelo SIMIO ejecutable, estadísticamente defendible y útil para recomendar capacidad, dotación y política operacional de una panadería de supermercado.
+
+\section{Resumen Ejecutivo}
+
+El proyecto busca modelar, mediante simulación de eventos discretos en SIMIO, la operación de una panadería de supermercado que produce diez tipos de pan con recursos compartidos, demanda horaria no uniforme y riesgo de quiebre de stock. El objetivo no es únicamente reproducir el proceso, sino entregar una recomendación operacional defendible: cuántos recursos utilizar, qué política de horneo adoptar y cómo balancear servicio al cliente con costo operacional.
+
+La propuesta se estructura en cuatro ejes: modelación física, lógica de proceso, análisis de datos y validación estadística. Joaquín Parraud liderará la construcción física del modelo en SIMIO; Sebastián Ramírez diseñará el flujo lógico, las reglas de producción y las pruebas de consistencia; Vicente Ramírez liderará el análisis de datos, el motor de demanda y la triangulación de probabilidades. Las actividades restantes se distribuyen de manera uniforme para evitar dependencia crítica de una sola persona y asegurar continuidad del trabajo.
+
+El criterio rector será la trazabilidad. Cada decisión relevante del modelo deberá quedar asociada a una fuente de datos, una regla operacional, un indicador de desempeño y una evidencia verificable. De este modo, la entrega final podrá sostenerse tanto ante una audiencia técnica como ante una audiencia gerencial.
+
+\section{Mandato, Alcance y Criterios de Éxito}
+
+\subsection{Mandato del Proyecto}
+
+El sistema representa una panadería que abastece una sala de ventas entre las 09:00 y las 21:00 horas. Antes de la apertura debe existir stock inicial de todos los productos, y durante el día se debe producir, hornear, enfriar y reponer pan para reducir quiebres. Si un cliente no encuentra el pan requerido, la venta se pierde y no existe sustitución.
+
+El estudio debe determinar:
+\begin{itemize}
+  \item dotación recomendada de panaderos y manipuladores;
+  \item número requerido de hornos, mezcladoras, amasadoras, estaciones, cámaras, carros y bandejas;
+  \item horario operativo conveniente de la panadería;
+  \item política de secuencia de producción y horneo;
+  \item nivel de servicio alcanzable bajo costo operacional controlado.
+\end{itemize}
+
+\subsection{Alcance Mínimo del Modelo}
+
+El modelo debe representar producción, recursos limitados, inventario en sala, turnos, descansos, demanda no uniforme, compatibilidad de familias de horno, setup por cambio de familia, enfriamiento, reposición y pérdida de venta por quiebre. Además, debe permitir comparar políticas alternativas de producción y secuencia de horno.
+
+\subsection{Criterios de Éxito}
+
+\begin{tabularx}{\textwidth}{L{4.1cm}Y}
+  \toprule
+  \textbf{Criterio} & \textbf{Evidencia esperada} \\
+  \midrule
+  Ejecutabilidad & Modelo SIMIO corre sin errores y reproduce el escenario base. \\
+  Coherencia operacional & No hay mezclas de familias incompatibles, retiros parciales de horno ni inventarios negativos. \\
+  Calidad estadística & Resultados con réplicas, media, desviación estándar e intervalos de confianza. \\
+  Trazabilidad & Cada KPI se vincula a fuente de datos, regla de modelo y salida de resultados. \\
+  Decisión gerencial & Recomendación final presenta trade-off explícito entre costo, servicio y riesgo. \\
+  \bottomrule
+\end{tabularx}
+
+\section{Equipo, Roles y Gobernanza}
+
+\subsection{Responsabilidades Principales}
+
+\begin{tabularx}{\textwidth}{L{3.3cm}L{4.4cm}Y}
+  \toprule
+  \textbf{Integrante} & \textbf{Rol principal} & \textbf{Responsabilidades complementarias} \\
+  \midrule
+  Joaquín Parraud & Modelo físico en SIMIO & Construcción de layout, recursos, estaciones, caminos, objetos, capacidades, animación operacional y apoyo en pruebas de corridas. \\
+  Sebastián Ramírez & Flujo lógico del proceso & Secuencia productiva, reglas de inventario, política de hornos, restricciones operativas, validación estructural y documentación de lógica. \\
+  Vicente Ramírez & Datos y triangulación de probabilidades & Limpieza de datos, demanda horaria, probabilidades de elección, calibración, diseño experimental, análisis estadístico y visualización de resultados. \\
+  \bottomrule
+\end{tabularx}
+
+\subsection{RACI de Macroentregables}
+
+\begin{tabularx}{\textwidth}{L{4.8cm}L{2.4cm}L{2.4cm}L{2.4cm}Y}
+  \toprule
+  \textbf{Entregable} & \textbf{Joaquín} & \textbf{Sebastián} & \textbf{Vicente} & \textbf{Profesor} \\
+  \midrule
+  Arquitectura física SIMIO & R/A & C & C & I \\
+  Flujo lógico y reglas operativas & C & R/A & C & I \\
+  Motor de demanda y probabilidades & C & C & R/A & I \\
+  Política de horno y secuenciación & C & R/A & C & I \\
+  Diseño experimental y análisis estadístico & C & C & R/A & I \\
+  Verificación y validación & R & R/A & R & C \\
+  Informe técnico gerencial & C & R & R/A & I \\
+  Informe académico y anexos & R & R & R/A & I \\
+  Recomendación final costo-servicio & A & A & A & C \\
+  \bottomrule
+\end{tabularx}
+
+\textit{Leyenda: R = Responsible; A = Accountable; C = Consulted; I = Informed.}
+
+\section{Arquitectura de Datos y Trazabilidad}
+
+\subsection{Fuentes de Entrada}
+
+\begin{tabularx}{\textwidth}{L{4.0cm}L{4.6cm}Y}
+  \toprule
+  \textbf{Archivo} & \textbf{Contenido} & \textbf{Uso en el modelo} \\
+  \midrule
+  \parbox[t]{4.0cm}{\texttt{parametros\_proceso}\\\texttt{\_panaderia.xlsx}} & Tiempos de etapas, familias, lotes, temperaturas y capacidad por carro. & Parametrizar procesos, tiempos, familias de horno, tamaños de lote y requerimientos de capacidad. \\
+  \parbox[t]{4.0cm}{\texttt{perfil\_demanda}\\\texttt{\_por\_hora}\\\texttt{\_panaderia.xlsx}} & Kilogramos esperados por hora y tipo de pan. & Calibrar intensidad de demanda, validación por franja y volumen diario. \\
+  \parbox[t]{4.0cm}{\texttt{probabilidades}\\\texttt{\_eleccion}\\\texttt{\_por\_hora.xlsx}} & Probabilidad horaria de elección de cada producto. & Simular composición de compra, primera elección y elecciones adicionales sin repetición. \\
+  Enunciado del caso & Reglas, restricciones, entregables e indicadores. & Definir alcance mínimo, supuestos obligatorios y criterios de aceptación. \\
+  \bottomrule
+\end{tabularx}
+
+\subsection{Matriz de Trazabilidad}
+
+\small
+\begin{longtable}{L{2.55cm}L{2.75cm}L{3.05cm}L{2.75cm}L{2.75cm}}
+  \toprule
+  \textbf{Requisito} & \textbf{Fuente} & \textbf{Implementación SIMIO} & \textbf{KPI asociado} & \textbf{Evidencia} \\
+  \midrule
+  \endfirsthead
+  \toprule
+  \textbf{Requisito} & \textbf{Fuente} & \textbf{Implementación SIMIO} & \textbf{KPI asociado} & \textbf{Evidencia} \\
+  \midrule
+  \endhead
+  Inventario por tipo de pan & Enunciado, sección C & Estados por producto en sala & Fill rate, quiebre, sobrante & Tabla de inventario horario \\
+  Demanda horaria no uniforme & Perfil de demanda & Llegadas/órdenes por franja & Demanda simulada vs. esperada & Validación con tolerancia \(\pm 5\%\) \\
+  Compra de 1, 2 o 3 tipos & Enunciado, sección E & Lógica probabilística sin repetición & Mix de compra y kg vendidos & Log de demanda y elecciones \\
+  Familias de horneado & Enunciado, sección III-B & Atributo \texttt{FamiliaHorno} & Utilización y setups & Historial de corridas \\
+  No mezclar familias & Enunciado, sección III-C & Restricción de carga por familia & Violaciones lógicas & Prueba de compatibilidad \\
+  Carga/descarga con manipulador & Enunciado, sección III-E & Recurso requerido antes y después del horno & Espera de horno, utilización manipuladores & Reporte de colas \\
+  Setup por cambio de familia & Enunciado, sección III-F & Tiempo condicional de 0 o 5 min & Tiempo ocioso, throughput & Registro de secuencias \\
+  Turnos y descansos escalonados & Enunciado, sección D & Calendarios por recurso humano & Disponibilidad y espera & Calendario auditado \\
+  Enfriamiento no disponible para venta & Enunciado, sección III-J & Estado intermedio antes de inventario sala & Tiempo de ciclo y fill rate & Tiempos por lote \\
+  Recursos limitados & Enunciado, sección B & Capacidades parametrizadas por escenario & Utilización y colas & Comparativo DoE \\
+  \bottomrule
+\end{longtable}
+\normalsize
+
+\section{Arquitectura Operacional del Modelo}
+
+\subsection{Entidad Principal}
+
+La entidad \texttt{LotePan} representará una unidad de producción. Sus atributos mínimos serán: tipo de pan, familia de horneado, kilogramos del lote, hora de liberación, hora de llegada a sala, prioridad operacional, tiempo acumulado de proceso y estado de disponibilidad.
+
+\subsection{Flujo Lógico de Proceso}
+
+El flujo lógico será:
+
+\begin{enumerate}
+  \item solicitud de producción por política de inventario y demanda esperada;
+  \item pesado y dosificación;
+  \item mezclado o amasado según corresponda;
+  \item reposo en masa;
+  \item dividido, formado o laminado;
+  \item fermentación final;
+  \item espera de horno por familia compatible;
+  \item setup si cambia la familia;
+  \item carga, horneado y descarga;
+  \item enfriamiento;
+  \item reposición a sala;
+  \item consumo por demanda y registro de venta satisfecha o perdida.
+\end{enumerate}
+
+\begin{figure}[htbp]
+  \centering
+  \resizebox{\textwidth}{!}{%
+  \begin{tikzpicture}[node distance=0.7cm and 0.55cm]
+    \node[smallbox] (pesado) {Pesado y\\dosificación};
+    \node[smallbox, right=of pesado] (mezclado) {Mezclado};
+    \node[smallbox, right=of mezclado] (amasado) {Amasado};
+    \node[smallbox, right=of amasado] (reposo) {Reposo\\en masa};
+    \node[smallbox, right=of reposo] (formado) {Dividido y\\formado};
+
+    \node[smallbox, below=1.0cm of formado] (fermentacion) {Fermentación\\final};
+    \node[smallbox, left=of fermentacion] (horno) {Horneado\\batch};
+    \node[smallbox, left=of horno] (enfriado) {Enfriado};
+    \node[smallbox, left=of enfriado] (reposicion) {Reposición\\a sala};
+    \node[smallbox, left=of reposicion] (inventario) {Inventario\\en sala};
+
+    \node[decision, below=0.85cm of inventario] (stock) {Stock\\disponible?};
+    \node[smallbox, below left=0.75cm and 0.05cm of stock, fill=accentred!8, draw=accentred] (quiebre) {Registrar\\quiebre};
+    \node[smallbox, below right=0.75cm and 0.05cm of stock, fill=accentgreen!8, draw=accentgreen] (venta) {Satisfacer\\demanda};
+
+    \draw[arrow] (pesado) -- (mezclado);
+    \draw[arrow] (mezclado) -- (amasado);
+    \draw[arrow] (amasado) -- (reposo);
+    \draw[arrow] (reposo) -- (formado);
+    \draw[arrow] (formado) -- (fermentacion);
+    \draw[arrow] (fermentacion) -- (horno);
+    \draw[arrow] (horno) -- (enfriado);
+    \draw[arrow] (enfriado) -- (reposicion);
+    \draw[arrow] (reposicion) -- (inventario);
+    \draw[arrow] (inventario) -- (stock);
+    \draw[arrow] (stock) -- node[font=\scriptsize, left] {No} (quiebre);
+    \draw[arrow] (stock) -- node[font=\scriptsize, right] {Sí} (venta);
+  \end{tikzpicture}}
+  \caption{Flujo lógico end-to-end desde preparación hasta venta o quiebre.}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \resizebox{\textwidth}{!}{%
+  \begin{tikzpicture}[node distance=0.55cm and 0.65cm]
+    \node[box] (panaderos) {Panaderos};
+    \node[box, right=of panaderos] (prep) {Cola de\\preparación};
+    \node[box, right=of prep] (mezcla) {Mezcladoras\\y amasadoras};
+    \node[box, right=of mezcla] (mesas) {Mesas de\\formado};
+
+    \node[box, below=1.05cm of mesas] (camaras) {Cámaras de\\fermentación};
+    \node[box, left=of camaras] (manip) {Manipuladores};
+    \node[box, left=of manip] (colahorno) {Cola de\\horneado};
+    \node[box, left=of colahorno] (hornos) {Hornos\\+ setup};
+
+    \node[box, below=1.05cm of hornos] (enfriar) {Cola de\\enfriado};
+    \node[box, right=of enfriar] (racks) {Carros y\\bandejas};
+    \node[box, right=of racks] (sala) {Inventario\\sala};
+    \node[box, right=of sala] (clientes) {Demanda\\clientes};
+
+    \draw[arrow] (panaderos) -- (prep);
+    \draw[arrow] (prep) -- (mezcla);
+    \draw[arrow] (mezcla) -- (mesas);
+    \draw[arrow] (mesas) -- (camaras);
+    \draw[arrow] (camaras) -- (colahorno);
+    \draw[arrow] (colahorno) -- (hornos);
+    \draw[arrow] (hornos) -- (enfriar);
+    \draw[arrow] (enfriar) -- (racks);
+    \draw[arrow] (racks) -- (sala);
+    \draw[arrow] (sala) -- (clientes);
+    \draw[dashedarrow] (manip) -- (hornos);
+    \draw[dashedarrow] (manip) -- (racks);
+
+    \begin{scope}[on background layer]
+      \node[lane, fit=(panaderos)(prep)(mezcla)(mesas), label={[font=\small\bfseries]above:Producción de masa y formado}] {};
+      \node[lane, fit=(camaras)(manip)(colahorno)(hornos), label={[font=\small\bfseries]above:Fermentación y horneo}] {};
+      \node[lane, fit=(enfriar)(racks)(sala)(clientes), label={[font=\small\bfseries]below:Salida a ventas}] {};
+    \end{scope}
+  \end{tikzpicture}}
+  \caption{Arquitectura de recursos, colas y dependencias operacionales.}
+\end{figure}
+
+\subsection{Política de Horno}
+
+La política base seguirá la regla de carga mínima recomendada, espera máxima y riesgo de quiebre:
+
+\begin{enumerate}
+  \item agrupar lotes disponibles por familia compatible;
+  \item evaluar carga acumulada frente al umbral mínimo;
+  \item si la carga alcanza el umbral, iniciar corrida;
+  \item si no alcanza el umbral, esperar acumulación hasta el máximo permitido;
+  \item si existe riesgo de quiebre, autorizar corrida anticipada;
+  \item si no existe urgencia, postergar y reevaluar secuencia.
+\end{enumerate}
+
+\begin{figure}[htbp]
+  \centering
+  \resizebox{0.92\textwidth}{!}{%
+  \begin{tikzpicture}[node distance=0.85cm and 1.25cm]
+    \node[box] (solicitud) {Solicitud de\\corrida};
+    \node[decision, below=of solicitud] (carga) {Carga\\\(\geq\) umbral?};
+    \node[box, right=1.35cm of carga, fill=accentgreen!8, draw=accentgreen] (iniciar) {Iniciar corrida\\familia prioritaria};
+    \node[decision, below=of carga] (espera) {Espera\\\(<\) máximo?};
+    \node[box, right=1.35cm of espera] (acumular) {Esperar\\acumulación};
+    \node[decision, below=of espera] (riesgo) {Riesgo de\\quiebre alto?};
+    \node[box, right=1.35cm of riesgo, fill=accentorange!8, draw=accentorange] (anticipar) {Lanzar corrida\\anticipada};
+    \node[box, below=of riesgo] (postergar) {Postergar y\\reordenar};
+
+    \draw[arrow] (solicitud) -- (carga);
+    \draw[arrow] (carga) -- node[font=\scriptsize, above] {Sí} (iniciar);
+    \draw[arrow] (carga) -- node[font=\scriptsize, left] {No} (espera);
+    \draw[arrow] (espera) -- node[font=\scriptsize, above] {Sí} (acumular);
+    \draw[arrow] (espera) -- node[font=\scriptsize, left] {No} (riesgo);
+    \draw[arrow] (riesgo) -- node[font=\scriptsize, above] {Sí} (anticipar);
+    \draw[arrow] (riesgo) -- node[font=\scriptsize, left] {No} (postergar);
+    \draw[dashedarrow] (acumular.north) .. controls +(0,1.0) and +(1.0,-0.5) .. (carga.east);
+  \end{tikzpicture}}
+  \caption{Árbol de decisión para activación y secuencia de corrida de horno.}
+\end{figure}
+
+\textbf{Nota crítica de consistencia:} el enunciado menciona carga mínima recomendada de 50\% equivalente a 600 kg. Sin embargo, el archivo de parámetros contiene capacidades referenciales por carro entre 28 y 45 kg; con 6 carros, la capacidad máxima por corrida estaría aproximadamente entre 168 y 270 kg, dependiendo del producto. Esta diferencia debe resolverse antes de cerrar el modelo final, ya sea mediante consulta al profesor, corrección de unidades o supuesto explícito documentado.
+
+\section{Motor de Demanda y Triangulación de Probabilidades}
+
+Vicente Ramírez liderará el diseño y validación del motor de demanda. La lógica propuesta será:
+
+\begin{enumerate}
+  \item para cada franja horaria, definir el volumen esperado por tipo de pan;
+  \item generar compras de clientes con probabilidad de adquirir 1, 2 o 3 tipos;
+  \item seleccionar el primer tipo de pan según probabilidades horarias;
+  \item seleccionar tipos adicionales con las mismas proporciones, excluyendo productos ya escogidos;
+  \item generar kilogramos por tipo mediante distribución triangular parametrizada por producto;
+  \item comparar la demanda simulada acumulada contra el perfil esperado por hora;
+  \item ajustar el número de clientes o intensidad de llegadas hasta respetar la tolerancia definida.
+\end{enumerate}
+
+La validación de demanda se considerará aceptable si el error por franja y por producto crítico permanece dentro de una tolerancia operacional de \(\pm 5\%\), salvo justificación estadística documentada.
+
+\section{Indicadores de Desempeño}
+
+\begin{longtable}{L{4.1cm}L{5.2cm}L{3.2cm}L{2.6cm}}
+  \toprule
+  \textbf{KPI} & \textbf{Definición} & \textbf{Meta o criterio} & \textbf{Uso} \\
+  \midrule
+  \endfirsthead
+  \toprule
+  \textbf{KPI} & \textbf{Definición} & \textbf{Meta o criterio} & \textbf{Uso} \\
+  \midrule
+  \endhead
+  Fill rate total & Demanda satisfecha sobre demanda total & \(\geq 95\%\) & Servicio global \\
+  Fill rate por tipo & Demanda satisfecha por producto & Prioridad en productos críticos & Servicio detallado \\
+  Kg no vendidos por quiebre & Demanda perdida por falta de stock & Minimizar & Impacto comercial \\
+  Sobrante fin de día & Kg remanentes al cierre & \(\leq 8\%\) de producción & Control de sobreproducción \\
+  Utilización de panaderos & Tiempo ocupado sobre disponibilidad & 65\%--90\% & Balance humano \\
+  Utilización de manipuladores & Tiempo ocupado sobre disponibilidad & 65\%--90\% & Riesgo de bloqueo \\
+  Utilización de hornos & Tiempo de horno activo sobre disponibilidad & 60\%--92\% & Capacidad de horneo \\
+  Tiempo ciclo por lote & Desde liberación hasta disponibilidad en sala & Minimizar con estabilidad & Fluidez del proceso \\
+  Espera por recurso & Tiempo promedio en cola por etapa & Minimizar & Cuello de botella \\
+  Producción por tipo & Kg fabricados por producto & Coherente con demanda y sobrante & Control productivo \\
+  \bottomrule
+\end{longtable}
+
+\section{Modelo de Costo Relativo}
+
+Si no se cuenta con costos unitarios reales, se utilizará un índice de costo relativo para comparar escenarios:
+
+\[
+\begin{aligned}
+ICR ={}& w_1 \cdot \text{Panaderos}
++ w_2 \cdot \text{Manipuladores}
++ w_3 \cdot \text{Hornos} \\
+&+ w_4 \cdot \text{Equipos}
++ w_5 \cdot \text{Sobrante}
++ w_6 \cdot \text{Kg no vendidos}
+\end{aligned}
+\]
+
+Los pesos \(w_i\) deberán declararse en el informe. La recomendación final no se basará solo en menor costo, sino en la frontera costo-servicio: configuraciones que logren alto fill rate, baja pérdida por quiebre y utilización estable sin sobredimensionar recursos.
+
+\section{Plan de Verificación y Validación}
+
+\subsection{Verificación Estructural}
+
+\begin{itemize}
+  \item El modelo ejecuta sin errores ni entidades bloqueadas.
+  \item No existen inventarios negativos.
+  \item No se mezclan familias incompatibles en una corrida de horno.
+  \item No hay retiro parcial de carga antes de finalizar horneado y descarga.
+  \item Los descansos no dejan una función crítica sin cobertura.
+  \item Todo lote vendido pasó por enfriamiento antes de llegar a sala.
+\end{itemize}
+
+\subsection{Validación Cuantitativa}
+
+\begin{itemize}
+  \item La demanda diaria simulada converge a 8.200 kg/día en el escenario base.
+  \item El perfil horario simulado respeta el patrón de los archivos de entrada.
+  \item La producción, venta, sobrante y quiebre cierran mediante balance de masa.
+  \item Los KPIs se reportan por tipo de pan y total.
+  \item Cada escenario se ejecuta con al menos 30 réplicas e intervalos de confianza al 95\%.
+\end{itemize}
+
+\section{Diseño Experimental}
+
+\begin{tabularx}{\textwidth}{L{4.2cm}L{4.2cm}Y}
+  \toprule
+  \textbf{Factor} & \textbf{Niveles sugeridos} & \textbf{Motivo} \\
+  \midrule
+  Panaderos & 2, 3, 4 & Determina capacidad de preparación, formado y apoyo. \\
+  Manipuladores & 1, 2, 3 & Afecta carga, descarga, reposición y bloqueo de horno. \\
+  Hornos & 1, 2 & Evalúa capacidad crítica de horneo. \\
+  Mezcladoras / amasadoras & 1, 2 & Identifica restricciones tempranas del proceso. \\
+  Política de secuencia & Fija, por stock, por demanda, híbrida & Compara estabilidad con respuesta a quiebres. \\
+  Carga mínima efectiva & 40\%, 50\%, 60\% & Evalúa eficiencia versus velocidad de respuesta. \\
+  Espera máxima de corrida & 10, 15, 20 min & Controla acumulación y urgencia operacional. \\
+  \bottomrule
+\end{tabularx}
+
+\begin{figure}[htbp]
+  \centering
+  \resizebox{0.88\textwidth}{!}{%
+  \begin{tikzpicture}[x=1cm,y=0.06cm]
+    \draw[-Latex, thick] (0,0) -- (0,105) node[above, font=\scriptsize] {Índice normalizado};
+    \draw[-Latex, thick] (0,0) -- (10.2,0);
+    \foreach \y in {20,40,60,80,100} {
+      \draw[linegray] (0,\y) -- (9.7,\y);
+      \node[left, font=\scriptsize] at (0,\y) {\y};
+    }
+    \foreach \x/\lab in {1/Base,3/S1,5/S2,7/S3} {
+      \node[below, font=\scriptsize] at (\x+0.45,0) {\lab};
+    }
+    \foreach \x/\a/\b/\c in {1/82/70/28,3/91/82/16,5/96/88/8,7/94/78/11} {
+      \draw[fill=accentgreen!65, draw=accentgreen] (\x,0) rectangle +(0.28,\a);
+      \draw[fill=uddblue!55, draw=uddblue] (\x+0.35,0) rectangle +(0.28,\b);
+      \draw[fill=accentred!55, draw=accentred] (\x+0.70,0) rectangle +(0.28,\c);
+    }
+    \draw[fill=accentgreen!65, draw=accentgreen] (8.7,93) rectangle (8.95,97);
+    \node[font=\scriptsize, anchor=west] at (9.05,95) {Fill rate};
+    \draw[fill=uddblue!55, draw=uddblue] (8.7,83) rectangle (8.95,87);
+    \node[font=\scriptsize, anchor=west] at (9.05,85) {Costo};
+    \draw[fill=accentred!55, draw=accentred] (8.7,73) rectangle (8.95,77);
+    \node[font=\scriptsize, anchor=west] at (9.05,75) {Quiebre};
+  \end{tikzpicture}}
+  \caption{Comparativo esperado de escenarios para comunicar el trade-off costo-servicio.}
+\end{figure}
+
+\textbf{Regla de reporte:} cada escenario tendrá ID, parámetros, semilla, número de réplicas, fecha de corrida, versión del modelo, KPIs principales y observaciones. Esta bitácora será anexo obligatorio.
+
+\section{Roadmap de Ejecución}
+
+\begin{figure}[htbp]
+  \centering
+  \resizebox{\textwidth}{!}{%
+  \begin{tikzpicture}[x=0.34cm,y=0.72cm]
+    \draw[-Latex, thick] (0,0) -- (32,0);
+    \foreach \x/\lab in {0/22-abr,8/30-abr,9/01-may,16/08-may,23/15-may,29/21-may,30/22-may} {
+      \draw (\x,0.12) -- (\x,-0.12);
+      \node[below, font=\scriptsize] at (\x,-0.15) {\lab};
+    }
+    \foreach \y/\name in {1/Gobernanza y diseño,2/Implementación y calibración,3/Experimentación,4/Documentación y cierre} {
+      \node[left, align=right, font=\scriptsize] at (0,\y) {\name};
+      \draw[linegray] (0,\y) -- (30.5,\y);
+    }
+    \draw[ganttbar] (0,0.78) rectangle (9,1.22);
+    \draw[ganttbar] (9,1.78) rectangle (17,2.22);
+    \draw[ganttbar] (17,2.78) rectangle (24,3.22);
+    \draw[ganttbar] (24,3.78) rectangle (30,4.22);
+    \foreach \x/\m in {9/M1,16/M2,23/M3,29/M4,30/M5} {
+      \draw[ganttmilestone] (\x-0.16,0.55) rectangle (\x+0.16,4.45);
+      \node[above, font=\scriptsize\bfseries, text=accentred] at (\x,4.55) {\m};
+    }
+  \end{tikzpicture}}
+  \caption{Gantt ejecutivo del proyecto y gates de control.}
+\end{figure}
+
+\subsection{Calendario Maestro}
+
+\begin{longtable}{L{2.4cm}L{4.5cm}L{3.6cm}L{4.3cm}}
+  \toprule
+  \textbf{Fecha} & \textbf{Foco} & \textbf{Responsable líder} & \textbf{Entregable de cierre} \\
+  \midrule
+  \endfirsthead
+  \toprule
+  \textbf{Fecha} & \textbf{Foco} & \textbf{Responsable líder} & \textbf{Entregable de cierre} \\
+  \midrule
+  \endhead
+  22-abr & Kickoff técnico, lectura del enunciado y KPIs objetivo & Equipo & Charter operacional y criterios de calidad \\
+  23-abr & Mapeo As-Is / To-Be y eventos discretos & Sebastián & Diagrama lógico validado \\
+  24-abr & Normalización de datos y diccionario & Vicente & Dataset limpio y diccionario de variables \\
+  27-abr & Estructura física base en SIMIO & Joaquín & Layout y recursos base creados \\
+  28-abr & Motor de demanda horaria y elección de productos & Vicente & Demanda simulada calibrada preliminar \\
+  29-abr & Inventario en sala, quiebres y ventas perdidas & Sebastián & Subsistema de ventas operativo \\
+  30-abr & Turnos, descansos y cobertura mínima & Sebastián + Joaquín & Calendarios sin solapes críticos \\
+  01-may & Gate M1: verificación estructural & Equipo & Checklist estructural cerrado \\
+  04-may & Flujo completo mezcla--venta & Joaquín + Sebastián & Modelo end-to-end ejecutable \\
+  05-may & Política de horno, setup y compatibilidad & Sebastián & Motor de corridas operativo \\
+  06-may & Recursos limitados: carros, bandejas y equipos & Joaquín & Capacidades parametrizadas \\
+  07-may & Calibración base-case 8.200 kg/día & Vicente & Escenario base estable \\
+  08-may & Gate M2: validación cuantitativa inicial & Vicente + Sebastián & Informe de brechas y ajustes \\
+  11-may & Matriz DoE y escenarios priorizados & Vicente & Catálogo de escenarios \\
+  12-may & Corridas masivas con réplicas e IC95\% & Vicente + Joaquín & Resultados comparables \\
+  13-may & Sensibilidad y cuello de botella & Equipo & Ranking de restricciones \\
+  14-may & Selección de configuraciones candidatas & Equipo & Top 3 costo-servicio \\
+  15-may & Gate M3: recomendación preliminar & Equipo & Recomendación defendible \\
+  18-may & Informe técnico gerencial & Sebastián + Vicente & Borrador técnico completo \\
+  19-may & Informe académico y anexos & Joaquín + Vicente & Borrador académico completo \\
+  20-may & Integración final, trazabilidad y bitácora & Equipo & Paquete documental consolidado \\
+  21-may & Ensayo de defensa y revisión cruzada & Equipo & Versión corregida \\
+  22-may & Gate M4/M5: cierre y entrega & Equipo & Entrega final versionada \\
+  \bottomrule
+\end{longtable}
+
+\subsection{Balance de Carga por Integrante}
+
+La asignación busca respetar especialización sin concentrar riesgo. Joaquín concentra construcción física y parametrización de recursos; Sebastián concentra lógica, restricciones y verificación; Vicente concentra datos, experimentación y análisis. Las etapas de validación, documentación y defensa se trabajan de forma cruzada para que todos puedan explicar el modelo completo.
+
+\section{Riesgos y Contramedidas}
+
+\begin{longtable}{L{0.9cm}L{4.45cm}L{4.65cm}L{2.0cm}L{1.95cm}}
+  \toprule
+  \textbf{ID} & \textbf{Riesgo} & \textbf{Contramedida} & \textbf{Owner} & \textbf{Trigger} \\
+  \midrule
+  \endfirsthead
+  \toprule
+  \textbf{ID} & \textbf{Riesgo} & \textbf{Contramedida} & \textbf{Owner} & \textbf{Trigger} \\
+  \midrule
+  \endhead
+  R1 & Inconsistencia entre capacidad declarada y archivo de parámetros. & Documentar supuesto y consultar al profesor antes de congelar escenarios. & Sebastián & Diferencia no resuelta al M2 \\
+  R2 & Demanda simulada no reproduce perfil horario. & Ajustar intensidad de clientes y validar por franja con tolerancia. & Vicente & Error \(>5\%\) \\
+  R3 & Bloqueo de horno por falta de manipulador. & Escalonar turnos y evaluar prioridad de carga/descarga. & Joaquín & Espera horno \(>10\) min \\
+  R4 & Sobreproducción por política agresiva. & Penalizar sobrante en índice de costo relativo. & Vicente & Sobrante \(>8\%\) \\
+  R5 & Modelo físico avanza sin trazabilidad documental. & Actualizar matriz de requisitos en cada gate. & Sebastián & Cambio sin registro \\
+  R6 & Dependencia excesiva de una persona. & Revisión cruzada semanal y explicación breve de cada módulo al equipo. & Equipo & Módulo no explicable por otro integrante \\
+  \bottomrule
+\end{longtable}
+
+\begin{figure}[htbp]
+  \centering
+  \resizebox{0.78\textwidth}{!}{%
+  \begin{tikzpicture}[x=1.25cm,y=1.0cm]
+    \draw[-Latex, thick] (0.8,0.8) -- (5.7,0.8) node[right, font=\scriptsize] {Probabilidad};
+    \draw[-Latex, thick] (0.8,0.8) -- (0.8,5.55) node[above, font=\scriptsize] {Impacto};
+    \foreach \x in {1,...,5} {
+      \draw[linegray] (\x,0.8) -- (\x,5.3);
+      \node[below, font=\scriptsize] at (\x,0.75) {\x};
+    }
+    \foreach \y in {1,...,5} {
+      \draw[linegray] (0.8,\y) -- (5.4,\y);
+      \node[left, font=\scriptsize] at (0.75,\y) {\y};
+    }
+    \fill[accentgreen!10] (0.8,0.8) rectangle (2.6,2.6);
+    \fill[accentorange!12] (2.6,0.8) rectangle (4.2,4.2);
+    \fill[accentred!12] (4.2,0.8) rectangle (5.4,5.3);
+    \fill[accentred!12] (0.8,4.2) rectangle (5.4,5.3);
+    \foreach \x/\y/\id in {4.6/4.7/R1,3.9/3.6/R2,3.2/3.2/R3,3.5/2.8/R4,2.8/3.9/R5,2.4/3.3/R6} {
+      \node[circle, fill=uddblue, text=white, inner sep=2.4pt, font=\scriptsize\bfseries] at (\x,\y) {\id};
+    }
+    \node[font=\scriptsize, text=accentgreen] at (1.7,1.25) {Bajo};
+    \node[font=\scriptsize, text=accentorange] at (3.35,2.15) {Medio};
+    \node[font=\scriptsize, text=accentred] at (4.75,4.95) {Crítico};
+  \end{tikzpicture}}
+  \caption{Mapa de riesgos probabilidad-impacto para priorizar gestión del proyecto.}
+\end{figure}
+
+\section{Definición de Done por Hito}
+
+\subsection*{M1: Verificación estructural}
+El modelo contiene recursos, entidades, inventario, demanda preliminar y flujo sin errores de conexión. Se documentan supuestos iniciales y brechas abiertas.
+
+\subsection*{M2: Validación cuantitativa inicial}
+El escenario base reproduce aproximadamente los 8.200 kg/día, respeta patrones horarios y genera KPIs consistentes. La inconsistencia de capacidad de horno queda resuelta o explicitada.
+
+\subsection*{M3: Recomendación preliminar}
+La matriz de escenarios está ejecutada, el cuello de botella principal está identificado y se seleccionan tres configuraciones candidatas con evidencia.
+
+\subsection*{M4: Calidad documental}
+El informe técnico y académico contienen trazabilidad, anexos, tablas, supuestos, resultados, limitaciones y recomendación. La revisión cruzada no presenta no conformidades mayores.
+
+\subsection*{M5: Entrega final}
+El paquete final incluye modelo SIMIO ejecutable, informes, anexos de datos, bitácora de corridas, resultados y material de defensa.
+
+\section{Checklist de Entrega Profesional}
+
+\begin{enumerate}
+  \item Modelo SIMIO ejecutable y versionado.
+  \item Informe técnico orientado a gerencia.
+  \item Informe académico con proceso, decisiones y reflexión crítica.
+  \item Anexos con datos, parámetros, supuestos y distribuciones.
+  \item Matriz de trazabilidad requisito--modelo--KPI--evidencia.
+  \item Bitácora de corridas con versión, semillas, réplicas y resultados.
+  \item Tablero de KPIs por escenario y por tipo de pan.
+  \item Análisis de sensibilidad y cuello de botella.
+  \item Recomendación final con frontera costo-servicio.
+  \item Material de defensa: problema, evidencia, recomendación, riesgos e implementación.
+\end{enumerate}
+
+\section{Narrativa para Defensa}
+
+La defensa debe comunicar el proyecto como una decisión operacional basada en evidencia:
+
+\begin{quote}
+La panadería enfrenta quiebres de stock porque la demanda es variable y la producción opera con recursos compartidos y restricciones de horneo. El modelo SIMIO permite reproducir el sistema, medir sus cuellos de botella y comparar configuraciones de recursos y políticas de producción. La recomendación final se sustenta en réplicas, intervalos de confianza, trazabilidad de datos y un balance explícito entre nivel de servicio, costo relativo y riesgo de sobreproducción.
+\end{quote}
+
+\section{Supuestos Iniciales}
+
+\begin{itemize}
+  \item No se consideran fallas de equipos.
+  \item No hay sustitución entre tipos de pan cuando existe quiebre.
+  \item El producto no se deteriora dentro del horizonte diario.
+  \item Los hornos son equivalentes entre sí.
+  \item La demanda del día base corresponde a 8.200 kg.
+  \item Si no hay costos unitarios reales, se utiliza índice de costo relativo.
+  \item La capacidad de horno se congelará solo después de resolver la inconsistencia entre enunciado y archivo de parámetros.
+\end{itemize}
+
+\section{Cierre}
+
+Este roadmap establece una ruta de ejecución profesional para transformar el enunciado en un modelo de simulación útil, auditable y defendible. La calidad de la entrega dependerá de tres condiciones: consistencia de datos, disciplina de trazabilidad y validación estadística suficiente. Bajo esas condiciones, el equipo podrá entregar una recomendación operacional rigurosa y comprensible para una audiencia académica y gerencial.
+
+\end{document}
