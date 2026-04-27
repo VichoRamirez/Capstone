@@ -16,8 +16,8 @@
 \usepackage{xcolor}
 \usepackage{graphicx}
 \usepackage{pgfgantt}
-\usepackage{pdflscape}
 \usepackage{tikz}
+\usetikzlibrary{shapes.geometric}
 
 % ── Tablas ────────────────────────────────────────────────────────────────────
 \usepackage{booktabs}
@@ -100,18 +100,6 @@
 
 \end{tabular}
 
-\vspace{1.4cm}
-\renewcommand{\arraystretch}{1.3}
-\begin{tabularx}{0.92\textwidth}{@{}>{\bfseries}lX@{}}
-  \toprule
-  \multicolumn{2}{c}{\color{azulppal}\textbf{Equipo de Proyecto}} \\
-  \midrule
-  Líder de Modelamiento  & Construcción, integración y verificación del modelo SIMIO \\
-  Analista de Demanda    & Datos de entrada, distribuciones y parámetros de clientes \\
-  Analista de Procesos   & Lógica operacional: hornos, turnos y políticas de secuenc. \\
-  Resp. de Documentación & Redacción de informe técnico e informe académico \\
-  \bottomrule
-\end{tabularx}
 
 \vfill
 {\color{azulppal}\rule{\linewidth}{2.5pt}}\\[0.3em]
@@ -126,13 +114,11 @@
 \section{Resumen Ejecutivo}
 % ══════════════════════════════════════════════════════════════════════════════
 
-Este documento establece el Plan de Trabajo formal para el proyecto Capstone de Simulación de Eventos Discretos. El sistema bajo estudio es la panadería de un supermercado que produce diez variedades de pan fresco con una demanda diaria de \textbf{8.200~kg}. El problema gerencial declarado es un nivel inaceptable de quiebres de stock que genera pérdidas de venta y reclamos de clientes.
+Este documento establece el Plan de Trabajo formal para el proyecto Capstone de Simulación de Eventos Discretos. El sistema bajo estudio es la panadería de un supermercado que produce diez variedades de pan fresco. El problema gerencial declarado es un nivel inaceptable de quiebres de stock que genera pérdidas de venta y reclamos de clientes.
 
-El horizonte de ejecución comprende \textbf{24 días corridos}, desde el 27~de~abril hasta el 20~de~mayo de~2026, sin margen para retrasos acumulados. Los datos de entrada han sido provistos íntegramente por la cátedra, lo que elimina la fase de levantamiento de campo y concentra el esfuerzo en modelamiento, análisis y documentación.
+El horizonte de ejecución comprende desde el 27~de~abril hasta el 20~de~mayo de~2026.
 
-El plan se estructura en \textbf{cinco fases secuenciales}: fundamentos conceptuales, construcción modular en SIMIO, verificación y validación, experimentación y análisis de sensibilidad, y redacción de entregables. Se definen cuatro hitos de control y se identifican cinco riesgos con sus planes de mitigación.
-
-La premisa metodológica central, extraída de décadas de práctica en proyectos de simulación industrial, es la siguiente: \textit{no existe atajos entre el modelo conceptual y el modelo computacional}. Cada hora que el equipo invierta en las Fases~1 y~3 evitará entre tres y cinco horas de retrabajos en SIMIO. Este plan está diseñado para hacer esa inversión explícita y exigible.
+El plan se estructura en cinco fases secuenciales: fundamentos conceptuales, construcción modular en SIMIO, verificación y validación, experimentación y análisis de sensibilidad, y redacción de entregables. Se definen cuatro hitos de control y se identifican cinco riesgos con sus planes de mitigación.
 
 % ══════════════════════════════════════════════════════════════════════════════
 \section{Antecedentes del Proyecto}
@@ -142,11 +128,11 @@ La premisa metodológica central, extraída de décadas de práctica en proyecto
 
 La panadería opera en un ciclo diario en el que debe abastecer la sala de ventas de autoservicio del supermercado entre las 09:00 y las 21:00 horas. La producción debe comenzar antes de la apertura para garantizar disponibilidad inicial de todas las variedades. El proceso productivo de cada variedad incluye, en secuencia: pesado y dosificación de ingredientes, mezclado (intervención manual del panadero más ciclo automático de mezcladora), amasado manual, reposo o fermentación en masa, dividido y formado, fermentación final, horneado batch, enfriamiento y reposición a sala.
 
-Los hornos son de tipo industrial (piso o rotativo) y operan en \textbf{modo batch por corrida}: se cargan, hornean y descargan completamente antes de iniciar la siguiente corrida. Los diez tipos de pan se agrupan en tres familias de horneado según tiempo de cocción —14, 18 y 21 minutos—, y no se permite mezclar familias en una misma carga.
+Los hornos son de tipo industrial (piso o rotativo) y operan en modo batch por corrida: se cargan, hornean y descargan completamente antes de iniciar la siguiente corrida. Los diez tipos de pan se agrupan en tres familias de horneado según tiempo de cocción ---14, 18 y 21 minutos---, y no se permite mezclar familias en una misma carga.
 
 \subsection{Problema declarado}
 
-La jefatura del supermercado ha detectado un alto nivel de quiebres de stock que origina pérdidas de venta directas (la demanda no satisfecha no se recupera) y deterioro de la experiencia de compra. La hipótesis operacional es que el problema no radica en el volumen de demanda —que es conocido y cuantificado— sino en la \textbf{combinación y coordinación} de recursos: número de panaderos, manipuladores, hornos, máquinas, horario de inicio de operación y política de secuenciamiento de producción.
+La jefatura del supermercado ha detectado un alto nivel de quiebres de stock que origina pérdidas de venta directas (la demanda no satisfecha no se recupera) y deterioro de la experiencia de compra. La hipótesis operacional es que el problema no radica en el volumen de demanda --que es conocido y cuantificado-- sino en la combinación y coordinación de recursos: número de panaderos, manipuladores, hornos, máquinas, horario de inicio de operación y política de secuenciamiento de producción.
 
 \subsection{Pregunta central del estudio}
 
@@ -190,11 +176,9 @@ La jefatura del supermercado ha detectado un alto nivel de quiebres de stock que
 Los siguientes supuestos gobiernan la factibilidad del plan de trabajo. Su invalidación parcial requiere revisión inmediata del cronograma.
 
 \begin{enumerate}
-  \item Los tres archivos de parámetros entregados por la cátedra (\texttt{parametros\_proceso\_panaderia.xlsx}, \texttt{perfil\_demanda\_por\_hora\_panaderia.xlsx}, \texttt{probabilidades\_eleccion\_por\_hora.xlsx}) son completos, consistentes y suficientes para iniciar el modelamiento sin levantamiento de campo adicional.
+  \item Los tres archivos de parámetros entregados por la cátedra (\texttt{parametros\_proceso\_panaderia.xlsx}, \texttt{perfil\_demanda\_por\_hora\_panaderia.xlsx}, \texttt{probabilidades\_eleccion\_por\_hora.xlsx}) serán analizados para verificar que estén completos y contengan todos los datos necesarios.
   \item El equipo dispone de acceso operativo a SIMIO con licencia activa desde el primer día del proyecto.
-  \item Cada integrante puede dedicar un mínimo de \textbf{3 horas diarias efectivas} durante los 24 días del proyecto.
-  \item Las consultas al profesor se planifican con al menos 48 horas de anticipación a la fecha en que se requiere la respuesta.
-  \item La construcción del modelo sigue un enfoque \textbf{estrictamente modular e incremental}: ningún módulo se integra sin verificación previa del módulo en cuestión.
+  \item La construcción del modelo sigue un enfoque estrictamente modular e incremental: ningún módulo se integra sin verificación previa del módulo en cuestión.
   \item Los informes técnico y académico se redactan de forma incremental desde la Fase~1, no al final del proyecto.
 \end{enumerate}
 
@@ -213,19 +197,30 @@ El proyecto se organiza en cinco fases. La tabla~\ref{tab:resumen_fases} present
 \toprule
 \rowcolor{tabhead}\color{white}\textbf{Fase} & \color{white}\textbf{Nombre} & \color{white}\textbf{Objetivo principal} & \color{white}\textbf{Inicio} & \color{white}\textbf{Término} \\
 \midrule
-\rowcolor{tabrow} 1 & Fundamentos Conceptuales  & Definir el qué antes de construir el cómo & 27~Abr & 2~May \\
-2 & Construcción en SIMIO     & Modelo integrado, ejecutable y completo   & 3~May  & 10~May \\
-\rowcolor{tabrow} 3 & Verificación y Validación & Confirmar corrección y representatividad  & 10~May & 12~May \\
-4 & Experimentos y Análisis   & Comparar escenarios y analizar robustez   & 13~May & 17~May \\
-\rowcolor{tabrow} 5 & Documentación y Entrega   & Traducir resultados en recomendaciones    & 17~May & 20~May \\
+1 & Planificación & Planificar el proyecto en profundidad & 20 Abr & 27 Abr \\
+\rowcolor{tabrow} 2 & Análisis del caso y diagramas  & Diagramar y definir el proceso de manufactura completo & 27~Abr & 2~May \\
+3 & Construcción en SIMIO     & Modelo integrado, ejecutable y completo   & 3~May  & 10~May \\
+\rowcolor{tabrow} 4 & Verificación y Validación & Confirmar corrección y representatividad  & 10~May & 12~May \\
+5 & Experimentos y Análisis   & Comparar escenarios y analizar robustez   & 13~May & 17~May \\
+\rowcolor{tabrow} 6 & Documentación y Entrega   & Traducir resultados en recomendaciones    & 17~May & 20~May \\
 \bottomrule
 \end{tabularx}
 \end{table}
 
 % ── FASE 1 ────────────────────────────────────────────────────────────────────
-\subsection{Fase 1 — Fundamentos Conceptuales \quad\textit{(27~Abr\,--\,2~May\,·\,6 días)}}
 
-Esta fase es la más crítica del proyecto y, paradójicamente, la más subestimada por equipos sin experiencia. La experiencia en simulación industrial es inequívoca: cada hora invertida en diseño conceptual evita entre tres y cinco horas de depuración posterior en el software. No existe presión de plazo que justifique saltarse esta fase.
+\subsection{Fase 0 -- Planificación
+\quad\textit{(20~Abr\,--\,27~Abr\,·\,7 días)}}
+
+Redactar un documento que explique brevemente el problema, las fases para solucionarlo y detalle de manera extensa lo que es necesario hacer.
+
+\medskip
+\noindent\colorbox{grisclaro}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{\vspace{2pt}\textbf{Entregable Fase~1 (Hito H0 · 27~Abr):} Documento de planificación, entregables por fase de trabajo.\vspace{2pt}}}
+
+
+\subsection{Fase 1 — Análisis del caso y diagramas \quad\textit{(27~Abr\,--\,2~May\,·\,6 días)}}
+
+Esta es a fase más importante, siendo necesaria para no cometer errores en fases posteriores.
 
 \subsubsection{Actividad 1.1 — Definición formal del problema y objetivos \quad(27--28~Abr, 2~días)}
 
@@ -251,6 +246,7 @@ Registrar en tabla cada supuesto adoptado con su justificación y su impacto esp
   \item Tratamiento de los panes sobrantes al cierre del día.
   \item Representación del enfriamiento: ¿capacidad ilimitada o limitada por espacio físico?
   \item Tiempos de etapas no especificados: ¿determinísticos o con distribución?
+  \item Tiempos de desplazamiento.
   \item Política para corridas de horno por debajo de la carga mínima (600~kg = 50\% de capacidad).
 \end{itemize}
 
@@ -271,7 +267,7 @@ Este documento debe ser revisado y aprobado por todos los integrantes antes de a
 Resolver explícitamente: ¿la demanda se modela cliente a cliente o por pulsos horarios? ¿El inventario se lleva en kg o en unidades físicas? ¿El lote es la entidad de producción? Estas decisiones afectan de forma determinante la complejidad computacional y la velocidad de ejecución del modelo.
 
 \medskip
-\noindent\colorbox{grisclaro}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{\vspace{2pt}\textbf{Entregable Fase~1 (Hito H1 · 2~May):} Documento de fundamentos — tabla maestra de parámetros, lista de supuestos justificados, modelo conceptual completo, definición de unidades de modelación.\vspace{2pt}}}
+\noindent\colorbox{grisclaro}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{\vspace{2pt}\textbf{Entregable Fase~2 (Hito H1 · 2~May):} Documento de fundamentos — tabla maestra de parámetros, lista de supuestos justificados, modelo conceptual completo, definición de unidades de modelación.\vspace{2pt}}}
 
 % ── FASE 2 ────────────────────────────────────────────────────────────────────
 \subsection{Fase 2 — Construcción Modular del Modelo en SIMIO \quad\textit{(3--10~May\,·\,8 días)}}
@@ -400,30 +396,37 @@ Traducir los números en decisiones concretas: ¿qué recurso actúa como cuello
   \item \textbf{Informe Académico:} relata el proceso de desarrollo del modelo, las decisiones de modelamiento con su justificación, dificultades encontradas, análisis descartados, reflexiones metodológicas y discusión del cuello de botella del sistema. Incluye anexos con tablas de parámetros, distribuciones y lógica de demanda.
 \end{itemize}
 
-\textbf{Nota operacional crítica:} ambos informes deben haber acumulado borradores parciales desde la Fase~1. Iniciar la redacción desde cero en los últimos tres días del proyecto es una estrategia de alto riesgo que invariablemente produce documentos de baja calidad y plazos incumplidos.
-
 % ══════════════════════════════════════════════════════════════════════════════
 \section{Cronograma General}
 % ══════════════════════════════════════════════════════════════════════════════
 
-El diagrama de Gantt siguiente muestra las cinco fases y sus actividades principales sobre el eje temporal del proyecto (27~de~abril al 20~de~mayo de~2026). Los hitos formales se marcan con $\blacklozenge$.
+El diagrama de Gantt siguiente muestra las cinco fases posteriores a la planificación y sus actividades principales sobre el eje temporal del proyecto (27~de~abril al 20~de~mayo de~2026). Los hitos formales se marcan con $\blacklozenge$.
 
-\newpage
-\begin{landscape}
+% Página apaisada: paperwidth=297mm, paperheight=210mm (A4 girado).
+% \newgeometry no soporta 'landscape', pero sí acepta dimensiones explícitas.
+% Con estos márgenes: \textwidth ≈ 26.7 cm, \textheight ≈ 17.7 cm.
+\clearpage
+\newgeometry{paperwidth=297mm, paperheight=210mm,
+             left=1.5cm, right=1.5cm, top=1.8cm, bottom=1.5cm}
+\thispagestyle{plain}
 
 \begin{center}
 {\large\bfseries\color{azulppal}%
 Diagrama de Gantt -- Plan de Trabajo Capstone Analytics\\[0.15em]
-{\normalsize\normalfont\color{grisoscuro}27 de Abril -- 20 de Mayo de 2026 \quad (24 d\'ias corridos)}}
+{\normalsize\normalfont\color{grisoscuro}%
+27 de Abril -- 20 de Mayo de 2026 \quad (24 d\'ias corridos)}}
 \end{center}
-\vspace{0.2cm}
+\vspace{0.25cm}
 
+% \textwidth ≈ 26.7 cm (paperwidth 297mm − márgenes 2×1.5cm).
+% Área de barras = 26.7 cm − 5 cm (etiquetas) = 21.7 cm → x unit ≈ 0.90 cm.
+% \textheight ≈ 17.7 cm. Filas: 2 títulos + 30 filas → altura ≈ 2×0.60+30×0.50=16.2 cm ✓
 \begin{ganttchart}[
   hgrid,
   vgrid,
-  x unit=0.68cm,
+  x unit=0.90cm,
   y unit title=0.60cm,
-  y unit chart=0.44cm,
+  y unit chart=0.50cm,
   title height=1,
   bar height=0.55,
   milestone height=0.50,
@@ -433,7 +436,7 @@ Diagrama de Gantt -- Plan de Trabajo Capstone Analytics\\[0.15em]
   milestone label font=\scriptsize\bfseries,
   bar/.append style={fill=g1},
   group/.append style={fill=azulppal, draw=azulppal},
-  milestone/.append style={fill=naranja, draw=naranja, shape=diamond}
+  milestone/.append style={fill=naranja, draw=naranja}
 ]{1}{24}
 
   % ── Fila de meses ─────────────────────────────────────────────────────────
@@ -488,14 +491,20 @@ Diagrama de Gantt -- Plan de Trabajo Capstone Analytics\\[0.15em]
 
 \end{ganttchart}
 
+
 \vspace{0.2cm}
 {\scriptsize\color{grisoscuro}
-\textit{Los n\'umeros en la fila de d\'ias corresponden al d\'ia del mes (columnas bajo ``Abril'' = 27--30 Abr; bajo ``Mayo'' = 01--20 May).
-D\'ia 1 del proyecto = 27 de abril de 2026.
-Los hitos formales (H1--H4) corresponden a los puntos de control obligatorios.
-Actividades en paralelo reflejan trabajo simult\'aneo de distintos integrantes.}}
+\textit{Los n\'umeros en la fila de d\'ias corresponden al d\'ia del mes
+(columnas bajo ``Abril'' = 27--30 Abr; columnas bajo ``Mayo'' = 01--20 May).
+D\'ia~1 del proyecto = 27 de abril de 2026.
+Los hitos H1--H4 son los puntos de control obligatorios.
+Las actividades en paralelo dentro de una fase reflejan trabajo
+simult\'aneo entre distintos integrantes del equipo.}}
 
-\end{landscape}
+
+\clearpage
+\restoregeometry
+\pagestyle{fancy}
 
 % ══════════════════════════════════════════════════════════════════════════════
 \section{Hitos del Proyecto}

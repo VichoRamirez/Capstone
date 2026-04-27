@@ -187,12 +187,6 @@ INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/pgf/utilities/pgfcalendar.sty
 INPUT /usr/local/texlive/2025/texmf-dist/tex/generic/pgf/utilities/pgfcalendar.code.tex
 INPUT /usr/local/texlive/2025/texmf-dist/tex/generic/pgf/utilities/pgfcalendar.code.tex
 INPUT /usr/local/texlive/2025/texmf-dist/tex/generic/pgf/utilities/pgfcalendar.code.tex
-INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/pdflscape/pdflscape.sty
-INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/pdflscape/pdflscape.sty
-INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/pdflscape/pdflscape-nometadata.sty
-INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/pdflscape/pdflscape-nometadata.sty
-INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/graphics/lscape.sty
-INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/graphics/lscape.sty
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/booktabs/booktabs.sty
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/booktabs/booktabs.sty
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/tools/array.sty
@@ -341,9 +335,9 @@ INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/lm/t1lmtt.fd
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/lm/ec-lmtt12.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/lm/ec-lmbxi10.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/lm/ts1-lmbxi10.tfm
+INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/lm/ts1-lmbx12.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/lm/ts1-lmbx12.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/lm/ec-lmr8.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/lm/ec-lmbx8.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/lm/ec-lmri8.tfm
