@@ -1,0 +1,6 @@
+# Claude config local
+CLAUDE.md
+.claude/
+
+# capstone vEnv
+CapstoneEnv/
