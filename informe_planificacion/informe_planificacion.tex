@@ -74,6 +74,9 @@
 
 % ─────────────────────────────────────────────────────────────────────────────
 \begin{document}
+% Force A4 portrait for all pages (pdflatex defaults to letter without a4paper).
+\pdfpagewidth=210mm
+\pdfpageheight=297mm
 \setlength{\parskip}{6pt}
 
 % ══════════════════════════════════════════════════════════════════════════════
@@ -402,10 +405,10 @@ Traducir los números en decisiones concretas: ¿qué recurso actúa como cuello
 
 El diagrama de Gantt siguiente muestra las cinco fases posteriores a la planificación y sus actividades principales sobre el eje temporal del proyecto (27~de~abril al 20~de~mayo de~2026). Los hitos formales se marcan con $\blacklozenge$.
 
-% Página apaisada: paperwidth=297mm, paperheight=210mm (A4 girado).
-% \newgeometry no soporta 'landscape', pero sí acepta dimensiones explícitas.
-% Con estos márgenes: \textwidth ≈ 26.7 cm, \textheight ≈ 17.7 cm.
+% Página apaisada A4: pdfpagewidth/height para pdflatex + newgeometry para layout.
 \clearpage
+\pdfpagewidth=297mm
+\pdfpageheight=210mm
 \newgeometry{paperwidth=297mm, paperheight=210mm,
              left=1.5cm, right=1.5cm, top=1.8cm, bottom=1.5cm}
 \thispagestyle{plain}
@@ -503,6 +506,8 @@ simult\'aneo entre distintos integrantes del equipo.}}
 
 
 \clearpage
+\pdfpagewidth=210mm
+\pdfpageheight=297mm
 \restoregeometry
 \pagestyle{fancy}
 

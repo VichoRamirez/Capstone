@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1777324876.27588 "informe_planificacion.tex" "informe_planificacion.pdf" "informe_planificacion" 1777324878.76083 2
+["pdflatex"] 1777325746.27198 "informe_planificacion.tex" "informe_planificacion.pdf" "informe_planificacion" 1777325749.99577 2
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc" 1254269338 2375 baa924870cfb487815765f9094cf3728 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc" 1202520719 2840 216e6e45ad352e2456e1149f28885bee ""
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc" 1202520719 2327 9d6df24f9c4f7368395224341a95523a ""
@@ -195,10 +195,10 @@
   "/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1755720473 5528033 0c358b2aae4aa21399659c485f38b4ac ""
   "/usr/local/texlive/2025/texmf-var/web2c/pdftex/pdflatex.fmt" 1755720627 3605798 a180b8f389d5bfcf13344c8e12682cf2 ""
   "/usr/local/texlive/2025/texmf.cnf" 1755720463.9406 455 5b996dcaa0eb4ef14a83b026bc0a008c ""
-  "informe_planificacion.aux" 1777324878.48912 9921 d45df1a5f1a7e8a8792d7ae0b4f78d9f "pdflatex"
-  "informe_planificacion.out" 1777324878.49212 15119 346cc34e20f0c0274c49ea1f36d9b461 "pdflatex"
-  "informe_planificacion.tex" 1777324874.76553 52017 0d6f79ac01ae91fae3cba671f2bf43f4 ""
-  "informe_planificacion.toc" 1777324878.49312 6022 fb05b56b8e4527a6d045ecea8c3550b1 "pdflatex"
+  "informe_planificacion.aux" 1777325749.65066 9921 d45df1a5f1a7e8a8792d7ae0b4f78d9f "pdflatex"
+  "informe_planificacion.out" 1777325749.65466 15119 346cc34e20f0c0274c49ea1f36d9b461 "pdflatex"
+  "informe_planificacion.tex" 1777325669.3779 52084 4582b30e8b4117afc399a038083caaa3 ""
+  "informe_planificacion.toc" 1777325749.65566 6022 fb05b56b8e4527a6d045ecea8c3550b1 "pdflatex"
   (generated)
   "informe_planificacion.aux"
   "informe_planificacion.log"

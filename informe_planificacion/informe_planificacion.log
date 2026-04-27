@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.8.20)  27 APR 2026 17:21
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.8.20)  27 APR 2026 17:35
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -725,29 +725,29 @@ Package hyperref Info: Link coloring ON on input line 76.
 \@outlinefile=\write4
 \openout4 = `informe_planificacion.out'.
 
-LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 95.
+LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 98.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OML+lmm on input line 95.
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 98.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 95.
+LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 98.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 95.
+LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 98.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 95.
+(Font)              <12> on input line 98.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 95.
+(Font)              <8> on input line 98.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 95.
-LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 106.
+(Font)              <6> on input line 98.
+LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 109.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/lm/ts1lmr.fd
 File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
@@ -773,7 +773,7 @@ l.32 ...17~May, 2~dÃ­as)}{11}{subsubsection.5.5.3}
 [2]
 
 [3]
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 179.
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 182.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
@@ -782,62 +782,62 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 
-Overfull \hbox (51.67722pt too wide) in paragraph at lines 179--180
+Overfull \hbox (51.67722pt too wide) in paragraph at lines 182--183
 []\T1/lmr/m/n/12 (-20) Los tres ar-chi-vos de pa-rá-me-tros en-tre-ga-dos por la cá-te-dra (\T1/lmtt/m/n/12 parametros_proceso_panaderia.xlsx\T1/lmr/m/n/12 (-20) ,
  []
 
 
-Overfull \hbox (29.2473pt too wide) in paragraph at lines 179--180
+Overfull \hbox (29.2473pt too wide) in paragraph at lines 182--183
 \T1/lmtt/m/n/12 perfil_demanda_por_hora_panaderia.xlsx\T1/lmr/m/n/12 (-20) , \T1/lmtt/m/n/12 probabilidades_eleccion_por_hora.xlsx\T1/lmr/m/n/12 (-20) )
  []
 
 
 
 [4]
-Underfull \hbox (badness 5847) in paragraph at lines 207--207
+Underfull \hbox (badness 5847) in paragraph at lines 210--210
 []|\T1/lmr/m/n/12 (+20) Comparar es-ce-na-rios y
  []
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                \hskip 11.74983pt
-(hyperref)                replaced by space on input line 213.
+(hyperref)                replaced by space on input line 216.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\leavevmode@ifvmode' on input line 213.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                \kern 1.95836pt
-(hyperref)                removed on input line 213.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\leavevmode@ifvmode' on input line 213.
+(hyperref)                removing `\leavevmode@ifvmode' on input line 216.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                \kern 1.95836pt
-(hyperref)                removed on input line 213.
+(hyperref)                removed on input line 216.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\leavevmode@ifvmode' on input line 213.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                \kern 1.95836pt
-(hyperref)                removed on input line 213.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\leavevmode@ifvmode' on input line 213.
+(hyperref)                removing `\leavevmode@ifvmode' on input line 216.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                \kern 1.95836pt
-(hyperref)                removed on input line 213.
+(hyperref)                removed on input line 216.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\leavevmode@ifvmode' on input line 216.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                \kern 1.95836pt
+(hyperref)                removed on input line 216.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\leavevmode@ifvmode' on input line 216.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                \kern 1.95836pt
+(hyperref)                removed on input line 216.
 
 
 
@@ -845,58 +845,58 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                \hskip 11.74983pt
-(hyperref)                replaced by space on input line 221.
+(hyperref)                replaced by space on input line 224.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\leavevmode@ifvmode' on input line 221.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                \kern 1.95836pt
-(hyperref)                removed on input line 221.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\leavevmode@ifvmode' on input line 221.
+(hyperref)                removing `\leavevmode@ifvmode' on input line 224.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                \kern 1.95836pt
-(hyperref)                removed on input line 221.
+(hyperref)                removed on input line 224.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\leavevmode@ifvmode' on input line 221.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                \kern 1.95836pt
-(hyperref)                removed on input line 221.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\leavevmode@ifvmode' on input line 221.
+(hyperref)                removing `\leavevmode@ifvmode' on input line 224.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                \kern 1.95836pt
-(hyperref)                removed on input line 221.
+(hyperref)                removed on input line 224.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\leavevmode@ifvmode' on input line 224.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                \kern 1.95836pt
+(hyperref)                removed on input line 224.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\leavevmode@ifvmode' on input line 224.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                \kern 1.95836pt
+(hyperref)                removed on input line 224.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                \hskip 11.74983pt
-(hyperref)                replaced by space on input line 225.
+(hyperref)                replaced by space on input line 228.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                \hskip 11.74983pt
-(hyperref)                replaced by space on input line 229.
+(hyperref)                replaced by space on input line 232.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                \hskip 11.74983pt
-(hyperref)                replaced by space on input line 240.
+(hyperref)                replaced by space on input line 243.
 
 
 
@@ -904,40 +904,40 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                \hskip 11.74983pt
-(hyperref)                replaced by space on input line 253.
+(hyperref)                replaced by space on input line 256.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                \hskip 11.74983pt
-(hyperref)                replaced by space on input line 265.
+(hyperref)                replaced by space on input line 268.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                \hskip 11.74983pt
-(hyperref)                replaced by space on input line 273.
+(hyperref)                replaced by space on input line 276.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\leavevmode@ifvmode' on input line 273.
+(hyperref)                removing `\leavevmode@ifvmode' on input line 276.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                \kern 1.95836pt
-(hyperref)                removed on input line 273.
+(hyperref)                removed on input line 276.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\leavevmode@ifvmode' on input line 273.
+(hyperref)                removing `\leavevmode@ifvmode' on input line 276.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                \kern 1.95836pt
-(hyperref)                removed on input line 273.
+(hyperref)                removed on input line 276.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                \hskip 11.74983pt
-(hyperref)                replaced by space on input line 277.
+(hyperref)                replaced by space on input line 280.
 
 
 
@@ -945,17 +945,17 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                \hskip 11.74983pt
-(hyperref)                replaced by space on input line 283.
+(hyperref)                replaced by space on input line 286.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                \hskip 11.74983pt
-(hyperref)                replaced by space on input line 287.
+(hyperref)                replaced by space on input line 290.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                \hskip 11.74983pt
-(hyperref)                replaced by space on input line 293.
+(hyperref)                replaced by space on input line 296.
 
 
 
@@ -963,40 +963,40 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                \hskip 11.74983pt
-(hyperref)                replaced by space on input line 307.
+(hyperref)                replaced by space on input line 310.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                \hskip 11.74983pt
-(hyperref)                replaced by space on input line 311.
+(hyperref)                replaced by space on input line 314.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                \hskip 11.74983pt
-(hyperref)                replaced by space on input line 319.
+(hyperref)                replaced by space on input line 322.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\leavevmode@ifvmode' on input line 319.
+(hyperref)                removing `\leavevmode@ifvmode' on input line 322.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                \kern 1.95836pt
-(hyperref)                removed on input line 319.
+(hyperref)                removed on input line 322.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\leavevmode@ifvmode' on input line 319.
+(hyperref)                removing `\leavevmode@ifvmode' on input line 322.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                \kern 1.95836pt
-(hyperref)                removed on input line 319.
+(hyperref)                removed on input line 322.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                \hskip 11.74983pt
-(hyperref)                replaced by space on input line 327.
+(hyperref)                replaced by space on input line 330.
 
 
 
@@ -1004,35 +1004,35 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                \hskip 11.74983pt
-(hyperref)                replaced by space on input line 342.
+(hyperref)                replaced by space on input line 345.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                \hskip 11.74983pt
-(hyperref)                replaced by space on input line 352.
+(hyperref)                replaced by space on input line 355.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\leavevmode@ifvmode' on input line 352.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                \kern 1.95836pt
-(hyperref)                removed on input line 352.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\leavevmode@ifvmode' on input line 352.
+(hyperref)                removing `\leavevmode@ifvmode' on input line 355.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                \kern 1.95836pt
-(hyperref)                removed on input line 352.
+(hyperref)                removed on input line 355.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\leavevmode@ifvmode' on input line 355.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                \kern 1.95836pt
+(hyperref)                removed on input line 355.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                \hskip 11.74983pt
-(hyperref)                replaced by space on input line 354.
+(hyperref)                replaced by space on input line 357.
 
 
 
@@ -1040,53 +1040,53 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                \hskip 11.74983pt
-(hyperref)                replaced by space on input line 366.
+(hyperref)                replaced by space on input line 369.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                \hskip 11.74983pt
-(hyperref)                replaced by space on input line 370.
+(hyperref)                replaced by space on input line 373.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                \hskip 11.74983pt
-(hyperref)                replaced by space on input line 386.
+(hyperref)                replaced by space on input line 389.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\leavevmode@ifvmode' on input line 386.
+(hyperref)                removing `\leavevmode@ifvmode' on input line 389.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                \kern 1.95836pt
-(hyperref)                removed on input line 386.
+(hyperref)                removed on input line 389.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\leavevmode@ifvmode' on input line 386.
+(hyperref)                removing `\leavevmode@ifvmode' on input line 389.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                \kern 1.95836pt
-(hyperref)                removed on input line 386.
+(hyperref)                removed on input line 389.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                \hskip 11.74983pt
-(hyperref)                replaced by space on input line 388.
+(hyperref)                replaced by space on input line 391.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                \hskip 11.74983pt
-(hyperref)                replaced by space on input line 392.
+(hyperref)                replaced by space on input line 395.
 
 
 
 [11]
-./informe_planificacion.tex:403: Undefined control sequence.
+./informe_planificacion.tex:406: Undefined control sequence.
 <recently read> \blacklozenge 
                               
-l.403 ...tos formales se marcan con $\blacklozenge
+l.406 ...tos formales se marcan con $\blacklozenge
                                                   $.
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1136,7 +1136,7 @@ Package geometry Warning: `paperheight': not available in `\newgeometry'; skippe
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 
-Overfull \hbox (243.38875pt too wide) in paragraph at lines 492--493
+Overfull \hbox (243.38875pt too wide) in paragraph at lines 495--496
 [][] 
  []
 
@@ -1146,17 +1146,17 @@ Overfull \hbox (243.38875pt too wide) in paragraph at lines 492--493
 
 
 ]
-Underfull \hbox (badness 2229) in paragraph at lines 596--596
+Underfull \hbox (badness 2229) in paragraph at lines 601--601
 []|\T1/lmr/m/n/12 (+20) Concentración del es-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 596--596
+Underfull \hbox (badness 10000) in paragraph at lines 601--601
 []|\T1/lmr/m/n/12 (+20) Número in-su-fi-cien-te
  []
 
 
-Underfull \hbox (badness 1661) in paragraph at lines 596--596
+Underfull \hbox (badness 1661) in paragraph at lines 601--601
 \T1/lmr/m/n/12 (+20) po-grá-fi-cos, va-lo-res en
  []
 
@@ -1164,157 +1164,157 @@ Underfull \hbox (badness 1661) in paragraph at lines 596--596
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
-Overfull \hbox (1.65628pt too wide) in paragraph at lines 640--640
+Overfull \hbox (1.65628pt too wide) in paragraph at lines 645--645
 []|\T1/lmr/bx/n/12 (-20) Actividad| 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 640--640
+Underfull \hbox (badness 10000) in paragraph at lines 645--645
 []|\T1/lmr/m/n/12 (+20) Definición
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 640--640
+Underfull \hbox (badness 10000) in paragraph at lines 645--645
 \T1/lmr/m/n/12 (+20) del pro-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 640--640
+Underfull \hbox (badness 10000) in paragraph at lines 645--645
 \T1/lmr/m/n/12 (+20) ble-ma y
  []
 
 
-Overfull \hbox (11.44391pt too wide) in paragraph at lines 640--640
+Overfull \hbox (11.44391pt too wide) in paragraph at lines 645--645
 []|\T1/lmr/m/n/12 (-20) Organización
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 640--640
+Underfull \hbox (badness 10000) in paragraph at lines 645--645
 \T1/lmr/m/n/12 (+20) y ve-ri-fi-
  []
 
 
-Underfull \hbox (badness 2753) in paragraph at lines 640--640
+Underfull \hbox (badness 2753) in paragraph at lines 645--645
 \T1/lmr/m/n/12 (+20) ca-ción de
  []
 
 
-Overfull \hbox (7.4179pt too wide) in paragraph at lines 640--640
+Overfull \hbox (7.4179pt too wide) in paragraph at lines 645--645
 []|\T1/lmr/m/n/12 (-20) Formulación
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 640--640
+Underfull \hbox (badness 10000) in paragraph at lines 645--645
 []|\T1/lmr/m/n/12 (+20) Modelo
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 640--640
+Underfull \hbox (badness 10000) in paragraph at lines 645--645
 \T1/lmr/m/n/12 (+20) con-cep-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 640--640
+Underfull \hbox (badness 10000) in paragraph at lines 645--645
 \T1/lmr/m/n/12 (+20) tual del
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 640--640
+Underfull \hbox (badness 10000) in paragraph at lines 645--645
 []|\T1/lmr/m/n/12 (+20) Módulo
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 640--640
+Underfull \hbox (badness 10000) in paragraph at lines 645--645
 \T1/lmr/m/n/12 (+20) in-ven-ta-rio
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 640--640
+Underfull \hbox (badness 10000) in paragraph at lines 645--645
 []|\T1/lmr/m/n/12 (+20) Módulo
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 640--640
+Underfull \hbox (badness 10000) in paragraph at lines 645--645
 \T1/lmr/m/n/12 (+20) pro-duc-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 640--640
+Underfull \hbox (badness 10000) in paragraph at lines 645--645
 \T1/lmr/m/n/12 (+20) ción y
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 640--640
+Underfull \hbox (badness 10000) in paragraph at lines 645--645
 \T1/lmr/m/n/12 (+20) RRHH
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 640--640
+Underfull \hbox (badness 10000) in paragraph at lines 645--645
 []|\T1/lmr/m/n/12 (+20) Módulo
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 640--640
+Underfull \hbox (badness 10000) in paragraph at lines 645--645
 \T1/lmr/m/n/12 (+20) horno
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 640--640
+Underfull \hbox (badness 10000) in paragraph at lines 645--645
 \T1/lmr/m/n/12 (+20) batch
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 640--640
+Underfull \hbox (badness 10000) in paragraph at lines 645--645
 []|\T1/lmr/m/n/12 (+20) Políticas
  []
 
 
-Overfull \hbox (3.74292pt too wide) in paragraph at lines 640--640
+Overfull \hbox (3.74292pt too wide) in paragraph at lines 645--645
 []|\T1/lmr/m/n/12 (-20) Verificación
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 640--640
+Underfull \hbox (badness 10000) in paragraph at lines 645--645
 \T1/lmr/m/n/12 (+20) y va-li-da-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 640--640
+Underfull \hbox (badness 10000) in paragraph at lines 645--645
 []|\T1/lmr/m/n/12 (+20) Diseño y
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 640--640
+Underfull \hbox (badness 10000) in paragraph at lines 645--645
 \T1/lmr/m/n/12 (+20) eje-cu-ción
  []
 
 
-Underfull \hbox (badness 1259) in paragraph at lines 640--640
+Underfull \hbox (badness 1259) in paragraph at lines 645--645
 \T1/lmr/m/n/12 (+20) de ex-pe-ri-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 640--640
+Underfull \hbox (badness 10000) in paragraph at lines 645--645
 []|\T1/lmr/m/n/12 (+20) Análisis
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 640--640
+Underfull \hbox (badness 10000) in paragraph at lines 645--645
 []|\T1/lmr/m/n/12 (+20) Informe
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 640--640
+Underfull \hbox (badness 10000) in paragraph at lines 645--645
 \T1/lmr/m/n/12 (+20) téc-ni-co
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 640--640
+Underfull \hbox (badness 10000) in paragraph at lines 645--645
 []|\T1/lmr/m/n/12 (+20) Informe
  []
 
 
-LaTeX Warning: Float too large for page by 162.68738pt on input line 641.
+LaTeX Warning: Float too large for page by 162.68738pt on input line 646.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
@@ -1331,125 +1331,125 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 [16]
 
 Package tabularx Warning: X Columns too narrow (table too wide)
-(tabularx)                 on input line 724.
+(tabularx)                 on input line 729.
 
 
-Overfull \hbox (15.46642pt too wide) in paragraph at lines 724--724
+Overfull \hbox (15.46642pt too wide) in paragraph at lines 729--729
 []|\T1/lmr/bx/n/12 (-20) Tipo
  []
 
 
-Overfull \hbox (1.63696pt too wide) in paragraph at lines 724--724
+Overfull \hbox (1.63696pt too wide) in paragraph at lines 729--729
 \T1/lmr/bx/n/12 (-20) de
  []
 
 
-Overfull \hbox (9.41475pt too wide) in paragraph at lines 724--724
+Overfull \hbox (9.41475pt too wide) in paragraph at lines 729--729
 \T1/lmr/bx/n/12 (-20) pan| 
  []
 
 
-Overfull \hbox (47.1006pt too wide) in paragraph at lines 724--724
+Overfull \hbox (47.1006pt too wide) in paragraph at lines 729--729
 []|\T1/lmr/m/n/12 (-20) Marraqueta| 
  []
 
 
-Overfull \hbox (27.58928pt too wide) in paragraph at lines 724--724
+Overfull \hbox (27.58928pt too wide) in paragraph at lines 729--729
 []|\T1/lmr/m/n/12 (-20) Hallulla| 
  []
 
 
-Overfull \hbox (7.9133pt too wide) in paragraph at lines 724--724
+Overfull \hbox (7.9133pt too wide) in paragraph at lines 729--729
 []|\T1/lmr/m/n/12 (-20) Pan
  []
 
 
-Overfull \hbox (6.8002pt too wide) in paragraph at lines 724--724
+Overfull \hbox (6.8002pt too wide) in paragraph at lines 729--729
 \T1/lmr/m/n/12 (-20) Hot
  []
 
 
-Overfull \hbox (8.55968pt too wide) in paragraph at lines 724--724
+Overfull \hbox (8.55968pt too wide) in paragraph at lines 729--729
 \T1/lmr/m/n/12 (-20) Dog| 
  []
 
 
-Overfull \hbox (47.1006pt too wide) in paragraph at lines 724--724
+Overfull \hbox (47.1006pt too wide) in paragraph at lines 729--729
 []|\T1/lmr/m/n/12 (-20) Marraqueta
  []
 
 
-Overfull \hbox (0.67792pt too wide) in paragraph at lines 724--724
+Overfull \hbox (0.67792pt too wide) in paragraph at lines 729--729
 \T1/lmr/m/n/12 (-20) In-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 724--724
+Underfull \hbox (badness 10000) in paragraph at lines 729--729
 \T1/lmr/m/n/12 te-
  []
 
 
-Overfull \hbox (7.44182pt too wide) in paragraph at lines 724--724
+Overfull \hbox (7.44182pt too wide) in paragraph at lines 729--729
 \T1/lmr/m/n/12 (-20) gral| 
  []
 
 
-Overfull \hbox (27.58928pt too wide) in paragraph at lines 724--724
+Overfull \hbox (27.58928pt too wide) in paragraph at lines 729--729
 []|\T1/lmr/m/n/12 (-20) Hallulla
  []
 
 
-Overfull \hbox (0.67792pt too wide) in paragraph at lines 724--724
+Overfull \hbox (0.67792pt too wide) in paragraph at lines 729--729
 \T1/lmr/m/n/12 (-20) In-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 724--724
+Underfull \hbox (badness 10000) in paragraph at lines 729--729
 \T1/lmr/m/n/12 te-
  []
 
 
-Overfull \hbox (7.44182pt too wide) in paragraph at lines 724--724
+Overfull \hbox (7.44182pt too wide) in paragraph at lines 729--729
 \T1/lmr/m/n/12 (-20) gral| 
  []
 
 
-Overfull \hbox (34.69005pt too wide) in paragraph at lines 724--724
+Overfull \hbox (34.69005pt too wide) in paragraph at lines 729--729
 []|\T1/lmr/m/n/12 (-20) Amasado| 
  []
 
 
-Overfull \hbox (32.39095pt too wide) in paragraph at lines 724--724
+Overfull \hbox (32.39095pt too wide) in paragraph at lines 729--729
 []|\T1/lmr/m/n/12 (-20) Ciabatta| 
  []
 
 
-Overfull \hbox (33.50815pt too wide) in paragraph at lines 724--724
+Overfull \hbox (33.50815pt too wide) in paragraph at lines 729--729
 []|\T1/lmr/m/n/12 (-20) Baguette| 
  []
 
 
-Overfull \hbox (37.98741pt too wide) in paragraph at lines 724--724
+Overfull \hbox (37.98741pt too wide) in paragraph at lines 729--729
 []|\T1/lmr/m/n/12 (-20) Dobladita| 
  []
 
 
-Overfull \hbox (25.51859pt too wide) in paragraph at lines 724--724
+Overfull \hbox (25.51859pt too wide) in paragraph at lines 729--729
 []|\T1/lmr/m/n/12 (-20) Bocado
  []
 
 
-Overfull \hbox (4.6783pt too wide) in paragraph at lines 724--724
+Overfull \hbox (4.6783pt too wide) in paragraph at lines 729--729
 \T1/lmr/m/n/12 (-20) Da-
  []
 
 
-Overfull \hbox (3.60382pt too wide) in paragraph at lines 724--724
+Overfull \hbox (3.60382pt too wide) in paragraph at lines 729--729
 \T1/lmr/m/n/12 (-20) ma| 
  []
 
 
-Overfull \hbox (53.46773pt too wide) in alignment at lines 724--724
+Overfull \hbox (53.46773pt too wide) in alignment at lines 729--729
 [][][][][][] 
  []
 
@@ -1478,15 +1478,8 @@ LaTeX Info: Redefining \% on input line 11.
 LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2025-08-13>
  ***********
-
-
-Package rerunfilecheck Warning: File `informe_planificacion.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `informe_planificacion.out':
-(rerunfilecheck)             Before: 459CBF2A7429A5E69ABCB8742E66CBB6;15119
-(rerunfilecheck)             After:  346CC34E20F0C0274C49EA1F36D9B461;15119.
+Package rerunfilecheck Info: File `informe_planificacion.out' has not changed.
+(rerunfilecheck)             Checksum: 346CC34E20F0C0274C49EA1F36D9B461;15119.
  ) 
 Here is how much of TeX's memory you used:
  27627 strings out of 467800
@@ -1497,10 +1490,12 @@ Here is how much of TeX's memory you used:
  1141 hyphenation exceptions out of 8191
  99i,13n,101p,1150b,863s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmbx8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmbxi10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmri10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmri12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmri8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmtt12.pfb>
-Output written on informe_planificacion.pdf (21 pages, 354434 bytes).
+Output written on informe_planificacion.pdf (21 pages, 354499 bytes).
 PDF statistics:
  466 PDF objects out of 1000 (max. 8388607)
  408 compressed objects within 5 object streams
  82 named destinations out of 1000 (max. 500000)
  52101 words of extra memory for PDF output out of 61914 (max. 10000000)
+
+ 61914 (max. 10000000)
 
