@@ -1,0 +1,1394 @@
+RUT,Nombre cliente,Dirección cliente,Fecha de Pedido,Número de Orden,Monto Pedido,Fecha de despacho Solicitada,Comuna
+8.465.175-9,Cliente 8465175,"Calle Huérfanos 5159, Santiago, Chile",2026-12-08,ORD-CL-202612-000913,173687,2026-12-10,Santiago
+10.884.364-8,Cliente Nuevo 10884364,"Avenida Santa Rosa 5380, Santiago, Chile",2026-12-01,ORD-CL-202612-000205,84205,2026-12-04,La Florida
+9.035.343-5,Cliente 9035343,"Calle San Antonio 9169, Santiago, Chile",2026-12-17,ORD-CL-202612-002254,205153,2026-12-19,La Reina
+15.518.813-9,Cliente Nuevo 15518813,"Avenida Vitacura 843, Santiago, Chile",2026-12-15,ORD-CL-202612-002007,84016,2026-12-18,Las Condes
+11.669.766-7,Cliente Nuevo 11669766,"Avenida Kennedy 5651, Santiago, Chile",2026-12-14,ORD-CL-202612-001829,185127,2026-12-16,Independencia
+11.824.078-2,Cliente 11824078,"Avenida Matta 9009, Santiago, Chile",2026-12-10,ORD-CL-202612-001144,75082,2026-12-12,Vitacura
+10.411.606-1,Cliente Nuevo 10411606,"Calle Santo Domingo 6777, Santiago, Chile",2026-12-07,ORD-CL-202612-000840,109043,2026-12-10,Vitacura
+14.957.228-2,Cliente 14957228,"Avenida Mapocho 934, Santiago, Chile",2026-12-06,ORD-CL-202612-000713,129479,2026-12-09,La Reina
+9.689.641-2,Cliente Nuevo 9689641,"Avenida Tobalaba 2551, Santiago, Chile",2026-12-26,ORD-CL-202612-003457,211391,2026-12-29,Independencia
+17.416.421-8,Cliente 17416421,"Avenida Libertador Bernardo O'Higgins 8614, Santiago, Chile",2026-12-02,ORD-CL-202612-000261,280640,2026-12-06,Puente Alto
+19.398.473-2,Cliente Nuevo 19398473,"Avenida Manuel Montt 6079, Santiago, Chile",2026-12-02,ORD-CL-202612-000245,253065,2026-12-04,Recoleta
+12.088.641-7,Cliente Nuevo 12088641,"Avenida Vitacura 8761, Santiago, Chile",2026-12-06,ORD-CL-202612-000768,247807,2026-12-08,Vitacura
+16.513.297-6,Cliente Nuevo 16513297,"Avenida Matta 4483, Santiago, Chile",2026-12-14,ORD-CL-202612-001792,80129,2026-12-18,La Reina
+10.246.672-3,Cliente Nuevo 10246672,"Calle Monjitas 702, Santiago, Chile",2026-12-15,ORD-CL-202612-001906,232264,2026-12-17,Santiago
+13.139.013-9,Cliente Nuevo 13139013,"Avenida Vicuña Mackenna 9865, Santiago, Chile",2026-12-31,ORD-CL-202612-004140,166543,2027-01-04,La Reina
+12.725.879-1,Cliente Nuevo 12725879,"Avenida Mapocho 6728, Santiago, Chile",2026-12-02,ORD-CL-202612-000218,156889,2026-12-05,Lo Prado
+7.133.217-9,Cliente Nuevo 7133217,"Avenida Departamental 4795, Santiago, Chile",2026-12-13,ORD-CL-202612-001629,289879,2026-12-15,Quinta Normal
+17.155.797-7,Cliente 17155797,"Calle Santo Domingo 1864, Santiago, Chile",2026-12-26,ORD-CL-202612-003437,191511,2026-12-28,Las Condes
+14.429.807-9,Cliente 14429807,"Avenida Apoquindo 6788, Santiago, Chile",2026-12-14,ORD-CL-202612-001806,227799,2026-12-16,Independencia
+13.767.793-9,Cliente Nuevo 13767793,"Calle Amunátegui 9147, Santiago, Chile",2026-12-28,ORD-CL-202612-003680,147253,2027-01-01,Quinta Normal
+11.462.126-0,Cliente 11462126,"Avenida Irarrázaval 5965, Santiago, Chile",2026-12-17,ORD-CL-202612-002279,100724,2026-12-19,Peñalolén
+21.577.718-1,Cliente Nuevo 21577718,"Gran Avenida José Miguel Carrera 1092, Santiago, Chile",2026-12-01,ORD-CL-202612-000054,315308,2026-12-05,La Florida
+17.846.844-9,Cliente 17846844,"Calle San Diego 2838, Santiago, Chile",2026-12-11,ORD-CL-202612-001308,193766,2026-12-14,Vitacura
+5.433.342-8,Cliente 5433342,"Calle Arturo Prat 4641, Santiago, Chile",2026-12-26,ORD-CL-202612-003463,222568,2026-12-27,La Reina
+14.683.119-6,Cliente Nuevo 14683119,"Avenida Departamental 820, Santiago, Chile",2026-12-21,ORD-CL-202612-002788,107499,2026-12-23,Puente Alto
+20.915.589-0,Cliente 20915589,"Avenida Departamental 6509, Santiago, Chile",2026-12-17,ORD-CL-202612-002277,215309,2026-12-20,Quinta Normal
+8.688.112-4,Cliente 8688112,"Avenida Irarrázaval 4204, Santiago, Chile",2026-12-11,ORD-CL-202612-001274,81580,2026-12-12,Peñalolén
+16.783.720-7,Cliente 16783720,"Avenida Departamental 8393, Santiago, Chile",2026-12-14,ORD-CL-202612-001764,244287,2026-12-17,Santiago
+14.819.473-1,Cliente 14819473,"Avenida Grecia 6127, Santiago, Chile",2026-12-21,ORD-CL-202612-002758,180518,2026-12-23,Puente Alto
+11.504.160-7,Cliente 11504160,"Calle Morandé 2308, Santiago, Chile",2026-12-07,ORD-CL-202612-000838,166502,2026-12-11,La Florida
+10.338.580-7,Cliente 10338580,"Avenida Kennedy 6273, Santiago, Chile",2026-12-06,ORD-CL-202612-000760,216238,2026-12-11,Estación Central
+14.583.210-8,Cliente 14583210,"Avenida Pedro De Valdivia 3769, Santiago, Chile",2026-12-23,ORD-CL-202612-003113,111983,2026-12-25,San Miguel
+6.510.243-9,Cliente Nuevo 6510243,"Avenida Kennedy 5882, Santiago, Chile",2026-12-07,ORD-CL-202612-000793,73457,2026-12-09,Peñalolén
+18.197.694-3,Cliente Nuevo 18197694,"Avenida Las Condes 1349, Santiago, Chile",2026-12-22,ORD-CL-202612-002941,194882,2026-12-27,Santiago
+20.320.279-3,Cliente Nuevo 20320279,"Calle San Antonio 2616, Santiago, Chile",2026-12-21,ORD-CL-202612-002818,125916,2026-12-24,La Florida
+6.606.107-5,Cliente Nuevo 6606107,"Avenida Providencia 3544, Santiago, Chile",2026-12-16,ORD-CL-202612-002167,219020,2026-12-19,Puente Alto
+8.827.735-9,Cliente Nuevo 8827735,"Avenida Pajaritos 4700, Santiago, Chile",2026-12-03,ORD-CL-202612-000356,126699,2026-12-05,Santiago
+5.930.869-0,Cliente Nuevo 5930869,"Avenida Américo Vespucio 1323, Santiago, Chile",2026-12-28,ORD-CL-202612-003764,140024,2026-12-29,Vitacura
+6.052.790-4,Cliente 6052790,"Avenida Tobalaba 5021, Santiago, Chile",2026-12-09,ORD-CL-202612-001023,297065,2026-12-11,Quinta Normal
+16.554.800-3,Cliente 16554800,"Calle Estado 7420, Santiago, Chile",2026-12-23,ORD-CL-202612-003101,73208,2026-12-27,San Miguel
+14.449.066-2,Cliente 14449066,"Calle Santo Domingo 9845, Santiago, Chile",2026-12-06,ORD-CL-202612-000646,232563,2026-12-10,Lo Prado
+21.043.135-1,Cliente Nuevo 21043135,"Avenida Américo Vespucio 7807, Santiago, Chile",2026-12-19,ORD-CL-202612-002402,93657,2026-12-22,Lo Prado
+15.301.216-5,Cliente 15301216,"Avenida Vicuña Mackenna 8405, Santiago, Chile",2026-12-22,ORD-CL-202612-002963,106566,2026-12-25,Peñalolén
+15.420.449-6,Cliente Nuevo 15420449,"Avenida Américo Vespucio 7052, Santiago, Chile",2026-12-13,ORD-CL-202612-001576,202559,2026-12-16,Quinta Normal
+16.445.432-1,Cliente Nuevo 16445432,"Avenida Santa Rosa 8652, Santiago, Chile",2026-12-05,ORD-CL-202612-000570,269701,2026-12-10,Peñalolén
+15.575.959-7,Cliente 15575959,"Avenida Mapocho 4652, Santiago, Chile",2026-12-03,ORD-CL-202612-000376,49384,2026-12-05,Vitacura
+21.060.915-1,Cliente 21060915,"Avenida Macul 4705, Santiago, Chile",2026-12-15,ORD-CL-202612-001867,114794,2026-12-18,San Miguel
+17.625.173-4,Cliente Nuevo 17625173,"Calle Catedral 9893, Santiago, Chile",2026-12-18,ORD-CL-202612-002371,128994,2026-12-21,Lo Prado
+17.854.674-8,Cliente Nuevo 17854674,"Avenida Santa Rosa 5071, Santiago, Chile",2026-12-06,ORD-CL-202612-000654,280153,2026-12-10,La Florida
+5.212.571-7,Cliente 5212571,"Avenida Apoquindo 6587, Santiago, Chile",2026-12-15,ORD-CL-202612-001908,130503,2026-12-17,Santiago
+17.308.796-5,Cliente 17308796,"Avenida Grecia 7261, Santiago, Chile",2026-12-07,ORD-CL-202612-000828,191838,2026-12-10,Santiago
+15.246.269-4,Cliente Nuevo 15246269,"Avenida Mapocho 8992, Santiago, Chile",2026-12-23,ORD-CL-202612-003114,87100,2026-12-27,Las Condes
+20.791.707-4,Cliente Nuevo 20791707,"Avenida Irarrázaval 8053, Santiago, Chile",2026-12-17,ORD-CL-202612-002278,112783,2026-12-19,La Reina
+20.611.804-1,Cliente 20611804,"Avenida Vitacura 1955, Santiago, Chile",2026-12-28,ORD-CL-202612-003715,88580,2026-12-31,Lo Prado
+6.406.935-9,Cliente Nuevo 6406935,"Calle San Diego 2159, Santiago, Chile",2026-12-23,ORD-CL-202612-002989,96877,2026-12-26,Estación Central
+7.910.497-1,Cliente Nuevo 7910497,"Avenida Independencia 4637, Santiago, Chile",2026-12-11,ORD-CL-202612-001333,177883,2026-12-14,Providencia
+16.263.046-0,Cliente Nuevo 16263046,"Avenida Kennedy 8978, Santiago, Chile",2026-12-23,ORD-CL-202612-003033,201474,2026-12-26,San Miguel
+10.807.050-1,Cliente 10807050,"Calle San Diego 9203, Santiago, Chile",2026-12-22,ORD-CL-202612-002911,148587,2026-12-23,Santiago
+14.040.778-3,Cliente Nuevo 14040778,"Calle Santo Domingo 211, Santiago, Chile",2026-12-14,ORD-CL-202612-001717,304722,2026-12-16,La Florida
+7.640.426-3,Cliente Nuevo 7640426,"Avenida Vitacura 7084, Santiago, Chile",2026-12-16,ORD-CL-202612-002188,294161,2026-12-18,Peñalolén
+19.237.467-1,Cliente 19237467,"Avenida Kennedy 7565, Santiago, Chile",2026-12-05,ORD-CL-202612-000585,296917,2026-12-07,Peñalolén
+19.561.748-8,Cliente 19561748,"Gran Avenida José Miguel Carrera 5271, Santiago, Chile",2026-12-11,ORD-CL-202612-001402,117229,2026-12-16,Puente Alto
+6.957.401-2,Cliente 6957401,"Avenida Independencia 912, Santiago, Chile",2026-12-15,ORD-CL-202612-002006,204418,2026-12-17,San Miguel
+9.543.617-7,Cliente 9543617,"Calle San Antonio 9038, Santiago, Chile",2026-12-11,ORD-CL-202612-001339,95176,2026-12-13,Las Condes
+13.651.938-0,Cliente 13651938,"Calle Morandé 1676, Santiago, Chile",2026-12-28,ORD-CL-202612-003787,142161,2027-01-01,Quinta Normal
+11.292.260-5,Cliente 11292260,"Avenida Irarrázaval 6780, Santiago, Chile",2026-12-23,ORD-CL-202612-003109,92118,2026-12-26,Santiago
+17.008.500-2,Cliente Nuevo 17008500,"Avenida Libertador Bernardo O'Higgins 2693, Santiago, Chile",2026-12-17,ORD-CL-202612-002212,88450,2026-12-20,Santiago
+10.201.227-3,Cliente 10201227,"Avenida Providencia 6854, Santiago, Chile",2026-12-14,ORD-CL-202612-001800,189092,2026-12-17,Recoleta
+14.120.638-2,Cliente Nuevo 14120638,"Avenida Providencia 9354, Santiago, Chile",2026-12-20,ORD-CL-202612-002657,73257,2026-12-23,Lo Prado
+12.193.567-5,Cliente 12193567,"Avenida Independencia 9295, Santiago, Chile",2026-12-04,ORD-CL-202612-000459,178684,2026-12-08,Lo Prado
+10.053.123-7,Cliente Nuevo 10053123,"Calle Morandé 928, Santiago, Chile",2026-12-15,ORD-CL-202612-001877,119557,2026-12-16,San Miguel
+13.775.682-8,Cliente Nuevo 13775682,"Calle Monjitas 6910, Santiago, Chile",2026-12-02,ORD-CL-202612-000263,198496,2026-12-05,Puente Alto
+21.783.451-3,Cliente 21783451,"Calle Morandé 7161, Santiago, Chile",2026-12-19,ORD-CL-202612-002585,132919,2026-12-21,Recoleta
+9.543.617-7,Cliente 9543617,"Calle San Antonio 9038, Santiago, Chile",2026-12-25,ORD-CL-202612-003287,302944,2026-12-28,Las Condes
+22.080.557-4,Cliente 22080557,"Calle Arturo Prat 5241, Santiago, Chile",2026-12-16,ORD-CL-202612-002194,145435,2026-12-20,Estación Central
+20.917.666-0,Cliente Nuevo 20917666,"Calle Teatinos 9903, Santiago, Chile",2026-12-05,ORD-CL-202612-000543,137956,2026-12-09,Estación Central
+11.563.816-4,Cliente Nuevo 11563816,"Calle Morandé 9400, Santiago, Chile",2026-12-14,ORD-CL-202612-001729,175337,2026-12-16,Vitacura
+8.210.131-4,Cliente 8210131,"Calle Monjitas 2837, Santiago, Chile",2026-12-19,ORD-CL-202612-002578,63586,2026-12-21,Santiago
+11.850.979-9,Cliente 11850979,"Avenida Tobalaba 7248, Santiago, Chile",2026-12-14,ORD-CL-202612-001742,88473,2026-12-16,Providencia
+11.079.834-9,Cliente 11079834,"Avenida Pajaritos 9628, Santiago, Chile",2026-12-31,ORD-CL-202612-004090,134837,2027-01-04,Estación Central
+17.085.699-0,Cliente Nuevo 17085699,"Calle Huérfanos 4777, Santiago, Chile",2026-12-24,ORD-CL-202612-003242,91749,2026-12-27,Puente Alto
+16.523.988-3,Cliente Nuevo 16523988,"Avenida Vitacura 1454, Santiago, Chile",2026-12-28,ORD-CL-202612-003759,162216,2027-01-01,San Miguel
+10.463.358-7,Cliente Nuevo 10463358,"Calle Monjitas 6053, Santiago, Chile",2026-12-10,ORD-CL-202612-001171,43219,2026-12-13,San Miguel
+8.179.064-5,Cliente Nuevo 8179064,"Calle Morandé 613, Santiago, Chile",2026-12-16,ORD-CL-202612-002170,233669,2026-12-19,Santiago
+5.433.342-8,Cliente 5433342,"Calle Arturo Prat 4641, Santiago, Chile",2026-12-31,ORD-CL-202612-004175,177132,2027-01-02,La Reina
+5.149.195-4,Cliente 5149195,"Avenida Santa Rosa 5626, Santiago, Chile",2026-12-08,ORD-CL-202612-001011,168804,2026-12-10,San Miguel
+8.995.743-8,Cliente 8995743,"Avenida Santa Rosa 3654, Santiago, Chile",2026-12-23,ORD-CL-202612-003052,201964,2026-12-25,Santiago
+8.897.852-9,Cliente Nuevo 8897852,"Avenida Pajaritos 8228, Santiago, Chile",2026-12-17,ORD-CL-202612-002300,124196,2026-12-20,Las Condes
+20.736.036-0,Cliente Nuevo 20736036,"Calle Santo Domingo 650, Santiago, Chile",2026-12-16,ORD-CL-202612-002208,163488,2026-12-18,Estación Central
+11.843.976-3,Cliente 11843976,"Calle Estado 1767, Santiago, Chile",2026-12-09,ORD-CL-202612-001077,207644,2026-12-11,La Florida
+5.216.582-9,Cliente Nuevo 5216582,"Avenida Américo Vespucio 2071, Santiago, Chile",2026-12-23,ORD-CL-202612-003060,200846,2026-12-26,Independencia
+12.725.879-1,Cliente Nuevo 12725879,"Avenida Mapocho 6728, Santiago, Chile",2026-12-19,ORD-CL-202612-002395,213979,2026-12-23,Lo Prado
+10.353.880-5,Cliente Nuevo 10353880,"Avenida Departamental 88, Santiago, Chile",2026-12-14,ORD-CL-202612-001755,147959,2026-12-18,Santiago
+6.987.782-8,Cliente Nuevo 6987782,"Calle Merced 2702, Santiago, Chile",2026-12-28,ORD-CL-202612-003678,231499,2026-12-30,Santiago
+18.894.789-6,Cliente Nuevo 18894789,"Calle San Antonio 7865, Santiago, Chile",2026-12-18,ORD-CL-202612-002391,199150,2026-12-20,Vitacura
+8.418.763-1,Cliente Nuevo 8418763,"Avenida Santa Rosa 9809, Santiago, Chile",2026-12-13,ORD-CL-202612-001636,78138,2026-12-15,Santiago
+12.086.822-5,Cliente 12086822,"Calle Estado 8648, Santiago, Chile",2026-12-12,ORD-CL-202612-001483,309368,2026-12-15,Peñalolén
+20.008.165-9,Cliente 20008165,"Avenida Mapocho 1601, Santiago, Chile",2026-12-08,ORD-CL-202612-000899,162977,2026-12-10,Quinta Normal
+10.499.637-6,Cliente Nuevo 10499637,"Avenida Independencia 7595, Santiago, Chile",2026-12-05,ORD-CL-202612-000567,108244,2026-12-08,Santiago
+16.287.716-7,Cliente 16287716,"Avenida Santa Rosa 6749, Santiago, Chile",2026-12-16,ORD-CL-202612-002088,147203,2026-12-19,Estación Central
+19.950.985-0,Cliente Nuevo 19950985,"Avenida Tobalaba 8544, Santiago, Chile",2026-12-15,ORD-CL-202612-002022,124578,2026-12-17,Quinta Normal
+17.297.224-8,Cliente 17297224,"Avenida Independencia 9028, Santiago, Chile",2026-12-03,ORD-CL-202612-000373,167789,2026-12-06,Lo Prado
+5.318.872-4,Cliente Nuevo 5318872,"Gran Avenida José Miguel Carrera 5847, Santiago, Chile",2026-12-23,ORD-CL-202612-003096,121526,2026-12-25,Peñalolén
+14.693.203-4,Cliente Nuevo 14693203,"Calle Huérfanos 996, Santiago, Chile",2026-12-01,ORD-CL-202612-000193,154564,2026-12-05,La Florida
+5.216.582-9,Cliente Nuevo 5216582,"Avenida Américo Vespucio 2071, Santiago, Chile",2026-12-26,ORD-CL-202612-003528,129798,2026-12-28,Independencia
+22.543.918-4,Cliente Nuevo 22543918,"Calle Catedral 3236, Santiago, Chile",2026-12-04,ORD-CL-202612-000450,70515,2026-12-06,Recoleta
+18.505.871-0,Cliente 18505871,"Calle Catedral 9619, Santiago, Chile",2026-12-06,ORD-CL-202612-000627,182858,2026-12-09,La Florida
+22.570.788-8,Cliente 22570788,"Calle Morandé 2222, Santiago, Chile",2026-12-19,ORD-CL-202612-002571,80961,2026-12-22,Vitacura
+10.529.717-2,Cliente Nuevo 10529717,"Calle Compañía De Jesús 4356, Santiago, Chile",2026-12-06,ORD-CL-202612-000656,119634,2026-12-10,Estación Central
+7.641.766-6,Cliente Nuevo 7641766,"Calle Arturo Prat 7970, Santiago, Chile",2026-12-24,ORD-CL-202612-003245,234318,2026-12-27,Providencia
+15.595.095-2,Cliente 15595095,"Avenida Manuel Montt 6241, Santiago, Chile",2026-12-31,ORD-CL-202612-004156,165166,2027-01-02,Quinta Normal
+19.524.568-0,Cliente 19524568,"Calle Catedral 8542, Santiago, Chile",2026-12-14,ORD-CL-202612-001730,301327,2026-12-15,Santiago
+8.288.925-9,Cliente 8288925,"Calle Amunátegui 8931, Santiago, Chile",2026-12-19,ORD-CL-202612-002443,111010,2026-12-21,Estación Central
+14.310.620-8,Cliente Nuevo 14310620,"Calle Santo Domingo 5170, Santiago, Chile",2026-12-31,ORD-CL-202612-004171,164144,2027-01-02,Recoleta
+6.467.242-5,Cliente 6467242,"Avenida Independencia 24, Santiago, Chile",2026-12-13,ORD-CL-202612-001577,169598,2026-12-16,San Miguel
+19.955.744-1,Cliente Nuevo 19955744,"Avenida Manuel Montt 4776, Santiago, Chile",2026-12-13,ORD-CL-202612-001564,106882,2026-12-15,Santiago
+16.111.501-1,Cliente Nuevo 16111501,"Avenida Mapocho 2352, Santiago, Chile",2026-12-19,ORD-CL-202612-002441,118849,2026-12-21,Recoleta
+5.165.826-0,Cliente Nuevo 5165826,"Calle Huérfanos 6451, Santiago, Chile",2026-12-15,ORD-CL-202612-001918,326940,2026-12-18,Vitacura
+9.364.839-4,Cliente 9364839,"Avenida Apoquindo 7973, Santiago, Chile",2026-12-16,ORD-CL-202612-002168,109846,2026-12-18,Independencia
+16.554.800-3,Cliente 16554800,"Calle Estado 7420, Santiago, Chile",2026-12-09,ORD-CL-202612-001030,218062,2026-12-12,San Miguel
+7.374.439-8,Cliente Nuevo 7374439,"Calle Estado 5020, Santiago, Chile",2026-12-30,ORD-CL-202612-003978,185327,2027-01-01,Vitacura
+5.805.928-3,Cliente Nuevo 5805928,"Calle Teatinos 3426, Santiago, Chile",2026-12-17,ORD-CL-202612-002267,132228,2026-12-18,Puente Alto
+20.028.545-4,Cliente Nuevo 20028545,"Calle Estado 2507, Santiago, Chile",2026-12-26,ORD-CL-202612-003526,73682,2026-12-28,Santiago
+19.427.280-3,Cliente 19427280,"Calle Merced 8269, Santiago, Chile",2026-12-29,ORD-CL-202612-003861,209150,2027-01-01,Estación Central
+7.062.851-9,Cliente Nuevo 7062851,"Avenida Las Condes 2824, Santiago, Chile",2026-12-01,ORD-CL-202612-000048,76722,2026-12-04,Independencia
+22.339.630-5,Cliente Nuevo 22339630,"Avenida Irarrázaval 7187, Santiago, Chile",2026-12-21,ORD-CL-202612-002787,102509,2026-12-23,Independencia
+17.106.870-6,Cliente 17106870,"Avenida Recoleta 5324, Santiago, Chile",2026-12-22,ORD-CL-202612-002953,232530,2026-12-24,Providencia
+14.867.251-1,Cliente 14867251,"Calle Catedral 3440, Santiago, Chile",2026-12-04,ORD-CL-202612-000470,109571,2026-12-07,Independencia
+7.499.857-0,Cliente Nuevo 7499857,"Calle Santo Domingo 8998, Santiago, Chile",2026-12-21,ORD-CL-202612-002793,294654,2026-12-25,Santiago
+13.892.478-4,Cliente 13892478,"Avenida Irarrázaval 8356, Santiago, Chile",2026-12-27,ORD-CL-202612-003625,98512,2026-12-29,Vitacura
+12.033.777-7,Cliente Nuevo 12033777,"Calle Santo Domingo 1612, Santiago, Chile",2026-12-16,ORD-CL-202612-002200,96187,2026-12-18,Santiago
+16.095.874-3,Cliente Nuevo 16095874,"Avenida Vitacura 2253, Santiago, Chile",2026-12-23,ORD-CL-202612-003076,103023,2026-12-25,Santiago
+7.995.605-2,Cliente Nuevo 7995605,"Avenida La Florida 4780, Santiago, Chile",2026-12-09,ORD-CL-202612-001093,288402,2026-12-11,Santiago
+7.836.410-2,Cliente 7836410,"Avenida Irarrázaval 3179, Santiago, Chile",2026-12-24,ORD-CL-202612-003149,205365,2026-12-26,Estación Central
+16.513.123-9,Cliente Nuevo 16513123,"Calle Arturo Prat 4053, Santiago, Chile",2026-12-20,ORD-CL-202612-002626,149368,2026-12-22,Independencia
+19.359.934-4,Cliente Nuevo 19359934,"Calle Merced 4538, Santiago, Chile",2026-12-11,ORD-CL-202612-001394,165284,2026-12-13,Puente Alto
+13.193.452-1,Cliente Nuevo 13193452,"Avenida Vicuña Mackenna 1848, Santiago, Chile",2026-12-04,ORD-CL-202612-000457,208661,2026-12-07,Lo Prado
+14.276.332-2,Cliente Nuevo 14276332,"Calle Morandé 7331, Santiago, Chile",2026-12-10,ORD-CL-202612-001203,183627,2026-12-13,Puente Alto
+5.207.863-4,Cliente Nuevo 5207863,"Calle San Diego 7691, Santiago, Chile",2026-12-14,ORD-CL-202612-001781,269899,2026-12-17,San Miguel
+7.951.830-0,Cliente Nuevo 7951830,"Calle Teatinos 9817, Santiago, Chile",2026-12-06,ORD-CL-202612-000648,166279,2026-12-10,Santiago
+14.077.834-4,Cliente 14077834,"Calle San Diego 9330, Santiago, Chile",2026-12-15,ORD-CL-202612-001859,152879,2026-12-18,Lo Prado
+10.794.720-1,Cliente Nuevo 10794720,"Calle San Antonio 9747, Santiago, Chile",2026-12-01,ORD-CL-202612-000014,79764,2026-12-04,Puente Alto
+11.215.414-8,Cliente 11215414,"Avenida Providencia 5667, Santiago, Chile",2026-12-30,ORD-CL-202612-003907,231035,2026-12-31,Santiago
+16.946.426-7,Cliente 16946426,"Calle Catedral 4222, Santiago, Chile",2026-12-22,ORD-CL-202612-002958,123056,2026-12-25,La Reina
+8.370.123-6,Cliente Nuevo 8370123,"Calle Santo Domingo 2882, Santiago, Chile",2026-12-27,ORD-CL-202612-003588,270660,2026-12-29,Lo Prado
+15.073.105-3,Cliente Nuevo 15073105,"Avenida La Florida 8463, Santiago, Chile",2026-12-22,ORD-CL-202612-002948,186499,2026-12-23,Estación Central
+5.766.336-6,Cliente Nuevo 5766336,"Calle Catedral 2585, Santiago, Chile",2026-12-09,ORD-CL-202612-001079,129365,2026-12-12,La Florida
+12.627.284-5,Cliente 12627284,"Avenida Recoleta 8980, Santiago, Chile",2026-12-30,ORD-CL-202612-003981,86989,2026-12-31,Recoleta
+14.680.199-8,Cliente Nuevo 14680199,"Avenida Libertador Bernardo O'Higgins 6552, Santiago, Chile",2026-12-16,ORD-CL-202612-002051,125480,2026-12-18,Santiago
+5.263.848-4,Cliente Nuevo 5263848,"Avenida Manuel Montt 8828, Santiago, Chile",2026-12-23,ORD-CL-202612-003121,72300,2026-12-25,Santiago
+14.091.933-4,Cliente 14091933,"Calle Huérfanos 6842, Santiago, Chile",2026-12-06,ORD-CL-202612-000732,103352,2026-12-08,Santiago
+17.624.572-6,Cliente 17624572,"Calle San Antonio 960, Santiago, Chile",2026-12-16,ORD-CL-202612-002080,124094,2026-12-19,Peñalolén
+19.429.781-7,Cliente 19429781,"Calle Arturo Prat 6209, Santiago, Chile",2026-12-28,ORD-CL-202612-003739,240300,2026-12-30,Independencia
+19.414.022-1,Cliente Nuevo 19414022,"Calle Santo Domingo 8278, Santiago, Chile",2026-12-04,ORD-CL-202612-000436,163804,2026-12-07,Santiago
+16.467.561-8,Cliente 16467561,"Calle Teatinos 4467, Santiago, Chile",2026-12-26,ORD-CL-202612-003566,122268,2026-12-28,Providencia
+15.880.306-9,Cliente 15880306,"Avenida Vicuña Mackenna 6625, Santiago, Chile",2026-12-19,ORD-CL-202612-002562,254203,2026-12-23,Estación Central
+6.334.282-1,Cliente Nuevo 6334282,"Avenida Pedro De Valdivia 7852, Santiago, Chile",2026-12-10,ORD-CL-202612-001223,196154,2026-12-13,La Reina
+11.850.979-9,Cliente 11850979,"Avenida Tobalaba 7248, Santiago, Chile",2026-12-26,ORD-CL-202612-003448,152548,2026-12-27,Providencia
+22.994.958-6,Cliente Nuevo 22994958,"Calle San Antonio 3796, Santiago, Chile",2026-12-19,ORD-CL-202612-002618,193115,2026-12-21,Independencia
+14.236.848-3,Cliente Nuevo 14236848,"Avenida Las Condes 7844, Santiago, Chile",2026-12-31,ORD-CL-202612-004029,261520,2027-01-02,La Reina
+14.907.881-1,Cliente Nuevo 14907881,"Calle San Diego 5190, Santiago, Chile",2026-12-19,ORD-CL-202612-002495,86214,2026-12-22,Peñalolén
+5.628.536-3,Cliente Nuevo 5628536,"Calle Teatinos 7030, Santiago, Chile",2026-12-07,ORD-CL-202612-000815,211798,2026-12-09,Santiago
+22.094.291-1,Cliente 22094291,"Calle Santo Domingo 7533, Santiago, Chile",2026-12-31,ORD-CL-202612-004074,264250,2027-01-04,Lo Prado
+19.116.035-0,Cliente 19116035,"Calle Amunátegui 6560, Santiago, Chile",2026-12-12,ORD-CL-202612-001532,256504,2026-12-15,Vitacura
+13.070.120-2,Cliente 13070120,"Calle Monjitas 9966, Santiago, Chile",2026-12-23,ORD-CL-202612-003124,99236,2026-12-25,Santiago
+13.011.364-4,Cliente Nuevo 13011364,"Avenida Américo Vespucio 1280, Santiago, Chile",2026-12-06,ORD-CL-202612-000662,176761,2026-12-10,Puente Alto
+7.055.082-4,Cliente Nuevo 7055082,"Avenida Kennedy 2316, Santiago, Chile",2026-12-16,ORD-CL-202612-002210,125669,2026-12-20,Recoleta
+13.452.771-8,Cliente Nuevo 13452771,"Avenida Las Condes 8964, Santiago, Chile",2026-12-30,ORD-CL-202612-003906,149139,2027-01-02,Las Condes
+17.037.071-1,Cliente Nuevo 17037071,"Avenida Vicuña Mackenna 6602, Santiago, Chile",2026-12-24,ORD-CL-202612-003190,234561,2026-12-26,Recoleta
+8.346.407-5,Cliente Nuevo 8346407,"Avenida Mapocho 5003, Santiago, Chile",2026-12-28,ORD-CL-202612-003779,203625,2026-12-30,Santiago
+21.475.685-2,Cliente 21475685,"Avenida Providencia 3090, Santiago, Chile",2026-12-16,ORD-CL-202612-002173,97659,2026-12-19,Santiago
+5.910.073-3,Cliente Nuevo 5910073,"Avenida Las Condes 5618, Santiago, Chile",2026-12-28,ORD-CL-202612-003763,43889,2026-12-29,Vitacura
+7.941.056-6,Cliente Nuevo 7941056,"Avenida Kennedy 5315, Santiago, Chile",2026-12-01,ORD-CL-202612-000003,115798,2026-12-04,Independencia
+11.666.079-1,Cliente Nuevo 11666079,"Calle Arturo Prat 5720, Santiago, Chile",2026-12-19,ORD-CL-202612-002454,130186,2026-12-23,Lo Prado
+14.081.942-3,Cliente 14081942,"Avenida Vicuña Mackenna 139, Santiago, Chile",2026-12-11,ORD-CL-202612-001328,165666,2026-12-14,Puente Alto
+18.407.788-8,Cliente 18407788,"Avenida Américo Vespucio 898, Santiago, Chile",2026-12-15,ORD-CL-202612-002002,199762,2026-12-17,Las Condes
+9.212.917-4,Cliente 9212917,"Gran Avenida José Miguel Carrera 9844, Santiago, Chile",2026-12-01,ORD-CL-202612-000080,203429,2026-12-05,Quinta Normal
+15.839.440-2,Cliente Nuevo 15839440,"Calle Compañía De Jesús 2799, Santiago, Chile",2026-12-31,ORD-CL-202612-004111,104724,2027-01-02,Quinta Normal
+10.807.050-1,Cliente 10807050,"Calle San Diego 9203, Santiago, Chile",2026-12-28,ORD-CL-202612-003806,118101,2026-12-29,Santiago
+8.688.112-4,Cliente 8688112,"Avenida Irarrázaval 4204, Santiago, Chile",2026-12-12,ORD-CL-202612-001487,242574,2026-12-17,Peñalolén
+22.538.782-2,Cliente Nuevo 22538782,"Avenida Departamental 5058, Santiago, Chile",2026-12-27,ORD-CL-202612-003600,36386,2026-12-29,Providencia
+10.271.096-5,Cliente Nuevo 10271096,"Avenida Vicuña Mackenna 1694, Santiago, Chile",2026-12-25,ORD-CL-202612-003407,217139,2026-12-28,Lo Prado
+19.109.601-9,Cliente Nuevo 19109601,"Avenida Libertador Bernardo O'Higgins 3892, Santiago, Chile",2026-12-25,ORD-CL-202612-003305,60787,2026-12-28,San Miguel
+17.537.130-3,Cliente 17537130,"Calle San Antonio 3561, Santiago, Chile",2026-12-11,ORD-CL-202612-001260,129214,2026-12-13,Peñalolén
+18.773.090-6,Cliente Nuevo 18773090,"Calle Morandé 69, Santiago, Chile",2026-12-08,ORD-CL-202612-000981,188242,2026-12-12,Las Condes
+9.227.283-1,Cliente Nuevo 9227283,"Calle Santo Domingo 1221, Santiago, Chile",2026-12-02,ORD-CL-202612-000238,244617,2026-12-05,Vitacura
+12.091.711-6,Cliente Nuevo 12091711,"Avenida Vitacura 6199, Santiago, Chile",2026-12-08,ORD-CL-202612-000987,59312,2026-12-12,Santiago
+20.399.412-6,Cliente Nuevo 20399412,"Calle San Antonio 4351, Santiago, Chile",2026-12-27,ORD-CL-202612-003597,206246,2026-12-28,Independencia
+19.464.509-3,Cliente 19464509,"Avenida Libertador Bernardo O'Higgins 2778, Santiago, Chile",2026-12-17,ORD-CL-202612-002324,167373,2026-12-20,Recoleta
+22.570.252-0,Cliente 22570252,"Calle Compañía De Jesús 7475, Santiago, Chile",2026-12-29,ORD-CL-202612-003879,159282,2027-01-01,Lo Prado
+10.120.780-8,Cliente Nuevo 10120780,"Avenida Grecia 7990, Santiago, Chile",2026-12-03,ORD-CL-202612-000323,203222,2026-12-06,Recoleta
+18.429.770-6,Cliente 18429770,"Calle Huérfanos 8536, Santiago, Chile",2026-12-03,ORD-CL-202612-000351,46432,2026-12-06,Puente Alto
+13.132.045-6,Cliente 13132045,"Avenida Apoquindo 1730, Santiago, Chile",2026-12-23,ORD-CL-202612-002998,211331,2026-12-26,Recoleta
+7.951.830-0,Cliente Nuevo 7951830,"Calle Teatinos 9817, Santiago, Chile",2026-12-15,ORD-CL-202612-001991,274125,2026-12-18,Santiago
+9.024.420-1,Cliente Nuevo 9024420,"Avenida Providencia 270, Santiago, Chile",2026-12-25,ORD-CL-202612-003343,264647,2026-12-27,Recoleta
+10.463.358-7,Cliente Nuevo 10463358,"Calle Monjitas 6053, Santiago, Chile",2026-12-03,ORD-CL-202612-000284,137588,2026-12-05,San Miguel
+11.258.120-3,Cliente Nuevo 11258120,"Avenida Tobalaba 3105, Santiago, Chile",2026-12-23,ORD-CL-202612-003116,79441,2026-12-25,San Miguel
+14.106.311-8,Cliente Nuevo 14106311,"Calle Huérfanos 6206, Santiago, Chile",2026-12-16,ORD-CL-202612-002182,120249,2026-12-18,Santiago
+6.425.990-5,Cliente 6425990,"Avenida Tobalaba 5074, Santiago, Chile",2026-12-23,ORD-CL-202612-003137,203579,2026-12-25,Peñalolén
+16.478.394-3,Cliente Nuevo 16478394,"Avenida Las Condes 7366, Santiago, Chile",2026-12-05,ORD-CL-202612-000516,189206,2026-12-08,Providencia
+11.330.850-8,Cliente 11330850,"Avenida Pajaritos 9008, Santiago, Chile",2026-12-05,ORD-CL-202612-000526,97441,2026-12-07,Independencia
+20.243.470-3,Cliente 20243470,"Avenida Macul 956, Santiago, Chile",2026-12-20,ORD-CL-202612-002703,296137,2026-12-22,Santiago
+10.217.904-2,Cliente Nuevo 10217904,"Avenida Macul 5140, Santiago, Chile",2026-12-15,ORD-CL-202612-001947,155615,2026-12-18,Independencia
+15.155.879-0,Cliente 15155879,"Calle Estado 4510, Santiago, Chile",2026-12-30,ORD-CL-202612-003991,167889,2027-01-03,Quinta Normal
+14.729.367-0,Cliente 14729367,"Avenida Recoleta 1848, Santiago, Chile",2026-12-17,ORD-CL-202612-002252,176407,2026-12-19,Santiago
+11.330.850-8,Cliente 11330850,"Avenida Pajaritos 9008, Santiago, Chile",2026-12-06,ORD-CL-202612-000677,46077,2026-12-09,Independencia
+17.234.652-8,Cliente 17234652,"Avenida Mapocho 517, Santiago, Chile",2026-12-09,ORD-CL-202612-001086,256434,2026-12-13,Vitacura
+22.943.271-3,Cliente Nuevo 22943271,"Avenida Santa Rosa 2167, Santiago, Chile",2026-12-16,ORD-CL-202612-002162,223895,2026-12-19,La Florida
+17.620.980-6,Cliente Nuevo 17620980,"Avenida Departamental 2987, Santiago, Chile",2026-12-27,ORD-CL-202612-003574,58038,2026-12-30,Vitacura
+14.745.864-9,Cliente 14745864,"Avenida Vicuña Mackenna 2820, Santiago, Chile",2026-12-19,ORD-CL-202612-002485,171383,2026-12-21,Estación Central
+20.874.687-7,Cliente Nuevo 20874687,"Avenida Kennedy 9675, Santiago, Chile",2026-12-14,ORD-CL-202612-001734,147034,2026-12-17,Recoleta
+22.021.731-7,Cliente Nuevo 22021731,"Avenida Grecia 7439, Santiago, Chile",2026-12-30,ORD-CL-202612-003951,114429,2027-01-02,Independencia
+21.196.886-8,Cliente Nuevo 21196886,"Avenida Matta 3211, Santiago, Chile",2026-12-07,ORD-CL-202612-000868,134214,2026-12-09,Quinta Normal
+6.643.744-0,Cliente Nuevo 6643744,"Calle Teatinos 1106, Santiago, Chile",2026-12-28,ORD-CL-202612-003805,133651,2026-12-30,Santiago
+20.007.968-6,Cliente Nuevo 20007968,"Calle Arturo Prat 2497, Santiago, Chile",2026-12-16,ORD-CL-202612-002209,103998,2026-12-20,Quinta Normal
+14.466.059-3,Cliente Nuevo 14466059,"Avenida Las Condes 9155, Santiago, Chile",2026-12-23,ORD-CL-202612-003094,212186,2026-12-25,Santiago
+16.664.462-9,Cliente 16664462,"Avenida Manuel Montt 2208, Santiago, Chile",2026-12-23,ORD-CL-202612-002990,137616,2026-12-26,Recoleta
+16.142.409-9,Cliente 16142409,"Avenida Pajaritos 8764, Santiago, Chile",2026-12-22,ORD-CL-202612-002826,81820,2026-12-25,Santiago
+10.061.066-8,Cliente Nuevo 10061066,"Avenida Pedro De Valdivia 5865, Santiago, Chile",2026-12-07,ORD-CL-202612-000824,263991,2026-12-10,Las Condes
+13.859.752-7,Cliente Nuevo 13859752,"Avenida Matta 5760, Santiago, Chile",2026-12-22,ORD-CL-202612-002921,94832,2026-12-25,Santiago
+17.689.703-3,Cliente 17689703,"Avenida Santa Rosa 4394, Santiago, Chile",2026-12-11,ORD-CL-202612-001277,222116,2026-12-13,Santiago
+9.070.055-1,Cliente 9070055,"Avenida Vicuña Mackenna 3035, Santiago, Chile",2026-12-13,ORD-CL-202612-001635,81498,2026-12-15,Lo Prado
+5.098.173-6,Cliente 5098173,"Calle Arturo Prat 9979, Santiago, Chile",2026-12-21,ORD-CL-202612-002752,84070,2026-12-23,Providencia
+21.628.171-6,Cliente 21628171,"Calle Estado 5679, Santiago, Chile",2026-12-20,ORD-CL-202612-002662,102978,2026-12-23,Las Condes
+14.129.991-5,Cliente 14129991,"Avenida Matta 1637, Santiago, Chile",2026-12-12,ORD-CL-202612-001530,188494,2026-12-16,Estación Central
+22.445.445-9,Cliente 22445445,"Avenida Kennedy 7707, Santiago, Chile",2026-12-14,ORD-CL-202612-001795,192687,2026-12-16,Providencia
+18.117.500-8,Cliente Nuevo 18117500,"Avenida Kennedy 6923, Santiago, Chile",2026-12-28,ORD-CL-202612-003685,108750,2026-12-30,Quinta Normal
+8.995.743-8,Cliente 8995743,"Avenida Santa Rosa 3654, Santiago, Chile",2026-12-16,ORD-CL-202612-002120,223435,2026-12-18,Santiago
+19.452.967-3,Cliente Nuevo 19452967,"Avenida Tobalaba 7151, Santiago, Chile",2026-12-14,ORD-CL-202612-001850,173670,2026-12-16,San Miguel
+15.437.407-1,Cliente Nuevo 15437407,"Calle Santo Domingo 6677, Santiago, Chile",2026-12-05,ORD-CL-202612-000496,196695,2026-12-08,Quinta Normal
+11.792.673-0,Cliente Nuevo 11792673,"Avenida Mapocho 4034, Santiago, Chile",2026-12-08,ORD-CL-202612-001016,83680,2026-12-12,Quinta Normal
+18.043.869-7,Cliente Nuevo 18043869,"Avenida Libertador Bernardo O'Higgins 7790, Santiago, Chile",2026-12-08,ORD-CL-202612-000921,256661,2026-12-10,Peñalolén
+22.281.230-0,Cliente 22281230,"Avenida Libertador Bernardo O'Higgins 5480, Santiago, Chile",2026-12-31,ORD-CL-202612-004109,95999,2027-01-04,Recoleta
+14.799.664-5,Cliente 14799664,"Avenida Américo Vespucio 118, Santiago, Chile",2026-12-11,ORD-CL-202612-001385,84431,2026-12-14,Independencia
+17.107.764-6,Cliente 17107764,"Avenida Pajaritos 5796, Santiago, Chile",2026-12-01,ORD-CL-202612-000087,325781,2026-12-03,Independencia
+8.496.671-7,Cliente 8496671,"Avenida Irarrázaval 3764, Santiago, Chile",2026-12-19,ORD-CL-202612-002410,220042,2026-12-21,La Florida
+7.978.779-8,Cliente Nuevo 7978779,"Avenida Santa Rosa 6009, Santiago, Chile",2026-12-17,ORD-CL-202612-002269,315259,2026-12-21,Las Condes
+11.070.385-4,Cliente Nuevo 11070385,"Avenida Providencia 5213, Santiago, Chile",2026-12-08,ORD-CL-202612-000943,180264,2026-12-11,San Miguel
+10.331.001-2,Cliente Nuevo 10331001,"Calle Teatinos 269, Santiago, Chile",2026-12-19,ORD-CL-202612-002411,259501,2026-12-21,Peñalolén
+21.171.484-4,Cliente 21171484,"Calle Morandé 9783, Santiago, Chile",2026-12-08,ORD-CL-202612-000903,80136,2026-12-12,Estación Central
+20.757.511-0,Cliente 20757511,"Avenida Vicuña Mackenna 154, Santiago, Chile",2026-12-01,ORD-CL-202612-000030,229074,2026-12-04,Recoleta
+9.415.369-1,Cliente 9415369,"Calle San Antonio 8998, Santiago, Chile",2026-12-03,ORD-CL-202612-000291,163832,2026-12-07,Recoleta
+10.584.097-1,Cliente Nuevo 10584097,"Calle San Antonio 17, Santiago, Chile",2026-12-22,ORD-CL-202612-002900,239796,2026-12-23,Lo Prado
+21.566.255-6,Cliente 21566255,"Avenida Recoleta 7733, Santiago, Chile",2026-12-31,ORD-CL-202612-004108,220429,2027-01-03,Santiago
+18.454.880-2,Cliente 18454880,"Calle Huérfanos 4859, Santiago, Chile",2026-12-02,ORD-CL-202612-000242,72730,2026-12-05,Peñalolén
+15.815.165-1,Cliente 15815165,"Calle Santo Domingo 9121, Santiago, Chile",2026-12-08,ORD-CL-202612-000938,277499,2026-12-10,Recoleta
+15.958.523-9,Cliente Nuevo 15958523,"Avenida Vicuña Mackenna 6713, Santiago, Chile",2026-12-03,ORD-CL-202612-000277,202785,2026-12-06,San Miguel
+6.190.976-9,Cliente 6190976,"Calle Estado 9741, Santiago, Chile",2026-12-28,ORD-CL-202612-003709,211714,2026-12-30,La Reina
+22.759.622-2,Cliente 22759622,"Avenida Matta 5603, Santiago, Chile",2026-12-01,ORD-CL-202612-000129,118861,2026-12-04,La Reina
+6.852.110-4,Cliente 6852110,"Avenida Macul 3599, Santiago, Chile",2026-12-26,ORD-CL-202612-003522,247732,2026-12-28,Recoleta
+9.490.310-5,Cliente 9490310,"Avenida Vicuña Mackenna 9874, Santiago, Chile",2026-12-11,ORD-CL-202612-001354,209457,2026-12-14,La Florida
+5.207.312-2,Cliente Nuevo 5207312,"Calle San Diego 2452, Santiago, Chile",2026-12-30,ORD-CL-202612-003939,160815,2027-01-01,Estación Central
+7.883.540-8,Cliente 7883540,"Avenida Pedro De Valdivia 7181, Santiago, Chile",2026-12-16,ORD-CL-202612-002106,293786,2026-12-18,Vitacura
+16.038.629-9,Cliente Nuevo 16038629,"Calle Morandé 1319, Santiago, Chile",2026-12-08,ORD-CL-202612-000975,316771,2026-12-11,Estación Central
+7.574.356-3,Cliente 7574356,"Calle San Diego 5489, Santiago, Chile",2026-12-10,ORD-CL-202612-001141,235339,2026-12-12,Puente Alto
+11.322.388-1,Cliente Nuevo 11322388,"Avenida Independencia 8882, Santiago, Chile",2026-12-21,ORD-CL-202612-002741,302082,2026-12-25,San Miguel
+17.045.268-1,Cliente Nuevo 17045268,"Avenida Pedro De Valdivia 3805, Santiago, Chile",2026-12-15,ORD-CL-202612-001989,126142,2026-12-18,Santiago
+13.180.239-0,Cliente 13180239,"Avenida Mapocho 2988, Santiago, Chile",2026-12-07,ORD-CL-202612-000878,174557,2026-12-09,Peñalolén
+21.568.398-5,Cliente Nuevo 21568398,"Avenida Américo Vespucio 4227, Santiago, Chile",2026-12-30,ORD-CL-202612-003966,117252,2027-01-02,Estación Central
+9.741.243-6,Cliente 9741243,"Calle San Antonio 3410, Santiago, Chile",2026-12-05,ORD-CL-202612-000542,157031,2026-12-08,Santiago
+6.606.107-5,Cliente Nuevo 6606107,"Avenida Providencia 3544, Santiago, Chile",2026-12-31,ORD-CL-202612-004138,262261,2027-01-03,Puente Alto
+21.196.886-8,Cliente Nuevo 21196886,"Avenida Matta 3211, Santiago, Chile",2026-12-29,ORD-CL-202612-003832,216693,2026-12-31,Quinta Normal
+12.737.660-8,Cliente Nuevo 12737660,"Calle Amunátegui 5053, Santiago, Chile",2026-12-27,ORD-CL-202612-003615,231808,2026-12-29,Puente Alto
+16.775.133-3,Cliente Nuevo 16775133,"Avenida Pajaritos 4612, Santiago, Chile",2026-12-18,ORD-CL-202612-002339,138433,2026-12-19,Providencia
+16.220.368-8,Cliente Nuevo 16220368,"Avenida Recoleta 3634, Santiago, Chile",2026-12-18,ORD-CL-202612-002361,112104,2026-12-21,Santiago
+12.640.480-3,Cliente 12640480,"Calle Compañía De Jesús 2986, Santiago, Chile",2026-12-15,ORD-CL-202612-001937,54407,2026-12-19,Peñalolén
+10.109.395-5,Cliente Nuevo 10109395,"Avenida Apoquindo 4985, Santiago, Chile",2026-12-08,ORD-CL-202612-000996,174461,2026-12-13,Santiago
+15.636.947-1,Cliente Nuevo 15636947,"Avenida La Florida 5799, Santiago, Chile",2026-12-24,ORD-CL-202612-003214,96556,2026-12-27,Estación Central
+20.552.104-2,Cliente 20552104,"Avenida La Florida 1383, Santiago, Chile",2026-12-15,ORD-CL-202612-001938,206300,2026-12-17,Las Condes
+5.482.053-2,Cliente Nuevo 5482053,"Calle Catedral 8079, Santiago, Chile",2026-12-25,ORD-CL-202612-003308,156161,2026-12-28,Las Condes
+20.081.472-2,Cliente Nuevo 20081472,"Avenida Mapocho 4504, Santiago, Chile",2026-12-13,ORD-CL-202612-001668,122131,2026-12-14,La Reina
+18.798.662-1,Cliente Nuevo 18798662,"Avenida Apoquindo 3569, Santiago, Chile",2026-12-06,ORD-CL-202612-000780,88038,2026-12-10,Recoleta
+11.212.451-0,Cliente 11212451,"Avenida Américo Vespucio 2037, Santiago, Chile",2026-12-03,ORD-CL-202612-000387,63448,2026-12-06,Las Condes
+15.558.134-2,Cliente Nuevo 15558134,"Avenida Vitacura 5063, Santiago, Chile",2026-12-03,ORD-CL-202612-000398,106824,2026-12-05,Quinta Normal
+8.613.975-1,Cliente Nuevo 8613975,"Avenida Tobalaba 8129, Santiago, Chile",2026-12-20,ORD-CL-202612-002700,72709,2026-12-22,La Florida
+22.080.557-4,Cliente 22080557,"Calle Arturo Prat 5241, Santiago, Chile",2026-12-14,ORD-CL-202612-001766,277826,2026-12-17,Estación Central
+6.511.881-7,Cliente Nuevo 6511881,"Avenida Américo Vespucio 9745, Santiago, Chile",2026-12-12,ORD-CL-202612-001452,150279,2026-12-14,Lo Prado
+22.272.741-7,Cliente Nuevo 22272741,"Calle Merced 2182, Santiago, Chile",2026-12-14,ORD-CL-202612-001735,151527,2026-12-18,La Florida
+7.794.068-0,Cliente Nuevo 7794068,"Calle Bandera 3155, Santiago, Chile",2026-12-13,ORD-CL-202612-001684,143841,2026-12-15,Santiago
+18.533.014-5,Cliente 18533014,"Avenida Departamental 8960, Santiago, Chile",2026-12-15,ORD-CL-202612-001913,243303,2026-12-17,La Reina
+12.367.774-3,Cliente Nuevo 12367774,"Calle Merced 9195, Santiago, Chile",2026-12-26,ORD-CL-202612-003539,177660,2026-12-29,Providencia
+17.978.490-4,Cliente 17978490,"Avenida Kennedy 6477, Santiago, Chile",2026-12-23,ORD-CL-202612-002987,83830,2026-12-25,Santiago
+6.438.229-6,Cliente 6438229,"Calle Merced 6576, Santiago, Chile",2026-12-02,ORD-CL-202612-000222,298476,2026-12-03,Puente Alto
+19.109.601-9,Cliente Nuevo 19109601,"Avenida Libertador Bernardo O'Higgins 3892, Santiago, Chile",2026-12-21,ORD-CL-202612-002759,81513,2026-12-24,San Miguel
+9.177.486-1,Cliente 9177486,"Calle Merced 896, Santiago, Chile",2026-12-20,ORD-CL-202612-002677,269908,2026-12-22,Lo Prado
+19.701.098-5,Cliente Nuevo 19701098,"Avenida Kennedy 8609, Santiago, Chile",2026-12-20,ORD-CL-202612-002647,140602,2026-12-23,Lo Prado
+19.442.394-3,Cliente 19442394,"Avenida Américo Vespucio 3407, Santiago, Chile",2026-12-03,ORD-CL-202612-000404,286117,2026-12-05,Recoleta
+11.714.785-7,Cliente Nuevo 11714785,"Avenida Matta 2703, Santiago, Chile",2026-12-02,ORD-CL-202612-000249,61447,2026-12-06,Puente Alto
+19.455.888-2,Cliente Nuevo 19455888,"Calle Catedral 3465, Santiago, Chile",2026-12-13,ORD-CL-202612-001650,166468,2026-12-15,Vitacura
+19.561.748-8,Cliente 19561748,"Gran Avenida José Miguel Carrera 5271, Santiago, Chile",2026-12-23,ORD-CL-202612-002983,45729,2026-12-25,Puente Alto
+21.783.616-1,Cliente 21783616,"Avenida Américo Vespucio 3402, Santiago, Chile",2026-12-11,ORD-CL-202612-001390,91351,2026-12-13,Providencia
+18.117.500-8,Cliente Nuevo 18117500,"Avenida Kennedy 6923, Santiago, Chile",2026-12-25,ORD-CL-202612-003280,76460,2026-12-27,Quinta Normal
+19.888.499-6,Cliente Nuevo 19888499,"Calle Arturo Prat 5007, Santiago, Chile",2026-12-26,ORD-CL-202612-003530,148804,2026-12-28,Las Condes
+16.263.178-2,Cliente Nuevo 16263178,"Calle Amunátegui 7235, Santiago, Chile",2026-12-04,ORD-CL-202612-000448,150492,2026-12-07,Quinta Normal
+21.766.072-6,Cliente Nuevo 21766072,"Avenida La Florida 2626, Santiago, Chile",2026-12-09,ORD-CL-202612-001019,230467,2026-12-12,Santiago
+18.613.878-0,Cliente Nuevo 18613878,"Avenida Apoquindo 9524, Santiago, Chile",2026-12-06,ORD-CL-202612-000785,130390,2026-12-08,La Reina
+19.524.568-0,Cliente 19524568,"Calle Catedral 8542, Santiago, Chile",2026-12-30,ORD-CL-202612-003909,187430,2026-12-31,Santiago
+13.395.227-9,Cliente 13395227,"Avenida Irarrázaval 1701, Santiago, Chile",2026-12-16,ORD-CL-202612-002197,88910,2026-12-17,Santiago
+9.610.014-7,Cliente Nuevo 9610014,"Avenida Pedro De Valdivia 353, Santiago, Chile",2026-12-14,ORD-CL-202612-001838,128183,2026-12-16,Vitacura
+5.004.054-6,Cliente Nuevo 5004054,"Avenida Manuel Montt 1358, Santiago, Chile",2026-12-05,ORD-CL-202612-000575,81557,2026-12-08,Independencia
+12.698.104-2,Cliente Nuevo 12698104,"Calle Estado 6949, Santiago, Chile",2026-12-31,ORD-CL-202612-004104,226728,2027-01-03,La Florida
+19.429.781-7,Cliente 19429781,"Calle Arturo Prat 6209, Santiago, Chile",2026-12-06,ORD-CL-202612-000752,76338,2026-12-09,Independencia
+20.270.464-3,Cliente Nuevo 20270464,"Calle Amunátegui 4564, Santiago, Chile",2026-12-30,ORD-CL-202612-003926,293193,2027-01-02,Estación Central
+8.060.848-2,Cliente Nuevo 8060848,"Avenida Kennedy 1770, Santiago, Chile",2026-12-15,ORD-CL-202612-001895,164266,2026-12-17,Quinta Normal
+8.395.310-4,Cliente Nuevo 8395310,"Gran Avenida José Miguel Carrera 1084, Santiago, Chile",2026-12-09,ORD-CL-202612-001024,52965,2026-12-12,La Florida
+18.737.764-9,Cliente 18737764,"Avenida Américo Vespucio 8747, Santiago, Chile",2026-12-27,ORD-CL-202612-003582,142497,2026-12-29,San Miguel
+14.999.487-9,Cliente Nuevo 14999487,"Calle Huérfanos 3022, Santiago, Chile",2026-12-28,ORD-CL-202612-003782,155077,2026-12-30,San Miguel
+5.205.860-3,Cliente Nuevo 5205860,"Avenida Libertador Bernardo O'Higgins 5665, Santiago, Chile",2026-12-03,ORD-CL-202612-000309,47026,2026-12-06,San Miguel
+12.601.567-6,Cliente 12601567,"Avenida Manuel Montt 8763, Santiago, Chile",2026-12-14,ORD-CL-202612-001816,168341,2026-12-16,Peñalolén
+19.618.300-6,Cliente Nuevo 19618300,"Calle Merced 2159, Santiago, Chile",2026-12-25,ORD-CL-202612-003310,300264,2026-12-27,Recoleta
+9.610.014-7,Cliente Nuevo 9610014,"Avenida Pedro De Valdivia 353, Santiago, Chile",2026-12-26,ORD-CL-202612-003529,262046,2026-12-30,Vitacura
+19.773.132-3,Cliente Nuevo 19773132,"Avenida Apoquindo 3229, Santiago, Chile",2026-12-26,ORD-CL-202612-003507,96020,2026-12-31,La Florida
+17.184.732-5,Cliente Nuevo 17184732,"Avenida Macul 2833, Santiago, Chile",2026-12-17,ORD-CL-202612-002255,295708,2026-12-18,Puente Alto
+21.668.211-6,Cliente 21668211,"Calle Catedral 9848, Santiago, Chile",2026-12-03,ORD-CL-202612-000402,276727,2026-12-05,La Reina
+10.772.894-6,Cliente 10772894,"Avenida Pajaritos 1016, Santiago, Chile",2026-12-01,ORD-CL-202612-000208,107390,2026-12-03,San Miguel
+6.190.976-9,Cliente 6190976,"Calle Estado 9741, Santiago, Chile",2026-12-20,ORD-CL-202612-002672,268744,2026-12-24,La Reina
+8.823.811-3,Cliente 8823811,"Avenida Kennedy 7331, Santiago, Chile",2026-12-17,ORD-CL-202612-002215,107564,2026-12-18,Independencia
+15.112.652-8,Cliente Nuevo 15112652,"Avenida Santa Rosa 4704, Santiago, Chile",2026-12-25,ORD-CL-202612-003425,88049,2026-12-27,Lo Prado
+18.051.800-7,Cliente Nuevo 18051800,"Avenida Manuel Montt 5734, Santiago, Chile",2026-12-01,ORD-CL-202612-000061,91564,2026-12-03,Independencia
+13.477.983-5,Cliente Nuevo 13477983,"Avenida Grecia 6060, Santiago, Chile",2026-12-03,ORD-CL-202612-000383,137673,2026-12-06,Lo Prado
+12.699.080-4,Cliente Nuevo 12699080,"Avenida Irarrázaval 1789, Santiago, Chile",2026-12-28,ORD-CL-202612-003795,211008,2027-01-01,La Reina
+7.614.835-3,Cliente Nuevo 7614835,"Avenida Vitacura 8108, Santiago, Chile",2026-12-23,ORD-CL-202612-003087,142541,2026-12-26,Santiago
+16.530.563-1,Cliente Nuevo 16530563,"Calle Huérfanos 4870, Santiago, Chile",2026-12-26,ORD-CL-202612-003477,128780,2026-12-28,Providencia
+16.859.640-8,Cliente 16859640,"Avenida Vitacura 6410, Santiago, Chile",2026-12-08,ORD-CL-202612-000969,116088,2026-12-10,Puente Alto
+12.356.190-9,Cliente Nuevo 12356190,"Avenida Américo Vespucio 9821, Santiago, Chile",2026-12-06,ORD-CL-202612-000682,236474,2026-12-10,Santiago
+11.709.525-5,Cliente 11709525,"Calle Morandé 9705, Santiago, Chile",2026-12-13,ORD-CL-202612-001665,183227,2026-12-15,Quinta Normal
+17.191.258-0,Cliente 17191258,"Avenida Departamental 5698, Santiago, Chile",2026-12-15,ORD-CL-202612-001990,108670,2026-12-17,Santiago
+21.123.205-6,Cliente Nuevo 21123205,"Avenida Independencia 4789, Santiago, Chile",2026-12-15,ORD-CL-202612-001972,157086,2026-12-19,La Reina
+9.697.997-8,Cliente Nuevo 9697997,"Avenida Tobalaba 3092, Santiago, Chile",2026-12-07,ORD-CL-202612-000876,147483,2026-12-10,Independencia
+7.099.944-3,Cliente 7099944,"Avenida Pedro De Valdivia 2536, Santiago, Chile",2026-12-26,ORD-CL-202612-003542,258398,2026-12-29,Providencia
+17.875.000-0,Cliente 17875000,"Avenida Providencia 5716, Santiago, Chile",2026-12-13,ORD-CL-202612-001643,87945,2026-12-16,Las Condes
+10.056.138-1,Cliente 10056138,"Calle Morandé 1981, Santiago, Chile",2026-12-28,ORD-CL-202612-003697,277996,2026-12-30,San Miguel
+22.031.223-7,Cliente 22031223,"Calle Amunátegui 3146, Santiago, Chile",2026-12-02,ORD-CL-202612-000241,130629,2026-12-04,Las Condes
+13.395.227-9,Cliente 13395227,"Avenida Irarrázaval 1701, Santiago, Chile",2026-12-06,ORD-CL-202612-000675,148173,2026-12-08,Santiago
+14.182.415-3,Cliente Nuevo 14182415,"Avenida Vicuña Mackenna 2952, Santiago, Chile",2026-12-13,ORD-CL-202612-001553,177373,2026-12-16,Santiago
+8.823.811-3,Cliente 8823811,"Avenida Kennedy 7331, Santiago, Chile",2026-12-01,ORD-CL-202612-000009,187109,2026-12-03,Independencia
+18.358.564-5,Cliente Nuevo 18358564,"Avenida Vitacura 3943, Santiago, Chile",2026-12-13,ORD-CL-202612-001600,82424,2026-12-17,Santiago
+10.976.769-3,Cliente Nuevo 10976769,"Avenida Libertador Bernardo O'Higgins 8781, Santiago, Chile",2026-12-09,ORD-CL-202612-001087,186323,2026-12-13,Puente Alto
+11.714.785-7,Cliente Nuevo 11714785,"Avenida Matta 2703, Santiago, Chile",2026-12-28,ORD-CL-202612-003796,94267,2026-12-31,Puente Alto
+17.144.341-3,Cliente 17144341,"Calle Santo Domingo 1324, Santiago, Chile",2026-12-24,ORD-CL-202612-003212,153378,2026-12-26,Las Condes
+11.331.335-0,Cliente 11331335,"Avenida Vitacura 5004, Santiago, Chile",2026-12-24,ORD-CL-202612-003216,73085,2026-12-27,San Miguel
+16.263.178-2,Cliente Nuevo 16263178,"Calle Amunátegui 7235, Santiago, Chile",2026-12-15,ORD-CL-202612-001864,256255,2026-12-17,Quinta Normal
+22.796.237-0,Cliente Nuevo 22796237,"Calle Morandé 3192, Santiago, Chile",2026-12-10,ORD-CL-202612-001169,147452,2026-12-13,La Florida
+11.212.451-0,Cliente 11212451,"Avenida Américo Vespucio 2037, Santiago, Chile",2026-12-14,ORD-CL-202612-001733,116117,2026-12-19,Las Condes
+21.259.045-6,Cliente 21259045,"Avenida Pajaritos 7853, Santiago, Chile",2026-12-22,ORD-CL-202612-002854,57916,2026-12-25,Peñalolén
+14.683.119-6,Cliente Nuevo 14683119,"Avenida Departamental 820, Santiago, Chile",2026-12-23,ORD-CL-202612-002993,268378,2026-12-25,Puente Alto
+15.306.033-4,Cliente Nuevo 15306033,"Calle Compañía De Jesús 4417, Santiago, Chile",2026-12-24,ORD-CL-202612-003209,134296,2026-12-27,Independencia
+7.337.266-2,Cliente Nuevo 7337266,"Avenida Recoleta 5073, Santiago, Chile",2026-12-31,ORD-CL-202612-004155,307488,2027-01-02,Santiago
+8.336.332-0,Cliente Nuevo 8336332,"Avenida Manuel Montt 685, Santiago, Chile",2026-12-20,ORD-CL-202612-002712,103770,2026-12-24,Recoleta
+20.554.353-7,Cliente Nuevo 20554353,"Avenida Vitacura 7753, Santiago, Chile",2026-12-22,ORD-CL-202612-002943,296334,2026-12-24,Quinta Normal
+6.987.511-1,Cliente Nuevo 6987511,"Calle Merced 4984, Santiago, Chile",2026-12-15,ORD-CL-202612-001994,165833,2026-12-18,Santiago
+15.073.105-3,Cliente Nuevo 15073105,"Avenida La Florida 8463, Santiago, Chile",2026-12-06,ORD-CL-202612-000635,172095,2026-12-07,Estación Central
+15.290.073-0,Cliente 15290073,"Avenida La Florida 4055, Santiago, Chile",2026-12-06,ORD-CL-202612-000778,198533,2026-12-09,Puente Alto
+18.522.445-1,Cliente Nuevo 18522445,"Calle San Diego 4317, Santiago, Chile",2026-12-10,ORD-CL-202612-001216,144468,2026-12-13,La Reina
+14.192.154-3,Cliente Nuevo 14192154,"Calle Teatinos 1048, Santiago, Chile",2026-12-08,ORD-CL-202612-000892,112931,2026-12-10,Quinta Normal
+21.177.638-5,Cliente 21177638,"Avenida Pajaritos 1039, Santiago, Chile",2026-12-02,ORD-CL-202612-000240,216425,2026-12-05,La Florida
+15.010.840-6,Cliente 15010840,"Calle Amunátegui 5187, Santiago, Chile",2026-12-18,ORD-CL-202612-002373,108299,2026-12-20,Recoleta
+18.563.792-4,Cliente Nuevo 18563792,"Calle Arturo Prat 1108, Santiago, Chile",2026-12-23,ORD-CL-202612-003014,305613,2026-12-27,Independencia
+14.146.237-9,Cliente Nuevo 14146237,"Avenida Grecia 6845, Santiago, Chile",2026-12-17,ORD-CL-202612-002221,137485,2026-12-20,Santiago
+5.129.743-6,Cliente Nuevo 5129743,"Avenida Providencia 1433, Santiago, Chile",2026-12-02,ORD-CL-202612-000250,170966,2026-12-04,San Miguel
+5.621.030-0,Cliente Nuevo 5621030,"Calle Estado 7124, Santiago, Chile",2026-12-23,ORD-CL-202612-003064,222598,2026-12-25,Estación Central
+14.583.210-8,Cliente 14583210,"Avenida Pedro De Valdivia 3769, Santiago, Chile",2026-12-11,ORD-CL-202612-001285,204184,2026-12-13,San Miguel
+5.662.885-2,Cliente 5662885,"Calle Arturo Prat 9631, Santiago, Chile",2026-12-02,ORD-CL-202612-000235,155282,2026-12-05,Las Condes
+14.073.763-2,Cliente 14073763,"Calle Monjitas 403, Santiago, Chile",2026-12-01,ORD-CL-202612-000206,168346,2026-12-05,Recoleta
+6.765.812-7,Cliente 6765812,"Avenida Américo Vespucio 609, Santiago, Chile",2026-12-19,ORD-CL-202612-002393,161434,2026-12-21,Providencia
+9.763.970-0,Cliente 9763970,"Calle Bandera 9916, Santiago, Chile",2026-12-15,ORD-CL-202612-001953,201262,2026-12-18,Peñalolén
+10.902.419-0,Cliente 10902419,"Avenida Santa Rosa 3238, Santiago, Chile",2026-12-16,ORD-CL-202612-002060,123375,2026-12-18,La Florida
+13.826.430-9,Cliente Nuevo 13826430,"Avenida Mapocho 1366, Santiago, Chile",2026-12-28,ORD-CL-202612-003766,204067,2026-12-30,Recoleta
+8.700.812-9,Cliente 8700812,"Avenida Vitacura 8959, Santiago, Chile",2026-12-26,ORD-CL-202612-003493,56099,2026-12-27,La Reina
+13.905.591-0,Cliente Nuevo 13905591,"Avenida Irarrázaval 7578, Santiago, Chile",2026-12-16,ORD-CL-202612-002176,215530,2026-12-19,Providencia
+17.313.403-1,Cliente 17313403,"Avenida La Florida 7678, Santiago, Chile",2026-12-06,ORD-CL-202612-000645,133332,2026-12-08,Santiago
+9.689.641-2,Cliente Nuevo 9689641,"Avenida Tobalaba 2551, Santiago, Chile",2026-12-02,ORD-CL-202612-000233,86209,2026-12-06,Independencia
+11.969.299-2,Cliente Nuevo 11969299,"Avenida Vitacura 4042, Santiago, Chile",2026-12-16,ORD-CL-202612-002081,153177,2026-12-19,Peñalolén
+10.109.395-5,Cliente Nuevo 10109395,"Avenida Apoquindo 4985, Santiago, Chile",2026-12-03,ORD-CL-202612-000329,60167,2026-12-06,Santiago
+21.455.475-7,Cliente Nuevo 21455475,"Calle Teatinos 7534, Santiago, Chile",2026-12-26,ORD-CL-202612-003488,293149,2026-12-29,Recoleta
+20.759.906-8,Cliente Nuevo 20759906,"Avenida Tobalaba 402, Santiago, Chile",2026-12-06,ORD-CL-202612-000762,112679,2026-12-07,Lo Prado
+11.555.733-9,Cliente 11555733,"Calle Monjitas 6333, Santiago, Chile",2026-12-03,ORD-CL-202612-000281,53760,2026-12-04,Estación Central
+18.290.624-1,Cliente Nuevo 18290624,"Avenida Santa Rosa 3936, Santiago, Chile",2026-12-19,ORD-CL-202612-002438,94481,2026-12-21,Providencia
+7.932.926-3,Cliente 7932926,"Calle Estado 5553, Santiago, Chile",2026-12-03,ORD-CL-202612-000279,318213,2026-12-06,Puente Alto
+14.736.651-2,Cliente Nuevo 14736651,"Calle San Diego 2371, Santiago, Chile",2026-12-21,ORD-CL-202612-002766,195761,2026-12-23,Puente Alto
+5.621.030-0,Cliente Nuevo 5621030,"Calle Estado 7124, Santiago, Chile",2026-12-26,ORD-CL-202612-003531,129103,2026-12-30,Estación Central
+14.680.199-8,Cliente Nuevo 14680199,"Avenida Libertador Bernardo O'Higgins 6552, Santiago, Chile",2026-12-08,ORD-CL-202612-000964,314716,2026-12-11,Santiago
+14.422.899-8,Cliente 14422899,"Avenida Kennedy 6045, Santiago, Chile",2026-12-13,ORD-CL-202612-001654,99613,2026-12-15,Santiago
+5.805.164-9,Cliente Nuevo 5805164,"Avenida Departamental 4173, Santiago, Chile",2026-12-04,ORD-CL-202612-000492,131396,2026-12-05,La Reina
+6.503.837-5,Cliente Nuevo 6503837,"Gran Avenida José Miguel Carrera 7083, Santiago, Chile",2026-12-27,ORD-CL-202612-003647,188607,2026-12-30,Puente Alto
+17.524.226-2,Cliente 17524226,"Avenida Irarrázaval 3280, Santiago, Chile",2026-12-18,ORD-CL-202612-002334,72325,2026-12-20,Estación Central
+6.283.572-5,Cliente 6283572,"Avenida Américo Vespucio 2389, Santiago, Chile",2026-12-08,ORD-CL-202612-001009,247355,2026-12-09,Independencia
+11.291.344-8,Cliente Nuevo 11291344,"Calle Monjitas 5749, Santiago, Chile",2026-12-18,ORD-CL-202612-002372,159061,2026-12-20,Santiago
+7.453.887-1,Cliente Nuevo 7453887,"Avenida Macul 6581, Santiago, Chile",2026-12-19,ORD-CL-202612-002436,34204,2026-12-21,Providencia
+21.546.217-3,Cliente Nuevo 21546217,"Avenida Pedro De Valdivia 8264, Santiago, Chile",2026-12-01,ORD-CL-202612-000163,153079,2026-12-03,Puente Alto
+20.940.087-2,Cliente Nuevo 20940087,"Avenida Pajaritos 5193, Santiago, Chile",2026-12-19,ORD-CL-202612-002537,47861,2026-12-23,Santiago
+15.304.873-5,Cliente Nuevo 15304873,"Calle Arturo Prat 9820, Santiago, Chile",2026-12-03,ORD-CL-202612-000336,105015,2026-12-06,Lo Prado
+8.852.247-3,Cliente 8852247,"Calle Amunátegui 3636, Santiago, Chile",2026-12-14,ORD-CL-202612-001718,121721,2026-12-18,Independencia
+10.835.086-8,Cliente 10835086,"Calle Monjitas 4534, Santiago, Chile",2026-12-20,ORD-CL-202612-002693,115424,2026-12-22,Las Condes
+22.949.052-6,Cliente 22949052,"Avenida Kennedy 9275, Santiago, Chile",2026-12-31,ORD-CL-202612-004086,175136,2027-01-01,Estación Central
+11.547.340-3,Cliente 11547340,"Avenida La Florida 9375, Santiago, Chile",2026-12-17,ORD-CL-202612-002316,250257,2026-12-21,La Reina
+15.658.830-6,Cliente Nuevo 15658830,"Calle Teatinos 8353, Santiago, Chile",2026-12-16,ORD-CL-202612-002142,224108,2026-12-18,Peñalolén
+14.462.552-5,Cliente Nuevo 14462552,"Calle Morandé 5878, Santiago, Chile",2026-12-11,ORD-CL-202612-001296,189598,2026-12-13,Las Condes
+21.367.222-9,Cliente 21367222,"Avenida Américo Vespucio 439, Santiago, Chile",2026-12-09,ORD-CL-202612-001069,152653,2026-12-12,Recoleta
+17.735.075-3,Cliente Nuevo 17735075,"Calle San Antonio 9627, Santiago, Chile",2026-12-07,ORD-CL-202612-000837,155565,2026-12-09,Santiago
+13.866.087-3,Cliente Nuevo 13866087,"Avenida Departamental 9238, Santiago, Chile",2026-12-21,ORD-CL-202612-002744,90891,2026-12-22,Providencia
+12.817.209-1,Cliente 12817209,"Avenida Recoleta 532, Santiago, Chile",2026-12-22,ORD-CL-202612-002934,95840,2026-12-25,La Florida
+11.421.024-8,Cliente 11421024,"Gran Avenida José Miguel Carrera 2634, Santiago, Chile",2026-12-11,ORD-CL-202612-001287,154546,2026-12-13,Santiago
+17.760.400-9,Cliente 17760400,"Calle Monjitas 7634, Santiago, Chile",2026-12-08,ORD-CL-202612-000978,130165,2026-12-10,Santiago
+10.975.161-8,Cliente 10975161,"Avenida Kennedy 9263, Santiago, Chile",2026-12-09,ORD-CL-202612-001088,278499,2026-12-11,La Reina
+7.182.956-1,Cliente Nuevo 7182956,"Avenida Pajaritos 3514, Santiago, Chile",2026-12-13,ORD-CL-202612-001622,108230,2026-12-16,San Miguel
+16.936.113-2,Cliente 16936113,"Avenida Las Condes 6073, Santiago, Chile",2026-12-05,ORD-CL-202612-000537,118959,2026-12-07,Estación Central
+16.887.774-4,Cliente 16887774,"Calle Estado 4661, Santiago, Chile",2026-12-30,ORD-CL-202612-003958,88463,2027-01-02,Puente Alto
+10.703.244-7,Cliente 10703244,"Avenida Irarrázaval 2767, Santiago, Chile",2026-12-20,ORD-CL-202612-002644,100108,2026-12-24,Vitacura
+13.705.835-4,Cliente 13705835,"Calle Merced 99, Santiago, Chile",2026-12-10,ORD-CL-202612-001229,143374,2026-12-11,Independencia
+22.676.833-3,Cliente Nuevo 22676833,"Avenida Irarrázaval 515, Santiago, Chile",2026-12-15,ORD-CL-202612-001873,151982,2026-12-19,Lo Prado
+7.134.566-0,Cliente 7134566,"Calle San Antonio 3448, Santiago, Chile",2026-12-28,ORD-CL-202612-003783,119264,2027-01-01,Las Condes
+8.508.000-3,Cliente 8508000,"Avenida Las Condes 3917, Santiago, Chile",2026-12-23,ORD-CL-202612-003080,82960,2026-12-25,Puente Alto
+14.545.473-6,Cliente 14545473,"Avenida Grecia 6697, Santiago, Chile",2026-12-03,ORD-CL-202612-000298,50989,2026-12-05,San Miguel
+6.495.658-2,Cliente 6495658,"Avenida Tobalaba 9986, Santiago, Chile",2026-12-01,ORD-CL-202612-000039,54521,2026-12-03,Las Condes
+6.052.790-4,Cliente 6052790,"Avenida Tobalaba 5021, Santiago, Chile",2026-12-15,ORD-CL-202612-001878,74858,2026-12-18,Quinta Normal
+20.952.007-0,Cliente Nuevo 20952007,"Avenida Macul 7997, Santiago, Chile",2026-12-19,ORD-CL-202612-002545,175705,2026-12-23,Independencia
+8.729.039-9,Cliente 8729039,"Avenida Las Condes 4566, Santiago, Chile",2026-12-17,ORD-CL-202612-002307,98109,2026-12-19,Santiago
+20.538.144-4,Cliente Nuevo 20538144,"Calle Teatinos 3114, Santiago, Chile",2026-12-04,ORD-CL-202612-000410,260984,2026-12-06,Santiago
+18.370.362-7,Cliente Nuevo 18370362,"Avenida Libertador Bernardo O'Higgins 2384, Santiago, Chile",2026-12-03,ORD-CL-202612-000301,191776,2026-12-05,Independencia
+8.689.493-3,Cliente Nuevo 8689493,"Avenida Independencia 1993, Santiago, Chile",2026-12-16,ORD-CL-202612-002203,116369,2026-12-17,Santiago
+6.904.381-9,Cliente 6904381,"Avenida Libertador Bernardo O'Higgins 7273, Santiago, Chile",2026-12-07,ORD-CL-202612-000874,161360,2026-12-10,Santiago
+14.435.199-1,Cliente Nuevo 14435199,"Calle Catedral 5780, Santiago, Chile",2026-12-16,ORD-CL-202612-002073,122271,2026-12-20,Las Condes
+8.933.088-4,Cliente 8933088,"Avenida Santa Rosa 9972, Santiago, Chile",2026-12-29,ORD-CL-202612-003843,109964,2027-01-01,Providencia
+11.312.538-3,Cliente Nuevo 11312538,"Gran Avenida José Miguel Carrera 4470, Santiago, Chile",2026-12-31,ORD-CL-202612-004105,152674,2027-01-02,Puente Alto
+12.513.523-4,Cliente Nuevo 12513523,"Gran Avenida José Miguel Carrera 1905, Santiago, Chile",2026-12-12,ORD-CL-202612-001430,89084,2026-12-15,Independencia
+15.916.683-3,Cliente 15916683,"Calle Santo Domingo 1407, Santiago, Chile",2026-12-27,ORD-CL-202612-003609,49248,2026-12-29,La Florida
+11.677.416-6,Cliente 11677416,"Calle Morandé 1655, Santiago, Chile",2026-12-03,ORD-CL-202612-000282,135373,2026-12-05,Quinta Normal
+16.610.047-5,Cliente Nuevo 16610047,"Calle Morandé 6676, Santiago, Chile",2026-12-27,ORD-CL-202612-003602,164191,2026-12-31,Recoleta
+11.515.472-1,Cliente Nuevo 11515472,"Calle Arturo Prat 9926, Santiago, Chile",2026-12-08,ORD-CL-202612-001001,169561,2026-12-09,La Reina
+13.858.234-4,Cliente 13858234,"Calle Merced 8925, Santiago, Chile",2026-12-12,ORD-CL-202612-001514,136692,2026-12-14,Lo Prado
+20.921.479-4,Cliente 20921479,"Calle San Antonio 8635, Santiago, Chile",2026-12-10,ORD-CL-202612-001168,49015,2026-12-13,Independencia
+21.891.611-3,Cliente 21891611,"Calle Morandé 1682, Santiago, Chile",2026-12-06,ORD-CL-202612-000647,35295,2026-12-08,Lo Prado
+8.370.123-6,Cliente Nuevo 8370123,"Calle Santo Domingo 2882, Santiago, Chile",2026-12-30,ORD-CL-202612-003955,183617,2026-12-31,Lo Prado
+16.776.894-4,Cliente 16776894,"Calle Bandera 9307, Santiago, Chile",2026-12-25,ORD-CL-202612-003416,249603,2026-12-28,Estación Central
+8.440.511-5,Cliente Nuevo 8440511,"Avenida Pajaritos 5711, Santiago, Chile",2026-12-17,ORD-CL-202612-002226,76088,2026-12-19,Quinta Normal
+20.510.095-7,Cliente Nuevo 20510095,"Avenida Libertador Bernardo O'Higgins 5771, Santiago, Chile",2026-12-22,ORD-CL-202612-002882,82375,2026-12-25,Santiago
+17.289.204-6,Cliente Nuevo 17289204,"Avenida Libertador Bernardo O'Higgins 5990, Santiago, Chile",2026-12-10,ORD-CL-202612-001240,127695,2026-12-12,Lo Prado
+14.417.563-0,Cliente 14417563,"Gran Avenida José Miguel Carrera 2906, Santiago, Chile",2026-12-19,ORD-CL-202612-002506,226748,2026-12-22,Santiago
+15.893.864-7,Cliente 15893864,"Gran Avenida José Miguel Carrera 572, Santiago, Chile",2026-12-25,ORD-CL-202612-003306,207076,2026-12-28,Recoleta
+22.288.705-4,Cliente 22288705,"Avenida Independencia 6700, Santiago, Chile",2026-12-20,ORD-CL-202612-002679,62883,2026-12-22,Quinta Normal
+11.560.240-5,Cliente Nuevo 11560240,"Avenida Independencia 7786, Santiago, Chile",2026-12-31,ORD-CL-202612-004145,130916,2027-01-02,San Miguel
+15.022.998-1,Cliente 15022998,"Avenida Providencia 1687, Santiago, Chile",2026-12-01,ORD-CL-202612-000033,99454,2026-12-02,La Reina
+20.736.036-0,Cliente Nuevo 20736036,"Calle Santo Domingo 650, Santiago, Chile",2026-12-21,ORD-CL-202612-002736,235013,2026-12-23,Estación Central
+18.148.969-2,Cliente 18148969,"Calle San Antonio 448, Santiago, Chile",2026-12-25,ORD-CL-202612-003347,90477,2026-12-29,Vitacura
+22.223.430-0,Cliente 22223430,"Avenida Tobalaba 8047, Santiago, Chile",2026-12-17,ORD-CL-202612-002272,111677,2026-12-19,La Florida
+16.946.891-7,Cliente 16946891,"Avenida Pajaritos 7516, Santiago, Chile",2026-12-10,ORD-CL-202612-001227,108773,2026-12-14,Santiago
+10.474.635-6,Cliente Nuevo 10474635,"Avenida Las Condes 3624, Santiago, Chile",2026-12-20,ORD-CL-202612-002718,117417,2026-12-22,Independencia
+15.199.393-7,Cliente Nuevo 15199393,"Avenida Irarrázaval 1804, Santiago, Chile",2026-12-04,ORD-CL-202612-000425,199232,2026-12-06,Santiago
+7.815.509-7,Cliente Nuevo 7815509,"Avenida Tobalaba 803, Santiago, Chile",2026-12-30,ORD-CL-202612-003993,142123,2027-01-01,La Reina
+14.150.753-1,Cliente Nuevo 14150753,"Calle Amunátegui 144, Santiago, Chile",2026-12-05,ORD-CL-202612-000551,83921,2026-12-07,Santiago
+14.946.610-7,Cliente Nuevo 14946610,"Avenida Departamental 2933, Santiago, Chile",2026-12-09,ORD-CL-202612-001084,254903,2026-12-13,Lo Prado
+21.221.403-9,Cliente Nuevo 21221403,"Calle Huérfanos 2937, Santiago, Chile",2026-12-04,ORD-CL-202612-000473,78094,2026-12-07,Providencia
+19.979.903-0,Cliente 19979903,"Avenida Las Condes 6919, Santiago, Chile",2026-12-27,ORD-CL-202612-003645,145673,2026-12-30,Las Condes
+10.332.125-2,Cliente 10332125,"Avenida Grecia 5268, Santiago, Chile",2026-12-04,ORD-CL-202612-000439,207746,2026-12-06,La Florida
+5.766.336-6,Cliente Nuevo 5766336,"Calle Catedral 2585, Santiago, Chile",2026-12-23,ORD-CL-202612-003041,128716,2026-12-25,La Florida
+5.880.401-0,Cliente Nuevo 5880401,"Avenida Departamental 8230, Santiago, Chile",2026-12-31,ORD-CL-202612-004059,158516,2027-01-04,Santiago
+13.857.481-2,Cliente 13857481,"Avenida Vitacura 8614, Santiago, Chile",2026-12-06,ORD-CL-202612-000637,244622,2026-12-10,Puente Alto
+15.732.982-0,Cliente Nuevo 15732982,"Avenida Providencia 1929, Santiago, Chile",2026-12-10,ORD-CL-202612-001116,105714,2026-12-14,La Reina
+18.961.378-1,Cliente 18961378,"Avenida Pedro De Valdivia 2479, Santiago, Chile",2026-12-10,ORD-CL-202612-001155,87134,2026-12-13,Las Condes
+15.251.296-7,Cliente 15251296,"Avenida Providencia 4309, Santiago, Chile",2026-12-19,ORD-CL-202612-002478,148599,2026-12-21,Santiago
+7.144.201-2,Cliente Nuevo 7144201,"Avenida Vicuña Mackenna 3988, Santiago, Chile",2026-12-07,ORD-CL-202612-000863,104032,2026-12-09,La Reina
+15.682.716-5,Cliente 15682716,"Avenida Vicuña Mackenna 7595, Santiago, Chile",2026-12-22,ORD-CL-202612-002940,81288,2026-12-24,Puente Alto
+18.535.055-4,Cliente 18535055,"Avenida Providencia 8811, Santiago, Chile",2026-12-11,ORD-CL-202612-001405,79101,2026-12-16,Santiago
+5.539.930-3,Cliente 5539930,"Avenida Macul 6617, Santiago, Chile",2026-12-07,ORD-CL-202612-000834,291262,2026-12-09,San Miguel
+12.998.113-8,Cliente 12998113,"Avenida Pajaritos 2544, Santiago, Chile",2026-12-21,ORD-CL-202612-002816,67292,2026-12-26,Las Condes
+20.499.691-9,Cliente 20499691,"Avenida Manuel Montt 4307, Santiago, Chile",2026-12-19,ORD-CL-202612-002598,210158,2026-12-22,San Miguel
+14.741.684-1,Cliente Nuevo 14741684,"Avenida Santa Rosa 1070, Santiago, Chile",2026-12-26,ORD-CL-202612-003494,311904,2026-12-30,La Reina
+14.918.958-0,Cliente Nuevo 14918958,"Avenida Apoquindo 3829, Santiago, Chile",2026-12-09,ORD-CL-202612-001082,200083,2026-12-11,La Florida
+22.213.914-5,Cliente 22213914,"Avenida Tobalaba 6778, Santiago, Chile",2026-12-16,ORD-CL-202612-002071,146678,2026-12-18,Las Condes
+6.843.079-6,Cliente Nuevo 6843079,"Calle Arturo Prat 1596, Santiago, Chile",2026-12-30,ORD-CL-202612-004005,97237,2027-01-01,Independencia
+13.168.967-9,Cliente Nuevo 13168967,"Avenida Recoleta 6597, Santiago, Chile",2026-12-09,ORD-CL-202612-001029,165667,2026-12-10,La Reina
+9.177.486-1,Cliente 9177486,"Calle Merced 896, Santiago, Chile",2026-12-26,ORD-CL-202612-003466,216753,2026-12-28,Lo Prado
+16.399.358-6,Cliente 16399358,"Avenida Providencia 4275, Santiago, Chile",2026-12-01,ORD-CL-202612-000209,178265,2026-12-03,Las Condes
+8.185.637-4,Cliente 8185637,"Calle Santo Domingo 1982, Santiago, Chile",2026-12-03,ORD-CL-202612-000379,95366,2026-12-07,Estación Central
+16.240.089-1,Cliente Nuevo 16240089,"Calle Monjitas 3007, Santiago, Chile",2026-12-19,ORD-CL-202612-002599,201585,2026-12-23,Estación Central
+8.880.850-4,Cliente Nuevo 8880850,"Avenida Apoquindo 6717, Santiago, Chile",2026-12-30,ORD-CL-202612-003903,114939,2027-01-01,Santiago
+15.437.407-1,Cliente Nuevo 15437407,"Calle Santo Domingo 6677, Santiago, Chile",2026-12-25,ORD-CL-202612-003398,241170,2026-12-27,Quinta Normal
+9.214.610-0,Cliente Nuevo 9214610,"Calle Bandera 4115, Santiago, Chile",2026-12-10,ORD-CL-202612-001134,257348,2026-12-12,Santiago
+6.219.949-0,Cliente 6219949,"Calle Morandé 1976, Santiago, Chile",2026-12-01,ORD-CL-202612-000181,172274,2026-12-04,Puente Alto
+9.347.581-0,Cliente Nuevo 9347581,"Calle Morandé 6751, Santiago, Chile",2026-12-01,ORD-CL-202612-000015,229269,2026-12-03,Estación Central
+14.333.549-2,Cliente 14333549,"Avenida Mapocho 5663, Santiago, Chile",2026-12-11,ORD-CL-202612-001367,173563,2026-12-13,Santiago
+9.054.161-7,Cliente Nuevo 9054161,"Avenida Américo Vespucio 382, Santiago, Chile",2026-12-24,ORD-CL-202612-003159,197492,2026-12-26,Santiago
+20.320.279-3,Cliente Nuevo 20320279,"Calle San Antonio 2616, Santiago, Chile",2026-12-05,ORD-CL-202612-000536,165498,2026-12-08,La Florida
+16.557.205-7,Cliente 16557205,"Calle Arturo Prat 4440, Santiago, Chile",2026-12-19,ORD-CL-202612-002610,182983,2026-12-21,San Miguel
+20.319.081-6,Cliente 20319081,"Avenida Grecia 1341, Santiago, Chile",2026-12-09,ORD-CL-202612-001073,48801,2026-12-11,La Florida
+14.106.311-8,Cliente Nuevo 14106311,"Calle Huérfanos 6206, Santiago, Chile",2026-12-31,ORD-CL-202612-004015,149344,2027-01-02,Santiago
+20.394.144-0,Cliente Nuevo 20394144,"Avenida Vitacura 657, Santiago, Chile",2026-12-23,ORD-CL-202612-003037,66831,2026-12-26,Puente Alto
+17.282.729-7,Cliente Nuevo 17282729,"Avenida Matta 3990, Santiago, Chile",2026-12-14,ORD-CL-202612-001810,85439,2026-12-16,La Reina
+21.934.490-7,Cliente Nuevo 21934490,"Avenida Apoquindo 2899, Santiago, Chile",2026-12-17,ORD-CL-202612-002260,94277,2026-12-19,La Florida
+20.328.731-5,Cliente Nuevo 20328731,"Avenida Pajaritos 9996, Santiago, Chile",2026-12-22,ORD-CL-202612-002891,139608,2026-12-25,Las Condes
+21.052.671-9,Cliente Nuevo 21052671,"Calle San Diego 7949, Santiago, Chile",2026-12-14,ORD-CL-202612-001752,314523,2026-12-16,San Miguel
+8.386.917-5,Cliente 8386917,"Avenida Macul 2467, Santiago, Chile",2026-12-17,ORD-CL-202612-002298,151402,2026-12-20,Vitacura
+20.473.461-3,Cliente Nuevo 20473461,"Avenida Libertador Bernardo O'Higgins 1672, Santiago, Chile",2026-12-01,ORD-CL-202612-000040,61345,2026-12-04,Peñalolén
+13.518.732-9,Cliente 13518732,"Avenida Independencia 6485, Santiago, Chile",2026-12-30,ORD-CL-202612-004003,141133,2027-01-01,La Florida
+8.140.990-3,Cliente Nuevo 8140990,"Gran Avenida José Miguel Carrera 9042, Santiago, Chile",2026-12-29,ORD-CL-202612-003873,79613,2026-12-31,San Miguel
+22.683.270-6,Cliente Nuevo 22683270,"Calle San Antonio 1640, Santiago, Chile",2026-12-27,ORD-CL-202612-003618,242562,2026-12-31,San Miguel
+15.088.834-8,Cliente 15088834,"Avenida Departamental 7737, Santiago, Chile",2026-12-22,ORD-CL-202612-002831,140612,2026-12-24,San Miguel
+17.817.197-1,Cliente Nuevo 17817197,"Avenida Santa Rosa 5280, Santiago, Chile",2026-12-05,ORD-CL-202612-000611,74604,2026-12-08,Santiago
+14.772.588-5,Cliente Nuevo 14772588,"Avenida Departamental 5011, Santiago, Chile",2026-12-17,ORD-CL-202612-002235,90474,2026-12-21,Independencia
+17.547.435-3,Cliente Nuevo 17547435,"Avenida Irarrázaval 2033, Santiago, Chile",2026-12-01,ORD-CL-202612-000148,121313,2026-12-03,Santiago
+12.235.504-7,Cliente 12235504,"Avenida Kennedy 7107, Santiago, Chile",2026-12-25,ORD-CL-202612-003419,140601,2026-12-27,Santiago
+12.021.434-2,Cliente 12021434,"Avenida Matta 5146, Santiago, Chile",2026-12-12,ORD-CL-202612-001513,155191,2026-12-15,Santiago
+19.808.241-8,Cliente Nuevo 19808241,"Avenida Pajaritos 391, Santiago, Chile",2026-12-18,ORD-CL-202612-002386,176924,2026-12-20,La Florida
+21.331.931-3,Cliente 21331931,"Calle Morandé 1038, Santiago, Chile",2026-12-17,ORD-CL-202612-002264,44113,2026-12-21,Independencia
+16.426.911-9,Cliente Nuevo 16426911,"Avenida Independencia 2471, Santiago, Chile",2026-12-05,ORD-CL-202612-000607,144450,2026-12-07,Santiago
+6.473.155-6,Cliente 6473155,"Avenida Matta 306, Santiago, Chile",2026-12-14,ORD-CL-202612-001761,126458,2026-12-17,Lo Prado
+6.438.229-6,Cliente 6438229,"Calle Merced 6576, Santiago, Chile",2026-12-05,ORD-CL-202612-000523,74778,2026-12-07,Puente Alto
+21.961.796-1,Cliente Nuevo 21961796,"Avenida Tobalaba 7018, Santiago, Chile",2026-12-01,ORD-CL-202612-000172,160962,2026-12-04,Peñalolén
+9.314.676-1,Cliente Nuevo 9314676,"Calle Estado 2897, Santiago, Chile",2026-12-11,ORD-CL-202612-001263,102147,2026-12-13,La Florida
+13.203.400-0,Cliente Nuevo 13203400,"Avenida Libertador Bernardo O'Higgins 4295, Santiago, Chile",2026-12-12,ORD-CL-202612-001494,249911,2026-12-16,Puente Alto
+15.246.269-4,Cliente Nuevo 15246269,"Avenida Mapocho 8992, Santiago, Chile",2026-12-24,ORD-CL-202612-003261,238806,2026-12-28,Las Condes
+18.007.218-7,Cliente Nuevo 18007218,"Avenida La Florida 5134, Santiago, Chile",2026-12-31,ORD-CL-202612-004058,67624,2027-01-04,La Reina
+13.594.672-8,Cliente Nuevo 13594672,"Avenida Macul 2271, Santiago, Chile",2026-12-01,ORD-CL-202612-000164,297993,2026-12-04,Peñalolén
+10.563.960-1,Cliente Nuevo 10563960,"Calle Teatinos 2098, Santiago, Chile",2026-12-12,ORD-CL-202612-001466,216776,2026-12-14,San Miguel
+20.528.123-3,Cliente 20528123,"Avenida Grecia 3746, Santiago, Chile",2026-12-07,ORD-CL-202612-000861,211322,2026-12-10,Peñalolén
+19.437.090-9,Cliente Nuevo 19437090,"Avenida Apoquindo 1470, Santiago, Chile",2026-12-21,ORD-CL-202612-002794,133637,2026-12-23,Santiago
+8.672.977-1,Cliente 8672977,"Calle Amunátegui 9635, Santiago, Chile",2026-12-31,ORD-CL-202612-004142,55092,2027-01-03,Santiago
+20.329.309-9,Cliente Nuevo 20329309,"Calle Catedral 6899, Santiago, Chile",2026-12-21,ORD-CL-202612-002732,115379,2026-12-23,Independencia
+16.805.473-9,Cliente Nuevo 16805473,"Calle Santo Domingo 406, Santiago, Chile",2026-12-04,ORD-CL-202612-000422,126409,2026-12-08,Santiago
+22.759.622-2,Cliente 22759622,"Avenida Matta 5603, Santiago, Chile",2026-12-12,ORD-CL-202612-001449,282752,2026-12-15,La Reina
+8.328.717-3,Cliente 8328717,"Avenida Las Condes 7602, Santiago, Chile",2026-12-24,ORD-CL-202612-003196,127888,2026-12-25,La Florida
+12.379.080-7,Cliente Nuevo 12379080,"Calle San Diego 785, Santiago, Chile",2026-12-17,ORD-CL-202612-002294,152768,2026-12-19,Santiago
+22.718.662-4,Cliente 22718662,"Calle Estado 7755, Santiago, Chile",2026-12-27,ORD-CL-202612-003622,85440,2026-12-30,Estación Central
+8.823.811-3,Cliente 8823811,"Avenida Kennedy 7331, Santiago, Chile",2026-12-27,ORD-CL-202612-003583,154012,2026-12-29,Independencia
+20.360.998-8,Cliente Nuevo 20360998,"Calle Teatinos 7159, Santiago, Chile",2026-12-29,ORD-CL-202612-003855,98415,2027-01-02,Peñalolén
+21.430.599-5,Cliente 21430599,"Calle Teatinos 813, Santiago, Chile",2026-12-19,ORD-CL-202612-002543,141631,2026-12-23,La Florida
+15.275.177-6,Cliente Nuevo 15275177,"Calle Teatinos 7543, Santiago, Chile",2026-12-23,ORD-CL-202612-003070,164564,2026-12-25,La Florida
+5.628.536-3,Cliente Nuevo 5628536,"Calle Teatinos 7030, Santiago, Chile",2026-12-06,ORD-CL-202612-000634,117641,2026-12-08,Santiago
+15.983.093-8,Cliente 15983093,"Calle Compañía De Jesús 8561, Santiago, Chile",2026-12-08,ORD-CL-202612-000970,139293,2026-12-11,Providencia
+15.275.177-6,Cliente Nuevo 15275177,"Calle Teatinos 7543, Santiago, Chile",2026-12-29,ORD-CL-202612-003851,299554,2027-01-02,La Florida
+8.336.332-0,Cliente Nuevo 8336332,"Avenida Manuel Montt 685, Santiago, Chile",2026-12-06,ORD-CL-202612-000666,171562,2026-12-09,Recoleta
+5.882.244-8,Cliente Nuevo 5882244,"Calle Merced 8895, Santiago, Chile",2026-12-25,ORD-CL-202612-003277,108026,2026-12-29,Quinta Normal
+9.554.867-4,Cliente 9554867,"Avenida Tobalaba 5752, Santiago, Chile",2026-12-25,ORD-CL-202612-003321,66867,2026-12-28,Santiago
+8.738.877-8,Cliente 8738877,"Avenida Tobalaba 7259, Santiago, Chile",2026-12-06,ORD-CL-202612-000726,276828,2026-12-08,Santiago
+9.680.586-0,Cliente 9680586,"Calle Huérfanos 8101, Santiago, Chile",2026-12-27,ORD-CL-202612-003611,219624,2026-12-30,San Miguel
+19.331.820-7,Cliente Nuevo 19331820,"Avenida Independencia 2414, Santiago, Chile",2026-12-13,ORD-CL-202612-001689,99321,2026-12-15,San Miguel
+5.875.859-6,Cliente 5875859,"Avenida Manuel Montt 5607, Santiago, Chile",2026-12-01,ORD-CL-202612-000102,137624,2026-12-06,Las Condes
+14.077.834-4,Cliente 14077834,"Calle San Diego 9330, Santiago, Chile",2026-12-06,ORD-CL-202612-000735,111988,2026-12-08,Lo Prado
+16.274.233-1,Cliente Nuevo 16274233,"Avenida Grecia 1105, Santiago, Chile",2026-12-23,ORD-CL-202612-003017,132406,2026-12-26,Santiago
+12.210.986-5,Cliente 12210986,"Avenida Providencia 5225, Santiago, Chile",2026-12-11,ORD-CL-202612-001361,289118,2026-12-15,Las Condes
+15.092.333-2,Cliente 15092333,"Avenida Recoleta 33, Santiago, Chile",2026-12-24,ORD-CL-202612-003205,263900,2026-12-27,Santiago
+14.233.701-5,Cliente 14233701,"Avenida Libertador Bernardo O'Higgins 2588, Santiago, Chile",2026-12-13,ORD-CL-202612-001687,136263,2026-12-14,Lo Prado
+17.984.108-4,Cliente 17984108,"Calle Arturo Prat 6826, Santiago, Chile",2026-12-25,ORD-CL-202612-003286,182650,2026-12-28,Santiago
+22.679.223-0,Cliente Nuevo 22679223,"Calle Teatinos 3214, Santiago, Chile",2026-12-28,ORD-CL-202612-003780,276382,2026-12-31,Lo Prado
+11.735.042-7,Cliente 11735042,"Avenida Vicuña Mackenna 2305, Santiago, Chile",2026-12-26,ORD-CL-202612-003540,159599,2026-12-28,Recoleta
+13.730.612-4,Cliente Nuevo 13730612,"Calle Teatinos 1095, Santiago, Chile",2026-12-23,ORD-CL-202612-003011,158049,2026-12-26,Puente Alto
+11.110.125-3,Cliente Nuevo 11110125,"Avenida Grecia 7712, Santiago, Chile",2026-12-29,ORD-CL-202612-003842,59555,2026-12-31,Recoleta
+12.417.413-1,Cliente Nuevo 12417413,"Avenida Tobalaba 1937, Santiago, Chile",2026-12-08,ORD-CL-202612-001017,109400,2026-12-10,Recoleta
+8.438.148-8,Cliente Nuevo 8438148,"Avenida Kennedy 6569, Santiago, Chile",2026-12-31,ORD-CL-202612-004048,200928,2027-01-02,La Reina
+6.846.068-6,Cliente 6846068,"Avenida Irarrázaval 4486, Santiago, Chile",2026-12-06,ORD-CL-202612-000653,151182,2026-12-08,Estación Central
+13.651.938-0,Cliente 13651938,"Calle Morandé 1676, Santiago, Chile",2026-12-24,ORD-CL-202612-003226,135002,2026-12-27,Quinta Normal
+16.302.192-8,Cliente 16302192,"Calle Bandera 5901, Santiago, Chile",2026-12-22,ORD-CL-202612-002873,97035,2026-12-24,La Florida
+21.956.641-1,Cliente 21956641,"Gran Avenida José Miguel Carrera 1848, Santiago, Chile",2026-12-04,ORD-CL-202612-000443,184459,2026-12-07,Recoleta
+14.458.746-3,Cliente Nuevo 14458746,"Avenida Kennedy 9107, Santiago, Chile",2026-12-13,ORD-CL-202612-001567,159772,2026-12-15,Recoleta
+13.924.812-6,Cliente Nuevo 13924812,"Calle Catedral 4984, Santiago, Chile",2026-12-27,ORD-CL-202612-003573,186925,2026-12-30,Puente Alto
+22.449.774-2,Cliente Nuevo 22449774,"Avenida Pajaritos 6316, Santiago, Chile",2026-12-01,ORD-CL-202612-000159,256738,2026-12-05,Providencia
+12.008.527-5,Cliente 12008527,"Calle Arturo Prat 746, Santiago, Chile",2026-12-26,ORD-CL-202612-003517,169539,2026-12-28,Santiago
+7.702.641-0,Cliente Nuevo 7702641,"Calle Monjitas 6796, Santiago, Chile",2026-12-15,ORD-CL-202612-001928,167029,2026-12-17,San Miguel
+10.353.880-5,Cliente Nuevo 10353880,"Avenida Departamental 88, Santiago, Chile",2026-12-08,ORD-CL-202612-000912,129442,2026-12-10,Santiago
+13.418.713-8,Cliente 13418713,"Calle Merced 6655, Santiago, Chile",2026-12-07,ORD-CL-202612-000818,119568,2026-12-09,Vitacura
+20.933.898-9,Cliente Nuevo 20933898,"Avenida Libertador Bernardo O'Higgins 3088, Santiago, Chile",2026-12-25,ORD-CL-202612-003345,232361,2026-12-27,Puente Alto
+5.775.258-5,Cliente Nuevo 5775258,"Avenida Macul 922, Santiago, Chile",2026-12-15,ORD-CL-202612-001886,178832,2026-12-17,Santiago
+6.899.786-1,Cliente 6899786,"Calle Merced 6738, Santiago, Chile",2026-12-12,ORD-CL-202612-001433,231066,2026-12-15,Lo Prado
+15.902.183-1,Cliente Nuevo 15902183,"Calle Arturo Prat 3692, Santiago, Chile",2026-12-10,ORD-CL-202612-001251,129623,2026-12-12,Estación Central
+13.395.410-0,Cliente Nuevo 13395410,"Calle San Antonio 12, Santiago, Chile",2026-12-25,ORD-CL-202612-003361,167208,2026-12-29,Estación Central
+16.029.558-0,Cliente Nuevo 16029558,"Avenida Matta 5475, Santiago, Chile",2026-12-24,ORD-CL-202612-003258,186252,2026-12-27,La Florida
+12.172.627-6,Cliente Nuevo 12172627,"Calle San Diego 9161, Santiago, Chile",2026-12-27,ORD-CL-202612-003569,131444,2026-12-31,Recoleta
+22.547.461-3,Cliente 22547461,"Avenida Irarrázaval 5222, Santiago, Chile",2026-12-08,ORD-CL-202612-000933,139006,2026-12-10,Vitacura
+19.802.533-2,Cliente Nuevo 19802533,"Calle Arturo Prat 8711, Santiago, Chile",2026-12-08,ORD-CL-202612-000914,104005,2026-12-11,La Florida
+11.044.319-2,Cliente Nuevo 11044319,"Calle Bandera 7702, Santiago, Chile",2026-12-01,ORD-CL-202612-000097,239385,2026-12-04,Santiago
+11.766.836-3,Cliente 11766836,"Avenida Kennedy 5469, Santiago, Chile",2026-12-20,ORD-CL-202612-002704,176202,2026-12-22,Santiago
+11.020.094-5,Cliente Nuevo 11020094,"Avenida Vitacura 9378, Santiago, Chile",2026-12-07,ORD-CL-202612-000792,157683,2026-12-09,Santiago
+20.270.464-3,Cliente Nuevo 20270464,"Calle Amunátegui 4564, Santiago, Chile",2026-12-13,ORD-CL-202612-001633,128591,2026-12-16,Estación Central
+12.550.331-9,Cliente 12550331,"Avenida Macul 6773, Santiago, Chile",2026-12-11,ORD-CL-202612-001345,290890,2026-12-14,Estación Central
+16.038.629-9,Cliente Nuevo 16038629,"Calle Morandé 1319, Santiago, Chile",2026-12-10,ORD-CL-202612-001142,99311,2026-12-13,Estación Central
+10.813.137-3,Cliente Nuevo 10813137,"Avenida Santa Rosa 6309, Santiago, Chile",2026-12-26,ORD-CL-202612-003541,185011,2026-12-28,Santiago
+7.554.754-9,Cliente Nuevo 7554754,"Calle Compañía De Jesús 7238, Santiago, Chile",2026-12-03,ORD-CL-202612-000285,131646,2026-12-04,Puente Alto
+8.156.680-3,Cliente Nuevo 8156680,"Avenida Las Condes 6476, Santiago, Chile",2026-12-24,ORD-CL-202612-003168,302227,2026-12-26,Peñalolén
+6.782.303-1,Cliente Nuevo 6782303,"Avenida Tobalaba 7894, Santiago, Chile",2026-12-31,ORD-CL-202612-004096,270089,2027-01-03,Estación Central
+19.948.802-5,Cliente Nuevo 19948802,"Avenida Providencia 7581, Santiago, Chile",2026-12-12,ORD-CL-202612-001439,136876,2026-12-16,Independencia
+5.445.822-5,Cliente 5445822,"Avenida Kennedy 7355, Santiago, Chile",2026-12-20,ORD-CL-202612-002628,148482,2026-12-22,Lo Prado
+22.873.493-4,Cliente Nuevo 22873493,"Avenida Libertador Bernardo O'Higgins 3074, Santiago, Chile",2026-12-16,ORD-CL-202612-002087,100260,2026-12-20,La Reina
+12.334.420-8,Cliente Nuevo 12334420,"Calle Teatinos 7022, Santiago, Chile",2026-12-13,ORD-CL-202612-001638,101202,2026-12-17,Providencia
+14.683.119-6,Cliente Nuevo 14683119,"Avenida Departamental 820, Santiago, Chile",2026-12-21,ORD-CL-202612-002784,134495,2026-12-23,Puente Alto
+17.875.000-0,Cliente 17875000,"Avenida Providencia 5716, Santiago, Chile",2026-12-26,ORD-CL-202612-003456,296232,2026-12-28,Las Condes
+8.370.123-6,Cliente Nuevo 8370123,"Calle Santo Domingo 2882, Santiago, Chile",2026-12-29,ORD-CL-202612-003883,193410,2027-01-01,Lo Prado
+15.003.737-9,Cliente 15003737,"Avenida Las Condes 7420, Santiago, Chile",2026-12-11,ORD-CL-202612-001357,72199,2026-12-13,Providencia
+19.513.768-2,Cliente Nuevo 19513768,"Calle Estado 238, Santiago, Chile",2026-12-01,ORD-CL-202612-000114,110928,2026-12-04,Santiago
+10.046.343-7,Cliente 10046343,"Avenida Las Condes 6181, Santiago, Chile",2026-12-28,ORD-CL-202612-003728,279176,2026-12-31,Santiago
+7.836.410-2,Cliente 7836410,"Avenida Irarrázaval 3179, Santiago, Chile",2026-12-09,ORD-CL-202612-001070,109260,2026-12-12,Estación Central
+19.429.781-7,Cliente 19429781,"Calle Arturo Prat 6209, Santiago, Chile",2026-12-31,ORD-CL-202612-004030,71435,2027-01-02,Independencia
+10.813.137-3,Cliente Nuevo 10813137,"Avenida Santa Rosa 6309, Santiago, Chile",2026-12-18,ORD-CL-202612-002379,90754,2026-12-20,Santiago
+20.320.279-3,Cliente Nuevo 20320279,"Calle San Antonio 2616, Santiago, Chile",2026-12-28,ORD-CL-202612-003776,203281,2026-12-31,La Florida
+20.757.511-0,Cliente 20757511,"Avenida Vicuña Mackenna 154, Santiago, Chile",2026-12-01,ORD-CL-202612-000157,47974,2026-12-02,Recoleta
+19.246.133-9,Cliente Nuevo 19246133,"Avenida Mapocho 4083, Santiago, Chile",2026-12-04,ORD-CL-202612-000445,182380,2026-12-06,La Florida
+22.327.426-5,Cliente Nuevo 22327426,"Avenida Pajaritos 9448, Santiago, Chile",2026-12-19,ORD-CL-202612-002444,87596,2026-12-23,Independencia
+21.847.476-9,Cliente Nuevo 21847476,"Avenida Santa Rosa 5600, Santiago, Chile",2026-12-14,ORD-CL-202612-001780,93979,2026-12-19,Vitacura
+16.445.432-1,Cliente Nuevo 16445432,"Avenida Santa Rosa 8652, Santiago, Chile",2026-12-11,ORD-CL-202612-001416,156360,2026-12-15,Peñalolén
+13.613.198-1,Cliente 13613198,"Gran Avenida José Miguel Carrera 2252, Santiago, Chile",2026-12-23,ORD-CL-202612-002985,93591,2026-12-25,Lo Prado
+22.655.290-1,Cliente 22655290,"Avenida Tobalaba 3853, Santiago, Chile",2026-12-24,ORD-CL-202612-003222,102457,2026-12-27,Independencia
+16.589.779-7,Cliente Nuevo 16589779,"Avenida Apoquindo 1918, Santiago, Chile",2026-12-29,ORD-CL-202612-003819,296323,2027-01-01,Independencia
+5.263.848-4,Cliente Nuevo 5263848,"Avenida Manuel Montt 8828, Santiago, Chile",2026-12-14,ORD-CL-202612-001788,216490,2026-12-16,Santiago
+14.533.846-0,Cliente 14533846,"Calle Compañía De Jesús 7738, Santiago, Chile",2026-12-19,ORD-CL-202612-002484,114589,2026-12-22,Peñalolén
+5.178.125-8,Cliente Nuevo 5178125,"Avenida Mapocho 5094, Santiago, Chile",2026-12-16,ORD-CL-202612-002095,196927,2026-12-17,La Reina
+8.582.936-2,Cliente Nuevo 8582936,"Calle Catedral 9540, Santiago, Chile",2026-12-04,ORD-CL-202612-000474,282516,2026-12-08,La Reina
+15.893.864-7,Cliente 15893864,"Gran Avenida José Miguel Carrera 572, Santiago, Chile",2026-12-13,ORD-CL-202612-001578,138024,2026-12-17,Recoleta
+12.590.437-9,Cliente Nuevo 12590437,"Calle Santo Domingo 3029, Santiago, Chile",2026-12-18,ORD-CL-202612-002362,238022,2026-12-23,Recoleta
+13.952.745-3,Cliente 13952745,"Calle Santo Domingo 3512, Santiago, Chile",2026-12-06,ORD-CL-202612-000779,59205,2026-12-10,Estación Central
+7.148.186-5,Cliente Nuevo 7148186,"Calle Santo Domingo 2857, Santiago, Chile",2026-12-09,ORD-CL-202612-001044,190034,2026-12-11,Peñalolén
+19.246.133-9,Cliente Nuevo 19246133,"Avenida Mapocho 4083, Santiago, Chile",2026-12-01,ORD-CL-202612-000182,323619,2026-12-04,La Florida
+19.942.029-2,Cliente 19942029,"Calle Bandera 7833, Santiago, Chile",2026-12-22,ORD-CL-202612-002904,196509,2026-12-26,Santiago
+5.027.457-1,Cliente 5027457,"Avenida Kennedy 198, Santiago, Chile",2026-12-14,ORD-CL-202612-001787,213829,2026-12-16,Estación Central
+17.709.152-5,Cliente Nuevo 17709152,"Calle Estado 5634, Santiago, Chile",2026-12-01,ORD-CL-202612-000007,154260,2026-12-04,Estación Central
+5.405.159-6,Cliente Nuevo 5405159,"Avenida Irarrázaval 1289, Santiago, Chile",2026-12-16,ORD-CL-202612-002130,154978,2026-12-18,Recoleta
+15.355.823-9,Cliente Nuevo 15355823,"Avenida Independencia 2872, Santiago, Chile",2026-12-25,ORD-CL-202612-003304,127077,2026-12-27,Estación Central
+13.251.660-0,Cliente 13251660,"Calle Teatinos 9197, Santiago, Chile",2026-12-16,ORD-CL-202612-002206,289437,2026-12-20,Peñalolén
+6.649.055-1,Cliente Nuevo 6649055,"Avenida La Florida 9550, Santiago, Chile",2026-12-21,ORD-CL-202612-002814,134863,2026-12-23,Providencia
+6.490.338-3,Cliente Nuevo 6490338,"Avenida Macul 8196, Santiago, Chile",2026-12-22,ORD-CL-202612-002947,211800,2026-12-23,Santiago
+13.587.066-1,Cliente Nuevo 13587066,"Gran Avenida José Miguel Carrera 8824, Santiago, Chile",2026-12-23,ORD-CL-202612-003040,210046,2026-12-27,Quinta Normal
+17.106.870-6,Cliente 17106870,"Avenida Recoleta 5324, Santiago, Chile",2026-12-23,ORD-CL-202612-003019,98388,2026-12-27,Providencia
+11.044.319-2,Cliente Nuevo 11044319,"Calle Bandera 7702, Santiago, Chile",2026-12-21,ORD-CL-202612-002747,69193,2026-12-24,Santiago
+13.952.745-3,Cliente 13952745,"Calle Santo Domingo 3512, Santiago, Chile",2026-12-07,ORD-CL-202612-000808,228474,2026-12-09,Estación Central
+6.792.213-8,Cliente Nuevo 6792213,"Avenida Apoquindo 2255, Santiago, Chile",2026-12-12,ORD-CL-202612-001492,230374,2026-12-15,Providencia
+12.031.498-3,Cliente Nuevo 12031498,"Calle San Diego 6481, Santiago, Chile",2026-12-14,ORD-CL-202612-001767,72957,2026-12-18,Quinta Normal
+17.569.588-0,Cliente 17569588,"Avenida Kennedy 6833, Santiago, Chile",2026-12-03,ORD-CL-202612-000287,116410,2026-12-06,Santiago
+20.510.095-7,Cliente Nuevo 20510095,"Avenida Libertador Bernardo O'Higgins 5771, Santiago, Chile",2026-12-20,ORD-CL-202612-002721,127944,2026-12-22,Santiago
+16.018.272-9,Cliente 16018272,"Calle Monjitas 7075, Santiago, Chile",2026-12-11,ORD-CL-202612-001353,184254,2026-12-13,Vitacura
+11.258.120-3,Cliente Nuevo 11258120,"Avenida Tobalaba 3105, Santiago, Chile",2026-12-19,ORD-CL-202612-002553,158012,2026-12-21,San Miguel
+17.917.635-0,Cliente 17917635,"Avenida Apoquindo 6480, Santiago, Chile",2026-12-11,ORD-CL-202612-001286,122473,2026-12-14,Recoleta
+19.045.111-0,Cliente 19045111,"Avenida Macul 5144, Santiago, Chile",2026-12-28,ORD-CL-202612-003733,216998,2026-12-31,Providencia
+10.059.413-2,Cliente 10059413,"Calle Amunátegui 7156, Santiago, Chile",2026-12-26,ORD-CL-202612-003474,318572,2026-12-29,Peñalolén
+21.054.860-0,Cliente Nuevo 21054860,"Avenida Libertador Bernardo O'Higgins 6781, Santiago, Chile",2026-12-05,ORD-CL-202612-000511,76608,2026-12-08,Quinta Normal
+9.469.164-6,Cliente Nuevo 9469164,"Avenida Apoquindo 241, Santiago, Chile",2026-12-22,ORD-CL-202612-002949,168641,2026-12-25,La Florida
+10.246.672-3,Cliente Nuevo 10246672,"Calle Monjitas 702, Santiago, Chile",2026-12-10,ORD-CL-202612-001231,192536,2026-12-12,Santiago
+14.630.107-0,Cliente Nuevo 14630107,"Avenida Vitacura 6815, Santiago, Chile",2026-12-16,ORD-CL-202612-002078,179769,2026-12-20,La Reina
+12.362.716-1,Cliente Nuevo 12362716,"Calle Monjitas 9278, Santiago, Chile",2026-12-11,ORD-CL-202612-001267,173747,2026-12-13,La Florida
+6.639.541-7,Cliente 6639541,"Calle Amunátegui 7313, Santiago, Chile",2026-12-27,ORD-CL-202612-003662,127509,2026-12-29,Puente Alto
+8.578.575-8,Cliente 8578575,"Avenida Vitacura 1465, Santiago, Chile",2026-12-13,ORD-CL-202612-001673,123287,2026-12-15,Las Condes
+22.261.538-1,Cliente Nuevo 22261538,"Avenida Departamental 7599, Santiago, Chile",2026-12-11,ORD-CL-202612-001337,43019,2026-12-13,Recoleta
+16.600.649-5,Cliente 16600649,"Calle Arturo Prat 1385, Santiago, Chile",2026-12-13,ORD-CL-202612-001649,133248,2026-12-15,Peñalolén
+11.862.103-1,Cliente Nuevo 11862103,"Calle Huérfanos 5182, Santiago, Chile",2026-12-22,ORD-CL-202612-002856,280839,2026-12-24,Quinta Normal
+15.022.998-1,Cliente 15022998,"Avenida Providencia 1687, Santiago, Chile",2026-12-10,ORD-CL-202612-001212,84880,2026-12-14,La Reina
+19.429.781-7,Cliente 19429781,"Calle Arturo Prat 6209, Santiago, Chile",2026-12-17,ORD-CL-202612-002271,225120,2026-12-21,Independencia
+13.458.560-5,Cliente 13458560,"Gran Avenida José Miguel Carrera 8857, Santiago, Chile",2026-12-05,ORD-CL-202612-000522,159701,2026-12-08,La Florida
+7.919.660-9,Cliente 7919660,"Calle Estado 8391, Santiago, Chile",2026-12-06,ORD-CL-202612-000786,186993,2026-12-09,Independencia
+22.261.538-1,Cliente Nuevo 22261538,"Avenida Departamental 7599, Santiago, Chile",2026-12-14,ORD-CL-202612-001723,316336,2026-12-17,Recoleta
+5.892.823-8,Cliente Nuevo 5892823,"Avenida Matta 6992, Santiago, Chile",2026-12-20,ORD-CL-202612-002724,257515,2026-12-24,Estación Central
+14.485.901-2,Cliente Nuevo 14485901,"Avenida Pedro De Valdivia 3626, Santiago, Chile",2026-12-29,ORD-CL-202612-003846,127497,2027-01-03,Peñalolén
+9.711.475-0,Cliente Nuevo 9711475,"Avenida Providencia 4440, Santiago, Chile",2026-12-21,ORD-CL-202612-002775,197072,2026-12-24,Lo Prado
+22.564.321-3,Cliente Nuevo 22564321,"Avenida Santa Rosa 1957, Santiago, Chile",2026-12-23,ORD-CL-202612-003065,94039,2026-12-25,Peñalolén
+13.168.967-9,Cliente Nuevo 13168967,"Avenida Recoleta 6597, Santiago, Chile",2026-12-31,ORD-CL-202612-004173,242235,2027-01-05,La Reina
+8.049.206-2,Cliente 8049206,"Avenida Manuel Montt 6711, Santiago, Chile",2026-12-19,ORD-CL-202612-002522,206456,2026-12-21,Lo Prado
+11.853.665-3,Cliente Nuevo 11853665,"Calle Catedral 6542, Santiago, Chile",2026-12-18,ORD-CL-202612-002332,69039,2026-12-20,Peñalolén
+17.650.281-9,Cliente Nuevo 17650281,"Avenida Irarrázaval 9016, Santiago, Chile",2026-12-10,ORD-CL-202612-001233,68201,2026-12-14,San Miguel
+19.409.077-8,Cliente 19409077,"Calle Amunátegui 1188, Santiago, Chile",2026-12-13,ORD-CL-202612-001664,78618,2026-12-16,Las Condes
+13.666.497-6,Cliente 13666497,"Calle Monjitas 5385, Santiago, Chile",2026-12-17,ORD-CL-202612-002245,126733,2026-12-20,La Florida
+21.697.296-8,Cliente Nuevo 21697296,"Avenida Recoleta 2494, Santiago, Chile",2026-12-25,ORD-CL-202612-003415,98807,2026-12-28,La Florida
+17.313.403-1,Cliente 17313403,"Avenida La Florida 7678, Santiago, Chile",2026-12-01,ORD-CL-202612-000002,118942,2026-12-03,Santiago
+18.791.494-6,Cliente 18791494,"Avenida Irarrázaval 7154, Santiago, Chile",2026-12-10,ORD-CL-202612-001245,92759,2026-12-13,La Reina
+22.432.854-8,Cliente 22432854,"Avenida Providencia 2654, Santiago, Chile",2026-12-10,ORD-CL-202612-001176,112189,2026-12-11,Santiago
+11.566.587-1,Cliente Nuevo 11566587,"Avenida Manuel Montt 9695, Santiago, Chile",2026-12-27,ORD-CL-202612-003665,299404,2026-12-28,La Reina
+22.361.716-4,Cliente Nuevo 22361716,"Avenida Pajaritos 1316, Santiago, Chile",2026-12-28,ORD-CL-202612-003674,97833,2026-12-31,Independencia
+8.395.310-4,Cliente Nuevo 8395310,"Gran Avenida José Miguel Carrera 1084, Santiago, Chile",2026-12-24,ORD-CL-202612-003219,206057,2026-12-26,La Florida
+7.554.754-9,Cliente Nuevo 7554754,"Calle Compañía De Jesús 7238, Santiago, Chile",2026-12-18,ORD-CL-202612-002376,110382,2026-12-21,Puente Alto
+19.806.040-6,Cliente 19806040,"Avenida La Florida 1424, Santiago, Chile",2026-12-30,ORD-CL-202612-003971,102201,2027-01-02,Puente Alto
+12.513.523-4,Cliente Nuevo 12513523,"Gran Avenida José Miguel Carrera 1905, Santiago, Chile",2026-12-20,ORD-CL-202612-002682,326661,2026-12-22,Independencia
+22.432.854-8,Cliente 22432854,"Avenida Providencia 2654, Santiago, Chile",2026-12-11,ORD-CL-202612-001320,126628,2026-12-13,Santiago
+16.494.486-0,Cliente Nuevo 16494486,"Calle San Diego 6793, Santiago, Chile",2026-12-15,ORD-CL-202612-001905,164118,2026-12-18,Santiago
+8.613.975-1,Cliente Nuevo 8613975,"Avenida Tobalaba 8129, Santiago, Chile",2026-12-28,ORD-CL-202612-003692,127665,2026-12-30,La Florida
+14.236.848-3,Cliente Nuevo 14236848,"Avenida Las Condes 7844, Santiago, Chile",2026-12-14,ORD-CL-202612-001812,135458,2026-12-16,La Reina
+15.088.834-8,Cliente 15088834,"Avenida Departamental 7737, Santiago, Chile",2026-12-21,ORD-CL-202612-002768,196851,2026-12-24,San Miguel
+20.826.044-2,Cliente 20826044,"Calle Estado 1659, Santiago, Chile",2026-12-29,ORD-CL-202612-003852,175144,2027-01-01,Las Condes
+19.823.676-7,Cliente 19823676,"Avenida Mapocho 8108, Santiago, Chile",2026-12-16,ORD-CL-202612-002094,309272,2026-12-19,Santiago
+8.194.807-7,Cliente Nuevo 8194807,"Avenida Las Condes 3925, Santiago, Chile",2026-12-15,ORD-CL-202612-001939,302539,2026-12-17,Santiago
+14.146.453-0,Cliente Nuevo 14146453,"Calle Estado 6910, Santiago, Chile",2026-12-24,ORD-CL-202612-003252,58911,2026-12-26,Providencia
+21.891.734-5,Cliente Nuevo 21891734,"Avenida Pajaritos 933, Santiago, Chile",2026-12-27,ORD-CL-202612-003669,244722,2026-12-30,Vitacura
+12.167.207-7,Cliente Nuevo 12167207,"Calle Monjitas 4146, Santiago, Chile",2026-12-23,ORD-CL-202612-003015,232868,2026-12-26,Estación Central
+9.111.040-9,Cliente 9111040,"Calle Arturo Prat 810, Santiago, Chile",2026-12-06,ORD-CL-202612-000696,222670,2026-12-09,Santiago
+19.246.133-9,Cliente Nuevo 19246133,"Avenida Mapocho 4083, Santiago, Chile",2026-12-20,ORD-CL-202612-002699,93724,2026-12-22,La Florida
+21.466.765-2,Cliente Nuevo 21466765,"Calle Estado 8982, Santiago, Chile",2026-12-03,ORD-CL-202612-000348,155873,2026-12-05,Santiago
+11.969.299-2,Cliente Nuevo 11969299,"Avenida Vitacura 4042, Santiago, Chile",2026-12-10,ORD-CL-202612-001163,133416,2026-12-13,Peñalolén
+7.567.541-6,Cliente 7567541,"Avenida Independencia 3951, Santiago, Chile",2026-12-16,ORD-CL-202612-002112,247762,2026-12-18,La Florida
+19.979.903-0,Cliente 19979903,"Avenida Las Condes 6919, Santiago, Chile",2026-12-20,ORD-CL-202612-002720,198758,2026-12-22,Las Condes
+22.547.461-3,Cliente 22547461,"Avenida Irarrázaval 5222, Santiago, Chile",2026-12-19,ORD-CL-202612-002593,140774,2026-12-20,Vitacura
+11.318.051-6,Cliente Nuevo 11318051,"Calle Morandé 1493, Santiago, Chile",2026-12-28,ORD-CL-202612-003790,149954,2026-12-30,Puente Alto
+6.438.229-6,Cliente 6438229,"Calle Merced 6576, Santiago, Chile",2026-12-11,ORD-CL-202612-001373,107968,2026-12-15,Puente Alto
+17.263.025-1,Cliente 17263025,"Avenida Macul 2073, Santiago, Chile",2026-12-31,ORD-CL-202612-004057,97875,2027-01-04,Lo Prado
+8.508.000-3,Cliente 8508000,"Avenida Las Condes 3917, Santiago, Chile",2026-12-25,ORD-CL-202612-003353,161637,2026-12-28,Puente Alto
+17.271.579-6,Cliente 17271579,"Calle Amunátegui 3570, Santiago, Chile",2026-12-23,ORD-CL-202612-003077,169001,2026-12-26,Lo Prado
+9.185.090-5,Cliente Nuevo 9185090,"Avenida Manuel Montt 4351, Santiago, Chile",2026-12-08,ORD-CL-202612-000963,299907,2026-12-11,Vitacura
+17.569.588-0,Cliente 17569588,"Avenida Kennedy 6833, Santiago, Chile",2026-12-21,ORD-CL-202612-002756,66426,2026-12-22,Santiago
+6.840.249-1,Cliente Nuevo 6840249,"Avenida Departamental 1582, Santiago, Chile",2026-12-11,ORD-CL-202612-001272,48636,2026-12-13,Las Condes
+6.277.553-9,Cliente Nuevo 6277553,"Avenida Las Condes 8020, Santiago, Chile",2026-12-30,ORD-CL-202612-003949,168175,2027-01-01,Peñalolén
+6.850.011-0,Cliente Nuevo 6850011,"Calle Teatinos 5432, Santiago, Chile",2026-12-26,ORD-CL-202612-003565,264427,2026-12-28,Santiago
+10.271.268-6,Cliente 10271268,"Avenida Recoleta 9064, Santiago, Chile",2026-12-07,ORD-CL-202612-000816,148027,2026-12-09,Santiago
+15.618.442-9,Cliente 15618442,"Avenida Las Condes 1859, Santiago, Chile",2026-12-05,ORD-CL-202612-000604,185847,2026-12-07,Santiago
+16.028.172-6,Cliente 16028172,"Gran Avenida José Miguel Carrera 7987, Santiago, Chile",2026-12-01,ORD-CL-202612-000101,168542,2026-12-06,Santiago
+14.544.300-5,Cliente Nuevo 14544300,"Calle Morandé 5902, Santiago, Chile",2026-12-01,ORD-CL-202612-000190,170906,2026-12-05,Quinta Normal
+5.569.188-3,Cliente 5569188,"Avenida La Florida 2701, Santiago, Chile",2026-12-08,ORD-CL-202612-001003,101513,2026-12-10,Independencia
+17.308.796-5,Cliente 17308796,"Avenida Grecia 7261, Santiago, Chile",2026-12-31,ORD-CL-202612-004060,194893,2027-01-04,Santiago
+21.219.636-4,Cliente 21219636,"Avenida Pajaritos 3626, Santiago, Chile",2026-12-19,ORD-CL-202612-002504,223731,2026-12-21,Estación Central
+16.494.486-0,Cliente Nuevo 16494486,"Calle San Diego 6793, Santiago, Chile",2026-12-24,ORD-CL-202612-003148,202407,2026-12-25,Santiago
+7.499.857-0,Cliente Nuevo 7499857,"Calle Santo Domingo 8998, Santiago, Chile",2026-12-03,ORD-CL-202612-000299,137233,2026-12-05,Santiago
+17.327.422-1,Cliente Nuevo 17327422,"Avenida Independencia 2203, Santiago, Chile",2026-12-15,ORD-CL-202612-001866,327754,2026-12-18,Peñalolén
+22.624.142-8,Cliente 22624142,"Avenida Providencia 7465, Santiago, Chile",2026-12-13,ORD-CL-202612-001698,89644,2026-12-17,Quinta Normal
+20.528.123-3,Cliente 20528123,"Avenida Grecia 3746, Santiago, Chile",2026-12-19,ORD-CL-202612-002580,259739,2026-12-22,Peñalolén
+9.763.970-0,Cliente 9763970,"Calle Bandera 9916, Santiago, Chile",2026-12-18,ORD-CL-202612-002358,204391,2026-12-20,Peñalolén
+12.033.777-7,Cliente Nuevo 12033777,"Calle Santo Domingo 1612, Santiago, Chile",2026-12-07,ORD-CL-202612-000797,160452,2026-12-09,Santiago
+12.998.113-8,Cliente 12998113,"Avenida Pajaritos 2544, Santiago, Chile",2026-12-29,ORD-CL-202612-003831,145917,2027-01-02,Las Condes
+10.975.161-8,Cliente 10975161,"Avenida Kennedy 9263, Santiago, Chile",2026-12-22,ORD-CL-202612-002853,82804,2026-12-24,La Reina
+10.703.244-7,Cliente 10703244,"Avenida Irarrázaval 2767, Santiago, Chile",2026-12-13,ORD-CL-202612-001573,165758,2026-12-17,Vitacura
+10.478.164-6,Cliente Nuevo 10478164,"Avenida Recoleta 489, Santiago, Chile",2026-12-15,ORD-CL-202612-002025,154006,2026-12-18,Puente Alto
+6.671.946-1,Cliente Nuevo 6671946,"Avenida Tobalaba 6329, Santiago, Chile",2026-12-13,ORD-CL-202612-001637,86511,2026-12-17,San Miguel
+20.776.299-3,Cliente Nuevo 20776299,"Avenida Pajaritos 6860, Santiago, Chile",2026-12-08,ORD-CL-202612-001000,134114,2026-12-11,Las Condes
+17.917.635-0,Cliente 17917635,"Avenida Apoquindo 6480, Santiago, Chile",2026-12-05,ORD-CL-202612-000605,280984,2026-12-08,Recoleta
+8.833.973-4,Cliente Nuevo 8833973,"Avenida Vitacura 4596, Santiago, Chile",2026-12-20,ORD-CL-202612-002688,175293,2026-12-22,Vitacura
+15.290.073-0,Cliente 15290073,"Avenida La Florida 4055, Santiago, Chile",2026-12-21,ORD-CL-202612-002817,201071,2026-12-23,Puente Alto
+15.460.916-7,Cliente 15460916,"Calle Bandera 7800, Santiago, Chile",2026-12-01,ORD-CL-202612-000023,92650,2026-12-04,Puente Alto
+10.370.382-5,Cliente 10370382,"Avenida Vitacura 7462, Santiago, Chile",2026-12-31,ORD-CL-202612-004049,136263,2027-01-01,Vitacura
+7.812.953-1,Cliente 7812953,"Avenida Pajaritos 3548, Santiago, Chile",2026-12-24,ORD-CL-202612-003155,217197,2026-12-27,Santiago
+20.589.339-7,Cliente 20589339,"Calle Santo Domingo 9749, Santiago, Chile",2026-12-04,ORD-CL-202612-000437,71578,2026-12-07,Santiago
+10.234.816-4,Cliente Nuevo 10234816,"Calle Compañía De Jesús 3316, Santiago, Chile",2026-12-24,ORD-CL-202612-003189,185259,2026-12-26,Peñalolén
+17.575.935-7,Cliente 17575935,"Calle Bandera 7828, Santiago, Chile",2026-12-31,ORD-CL-202612-004102,280548,2027-01-02,Santiago
+6.899.986-8,Cliente Nuevo 6899986,"Avenida Mapocho 1251, Santiago, Chile",2026-12-08,ORD-CL-202612-000897,51837,2026-12-10,La Reina
+19.523.392-4,Cliente 19523392,"Avenida Recoleta 978, Santiago, Chile",2026-12-06,ORD-CL-202612-000721,166325,2026-12-08,Independencia
+22.906.999-7,Cliente 22906999,"Calle Bandera 6834, Santiago, Chile",2026-12-25,ORD-CL-202612-003294,208573,2026-12-27,La Florida
+8.156.680-3,Cliente Nuevo 8156680,"Avenida Las Condes 6476, Santiago, Chile",2026-12-22,ORD-CL-202612-002851,116657,2026-12-26,Peñalolén
+14.971.321-1,Cliente Nuevo 14971321,"Avenida Pedro De Valdivia 5930, Santiago, Chile",2026-12-16,ORD-CL-202612-002122,92959,2026-12-19,Puente Alto
+19.116.035-0,Cliente 19116035,"Calle Amunátegui 6560, Santiago, Chile",2026-12-15,ORD-CL-202612-001903,69417,2026-12-17,Vitacura
+8.206.285-3,Cliente Nuevo 8206285,"Calle San Diego 1311, Santiago, Chile",2026-12-29,ORD-CL-202612-003817,56731,2026-12-31,La Reina
+20.952.182-6,Cliente Nuevo 20952182,"Calle Morandé 5183, Santiago, Chile",2026-12-17,ORD-CL-202612-002284,212353,2026-12-21,Las Condes
+9.035.343-5,Cliente 9035343,"Calle San Antonio 9169, Santiago, Chile",2026-12-09,ORD-CL-202612-001021,81658,2026-12-11,La Reina
+16.513.880-6,Cliente Nuevo 16513880,"Avenida Las Condes 6382, Santiago, Chile",2026-12-05,ORD-CL-202612-000498,87329,2026-12-07,Vitacura
+18.049.613-1,Cliente 18049613,"Avenida Santa Rosa 2215, Santiago, Chile",2026-12-15,ORD-CL-202612-001870,66373,2026-12-17,Estación Central
+19.869.239-1,Cliente Nuevo 19869239,"Avenida Matta 8387, Santiago, Chile",2026-12-05,ORD-CL-202612-000547,132647,2026-12-06,Providencia
+20.307.103-7,Cliente Nuevo 20307103,"Calle San Antonio 1624, Santiago, Chile",2026-12-25,ORD-CL-202612-003283,96920,2026-12-28,Providencia
+13.044.024-6,Cliente 13044024,"Calle Estado 8180, Santiago, Chile",2026-12-15,ORD-CL-202612-001904,149796,2026-12-17,Las Condes
+5.472.652-1,Cliente 5472652,"Calle Amunátegui 3124, Santiago, Chile",2026-12-21,ORD-CL-202612-002735,115393,2026-12-22,Vitacura
+15.706.390-3,Cliente Nuevo 15706390,"Calle Compañía De Jesús 5396, Santiago, Chile",2026-12-29,ORD-CL-202612-003811,207747,2026-12-31,La Florida
+11.325.013-7,Cliente Nuevo 11325013,"Avenida Tobalaba 3549, Santiago, Chile",2026-12-17,ORD-CL-202612-002290,106301,2026-12-19,Puente Alto
+9.764.075-9,Cliente 9764075,"Avenida Tobalaba 7751, Santiago, Chile",2026-12-19,ORD-CL-202612-002439,74744,2026-12-21,La Reina
+9.773.767-8,Cliente 9773767,"Avenida La Florida 7492, Santiago, Chile",2026-12-11,ORD-CL-202612-001300,184909,2026-12-13,Santiago
+6.735.029-2,Cliente 6735029,"Gran Avenida José Miguel Carrera 5414, Santiago, Chile",2026-12-30,ORD-CL-202612-003965,261472,2027-01-01,Quinta Normal
+21.853.990-0,Cliente 21853990,"Gran Avenida José Miguel Carrera 3229, Santiago, Chile",2026-12-14,ORD-CL-202612-001813,220703,2026-12-16,Las Condes
+21.662.568-4,Cliente 21662568,"Avenida Mapocho 5583, Santiago, Chile",2026-12-19,ORD-CL-202612-002510,73340,2026-12-21,Santiago
+6.919.530-9,Cliente Nuevo 6919530,"Avenida Pajaritos 2670, Santiago, Chile",2026-12-25,ORD-CL-202612-003339,123867,2026-12-27,Peñalolén
+15.902.183-1,Cliente Nuevo 15902183,"Calle Arturo Prat 3692, Santiago, Chile",2026-12-26,ORD-CL-202612-003562,129352,2026-12-29,Estación Central
+15.384.499-0,Cliente 15384499,"Calle San Antonio 9427, Santiago, Chile",2026-12-16,ORD-CL-202612-002068,112562,2026-12-18,Puente Alto
+11.969.299-2,Cliente Nuevo 11969299,"Avenida Vitacura 4042, Santiago, Chile",2026-12-14,ORD-CL-202612-001748,129322,2026-12-16,Peñalolén
+16.554.800-3,Cliente 16554800,"Calle Estado 7420, Santiago, Chile",2026-12-25,ORD-CL-202612-003403,62617,2026-12-28,San Miguel
+14.206.042-6,Cliente Nuevo 14206042,"Avenida Providencia 4638, Santiago, Chile",2026-12-26,ORD-CL-202612-003524,316830,2026-12-28,Santiago
+22.513.255-8,Cliente 22513255,"Avenida Tobalaba 5396, Santiago, Chile",2026-12-14,ORD-CL-202612-001827,161817,2026-12-16,Vitacura
+9.726.119-3,Cliente 9726119,"Calle Arturo Prat 8069, Santiago, Chile",2026-12-06,ORD-CL-202612-000652,98655,2026-12-08,Santiago
+7.648.841-2,Cliente Nuevo 7648841,"Avenida Manuel Montt 4025, Santiago, Chile",2026-12-23,ORD-CL-202612-003047,189689,2026-12-24,Santiago
+21.805.407-4,Cliente Nuevo 21805407,"Calle Santo Domingo 8500, Santiago, Chile",2026-12-15,ORD-CL-202612-001945,282841,2026-12-18,Puente Alto
+12.508.817-7,Cliente 12508817,"Avenida Grecia 5637, Santiago, Chile",2026-12-14,ORD-CL-202612-001844,152619,2026-12-18,Recoleta
+14.651.932-3,Cliente Nuevo 14651932,"Avenida Kennedy 1172, Santiago, Chile",2026-12-09,ORD-CL-202612-001062,140117,2026-12-11,Providencia
+11.867.941-0,Cliente Nuevo 11867941,"Avenida Matta 6279, Santiago, Chile",2026-12-28,ORD-CL-202612-003768,308537,2026-12-31,Independencia
+6.745.477-7,Cliente Nuevo 6745477,"Calle Estado 8755, Santiago, Chile",2026-12-08,ORD-CL-202612-001013,135445,2026-12-09,Peñalolén
+22.538.782-2,Cliente Nuevo 22538782,"Avenida Departamental 5058, Santiago, Chile",2026-12-19,ORD-CL-202612-002612,56277,2026-12-22,Providencia
+17.657.459-0,Cliente 17657459,"Avenida Macul 5525, Santiago, Chile",2026-12-10,ORD-CL-202612-001136,82579,2026-12-13,La Florida
+17.094.471-5,Cliente 17094471,"Avenida Mapocho 4726, Santiago, Chile",2026-12-30,ORD-CL-202612-003982,255377,2027-01-01,Quinta Normal
+13.522.601-8,Cliente 13522601,"Calle Huérfanos 9159, Santiago, Chile",2026-12-24,ORD-CL-202612-003186,207440,2026-12-26,Providencia
+9.212.915-7,Cliente 9212915,"Avenida Grecia 7352, Santiago, Chile",2026-12-16,ORD-CL-202612-002136,157958,2026-12-20,La Florida
+7.656.100-9,Cliente Nuevo 7656100,"Calle San Diego 19, Santiago, Chile",2026-12-15,ORD-CL-202612-001985,254357,2026-12-18,Quinta Normal
+12.213.956-6,Cliente Nuevo 12213956,"Calle Bandera 4175, Santiago, Chile",2026-12-19,ORD-CL-202612-002568,121712,2026-12-22,Providencia
+18.190.145-8,Cliente Nuevo 18190145,"Avenida Matta 7432, Santiago, Chile",2026-12-08,ORD-CL-202612-000980,240107,2026-12-11,Peñalolén
+16.822.988-5,Cliente 16822988,"Calle Teatinos 1540, Santiago, Chile",2026-12-10,ORD-CL-202612-001125,291431,2026-12-13,Providencia
+8.933.088-4,Cliente 8933088,"Avenida Santa Rosa 9972, Santiago, Chile",2026-12-14,ORD-CL-202612-001802,317694,2026-12-16,Providencia
+18.216.525-2,Cliente 18216525,"Avenida Américo Vespucio 8124, Santiago, Chile",2026-12-03,ORD-CL-202612-000318,41249,2026-12-05,San Miguel
+19.414.022-1,Cliente Nuevo 19414022,"Calle Santo Domingo 8278, Santiago, Chile",2026-12-22,ORD-CL-202612-002923,226188,2026-12-25,Santiago
+21.785.699-3,Cliente 21785699,"Avenida Apoquindo 4280, Santiago, Chile",2026-12-31,ORD-CL-202612-004098,131914,2027-01-03,Independencia
+10.226.639-2,Cliente Nuevo 10226639,"Avenida Vitacura 1395, Santiago, Chile",2026-12-08,ORD-CL-202612-000961,195556,2026-12-10,San Miguel
+7.112.518-1,Cliente 7112518,"Avenida Pedro De Valdivia 9956, Santiago, Chile",2026-12-10,ORD-CL-202612-001113,53925,2026-12-12,Estación Central
+13.175.038-3,Cliente Nuevo 13175038,"Calle Estado 8042, Santiago, Chile",2026-12-11,ORD-CL-202612-001376,120094,2026-12-15,Recoleta
+10.974.518-9,Cliente 10974518,"Calle Teatinos 8575, Santiago, Chile",2026-12-11,ORD-CL-202612-001310,146346,2026-12-13,Santiago
+22.912.842-7,Cliente Nuevo 22912842,"Avenida Las Condes 5230, Santiago, Chile",2026-12-17,ORD-CL-202612-002213,266865,2026-12-19,Puente Alto
+21.037.736-2,Cliente 21037736,"Calle Compañía De Jesús 1424, Santiago, Chile",2026-12-03,ORD-CL-202612-000331,132743,2026-12-05,Santiago
+6.745.477-7,Cliente Nuevo 6745477,"Calle Estado 8755, Santiago, Chile",2026-12-31,ORD-CL-202612-004082,113612,2027-01-03,Peñalolén
+12.660.541-2,Cliente 12660541,"Calle Arturo Prat 4097, Santiago, Chile",2026-12-05,ORD-CL-202612-000618,87835,2026-12-07,Santiago
+22.691.738-1,Cliente 22691738,"Avenida Independencia 3693, Santiago, Chile",2026-12-08,ORD-CL-202612-000948,125123,2026-12-10,La Florida
+12.091.711-6,Cliente Nuevo 12091711,"Avenida Vitacura 6199, Santiago, Chile",2026-12-13,ORD-CL-202612-001569,96681,2026-12-16,Santiago
+5.372.998-7,Cliente 5372998,"Avenida Independencia 4412, Santiago, Chile",2026-12-22,ORD-CL-202612-002843,166696,2026-12-24,Quinta Normal
+19.012.047-9,Cliente 19012047,"Avenida Kennedy 1678, Santiago, Chile",2026-12-06,ORD-CL-202612-000626,143382,2026-12-08,Providencia
+8.789.979-5,Cliente 8789979,"Calle Merced 4786, Santiago, Chile",2026-12-22,ORD-CL-202612-002894,96360,2026-12-26,Providencia
+7.553.319-0,Cliente Nuevo 7553319,"Calle Santo Domingo 5422, Santiago, Chile",2026-12-07,ORD-CL-202612-000877,300469,2026-12-09,Lo Prado
+12.447.358-7,Cliente Nuevo 12447358,"Avenida Las Condes 7304, Santiago, Chile",2026-12-02,ORD-CL-202612-000264,166622,2026-12-05,Puente Alto
+22.130.342-4,Cliente Nuevo 22130342,"Avenida Mapocho 6168, Santiago, Chile",2026-12-13,ORD-CL-202612-001700,241596,2026-12-16,Las Condes
+8.049.206-2,Cliente 8049206,"Avenida Manuel Montt 6711, Santiago, Chile",2026-12-13,ORD-CL-202612-001670,233399,2026-12-16,Lo Prado
+8.827.735-9,Cliente Nuevo 8827735,"Avenida Pajaritos 4700, Santiago, Chile",2026-12-11,ORD-CL-202612-001356,126696,2026-12-14,Santiago
+16.018.272-9,Cliente 16018272,"Calle Monjitas 7075, Santiago, Chile",2026-12-17,ORD-CL-202612-002223,150892,2026-12-19,Vitacura
+7.686.618-4,Cliente 7686618,"Calle Catedral 8449, Santiago, Chile",2026-12-15,ORD-CL-202612-001909,243889,2026-12-18,Santiago
+5.053.024-2,Cliente 5053024,"Avenida Departamental 1018, Santiago, Chile",2026-12-13,ORD-CL-202612-001704,300765,2026-12-17,Quinta Normal
+11.863.822-2,Cliente 11863822,"Avenida Apoquindo 793, Santiago, Chile",2026-12-02,ORD-CL-202612-000256,136619,2026-12-05,Santiago
+13.676.688-5,Cliente Nuevo 13676688,"Calle Arturo Prat 1559, Santiago, Chile",2026-12-07,ORD-CL-202612-000848,180646,2026-12-10,Recoleta
+8.311.488-1,Cliente 8311488,"Avenida Las Condes 1211, Santiago, Chile",2026-12-14,ORD-CL-202612-001721,151060,2026-12-18,La Florida
+16.696.846-0,Cliente 16696846,"Calle Huérfanos 264, Santiago, Chile",2026-12-13,ORD-CL-202612-001596,210489,2026-12-16,Lo Prado
+10.772.894-6,Cliente 10772894,"Avenida Pajaritos 1016, Santiago, Chile",2026-12-24,ORD-CL-202612-003154,142001,2026-12-29,San Miguel
+21.079.522-3,Cliente 21079522,"Avenida Irarrázaval 2958, Santiago, Chile",2026-12-29,ORD-CL-202612-003816,203010,2026-12-31,Independencia
+7.366.327-3,Cliente Nuevo 7366327,"Avenida Apoquindo 2531, Santiago, Chile",2026-12-22,ORD-CL-202612-002849,255532,2026-12-25,Santiago
+5.207.312-2,Cliente Nuevo 5207312,"Calle San Diego 2452, Santiago, Chile",2026-12-01,ORD-CL-202612-000081,172749,2026-12-04,Estación Central
+12.163.116-7,Cliente Nuevo 12163116,"Calle Bandera 2807, Santiago, Chile",2026-12-23,ORD-CL-202612-003136,142632,2026-12-25,Puente Alto
+12.961.260-2,Cliente Nuevo 12961260,"Calle Amunátegui 8408, Santiago, Chile",2026-12-18,ORD-CL-202612-002359,40841,2026-12-21,Santiago
+11.195.978-4,Cliente Nuevo 11195978,"Avenida Libertador Bernardo O'Higgins 4420, Santiago, Chile",2026-12-13,ORD-CL-202612-001559,201190,2026-12-15,Peñalolén
+8.288.925-9,Cliente 8288925,"Calle Amunátegui 8931, Santiago, Chile",2026-12-15,ORD-CL-202612-001954,184879,2026-12-17,Estación Central
+22.476.617-7,Cliente Nuevo 22476617,"Calle Teatinos 6266, Santiago, Chile",2026-12-01,ORD-CL-202612-000025,255160,2026-12-03,Providencia
+10.419.414-1,Cliente Nuevo 10419414,"Avenida Providencia 1261, Santiago, Chile",2026-12-12,ORD-CL-202612-001441,44058,2026-12-15,La Florida
+19.558.787-9,Cliente 19558787,"Avenida Tobalaba 4682, Santiago, Chile",2026-12-10,ORD-CL-202612-001224,192975,2026-12-12,La Florida
+16.489.088-4,Cliente 16489088,"Avenida Macul 8544, Santiago, Chile",2026-12-29,ORD-CL-202612-003859,155777,2026-12-31,Peñalolén
+6.120.194-4,Cliente 6120194,"Calle San Antonio 5135, Santiago, Chile",2026-12-13,ORD-CL-202612-001598,143536,2026-12-14,San Miguel
+21.079.522-3,Cliente 21079522,"Avenida Irarrázaval 2958, Santiago, Chile",2026-12-31,ORD-CL-202612-004122,79764,2027-01-02,Independencia
+19.856.952-4,Cliente 19856952,"Avenida Departamental 2287, Santiago, Chile",2026-12-16,ORD-CL-202612-002205,133832,2026-12-18,La Florida
+10.070.774-1,Cliente Nuevo 10070774,"Avenida Independencia 822, Santiago, Chile",2026-12-23,ORD-CL-202612-003062,165245,2026-12-25,Estación Central
+12.210.986-5,Cliente 12210986,"Avenida Providencia 5225, Santiago, Chile",2026-12-23,ORD-CL-202612-003010,119687,2026-12-26,Las Condes
+5.766.588-6,Cliente Nuevo 5766588,"Avenida Santa Rosa 9461, Santiago, Chile",2026-12-17,ORD-CL-202612-002237,127204,2026-12-20,Santiago
+12.601.567-6,Cliente 12601567,"Avenida Manuel Montt 8763, Santiago, Chile",2026-12-27,ORD-CL-202612-003648,148359,2026-12-28,Peñalolén
+5.879.412-3,Cliente Nuevo 5879412,"Calle Estado 300, Santiago, Chile",2026-12-19,ORD-CL-202612-002471,159468,2026-12-22,Santiago
+14.092.820-9,Cliente Nuevo 14092820,"Avenida Américo Vespucio 5192, Santiago, Chile",2026-12-08,ORD-CL-202612-000904,177274,2026-12-11,Vitacura
+14.595.198-5,Cliente Nuevo 14595198,"Avenida Irarrázaval 2601, Santiago, Chile",2026-12-15,ORD-CL-202612-002000,96823,2026-12-17,La Florida
+19.524.568-0,Cliente 19524568,"Calle Catedral 8542, Santiago, Chile",2026-12-31,ORD-CL-202612-004083,121903,2027-01-03,Santiago
+9.227.283-1,Cliente Nuevo 9227283,"Calle Santo Domingo 1221, Santiago, Chile",2026-12-10,ORD-CL-202612-001118,137261,2026-12-13,Vitacura
+9.484.819-4,Cliente Nuevo 9484819,"Calle Estado 1758, Santiago, Chile",2026-12-14,ORD-CL-202612-001786,170223,2026-12-18,San Miguel
+22.285.617-9,Cliente Nuevo 22285617,"Calle Amunátegui 6557, Santiago, Chile",2026-12-29,ORD-CL-202612-003854,82487,2027-01-01,Independencia
+6.466.103-7,Cliente 6466103,"Calle San Antonio 7911, Santiago, Chile",2026-12-01,ORD-CL-202612-000119,212531,2026-12-03,Santiago
+15.983.093-8,Cliente 15983093,"Calle Compañía De Jesús 8561, Santiago, Chile",2026-12-13,ORD-CL-202612-001593,207531,2026-12-14,Providencia
+18.961.378-1,Cliente 18961378,"Avenida Pedro De Valdivia 2479, Santiago, Chile",2026-12-11,ORD-CL-202612-001377,204555,2026-12-13,Las Condes
+20.307.103-7,Cliente Nuevo 20307103,"Calle San Antonio 1624, Santiago, Chile",2026-12-21,ORD-CL-202612-002740,91630,2026-12-25,Providencia
+15.517.700-9,Cliente Nuevo 15517700,"Calle Huérfanos 2940, Santiago, Chile",2026-12-21,ORD-CL-202612-002782,244507,2026-12-23,Santiago
+5.903.103-7,Cliente Nuevo 5903103,"Avenida Manuel Montt 7191, Santiago, Chile",2026-12-24,ORD-CL-202612-003270,100934,2026-12-26,Santiago
+9.979.417-9,Cliente 9979417,"Avenida Pajaritos 4330, Santiago, Chile",2026-12-13,ORD-CL-202612-001657,100412,2026-12-16,Santiago
+8.890.593-4,Cliente 8890593,"Avenida Mapocho 1166, Santiago, Chile",2026-12-22,ORD-CL-202612-002967,81511,2026-12-25,Peñalolén
+16.018.272-9,Cliente 16018272,"Calle Monjitas 7075, Santiago, Chile",2026-12-30,ORD-CL-202612-003975,156689,2027-01-03,Vitacura
+6.732.448-5,Cliente 6732448,"Avenida Américo Vespucio 8714, Santiago, Chile",2026-12-15,ORD-CL-202612-001915,225130,2026-12-17,Providencia
+11.565.193-6,Cliente Nuevo 11565193,"Avenida Américo Vespucio 7510, Santiago, Chile",2026-12-27,ORD-CL-202612-003673,142410,2026-12-30,Las Condes
+10.796.031-2,Cliente 10796031,"Avenida Pajaritos 9591, Santiago, Chile",2026-12-19,ORD-CL-202612-002549,209423,2026-12-21,Santiago
+15.954.383-7,Cliente Nuevo 15954383,"Calle San Diego 1219, Santiago, Chile",2026-12-31,ORD-CL-202612-004121,73899,2027-01-03,Independencia
+5.802.113-4,Cliente Nuevo 5802113,"Avenida Las Condes 599, Santiago, Chile",2026-12-01,ORD-CL-202612-000111,260585,2026-12-03,San Miguel
+8.741.036-6,Cliente Nuevo 8741036,"Calle Monjitas 7214, Santiago, Chile",2026-12-13,ORD-CL-202612-001614,147092,2026-12-16,Quinta Normal
+20.911.185-1,Cliente 20911185,"Avenida Recoleta 9615, Santiago, Chile",2026-12-19,ORD-CL-202612-002425,132568,2026-12-22,Vitacura
+22.706.642-3,Cliente 22706642,"Gran Avenida José Miguel Carrera 9888, Santiago, Chile",2026-12-17,ORD-CL-202612-002312,163659,2026-12-20,Santiago
+13.269.727-3,Cliente 13269727,"Calle Bandera 8232, Santiago, Chile",2026-12-20,ORD-CL-202612-002716,172449,2026-12-22,Santiago
+20.827.561-3,Cliente 20827561,"Avenida Macul 2508, Santiago, Chile",2026-12-01,ORD-CL-202612-000112,156946,2026-12-03,La Reina
+18.429.770-6,Cliente 18429770,"Calle Huérfanos 8536, Santiago, Chile",2026-12-03,ORD-CL-202612-000344,47412,2026-12-05,Puente Alto
+10.767.619-3,Cliente 10767619,"Avenida Américo Vespucio 506, Santiago, Chile",2026-12-20,ORD-CL-202612-002633,209808,2026-12-23,San Miguel
+12.168.044-7,Cliente Nuevo 12168044,"Calle Bandera 7508, Santiago, Chile",2026-12-14,ORD-CL-202612-001756,101242,2026-12-15,Las Condes
+22.445.445-9,Cliente 22445445,"Avenida Kennedy 7707, Santiago, Chile",2026-12-05,ORD-CL-202612-000556,227036,2026-12-09,Providencia
+16.887.774-4,Cliente 16887774,"Calle Estado 4661, Santiago, Chile",2026-12-15,ORD-CL-202612-001892,277519,2026-12-17,Puente Alto
+15.444.723-9,Cliente Nuevo 15444723,"Avenida Libertador Bernardo O'Higgins 4124, Santiago, Chile",2026-12-06,ORD-CL-202612-000745,122259,2026-12-08,Providencia
+9.680.586-0,Cliente 9680586,"Calle Huérfanos 8101, Santiago, Chile",2026-12-26,ORD-CL-202612-003450,206806,2026-12-29,San Miguel
+15.621.877-1,Cliente Nuevo 15621877,"Calle Monjitas 9802, Santiago, Chile",2026-12-09,ORD-CL-202612-001066,114477,2026-12-11,Santiago
+12.172.627-6,Cliente Nuevo 12172627,"Calle San Diego 9161, Santiago, Chile",2026-12-26,ORD-CL-202612-003532,140754,2026-12-28,Recoleta
+14.115.596-9,Cliente 14115596,"Calle Merced 8350, Santiago, Chile",2026-12-11,ORD-CL-202612-001341,273645,2026-12-14,Vitacura
+9.159.574-0,Cliente 9159574,"Gran Avenida José Miguel Carrera 6581, Santiago, Chile",2026-12-07,ORD-CL-202612-000867,57510,2026-12-09,Las Condes
+10.213.922-7,Cliente Nuevo 10213922,"Calle Bandera 3131, Santiago, Chile",2026-12-15,ORD-CL-202612-001863,127239,2026-12-18,Estación Central
+9.727.696-0,Cliente Nuevo 9727696,"Avenida Pajaritos 2452, Santiago, Chile",2026-12-31,ORD-CL-202612-004117,72764,2027-01-04,La Florida
+16.353.195-1,Cliente Nuevo 16353195,"Avenida Pajaritos 2107, Santiago, Chile",2026-12-11,ORD-CL-202612-001383,51043,2026-12-13,Providencia
+13.867.485-8,Cliente Nuevo 13867485,"Calle Morandé 4830, Santiago, Chile",2026-12-23,ORD-CL-202612-003118,259637,2026-12-26,Vitacura
+17.835.620-8,Cliente 17835620,"Avenida Apoquindo 6999, Santiago, Chile",2026-12-25,ORD-CL-202612-003329,132798,2026-12-28,Puente Alto
+15.732.866-7,Cliente 15732866,"Calle Santo Domingo 7736, Santiago, Chile",2026-12-10,ORD-CL-202612-001140,171313,2026-12-12,Santiago
+21.841.892-1,Cliente 21841892,"Avenida Kennedy 9846, Santiago, Chile",2026-12-23,ORD-CL-202612-003081,110794,2026-12-26,La Reina
+7.117.233-1,Cliente 7117233,"Avenida Las Condes 5070, Santiago, Chile",2026-12-14,ORD-CL-202612-001727,97268,2026-12-17,Santiago
+5.161.351-9,Cliente 5161351,"Calle Arturo Prat 5460, Santiago, Chile",2026-12-09,ORD-CL-202612-001034,96764,2026-12-11,Peñalolén
+5.376.142-9,Cliente 5376142,"Avenida Departamental 5645, Santiago, Chile",2026-12-28,ORD-CL-202612-003789,132538,2026-12-30,Providencia
+9.969.180-0,Cliente Nuevo 9969180,"Calle San Diego 6271, Santiago, Chile",2026-12-15,ORD-CL-202612-001927,222721,2026-12-17,La Reina
+14.319.883-1,Cliente 14319883,"Avenida Matta 5936, Santiago, Chile",2026-12-30,ORD-CL-202612-004004,122730,2027-01-03,Puente Alto
+12.666.103-1,Cliente Nuevo 12666103,"Avenida Departamental 129, Santiago, Chile",2026-12-23,ORD-CL-202612-003069,189871,2026-12-26,La Reina
+7.937.753-5,Cliente Nuevo 7937753,"Calle Bandera 6021, Santiago, Chile",2026-12-31,ORD-CL-202612-004014,267009,2027-01-03,Quinta Normal
+9.245.633-5,Cliente Nuevo 9245633,"Avenida Irarrázaval 8877, Santiago, Chile",2026-12-02,ORD-CL-202612-000214,270079,2026-12-04,Peñalolén
+6.606.107-5,Cliente Nuevo 6606107,"Avenida Providencia 3544, Santiago, Chile",2026-12-12,ORD-CL-202612-001434,88373,2026-12-14,Puente Alto
+13.905.591-0,Cliente Nuevo 13905591,"Avenida Irarrázaval 7578, Santiago, Chile",2026-12-08,ORD-CL-202612-000919,155004,2026-12-10,Providencia
+20.589.339-7,Cliente 20589339,"Calle Santo Domingo 9749, Santiago, Chile",2026-12-20,ORD-CL-202612-002663,131074,2026-12-23,Santiago
+20.329.309-9,Cliente Nuevo 20329309,"Calle Catedral 6899, Santiago, Chile",2026-12-28,ORD-CL-202612-003753,116193,2026-12-30,Independencia
+22.149.970-6,Cliente Nuevo 22149970,"Calle Compañía De Jesús 7303, Santiago, Chile",2026-12-24,ORD-CL-202612-003200,77291,2026-12-25,Independencia
+18.548.320-0,Cliente Nuevo 18548320,"Avenida Apoquindo 1062, Santiago, Chile",2026-12-20,ORD-CL-202612-002670,215698,2026-12-24,Quinta Normal
+20.328.731-5,Cliente Nuevo 20328731,"Avenida Pajaritos 9996, Santiago, Chile",2026-12-01,ORD-CL-202612-000165,221136,2026-12-04,Las Condes
+20.576.826-3,Cliente Nuevo 20576826,"Calle Compañía De Jesús 9096, Santiago, Chile",2026-12-23,ORD-CL-202612-003090,248117,2026-12-26,Vitacura
+9.763.970-0,Cliente 9763970,"Calle Bandera 9916, Santiago, Chile",2026-12-01,ORD-CL-202612-000128,103775,2026-12-04,Peñalolén
+18.125.753-3,Cliente 18125753,"Calle Catedral 808, Santiago, Chile",2026-12-25,ORD-CL-202612-003421,129092,2026-12-28,Vitacura
+8.876.027-1,Cliente Nuevo 8876027,"Calle Morandé 3445, Santiago, Chile",2026-12-07,ORD-CL-202612-000817,57768,2026-12-10,Santiago
+20.325.827-9,Cliente 20325827,"Avenida Santa Rosa 7174, Santiago, Chile",2026-12-01,ORD-CL-202612-000084,148638,2026-12-04,Providencia
+20.486.869-7,Cliente Nuevo 20486869,"Avenida Matta 1017, Santiago, Chile",2026-12-31,ORD-CL-202612-004143,117710,2027-01-04,Santiago
+6.505.448-5,Cliente 6505448,"Avenida La Florida 3026, Santiago, Chile",2026-12-06,ORD-CL-202612-000625,172088,2026-12-08,Santiago
+8.194.807-7,Cliente Nuevo 8194807,"Avenida Las Condes 3925, Santiago, Chile",2026-12-28,ORD-CL-202612-003777,135251,2026-12-30,Santiago
+7.444.024-7,Cliente Nuevo 7444024,"Avenida Manuel Montt 531, Santiago, Chile",2026-12-05,ORD-CL-202612-000518,94285,2026-12-10,Las Condes
+10.284.916-2,Cliente Nuevo 10284916,"Calle Arturo Prat 1115, Santiago, Chile",2026-12-15,ORD-CL-202612-001940,98510,2026-12-17,Santiago
+7.053.292-4,Cliente 7053292,"Calle Merced 3468, Santiago, Chile",2026-12-21,ORD-CL-202612-002743,84853,2026-12-24,Las Condes
+7.499.276-7,Cliente 7499276,"Calle Compañía De Jesús 5241, Santiago, Chile",2026-12-04,ORD-CL-202612-000469,166904,2026-12-06,Providencia
+12.334.420-8,Cliente Nuevo 12334420,"Calle Teatinos 7022, Santiago, Chile",2026-12-17,ORD-CL-202612-002311,258647,2026-12-19,Providencia
+5.974.807-2,Cliente Nuevo 5974807,"Avenida Macul 928, Santiago, Chile",2026-12-08,ORD-CL-202612-000893,237818,2026-12-12,La Reina
+7.521.383-3,Cliente Nuevo 7521383,"Avenida Vicuña Mackenna 8172, Santiago, Chile",2026-12-26,ORD-CL-202612-003512,193062,2026-12-30,Puente Alto
+5.363.349-1,Cliente 5363349,"Avenida Tobalaba 473, Santiago, Chile",2026-12-22,ORD-CL-202612-002866,109656,2026-12-25,Santiago
+8.508.000-3,Cliente 8508000,"Avenida Las Condes 3917, Santiago, Chile",2026-12-09,ORD-CL-202612-001050,99522,2026-12-11,Puente Alto
+9.161.025-8,Cliente Nuevo 9161025,"Avenida Kennedy 5042, Santiago, Chile",2026-12-24,ORD-CL-202612-003142,165908,2026-12-29,Estación Central
+15.841.162-9,Cliente 15841162,"Gran Avenida José Miguel Carrera 9520, Santiago, Chile",2026-12-12,ORD-CL-202612-001511,200108,2026-12-15,Independencia
+10.902.419-0,Cliente 10902419,"Avenida Santa Rosa 3238, Santiago, Chile",2026-12-06,ORD-CL-202612-000688,75530,2026-12-08,La Florida
+7.836.410-2,Cliente 7836410,"Avenida Irarrázaval 3179, Santiago, Chile",2026-12-19,ORD-CL-202612-002482,253999,2026-12-22,Estación Central
+21.475.685-2,Cliente 21475685,"Avenida Providencia 3090, Santiago, Chile",2026-12-19,ORD-CL-202612-002488,113259,2026-12-21,Santiago
+7.134.566-0,Cliente 7134566,"Calle San Antonio 3448, Santiago, Chile",2026-12-29,ORD-CL-202612-003820,113866,2027-01-01,Las Condes
+14.741.684-1,Cliente Nuevo 14741684,"Avenida Santa Rosa 1070, Santiago, Chile",2026-12-26,ORD-CL-202612-003471,270246,2026-12-28,La Reina
+7.197.560-5,Cliente 7197560,"Calle Amunátegui 4767, Santiago, Chile",2026-12-31,ORD-CL-202612-004053,265878,2027-01-03,Santiago
+16.662.364-5,Cliente 16662364,"Avenida Departamental 4836, Santiago, Chile",2026-12-25,ORD-CL-202612-003417,71708,2026-12-27,Vitacura
+12.031.498-3,Cliente Nuevo 12031498,"Calle San Diego 6481, Santiago, Chile",2026-12-06,ORD-CL-202612-000671,127373,2026-12-08,Quinta Normal
+7.499.276-7,Cliente 7499276,"Calle Compañía De Jesús 5241, Santiago, Chile",2026-12-11,ORD-CL-202612-001275,152726,2026-12-14,Providencia
+8.491.877-8,Cliente Nuevo 8491877,"Avenida Tobalaba 1063, Santiago, Chile",2026-12-27,ORD-CL-202612-003627,121717,2026-12-30,Vitacura
+17.881.840-5,Cliente 17881840,"Avenida Las Condes 1767, Santiago, Chile",2026-12-31,ORD-CL-202612-004133,114429,2027-01-03,La Florida
+6.941.496-0,Cliente Nuevo 6941496,"Calle Santo Domingo 7909, Santiago, Chile",2026-12-01,ORD-CL-202612-000106,189597,2026-12-05,Independencia
+7.396.900-6,Cliente Nuevo 7396900,"Avenida Manuel Montt 6504, Santiago, Chile",2026-12-11,ORD-CL-202612-001278,202264,2026-12-14,La Florida
+20.759.906-8,Cliente Nuevo 20759906,"Avenida Tobalaba 402, Santiago, Chile",2026-12-25,ORD-CL-202612-003377,261213,2026-12-27,Lo Prado
+22.363.837-4,Cliente Nuevo 22363837,"Avenida Providencia 2918, Santiago, Chile",2026-12-28,ORD-CL-202612-003800,130602,2026-12-30,Peñalolén
+20.008.165-9,Cliente 20008165,"Avenida Mapocho 1601, Santiago, Chile",2026-12-12,ORD-CL-202612-001538,140208,2026-12-14,Quinta Normal
+20.486.869-7,Cliente Nuevo 20486869,"Avenida Matta 1017, Santiago, Chile",2026-12-13,ORD-CL-202612-001625,183757,2026-12-14,Santiago
+17.008.500-2,Cliente Nuevo 17008500,"Avenida Libertador Bernardo O'Higgins 2693, Santiago, Chile",2026-12-22,ORD-CL-202612-002929,200930,2026-12-25,Santiago
+10.223.485-1,Cliente 10223485,"Calle Teatinos 438, Santiago, Chile",2026-12-07,ORD-CL-202612-000813,261203,2026-12-09,Santiago
+14.092.820-9,Cliente Nuevo 14092820,"Avenida Américo Vespucio 5192, Santiago, Chile",2026-12-03,ORD-CL-202612-000312,65619,2026-12-05,Vitacura
+19.039.525-0,Cliente Nuevo 19039525,"Avenida Providencia 4139, Santiago, Chile",2026-12-19,ORD-CL-202612-002426,117119,2026-12-23,Las Condes
+15.332.023-4,Cliente 15332023,"Calle Catedral 6241, Santiago, Chile",2026-12-22,ORD-CL-202612-002829,272303,2026-12-25,San Miguel
+17.215.182-1,Cliente 17215182,"Calle Santo Domingo 9933, Santiago, Chile",2026-12-19,ORD-CL-202612-002570,114081,2026-12-22,San Miguel
+22.679.223-0,Cliente Nuevo 22679223,"Calle Teatinos 3214, Santiago, Chile",2026-12-08,ORD-CL-202612-000995,65439,2026-12-12,Lo Prado
+17.868.261-3,Cliente Nuevo 17868261,"Avenida Irarrázaval 4764, Santiago, Chile",2026-12-04,ORD-CL-202612-000418,254873,2026-12-08,Recoleta
+12.115.833-9,Cliente Nuevo 12115833,"Calle San Antonio 1641, Santiago, Chile",2026-12-30,ORD-CL-202612-003900,123873,2027-01-01,San Miguel
+9.554.867-4,Cliente 9554867,"Avenida Tobalaba 5752, Santiago, Chile",2026-12-24,ORD-CL-202612-003165,62561,2026-12-26,Santiago
+11.808.530-0,Cliente Nuevo 11808530,"Calle Huérfanos 9096, Santiago, Chile",2026-12-10,ORD-CL-202612-001236,170463,2026-12-14,Santiago
+18.880.614-0,Cliente 18880614,"Calle Huérfanos 2429, Santiago, Chile",2026-12-21,ORD-CL-202612-002803,83241,2026-12-25,San Miguel
+21.269.458-3,Cliente 21269458,"Calle Amunátegui 1984, Santiago, Chile",2026-12-19,ORD-CL-202612-002460,181625,2026-12-21,Peñalolén
+6.736.303-5,Cliente 6736303,"Avenida Manuel Montt 7039, Santiago, Chile",2026-12-30,ORD-CL-202612-003969,161691,2027-01-03,Santiago
+6.927.295-4,Cliente 6927295,"Calle Compañía De Jesús 2373, Santiago, Chile",2026-12-17,ORD-CL-202612-002319,227219,2026-12-19,Santiago
+22.449.774-2,Cliente Nuevo 22449774,"Avenida Pajaritos 6316, Santiago, Chile",2026-12-24,ORD-CL-202612-003206,191116,2026-12-26,Providencia
+15.815.165-1,Cliente 15815165,"Calle Santo Domingo 9121, Santiago, Chile",2026-12-01,ORD-CL-202612-000169,222871,2026-12-03,Recoleta
+9.374.030-0,Cliente 9374030,"Avenida Macul 3991, Santiago, Chile",2026-12-12,ORD-CL-202612-001423,288568,2026-12-14,Santiago
+14.200.802-1,Cliente 14200802,"Avenida Pedro De Valdivia 3807, Santiago, Chile",2026-12-16,ORD-CL-202612-002183,49680,2026-12-19,Quinta Normal
+14.429.807-9,Cliente 14429807,"Avenida Apoquindo 6788, Santiago, Chile",2026-12-31,ORD-CL-202612-004088,193134,2027-01-02,Independencia
+22.874.785-8,Cliente Nuevo 22874785,"Avenida Vicuña Mackenna 3038, Santiago, Chile",2026-12-20,ORD-CL-202612-002710,104047,2026-12-23,Estación Central
+8.687.840-7,Cliente Nuevo 8687840,"Avenida Vicuña Mackenna 2587, Santiago, Chile",2026-12-12,ORD-CL-202612-001518,304661,2026-12-14,Estación Central
+14.512.240-4,Cliente Nuevo 14512240,"Avenida Matta 5370, Santiago, Chile",2026-12-03,ORD-CL-202612-000283,125301,2026-12-06,Estación Central
+9.747.941-6,Cliente Nuevo 9747941,"Avenida Providencia 4079, Santiago, Chile",2026-12-28,ORD-CL-202612-003758,111918,2027-01-01,Las Condes
+14.081.942-3,Cliente 14081942,"Avenida Vicuña Mackenna 139, Santiago, Chile",2026-12-20,ORD-CL-202612-002653,78198,2026-12-24,Puente Alto
+8.288.925-9,Cliente 8288925,"Calle Amunátegui 8931, Santiago, Chile",2026-12-11,ORD-CL-202612-001398,289081,2026-12-13,Estación Central
+14.976.779-6,Cliente 14976779,"Avenida Irarrázaval 8302, Santiago, Chile",2026-12-01,ORD-CL-202612-000052,82669,2026-12-03,Santiago
+12.492.700-8,Cliente 12492700,"Gran Avenida José Miguel Carrera 1240, Santiago, Chile",2026-12-25,ORD-CL-202612-003384,168412,2026-12-29,San Miguel
+19.958.614-1,Cliente 19958614,"Avenida La Florida 7523, Santiago, Chile",2026-12-15,ORD-CL-202612-002008,183088,2026-12-17,Lo Prado
+14.458.746-3,Cliente Nuevo 14458746,"Avenida Kennedy 9107, Santiago, Chile",2026-12-04,ORD-CL-202612-000433,84161,2026-12-05,Recoleta
+17.422.328-0,Cliente 17422328,"Avenida Providencia 7142, Santiago, Chile",2026-12-14,ORD-CL-202612-001776,182899,2026-12-17,Lo Prado
+17.602.845-5,Cliente Nuevo 17602845,"Calle Arturo Prat 2535, Santiago, Chile",2026-12-12,ORD-CL-202612-001484,124671,2026-12-15,Lo Prado
+13.559.624-9,Cliente 13559624,"Calle Estado 6390, Santiago, Chile",2026-12-19,ORD-CL-202612-002604,135414,2026-12-22,Santiago
+15.229.396-3,Cliente 15229396,"Calle Merced 2024, Santiago, Chile",2026-12-15,ORD-CL-202612-001884,118396,2026-12-17,San Miguel
+8.998.099-5,Cliente Nuevo 8998099,"Avenida Las Condes 539, Santiago, Chile",2026-12-22,ORD-CL-202612-002898,121791,2026-12-25,Santiago
+20.495.444-6,Cliente 20495444,"Calle Huérfanos 5705, Santiago, Chile",2026-12-31,ORD-CL-202612-004018,245012,2027-01-03,Santiago
+7.604.506-0,Cliente Nuevo 7604506,"Calle Bandera 7395, Santiago, Chile",2026-12-14,ORD-CL-202612-001784,154579,2026-12-16,La Reina
+18.266.885-0,Cliente 18266885,"Avenida Pedro De Valdivia 8568, Santiago, Chile",2026-12-06,ORD-CL-202612-000722,156403,2026-12-09,Providencia
+8.140.990-3,Cliente Nuevo 8140990,"Gran Avenida José Miguel Carrera 9042, Santiago, Chile",2026-12-23,ORD-CL-202612-003006,178462,2026-12-27,San Miguel
+14.283.601-1,Cliente Nuevo 14283601,"Avenida Vicuña Mackenna 1789, Santiago, Chile",2026-12-16,ORD-CL-202612-002138,116980,2026-12-19,Santiago
+9.894.037-2,Cliente Nuevo 9894037,"Avenida Macul 3744, Santiago, Chile",2026-12-20,ORD-CL-202612-002665,87673,2026-12-22,Quinta Normal
+9.177.486-1,Cliente 9177486,"Calle Merced 896, Santiago, Chile",2026-12-09,ORD-CL-202612-001107,200950,2026-12-11,Lo Prado
+22.290.680-4,Cliente Nuevo 22290680,"Calle Estado 6774, Santiago, Chile",2026-12-19,ORD-CL-202612-002523,231424,2026-12-21,Santiago
+5.098.173-6,Cliente 5098173,"Calle Arturo Prat 9979, Santiago, Chile",2026-12-25,ORD-CL-202612-003368,112399,2026-12-28,Providencia
+15.841.162-9,Cliente 15841162,"Gran Avenida José Miguel Carrera 9520, Santiago, Chile",2026-12-24,ORD-CL-202612-003173,61211,2026-12-26,Independencia
+21.430.599-5,Cliente 21430599,"Calle Teatinos 813, Santiago, Chile",2026-12-15,ORD-CL-202612-001981,174964,2026-12-16,La Florida
+6.510.437-1,Cliente 6510437,"Calle Bandera 1508, Santiago, Chile",2026-12-25,ORD-CL-202612-003290,203234,2026-12-28,Independencia
+15.998.202-2,Cliente Nuevo 15998202,"Calle Monjitas 6010, Santiago, Chile",2026-12-14,ORD-CL-202612-001785,263111,2026-12-16,Puente Alto
+9.180.885-9,Cliente Nuevo 9180885,"Avenida Kennedy 6061, Santiago, Chile",2026-12-23,ORD-CL-202612-002995,162901,2026-12-25,Santiago
+19.068.261-9,Cliente 19068261,"Calle Estado 4684, Santiago, Chile",2026-12-19,ORD-CL-202612-002427,186474,2026-12-21,Puente Alto
+21.810.028-6,Cliente Nuevo 21810028,"Calle Santo Domingo 7546, Santiago, Chile",2026-12-09,ORD-CL-202612-001100,102494,2026-12-14,La Florida
+9.214.681-8,Cliente Nuevo 9214681,"Calle Amunátegui 4416, Santiago, Chile",2026-12-11,ORD-CL-202612-001321,192995,2026-12-14,Las Condes
+15.087.591-8,Cliente 15087591,"Avenida Recoleta 9981, Santiago, Chile",2026-12-08,ORD-CL-202612-001006,177160,2026-12-09,Santiago
+9.979.417-9,Cliente 9979417,"Avenida Pajaritos 4330, Santiago, Chile",2026-12-03,ORD-CL-202612-000355,92803,2026-12-06,Santiago
+19.431.847-1,Cliente 19431847,"Avenida Pajaritos 3461, Santiago, Chile",2026-12-10,ORD-CL-202612-001143,160203,2026-12-13,Vitacura
+7.197.560-5,Cliente 7197560,"Calle Amunátegui 4767, Santiago, Chile",2026-12-14,ORD-CL-202612-001847,201769,2026-12-18,Santiago
+20.328.731-5,Cliente Nuevo 20328731,"Avenida Pajaritos 9996, Santiago, Chile",2026-12-08,ORD-CL-202612-000999,157146,2026-12-10,Las Condes
+11.331.335-0,Cliente 11331335,"Avenida Vitacura 5004, Santiago, Chile",2026-12-23,ORD-CL-202612-003074,95617,2026-12-25,San Miguel
+18.190.145-8,Cliente Nuevo 18190145,"Avenida Matta 7432, Santiago, Chile",2026-12-26,ORD-CL-202612-003443,243736,2026-12-30,Peñalolén
+11.302.609-1,Cliente Nuevo 11302609,"Avenida Departamental 889, Santiago, Chile",2026-12-18,ORD-CL-202612-002335,165324,2026-12-20,Vitacura
+5.770.009-3,Cliente Nuevo 5770009,"Gran Avenida José Miguel Carrera 152, Santiago, Chile",2026-12-19,ORD-CL-202612-002500,139817,2026-12-21,Lo Prado
+6.867.598-6,Cliente 6867598,"Gran Avenida José Miguel Carrera 2236, Santiago, Chile",2026-12-21,ORD-CL-202612-002737,176290,2026-12-24,Providencia
+14.862.014-2,Cliente Nuevo 14862014,"Calle Bandera 1777, Santiago, Chile",2026-12-25,ORD-CL-202612-003322,288728,2026-12-27,Vitacura
+15.861.894-2,Cliente 15861894,"Avenida Vitacura 4145, Santiago, Chile",2026-12-11,ORD-CL-202612-001378,122832,2026-12-15,Puente Alto
+6.505.448-5,Cliente 6505448,"Avenida La Florida 3026, Santiago, Chile",2026-12-01,ORD-CL-202612-000118,43659,2026-12-03,Santiago
+22.576.576-6,Cliente 22576576,"Avenida Grecia 1144, Santiago, Chile",2026-12-26,ORD-CL-202612-003468,215545,2026-12-29,Quinta Normal
+14.449.066-2,Cliente 14449066,"Calle Santo Domingo 9845, Santiago, Chile",2026-12-11,ORD-CL-202612-001332,236051,2026-12-13,Lo Prado
+21.609.589-4,Cliente 21609589,"Avenida Tobalaba 4667, Santiago, Chile",2026-12-25,ORD-CL-202612-003332,151892,2026-12-27,Santiago
+17.117.379-4,Cliente Nuevo 17117379,"Calle Santo Domingo 483, Santiago, Chile",2026-12-15,ORD-CL-202612-001998,103150,2026-12-17,San Miguel
+20.274.770-8,Cliente 20274770,"Calle Morandé 9393, Santiago, Chile",2026-12-07,ORD-CL-202612-000869,147075,2026-12-08,Santiago
+17.384.703-9,Cliente 17384703,"Avenida Independencia 8976, Santiago, Chile",2026-12-12,ORD-CL-202612-001454,78250,2026-12-15,Estación Central
+14.572.874-7,Cliente Nuevo 14572874,"Calle Estado 3894, Santiago, Chile",2026-12-09,ORD-CL-202612-001059,116097,2026-12-11,Providencia
+14.595.198-5,Cliente Nuevo 14595198,"Avenida Irarrázaval 2601, Santiago, Chile",2026-12-11,ORD-CL-202612-001395,153281,2026-12-14,La Florida
+13.197.815-4,Cliente Nuevo 13197815,"Calle San Antonio 302, Santiago, Chile",2026-12-10,ORD-CL-202612-001146,237982,2026-12-13,Independencia
+6.435.456-8,Cliente 6435456,"Avenida Macul 6737, Santiago, Chile",2026-12-19,ORD-CL-202612-002442,280731,2026-12-21,Recoleta
+12.627.284-5,Cliente 12627284,"Avenida Recoleta 8980, Santiago, Chile",2026-12-27,ORD-CL-202612-003628,80663,2026-12-30,Recoleta
+10.569.358-9,Cliente Nuevo 10569358,"Avenida Apoquindo 595, Santiago, Chile",2026-12-10,ORD-CL-202612-001132,160859,2026-12-12,Santiago
+20.441.515-9,Cliente Nuevo 20441515,"Calle Arturo Prat 1187, Santiago, Chile",2026-12-29,ORD-CL-202612-003833,312971,2027-01-02,Santiago
+7.133.217-9,Cliente Nuevo 7133217,"Avenida Departamental 4795, Santiago, Chile",2026-12-01,ORD-CL-202612-000042,74718,2026-12-02,Quinta Normal
+5.043.964-9,Cliente Nuevo 5043964,"Avenida Santa Rosa 2639, Santiago, Chile",2026-12-16,ORD-CL-202612-002117,109932,2026-12-18,Lo Prado
+11.850.979-9,Cliente 11850979,"Avenida Tobalaba 7248, Santiago, Chile",2026-12-06,ORD-CL-202612-000783,252920,2026-12-10,Providencia
+21.208.203-8,Cliente Nuevo 21208203,"Avenida La Florida 476, Santiago, Chile",2026-12-30,ORD-CL-202612-003989,76698,2027-01-01,Lo Prado
+10.448.640-4,Cliente 10448640,"Avenida Departamental 7403, Santiago, Chile",2026-12-08,ORD-CL-202612-000989,47444,2026-12-10,Recoleta
+17.604.610-9,Cliente Nuevo 17604610,"Gran Avenida José Miguel Carrera 9698, Santiago, Chile",2026-12-22,ORD-CL-202612-002950,292162,2026-12-25,Lo Prado
+12.417.413-1,Cliente Nuevo 12417413,"Avenida Tobalaba 1937, Santiago, Chile",2026-12-27,ORD-CL-202612-003655,223437,2026-12-28,Recoleta
+15.236.104-9,Cliente 15236104,"Calle Teatinos 975, Santiago, Chile",2026-12-28,ORD-CL-202612-003710,238077,2026-12-31,San Miguel
+19.437.090-9,Cliente Nuevo 19437090,"Avenida Apoquindo 1470, Santiago, Chile",2026-12-17,ORD-CL-202612-002275,41136,2026-12-20,Santiago
+5.354.938-9,Cliente 5354938,"Calle Teatinos 2846, Santiago, Chile",2026-12-23,ORD-CL-202612-003106,195652,2026-12-27,Peñalolén
+15.332.023-4,Cliente 15332023,"Calle Catedral 6241, Santiago, Chile",2026-12-08,ORD-CL-202612-000985,115381,2026-12-11,San Miguel
+13.012.372-4,Cliente Nuevo 13012372,"Calle Catedral 6951, Santiago, Chile",2026-12-24,ORD-CL-202612-003264,173304,2026-12-28,Peñalolén
+7.941.218-7,Cliente Nuevo 7941218,"Calle Arturo Prat 2074, Santiago, Chile",2026-12-15,ORD-CL-202612-001951,180473,2026-12-17,Santiago
+21.635.241-5,Cliente 21635241,"Avenida Irarrázaval 1390, Santiago, Chile",2026-12-20,ORD-CL-202612-002646,99692,2026-12-23,Santiago
+18.535.055-4,Cliente 18535055,"Avenida Providencia 8811, Santiago, Chile",2026-12-22,ORD-CL-202612-002916,332495,2026-12-24,Santiago
+9.266.724-0,Cliente 9266724,"Avenida Apoquindo 868, Santiago, Chile",2026-12-15,ORD-CL-202612-002011,98965,2026-12-17,Lo Prado
+9.165.449-2,Cliente Nuevo 9165449,"Calle Monjitas 5755, Santiago, Chile",2026-12-14,ORD-CL-202612-001836,297863,2026-12-17,Santiago
+21.219.636-4,Cliente 21219636,"Avenida Pajaritos 3626, Santiago, Chile",2026-12-01,ORD-CL-202612-000071,88539,2026-12-03,Estación Central
+22.428.951-5,Cliente 22428951,"Avenida Matta 2839, Santiago, Chile",2026-12-03,ORD-CL-202612-000382,277111,2026-12-05,Recoleta
+21.455.475-7,Cliente Nuevo 21455475,"Calle Teatinos 7534, Santiago, Chile",2026-12-10,ORD-CL-202612-001206,84396,2026-12-13,Recoleta
+21.841.892-1,Cliente 21841892,"Avenida Kennedy 9846, Santiago, Chile",2026-12-08,ORD-CL-202612-000908,47384,2026-12-10,La Reina
+13.689.284-3,Cliente 13689284,"Calle San Diego 2653, Santiago, Chile",2026-12-25,ORD-CL-202612-003350,244217,2026-12-26,Vitacura
+13.752.238-8,Cliente 13752238,"Calle Estado 9631, Santiago, Chile",2026-12-22,ORD-CL-202612-002834,124951,2026-12-24,Santiago
+14.772.588-5,Cliente Nuevo 14772588,"Avenida Departamental 5011, Santiago, Chile",2026-12-08,ORD-CL-202612-000997,158723,2026-12-11,Independencia
+11.304.512-5,Cliente 11304512,"Avenida Recoleta 5362, Santiago, Chile",2026-12-10,ORD-CL-202612-001255,119837,2026-12-13,Peñalolén
+11.283.715-2,Cliente Nuevo 11283715,"Avenida Grecia 6574, Santiago, Chile",2026-12-26,ORD-CL-202612-003497,101902,2026-12-28,Lo Prado
+8.393.348-0,Cliente Nuevo 8393348,"Avenida Macul 7869, Santiago, Chile",2026-12-18,ORD-CL-202612-002383,229513,2026-12-19,Las Condes
+21.490.421-3,Cliente 21490421,"Calle Amunátegui 3426, Santiago, Chile",2026-12-12,ORD-CL-202612-001512,149925,2026-12-16,La Reina
+15.905.203-0,Cliente 15905203,"Calle Arturo Prat 8089, Santiago, Chile",2026-12-26,ORD-CL-202612-003506,89102,2026-12-28,Las Condes
+5.368.866-0,Cliente Nuevo 5368866,"Avenida Pedro De Valdivia 9478, Santiago, Chile",2026-12-17,ORD-CL-202612-002268,321998,2026-12-19,Puente Alto
+9.680.586-0,Cliente 9680586,"Calle Huérfanos 8101, Santiago, Chile",2026-12-16,ORD-CL-202612-002175,251617,2026-12-19,San Miguel
+19.119.546-0,Cliente 19119546,"Calle Catedral 1418, Santiago, Chile",2026-12-11,ORD-CL-202612-001409,102331,2026-12-13,Santiago
+18.545.552-1,Cliente 18545552,"Avenida La Florida 6651, Santiago, Chile",2026-12-14,ORD-CL-202612-001743,70313,2026-12-16,Santiago
+16.029.558-0,Cliente Nuevo 16029558,"Avenida Matta 5475, Santiago, Chile",2026-12-23,ORD-CL-202612-003056,336536,2026-12-25,La Florida
+14.065.283-2,Cliente 14065283,"Avenida Macul 9885, Santiago, Chile",2026-12-29,ORD-CL-202612-003868,179991,2026-12-31,Quinta Normal
+9.969.180-0,Cliente Nuevo 9969180,"Calle San Diego 6271, Santiago, Chile",2026-12-11,ORD-CL-202612-001355,306169,2026-12-14,La Reina
+9.773.714-3,Cliente Nuevo 9773714,"Avenida Matta 6450, Santiago, Chile",2026-12-12,ORD-CL-202612-001442,170228,2026-12-15,Recoleta
+6.221.285-6,Cliente 6221285,"Avenida Libertador Bernardo O'Higgins 8974, Santiago, Chile",2026-12-22,ORD-CL-202612-002879,95036,2026-12-25,Estación Central
+11.972.250-9,Cliente 11972250,"Avenida Mapocho 159, Santiago, Chile",2026-12-31,ORD-CL-202612-004040,185091,2027-01-04,Peñalolén
+11.504.160-7,Cliente 11504160,"Calle Morandé 2308, Santiago, Chile",2026-12-09,ORD-CL-202612-001110,200210,2026-12-12,La Florida
+10.332.125-2,Cliente 10332125,"Avenida Grecia 5268, Santiago, Chile",2026-12-11,ORD-CL-202612-001256,172044,2026-12-14,La Florida
+20.917.666-0,Cliente Nuevo 20917666,"Calle Teatinos 9903, Santiago, Chile",2026-12-31,ORD-CL-202612-004061,93722,2027-01-02,Estación Central
+21.129.694-4,Cliente Nuevo 21129694,"Avenida Américo Vespucio 3402, Santiago, Chile",2026-12-08,ORD-CL-202612-000945,183159,2026-12-12,La Reina
+6.782.303-1,Cliente Nuevo 6782303,"Avenida Tobalaba 7894, Santiago, Chile",2026-12-04,ORD-CL-202612-000495,194565,2026-12-06,Estación Central
+10.461.970-9,Cliente 10461970,"Calle Catedral 3069, Santiago, Chile",2026-12-22,ORD-CL-202612-002955,110065,2026-12-24,Santiago
+18.278.841-3,Cliente Nuevo 18278841,"Avenida Providencia 1084, Santiago, Chile",2026-12-06,ORD-CL-202612-000789,176576,2026-12-09,Santiago
+15.029.322-2,Cliente 15029322,"Avenida Irarrázaval 3307, Santiago, Chile",2026-12-11,ORD-CL-202612-001293,127959,2026-12-14,Vitacura
+5.472.652-1,Cliente 5472652,"Calle Amunátegui 3124, Santiago, Chile",2026-12-04,ORD-CL-202612-000490,250404,2026-12-06,Vitacura
+15.301.216-5,Cliente 15301216,"Avenida Vicuña Mackenna 8405, Santiago, Chile",2026-12-23,ORD-CL-202612-003043,69714,2026-12-25,Peñalolén
+10.233.089-4,Cliente Nuevo 10233089,"Calle Compañía De Jesús 1161, Santiago, Chile",2026-12-16,ORD-CL-202612-002195,153868,2026-12-18,Independencia
+18.305.966-9,Cliente 18305966,"Calle San Antonio 8832, Santiago, Chile",2026-12-23,ORD-CL-202612-003122,278943,2026-12-27,Lo Prado
+8.878.523-4,Cliente Nuevo 8878523,"Avenida Manuel Montt 5813, Santiago, Chile",2026-12-22,ORD-CL-202612-002827,212398,2026-12-24,Peñalolén
+11.629.931-6,Cliente Nuevo 11629931,"Avenida Macul 3293, Santiago, Chile",2026-12-06,ORD-CL-202612-000759,142718,2026-12-09,Santiago
+10.442.370-7,Cliente Nuevo 10442370,"Calle Huérfanos 2125, Santiago, Chile",2026-12-30,ORD-CL-202612-003885,195820,2027-01-02,San Miguel
+7.136.434-3,Cliente Nuevo 7136434,"Calle Compañía De Jesús 4206, Santiago, Chile",2026-12-08,ORD-CL-202612-000887,111113,2026-12-11,Las Condes
+20.071.065-7,Cliente Nuevo 20071065,"Calle Compañía De Jesús 2750, Santiago, Chile",2026-12-23,ORD-CL-202612-003026,80172,2026-12-25,La Florida
+15.381.448-9,Cliente Nuevo 15381448,"Avenida Pajaritos 3649, Santiago, Chile",2026-12-15,ORD-CL-202612-001984,175534,2026-12-18,Santiago
+8.876.027-1,Cliente Nuevo 8876027,"Calle Morandé 3445, Santiago, Chile",2026-12-10,ORD-CL-202612-001133,182205,2026-12-11,Santiago
+17.416.421-8,Cliente 17416421,"Avenida Libertador Bernardo O'Higgins 8614, Santiago, Chile",2026-12-22,ORD-CL-202612-002968,68517,2026-12-26,Puente Alto
+8.803.300-4,Cliente Nuevo 8803300,"Calle Compañía De Jesús 7400, Santiago, Chile",2026-12-19,ORD-CL-202612-002415,52858,2026-12-23,San Miguel
+19.566.156-0,Cliente Nuevo 19566156,"Calle Compañía De Jesús 2790, Santiago, Chile",2026-12-31,ORD-CL-202612-004129,194309,2027-01-03,La Reina
+20.762.176-8,Cliente 20762176,"Avenida Recoleta 7823, Santiago, Chile",2026-12-16,ORD-CL-202612-002149,308254,2026-12-19,La Florida
+19.773.132-3,Cliente Nuevo 19773132,"Avenida Apoquindo 3229, Santiago, Chile",2026-12-19,ORD-CL-202612-002445,223895,2026-12-21,La Florida
+9.727.696-0,Cliente Nuevo 9727696,"Avenida Pajaritos 2452, Santiago, Chile",2026-12-10,ORD-CL-202612-001160,266809,2026-12-12,La Florida
+9.212.565-7,Cliente Nuevo 9212565,"Avenida Santa Rosa 7074, Santiago, Chile",2026-12-04,ORD-CL-202612-000412,234489,2026-12-07,Lo Prado
+13.181.020-0,Cliente Nuevo 13181020,"Avenida La Florida 3952, Santiago, Chile",2026-12-07,ORD-CL-202612-000796,131049,2026-12-11,Vitacura
+19.069.396-2,Cliente 19069396,"Avenida Mapocho 4491, Santiago, Chile",2026-12-10,ORD-CL-202612-001214,68465,2026-12-13,San Miguel
+11.853.776-8,Cliente 11853776,"Calle Catedral 3304, Santiago, Chile",2026-12-08,ORD-CL-202612-000932,286575,2026-12-12,Quinta Normal
+11.702.770-0,Cliente 11702770,"Calle Merced 4278, Santiago, Chile",2026-12-12,ORD-CL-202612-001479,175311,2026-12-15,Santiago
+6.221.285-6,Cliente 6221285,"Avenida Libertador Bernardo O'Higgins 8974, Santiago, Chile",2026-12-27,ORD-CL-202612-003642,268343,2026-12-30,Estación Central
+14.653.027-7,Cliente Nuevo 14653027,"Avenida Departamental 9744, Santiago, Chile",2026-12-10,ORD-CL-202612-001239,100908,2026-12-12,Lo Prado
+11.129.072-4,Cliente 11129072,"Avenida Departamental 6137, Santiago, Chile",2026-12-01,ORD-CL-202612-000058,192878,2026-12-04,Recoleta
+13.487.640-4,Cliente Nuevo 13487640,"Calle Bandera 589, Santiago, Chile",2026-12-22,ORD-CL-202612-002901,118368,2026-12-24,Las Condes
+18.489.688-3,Cliente 18489688,"Avenida Kennedy 5660, Santiago, Chile",2026-12-25,ORD-CL-202612-003344,148797,2026-12-28,Estación Central
+6.946.263-4,Cliente 6946263,"Avenida Manuel Montt 2881, Santiago, Chile",2026-12-05,ORD-CL-202612-000519,106735,2026-12-09,Quinta Normal
+15.053.679-6,Cliente Nuevo 15053679,"Calle Arturo Prat 2917, Santiago, Chile",2026-12-10,ORD-CL-202612-001124,170138,2026-12-11,Santiago
+5.138.738-6,Cliente Nuevo 5138738,"Avenida Independencia 4810, Santiago, Chile",2026-12-01,ORD-CL-202612-000187,156899,2026-12-03,Puente Alto
+16.111.501-1,Cliente Nuevo 16111501,"Avenida Mapocho 2352, Santiago, Chile",2026-12-02,ORD-CL-202612-000224,275701,2026-12-05,Recoleta
+10.758.460-8,Cliente 10758460,"Calle Estado 1128, Santiago, Chile",2026-12-28,ORD-CL-202612-003724,251866,2026-12-29,Puente Alto
+13.948.753-2,Cliente 13948753,"Avenida Irarrázaval 4826, Santiago, Chile",2026-12-10,ORD-CL-202612-001197,93416,2026-12-12,San Miguel
+11.580.340-6,Cliente Nuevo 11580340,"Avenida Grecia 9490, Santiago, Chile",2026-12-22,ORD-CL-202612-002857,243321,2026-12-25,Estación Central
+13.767.793-9,Cliente Nuevo 13767793,"Calle Amunátegui 9147, Santiago, Chile",2026-12-25,ORD-CL-202612-003296,69132,2026-12-26,Quinta Normal
+5.548.910-5,Cliente Nuevo 5548910,"Avenida Vicuña Mackenna 6287, Santiago, Chile",2026-12-19,ORD-CL-202612-002613,120610,2026-12-20,Santiago
+19.296.520-0,Cliente Nuevo 19296520,"Calle Teatinos 7786, Santiago, Chile",2026-12-23,ORD-CL-202612-003084,175353,2026-12-27,La Reina
+6.469.530-0,Cliente Nuevo 6469530,"Avenida Santa Rosa 6756, Santiago, Chile",2026-12-24,ORD-CL-202612-003175,269794,2026-12-25,Recoleta
+14.004.174-2,Cliente 14004174,"Avenida Kennedy 5560, Santiago, Chile",2026-12-04,ORD-CL-202612-000421,196348,2026-12-06,Santiago
+16.445.432-1,Cliente Nuevo 16445432,"Avenida Santa Rosa 8652, Santiago, Chile",2026-12-01,ORD-CL-202612-000051,331791,2026-12-05,Peñalolén
+5.306.445-1,Cliente Nuevo 5306445,"Avenida Tobalaba 4027, Santiago, Chile",2026-12-18,ORD-CL-202612-002352,216252,2026-12-20,Recoleta
+13.651.938-0,Cliente 13651938,"Calle Morandé 1676, Santiago, Chile",2026-12-10,ORD-CL-202612-001165,201661,2026-12-13,Quinta Normal
+22.537.714-9,Cliente 22537714,"Calle Amunátegui 8339, Santiago, Chile",2026-12-15,ORD-CL-202612-001923,196727,2026-12-19,Puente Alto
+19.805.203-9,Cliente 19805203,"Calle Santo Domingo 7873, Santiago, Chile",2026-12-15,ORD-CL-202612-001961,90725,2026-12-17,Santiago
+17.256.565-4,Cliente Nuevo 17256565,"Calle Morandé 2970, Santiago, Chile",2026-12-14,ORD-CL-202612-001805,149365,2026-12-15,San Miguel
+10.902.419-0,Cliente 10902419,"Avenida Santa Rosa 3238, Santiago, Chile",2026-12-11,ORD-CL-202612-001396,129147,2026-12-15,La Florida
+8.803.300-4,Cliente Nuevo 8803300,"Calle Compañía De Jesús 7400, Santiago, Chile",2026-12-06,ORD-CL-202612-000756,78838,2026-12-08,San Miguel
+21.455.475-7,Cliente Nuevo 21455475,"Calle Teatinos 7534, Santiago, Chile",2026-12-02,ORD-CL-202612-000211,211760,2026-12-05,Recoleta
+5.941.416-4,Cliente Nuevo 5941416,"Avenida Santa Rosa 9440, Santiago, Chile",2026-12-09,ORD-CL-202612-001035,185643,2026-12-11,Lo Prado
+15.236.104-9,Cliente 15236104,"Calle Teatinos 975, Santiago, Chile",2026-12-15,ORD-CL-202612-001957,234369,2026-12-16,San Miguel
+13.963.434-1,Cliente Nuevo 13963434,"Calle San Diego 3902, Santiago, Chile",2026-12-04,ORD-CL-202612-000468,179445,2026-12-06,La Reina
+17.170.812-3,Cliente Nuevo 17170812,"Avenida Santa Rosa 5583, Santiago, Chile",2026-12-02,ORD-CL-202612-000268,149766,2026-12-05,Santiago
+9.838.273-9,Cliente Nuevo 9838273,"Calle Amunátegui 1717, Santiago, Chile",2026-12-13,ORD-CL-202612-001642,92840,2026-12-15,Santiago
+17.917.635-0,Cliente 17917635,"Avenida Apoquindo 6480, Santiago, Chile",2026-12-15,ORD-CL-202612-002015,90060,2026-12-17,Recoleta
+8.829.317-5,Cliente 8829317,"Avenida Providencia 4618, Santiago, Chile",2026-12-03,ORD-CL-202612-000304,141062,2026-12-05,La Reina
+19.116.035-0,Cliente 19116035,"Calle Amunátegui 6560, Santiago, Chile",2026-12-18,ORD-CL-202612-002364,221778,2026-12-21,Vitacura
+8.409.181-1,Cliente Nuevo 8409181,"Avenida Irarrázaval 5147, Santiago, Chile",2026-12-19,ORD-CL-202612-002579,154492,2026-12-21,Quinta Normal
+12.242.451-7,Cliente Nuevo 12242451,"Calle Huérfanos 2452, Santiago, Chile",2026-12-21,ORD-CL-202612-002812,147744,2026-12-23,Las Condes
+18.703.849-2,Cliente 18703849,"Calle San Antonio 5691, Santiago, Chile",2026-12-02,ORD-CL-202612-000220,88017,2026-12-06,Quinta Normal
+19.568.555-7,Cliente Nuevo 19568555,"Avenida Tobalaba 3001, Santiago, Chile",2026-12-05,ORD-CL-202612-000622,97435,2026-12-08,Peñalolén
+5.910.073-3,Cliente Nuevo 5910073,"Avenida Las Condes 5618, Santiago, Chile",2026-12-05,ORD-CL-202612-000612,82093,2026-12-08,Vitacura
+11.024.541-6,Cliente Nuevo 11024541,"Avenida Irarrázaval 3003, Santiago, Chile",2026-12-17,ORD-CL-202612-002306,311047,2026-12-21,Recoleta
+15.768.838-4,Cliente 15768838,"Calle Catedral 2422, Santiago, Chile",2026-12-26,ORD-CL-202612-003521,57631,2026-12-29,Vitacura
+9.610.956-8,Cliente Nuevo 9610956,"Avenida Apoquindo 3723, Santiago, Chile",2026-12-03,ORD-CL-202612-000349,260256,2026-12-06,Quinta Normal
+19.779.462-2,Cliente 19779462,"Calle Huérfanos 3861, Santiago, Chile",2026-12-27,ORD-CL-202612-003632,125589,2026-12-28,San Miguel
+10.796.031-2,Cliente 10796031,"Avenida Pajaritos 9591, Santiago, Chile",2026-12-04,ORD-CL-202612-000486,233350,2026-12-06,Santiago
+7.932.926-3,Cliente 7932926,"Calle Estado 5553, Santiago, Chile",2026-12-17,ORD-CL-202612-002286,240670,2026-12-18,Puente Alto
+12.601.622-7,Cliente Nuevo 12601622,"Calle Arturo Prat 1061, Santiago, Chile",2026-12-13,ORD-CL-202612-001705,260777,2026-12-15,Quinta Normal
+7.648.841-2,Cliente Nuevo 7648841,"Avenida Manuel Montt 4025, Santiago, Chile",2026-12-27,ORD-CL-202612-003577,139973,2026-12-30,Santiago
+20.433.969-2,Cliente 20433969,"Avenida Providencia 8885, Santiago, Chile",2026-12-24,ORD-CL-202612-003194,97391,2026-12-25,Santiago
+20.754.517-6,Cliente Nuevo 20754517,"Calle Compañía De Jesús 2778, Santiago, Chile",2026-12-19,ORD-CL-202612-002534,155439,2026-12-21,La Reina
+19.078.012-7,Cliente 19078012,"Calle Amunátegui 5542, Santiago, Chile",2026-12-08,ORD-CL-202612-000925,201266,2026-12-12,Estación Central
+10.144.560-6,Cliente Nuevo 10144560,"Calle Arturo Prat 7831, Santiago, Chile",2026-12-16,ORD-CL-202612-002141,104549,2026-12-18,Las Condes
+16.928.013-6,Cliente 16928013,"Calle Estado 4566, Santiago, Chile",2026-12-25,ORD-CL-202612-003376,172040,2026-12-29,Santiago
+19.569.692-1,Cliente Nuevo 19569692,"Calle Monjitas 1204, Santiago, Chile",2026-12-14,ORD-CL-202612-001846,129044,2026-12-19,Vitacura
+5.668.801-2,Cliente 5668801,"Avenida Tobalaba 976, Santiago, Chile",2026-12-14,ORD-CL-202612-001814,86758,2026-12-16,Estación Central
+17.255.238-2,Cliente Nuevo 17255238,"Gran Avenida José Miguel Carrera 2391, Santiago, Chile",2026-12-10,ORD-CL-202612-001218,153542,2026-12-12,La Reina
+14.921.076-6,Cliente Nuevo 14921076,"Calle San Antonio 4837, Santiago, Chile",2026-12-30,ORD-CL-202612-003942,95837,2027-01-01,Independencia
+19.708.200-2,Cliente Nuevo 19708200,"Calle Monjitas 7397, Santiago, Chile",2026-12-14,ORD-CL-202612-001757,277589,2026-12-17,Estación Central
+7.995.605-2,Cliente Nuevo 7995605,"Avenida La Florida 4780, Santiago, Chile",2026-12-27,ORD-CL-202612-003616,164104,2026-12-30,Santiago
+20.620.285-0,Cliente 20620285,"Avenida Libertador Bernardo O'Higgins 3848, Santiago, Chile",2026-12-18,ORD-CL-202612-002330,158345,2026-12-19,Las Condes
+5.518.697-7,Cliente Nuevo 5518697,"Avenida Vitacura 9543, Santiago, Chile",2026-12-19,ORD-CL-202612-002544,144009,2026-12-21,Peñalolén
+19.694.095-4,Cliente 19694095,"Avenida Independencia 2139, Santiago, Chile",2026-12-02,ORD-CL-202612-000247,197881,2026-12-04,Independencia
+10.572.548-1,Cliente Nuevo 10572548,"Avenida Pajaritos 5937, Santiago, Chile",2026-12-19,ORD-CL-202612-002498,136081,2026-12-21,Quinta Normal
+5.535.738-4,Cliente 5535738,"Calle Bandera 5032, Santiago, Chile",2026-12-23,ORD-CL-202612-003032,147860,2026-12-25,Puente Alto
+18.485.626-3,Cliente Nuevo 18485626,"Calle Monjitas 5985, Santiago, Chile",2026-12-03,ORD-CL-202612-000407,188529,2026-12-05,Vitacura
+15.384.499-0,Cliente 15384499,"Calle San Antonio 9427, Santiago, Chile",2026-12-07,ORD-CL-202612-000852,179996,2026-12-09,Puente Alto
+8.903.235-0,Cliente 8903235,"Avenida Santa Rosa 373, Santiago, Chile",2026-12-19,ORD-CL-202612-002563,68539,2026-12-21,Independencia
+8.164.057-6,Cliente Nuevo 8164057,"Avenida Libertador Bernardo O'Higgins 4908, Santiago, Chile",2026-12-07,ORD-CL-202612-000865,86740,2026-12-10,San Miguel
+6.366.892-2,Cliente 6366892,"Avenida Vicuña Mackenna 9416, Santiago, Chile",2026-12-28,ORD-CL-202612-003729,65611,2026-12-30,La Reina
+13.810.979-2,Cliente Nuevo 13810979,"Avenida Kennedy 7247, Santiago, Chile",2026-12-20,ORD-CL-202612-002706,48188,2026-12-23,Santiago
+22.359.273-4,Cliente Nuevo 22359273,"Avenida Manuel Montt 8349, Santiago, Chile",2026-12-03,ORD-CL-202612-000333,101902,2026-12-07,Peñalolén
+15.949.317-5,Cliente Nuevo 15949317,"Calle Monjitas 1312, Santiago, Chile",2026-12-06,ORD-CL-202612-000644,244258,2026-12-09,Las Condes
+5.926.306-5,Cliente Nuevo 5926306,"Avenida Departamental 1364, Santiago, Chile",2026-12-08,ORD-CL-202612-000983,226066,2026-12-12,Estación Central
+15.118.916-1,Cliente Nuevo 15118916,"Avenida Vicuña Mackenna 3841, Santiago, Chile",2026-12-06,ORD-CL-202612-000712,164261,2026-12-10,Las Condes
+16.640.561-3,Cliente Nuevo 16640561,"Avenida Independencia 398, Santiago, Chile",2026-12-17,ORD-CL-202612-002261,248949,2026-12-18,Santiago
+5.834.790-3,Cliente Nuevo 5834790,"Avenida Independencia 8147, Santiago, Chile",2026-12-03,ORD-CL-202612-000308,197345,2026-12-06,La Reina
+17.547.435-3,Cliente Nuevo 17547435,"Avenida Irarrázaval 2033, Santiago, Chile",2026-12-06,ORD-CL-202612-000642,195733,2026-12-10,Santiago
+18.195.149-6,Cliente 18195149,"Avenida Pajaritos 5435, Santiago, Chile",2026-12-01,ORD-CL-202612-000011,140619,2026-12-03,Santiago
+14.400.329-4,Cliente Nuevo 14400329,"Calle Bandera 3669, Santiago, Chile",2026-12-13,ORD-CL-202612-001674,87164,2026-12-16,Las Condes
+7.959.733-1,Cliente 7959733,"Avenida Kennedy 3031, Santiago, Chile",2026-12-25,ORD-CL-202612-003314,284776,2026-12-29,Vitacura
+11.704.104-4,Cliente Nuevo 11704104,"Calle Estado 8684, Santiago, Chile",2026-12-21,ORD-CL-202612-002824,229948,2026-12-23,Vitacura
+18.290.345-3,Cliente Nuevo 18290345,"Calle Amunátegui 8098, Santiago, Chile",2026-12-19,ORD-CL-202612-002433,307327,2026-12-21,Santiago
+5.318.872-4,Cliente Nuevo 5318872,"Gran Avenida José Miguel Carrera 5847, Santiago, Chile",2026-12-15,ORD-CL-202612-001925,114847,2026-12-17,Peñalolén
+8.434.384-1,Cliente Nuevo 8434384,"Avenida Irarrázaval 4347, Santiago, Chile",2026-12-10,ORD-CL-202612-001193,89733,2026-12-13,Peñalolén
+16.554.800-3,Cliente 16554800,"Calle Estado 7420, Santiago, Chile",2026-12-01,ORD-CL-202612-000134,98029,2026-12-04,San Miguel
+10.412.066-2,Cliente 10412066,"Gran Avenida José Miguel Carrera 3362, Santiago, Chile",2026-12-08,ORD-CL-202612-000949,140619,2026-12-11,Santiago
+5.882.244-8,Cliente Nuevo 5882244,"Calle Merced 8895, Santiago, Chile",2026-12-10,ORD-CL-202612-001181,196043,2026-12-13,Quinta Normal
+18.090.741-8,Cliente 18090741,"Calle Estado 4482, Santiago, Chile",2026-12-22,ORD-CL-202612-002896,265729,2026-12-25,La Florida
+14.435.199-1,Cliente Nuevo 14435199,"Calle Catedral 5780, Santiago, Chile",2026-12-10,ORD-CL-202612-001159,145031,2026-12-12,Las Condes
+21.546.217-3,Cliente Nuevo 21546217,"Avenida Pedro De Valdivia 8264, Santiago, Chile",2026-12-22,ORD-CL-202612-002880,249482,2026-12-26,Puente Alto
+11.154.943-7,Cliente Nuevo 11154943,"Avenida Pedro De Valdivia 3187, Santiago, Chile",2026-12-15,ORD-CL-202612-001860,212436,2026-12-17,Providencia
+14.077.834-4,Cliente 14077834,"Calle San Diego 9330, Santiago, Chile",2026-12-03,ORD-CL-202612-000292,94531,2026-12-06,Lo Prado
+18.136.533-6,Cliente 18136533,"Avenida Libertador Bernardo O'Higgins 1045, Santiago, Chile",2026-12-31,ORD-CL-202612-004127,202161,2027-01-02,Santiago
+7.641.766-6,Cliente Nuevo 7641766,"Calle Arturo Prat 7970, Santiago, Chile",2026-12-08,ORD-CL-202612-000957,188141,2026-12-10,Providencia
+15.420.688-3,Cliente Nuevo 15420688,"Avenida Tobalaba 4107, Santiago, Chile",2026-12-23,ORD-CL-202612-003054,140364,2026-12-25,Santiago
+15.020.480-2,Cliente 15020480,"Avenida Santa Rosa 5687, Santiago, Chile",2026-12-19,ORD-CL-202612-002561,146739,2026-12-21,Independencia
+13.663.004-0,Cliente 13663004,"Avenida Vicuña Mackenna 9400, Santiago, Chile",2026-12-19,ORD-CL-202612-002416,97227,2026-12-20,Peñalolén
+18.886.428-9,Cliente 18886428,"Avenida Apoquindo 2126, Santiago, Chile",2026-12-20,ORD-CL-202612-002709,84368,2026-12-22,Lo Prado
+15.706.390-3,Cliente Nuevo 15706390,"Calle Compañía De Jesús 5396, Santiago, Chile",2026-12-07,ORD-CL-202612-000811,258735,2026-12-10,La Florida
+14.775.032-2,Cliente 14775032,"Avenida Departamental 2113, Santiago, Chile",2026-12-31,ORD-CL-202612-004172,177125,2027-01-04,Estación Central
+11.781.750-3,Cliente 11781750,"Gran Avenida José Miguel Carrera 9176, Santiago, Chile",2026-12-04,ORD-CL-202612-000471,72905,2026-12-06,Santiago
+19.174.623-5,Cliente 19174623,"Avenida Recoleta 598, Santiago, Chile",2026-12-17,ORD-CL-202612-002231,225727,2026-12-20,Peñalolén
+9.773.767-8,Cliente 9773767,"Avenida La Florida 7492, Santiago, Chile",2026-12-26,ORD-CL-202612-003487,232739,2026-12-28,Santiago
+7.686.618-4,Cliente 7686618,"Calle Catedral 8449, Santiago, Chile",2026-12-24,ORD-CL-202612-003244,73019,2026-12-28,Santiago
+14.464.405-0,Cliente Nuevo 14464405,"Avenida Apoquindo 4174, Santiago, Chile",2026-12-28,ORD-CL-202612-003682,143886,2026-12-30,Independencia
+10.907.998-7,Cliente 10907998,"Avenida Manuel Montt 2218, Santiago, Chile",2026-12-09,ORD-CL-202612-001089,52876,2026-12-11,San Miguel
+14.319.883-1,Cliente 14319883,"Avenida Matta 5936, Santiago, Chile",2026-12-05,ORD-CL-202612-000583,128047,2026-12-08,Puente Alto
+7.686.618-4,Cliente 7686618,"Calle Catedral 8449, Santiago, Chile",2026-12-03,ORD-CL-202612-000293,324324,2026-12-07,Santiago
+21.032.981-1,Cliente 21032981,"Calle Huérfanos 3562, Santiago, Chile",2026-12-31,ORD-CL-202612-004170,239246,2027-01-02,Lo Prado
+9.773.714-3,Cliente Nuevo 9773714,"Avenida Matta 6450, Santiago, Chile",2026-12-06,ORD-CL-202612-000680,127157,2026-12-08,Recoleta
+13.033.877-0,Cliente Nuevo 13033877,"Avenida Pedro De Valdivia 9814, Santiago, Chile",2026-12-30,ORD-CL-202612-003997,169089,2027-01-01,Lo Prado
+16.265.227-8,Cliente 16265227,"Avenida Recoleta 8905, Santiago, Chile",2026-12-28,ORD-CL-202612-003803,143379,2026-12-31,Providencia
+16.554.800-3,Cliente 16554800,"Calle Estado 7420, Santiago, Chile",2026-12-26,ORD-CL-202612-003527,99020,2026-12-28,San Miguel
+20.138.936-5,Cliente Nuevo 20138936,"Avenida Apoquindo 5952, Santiago, Chile",2026-12-10,ORD-CL-202612-001183,140201,2026-12-12,La Reina
+6.852.110-4,Cliente 6852110,"Avenida Macul 3599, Santiago, Chile",2026-12-14,ORD-CL-202612-001799,168100,2026-12-16,Recoleta
+12.698.104-2,Cliente Nuevo 12698104,"Calle Estado 6949, Santiago, Chile",2026-12-05,ORD-CL-202612-000510,85275,2026-12-08,La Florida
+18.031.371-2,Cliente 18031371,"Avenida Mapocho 1103, Santiago, Chile",2026-12-15,ORD-CL-202612-001920,176259,2026-12-17,Santiago
+9.159.574-0,Cliente 9159574,"Gran Avenida José Miguel Carrera 6581, Santiago, Chile",2026-12-21,ORD-CL-202612-002821,104585,2026-12-23,Las Condes
+14.503.617-7,Cliente 14503617,"Avenida Tobalaba 5892, Santiago, Chile",2026-12-10,ORD-CL-202612-001246,96027,2026-12-14,Quinta Normal
+18.377.372-5,Cliente Nuevo 18377372,"Avenida Vicuña Mackenna 3942, Santiago, Chile",2026-12-22,ORD-CL-202612-002867,90471,2026-12-24,San Miguel
+18.617.683-9,Cliente Nuevo 18617683,"Calle Estado 8845, Santiago, Chile",2026-12-27,ORD-CL-202612-003635,91662,2026-12-30,Estación Central
+10.563.003-7,Cliente 10563003,"Avenida La Florida 4625, Santiago, Chile",2026-12-28,ORD-CL-202612-003722,70052,2026-12-30,Santiago
+8.829.317-5,Cliente 8829317,"Avenida Providencia 4618, Santiago, Chile",2026-12-16,ORD-CL-202612-002050,72666,2026-12-20,La Reina
+11.162.255-0,Cliente 11162255,"Calle Amunátegui 8155, Santiago, Chile",2026-12-31,ORD-CL-202612-004114,136887,2027-01-02,Recoleta
+13.006.020-8,Cliente 13006020,"Calle Huérfanos 6157, Santiago, Chile",2026-12-15,ORD-CL-202612-002023,82537,2026-12-17,Las Condes
+11.338.808-7,Cliente Nuevo 11338808,"Avenida Américo Vespucio 6368, Santiago, Chile",2026-12-14,ORD-CL-202612-001794,214144,2026-12-17,Santiago
+22.445.445-9,Cliente 22445445,"Avenida Kennedy 7707, Santiago, Chile",2026-12-03,ORD-CL-202612-000330,198294,2026-12-07,Providencia
+18.508.916-4,Cliente 18508916,"Calle Morandé 700, Santiago, Chile",2026-12-19,ORD-CL-202612-002450,240789,2026-12-23,Estación Central
+20.940.087-2,Cliente Nuevo 20940087,"Avenida Pajaritos 5193, Santiago, Chile",2026-12-27,ORD-CL-202612-003667,262088,2026-12-30,Santiago
+10.370.382-5,Cliente 10370382,"Avenida Vitacura 7462, Santiago, Chile",2026-12-14,ORD-CL-202612-001770,196885,2026-12-17,Vitacura
+8.852.247-3,Cliente 8852247,"Calle Amunátegui 3636, Santiago, Chile",2026-12-24,ORD-CL-202612-003217,136287,2026-12-27,Independencia
+9.070.055-1,Cliente 9070055,"Avenida Vicuña Mackenna 3035, Santiago, Chile",2026-12-19,ORD-CL-202612-002473,166076,2026-12-22,Lo Prado
+8.829.317-5,Cliente 8829317,"Avenida Providencia 4618, Santiago, Chile",2026-12-09,ORD-CL-202612-001026,157066,2026-12-13,La Reina
+17.918.205-5,Cliente Nuevo 17918205,"Avenida Manuel Montt 2121, Santiago, Chile",2026-12-25,ORD-CL-202612-003274,253035,2026-12-27,Peñalolén
+7.894.878-8,Cliente Nuevo 7894878,"Calle Huérfanos 6471, Santiago, Chile",2026-12-03,ORD-CL-202612-000375,79018,2026-12-04,Quinta Normal
+8.402.871-2,Cliente Nuevo 8402871,"Avenida Recoleta 1088, Santiago, Chile",2026-12-30,ORD-CL-202612-003935,166093,2027-01-01,Puente Alto
+19.869.239-1,Cliente Nuevo 19869239,"Avenida Matta 8387, Santiago, Chile",2026-12-21,ORD-CL-202612-002762,120160,2026-12-23,Providencia
+14.299.456-2,Cliente Nuevo 14299456,"Calle San Antonio 8089, Santiago, Chile",2026-12-18,ORD-CL-202612-002357,253981,2026-12-20,La Reina
+9.709.625-6,Cliente Nuevo 9709625,"Calle Arturo Prat 2589, Santiago, Chile",2026-12-19,ORD-CL-202612-002405,129364,2026-12-21,Peñalolén
+15.236.104-9,Cliente 15236104,"Calle Teatinos 975, Santiago, Chile",2026-12-01,ORD-CL-202612-000085,299317,2026-12-03,San Miguel
+12.660.541-2,Cliente 12660541,"Calle Arturo Prat 4097, Santiago, Chile",2026-12-21,ORD-CL-202612-002754,78035,2026-12-24,Santiago
+21.015.076-2,Cliente 21015076,"Avenida Departamental 1600, Santiago, Chile",2026-12-09,ORD-CL-202612-001104,86767,2026-12-12,Las Condes
+19.502.629-7,Cliente 19502629,"Calle Amunátegui 3822, Santiago, Chile",2026-12-30,ORD-CL-202612-003916,79905,2027-01-04,Santiago
+8.164.057-6,Cliente Nuevo 8164057,"Avenida Libertador Bernardo O'Higgins 4908, Santiago, Chile",2026-12-30,ORD-CL-202612-003998,144001,2027-01-01,San Miguel
+21.546.217-3,Cliente Nuevo 21546217,"Avenida Pedro De Valdivia 8264, Santiago, Chile",2026-12-06,ORD-CL-202612-000718,141453,2026-12-08,Puente Alto
+19.949.560-0,Cliente Nuevo 19949560,"Calle Merced 969, Santiago, Chile",2026-12-27,ORD-CL-202612-003657,262447,2026-12-30,Puente Alto
+17.990.944-4,Cliente 17990944,"Calle Huérfanos 5579, Santiago, Chile",2026-12-16,ORD-CL-202612-002126,113300,2026-12-20,Recoleta
+22.570.788-8,Cliente 22570788,"Calle Morandé 2222, Santiago, Chile",2026-12-20,ORD-CL-202612-002669,201133,2026-12-24,Vitacura
+10.070.774-1,Cliente Nuevo 10070774,"Avenida Independencia 822, Santiago, Chile",2026-12-26,ORD-CL-202612-003510,77617,2026-12-29,Estación Central
+16.541.622-3,Cliente 16541622,"Calle Estado 2481, Santiago, Chile",2026-12-27,ORD-CL-202612-003633,300097,2026-12-29,San Miguel
+6.438.229-6,Cliente 6438229,"Calle Merced 6576, Santiago, Chile",2026-12-06,ORD-CL-202612-000744,193099,2026-12-08,Puente Alto
+13.017.820-2,Cliente Nuevo 13017820,"Avenida Apoquindo 6239, Santiago, Chile",2026-12-19,ORD-CL-202612-002398,176212,2026-12-21,La Reina
+20.617.357-1,Cliente 20617357,"Avenida Apoquindo 8523, Santiago, Chile",2026-12-25,ORD-CL-202612-003358,148151,2026-12-29,Las Condes
+16.285.363-4,Cliente Nuevo 16285363,"Calle Merced 3010, Santiago, Chile",2026-12-19,ORD-CL-202612-002601,61796,2026-12-22,Santiago
+12.668.481-4,Cliente Nuevo 12668481,"Calle Compañía De Jesús 326, Santiago, Chile",2026-12-26,ORD-CL-202612-003486,53805,2026-12-31,Estación Central
+18.429.138-2,Cliente 18429138,"Calle Merced 6618, Santiago, Chile",2026-12-03,ORD-CL-202612-000374,98122,2026-12-06,Santiago
+13.905.591-0,Cliente Nuevo 13905591,"Avenida Irarrázaval 7578, Santiago, Chile",2026-12-15,ORD-CL-202612-001926,104996,2026-12-17,Providencia
+19.816.210-6,Cliente Nuevo 19816210,"Avenida Grecia 5903, Santiago, Chile",2026-12-12,ORD-CL-202612-001426,140187,2026-12-14,Santiago
+6.466.103-7,Cliente 6466103,"Calle San Antonio 7911, Santiago, Chile",2026-12-27,ORD-CL-202612-003650,117111,2026-12-29,Santiago
+16.629.884-3,Cliente Nuevo 16629884,"Avenida Vitacura 5933, Santiago, Chile",2026-12-11,ORD-CL-202612-001366,142838,2026-12-14,Estación Central
+20.343.616-1,Cliente Nuevo 20343616,"Avenida Providencia 5117, Santiago, Chile",2026-12-11,ORD-CL-202612-001316,154953,2026-12-13,Santiago
+10.419.414-1,Cliente Nuevo 10419414,"Avenida Providencia 1261, Santiago, Chile",2026-12-21,ORD-CL-202612-002745,175396,2026-12-23,La Florida
+19.119.886-0,Cliente Nuevo 19119886,"Avenida Irarrázaval 2943, Santiago, Chile",2026-12-04,ORD-CL-202612-000429,112449,2026-12-07,Peñalolén
+16.285.363-4,Cliente Nuevo 16285363,"Calle Merced 3010, Santiago, Chile",2026-12-06,ORD-CL-202612-000659,74454,2026-12-08,Santiago
+14.976.009-2,Cliente 14976009,"Avenida La Florida 9733, Santiago, Chile",2026-12-11,ORD-CL-202612-001351,62658,2026-12-13,Providencia
+5.830.906-5,Cliente Nuevo 5830906,"Avenida Irarrázaval 6181, Santiago, Chile",2026-12-27,ORD-CL-202612-003638,123274,2026-12-31,Santiago
+21.723.297-3,Cliente 21723297,"Avenida Pedro De Valdivia 6852, Santiago, Chile",2026-12-22,ORD-CL-202612-002842,143131,2026-12-27,Recoleta
+14.417.563-0,Cliente 14417563,"Gran Avenida José Miguel Carrera 2906, Santiago, Chile",2026-12-16,ORD-CL-202612-002030,250575,2026-12-21,Santiago
+18.505.871-0,Cliente 18505871,"Calle Catedral 9619, Santiago, Chile",2026-12-23,ORD-CL-202612-003036,93032,2026-12-26,La Florida
+7.972.328-1,Cliente 7972328,"Avenida La Florida 9292, Santiago, Chile",2026-12-20,ORD-CL-202612-002714,240805,2026-12-23,Independencia
+18.136.533-6,Cliente 18136533,"Avenida Libertador Bernardo O'Higgins 1045, Santiago, Chile",2026-12-13,ORD-CL-202612-001641,132830,2026-12-16,Santiago
+14.065.283-2,Cliente 14065283,"Avenida Macul 9885, Santiago, Chile",2026-12-31,ORD-CL-202612-004178,145162,2027-01-02,Quinta Normal
+14.310.620-8,Cliente Nuevo 14310620,"Calle Santo Domingo 5170, Santiago, Chile",2026-12-01,ORD-CL-202612-000151,229807,2026-12-02,Recoleta
+20.550.215-3,Cliente Nuevo 20550215,"Calle Estado 1257, Santiago, Chile",2026-12-25,ORD-CL-202612-003326,202171,2026-12-26,Estación Central
+19.116.035-0,Cliente 19116035,"Calle Amunátegui 6560, Santiago, Chile",2026-12-03,ORD-CL-202612-000361,158587,2026-12-06,Vitacura
+14.455.374-4,Cliente 14455374,"Avenida Apoquindo 5742, Santiago, Chile",2026-12-11,ORD-CL-202612-001289,204917,2026-12-14,Puente Alto
+8.110.567-4,Cliente Nuevo 8110567,"Calle San Diego 7308, Santiago, Chile",2026-12-25,ORD-CL-202612-003318,98784,2026-12-27,Recoleta
+14.658.958-5,Cliente Nuevo 14658958,"Calle Santo Domingo 8354, Santiago, Chile",2026-12-11,ORD-CL-202612-001325,51001,2026-12-15,Estación Central
+16.053.602-9,Cliente Nuevo 16053602,"Calle Amunátegui 4142, Santiago, Chile",2026-12-04,ORD-CL-202612-000475,296934,2026-12-07,Providencia
+12.746.163-2,Cliente 12746163,"Avenida Irarrázaval 9646, Santiago, Chile",2026-12-13,ORD-CL-202612-001656,194148,2026-12-17,La Reina
+15.983.093-8,Cliente 15983093,"Calle Compañía De Jesús 8561, Santiago, Chile",2026-12-16,ORD-CL-202612-002108,301657,2026-12-19,Providencia
+20.329.309-9,Cliente Nuevo 20329309,"Calle Catedral 6899, Santiago, Chile",2026-12-01,ORD-CL-202612-000005,230875,2026-12-04,Independencia
+13.812.185-0,Cliente Nuevo 13812185,"Avenida Irarrázaval 9159, Santiago, Chile",2026-12-20,ORD-CL-202612-002694,191473,2026-12-22,La Florida
+18.429.770-6,Cliente 18429770,"Calle Huérfanos 8536, Santiago, Chile",2026-12-25,ORD-CL-202612-003389,57995,2026-12-29,Puente Alto
+9.347.581-0,Cliente Nuevo 9347581,"Calle Morandé 6751, Santiago, Chile",2026-12-15,ORD-CL-202612-001893,103183,2026-12-17,Estación Central
+19.331.820-7,Cliente Nuevo 19331820,"Avenida Independencia 2414, Santiago, Chile",2026-12-13,ORD-CL-202612-001693,59799,2026-12-15,San Miguel
+7.383.509-4,Cliente Nuevo 7383509,"Avenida Matta 4411, Santiago, Chile",2026-12-02,ORD-CL-202612-000223,222937,2026-12-06,Las Condes
+22.911.959-6,Cliente Nuevo 22911959,"Avenida Matta 2502, Santiago, Chile",2026-12-06,ORD-CL-202612-000769,218332,2026-12-10,Estación Central
+18.051.800-7,Cliente Nuevo 18051800,"Avenida Manuel Montt 5734, Santiago, Chile",2026-12-16,ORD-CL-202612-002124,96127,2026-12-18,Independencia
+16.240.089-1,Cliente Nuevo 16240089,"Calle Monjitas 3007, Santiago, Chile",2026-12-12,ORD-CL-202612-001482,168587,2026-12-15,Estación Central
+21.259.045-6,Cliente 21259045,"Avenida Pajaritos 7853, Santiago, Chile",2026-12-19,ORD-CL-202612-002551,198037,2026-12-22,Peñalolén
+13.456.989-1,Cliente 13456989,"Calle Compañía De Jesús 9577, Santiago, Chile",2026-12-16,ORD-CL-202612-002042,112487,2026-12-20,Quinta Normal
+11.174.494-1,Cliente 11174494,"Calle Santo Domingo 5696, Santiago, Chile",2026-12-31,ORD-CL-202612-004025,136825,2027-01-02,Quinta Normal
+8.684.034-3,Cliente Nuevo 8684034,"Avenida Recoleta 514, Santiago, Chile",2026-12-14,ORD-CL-202612-001811,117840,2026-12-17,Santiago
+11.853.776-8,Cliente 11853776,"Calle Catedral 3304, Santiago, Chile",2026-12-02,ORD-CL-202612-000212,123297,2026-12-06,Quinta Normal
+19.805.203-9,Cliente 19805203,"Calle Santo Domingo 7873, Santiago, Chile",2026-12-28,ORD-CL-202612-003716,171368,2026-12-31,Santiago
+19.718.916-5,Cliente 19718916,"Calle Merced 7282, Santiago, Chile",2026-12-09,ORD-CL-202612-001094,169073,2026-12-13,Lo Prado
+9.657.778-2,Cliente Nuevo 9657778,"Avenida Independencia 6663, Santiago, Chile",2026-12-17,ORD-CL-202612-002250,255378,2026-12-20,Peñalolén
+15.290.073-0,Cliente 15290073,"Avenida La Florida 4055, Santiago, Chile",2026-12-28,ORD-CL-202612-003774,93624,2027-01-01,Puente Alto
+9.776.410-3,Cliente Nuevo 9776410,"Avenida Pedro De Valdivia 6268, Santiago, Chile",2026-12-10,ORD-CL-202612-001180,263577,2026-12-13,San Miguel
+7.924.963-1,Cliente Nuevo 7924963,"Calle Monjitas 7974, Santiago, Chile",2026-12-28,ORD-CL-202612-003747,97852,2026-12-31,Recoleta
+15.118.916-1,Cliente Nuevo 15118916,"Avenida Vicuña Mackenna 3841, Santiago, Chile",2026-12-22,ORD-CL-202612-002861,117826,2026-12-26,Las Condes
+20.350.933-3,Cliente 20350933,"Calle Bandera 313, Santiago, Chile",2026-12-15,ORD-CL-202612-001986,282476,2026-12-17,Puente Alto
+16.274.233-1,Cliente Nuevo 16274233,"Avenida Grecia 1105, Santiago, Chile",2026-12-26,ORD-CL-202612-003447,62190,2026-12-28,Santiago
+21.024.807-2,Cliente Nuevo 21024807,"Gran Avenida José Miguel Carrera 9351, Santiago, Chile",2026-12-25,ORD-CL-202612-003356,99794,2026-12-27,Vitacura
+8.508.000-3,Cliente 8508000,"Avenida Las Condes 3917, Santiago, Chile",2026-12-19,ORD-CL-202612-002581,97288,2026-12-21,Puente Alto
+17.683.890-0,Cliente 17683890,"Calle Arturo Prat 2198, Santiago, Chile",2026-12-19,ORD-CL-202612-002494,121369,2026-12-21,Santiago
+9.185.090-5,Cliente Nuevo 9185090,"Avenida Manuel Montt 4351, Santiago, Chile",2026-12-30,ORD-CL-202612-003996,262818,2027-01-03,Vitacura
+14.396.007-4,Cliente 14396007,"Gran Avenida José Miguel Carrera 1517, Santiago, Chile",2026-12-22,ORD-CL-202612-002908,145574,2026-12-26,San Miguel
+22.958.652-8,Cliente 22958652,"Avenida Departamental 5762, Santiago, Chile",2026-12-06,ORD-CL-202612-000649,262320,2026-12-08,Lo Prado
+19.283.981-6,Cliente 19283981,"Calle Teatinos 9703, Santiago, Chile",2026-12-11,ORD-CL-202612-001273,110235,2026-12-14,La Reina
+14.089.104-8,Cliente Nuevo 14089104,"Avenida La Florida 9439, Santiago, Chile",2026-12-17,ORD-CL-202612-002257,179079,2026-12-20,Santiago
+19.942.029-2,Cliente 19942029,"Calle Bandera 7833, Santiago, Chile",2026-12-01,ORD-CL-202612-000057,193622,2026-12-04,Santiago
+18.879.635-6,Cliente 18879635,"Avenida Independencia 8901, Santiago, Chile",2026-12-17,ORD-CL-202612-002263,246770,2026-12-20,Santiago
+14.091.933-4,Cliente 14091933,"Calle Huérfanos 6842, Santiago, Chile",2026-12-13,ORD-CL-202612-001672,100459,2026-12-16,Santiago
+17.840.477-5,Cliente 17840477,"Avenida Macul 9564, Santiago, Chile",2026-12-24,ORD-CL-202612-003172,120692,2026-12-26,Santiago
+7.139.480-8,Cliente 7139480,"Calle Amunátegui 1144, Santiago, Chile",2026-12-23,ORD-CL-202612-003020,200066,2026-12-26,Lo Prado
+15.305.122-8,Cliente 15305122,"Calle Morandé 7758, Santiago, Chile",2026-12-04,ORD-CL-202612-000465,163503,2026-12-05,Estación Central
+21.208.203-8,Cliente Nuevo 21208203,"Avenida La Florida 476, Santiago, Chile",2026-12-15,ORD-CL-202612-001891,94005,2026-12-18,Lo Prado
+15.998.202-2,Cliente Nuevo 15998202,"Calle Monjitas 6010, Santiago, Chile",2026-12-04,ORD-CL-202612-000482,71080,2026-12-06,Puente Alto
+6.159.830-0,Cliente 6159830,"Avenida Kennedy 9292, Santiago, Chile",2026-12-20,ORD-CL-202612-002654,241628,2026-12-23,Santiago
+14.570.237-8,Cliente 14570237,"Gran Avenida José Miguel Carrera 7970, Santiago, Chile",2026-12-06,ORD-CL-202612-000631,193261,2026-12-08,Santiago
+16.535.210-6,Cliente Nuevo 16535210,"Calle Santo Domingo 3573, Santiago, Chile",2026-12-22,ORD-CL-202612-002931,93995,2026-12-27,Santiago
+14.352.652-9,Cliente Nuevo 14352652,"Avenida Manuel Montt 4866, Santiago, Chile",2026-12-10,ORD-CL-202612-001196,71462,2026-12-12,Santiago
+16.353.195-1,Cliente Nuevo 16353195,"Avenida Pajaritos 2107, Santiago, Chile",2026-12-16,ORD-CL-202612-002085,55836,2026-12-20,Providencia
+13.452.771-8,Cliente Nuevo 13452771,"Avenida Las Condes 8964, Santiago, Chile",2026-12-22,ORD-CL-202612-002890,75406,2026-12-25,Las Condes
+18.522.445-1,Cliente Nuevo 18522445,"Calle San Diego 4317, Santiago, Chile",2026-12-10,ORD-CL-202612-001120,109375,2026-12-11,La Reina
+9.294.990-5,Cliente 9294990,"Avenida Matta 2587, Santiago, Chile",2026-12-13,ORD-CL-202612-001702,244755,2026-12-16,Santiago
+7.069.912-6,Cliente 7069912,"Avenida Kennedy 3779, Santiago, Chile",2026-12-15,ORD-CL-202612-001977,244394,2026-12-19,Independencia
+9.161.025-8,Cliente Nuevo 9161025,"Avenida Kennedy 5042, Santiago, Chile",2026-12-15,ORD-CL-202612-001935,192959,2026-12-18,Estación Central
+17.604.610-9,Cliente Nuevo 17604610,"Gran Avenida José Miguel Carrera 9698, Santiago, Chile",2026-12-29,ORD-CL-202612-003841,104142,2026-12-31,Lo Prado
+7.182.956-1,Cliente Nuevo 7182956,"Avenida Pajaritos 3514, Santiago, Chile",2026-12-15,ORD-CL-202612-001871,121794,2026-12-18,San Miguel
+10.345.586-0,Cliente 10345586,"Avenida Mapocho 9185, Santiago, Chile",2026-12-17,ORD-CL-202612-002258,199914,2026-12-19,Puente Alto
+20.341.187-6,Cliente 20341187,"Avenida Independencia 5061, Santiago, Chile",2026-12-05,ORD-CL-202612-000593,195688,2026-12-09,San Miguel
+7.133.217-9,Cliente Nuevo 7133217,"Avenida Departamental 4795, Santiago, Chile",2026-12-13,ORD-CL-202612-001572,175500,2026-12-16,Quinta Normal
+8.829.354-0,Cliente Nuevo 8829354,"Avenida Matta 1351, Santiago, Chile",2026-12-06,ORD-CL-202612-000781,151837,2026-12-10,Santiago
+10.813.137-3,Cliente Nuevo 10813137,"Avenida Santa Rosa 6309, Santiago, Chile",2026-12-19,ORD-CL-202612-002456,142641,2026-12-22,Santiago
+13.872.533-5,Cliente 13872533,"Avenida Libertador Bernardo O'Higgins 2360, Santiago, Chile",2026-12-16,ORD-CL-202612-002082,65030,2026-12-19,Providencia
+7.099.944-3,Cliente 7099944,"Avenida Pedro De Valdivia 2536, Santiago, Chile",2026-12-05,ORD-CL-202612-000560,116349,2026-12-09,Providencia
+19.237.467-1,Cliente 19237467,"Avenida Kennedy 7565, Santiago, Chile",2026-12-03,ORD-CL-202612-000286,157873,2026-12-05,Peñalolén
+18.696.142-8,Cliente Nuevo 18696142,"Calle Morandé 1577, Santiago, Chile",2026-12-24,ORD-CL-202612-003192,115058,2026-12-27,Recoleta
+13.006.020-8,Cliente 13006020,"Calle Huérfanos 6157, Santiago, Chile",2026-12-25,ORD-CL-202612-003392,78170,2026-12-29,Las Condes
+8.829.354-0,Cliente Nuevo 8829354,"Avenida Matta 1351, Santiago, Chile",2026-12-11,ORD-CL-202612-001393,106741,2026-12-14,Santiago
+7.705.769-1,Cliente Nuevo 7705769,"Avenida Mapocho 6909, Santiago, Chile",2026-12-31,ORD-CL-202612-004021,188782,2027-01-03,Recoleta
+19.994.164-4,Cliente 19994164,"Avenida Macul 7795, Santiago, Chile",2026-12-09,ORD-CL-202612-001095,166977,2026-12-12,Santiago
+20.779.131-3,Cliente Nuevo 20779131,"Avenida Matta 4095, Santiago, Chile",2026-12-23,ORD-CL-202612-003045,98589,2026-12-27,Providencia
+13.033.877-0,Cliente Nuevo 13033877,"Avenida Pedro De Valdivia 9814, Santiago, Chile",2026-12-23,ORD-CL-202612-003034,106559,2026-12-27,Lo Prado
+6.852.110-4,Cliente 6852110,"Avenida Macul 3599, Santiago, Chile",2026-12-31,ORD-CL-202612-004024,239627,2027-01-02,Recoleta
+7.144.201-2,Cliente Nuevo 7144201,"Avenida Vicuña Mackenna 3988, Santiago, Chile",2026-12-23,ORD-CL-202612-002984,278959,2026-12-26,La Reina
+19.708.724-3,Cliente Nuevo 19708724,"Avenida Mapocho 696, Santiago, Chile",2026-12-26,ORD-CL-202612-003516,250487,2026-12-29,Puente Alto
+15.056.286-5,Cliente 15056286,"Avenida Independencia 6313, Santiago, Chile",2026-12-28,ORD-CL-202612-003754,90872,2026-12-29,Santiago
+14.089.104-8,Cliente Nuevo 14089104,"Avenida La Florida 9439, Santiago, Chile",2026-12-31,ORD-CL-202612-004118,153004,2027-01-02,Santiago
+18.668.779-2,Cliente Nuevo 18668779,"Calle San Antonio 544, Santiago, Chile",2026-12-05,ORD-CL-202612-000609,149960,2026-12-07,Las Condes
+13.453.886-9,Cliente 13453886,"Calle Catedral 2615, Santiago, Chile",2026-12-14,ORD-CL-202612-001830,126182,2026-12-16,Providencia
+18.869.132-5,Cliente 18869132,"Calle Amunátegui 7671, Santiago, Chile",2026-12-16,ORD-CL-202612-002207,34700,2026-12-20,La Florida
+18.164.650-9,Cliente Nuevo 18164650,"Calle Amunátegui 6684, Santiago, Chile",2026-12-23,ORD-CL-202612-003134,47625,2026-12-26,Independencia
+13.651.938-0,Cliente 13651938,"Calle Morandé 1676, Santiago, Chile",2026-12-11,ORD-CL-202612-001414,37572,2026-12-13,Quinta Normal
+8.264.391-3,Cliente Nuevo 8264391,"Avenida Departamental 9211, Santiago, Chile",2026-12-11,ORD-CL-202612-001362,134233,2026-12-12,Santiago
+5.321.451-8,Cliente Nuevo 5321451,"Avenida Américo Vespucio 3680, Santiago, Chile",2026-12-23,ORD-CL-202612-003048,108873,2026-12-26,Santiago
+12.712.976-6,Cliente 12712976,"Avenida Providencia 4190, Santiago, Chile",2026-12-28,ORD-CL-202612-003745,91796,2026-12-31,Santiago
+6.843.079-6,Cliente Nuevo 6843079,"Calle Arturo Prat 1596, Santiago, Chile",2026-12-13,ORD-CL-202612-001546,210874,2026-12-17,Independencia
+14.921.076-6,Cliente Nuevo 14921076,"Calle San Antonio 4837, Santiago, Chile",2026-12-26,ORD-CL-202612-003476,128624,2026-12-29,Independencia
+13.730.612-4,Cliente Nuevo 13730612,"Calle Teatinos 1095, Santiago, Chile",2026-12-11,ORD-CL-202612-001319,101317,2026-12-15,Puente Alto
+14.206.573-5,Cliente Nuevo 14206573,"Avenida Recoleta 2761, Santiago, Chile",2026-12-06,ORD-CL-202612-000773,48617,2026-12-08,Santiago
+5.395.655-0,Cliente 5395655,"Avenida Providencia 4623, Santiago, Chile",2026-12-23,ORD-CL-202612-003110,79975,2026-12-25,Puente Alto
+5.770.009-3,Cliente Nuevo 5770009,"Gran Avenida José Miguel Carrera 152, Santiago, Chile",2026-12-08,ORD-CL-202612-000979,115051,2026-12-10,Lo Prado
+5.878.888-2,Cliente Nuevo 5878888,"Avenida Independencia 6848, Santiago, Chile",2026-12-18,ORD-CL-202612-002343,86993,2026-12-22,La Reina
+13.251.660-0,Cliente 13251660,"Calle Teatinos 9197, Santiago, Chile",2026-12-28,ORD-CL-202612-003703,46596,2026-12-30,Peñalolén
+9.035.343-5,Cliente 9035343,"Calle San Antonio 9169, Santiago, Chile",2026-12-23,ORD-CL-202612-003029,176749,2026-12-27,La Reina
+21.810.028-6,Cliente Nuevo 21810028,"Calle Santo Domingo 7546, Santiago, Chile",2026-12-13,ORD-CL-202612-001683,197875,2026-12-16,La Florida
+12.106.755-7,Cliente 12106755,"Avenida Pedro De Valdivia 4433, Santiago, Chile",2026-12-01,ORD-CL-202612-000179,132092,2026-12-03,Peñalolén
+14.570.237-8,Cliente 14570237,"Gran Avenida José Miguel Carrera 7970, Santiago, Chile",2026-12-11,ORD-CL-202612-001304,104705,2026-12-14,Santiago
+6.743.091-3,Cliente 6743091,"Calle Bandera 7940, Santiago, Chile",2026-12-30,ORD-CL-202612-003912,186425,2027-01-03,Peñalolén
+18.055.387-0,Cliente Nuevo 18055387,"Avenida Vicuña Mackenna 2992, Santiago, Chile",2026-12-13,ORD-CL-202612-001562,119625,2026-12-15,Las Condes
+5.113.505-6,Cliente 5113505,"Avenida Apoquindo 282, Santiago, Chile",2026-12-13,ORD-CL-202612-001582,128268,2026-12-14,Santiago
+15.056.286-5,Cliente 15056286,"Avenida Independencia 6313, Santiago, Chile",2026-12-20,ORD-CL-202612-002719,185710,2026-12-22,Santiago
+18.670.836-3,Cliente 18670836,"Avenida Las Condes 4296, Santiago, Chile",2026-12-20,ORD-CL-202612-002671,66641,2026-12-22,Vitacura
+14.819.473-1,Cliente 14819473,"Avenida Grecia 6127, Santiago, Chile",2026-12-05,ORD-CL-202612-000624,84327,2026-12-07,Puente Alto
+5.306.445-1,Cliente Nuevo 5306445,"Avenida Tobalaba 4027, Santiago, Chile",2026-12-16,ORD-CL-202612-002029,197398,2026-12-18,Recoleta
+5.889.029-3,Cliente 5889029,"Calle Santo Domingo 8242, Santiago, Chile",2026-12-01,ORD-CL-202612-000152,89992,2026-12-04,La Reina
+7.883.540-8,Cliente 7883540,"Avenida Pedro De Valdivia 7181, Santiago, Chile",2026-12-31,ORD-CL-202612-004115,138230,2027-01-02,Vitacura
+20.207.959-3,Cliente Nuevo 20207959,"Calle Arturo Prat 4407, Santiago, Chile",2026-12-16,ORD-CL-202612-002058,113140,2026-12-18,Santiago
+22.698.905-6,Cliente Nuevo 22698905,"Avenida Manuel Montt 9900, Santiago, Chile",2026-12-19,ORD-CL-202612-002418,104015,2026-12-23,San Miguel
+17.904.645-9,Cliente 17904645,"Avenida Grecia 4822, Santiago, Chile",2026-12-11,ORD-CL-202612-001360,90728,2026-12-14,Santiago
+22.871.525-8,Cliente Nuevo 22871525,"Calle Huérfanos 4134, Santiago, Chile",2026-12-23,ORD-CL-202612-003126,143594,2026-12-26,Estación Central
+18.260.935-7,Cliente Nuevo 18260935,"Calle Teatinos 4556, Santiago, Chile",2026-12-14,ORD-CL-202612-001804,118331,2026-12-18,Providencia
+12.590.437-9,Cliente Nuevo 12590437,"Calle Santo Domingo 3029, Santiago, Chile",2026-12-04,ORD-CL-202612-000409,114667,2026-12-07,Recoleta
+15.540.278-7,Cliente 15540278,"Avenida Pedro De Valdivia 1748, Santiago, Chile",2026-12-16,ORD-CL-202612-002155,271311,2026-12-18,Quinta Normal
+22.933.193-9,Cliente Nuevo 22933193,"Avenida Vicuña Mackenna 1106, Santiago, Chile",2026-12-15,ORD-CL-202612-001872,158264,2026-12-17,Santiago
+9.444.321-7,Cliente Nuevo 9444321,"Avenida Mapocho 5244, Santiago, Chile",2026-12-01,ORD-CL-202612-000063,99852,2026-12-04,Vitacura
+8.440.511-5,Cliente Nuevo 8440511,"Avenida Pajaritos 5711, Santiago, Chile",2026-12-05,ORD-CL-202612-000591,173881,2026-12-07,Quinta Normal
+10.061.823-5,Cliente 10061823,"Calle Merced 7933, Santiago, Chile",2026-12-13,ORD-CL-202612-001680,150225,2026-12-15,Estación Central
+11.782.805-1,Cliente 11782805,"Calle Teatinos 51, Santiago, Chile",2026-12-26,ORD-CL-202612-003514,115151,2026-12-29,Providencia
+10.884.364-8,Cliente Nuevo 10884364,"Avenida Santa Rosa 5380, Santiago, Chile",2026-12-06,ORD-CL-202612-000633,179234,2026-12-10,La Florida
+7.941.056-6,Cliente Nuevo 7941056,"Avenida Kennedy 5315, Santiago, Chile",2026-12-03,ORD-CL-202612-000307,94138,2026-12-05,Independencia
+9.146.692-9,Cliente Nuevo 9146692,"Avenida Pajaritos 2476, Santiago, Chile",2026-12-15,ORD-CL-202612-001924,178842,2026-12-18,Santiago
+18.170.653-9,Cliente Nuevo 18170653,"Calle Catedral 2524, Santiago, Chile",2026-12-30,ORD-CL-202612-003974,89514,2027-01-02,Recoleta
+20.657.286-2,Cliente 20657286,"Avenida Manuel Montt 8479, Santiago, Chile",2026-12-11,ORD-CL-202612-001387,188317,2026-12-13,La Florida
+14.894.939-5,Cliente 14894939,"Avenida Mapocho 5324, Santiago, Chile",2026-12-26,ORD-CL-202612-003552,167814,2026-12-28,Recoleta
+20.879.223-6,Cliente 20879223,"Calle Monjitas 9892, Santiago, Chile",2026-12-31,ORD-CL-202612-004164,104354,2027-01-03,Independencia
+20.736.036-0,Cliente Nuevo 20736036,"Calle Santo Domingo 650, Santiago, Chile",2026-12-30,ORD-CL-202612-003957,189321,2027-01-02,Estación Central
+20.099.306-9,Cliente Nuevo 20099306,"Avenida Tobalaba 3141, Santiago, Chile",2026-12-28,ORD-CL-202612-003807,98910,2026-12-30,Vitacura
+6.163.666-8,Cliente Nuevo 6163666,"Avenida Tobalaba 8026, Santiago, Chile",2026-12-11,ORD-CL-202612-001346,214075,2026-12-14,Santiago
+7.146.339-0,Cliente 7146339,"Calle Santo Domingo 3318, Santiago, Chile",2026-12-21,ORD-CL-202612-002763,151780,2026-12-25,Quinta Normal
+19.437.090-9,Cliente Nuevo 19437090,"Avenida Apoquindo 1470, Santiago, Chile",2026-12-16,ORD-CL-202612-002186,255615,2026-12-18,Santiago
+19.816.210-6,Cliente Nuevo 19816210,"Avenida Grecia 5903, Santiago, Chile",2026-12-13,ORD-CL-202612-001557,247620,2026-12-17,Santiago
+13.826.430-9,Cliente Nuevo 13826430,"Avenida Mapocho 1366, Santiago, Chile",2026-12-11,ORD-CL-202612-001298,307287,2026-12-13,Recoleta
+8.972.045-0,Cliente Nuevo 8972045,"Calle Amunátegui 571, Santiago, Chile",2026-12-25,ORD-CL-202612-003414,207289,2026-12-28,Vitacura
+8.822.511-2,Cliente Nuevo 8822511,"Calle Morandé 7466, Santiago, Chile",2026-12-15,ORD-CL-202612-001999,206797,2026-12-17,San Miguel
+6.843.079-6,Cliente Nuevo 6843079,"Calle Arturo Prat 1596, Santiago, Chile",2026-12-17,ORD-CL-202612-002217,84304,2026-12-19,Independencia
+17.227.907-9,Cliente Nuevo 17227907,"Calle Compañía De Jesús 7495, Santiago, Chile",2026-12-31,ORD-CL-202612-004161,186365,2027-01-02,Estación Central
+13.522.601-8,Cliente 13522601,"Calle Huérfanos 9159, Santiago, Chile",2026-12-19,ORD-CL-202612-002530,177663,2026-12-20,Providencia
+7.416.994-3,Cliente Nuevo 7416994,"Avenida Pajaritos 6452, Santiago, Chile",2026-12-28,ORD-CL-202612-003804,199754,2026-12-30,Estación Central
+6.962.561-3,Cliente 6962561,"Calle Compañía De Jesús 6936, Santiago, Chile",2026-12-08,ORD-CL-202612-000962,75381,2026-12-10,Recoleta
+17.620.980-6,Cliente Nuevo 17620980,"Avenida Departamental 2987, Santiago, Chile",2026-12-19,ORD-CL-202612-002586,169105,2026-12-21,Vitacura
+21.891.734-5,Cliente Nuevo 21891734,"Avenida Pajaritos 933, Santiago, Chile",2026-12-21,ORD-CL-202612-002804,285244,2026-12-23,Vitacura
+5.242.922-7,Cliente Nuevo 5242922,"Avenida Matta 2130, Santiago, Chile",2026-12-10,ORD-CL-202612-001178,282494,2026-12-13,San Miguel
+8.065.026-6,Cliente Nuevo 8065026,"Calle Teatinos 8982, Santiago, Chile",2026-12-23,ORD-CL-202612-003123,230349,2026-12-27,Vitacura
+14.975.953-4,Cliente Nuevo 14975953,"Avenida Apoquindo 1014, Santiago, Chile",2026-12-03,ORD-CL-202612-000371,265742,2026-12-05,Vitacura
+12.592.663-1,Cliente Nuevo 12592663,"Avenida Santa Rosa 1012, Santiago, Chile",2026-12-14,ORD-CL-202612-001778,129126,2026-12-17,Puente Alto
+21.633.376-8,Cliente Nuevo 21633376,"Calle Catedral 102, Santiago, Chile",2026-12-30,ORD-CL-202612-003894,318988,2027-01-01,Providencia
+5.992.398-0,Cliente Nuevo 5992398,"Avenida Tobalaba 135, Santiago, Chile",2026-12-19,ORD-CL-202612-002596,213653,2026-12-21,Peñalolén
+13.034.664-7,Cliente Nuevo 13034664,"Avenida Mapocho 9365, Santiago, Chile",2026-12-22,ORD-CL-202612-002838,135217,2026-12-26,Providencia
+6.600.416-2,Cliente Nuevo 6600416,"Calle Santo Domingo 6811, Santiago, Chile",2026-12-14,ORD-CL-202612-001818,271711,2026-12-17,La Reina
+15.460.916-7,Cliente 15460916,"Calle Bandera 7800, Santiago, Chile",2026-12-29,ORD-CL-202612-003856,87944,2027-01-02,Puente Alto
+20.312.720-8,Cliente Nuevo 20312720,"Calle Huérfanos 3553, Santiago, Chile",2026-12-28,ORD-CL-202612-003734,299927,2027-01-01,Vitacura
+18.208.118-9,Cliente 18208118,"Avenida Irarrázaval 2790, Santiago, Chile",2026-12-22,ORD-CL-202612-002918,116531,2026-12-25,Las Condes
+19.268.872-3,Cliente Nuevo 19268872,"Calle Estado 3858, Santiago, Chile",2026-12-01,ORD-CL-202612-000189,188630,2026-12-05,Peñalolén
+18.894.789-6,Cliente Nuevo 18894789,"Calle San Antonio 7865, Santiago, Chile",2026-12-11,ORD-CL-202612-001329,209425,2026-12-14,Vitacura
+15.056.286-5,Cliente 15056286,"Avenida Independencia 6313, Santiago, Chile",2026-12-02,ORD-CL-202612-000230,157814,2026-12-05,Santiago
+11.212.451-0,Cliente 11212451,"Avenida Américo Vespucio 2037, Santiago, Chile",2026-12-10,ORD-CL-202612-001202,139644,2026-12-13,Las Condes
+18.051.800-7,Cliente Nuevo 18051800,"Avenida Manuel Montt 5734, Santiago, Chile",2026-12-12,ORD-CL-202612-001469,243275,2026-12-16,Independencia
+21.546.217-3,Cliente Nuevo 21546217,"Avenida Pedro De Valdivia 8264, Santiago, Chile",2026-12-12,ORD-CL-202612-001536,101943,2026-12-15,Puente Alto
+11.746.928-4,Cliente Nuevo 11746928,"Calle Amunátegui 2290, Santiago, Chile",2026-12-14,ORD-CL-202612-001765,82338,2026-12-18,Recoleta
+19.246.133-9,Cliente Nuevo 19246133,"Avenida Mapocho 4083, Santiago, Chile",2026-12-05,ORD-CL-202612-000597,232093,2026-12-07,La Florida
