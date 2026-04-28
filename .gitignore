@@ -4,7 +4,7 @@ CLAUDE.md
 
 # capstone vEnv
 CapstoneEnv/
-informe_planificacion/build/
+.env
 
 # LaTeX temp and aux files
 informe_planificacion/*.aux
@@ -16,3 +16,58 @@ informe_planificacion/*.out
 informe_planificacion/*.synctex.gz
 informe_planificacion/*.toc
 informe_planificacion/*.un~
+
+# --- Logs ---
+logs/
+*.log
+
+# --- Python ---
+# Virtual environments
+venv/
+.venv/
+env/
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Testing
+.pytest_cache/
+.hypothesis/
+
+# --- Docker/OSRM ---
+osrm-data/
+osrm-mount/
+.osrm/
+
+# --- Temporary files ---
+*.tmp
+*.temp
+*.temp~
+*.bak
+*.backup
+
+# ---IDE---
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# --- Datasets ---
+# (Opcional) Si tus datasets son muy grandes y no quieres subirlos
+data/raw/
+data/processed/
+data/interim/
+
+# --- R (si usas R) ---
+.Rhistory
+.RData
+*.Rhistory
+*.RData
+
+# --- Notebooks ---
+*.ipynb_checkpoints/
+
+# --- Informes/PDFs (Opcional) ---
+informe_planificacion/
