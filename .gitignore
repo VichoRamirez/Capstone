@@ -5,3 +5,14 @@ CLAUDE.md
 # capstone vEnv
 CapstoneEnv/
 informe_planificacion/build/
+
+# LaTeX temp and aux files
+infrome_planificacion/*.aux
+infrome_planificacion/*.dvi
+infrome_planificacion/*.fdb_latexmk
+infrome_planificacion/*.fls
+infrome_planificacion/*.log
+infrome_planificacion/*.out
+infrome_planificacion/*.synctex.gz
+infrome_planificacion/*.toc
+infrome_planificacion/*.un~
