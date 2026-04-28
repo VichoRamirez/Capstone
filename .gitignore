@@ -7,15 +7,15 @@ CapstoneEnv/
 .env
 
 # LaTeX temp and aux files
-LaTeX Projects/*/*.aux
-LaTeX Projects/*/*.dvi
-LaTeX Projects/*/*.fdb_latexmk
-LaTeX Projects/*/*.fls
-LaTeX Projects/*/*.log
-LaTeX Projects/*/*.out
-LaTeX Projects/*/*.synctex.gz
-LaTeX Projects/*/*.toc
-LaTeX Projects/*/*.un~
+*.aux
+*.dvi
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.toc
+*.un~
 
 # --- Logs ---
 logs/

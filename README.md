@@ -44,25 +44,23 @@ La panadería opera un ciclo diario de producción de 10 tipos de pan fresco par
  
 ```
 .
-├── Enunciado_export/
+├── LaTeX Projects/
+│   ├── InformeDePlanificación/
+│   │   ├── informe_planificacion.tex   # Fuente LaTeX del informe de planificación (H0)
+│   │   ├── informe_planificacion.pdf   # PDF compilado
+│   │   └── UDD.png                     # Logo UDD utilizado por el documento
+│   ├── InformeAcadémico/               # (en desarrollo)
+│   └── InformeTécnico/                 # (en desarrollo)
+│
+├── Panadería - Data/
 │   ├── parametros_proceso_panaderia.xlsx                    # Tiempos de etapas, tamaños de lote y capacidades por tipo de pan
 │   ├── perfil_demanda_por_hora_panaderia.xlsx               # Demanda esperada (kg) por franja horaria y tipo de pan
 │   ├── probabilidades_eleccion_por_hora.xlsx                # Probabilidad de elección por tipo de pan y franja horaria
 │   ├── Simulación Capstone Analytics - Fábrica de Pan.pdf   # Enunciado oficial del proyecto
 │   └── Metodología de Desarrollo.pdf                        # Metodología sugerida por la cátedra
 │
-├── informe_planificacion/
-│   ├── informe_planificacion.tex   # Fuente LaTeX del informe de planificación (H0)
-│   ├── informe_planificacion.pdf   # PDF compilado
-│   └── UDD.png                     # Logo UDD utilizado por el documento LaTeX
-│
-├── latex sebita/
-│   ├── Roadmap_SIMIO_Capstone_Analytics.tex   # Fuente LaTeX del roadmap de construcción del modelo
-│   └── Roadmap_SIMIO_Capstone_Analytics.pdf   # PDF compilado
-│
 ├── Panadería - Model/
-│   ├── Modelo - Panadería.spfx     # Modelo SIMIO del proceso de panadería
-│   └── Modelo - Panadería.backup   # Respaldo automático generado por SIMIO
+│   └── Modelo - Panadería.spfx   # Modelo SIMIO del proceso de panadería
 │
 └── README.md
 ```
