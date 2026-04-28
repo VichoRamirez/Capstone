@@ -61,7 +61,7 @@
 % ── Encabezado y pie ──────────────────────────────────────────────────────────
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[L]{\small\color{azulppal}\textbf{Plan de Trabajo · Simulación Panadería de Supermercado}}
+\fancyhead[L]{\small\color{azulppal}\textbf{Plan de Trabajo -- Simulación Panadería de Supermercado}}
 \fancyhead[R]{\small\color{grisoscuro}Abril--Mayo 2026}
 \fancyfoot[C]{\small\thepage}
 \renewcommand{\headrulewidth}{0.5pt}
@@ -129,7 +129,7 @@ Vicente Ramírez & Análisis de datos y triangulación de probabilidades: demand
 
 \vfill
 {\color{azulppal}\rule{\linewidth}{2.5pt}}\\[0.3em]
-{\small\color{grisoscuro} Capstone Analytics IIC511AD · Ingeniería Civil Industrial · Universidad del Desarrollo}
+{\small\color{grisoscuro} Capstone Analytics IIC511AD -- Ingeniería Civil Industrial -- Universidad del Desarrollo}
 \end{titlepage}
 
 % ══════════════════════════════════════════════════════════════════════════════
@@ -236,15 +236,15 @@ El proyecto se organiza en cinco fases. La tabla~\ref{tab:resumen_fases} present
 % ── FASE 1 ────────────────────────────────────────────────────────────────────
 
 \subsection{Fase 0 -- Planificación
-\quad\textit{(20~Abr\,--\,27~Abr\,·\,7 días)}}
+\quad\textit{(20~Abr\,--\,27~Abr, 7 días)}}
 
 Redactar un documento que explique brevemente el problema, las fases para solucionarlo y detalle de manera extensa lo que es necesario hacer.
 
 \medskip
-\noindent\colorbox{grisclaro}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{\vspace{2pt}\textbf{Entregable Fase~1 (Hito H0 · 27~Abr):} Documento de planificación, entregables por fase de trabajo.\vspace{2pt}}}
+\noindent\colorbox{grisclaro}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{\vspace{2pt}\textbf{Entregable Fase~1 (Hito H0 -- 27~Abr):} Documento de planificación, entregables por fase de trabajo.\vspace{2pt}}}
 
 
-\subsection{Fase 1 --- Análisis del caso y diagramas \quad\textit{(27~Abr\,--\,2~May\,·\,6 días)}}
+\subsection{Fase 1 --- Análisis del caso y diagramas \quad\textit{(27~Abr\,--\,2~May, 6 días)}}
 
 Esta es a fase más importante, siendo necesaria para no cometer errores en fases posteriores.
 
@@ -293,10 +293,10 @@ Este documento debe ser revisado y aprobado por todos los integrantes antes de a
 Resolver explícitamente: ¿la demanda se modela cliente a cliente o por pulsos horarios? ¿El inventario se lleva en kg o en unidades físicas? ¿El lote es la entidad de producción? Estas decisiones afectan de forma determinante la complejidad computacional y la velocidad de ejecución del modelo.
 
 \medskip
-\noindent\colorbox{grisclaro}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{\vspace{2pt}\textbf{Entregable Fase~2 (Hito H1 · 2~May):} Documento de fundamentos --- tabla maestra de parámetros, lista de supuestos justificados, modelo conceptual completo, definición de unidades de modelación.\vspace{2pt}}}
+\noindent\colorbox{grisclaro}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{\vspace{2pt}\textbf{Entregable Fase~2 (Hito H1 -- 2~May):} Documento de fundamentos --- tabla maestra de parámetros, lista de supuestos justificados, modelo conceptual completo, definición de unidades de modelación.\vspace{2pt}}}
 
 % ── FASE 2 ────────────────────────────────────────────────────────────────────
-\subsection{Fase 2 --- Construcción Modular del Modelo en SIMIO \quad\textit{(3--10~May\,·\,8 días)}}
+\subsection{Fase 2 --- Construcción Modular del Modelo en SIMIO \quad\textit{(3--10~May, 8 días)}}
 
 La construcción sigue un orden de módulos incrementales. La regla es inviolable: cada módulo se verifica antes de agregar el siguiente. Integrar módulos no verificados es el error más común en proyectos de simulación y el que más tiempo consume en corrección.
 
@@ -339,10 +339,10 @@ Parametrizar las políticas de secuenciamiento evaluables como parámetro config
 Replicar la lógica del Módulo~2.2 para las nueve variedades restantes e integrar todos los módulos. Activar el reporte automático de todos los KPIs requeridos por el enunciado: quiebres de stock por tipo, demanda satisfecha, sobrantes, utilización de recursos, tiempos de ciclo, ocupación del horno y frecuencia de setups.
 
 \medskip
-\noindent\colorbox{grisclaro}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{\vspace{2pt}\textbf{Entregable Fase~2 (Hito H2 · 10~May):} Modelo SIMIO completamente integrado, ejecutable sin errores durante al menos 20~réplicas consecutivas, con reporte automático de todos los KPIs.\vspace{2pt}}}
+\noindent\colorbox{grisclaro}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{\vspace{2pt}\textbf{Entregable Fase~2 (Hito H2 -- 10~May):} Modelo SIMIO completamente integrado, ejecutable sin errores durante al menos 20~réplicas consecutivas, con reporte automático de todos los KPIs.\vspace{2pt}}}
 
 % ── FASE 3 ────────────────────────────────────────────────────────────────────
-\subsection{Fase 3 --- Verificación y Validación \quad\textit{(10--12~May\,·\,3 días)}}
+\subsection{Fase 3 --- Verificación y Validación \quad\textit{(10--12~May, 3 días)}}
 
 La verificación y la validación son dos preguntas distintas que no deben confundirse:
 \begin{itemize}
@@ -372,10 +372,10 @@ En contexto académico, la validación se apoya en: (a) coherencia del orden de 
 Si el horno aparece con 5\% de utilización y aun así hay quiebres masivos, hay un error de lógica. Si agregar capacidad empeora los resultados, hay un error de diseño. Estos son los síntomas más habituales de modelos incorrectos.
 
 \medskip
-\noindent\colorbox{grisclaro}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{\vspace{2pt}\textbf{Entregable Fase~3 (Hito H3 · 12~May):} Protocolo de verificación completado (lista de chequeo firmada) y registro de la revisión de validación.\vspace{2pt}}}
+\noindent\colorbox{grisclaro}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{\vspace{2pt}\textbf{Entregable Fase~3 (Hito H3 -- 12~May):} Protocolo de verificación completado (lista de chequeo firmada) y registro de la revisión de validación.\vspace{2pt}}}
 
 % ── FASE 4 ────────────────────────────────────────────────────────────────────
-\subsection{Fase 4 --- Diseño y Ejecución de Experimentos \quad\textit{(13--17~May\,·\,5 días)}}
+\subsection{Fase 4 --- Diseño y Ejecución de Experimentos \quad\textit{(13--17~May, 5 días)}}
 
 \subsubsection{Actividad 4.1 --- Diseño experimental \quad(13~May, 1~día)}
 
@@ -406,10 +406,10 @@ Una solución no debe evaluarse solo en el escenario promedio. Perturbaciones a 
 Una política que solo funciona bajo condiciones promedio no es una recomendación gerencial válida. La robustez de la solución frente a variabilidad es parte del producto que se entrega.
 
 \medskip
-\noindent\colorbox{grisclaro}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{\vspace{2pt}\textbf{Entregable Fase~4 (Hito H4 · 17~May):} Tabla comparativa de escenarios con KPIs completos y análisis de sensibilidad documentado.\vspace{2pt}}}
+\noindent\colorbox{grisclaro}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{\vspace{2pt}\textbf{Entregable Fase~4 (Hito H4 -- 17~May):} Tabla comparativa de escenarios con KPIs completos y análisis de sensibilidad documentado.\vspace{2pt}}}
 
 % ── FASE 5 ────────────────────────────────────────────────────────────────────
-\subsection{Fase 5 --- Documentación y Entrega \quad\textit{(17--20~May\,·\,4 días)}}
+\subsection{Fase 5 --- Documentación y Entrega \quad\textit{(17--20~May, 4 días)}}
 
 \subsubsection{Actividad 5.1 --- Interpretación de resultados y recomendaciones \quad(17~May, 1~día)}
 
