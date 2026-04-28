@@ -1,0 +1,128 @@
+\documentclass[12pt]{article}
+
+% ── Codificación y tipografía ──────────────────────────────────────────────────
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amssymb}
+\usepackage[spanish,es-tabla]{babel}
+\usepackage{microtype}
+
+% ── Geometría ─────────────────────────────────────────────────────────────────
+\usepackage[left=3cm, right=2.5cm, top=3cm, bottom=2.5cm]{geometry}
+\setlength{\headheight}{24.02pt}
+\addtolength{\topmargin}{-12.01pt}
+
+% ── Gráficos y colores ────────────────────────────────────────────────────────
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{pgfgantt}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric}
+
+% ── Tablas ────────────────────────────────────────────────────────────────────
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{makecell}
+
+% ── Formato y estructura ──────────────────────────────────────────────────────
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{parskip}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{amssymb}
+\usepackage[htt]{hyphenat}
+\usepackage{float}
+
+% ── Paleta de colores ─────────────────────────────────────────────────────────
+\definecolor{azulppal}{RGB}{0,70,127}
+\definecolor{azulclaro}{RGB}{173,216,230}
+\definecolor{grisoscuro}{RGB}{64,64,64}
+\definecolor{grisclaro}{RGB}{245,245,245}
+\definecolor{naranja}{RGB}{204,85,0}
+\definecolor{verdeok}{RGB}{34,139,34}
+\definecolor{g1}{RGB}{41,128,185}
+\definecolor{g2}{RGB}{39,174,96}
+\definecolor{g3}{RGB}{211,84,0}
+\definecolor{g4}{RGB}{142,68,173}
+\definecolor{g5}{RGB}{192,57,43}
+\definecolor{tabhead}{RGB}{0,70,127}
+\definecolor{tabrow}{RGB}{235,243,252}
+
+% ── hyperref ──────────────────────────────────────────────────────────────────
+\hypersetup{
+  colorlinks=true, linkcolor=azulppal, urlcolor=azulppal, citecolor=azulppal,
+  pdftitle={Informe Técnico -- Capstone Analytics},
+  pdfauthor={Sebastián Ramírez, Vicente Ramírez, Joaquín Parraud}
+}
+
+% ── Encabezado y pie ──────────────────────────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\color{azulppal}\textbf{Informe Técnico -- Simulación Panadería de Supermercado}}
+\fancyhead[R]{\small\color{grisoscuro}Mayo 2026}
+\fancyfoot[C]{\small\thepage}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{azulppal}\leaders\hrule height 0.5pt\hfill}}
+
+% ── Secciones ─────────────────────────────────────────────────────────────────
+\titleformat{\section}{\large\bfseries\color{azulppal}}{\thesection.}{0.5em}{}[\titlerule]
+\titleformat{\subsection}{\normalsize\bfseries\color{grisoscuro}}{\thesubsection.}{0.5em}{}
+\titleformat{\subsubsection}{\normalsize\itshape\color{grisoscuro}}{\thesubsubsection.}{0.5em}{}
+\setlist[itemize]{topsep=2pt,itemsep=1pt,leftmargin=*}
+\setlist[enumerate]{topsep=2pt,itemsep=1pt,leftmargin=*}
+\setcounter{tocdepth}{2}
+
+
+
+% ─────────────────────────────────────────────────────────────────────────────
+\begin{document}
+\pdfpagewidth=210mm
+\pdfpageheight=297mm
+\setlength{\parskip}{6pt}
+
+% ══════════════════════════════════════════════════════════════════════════════
+%  PORTADA
+% ══════════════════════════════════════════════════════════════════════════════
+\begin{titlepage}
+\centering
+\vspace*{0.4cm}
+\includegraphics[width=0.36\linewidth]{../UDD.png}\\[0.9cm]
+{\color{azulppal}\rule{\linewidth}{2.5pt}}\\[0.5em]
+{\Huge\bfseries\color{azulppal} Informe Técnico}\\[0.4em]
+{\large\bfseries\color{grisoscuro} Proyecto Capstone Analytics}\\[0.2em]
+{\color{azulppal}\rule{\linewidth}{1pt}}\\[0.8em]
+{\Large\itshape\color{grisoscuro}
+  Simulación de Eventos Discretos:\\[0.3em]
+  Proceso de Fabricación de Pan\\
+  en Panadería de Supermercado}
+
+\vspace{0.85cm}
+\begin{tabular}{@{}ll@{}}
+  \textbf{Universidad:}      & Universidad del Desarrollo \\[3pt]
+  \textbf{Ramo:}             & Capstone Analytics \\[3pt]
+  \textbf{Código:}           & IIC511AD \\[3pt]
+  \textbf{Profesor:}         & Victor Vera, PhD \\[3pt]
+  \textbf{Documento:}        & Proyecto de Simulación -- Informe Técnico \\[3pt]
+  \textbf{Fecha:}            & 20 de mayo de 2026 \\[3pt]
+\end{tabular}
+
+\vfill
+\begin{flushright}
+{\small\color{grisoscuro}
+\textbf{Integrantes}\\[4pt]
+Joaquín Parraud\\
+Sebastián Ramírez\\
+Vicente Ramírez}
+\end{flushright}
+\vspace{0.4cm}
+{\color{azulppal}\rule{\linewidth}{2.5pt}}\\[0.3em]
+{\small\color{grisoscuro} Capstone Analytics IIC511AD -- Ingeniería Civil Industrial -- Universidad del Desarrollo}
+\end{titlepage}
+
+\end{document}
