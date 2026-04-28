@@ -7,12 +7,12 @@ CapstoneEnv/
 informe_planificacion/build/
 
 # LaTeX temp and aux files
-infrome_planificacion/*.aux
-infrome_planificacion/*.dvi
-infrome_planificacion/*.fdb_latexmk
-infrome_planificacion/*.fls
-infrome_planificacion/*.log
-infrome_planificacion/*.out
-infrome_planificacion/*.synctex.gz
-infrome_planificacion/*.toc
-infrome_planificacion/*.un~
+informe_planificacion/*.aux
+informe_planificacion/*.dvi
+informe_planificacion/*.fdb_latexmk
+informe_planificacion/*.fls
+informe_planificacion/*.log
+informe_planificacion/*.out
+informe_planificacion/*.synctex.gz
+informe_planificacion/*.toc
+informe_planificacion/*.un~
