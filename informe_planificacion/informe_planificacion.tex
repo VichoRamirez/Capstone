@@ -26,6 +26,7 @@
 \usepackage{tabularx}
 \usepackage{longtable}
 \usepackage{colortbl}
+\usepackage{makecell}
 
 % ── Formato y estructura ──────────────────────────────────────────────────────
 \usepackage{fancyhdr}
@@ -53,7 +54,7 @@
 \hypersetup{
   colorlinks=true, linkcolor=azulppal, urlcolor=azulppal, citecolor=azulppal,
   pdftitle={Plan de Trabajo -- Capstone Analytics},
-  pdfauthor={Consultor de Procesos}
+  pdfauthor={Sebastián Ramírez, Vicente Ramírez, Joaquín Parraud}
 }
 
 % ── Encabezado y pie ──────────────────────────────────────────────────────────
@@ -71,6 +72,10 @@
 \titleformat{\subsubsection}{\normalsize\itshape\color{grisoscuro}}{\thesubsubsection.}{0.5em}{}
 \setlist[itemize]{topsep=2pt,itemsep=1pt,leftmargin=*}
 \setlist[enumerate]{topsep=2pt,itemsep=1pt,leftmargin=*}
+% Limits ToC to Section and Subsection only
+\setcounter{tocdepth}{2} 
+
+
 
 % ─────────────────────────────────────────────────────────────────────────────
 \begin{document}
@@ -98,8 +103,7 @@
 \begin{tabular}{@{}ll@{}}
   \textbf{Documento:}        & Plan de Trabajo -- Informe de Planificación \\[3pt]
   \textbf{Versión:}          & 1.0 \\[3pt]
-  \textbf{Fecha de emisión:} & 27 de abril de 2026 \\[3pt]
-  \textbf{Plazo de entrega:} & Semana del 18 de mayo de 2026 \\[3pt]
+  \textbf{Fecha:} & 27 de abril de 2026 \\[3pt]
 
 \end{tabular}
 
@@ -550,6 +554,7 @@ Modelo SIMIO ejecutable + Informe Técnico + Informe Académico entregados dentr
 \end{tabularx}
 \end{table}
 
+\newpage
 % ══════════════════════════════════════════════════════════════════════════════
 \section{Gestión de Riesgos}
 % ══════════════════════════════════════════════════════════════════════════════
@@ -601,6 +606,7 @@ Actividad~1.2 dedicada explícitamente a validación cruzada de datos; triangula
 \end{tabularx}
 \end{table}
 
+\newpage
 % ══════════════════════════════════════════════════════════════════════════════
 \section{Distribución de Responsabilidades}
 % ══════════════════════════════════════════════════════════════════════════════
@@ -612,39 +618,39 @@ La tabla~\ref{tab:raci} asigna responsabilidades según el criterio RACI (R~=~Re
 \caption{Matriz RACI por actividad principal}
 \label{tab:raci}
 \renewcommand{\arraystretch}{1.35}
-\begin{tabularx}{\textwidth}{Xcccc}
+\begin{tabularx}{\textwidth}{Xccc}
 \toprule
 \rowcolor{tabhead}
 \color{white}\textbf{Actividad} &
-\color{white}\textbf{Líder}\newline\color{white}\textbf{Model.} &
-\color{white}\textbf{Analista}\newline\color{white}\textbf{Demanda} &
-\color{white}\textbf{Analista}\newline\color{white}\textbf{Procesos} &
-\color{white}\textbf{Resp.}\newline\color{white}\textbf{Docs.} \\
+\color{white}\textbf{Joaquín P} &
+\color{white}\textbf{Sebastián R.} &
+\color{white}\textbf{Vicente R.}  \\
 \midrule
 \rowcolor{tabrow}
-Definición del problema y alcance   & R & A & A & A \\
-Organización y verificación de datos & A & R & A & I \\
+Definición del problema y alcance   & R & A & A  \\
+Organización y verificación de datos & A & R & A  \\
 \rowcolor{tabrow}
-Formulación de supuestos             & A & A & R & A \\
-Modelo conceptual del sistema        & R & A & R & A \\
+Formulación de supuestos             & A & A & R  \\
+Modelo conceptual del sistema        & R & A & R  \\
 \rowcolor{tabrow}
-Módulo demanda e inventario (SIMIO)  & R & A & I & I \\
-Módulo producción y RRHH (SIMIO)     & R & I & A & I \\
+Módulo demanda e inventario (SIMIO)  & R & A & I  \\
+Módulo producción y RRHH (SIMIO)     & R & I & A  \\
 \rowcolor{tabrow}
-Módulo horno batch (SIMIO)           & R & I & A & I \\
-Políticas de secuenciamiento         & A & A & R & I \\
+Módulo horno batch (SIMIO)           & R & I & A  \\
+Políticas de secuenciamiento         & A & A & R  \\
 \rowcolor{tabrow}
-Verificación y validación            & R & A & A & I \\
-Diseño y ejecución de experimentos   & A & A & R & A \\
+Verificación y validación            & R & A & A  \\
+Diseño y ejecución de experimentos   & A & A & R  \\
 \rowcolor{tabrow}
-Análisis de sensibilidad             & A & R & A & A \\
-Informe técnico (gerencial)          & I & A & A & R \\
+Análisis de sensibilidad             & A & R & A  \\
+Informe técnico (gerencial)          & I & A & A  \\
 \rowcolor{tabrow}
-Informe académico                    & I & A & A & R \\
+Informe académico                    & I & A & A  \\
 \bottomrule
 \end{tabularx}
 \end{table}
 
+\newpage
 % ══════════════════════════════════════════════════════════════════════════════
 \section{Criterios de Calidad de los Entregables}
 % ══════════════════════════════════════════════════════════════════════════════
@@ -675,29 +681,14 @@ Informe académico                    & I & A & A & R \\
   \item Anexos completos: tabla maestra de parámetros, distribuciones de demanda y lógica de selección de tipo de pan.
 \end{itemize}
 
-% ══════════════════════════════════════════════════════════════════════════════
-\section{Observaciones del Consultor}
-% ══════════════════════════════════════════════════════════════════════════════
-
-En años de práctica en proyectos de simulación industrial, los fracasos no ocurren por falta de habilidad técnica. Ocurren, sistemáticamente, por tres errores de gestión:
-
-\begin{enumerate}
-  \item \textbf{Comenzar a programar en el software antes de tener el modelo conceptual cerrado.} La Fase~1 no es optativa ni acortable bajo ninguna presión de plazo. Cada hora de modelamiento conceptual ahorrada se convierte en tres horas de retrabajos en SIMIO con la lógica del horno mal especificada.
-
-  \item \textbf{No verificar módulo a módulo.} La tentación de ``avanzar y ver qué pasa'' produce modelos que corren pero simulan el sistema equivocado. La verificación incremental es la única estrategia que garantiza que se está gastando tiempo de cómputo en el modelo correcto.
-
-  \item \textbf{Dejar los informes para el final.} El informe de un proyecto de simulación no es un resumen del trabajo: es la evidencia de que el trabajo fue hecho correctamente. Un modelo sin documentación es un modelo que nadie puede auditar, reproducir ni extender. Escribir desde el primer día no es burocracia; es aseguramiento de calidad.
-\end{enumerate}
-
-Este plan fue diseñado para hacer que esos tres errores sean difíciles de cometer. Su eficacia depende enteramente de la disciplina del equipo en respetar las fases, los hitos y el orden de construcción aquí establecidos. Un plazo de 24~días es ajustado pero factible. No hay margen para iterar sobre errores de diseño conceptual tardíamente detectados.
 
 % ══════════════════════════════════════════════════════════════════════════════
+\newpage
 \appendix
 \section{Resumen de Datos del Sistema}
 % ══════════════════════════════════════════════════════════════════════════════
 
 \subsection{Demanda diaria por tipo de pan}
-
 \begin{table}[h!]
 \centering
 \caption{Demanda diaria esperada y distribución de compra por cliente}
@@ -706,12 +697,12 @@ Este plan fue diseñado para hacer que esos tres errores sean difíciles de come
 \begin{tabularx}{\textwidth}{Xccccc}
 \toprule
 \rowcolor{tabhead}
-\color{white}\textbf{Tipo de pan} &
+\color{white}\textbf{\makecell[c]{Tipo de\\pan}} &
 \color{white}\textbf{Familia} &
-\color{white}\textbf{Dem. diaria (kg)} &
-\color{white}\textbf{Mín. compra (kg)} &
-\color{white}\textbf{Moda (kg)} &
-\color{white}\textbf{Máx. compra (kg)} \\
+\color{white}\textbf{\makecell[c]{Dem. diaria\\(kg)}} &
+\color{white}\textbf{\makecell[c]{Mín. compra\\(kg)}} &
+\color{white}\textbf{\makecell[c]{Moda\\(kg)}} &
+\color{white}\textbf{\makecell[c]{Máx. compra\\(kg)}} \\
 \midrule
 \rowcolor{tabrow} Marraqueta           & 2 (18~min) & 2.000 & 0,3 & 1,0 & 2,0 \\
 Hallulla                              & 2 (18~min) & 1.700 & 0,3 & 1,0 & 2,0 \\
@@ -727,8 +718,11 @@ Bocado de Dama                        & 1 (14~min) &   220 & 0,3 & 0,5 & 1,0 \\
 \rowcolor{tabrow}\multicolumn{2}{l}{\textbf{Total}} & \textbf{8.200} & & & \\
 \bottomrule
 \end{tabularx}
-\footnotesize\textit{Nota: la cantidad comprada sigue una distribución triangular(mín, moda, máx).}
+\smallskip
+\footnotesize\textit{Nota: la cantidad comprada sigue una distribución triangular (mín, moda, máx).}
 \end{table}
+
+\newpage
 
 \subsection{Familias de horneado y restricciones del horno}
 
@@ -757,6 +751,7 @@ Carga del horno                     & Manipulador requerido, duración & 5~min \
 \end{tabularx}
 \end{table}
 
+
 \subsection{Composición de compra por cliente}
 
 \begin{table}[h!]
@@ -773,6 +768,7 @@ Carga del horno                     & Manipulador requerido, duración & 5~min \
 \rowcolor{tabrow} 3 tipos de pan (distintos) & 15\% \\
 \bottomrule
 \end{tabular}
+
 \footnotesize\textit{La elección del segundo y tercer tipo sigue las mismas probabilidades relativas horarias del primer tipo.}
 \end{table}
 

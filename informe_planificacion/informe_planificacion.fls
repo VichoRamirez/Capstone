@@ -200,6 +200,8 @@ INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/tools/longtable.sty
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/colortbl/colortbl.sty
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/colortbl/colortbl.sty
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/graphics/color.sty
+INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/makecell/makecell.sty
+INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/makecell/makecell.sty
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/titlesec/titlesec.sty
@@ -326,9 +328,9 @@ INPUT ./informe_planificacion.toc
 INPUT informe_planificacion.toc
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/lm/ec-lmri12.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/lm/ts1-lmri12.tfm
+OUTPUT informe_planificacion.toc
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/lm/ec-lmbx10.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/lm/ts1-lmbx10.tfm
-OUTPUT informe_planificacion.toc
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/lm/t1lmtt.fd
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/lm/t1lmtt.fd
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/lm/t1lmtt.fd
