@@ -4,6 +4,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
+\usepackage{amssymb}
 \usepackage[spanish,es-tabla]{babel}
 \usepackage{microtype}
 
@@ -89,7 +90,8 @@
 % ══════════════════════════════════════════════════════════════════════════════
 \begin{titlepage}
 \centering
-\vspace*{1.2cm}
+\vspace*{0.4cm}
+\includegraphics[width=0.36\linewidth]{UDD.png}\\[0.9cm]
 {\color{azulppal}\rule{\linewidth}{2.5pt}}\\[0.5em]
 {\Huge\bfseries\color{azulppal} Plan de Trabajo}\\[0.4em]
 {\large\bfseries\color{grisoscuro} Proyecto Capstone Analytics}\\[0.2em]
@@ -99,18 +101,35 @@
   Proceso de Fabricación de Pan\\
   en Panadería de Supermercado}
 
-\vspace{1.2cm}
+\vspace{0.85cm}
 \begin{tabular}{@{}ll@{}}
+  \textbf{Universidad:}      & Universidad del Desarrollo \\[3pt]
+  \textbf{Ramo:}             & Capstone Analytics \\[3pt]
+  \textbf{Código:}           & IIC511AD \\[3pt]
+  \textbf{Profesor:}         & Victor Vera, PhD \\[3pt]
   \textbf{Documento:}        & Plan de Trabajo -- Informe de Planificación \\[3pt]
   \textbf{Versión:}          & 1.0 \\[3pt]
   \textbf{Fecha:} & 27 de abril de 2026 \\[3pt]
 
 \end{tabular}
 
+\vspace{0.8cm}
+\begin{tabularx}{0.92\linewidth}{>{\bfseries}l X}
+\toprule
+\rowcolor{tabhead}
+\color{white}Integrante & \color{white}Responsabilidad principal \\
+\midrule
+\rowcolor{tabrow}
+Joaquín Parraud & Construcción del modelo físico en SIMIO: layout, objetos, recursos, estaciones y representación operacional. \\
+Sebastián Ramírez & Diseño del flujo lógico del proceso: reglas de producción, secuencia operacional, restricciones y verificación estructural. \\
+\rowcolor{tabrow}
+Vicente Ramírez & Análisis de datos y triangulación de probabilidades: demanda horaria, elección de productos, calibración y análisis experimental. \\
+\bottomrule
+\end{tabularx}
 
 \vfill
 {\color{azulppal}\rule{\linewidth}{2.5pt}}\\[0.3em]
-{\small\color{grisoscuro} Capstone Analytics · Ingeniería Civil Industrial · Universidad del Desarrollo}
+{\small\color{grisoscuro} Capstone Analytics IIC511AD · Ingeniería Civil Industrial · Universidad del Desarrollo}
 \end{titlepage}
 
 % ══════════════════════════════════════════════════════════════════════════════
@@ -147,7 +166,7 @@ La jefatura del supermercado ha detectado un alto nivel de quiebres de stock que
 \colorbox{grisclaro}{%
 \parbox{0.88\textwidth}{%
 \vspace{4pt}
-\textit{¿Cuál es la combinación mínima de recursos —panaderos, manipuladores, hornos, mezcladoras, amasadoras y horario de operación— junto con la política de secuenciamiento de producción, que garantiza un nivel de servicio de al menos 95\% de demanda satisfecha en todos los tipos de pan?}
+\textit{¿Cuál es la combinación mínima de recursos ---panaderos, manipuladores, hornos, mezcladoras, amasadoras y horario de operación--- junto con la política de secuenciamiento de producción, que garantiza un nivel de servicio de al menos 95\% de demanda satisfecha en todos los tipos de pan?}
 \vspace{4pt}
 }}
 \end{center}
@@ -225,15 +244,15 @@ Redactar un documento que explique brevemente el problema, las fases para soluci
 \noindent\colorbox{grisclaro}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{\vspace{2pt}\textbf{Entregable Fase~1 (Hito H0 · 27~Abr):} Documento de planificación, entregables por fase de trabajo.\vspace{2pt}}}
 
 
-\subsection{Fase 1 — Análisis del caso y diagramas \quad\textit{(27~Abr\,--\,2~May\,·\,6 días)}}
+\subsection{Fase 1 --- Análisis del caso y diagramas \quad\textit{(27~Abr\,--\,2~May\,·\,6 días)}}
 
 Esta es a fase más importante, siendo necesaria para no cometer errores en fases posteriores.
 
-\subsubsection{Actividad 1.1 — Definición formal del problema y objetivos \quad(27--28~Abr, 2~días)}
+\subsubsection{Actividad 1.1 --- Definición formal del problema y objetivos \quad(27--28~Abr, 2~días)}
 
 Redactar un documento interno de una página que establezca: (a) la pregunta exacta que responderá el modelo; (b) el criterio cuantitativo de éxito (\%~demanda satisfecha $\geq 95$\% por tipo de pan); (c) las variables de decisión (número de cada recurso, horario de inicio, política de secuenciamiento); y (d) las restricciones no negociables (familias de horno, turnos de 8 horas, descansos escalonados). Este documento opera como contrato interno del equipo: cualquier elemento del modelo que no contribuya a responder la pregunta definida aquí es descartado o simplificado.
 
-\subsubsection{Actividad 1.2 — Organización y verificación de datos de entrada \quad(27--29~Abr, 3~días)}
+\subsubsection{Actividad 1.2 --- Organización y verificación de datos de entrada \quad(27--29~Abr, 3~días)}
 
 Aunque los datos están entregados, no están ``listos para modelar''. Esta actividad comprende:
 \begin{itemize}
@@ -244,7 +263,7 @@ Aunque los datos están entregados, no están ``listos para modelar''. Esta acti
   \item Construir una \textbf{tabla maestra de parámetros} consolidada para uso directo en SIMIO, que centralice: tamaños de lote, tiempos de cada etapa, temperaturas, capacidades por carro/bandeja/horno, y demanda por hora y tipo.
 \end{itemize}
 
-\subsubsection{Actividad 1.3 — Formulación de supuestos explícitos \quad(28--30~Abr, 2~días)}
+\subsubsection{Actividad 1.3 --- Formulación de supuestos explícitos \quad(28--30~Abr, 2~días)}
 
 Registrar en tabla cada supuesto adoptado con su justificación y su impacto esperado. Los supuestos mínimos obligatorios son:
 
@@ -257,7 +276,7 @@ Registrar en tabla cada supuesto adoptado con su justificación y su impacto esp
   \item Política para corridas de horno por debajo de la carga mínima (600~kg = 50\% de capacidad).
 \end{itemize}
 
-\subsubsection{Actividad 1.4 — Modelo conceptual del sistema \quad(29~Abr--2~May, 4~días)}
+\subsubsection{Actividad 1.4 --- Modelo conceptual del sistema \quad(29~Abr--2~May, 4~días)}
 
 Desarrollar el modelo conceptual completo mediante:
 \begin{itemize}
@@ -269,35 +288,35 @@ Desarrollar el modelo conceptual completo mediante:
 
 Este documento debe ser revisado y aprobado por todos los integrantes antes de abrir SIMIO. Una aprobación formal del equipo sobre el modelo conceptual evita que distintos integrantes implementen lógicas inconsistentes en paralelo.
 
-\subsubsection{Actividad 1.5 — Definición de unidades y nivel de detalle \quad(2~May, 1~día)}
+\subsubsection{Actividad 1.5 --- Definición de unidades y nivel de detalle \quad(2~May, 1~día)}
 
 Resolver explícitamente: ¿la demanda se modela cliente a cliente o por pulsos horarios? ¿El inventario se lleva en kg o en unidades físicas? ¿El lote es la entidad de producción? Estas decisiones afectan de forma determinante la complejidad computacional y la velocidad de ejecución del modelo.
 
 \medskip
-\noindent\colorbox{grisclaro}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{\vspace{2pt}\textbf{Entregable Fase~2 (Hito H1 · 2~May):} Documento de fundamentos — tabla maestra de parámetros, lista de supuestos justificados, modelo conceptual completo, definición de unidades de modelación.\vspace{2pt}}}
+\noindent\colorbox{grisclaro}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{\vspace{2pt}\textbf{Entregable Fase~2 (Hito H1 · 2~May):} Documento de fundamentos --- tabla maestra de parámetros, lista de supuestos justificados, modelo conceptual completo, definición de unidades de modelación.\vspace{2pt}}}
 
 % ── FASE 2 ────────────────────────────────────────────────────────────────────
-\subsection{Fase 2 — Construcción Modular del Modelo en SIMIO \quad\textit{(3--10~May\,·\,8 días)}}
+\subsection{Fase 2 --- Construcción Modular del Modelo en SIMIO \quad\textit{(3--10~May\,·\,8 días)}}
 
 La construcción sigue un orden de módulos incrementales. La regla es inviolable: cada módulo se verifica antes de agregar el siguiente. Integrar módulos no verificados es el error más común en proyectos de simulación y el que más tiempo consume en corrección.
 
-\subsubsection{Módulo 2.1 — Inventario y demanda estocástica \quad(3--4~May, 2~días)}
+\subsubsection{Módulo 2.1 --- Inventario y demanda estocástica \quad(3--4~May, 2~días)}
 
 Construir el subsistema de sala de ventas: inventario por tipo de pan, generación de clientes con llegadas según perfil horario (usando el archivo de probabilidades horarias), selección del tipo de pan con las probabilidades dadas (uno, dos o tres tipos por cliente en 50\%/35\%/15\%), distribución triangular de la cantidad comprada por tipo, y registro de quiebres de stock.
 
 Verificación de cierre: con suficiente inventario inicial y sin producción activa, la demanda diaria generada por el modelo debe converger a los 8.200~kg/día esperados (dentro de $\pm$5\% en 30 réplicas).
 
-\subsubsection{Módulo 2.2 — Línea de producción base (una variedad) \quad(4--5~May, 2~días)}
+\subsubsection{Módulo 2.2 --- Línea de producción base (una variedad) \quad(4--5~May, 2~días)}
 
-Modelar el proceso completo para \textit{un único tipo de pan} — se recomienda la Marraqueta por ser la variedad de mayor demanda (2.000~kg/día). Incluye: pesado, mezclado (2~min de ingreso manual + ciclo automático de mezcladora + 1~min de retiro), amasado manual, fermentación en masa, dividido y formado, fermentación final. Verificar que el tiempo de ciclo simulado coincide con el calculado analíticamente a partir de los parámetros entregados.
+Modelar el proceso completo para \textit{un único tipo de pan} --- se recomienda la Marraqueta por ser la variedad de mayor demanda (2.000~kg/día). Incluye: pesado, mezclado (2~min de ingreso manual + ciclo automático de mezcladora + 1~min de retiro), amasado manual, fermentación en masa, dividido y formado, fermentación final. Verificar que el tiempo de ciclo simulado coincide con el calculado analíticamente a partir de los parámetros entregados.
 
-\subsubsection{Módulo 2.3 — Recursos humanos y turnos \quad(5--7~May, 3~días)}
+\subsubsection{Módulo 2.3 --- Recursos humanos y turnos \quad(5--7~May, 3~días)}
 
 Incorporar panaderos y manipuladores como recursos con disponibilidad controlada por horarios de turno, colación y descansos. Implementar el escalonamiento de descansos: en ningún momento todos los trabajadores de una función pueden estar ausentes simultáneamente.
 
 Este es el módulo de mayor riesgo técnico del proyecto. La lógica de schedules con restricción de cobertura mínima en SIMIO es más compleja que en herramientas de simulación genéricas. Se recomienda construir un prototipo aislado de solo turnos antes de integrarlo a la lógica productiva.
 
-\subsubsection{Módulo 2.4 — Horno batch con familias, setup y política de carga \quad(7--9~May, 3~días)}
+\subsubsection{Módulo 2.4 --- Horno batch con familias, setup y política de carga \quad(7--9~May, 3~días)}
 
 Implementar la lógica del horno:
 \begin{itemize}
@@ -311,11 +330,11 @@ Implementar la lógica del horno:
 
 Esta es la pieza más compleja del modelo y la fuente más probable de errores de lógica. Se asignan 3~días deliberadamente.
 
-\subsubsection{Módulo 2.5 — Políticas de secuenciamiento \quad(8--9~May, 2~días, en paralelo con 2.4)}
+\subsubsection{Módulo 2.5 --- Políticas de secuenciamiento \quad(8--9~May, 2~días, en paralelo con 2.4)}
 
 Parametrizar las políticas de secuenciamiento evaluables como parámetro configurable (no como código fijo): prioridad al producto con menor stock en sala; prioridad al producto con mayor demanda esperada en la hora siguiente; secuencia fija de familias (14 $\to$ 18 $\to$ 21); y estrategia híbrida combinada. La configurabilidad permite cambiar de política entre experimentos sin modificar el modelo.
 
-\subsubsection{Módulo 2.6 — Extensión a 10 tipos e integración final \quad(9--10~May, 2~días)}
+\subsubsection{Módulo 2.6 --- Extensión a 10 tipos e integración final \quad(9--10~May, 2~días)}
 
 Replicar la lógica del Módulo~2.2 para las nueve variedades restantes e integrar todos los módulos. Activar el reporte automático de todos los KPIs requeridos por el enunciado: quiebres de stock por tipo, demanda satisfecha, sobrantes, utilización de recursos, tiempos de ciclo, ocupación del horno y frecuencia de setups.
 
@@ -323,7 +342,7 @@ Replicar la lógica del Módulo~2.2 para las nueve variedades restantes e integr
 \noindent\colorbox{grisclaro}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{\vspace{2pt}\textbf{Entregable Fase~2 (Hito H2 · 10~May):} Modelo SIMIO completamente integrado, ejecutable sin errores durante al menos 20~réplicas consecutivas, con reporte automático de todos los KPIs.\vspace{2pt}}}
 
 % ── FASE 3 ────────────────────────────────────────────────────────────────────
-\subsection{Fase 3 — Verificación y Validación \quad\textit{(10--12~May\,·\,3 días)}}
+\subsection{Fase 3 --- Verificación y Validación \quad\textit{(10--12~May\,·\,3 días)}}
 
 La verificación y la validación son dos preguntas distintas que no deben confundirse:
 \begin{itemize}
@@ -331,7 +350,7 @@ La verificación y la validación son dos preguntas distintas que no deben confu
   \item \textbf{Validación:} ¿el modelo representa de manera aceptable el sistema real o propuesto? (¿produce resultados creíbles?)
 \end{itemize}
 
-\subsubsection{Actividad 3.1 — Verificación \quad(10--11~May, 2~días)}
+\subsubsection{Actividad 3.1 --- Verificación \quad(10--11~May, 2~días)}
 
 Lista de chequeo mínima:
 \begin{itemize}
@@ -346,7 +365,7 @@ Lista de chequeo mínima:
 
 Herramientas: animación en SIMIO, rastreo de entidades, corridas con demanda cero (solo producción) y corridas con un solo tipo de pan para comparar el tiempo de ciclo simulado contra el cálculo analítico.
 
-\subsubsection{Actividad 3.2 — Validación \quad(12~May, 1~día)}
+\subsubsection{Actividad 3.2 --- Validación \quad(12~May, 1~día)}
 
 En contexto académico, la validación se apoya en: (a) coherencia del orden de magnitud de los resultados con el análisis de capacidad estático; (b) análisis de sensibilidad de primer nivel (duplicar capacidad del horno debe mejorar los quiebres, no empeorarlos); y (c) revisión cruzada por integrantes que no participaron directamente en los módulos revisados.
 
@@ -356,9 +375,9 @@ Si el horno aparece con 5\% de utilización y aun así hay quiebres masivos, hay
 \noindent\colorbox{grisclaro}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{\vspace{2pt}\textbf{Entregable Fase~3 (Hito H3 · 12~May):} Protocolo de verificación completado (lista de chequeo firmada) y registro de la revisión de validación.\vspace{2pt}}}
 
 % ── FASE 4 ────────────────────────────────────────────────────────────────────
-\subsection{Fase 4 — Diseño y Ejecución de Experimentos \quad\textit{(13--17~May\,·\,5 días)}}
+\subsection{Fase 4 --- Diseño y Ejecución de Experimentos \quad\textit{(13--17~May\,·\,5 días)}}
 
-\subsubsection{Actividad 4.1 — Diseño experimental \quad(13~May, 1~día)}
+\subsubsection{Actividad 4.1 --- Diseño experimental \quad(13~May, 1~día)}
 
 Definir formalmente la matriz de experimentos:
 \begin{itemize}
@@ -370,11 +389,11 @@ Definir formalmente la matriz de experimentos:
   \item \textbf{KPIs de comparación:} \%~demanda satisfecha por tipo de pan (primario) y utilización de recursos (secundario para decisión de costo mínimo).
 \end{itemize}
 
-\subsubsection{Actividad 4.2 — Ejecución de escenarios \quad(13--16~May, 3~días)}
+\subsubsection{Actividad 4.2 --- Ejecución de escenarios \quad(13--16~May, 3~días)}
 
 Correr todos los escenarios definidos y registrar los resultados en una tabla comparativa estructurada. Documentar cualquier comportamiento inesperado observado durante la ejecución. No interpretar resultados en esta etapa: el análisis viene después de tener todos los datos.
 
-\subsubsection{Actividad 4.3 — Análisis de sensibilidad y robustez \quad(15--17~May, 2~días)}
+\subsubsection{Actividad 4.3 --- Análisis de sensibilidad y robustez \quad(15--17~May, 2~días)}
 
 Una solución no debe evaluarse solo en el escenario promedio. Perturbaciones a evaluar:
 \begin{itemize}
@@ -390,13 +409,13 @@ Una política que solo funciona bajo condiciones promedio no es una recomendaci�
 \noindent\colorbox{grisclaro}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{\vspace{2pt}\textbf{Entregable Fase~4 (Hito H4 · 17~May):} Tabla comparativa de escenarios con KPIs completos y análisis de sensibilidad documentado.\vspace{2pt}}}
 
 % ── FASE 5 ────────────────────────────────────────────────────────────────────
-\subsection{Fase 5 — Documentación y Entrega \quad\textit{(17--20~May\,·\,4 días)}}
+\subsection{Fase 5 --- Documentación y Entrega \quad\textit{(17--20~May\,·\,4 días)}}
 
-\subsubsection{Actividad 5.1 — Interpretación de resultados y recomendaciones \quad(17~May, 1~día)}
+\subsubsection{Actividad 5.1 --- Interpretación de resultados y recomendaciones \quad(17~May, 1~día)}
 
 Traducir los números en decisiones concretas: ¿qué recurso actúa como cuello de botella? ¿Conviene más capacidad de horno o más panaderos? ¿La restricción principal está en la fermentación o en el horneado? ¿Cuál es la configuración mínima que cumple el estándar de servicio? Esta es la actividad de mayor valor para el cliente; requiere juicio profesional, no solo lectura de tablas.
 
-\subsubsection{Actividad 5.2 — Redacción de entregables formales \quad(18--20~May, 3~días)}
+\subsubsection{Actividad 5.2 --- Redacción de entregables formales \quad(18--20~May, 3~días)}
 
 \begin{itemize}
   \item \textbf{Informe Técnico (gerencial):} orientado a la toma de decisiones de la jefatura. Ejecutivo, visual y contundente. Incluye: descripción del sistema, supuestos operacionales, estructura del modelo, definición de variables y recursos, escenarios evaluados, resultados tabulados, análisis de sensibilidad, y recomendación final de configuración de recursos y política de producción.
@@ -611,7 +630,26 @@ Actividad~1.2 dedicada explícitamente a validación cruzada de datos; triangula
 \section{Distribución de Responsabilidades}
 % ══════════════════════════════════════════════════════════════════════════════
 
-La tabla~\ref{tab:raci} asigna responsabilidades según el criterio RACI (R~=~Responsable, A~=~Apoya, I~=~Solo informa). El balance de carga es el criterio de asignación primario.
+La tabla~\ref{tab:responsabilidades-principales} explicita la responsabilidad principal de cada integrante. La tabla~\ref{tab:raci} distribuye las actividades restantes según el criterio RACI (R~=~Responsable, A~=~Apoya, I~=~Solo informa), respetando la especialización de cada integrante y procurando una carga de trabajo uniforme durante el horizonte del proyecto.
+
+\begin{table}[h!]
+\centering
+\caption{Integrantes y responsabilidad principal}
+\label{tab:responsabilidades-principales}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabularx}{\textwidth}{>{\bfseries}p{3.2cm}X}
+\toprule
+\rowcolor{tabhead}
+\color{white}\textbf{Integrante} & \color{white}\textbf{Responsabilidad principal} \\
+\midrule
+\rowcolor{tabrow}
+Joaquín Parraud & Desarrollo del modelo físico en SIMIO: construcción del layout, recursos, objetos, estaciones, rutas, capacidades y animación funcional del sistema. \\
+Sebastián Ramírez & Desarrollo del flujo lógico del proceso: secuencia productiva, reglas de inventario, restricciones operacionales, política de horno y pruebas de consistencia estructural. \\
+\rowcolor{tabrow}
+Vicente Ramírez & Análisis de datos y triangulación de probabilidades: limpieza de datos, demanda horaria, composición de compra, calibración, diseño experimental y análisis de resultados. \\
+\bottomrule
+\end{tabularx}
+\end{table}
 
 \begin{table}[h!]
 \centering
@@ -627,25 +665,25 @@ La tabla~\ref{tab:raci} asigna responsabilidades según el criterio RACI (R~=~Re
 \color{white}\textbf{Vicente R.}  \\
 \midrule
 \rowcolor{tabrow}
-Definición del problema y alcance   & R & A & A  \\
-Organización y verificación de datos & A & R & A  \\
+Definición del problema y alcance   & A & R & A  \\
+Organización y verificación de datos & A & A & R  \\
 \rowcolor{tabrow}
-Formulación de supuestos             & A & A & R  \\
-Modelo conceptual del sistema        & R & A & R  \\
+Formulación de supuestos             & A & R & A  \\
+Modelo conceptual del sistema        & A & R & A  \\
 \rowcolor{tabrow}
-Módulo demanda e inventario (SIMIO)  & R & A & I  \\
-Módulo producción y RRHH (SIMIO)     & R & I & A  \\
+Módulo demanda e inventario (SIMIO)  & A & A & R  \\
+Módulo producción y RRHH (SIMIO)     & R & A & A  \\
 \rowcolor{tabrow}
-Módulo horno batch (SIMIO)           & R & I & A  \\
-Políticas de secuenciamiento         & A & A & R  \\
+Módulo horno batch (SIMIO)           & R & R & A  \\
+Políticas de secuenciamiento         & A & R & A  \\
 \rowcolor{tabrow}
-Verificación y validación            & R & A & A  \\
+Verificación y validación            & A & R & A  \\
 Diseño y ejecución de experimentos   & A & A & R  \\
 \rowcolor{tabrow}
-Análisis de sensibilidad             & A & R & A  \\
-Informe técnico (gerencial)          & I & A & A  \\
+Análisis de sensibilidad             & A & A & R  \\
+Informe técnico (gerencial)          & A & R & A  \\
 \rowcolor{tabrow}
-Informe académico                    & I & A & A  \\
+Informe académico                    & R & A & A  \\
 \bottomrule
 \end{tabularx}
 \end{table}
