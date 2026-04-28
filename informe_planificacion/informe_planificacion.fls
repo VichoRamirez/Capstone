@@ -15,6 +15,10 @@ INPUT C:\Program Files\MiKTeX\tex\latex\base\fontenc.sty
 INPUT C:\Program Files\MiKTeX\fonts\tfm\jknappen\ec\ecrm1200.tfm
 INPUT C:\Program Files\MiKTeX\tex\latex\lm\lmodern.sty
 INPUT C:\Program Files\MiKTeX\tex\latex\lm\lmodern.sty
+INPUT C:\Program Files\MiKTeX\tex\latex\amsfonts\amssymb.sty
+INPUT C:\Program Files\MiKTeX\tex\latex\amsfonts\amssymb.sty
+INPUT C:\Program Files\MiKTeX\tex\latex\amsfonts\amsfonts.sty
+INPUT C:\Program Files\MiKTeX\tex\latex\amsfonts\amsfonts.sty
 INPUT C:\Program Files\MiKTeX\tex\generic\babel\babel.sty
 INPUT C:\Program Files\MiKTeX\tex\generic\babel\babel.sty
 INPUT C:\Program Files\MiKTeX\tex\generic\babel\txtbabel.def
@@ -260,10 +264,8 @@ INPUT C:\Users\raalv\AppData\Roaming\MiKTeX\tex\latex\rerunfilecheck\rerunfilech
 INPUT C:\Users\raalv\AppData\Roaming\MiKTeX\tex\latex\rerunfilecheck\rerunfilecheck.sty
 INPUT C:\Users\raalv\AppData\Roaming\MiKTeX\tex\generic\uniquecounter\uniquecounter.sty
 INPUT C:\Users\raalv\AppData\Roaming\MiKTeX\tex\generic\uniquecounter\uniquecounter.sty
-INPUT C:\Program Files\MiKTeX\tex\latex\amsfonts\amssymb.sty
-INPUT C:\Program Files\MiKTeX\tex\latex\amsfonts\amssymb.sty
-INPUT C:\Program Files\MiKTeX\tex\latex\amsfonts\amsfonts.sty
-INPUT C:\Program Files\MiKTeX\tex\latex\amsfonts\amsfonts.sty
+INPUT C:\Users\raalv\AppData\Roaming\MiKTeX\tex\latex\hyphenat\hyphenat.sty
+INPUT C:\Users\raalv\AppData\Roaming\MiKTeX\tex\latex\hyphenat\hyphenat.sty
 INPUT C:\Program Files\MiKTeX\tex\latex\lm\t1lmr.fd
 INPUT C:\Program Files\MiKTeX\tex\latex\lm\t1lmr.fd
 INPUT C:\Program Files\MiKTeX\tex\latex\lm\t1lmr.fd
@@ -282,6 +284,8 @@ INPUT C:\Program Files\MiKTeX\tex\context\base\mkii\supp-pdf.mkii
 INPUT C:\Program Files\MiKTeX\tex\context\base\mkii\supp-pdf.mkii
 INPUT C:\Program Files\MiKTeX\tex\latex\epstopdf-pkg\epstopdf-base.sty
 INPUT C:\Program Files\MiKTeX\tex\latex\epstopdf-pkg\epstopdf-base.sty
+INPUT C:\Users\raalv\AppData\Roaming\MiKTeX\tex\latex\grfext\grfext.sty
+INPUT C:\Users\raalv\AppData\Roaming\MiKTeX\tex\latex\grfext\grfext.sty
 INPUT C:\Program Files\MiKTeX\tex\latex\00miktex\epstopdf-sys.cfg
 INPUT C:\Program Files\MiKTeX\tex\latex\00miktex\epstopdf-sys.cfg
 INPUT C:\Program Files\MiKTeX\tex\latex\00miktex\epstopdf-sys.cfg
@@ -293,6 +297,24 @@ OUTPUT informe_planificacion.pdf
 INPUT .\informe_planificacion.out
 INPUT .\informe_planificacion.out
 OUTPUT informe_planificacion.out
+INPUT C:\Program Files\MiKTeX\tex\latex\lm\t1lmtt.fd
+INPUT C:\Program Files\MiKTeX\tex\latex\lm\t1lmtt.fd
+INPUT C:\Program Files\MiKTeX\tex\latex\lm\t1lmtt.fd
+INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\ec-lmtt12.tfm
+INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\ec-lmtti10.tfm
+INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\ec-lmtto10.tfm
+INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\ec-lmtcso10.tfm
+INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\ec-lmtk10.tfm
+INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\ec-lmtko10.tfm
+INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\ec-lmtlc10.tfm
+INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\ec-lmtlco10.tfm
+INPUT .\UDD.png
+INPUT .\UDD.png
+INPUT .\UDD.png
+INPUT .\UDD.png
+INPUT .\UDD.png
+INPUT .\UDD.png
+INPUT .\UDD.png
 INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\ec-lmr17.tfm
 INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\ec-lmbx12.tfm
 INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\ec-lmr12.tfm
@@ -341,28 +363,15 @@ INPUT C:\Program Files\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm10.tfm
 INPUT C:\Program Files\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm7.tfm
 INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\ec-lmbx12.tfm
 INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\ec-lmr10.tfm
-INPUT C:\Program Files\MiKTeX\tex\latex\lm\ts1lmr.fd
-INPUT C:\Program Files\MiKTeX\tex\latex\lm\ts1lmr.fd
-INPUT C:\Program Files\MiKTeX\tex\latex\lm\ts1lmr.fd
-INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\ts1-lmr10.tfm
 INPUT C:\Users\raalv\AppData\Local\MiKTeX\fonts\map\pdftex\pdftex.map
 INPUT C:\Program Files\MiKTeX\fonts\enc\dvips\lm\lm-ec.enc
-INPUT C:\Program Files\MiKTeX\fonts\enc\dvips\lm\lm-ts1.enc
 INPUT .\informe_planificacion.toc
 INPUT .\informe_planificacion.toc
 INPUT informe_planificacion.toc
 INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\ec-lmri12.tfm
-INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\ts1-lmri12.tfm
 OUTPUT informe_planificacion.toc
 INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\ec-lmbx10.tfm
-INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\ts1-lmbx10.tfm
-INPUT C:\Program Files\MiKTeX\tex\latex\lm\t1lmtt.fd
-INPUT C:\Program Files\MiKTeX\tex\latex\lm\t1lmtt.fd
-INPUT C:\Program Files\MiKTeX\tex\latex\lm\t1lmtt.fd
-INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\ec-lmtt12.tfm
 INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\ec-lmbxi10.tfm
-INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\ts1-lmbxi10.tfm
-INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\ts1-lmbx12.tfm
 INPUT C:\Program Files\MiKTeX\fonts\enc\dvips\lm\lm-mathsy.enc
 INPUT C:\Program Files\MiKTeX\fonts\enc\dvips\lm\lm-rm.enc
 INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\ec-lmr8.tfm
