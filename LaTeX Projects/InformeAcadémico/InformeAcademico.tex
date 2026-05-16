@@ -57,14 +57,14 @@
 % ── hyperref ──────────────────────────────────────────────────────────────────
 \hypersetup{
   colorlinks=true, linkcolor=azulppal, urlcolor=azulppal, citecolor=azulppal,
-  pdftitle={Plan de Trabajo -- Capstone Analytics},
+  pdftitle={Informe Académico -- Capstone Analytics},
   pdfauthor={Sebastián Ramírez, Vicente Ramírez, Joaquín Parraud}
 }
 
 % ── Encabezado y pie ──────────────────────────────────────────────────────────
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[L]{\small\color{azulppal}\textbf{Plan de Trabajo -- Simulación Panadería de Supermercado}}
+\fancyhead[L]{\small\color{azulppal}\textbf{Informe Académico -- Simulación Panadería de Supermercado}}
 \fancyhead[R]{\small\color{grisoscuro}Abril--Mayo 2026}
 \fancyfoot[C]{\small\thepage}
 \renewcommand{\headrulewidth}{0.5pt}
@@ -128,9 +128,9 @@ Vicente Ramírez}
 \end{titlepage}
 
 \tableofcontents
-\newpage
 
 % ══════════════════════════════════════════════════════════════════════════════
+\newpage
 \section{Introducción}
 % ══════════════════════════════════════════════════════════════════════════════
 
@@ -147,6 +147,7 @@ El sistema bajo estudio es una panadería que produce diez variedades de pan fre
 }}
 
 % ══════════════════════════════════════════════════════════════════════════════
+\newpage
 \section{Sistema bajo estudio}
 % ══════════════════════════════════════════════════════════════════════════════
 
@@ -163,6 +164,7 @@ Los hornos son de tipo industrial (piso o rotativo) y operan en modo batch por c
 La demanda diaria total alcanza 8.200~kg distribuidos entre los diez tipos de pan, con un perfil horario conocido. Cada cliente que llega compra uno, dos o tres tipos de pan con probabilidades 50\%, 35\% y 15\% respectivamente. La cantidad comprada por tipo sigue una distribución triangular (mínimo, moda, máximo) específica para cada producto.
 
 % ══════════════════════════════════════════════════════════════════════════════
+\newpage
 \section{Modelo conceptual}
 % ══════════════════════════════════════════════════════════════════════════════
 
@@ -190,6 +192,7 @@ Las variables de decisión del estudio son:
 El criterio cuantitativo de éxito es el porcentaje de demanda satisfecha por tipo de pan, que debe ser igual o superior al 95\% para todos los productos. Como criterio secundario para discriminar entre configuraciones que cumplen el estándar, se utiliza la utilización de recursos (minimización del costo operativo).
 
 % ══════════════════════════════════════════════════════════════════════════════
+\newpage
 \section{Decisiones de modelamiento}
 % ══════════════════════════════════════════════════════════════════════════════
 
@@ -211,6 +214,13 @@ El stock en sala se representa con un state vectorial de 10 posiciones (\texttt{
 
 El horno batch se implementa con tres colas lógicas, una por familia de horneado. Cada lote ingresa con su requerimiento de carros y bandejas, y la lógica de formación de carga selecciona lotes de una misma familia mientras la suma de carros no exceda la capacidad. La política de setup se evalúa mediante un proceso explícito que consulta una matriz de cambios entre familias.
 
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\linewidth]{../GuiaImplementacionSimio/figures_ai/ai_06_oven_batch_process.png}
+\caption{Esquema conceptual del horno batch: tres colas lógicas por familia, formación de carga por carros y bandejas, y política de setup entre familias.}
+\label{fig:horno-acad}
+\end{figure}
+
 \subsection{Recursos humanos}
 
 Los manipuladores se modelan como \texttt{Worker} de Simio con schedules de turno explícitos, lo que permite capturar caminata, colaciones (45~min) y descansos (2$\times$15~min). Los panaderos se modelan como \texttt{Secondary Resource} lógico (capacidad sin caminata física), una simplificación deliberada porque el desplazamiento físico del panadero no es relevante para los KPIs del estudio.
@@ -219,7 +229,15 @@ Los manipuladores se modelan como \texttt{Worker} de Simio con schedules de turn
 
 A pesar de que los diez tipos de pan tienen tiempos distintos en cada etapa, todos siguen la misma secuencia física de etapas. Por lo tanto el modelo usa una ruta única con tiempos parametrizados desde la tabla de etapas por producto, en lugar de rutas separadas o \texttt{Sequence Tables}.
 
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\linewidth]{../GuiaImplementacionSimio/figures_ai/ai_05_production_route.png}
+\caption{Ruta productiva única recorrida por todos los tipos de pan, con tiempos parametrizados por producto desde la tabla de etapas.}
+\label{fig:ruta-acad}
+\end{figure}
+
 % ══════════════════════════════════════════════════════════════════════════════
+\newpage
 \section{Implementación en Simio}
 % ══════════════════════════════════════════════════════════════════════════════
 
@@ -268,6 +286,7 @@ La lógica del modelo se concentra en procesos con triggers explícitos. Entre l
 \end{itemize}
 
 % ══════════════════════════════════════════════════════════════════════════════
+\newpage
 \section{Datos de entrada y tratamiento}
 % ══════════════════════════════════════════════════════════════════════════════
 
@@ -284,6 +303,7 @@ Antes de importar a Simio, los archivos pasan por una capa de transformación qu
 Toda decisión que no proviene directamente de los archivos fuente queda registrada en la tabla \texttt{Tbl\_Supuestos}, junto con su valor base, fuente, sensibilidad esperada y estado. Esto incluye los tiempos de etapas no especificados, los tiempos de desplazamiento internos y la política de corridas por debajo de la carga mínima.
 
 % ══════════════════════════════════════════════════════════════════════════════
+\newpage
 \section{Verificación y validación}
 % ══════════════════════════════════════════════════════════════════════════════
 
@@ -306,6 +326,7 @@ La validación responde a la pregunta: ¿el modelo representa de manera aceptabl
 Una prueba específica de calibración consiste en correr el modelo con inventario inicial infinito y sin producción activa: la demanda diaria generada debe converger a los 8.200~kg/día esperados dentro de un margen de $\pm$5\% en 30~réplicas.
 
 % ══════════════════════════════════════════════════════════════════════════════
+\newpage
 \section{Diseño experimental}
 % ══════════════════════════════════════════════════════════════════════════════
 
@@ -332,6 +353,7 @@ Sobre la configuración recomendada se evalúan perturbaciones para verificar ro
 
 % ══════════════════════════════════════════════════════════════════════════════
 \appendix
+\newpage
 \section{Parámetros del sistema}
 % ══════════════════════════════════════════════════════════════════════════════
 

@@ -126,9 +126,9 @@ Vicente Ramírez}
 \end{titlepage}
 
 \tableofcontents
-\newpage
 
 % ══════════════════════════════════════════════════════════════════════════════
+\newpage
 \section{Resumen ejecutivo}
 % ══════════════════════════════════════════════════════════════════════════════
 
@@ -140,6 +140,7 @@ Este informe presenta el modelo de simulación de eventos discretos construido p
 \noindent\textbf{Objetivo del estudio.} Determinar la configuración operacional mínima (cantidad de cada recurso, hora de inicio y política de producción) que cumple el estándar de servicio de 95\% para los diez tipos de pan, evaluando además su robustez frente a variaciones de demanda y composición del mix.
 
 % ══════════════════════════════════════════════════════════════════════════════
+\newpage
 \section{Problema y contexto operacional}
 % ══════════════════════════════════════════════════════════════════════════════
 
@@ -163,12 +164,20 @@ El volumen total de demanda (8.200~kg/día) está dentro de la capacidad teóric
 \end{center}
 
 % ══════════════════════════════════════════════════════════════════════════════
+\newpage
 \section{Sistema bajo estudio}
 % ══════════════════════════════════════════════════════════════════════════════
 
 \subsection{Proceso productivo}
 
 Cada variedad de pan recorre la misma secuencia de etapas, con tiempos específicos por producto: pesado y dosificación de ingredientes, mezclado (intervención manual del panadero más ciclo automático de mezcladora), amasado manual, reposo o fermentación en masa, dividido y formado, fermentación final, horneado batch, enfriamiento y reposición a sala.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\linewidth]{../GuiaImplementacionSimio/figures_ai/ai_05_production_route.png}
+\caption{Flujo del proceso productivo del pan: desde el pesado de ingredientes hasta la reposición a sala.}
+\label{fig:ruta-tec}
+\end{figure}
 
 \subsection{Hornos batch}
 
@@ -197,6 +206,13 @@ Setup distinta familia               & Cambio entre familias & 5~min \\
 \end{tabularx}
 \end{table}
 
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\linewidth]{../GuiaImplementacionSimio/figures_ai/ai_06_oven_batch_process.png}
+\caption{Operación batch del horno: agrupación por familia de horneado, formación de carga por carros y restricción de no mezclar familias en una misma corrida.}
+\label{fig:horno-tec-fig}
+\end{figure}
+
 \subsection{Demanda}
 
 La demanda diaria total es 8.200~kg distribuidos en diez tipos de pan con perfiles horarios distintos. Cada cliente compra uno, dos o tres tipos de pan con probabilidades 50\%, 35\% y 15\% respectivamente, y la cantidad por tipo sigue una distribución triangular específica del producto (Tabla~\ref{tab:demanda-tec}).
@@ -216,16 +232,16 @@ La demanda diaria total es 8.200~kg distribuidos en diez tipos de pan con perfil
 \color{white}\textbf{\makecell[c]{Moda\\(kg)}} &
 \color{white}\textbf{\makecell[c]{Máx.\\(kg)}} \\
 \midrule
-\rowcolor{tabrow} Marraqueta            & 2 & 2.000 & 0,3 & 1,0 & 2,0 \\
-Hallulla                                & 2 & 1.700 & 0,3 & 1,0 & 2,0 \\
-\rowcolor{tabrow} Pan Hot Dog           & 1 & 1.200 & 0,3 & 1,0 & 3,0 \\
-Marraqueta Integral                     & 3 &   800 & 0,3 & 0,5 & 2,0 \\
-\rowcolor{tabrow} Hallulla Integral     & 2 &   800 & 0,3 & 0,7 & 1,5 \\
-Amasado                                 & 2 &   380 & 0,3 & 0,8 & 2,0 \\
-\rowcolor{tabrow} Ciabatta              & 3 &   400 & 0,3 & 0,5 & 1,5 \\
-Baguette                                & 3 &   350 & 0,3 & 0,5 & 1,0 \\
-\rowcolor{tabrow} Dobladita             & 1 &   350 & 0,3 & 0,5 & 1,5 \\
-Bocado de Dama                          & 1 &   220 & 0,3 & 0,5 & 1,0 \\
+\rowcolor{tabrow} Marraqueta            & 2 (18~min) & 2.000 & 0,3 & 1,0 & 2,0 \\
+Hallulla                                & 2 (18~min) & 1.700 & 0,3 & 1,0 & 2,0 \\
+\rowcolor{tabrow} Pan Hot Dog           & 1 (14~min) & 1.200 & 0,3 & 1,0 & 3,0 \\
+Marraqueta Integral                     & 3 (21~min) &   800 & 0,3 & 0,5 & 2,0 \\
+\rowcolor{tabrow} Hallulla Integral     & 2 (18~min) &   800 & 0,3 & 0,7 & 1,5 \\
+Amasado                                 & 2 (18~min) &   380 & 0,3 & 0,8 & 2,0 \\
+\rowcolor{tabrow} Ciabatta              & 3 (21~min) &   400 & 0,3 & 0,5 & 1,5 \\
+Baguette                                & 3 (21~min) &   350 & 0,3 & 0,5 & 1,0 \\
+\rowcolor{tabrow} Dobladita             & 1 (14~min) &   350 & 0,3 & 0,5 & 1,5 \\
+Bocado de Dama                          & 1 (14~min) &   220 & 0,3 & 0,5 & 1,0 \\
 \midrule
 \rowcolor{tabrow}\multicolumn{2}{l}{\textbf{Total}} & \textbf{8.200} & & & \\
 \bottomrule
@@ -233,6 +249,7 @@ Bocado de Dama                          & 1 &   220 & 0,3 & 0,5 & 1,0 \\
 \end{table}
 
 % ══════════════════════════════════════════════════════════════════════════════
+\newpage
 \section{Supuestos operacionales}
 % ══════════════════════════════════════════════════════════════════════════════
 
@@ -242,13 +259,14 @@ Los supuestos que estructuran el modelo y sus resultados son los siguientes:
   \item La sala opera entre las 09:00 y las 21:00 horas; la producción comienza antes de la apertura para garantizar disponibilidad inicial.
   \item La demanda no satisfecha no se recupera: cada quiebre representa una pérdida directa.
   \item Los hornos operan exclusivamente en modo batch por corrida completa; no se permite mezclar familias en una misma carga.
-  \item Los panaderos y manipuladores trabajan en turnos con colaciones (45~min) y descansos (2$\times$15~min) escalonados, de modo que ninguna función queda sin cobertura simultáneamente.
+  \item Los panaderos y manipuladores trabajan en turnos con colaciones (45~min) y dos descansos de 15~min escalonados, de modo que ninguna función queda sin cobertura simultáneamente.
   \item No se modelan fallas de equipos ni mantenimiento mayor: se asume disponibilidad nominal de hornos, mezcladoras y amasadoras durante la jornada.
   \item El abastecimiento de materias primas se considera ilimitado dentro del horizonte diario.
   \item Los sobrantes al cierre del día no son objeto de optimización del modelo.
 \end{enumerate}
 
 % ══════════════════════════════════════════════════════════════════════════════
+\newpage
 \section{Estructura del modelo de simulación}
 % ══════════════════════════════════════════════════════════════════════════════
 
@@ -272,6 +290,7 @@ El modelo se implementa en Simio como simulación de eventos discretos, con dos 
 Todas las decisiones de escenario (número de panaderos, manipuladores, hornos, mezcladoras y amasadoras; hora de inicio; política de secuenciamiento) se controlan desde una tabla de escenarios mapeada uno a uno con controles de experimentos. Esto permite cambiar la configuración sin modificar la lógica del modelo.
 
 % ══════════════════════════════════════════════════════════════════════════════
+\newpage
 \section{Variables de decisión y escenarios}
 % ══════════════════════════════════════════════════════════════════════════════
 
@@ -300,6 +319,7 @@ Todas las decisiones de escenario (número de panaderos, manipuladores, hornos, 
 El plan experimental contempla un escenario base de referencia y un mínimo de seis escenarios alternativos que combinan variaciones de recursos y políticas. Cada escenario se ejecuta con al menos 20~réplicas (preferiblemente 30) para estabilizar los intervalos de confianza de los KPIs.
 
 % ══════════════════════════════════════════════════════════════════════════════
+\newpage
 \section{Indicadores de evaluación (KPIs)}
 % ══════════════════════════════════════════════════════════════════════════════
 
@@ -320,6 +340,7 @@ El plan experimental contempla un escenario base de referencia y un mínimo de s
 Los indicadores secundarios se usan principalmente para discriminar entre configuraciones que cumplen el estándar primario, eligiendo la que minimiza el costo operativo asociado.
 
 % ══════════════════════════════════════════════════════════════════════════════
+\newpage
 \section{Análisis de sensibilidad previsto}
 % ══════════════════════════════════════════════════════════════════════════════
 
@@ -335,6 +356,7 @@ Sobre la configuración recomendada se ejecutarán perturbaciones para evaluar r
 Una recomendación que solo cumple el estándar bajo condiciones promedio no es una recomendación gerencial válida; la robustez es parte del producto entregado.
 
 % ══════════════════════════════════════════════════════════════════════════════
+\newpage
 \section{Resultados y recomendación}
 % ══════════════════════════════════════════════════════════════════════════════
 
