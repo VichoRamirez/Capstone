@@ -9,6 +9,7 @@ CapstoneEnv/
 # LaTeX temp and aux files
 *.aux
 *.dvi
+*.xdv
 *.fdb_latexmk
 *.fls
 *.log
@@ -42,6 +43,7 @@ osrm-mount/
 .osrm/
 
 # --- Temporary files ---
+.DS_Store
 *.tmp
 *.temp
 *.temp~
