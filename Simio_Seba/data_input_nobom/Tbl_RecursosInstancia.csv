@@ -1,0 +1,7 @@
+RecursoID,Tipo,HomeNode,VelocidadMps,ScheduleID,Activo
+Panadero_1,Panadero,Node_Pesado,1.2,Sch_Panadero_1,True
+Panadero_2,Panadero,Node_Formado,1.2,Sch_Panadero_2,True
+Manipulador_1,Manipulador,Node_Horno,0.8,Sch_Manipulador_1,True
+Horno_1,Horno,Node_Horno,,Sch_Horno_1,True
+Mezcladora_1,Mezcladora,Node_Amasado,,Sch_Equipo_Base,True
+Amasadora_1,Amasadora,Node_Amasado,,Sch_Equipo_Base,True

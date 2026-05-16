@@ -1,0 +1,59 @@
+{
+  "generated_at": "2026-05-09T19:46:51",
+  "products": 10,
+  "etapas_rows": 70,
+  "demand_rows": 120,
+  "prob_rows": 120,
+  "rate_rows": 12,
+  "daily_total_kg": 8199.97,
+  "probability_sums_by_hour": [
+    {
+      "HoraIdx": 1,
+      "sum": 1.00001
+    },
+    {
+      "HoraIdx": 2,
+      "sum": 1.00001
+    },
+    {
+      "HoraIdx": 3,
+      "sum": 1.00001
+    },
+    {
+      "HoraIdx": 4,
+      "sum": 0.99999
+    },
+    {
+      "HoraIdx": 5,
+      "sum": 1.0
+    },
+    {
+      "HoraIdx": 6,
+      "sum": 1.0
+    },
+    {
+      "HoraIdx": 7,
+      "sum": 1.00001
+    },
+    {
+      "HoraIdx": 8,
+      "sum": 1.00001
+    },
+    {
+      "HoraIdx": 9,
+      "sum": 0.99998
+    },
+    {
+      "HoraIdx": 10,
+      "sum": 0.99999
+    },
+    {
+      "HoraIdx": 11,
+      "sum": 0.99998
+    },
+    {
+      "HoraIdx": 12,
+      "sum": 1.0
+    }
+  ]
+}

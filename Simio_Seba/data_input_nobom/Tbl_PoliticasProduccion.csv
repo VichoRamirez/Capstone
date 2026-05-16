@@ -1,0 +1,4 @@
+PoliticaID,Tipo,Descripcion,Prioridad,IntervaloLiberacionMin,Activa
+BASE_HIBRIDA,Hibrida,Preapertura push para stock inicial y pull por punto de reposicion durante venta,MenorStockRelativo,30,True
+PULL_STOCK,Pull,Liberar lote si stock baja de punto de reposicion,MenorStockRelativo,15,False
+PUSH_PLAN,Push,Liberar lotes segun plan horario,MayorDemandaEsperada,45,False
