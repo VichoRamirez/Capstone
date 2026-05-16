@@ -125,4 +125,219 @@ Vicente Ramírez}
 {\small\color{grisoscuro} Capstone Analytics IIC511AD -- Ingeniería Civil Industrial -- Universidad del Desarrollo}
 \end{titlepage}
 
+\tableofcontents
+\newpage
+
+% ══════════════════════════════════════════════════════════════════════════════
+\section{Resumen ejecutivo}
+% ══════════════════════════════════════════════════════════════════════════════
+
+La panadería del supermercado enfrenta un nivel inaceptable de quiebres de stock que genera pérdidas de venta directas y deterioro de la experiencia de compra. La demanda diaria es conocida (8.200~kg distribuidos en diez variedades de pan) y el problema no radica en su volumen sino en la coordinación de los recursos productivos: panaderos, manipuladores, hornos, mezcladoras, amasadoras y el horario de inicio de operación.
+
+Este informe presenta el modelo de simulación de eventos discretos construido para responder, con evidencia cuantitativa, cuál es la combinación mínima de recursos y la política de secuenciamiento de producción que garantiza un nivel de servicio de al menos 95\% de demanda satisfecha en todos los tipos de pan.
+
+\medskip
+\noindent\textbf{Objetivo del estudio.} Determinar la configuración operacional mínima (cantidad de cada recurso, hora de inicio y política de producción) que cumple el estándar de servicio de 95\% para los diez tipos de pan, evaluando además su robustez frente a variaciones de demanda y composición del mix.
+
+% ══════════════════════════════════════════════════════════════════════════════
+\section{Problema y contexto operacional}
+% ══════════════════════════════════════════════════════════════════════════════
+
+\subsection{Diagnóstico actual}
+
+La sala de ventas opera entre las 09:00 y las 21:00 horas con autoservicio de pan fresco. La jefatura ha detectado que ciertos tipos de pan se agotan antes del cierre y que el patrón se repite especialmente en horas de mayor afluencia. La demanda no satisfecha no se recupera (el cliente no espera ni reagenda), por lo que cada quiebre se traduce directamente en pérdida de venta.
+
+\subsection{Hipótesis operacional}
+
+El volumen total de demanda (8.200~kg/día) está dentro de la capacidad teórica del sistema. El problema se atribuye a la combinación de recursos y a la política de secuenciamiento de producción: una asignación incorrecta del panadero o una secuencia de horno que privilegia un producto sobre otro genera quiebres focalizados aunque el total agregado parezca correcto.
+
+\subsection{Pregunta central}
+
+\begin{center}
+\colorbox{grisclaro}{%
+\parbox{0.9\textwidth}{%
+\vspace{4pt}
+\textit{¿Cuál es la combinación mínima de recursos ---panaderos, manipuladores, hornos, mezcladoras, amasadoras y horario de operación--- junto con la política de secuenciamiento de producción, que garantiza un nivel de servicio de al menos 95\% de demanda satisfecha en todos los tipos de pan?}
+\vspace{4pt}
+}}
+\end{center}
+
+% ══════════════════════════════════════════════════════════════════════════════
+\section{Sistema bajo estudio}
+% ══════════════════════════════════════════════════════════════════════════════
+
+\subsection{Proceso productivo}
+
+Cada variedad de pan recorre la misma secuencia de etapas, con tiempos específicos por producto: pesado y dosificación de ingredientes, mezclado (intervención manual del panadero más ciclo automático de mezcladora), amasado manual, reposo o fermentación en masa, dividido y formado, fermentación final, horneado batch, enfriamiento y reposición a sala.
+
+\subsection{Hornos batch}
+
+Los hornos operan por corridas completas: se cargan, hornean y descargan en bloque antes de iniciar la siguiente corrida. Los diez tipos de pan se agrupan en tres familias de horneado, y una corrida no puede mezclar familias. Los parámetros operativos del horno se resumen en la Tabla~\ref{tab:horno-tec}.
+
+\begin{table}[H]
+\centering
+\caption{Parámetros operativos del horno batch}
+\label{tab:horno-tec}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\textwidth}{lXc}
+\toprule
+\rowcolor{tabhead}
+\color{white}\textbf{Parámetro} & \color{white}\textbf{Descripción} & \color{white}\textbf{Valor} \\
+\midrule
+\rowcolor{tabrow} Familia~1 (corto)  & Pan Hot Dog, Dobladita, Bocado de Dama & 14~min \\
+Familia~2 (medio)                    & Marraqueta, Hallulla, Hallulla Integral, Amasado & 18~min \\
+\rowcolor{tabrow} Familia~3 (largo)  & Marraqueta Integral, Ciabatta, Baguette & 21~min \\
+Capacidad máxima                     & 6~carros $\times$ 18~bandejas & 108~bandejas \\
+\rowcolor{tabrow} Carga mínima       & 50\% de capacidad & 600~kg \\
+Espera máxima                        & Tiempo antes de disparar corrida & 15~min \\
+\rowcolor{tabrow} Setup misma familia & Sin cambio de familia & 0~min \\
+Setup distinta familia               & Cambio entre familias & 5~min \\
+\rowcolor{tabrow} Carga/descarga     & Manipulador requerido & 5~min c/u \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Demanda}
+
+La demanda diaria total es 8.200~kg distribuidos en diez tipos de pan con perfiles horarios distintos. Cada cliente compra uno, dos o tres tipos de pan con probabilidades 50\%, 35\% y 15\% respectivamente, y la cantidad por tipo sigue una distribución triangular específica del producto (Tabla~\ref{tab:demanda-tec}).
+
+\begin{table}[H]
+\centering
+\caption{Demanda diaria por tipo de pan y distribución de compra}
+\label{tab:demanda-tec}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\textwidth}{Xccccc}
+\toprule
+\rowcolor{tabhead}
+\color{white}\textbf{\makecell[c]{Tipo de\\pan}} &
+\color{white}\textbf{Familia} &
+\color{white}\textbf{\makecell[c]{Dem. diaria\\(kg)}} &
+\color{white}\textbf{\makecell[c]{Mín.\\(kg)}} &
+\color{white}\textbf{\makecell[c]{Moda\\(kg)}} &
+\color{white}\textbf{\makecell[c]{Máx.\\(kg)}} \\
+\midrule
+\rowcolor{tabrow} Marraqueta            & 2 & 2.000 & 0,3 & 1,0 & 2,0 \\
+Hallulla                                & 2 & 1.700 & 0,3 & 1,0 & 2,0 \\
+\rowcolor{tabrow} Pan Hot Dog           & 1 & 1.200 & 0,3 & 1,0 & 3,0 \\
+Marraqueta Integral                     & 3 &   800 & 0,3 & 0,5 & 2,0 \\
+\rowcolor{tabrow} Hallulla Integral     & 2 &   800 & 0,3 & 0,7 & 1,5 \\
+Amasado                                 & 2 &   380 & 0,3 & 0,8 & 2,0 \\
+\rowcolor{tabrow} Ciabatta              & 3 &   400 & 0,3 & 0,5 & 1,5 \\
+Baguette                                & 3 &   350 & 0,3 & 0,5 & 1,0 \\
+\rowcolor{tabrow} Dobladita             & 1 &   350 & 0,3 & 0,5 & 1,5 \\
+Bocado de Dama                          & 1 &   220 & 0,3 & 0,5 & 1,0 \\
+\midrule
+\rowcolor{tabrow}\multicolumn{2}{l}{\textbf{Total}} & \textbf{8.200} & & & \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+% ══════════════════════════════════════════════════════════════════════════════
+\section{Supuestos operacionales}
+% ══════════════════════════════════════════════════════════════════════════════
+
+Los supuestos que estructuran el modelo y sus resultados son los siguientes:
+
+\begin{enumerate}
+  \item La sala opera entre las 09:00 y las 21:00 horas; la producción comienza antes de la apertura para garantizar disponibilidad inicial.
+  \item La demanda no satisfecha no se recupera: cada quiebre representa una pérdida directa.
+  \item Los hornos operan exclusivamente en modo batch por corrida completa; no se permite mezclar familias en una misma carga.
+  \item Los panaderos y manipuladores trabajan en turnos con colaciones (45~min) y descansos (2$\times$15~min) escalonados, de modo que ninguna función queda sin cobertura simultáneamente.
+  \item No se modelan fallas de equipos ni mantenimiento mayor: se asume disponibilidad nominal de hornos, mezcladoras y amasadoras durante la jornada.
+  \item El abastecimiento de materias primas se considera ilimitado dentro del horizonte diario.
+  \item Los sobrantes al cierre del día no son objeto de optimización del modelo.
+\end{enumerate}
+
+% ══════════════════════════════════════════════════════════════════════════════
+\section{Estructura del modelo de simulación}
+% ══════════════════════════════════════════════════════════════════════════════
+
+\subsection{Tipo de modelo}
+
+El modelo se implementa en Simio como simulación de eventos discretos, con dos tipos de entidades en flujo: clientes que llegan a la sala según un perfil horario y consumen inventario, y lotes de producción que recorren la ruta productiva.
+
+\subsection{Componentes principales}
+
+\begin{itemize}
+  \item \textbf{Demanda:} llegada de clientes individuales según tasa horaria calibrada; cada cliente elige el número de productos a comprar y los tipos según las probabilidades horarias.
+  \item \textbf{Inventario:} vector de stock por tipo de pan en la sala de ventas; cada compra descuenta el stock y los quiebres se registran como eventos.
+  \item \textbf{Producción:} ruta única de etapas con tiempos parametrizados por producto, alimentada por una política de generación de lotes.
+  \item \textbf{Horno:} tres colas lógicas (una por familia), formación de carga por carros y bandejas, política de setup explícita entre familias.
+  \item \textbf{Recursos humanos:} manipuladores con horarios y descansos explícitos; panaderos como capacidad lógica asignable a las etapas manuales.
+  \item \textbf{Reposición:} traslado del pan desde enfriamiento hasta el inventario de sala, con manipulador requerido.
+\end{itemize}
+
+\subsection{Parametrización}
+
+Todas las decisiones de escenario (número de panaderos, manipuladores, hornos, mezcladoras y amasadoras; hora de inicio; política de secuenciamiento) se controlan desde una tabla de escenarios mapeada uno a uno con controles de experimentos. Esto permite cambiar la configuración sin modificar la lógica del modelo.
+
+% ══════════════════════════════════════════════════════════════════════════════
+\section{Variables de decisión y escenarios}
+% ══════════════════════════════════════════════════════════════════════════════
+
+\subsection{Variables}
+
+\begin{itemize}
+  \item Número de panaderos: niveles a evaluar 2, 3, 4.
+  \item Número de manipuladores: niveles a evaluar 1, 2, 3.
+  \item Número de hornos: niveles a evaluar 1, 2, 3.
+  \item Número de mezcladoras y amasadoras: rango por definir según análisis preliminar de capacidad.
+  \item Hora de inicio de operación productiva: 04:00, 05:00, 06:00.
+  \item Política de secuenciamiento de producción: cuatro alternativas.
+\end{itemize}
+
+\subsection{Políticas de secuenciamiento}
+
+\begin{enumerate}
+  \item \textbf{Menor stock:} prioridad al producto con menor cobertura proyectada en sala.
+  \item \textbf{Mayor demanda esperada:} prioridad al producto con mayor demanda esperada en la siguiente hora.
+  \item \textbf{Secuencia fija por familias:} ordenamiento determinístico Familia~1~$\to$~2~$\to$~3.
+  \item \textbf{Híbrida:} combinación de las anteriores, balanceando stock y demanda futura.
+\end{enumerate}
+
+\subsection{Escenarios evaluados}
+
+El plan experimental contempla un escenario base de referencia y un mínimo de seis escenarios alternativos que combinan variaciones de recursos y políticas. Cada escenario se ejecuta con al menos 20~réplicas (preferiblemente 30) para estabilizar los intervalos de confianza de los KPIs.
+
+% ══════════════════════════════════════════════════════════════════════════════
+\section{Indicadores de evaluación (KPIs)}
+% ══════════════════════════════════════════════════════════════════════════════
+
+\subsection{Indicador primario}
+
+\textbf{Porcentaje de demanda satisfecha por tipo de pan.} El criterio de éxito requiere que este indicador sea igual o superior al 95\% para todos los productos simultáneamente.
+
+\subsection{Indicadores secundarios}
+
+\begin{itemize}
+  \item Quiebres de stock por tipo de pan (eventos y kg no atendidos).
+  \item Sobrantes al cierre del día por tipo de pan.
+  \item Utilización de recursos: panaderos, manipuladores, hornos, mezcladoras, amasadoras.
+  \item Tiempos de ciclo de producción por familia.
+  \item Ocupación del horno por familia y frecuencia de setups.
+\end{itemize}
+
+Los indicadores secundarios se usan principalmente para discriminar entre configuraciones que cumplen el estándar primario, eligiendo la que minimiza el costo operativo asociado.
+
+% ══════════════════════════════════════════════════════════════════════════════
+\section{Análisis de sensibilidad previsto}
+% ══════════════════════════════════════════════════════════════════════════════
+
+Sobre la configuración recomendada se ejecutarán perturbaciones para evaluar robustez:
+
+\begin{itemize}
+  \item Demanda total $\pm$20\% (día atípico o variabilidad estacional).
+  \item Cambio en el mix de productos hacia variedades de horneado largo (mayor presión sobre Familia~3).
+  \item Tiempos de fermentación aumentados en 15\% (variabilidad de procesos).
+  \item Variación en la política de setup del horno.
+\end{itemize}
+
+Una recomendación que solo cumple el estándar bajo condiciones promedio no es una recomendación gerencial válida; la robustez es parte del producto entregado.
+
+% ══════════════════════════════════════════════════════════════════════════════
+\section{Resultados y recomendación}
+% ══════════════════════════════════════════════════════════════════════════════
+
+\textit{Esta sección se completará una vez ejecutados los experimentos definidos en el diseño experimental. Incluirá la tabla comparativa de escenarios, los resultados del análisis de sensibilidad y la configuración mínima recomendada en términos de número de cada recurso, hora de inicio de operación y política de secuenciamiento adoptada.}
+
 \end{document}

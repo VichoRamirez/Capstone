@@ -127,4 +127,291 @@ Vicente Ramírez}
 {\small\color{grisoscuro} Capstone Analytics IIC511AD -- Ingeniería Civil Industrial -- Universidad del Desarrollo}
 \end{titlepage}
 
+\tableofcontents
+\newpage
+
+% ══════════════════════════════════════════════════════════════════════════════
+\section{Introducción}
+% ══════════════════════════════════════════════════════════════════════════════
+
+Este Informe Académico documenta el proceso de desarrollo del modelo de simulación de eventos discretos construido para la panadería de un supermercado. A diferencia del Informe Técnico --orientado a la decisión gerencial--, este documento relata las decisiones de modelamiento adoptadas, su justificación, las dificultades encontradas y la metodología empleada en cada etapa.
+
+El sistema bajo estudio es una panadería que produce diez variedades de pan fresco para abastecer la sala de ventas de autoservicio del supermercado entre las 09:00 y las 21:00 horas. El problema declarado por la jefatura es un nivel inaceptable de quiebres de stock que genera pérdidas de venta directas. La hipótesis operacional es que el problema no radica en el volumen de demanda --conocido y cuantificado-- sino en la combinación y coordinación de recursos: número de panaderos, manipuladores, hornos, máquinas, horario de inicio y política de secuenciamiento de producción.
+
+\medskip
+\noindent\colorbox{grisclaro}{%
+\parbox{\dimexpr\linewidth-2\fboxsep\relax}{%
+\vspace{2pt}
+\textit{¿Cuál es la combinación mínima de recursos ---panaderos, manipuladores, hornos, mezcladoras, amasadoras y horario de operación--- junto con la política de secuenciamiento de producción, que garantiza un nivel de servicio de al menos 95\% de demanda satisfecha en todos los tipos de pan?}
+\vspace{2pt}
+}}
+
+% ══════════════════════════════════════════════════════════════════════════════
+\section{Sistema bajo estudio}
+% ══════════════════════════════════════════════════════════════════════════════
+
+\subsection{Descripción del proceso productivo}
+
+La panadería opera en un ciclo diario en el que debe abastecer la sala de ventas entre las 09:00 y las 21:00 horas. La producción comienza antes de la apertura para garantizar disponibilidad inicial de todas las variedades. El proceso productivo de cada variedad incluye, en secuencia: pesado y dosificación de ingredientes, mezclado (intervención manual del panadero más ciclo automático de mezcladora), amasado manual, reposo o fermentación en masa, dividido y formado, fermentación final, horneado batch, enfriamiento y reposición a sala.
+
+\subsection{Hornos y familias de horneado}
+
+Los hornos son de tipo industrial (piso o rotativo) y operan en modo batch por corrida: se cargan, hornean y descargan completamente antes de iniciar la siguiente corrida. Los diez tipos de pan se agrupan en tres familias de horneado según tiempo de cocción ---14, 18 y 21 minutos---, y no se permite mezclar familias en una misma carga. La capacidad máxima por corrida es de 6~carros con 18~bandejas cada uno (108~bandejas en total). La carga mínima para disparar una corrida es 600~kg (50\% de la capacidad), con un tiempo máximo de espera de 15~minutos. El cambio entre corridas de la misma familia no requiere setup; el cambio entre familias requiere 5~minutos.
+
+\subsection{Demanda y composición de compra}
+
+La demanda diaria total alcanza 8.200~kg distribuidos entre los diez tipos de pan, con un perfil horario conocido. Cada cliente que llega compra uno, dos o tres tipos de pan con probabilidades 50\%, 35\% y 15\% respectivamente. La cantidad comprada por tipo sigue una distribución triangular (mínimo, moda, máximo) específica para cada producto.
+
+% ══════════════════════════════════════════════════════════════════════════════
+\section{Modelo conceptual}
+% ══════════════════════════════════════════════════════════════════════════════
+
+\subsection{Entidades y recursos}
+
+El modelo distingue dos tipos de entidades en flujo: \textbf{clientes} que llegan a la sala de ventas según un perfil horario y consumen inventario, y \textbf{lotes de producción} que recorren la ruta productiva desde el pesado hasta la reposición. La separación entre cliente y lote es una decisión deliberada que evita acoplar la lógica de consumo con la lógica de producción.
+
+Los recursos del modelo son: panaderos (que ejecutan las etapas manuales del proceso productivo), manipuladores (responsables de carga y descarga del horno, traslados internos y reposición a sala), hornos batch industriales, mezcladoras, amasadoras y los elementos físicos de transporte interno (carros y bandejas).
+
+\subsection{Inventario y eventos}
+
+El inventario en sala se representa mediante un vector de stock por tipo de pan, no como entidades físicas. Esta decisión simplifica el modelo computacionalmente sin perder precisión en los KPIs relevantes (nivel de servicio, quiebres, demanda perdida). Los eventos críticos del sistema son: llegada de cliente, consumo de inventario, generación de lote, disparo de corrida de horno, reposición a sala y cierre de turno.
+
+\subsection{Variables de decisión}
+
+Las variables de decisión del estudio son:
+\begin{itemize}
+  \item Número de panaderos, manipuladores, hornos, mezcladoras y amasadoras.
+  \item Hora de inicio de operación productiva (antes de la apertura de la sala).
+  \item Política de secuenciamiento de producción: prioridad al producto con menor stock, prioridad al producto con mayor demanda esperada, secuencia fija por familias, o estrategia híbrida.
+\end{itemize}
+
+\subsection{KPI principal}
+
+El criterio cuantitativo de éxito es el porcentaje de demanda satisfecha por tipo de pan, que debe ser igual o superior al 95\% para todos los productos. Como criterio secundario para discriminar entre configuraciones que cumplen el estándar, se utiliza la utilización de recursos (minimización del costo operativo).
+
+% ══════════════════════════════════════════════════════════════════════════════
+\section{Decisiones de modelamiento}
+% ══════════════════════════════════════════════════════════════════════════════
+
+Las decisiones que se describen a continuación quedaron cerradas antes de comenzar la construcción del modelo, con el fin de evitar que distintos integrantes implementaran lógicas inconsistentes en paralelo.
+
+\subsection{Clave única por producto}
+
+Cada tipo de pan se identifica internamente por un índice numérico (\texttt{ProductoIdx}) y no por su nombre. Esta clave se propaga por todas las tablas, states y processes del modelo. La motivación es robustez: el lookup por nombre es frágil cuando se importan archivos Excel con espacios extra, acentos inconsistentes o correcciones tipográficas.
+
+\subsection{Demanda como cliente individual}
+
+La demanda se modela como llegadas de clientes individuales según una tabla de tasas horarias (\texttt{Rate\_ClientesHora}), calibrada desde el perfil de demanda en kg/hora dividido por el consumo esperado por cliente. Esta representación se prefirió sobre una demanda agregada por pulsos horarios porque permite capturar la variabilidad en la composición de compra (1, 2 o 3 tipos por cliente) y registrar quiebres a nivel evento.
+
+\subsection{Inventario como state vectorial}
+
+El stock en sala se representa con un state vectorial de 10 posiciones (\texttt{StockSala[i]}), una por tipo de pan, y no como entidades físicas circulando en el modelo. Esta decisión reduce drásticamente la carga computacional y mantiene la trazabilidad sobre los KPIs.
+
+\subsection{Hornos: tres colas lógicas por familia}
+
+El horno batch se implementa con tres colas lógicas, una por familia de horneado. Cada lote ingresa con su requerimiento de carros y bandejas, y la lógica de formación de carga selecciona lotes de una misma familia mientras la suma de carros no exceda la capacidad. La política de setup se evalúa mediante un proceso explícito que consulta una matriz de cambios entre familias.
+
+\subsection{Recursos humanos}
+
+Los manipuladores se modelan como \texttt{Worker} de Simio con schedules de turno explícitos, lo que permite capturar caminata, colaciones (45~min) y descansos (2$\times$15~min). Los panaderos se modelan como \texttt{Secondary Resource} lógico (capacidad sin caminata física), una simplificación deliberada porque el desplazamiento físico del panadero no es relevante para los KPIs del estudio.
+
+\subsection{Ruta productiva única}
+
+A pesar de que los diez tipos de pan tienen tiempos distintos en cada etapa, todos siguen la misma secuencia física de etapas. Por lo tanto el modelo usa una ruta única con tiempos parametrizados desde la tabla de etapas por producto, en lugar de rutas separadas o \texttt{Sequence Tables}.
+
+% ══════════════════════════════════════════════════════════════════════════════
+\section{Implementación en Simio}
+% ══════════════════════════════════════════════════════════════════════════════
+
+La construcción del modelo siguió una secuencia modular incremental de siete etapas (M0 a M7), con verificación obligatoria al cierre de cada módulo antes de comenzar el siguiente.
+
+\begin{table}[H]
+\centering
+\caption{Secuencia modular de implementación}
+\label{tab:modulos}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\textwidth}{lX}
+\toprule
+\rowcolor{tabhead}\color{white}\textbf{Módulo} & \color{white}\textbf{Contenido} \\
+\midrule
+M0 & Creación de Data Tables, states, properties, processes mínimos y \texttt{Source\_InitModel} \\
+\rowcolor{tabrow}
+M1 & \texttt{Source\_Clientes}, demanda con \texttt{Rate\_ClientesHora}, inventario por \texttt{Assign}; calibración con stock infinito \\
+M2 & Servers de producción, flujo dummy, ruta única, registro de WIP y ciclo \\
+\rowcolor{tabrow}
+M3 & Horno: M3A funcional de a un lote, luego M3B batch completo por familia y carros \\
+M4 & Workers, schedules, secondary resources \\
+\rowcolor{tabrow}
+M5 & Consolidación de KPIs, verificación por checklist, validación de baseline \\
+M6 & Experimentos: Controls, Responses y matriz de escenarios \\
+\rowcolor{tabrow}
+M7 & Documentación final y reproducibilidad \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Diccionario de tablas}
+
+El modelo se alimenta de un conjunto cerrado de tablas con nombres canónicos: \texttt{Tbl\_ProductoIndice}, \texttt{Tbl\_EtapasProducto}, \texttt{Tbl\_DemandaHoraLong}, \texttt{Tbl\_ProbEleccionHoraLong}, \texttt{Tbl\_MixCompraCliente}, \texttt{Tbl\_StockPolitica}, \texttt{Tbl\_HornoFamilia}, \texttt{Tbl\_SetupHorno}, \texttt{Tbl\_RecursosInstancia}, \texttt{Tbl\_Escenarios} y \texttt{Tbl\_Supuestos}. Adicionalmente se crea \texttt{Rate\_ClientesHora} como \texttt{Rate Table} (no como Data Table normal) para alimentar la tasa de llegadas variable.
+
+\subsection{Processes principales}
+
+La lógica del modelo se concentra en procesos con triggers explícitos. Entre los más relevantes:
+
+\begin{itemize}
+  \item \texttt{P\_InitModel}: inicialización del stock y de los states de escenario al inicio de la corrida.
+  \item \texttt{P\_GenerarDemandaCliente}: sortea número de productos a comprar y dispara la cadena de elección y consumo.
+  \item \texttt{P\_ElegirProductos}: muestreo sin reemplazo con probabilidades normalizadas por hora.
+  \item \texttt{P\_ConsumirInventario}: descuenta stock, acumula demanda satisfecha y registra quiebres.
+  \item \texttt{P\_EvaluarHorno}, \texttt{P\_FormarCargaHorno}, \texttt{P\_AplicarSetupHorno}: lógica del horno batch.
+  \item \texttt{P\_ReponerSala}: traslado de pan fresco desde el área de enfriamiento al inventario de sala.
+\end{itemize}
+
+% ══════════════════════════════════════════════════════════════════════════════
+\section{Datos de entrada y tratamiento}
+% ══════════════════════════════════════════════════════════════════════════════
+
+\subsection{Archivos fuente}
+
+Los datos del caso provienen de tres archivos entregados por la cátedra: \texttt{parametros\_proceso\_panaderia.xlsx} (parámetros del proceso productivo y de hornos), \texttt{perfil\_demanda\_por\_hora\_panaderia.xlsx} (demanda en kg por hora y tipo) y \texttt{probabilidades\_eleccion\_por\_hora.xlsx} (probabilidad horaria de elección de cada tipo).
+
+\subsection{Capa ETL previa}
+
+Antes de importar a Simio, los archivos pasan por una capa de transformación que: (a) verifica consistencia interna y unidades; (b) convierte los datos a formato \texttt{long} normalizado por \texttt{ProductoIdx}; (c) calcula la tasa de llegadas de clientes a partir del perfil de kg/hora y el consumo esperado por cliente; (d) construye la tabla maestra de productos con sus distribuciones triangulares de compra.
+
+\subsection{Registro de supuestos}
+
+Toda decisión que no proviene directamente de los archivos fuente queda registrada en la tabla \texttt{Tbl\_Supuestos}, junto con su valor base, fuente, sensibilidad esperada y estado. Esto incluye los tiempos de etapas no especificados, los tiempos de desplazamiento internos y la política de corridas por debajo de la carga mínima.
+
+% ══════════════════════════════════════════════════════════════════════════════
+\section{Verificación y validación}
+% ══════════════════════════════════════════════════════════════════════════════
+
+\subsection{Verificación}
+
+La verificación responde a la pregunta: ¿el modelo fue construido correctamente? Su protocolo se basa en una lista de chequeo aplicada en M5:
+\begin{itemize}
+  \item Los lotes siguen la secuencia correcta de etapas para cada variedad.
+  \item Los panaderos se capturan y liberan en los momentos correctos.
+  \item El horno rechaza cargas mixtas entre familias.
+  \item La carga del horno no excede 6~carros ni 108~bandejas.
+  \item Los descansos del personal son escalonados y nunca simultáneos para una misma función.
+  \item No existen entidades bloqueadas ni colas con crecimiento ilimitado.
+\end{itemize}
+
+\subsection{Validación}
+
+La validación responde a la pregunta: ¿el modelo representa de manera aceptable el sistema? En contexto académico se apoya en: (a) coherencia del orden de magnitud de los resultados con el análisis de capacidad estático; (b) análisis de sensibilidad de primer nivel (duplicar la capacidad del horno debe mejorar los quiebres); (c) revisión cruzada por integrantes que no construyeron el módulo revisado.
+
+Una prueba específica de calibración consiste en correr el modelo con inventario inicial infinito y sin producción activa: la demanda diaria generada debe converger a los 8.200~kg/día esperados dentro de un margen de $\pm$5\% en 30~réplicas.
+
+% ══════════════════════════════════════════════════════════════════════════════
+\section{Diseño experimental}
+% ══════════════════════════════════════════════════════════════════════════════
+
+\subsection{Factores y niveles}
+
+La matriz experimental considera los siguientes factores de decisión:
+
+\begin{itemize}
+  \item Número de panaderos: 2, 3, 4.
+  \item Número de manipuladores: 1, 2, 3.
+  \item Número de hornos: 1, 2, 3.
+  \item Número de mezcladoras y amasadoras (rango por definir según análisis preliminar).
+  \item Hora de inicio de operación: 04:00, 05:00, 06:00.
+  \item Política de secuenciamiento: cuatro opciones (menor stock, mayor demanda esperada, secuencia fija por familias, híbrida).
+\end{itemize}
+
+\subsection{Protocolo de réplicas}
+
+Se ejecutan al menos 20~réplicas por escenario, preferiblemente 30, para estabilizar los intervalos de confianza de los KPIs. El horizonte de simulación es un día operacional completo: desde la hora de inicio productivo hasta las 21:00 horas.
+
+\subsection{Análisis de sensibilidad}
+
+Sobre la configuración recomendada se evalúan perturbaciones para verificar robustez: demanda total $\pm$20\%, cambio en el mix hacia variedades de horneado largo, tiempos de fermentación aumentados en 15\%, y variación en la política de setup del horno.
+
+% ══════════════════════════════════════════════════════════════════════════════
+\appendix
+\section{Parámetros del sistema}
+% ══════════════════════════════════════════════════════════════════════════════
+
+\subsection{Demanda diaria por tipo de pan}
+
+\begin{table}[H]
+\centering
+\caption{Demanda diaria esperada y distribución de compra por cliente}
+\label{tab:demanda-acad}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\textwidth}{Xccccc}
+\toprule
+\rowcolor{tabhead}
+\color{white}\textbf{\makecell[c]{Tipo de\\pan}} &
+\color{white}\textbf{Familia} &
+\color{white}\textbf{\makecell[c]{Dem. diaria\\(kg)}} &
+\color{white}\textbf{\makecell[c]{Mín. compra\\(kg)}} &
+\color{white}\textbf{\makecell[c]{Moda\\(kg)}} &
+\color{white}\textbf{\makecell[c]{Máx. compra\\(kg)}} \\
+\midrule
+\rowcolor{tabrow} Marraqueta           & 2 (18~min) & 2.000 & 0,3 & 1,0 & 2,0 \\
+Hallulla                              & 2 (18~min) & 1.700 & 0,3 & 1,0 & 2,0 \\
+\rowcolor{tabrow} Pan Hot Dog          & 1 (14~min) & 1.200 & 0,3 & 1,0 & 3,0 \\
+Marraqueta Integral                   & 3 (21~min) &   800 & 0,3 & 0,5 & 2,0 \\
+\rowcolor{tabrow} Hallulla Integral    & 2 (18~min) &   800 & 0,3 & 0,7 & 1,5 \\
+Amasado                               & 2 (18~min) &   380 & 0,3 & 0,8 & 2,0 \\
+\rowcolor{tabrow} Ciabatta             & 3 (21~min) &   400 & 0,3 & 0,5 & 1,5 \\
+Baguette                              & 3 (21~min) &   350 & 0,3 & 0,5 & 1,0 \\
+\rowcolor{tabrow} Dobladita            & 1 (14~min) &   350 & 0,3 & 0,5 & 1,5 \\
+Bocado de Dama                        & 1 (14~min) &   220 & 0,3 & 0,5 & 1,0 \\
+\midrule
+\rowcolor{tabrow}\multicolumn{2}{l}{\textbf{Total}} & \textbf{8.200} & & & \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Familias de horneado y parámetros del horno}
+
+\begin{table}[H]
+\centering
+\caption{Familias de horneado y restricciones del horno}
+\label{tab:horno-acad}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\textwidth}{lXc}
+\toprule
+\rowcolor{tabhead}
+\color{white}\textbf{Parámetro} & \color{white}\textbf{Descripción} & \color{white}\textbf{Valor} \\
+\midrule
+\rowcolor{tabrow} Familia~1 (corto)  & Pan Hot Dog, Dobladita, Bocado de Dama & 14~min \\
+Familia~2 (medio)                   & Marraqueta, Hallulla, Hallulla Integral, Amasado & 18~min \\
+\rowcolor{tabrow} Familia~3 (largo)  & Marraqueta Integral, Ciabatta, Baguette & 21~min \\
+Capacidad máxima                    & Carros por corrida & 6~carros \\
+\rowcolor{tabrow} Capacidad por carro & Bandejas por carro & 18~bandejas \\
+Carga mínima                        & 50\% de capacidad & 600~kg \\
+\rowcolor{tabrow} Espera máxima      & Tiempo máximo antes de disparar corrida & 15~min \\
+Setup misma familia                 & Cambio de corrida misma familia & 0~min \\
+\rowcolor{tabrow} Setup distinta familia & Cambio de familia & 5~min \\
+Carga del horno                     & Manipulador requerido, duración & 5~min \\
+\rowcolor{tabrow} Descarga del horno  & Manipulador requerido, duración & 5~min \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Composición de compra por cliente}
+
+\begin{table}[H]
+\centering
+\caption{Proporción de tipos de pan por visita}
+\label{tab:mix-acad}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{lc}
+\toprule
+\rowcolor{tabhead}
+\color{white}\textbf{Tipos de pan en una visita} & \color{white}\textbf{Probabilidad} \\
+\midrule
+\rowcolor{tabrow} 1 tipo de pan & 50\% \\
+2 tipos de pan (distintos) & 35\% \\
+\rowcolor{tabrow} 3 tipos de pan (distintos) & 15\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
 \end{document}
