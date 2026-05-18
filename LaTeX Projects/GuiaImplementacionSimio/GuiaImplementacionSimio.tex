@@ -217,7 +217,7 @@ Inventario en sala por tipo de pan. & Ventas de productos distintos al pan. \\
 Quiebres de stock y kg no vendidos. & Deterioro microbiologico detallado o vida util multi-dia avanzada. \\
 Hornos batch con familia, setup, carga, horneado y descarga. & Mantenimiento mayor, fallas electricas o breakdowns estocasticos. \\
 \rowcolor{tabrow}
-Panaderos, manipuladores, maquinas, carros y buffers limitados. & 3D decorativo, renders, camaras esteticas o importacion CAD pesada. \\
+Panaderos, manipuladores, maquinas, carros y colas logicas limitadas. & 3D decorativo, renders, camaras esteticas o importacion CAD pesada. \\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -365,15 +365,25 @@ M2 & \makecell[l]{\simio{Panaderia\_M2}\\\simio{ProduccionBase.spfx}} & Ruta uni
 M3 & \makecell[l]{\simio{Panaderia\_M3}\\\simio{HornoBatch.spfx}} & Hornos respetan familia, carros, bandejas, setup, carga, descarga y espera maxima. \\
 M4 & \makecell[l]{\simio{Panaderia\_M4}\\\simio{RecursosTurnos.spfx}} & Workers, schedules escalonados, movimientos y reposicion operan correctamente. \\
 \rowcolor{tabrow}
-M5 & \makecell[l]{\simio{Panaderia\_M5}\\\simio{KPIs\_VV.spfx}} & Tally Statistics, Output Statistics, balance de kg, verificacion y validacion base completos. \\
-M6 & \makecell[l]{\simio{Panaderia\_M6}\\\simio{Experimentos.spfx}} & Controls, responses, screening, confirmacion y exportacion de resultados listos. \\
+M5 & \makecell[l]{\simio{Panaderia\_M5}\\\simio{Layout2D.spfx}} & Layout funcional 2D de panaderia con zonas, paths, cola de horno visible y etiquetas operacionales. \\
+M6 & \makecell[l]{\simio{Panaderia\_M6}\\\simio{ClienteCanasta.spfx}} & Cliente individual con canasta estocastica por hora, sin repeticion de producto y kg por triangular. \\
 \rowcolor{tabrow}
-M7 & \makecell[l]{\simio{Panaderia\_M7}\\\simio{DocumentacionLatex.spfx}} & Guia final, anexos TikZ, bitacora, supuestos, plantillas y reproducibilidad cerradas. \\
+M7 & \makecell[l]{\simio{Panaderia\_M7}\\\simio{PoliticasProduccion.spfx}} & Politicas push, pull e hibrida conectadas a inventario y demanda. \\
+M8 & \makecell[l]{\simio{Panaderia\_M8}\\\simio{DotacionRecursos.spfx}} & Escenarios de dotacion, capacidades y turnos escalonados con recursos multiples. \\
+\rowcolor{tabrow}
+M9 & \makecell[l]{\simio{Panaderia\_M9}\\\simio{HornoBatchOperacional.spfx}} & Horno batch completo: familia, carga, setup, espera maxima, descarga y trazabilidad. \\
+M10 & \makecell[l]{\simio{Panaderia\_M10}\\\simio{ReposicionSala.spfx}} & Reposicion a sala, inventario vendible visible y cierre de balance producido-vendido-sobrante-WIP. \\
+\rowcolor{tabrow}
+M11 & \makecell[l]{\simio{Panaderia\_M11}\\\simio{PruebasComportamiento.spfx}} & Pruebas dinamicas formales de estres operacional antes de consolidar KPIs. \\
+M12 & \makecell[l]{\simio{Panaderia\_M12}\\\simio{KPIs\_VV.spfx}} & Tally Statistics, Output Statistics, balance de kg, verificacion y validacion base completos. \\
+\rowcolor{tabrow}
+M13 & \makecell[l]{\simio{Panaderia\_M13}\\\simio{Experimentos.spfx}} & Controls, responses, screening, confirmacion y exportacion de resultados listos. \\
+M14 & \makecell[l]{\simio{Panaderia\_M14}\\\simio{DocumentacionLatex.spfx}} & Guia final, anexos TikZ, bitacora, supuestos, plantillas y reproducibilidad cerradas. \\
 \bottomrule
 \end{longtable}
 }
 
-\aifigure{figures_ai/ai_22_versioning.jpg}{Versionado incremental del modelo M0--M7.}{Referencia visual para guardar versiones sin sobrescribir el baseline.}
+\aifigure{figures_ai/ai_22_versioning.jpg}{Versionado incremental del modelo M0--M14.}{Referencia visual para guardar versiones sin sobrescribir el baseline.}
 
 \subsection{2.5 Trazabilidad de tablas: por que ahora hay mas tablas y cuales son supuestos}
 
@@ -560,7 +570,7 @@ Crear \simio{Source\_LotesProduccion} & \simio{Facility > Standard Library > Sou
 Llamar \proc{P\_CrearLote} & \simio{Source\_LotesProduccion > Properties > Add-On Process Triggers > Created Entity} & M2A \\
 \rowcolor{tabrow}
 Enganchar reposicion a sala & \simio{Server\_Enfriado > Properties > Add-On Process Triggers > Exited = P\_ReponerSala} & M2/M3 \\
-Crear controls para experimento & \simio{Project Home > Experiments > Controls} (solo properties ya creadas) & M6 \\
+Crear controls para experimento & \simio{Project Home > Experiments > Controls} (solo properties ya creadas) & M13 \\
 \bottomrule
 \end{longtable}
 }
@@ -665,6 +675,7 @@ Antes de importar archivos, crea el schema de cada tabla. No partas por \simio{I
 \tabla{Tbl\_EtapasProducto} & ProductoIdx & Integer & \textbf{FK} a Tbl\_ProductoIndice.ProductoIdx. \\
  & ProductoID & String & Debe coincidir con tabla maestra. \\
  & Secuencia & Integer & 1..7 por producto. \\
+ & ProductoEtapaKey & Integer & \textbf{Key}. Calcular como \state{ProductoIdx * 100 + Secuencia}; permite usar \simio{RowForKey} en los \simio{Processing Time}. \\
  & EtapaCod & String & Codigo corto de etapa. \\
  & EtapaNombre & String & Nombre legible de etapa. \\
  & TiempoMin & Real & Mayor que 0. \\
@@ -931,7 +942,7 @@ CarrosReqBatchRef,MinKgCompra,ModaKgCompra,MaxKgCompra,Activo
   \end{itemize}
   \item Crear estos \simio{Integer State} vectoriales de producto: \state{StockoutCount} y \state{LotesProducidos}.
   \item Para \state{StockoutCount} y \state{LotesProducidos}, dejar \simio{Dimension Type = Vector}, \simio{Rows = 10}, \simio{Initial State Value = 0} y \simio{Public = True}.
-  \item Crear estos states escalares para horno base. Estos \textbf{no} son vectores y \textbf{no} se indexan por producto: \state{FamiliaActualHorno\_1} (Integer), \state{UltimoProductoHorneado\_1} (Integer), \state{SetupCountHorno\_1} (Integer), \state{TiempoSetupTotal\_1} (Real), \state{TiempoOcioHorno\_1} (Real), \state{TiempoEsperaHorno\_1} (Real), \state{TiempoEsperaManipHorno\_1} (Real).
+  \item Crear estos states escalares para horno base. Estos \textbf{no} son vectores y \textbf{no} se indexan por producto: \state{FamiliaActualHorno\_1} (Integer), \state{FamiliaObjetivoHorno\_1} (Integer), \state{UltimoProductoHorneado\_1} (Integer), \state{SetupCountHorno\_1} (Integer), \state{TiempoSetupTotal\_1} (Real), \state{TiempoOcioHorno\_1} (Real), \state{TiempoEsperaHorno\_1} (Real), \state{TiempoEsperaManipHorno\_1} (Real), \state{CarrosCargaHorno\_1} (Integer) y \state{KgCargaHorno\_1} (Real).
   \item Crear \state{WIP\_Pesado}, \state{WIP\_Mezclado}, \state{WIP\_Amasado}, \state{WIP\_Reposo}, \state{WIP\_Formado}, \state{WIP\_Fermentacion}, \state{WIP\_Horno}, \state{WIP\_Enfriado} como \simio{Integer State} escalares, con \simio{Dimension Type = Scalar}.
   \item En \simio{Properties}, renombrar cada state inmediatamente; no dejar nombres como \simio{RealState1}.
 \end{enumerate}
@@ -939,7 +950,7 @@ CarrosReqBatchRef,MinKgCompra,ModaKgCompra,MaxKgCompra,Activo
 \textbf{Lista final esperada en \simio{Model\_Panaderia > Definitions > States}:} al cerrar esta subseccion deben existir exactamente estos grupos:
 \begin{itemize}
   \item \textbf{Producto, vector de 10 filas:} \state{StockSala}, \state{DemandaTotal}, \state{DemandaSatisfecha}, \state{DemandaPerdida}, \state{ProduccionTotal}, \state{InventarioMinimo}, \state{InventarioAcumulado}, \state{StockoutCount}, \state{LotesProducidos}.
-  \item \textbf{Horno 1, escalares:} \state{FamiliaActualHorno\_1}, \state{UltimoProductoHorneado\_1}, \state{SetupCountHorno\_1}, \state{TiempoSetupTotal\_1}, \state{TiempoOcioHorno\_1}, \state{TiempoEsperaHorno\_1}, \state{TiempoEsperaManipHorno\_1}.
+  \item \textbf{Horno 1, escalares:} \state{FamiliaActualHorno\_1}, \state{FamiliaObjetivoHorno\_1}, \state{UltimoProductoHorneado\_1}, \state{SetupCountHorno\_1}, \state{TiempoSetupTotal\_1}, \state{TiempoOcioHorno\_1}, \state{TiempoEsperaHorno\_1}, \state{TiempoEsperaManipHorno\_1}, \state{CarrosCargaHorno\_1}, \state{KgCargaHorno\_1}.
   \item \textbf{WIP, escalares:} \state{WIP\_Pesado}, \state{WIP\_Mezclado}, \state{WIP\_Amasado}, \state{WIP\_Reposo}, \state{WIP\_Formado}, \state{WIP\_Fermentacion}, \state{WIP\_Horno}, \state{WIP\_Enfriado}.
 \end{itemize}
 
@@ -962,11 +973,13 @@ CarrosReqBatchRef,MinKgCompra,ModaKgCompra,MaxKgCompra,Activo
       \item \simio{Dimension Type = Scalar}
     \end{itemize}
   \item Crear \simio{Real State} y nombrar \state{KgLote}.
+  \item Crear \simio{Integer State} y nombrar \state{FamiliaHorno}.
   \item Crear \simio{Integer State} y nombrar \state{BandejasReq}.
   \item Crear \simio{Integer State} y nombrar \state{CarrosReq}.
   \item Crear \simio{Real State} y nombrar \state{HoraInicioCiclo}.
   \item Crear \simio{Real State} y nombrar \state{HoraEntradaColaHorno}.
   \item Crear \simio{Real State} y nombrar \state{HoraFinHorno}.
+  \item Crear \simio{Real State} y nombrar \state{HoraSolicitudManipHorno}. Este se usa recien en M4 para medir espera por manipulador.
   \item No crear \state{RefProducto} en la version base. Toda lectura de tablas se hara por \state{ProductoIdx}.
   \item Guardar el modelo y validar visualmente que los estados aparezcan bajo \simio{State Variables} de \simio{ModelEntity}.
 \end{enumerate}
@@ -974,13 +987,13 @@ CarrosReqBatchRef,MinKgCompra,ModaKgCompra,MaxKgCompra,Activo
 \textbf{Checklist de cierre de 3.3.2 (debe cumplirse completo):}
 \begin{itemize}
   \item [ ] Ya no estas en \simio{OnEnteredFreeSpace}; estas en \simio{Definitions > States}.
-  \item [ ] \state{ProductoIdx}, \state{KgLote}, \state{BandejasReq}, \state{CarrosReq} existen en \simio{ModelEntity}.
+  \item [ ] \state{ProductoIdx}, \state{KgLote}, \state{BandejasReq}, \state{CarrosReq}, \state{HoraInicioCiclo}, \state{HoraEntradaColaHorno}, \state{HoraFinHorno} y \state{HoraSolicitudManipHorno} existen en \simio{ModelEntity}.
   \item [ ] Ningun estado quedo con nombre por defecto como \simio{IntegerState1}, \simio{RealState1}, \simio{BooleanState1} o \simio{StringState1}.
   \item [ ] Todos los estados de entity quedaron \simio{Scalar} en M0.
 \end{itemize}
 
 \subsubsection{Crear Tally Statistics y State Statistics}
-\textbf{Objetivo de esta subseccion:} crear los contenedores estadisticos que Simio mostrara en resultados. En esta subseccion no se agregan pasos \simio{Tally} a procesos todavia, porque esos procesos se completan en M1--M4.
+\textbf{Objetivo de esta subseccion:} crear los contenedores estadisticos que Simio mostrara en resultados. En esta subseccion no se agregan pasos \simio{Tally} a procesos todavia, porque esos procesos se completan progresivamente entre M1 y M11.
 
 \begin{enumerate}
   \item Seleccionar \simio{Model\_Panaderia}.
@@ -988,7 +1001,7 @@ CarrosReqBatchRef,MinKgCompra,ModaKgCompra,MaxKgCompra,Activo
   \item En la seccion \simio{Statistics}, crear \simio{Tally Statistic}.
   \item Nombrar: \simio{Tally\_TiempoCicloLote}, \simio{Tally\_EsperaHorno}, \simio{Tally\_EsperaManipHorno}, \simio{Tally\_FinHornoADisponible}, \simio{Tally\_StockoutKg}.
   \item Para tiempos, definir \simio{Unit Type = Time}. Para kg, dejar \simio{Unit Type = Unspecified} si Simio no ofrece masa directamente; el nombre del tally debe indicar kg.
-  \item En M0 no crear \simio{State Statistic}. Se agregara en M5 despues de validar que \state{StockSala[1]}, ..., \state{StockSala[10]} y los states \state{WIP\_Pesado}, \state{WIP\_Mezclado}, \state{WIP\_Amasado}, \state{WIP\_Reposo}, \state{WIP\_Formado}, \state{WIP\_Fermentacion}, \state{WIP\_Horno}, \state{WIP\_Enfriado} cambian correctamente.
+  \item En M0 no crear \simio{State Statistic}. Se agregara en M12 despues de validar que \state{StockSala[1]}, ..., \state{StockSala[10]} y los states \state{WIP\_Pesado}, \state{WIP\_Mezclado}, \state{WIP\_Amasado}, \state{WIP\_Reposo}, \state{WIP\_Formado}, \state{WIP\_Fermentacion}, \state{WIP\_Horno}, \state{WIP\_Enfriado} cambian correctamente.
   \item Dejar anotado que cada \simio{Tally Statistic} debe recibir observaciones despues. Crear el elemento en \simio{Definitions > Elements} solo crea el lugar donde Simio guardara datos; \textbf{no genera datos automaticamente}.
 \end{enumerate}
 
@@ -1054,7 +1067,7 @@ Ejemplo: en M3, crear \proc{P\_EvaluarHorno}, \proc{P\_FormarCargaHorno}, \proc{
 
 \risk{} Si \proc{P\_InitModel} existe pero \simio{Source\_InitModel} no lo llama desde \simio{Created Entity}, el stock inicial no se cargara aunque el proceso exista.
 
-\subsubsection{Crear properties de escenario (obligatorio antes de M6)}
+\subsubsection{Crear properties de escenario (obligatorio antes de M13)}
 \aifigure{figures_ai/ai_m0_12_properties_escenario.png}{Vista esperada al crear properties de escenario en \simio{Definitions > Properties}.}{Referencia visual de M0 para dejar parametrizados \state{Prop\_NumPanaderos}, \state{Prop\_DemandMult}, \state{Prop\_StockInicialMult} y las demas properties que luego apareceran como \simio{Controls}.}
 
 \begin{enumerate}
@@ -1303,23 +1316,95 @@ Ejemplo: en M3, crear \proc{P\_EvaluarHorno}, \proc{P\_FormarCargaHorno}, \proc{
   \item Desde \simio{Standard Library}, arrastrar siete \simio{Server}: \simio{Server\_Pesado}, \simio{Server\_Mezclado}, \simio{Server\_Amasado}, \simio{Server\_Reposo}, \simio{Server\_Formado}, \simio{Server\_Fermentacion}, \simio{Server\_Enfriado}.
   \item Renombrar cada server en \simio{Properties > General > Name}.
   \item En M2 base, conectar todos los servers con \simio{Connector}. Los traslados con tiempo se agregan recien en M4.
-  \item Configurar \simio{Server\_Mezclado.Processing Time = Prop\_TiempoCargaMezcladoraMin + Prop\_TiempoRetiroMezclaMin}. Este server no lee \tabla{Tbl\_EtapasProducto}, porque el Excel no trae una etapa de mezclado separada.
-  \item Configurar \simio{Server\_Amasado.Processing Time} leyendo \tabla{Tbl\_EtapasProducto} para \state{EtapaCod = Amasado}. Esta es la etapa que viene en el archivo de parametros.
-  \item En los demas servers, editar \simio{Processing Time}. La expresion debe leer \tabla{Tbl\_EtapasProducto} con \state{ModelEntity.ProductoIdx} y \state{EtapaCod}.
-  \item No escribir tiempos fijos en el server salvo pruebas deterministicas.
+  \item Configurar \simio{Server\_Mezclado.Processing Time = Prop\_TiempoCargaMezcladoraMin + Prop\_TiempoRetiroMezclaMin}, con \simio{Units = Minutes}. Este server no lee \tabla{Tbl\_EtapasProducto}, porque el Excel no trae una etapa de mezclado separada. Si esas properties aun no existen, crearlas en \simio{Definitions > Properties} como \simio{Real}: \state{Prop\_TiempoCargaMezcladoraMin = 2.0} y \state{Prop\_TiempoRetiroMezclaMin = 1.0}. Para una prueba rapida equivalente se puede escribir temporalmente \simio{3}.
+  \item Configurar \simio{Server\_Amasado.Processing Time} leyendo \tabla{Tbl\_EtapasProducto} para la etapa \state{AMASADO}. Esta es la etapa que viene en el archivo de parametros; no usar \simio{Amasado} con minusculas si la tabla fue importada con codigo \simio{AMASADO}.
+  \item La forma implementable en Simio usa una key unica en \tabla{Tbl\_EtapasProducto}: \state{ProductoEtapaKey = ProductoIdx * 100 + Secuencia}. Marcar \state{ProductoEtapaKey} como \textbf{Key} en el schema de la tabla. Luego cada \simio{Processing Time} usa \simio{RowForKey} para encontrar la fila correcta y devolver \state{TiempoMin}. Si tu entidad en Simio se llama \simio{ModelEntity1}, reemplazar \state{ModelEntity.ProductoIdx} por \state{ModelEntity1.ProductoIdx} en todas las expresiones.
+
+  \begin{lstlisting}[language={},basicstyle=\ttfamily\small]
+Tbl_EtapasProducto[
+  Tbl_EtapasProducto.ProductoEtapaKey.RowForKey(
+    ModelEntity.ProductoIdx * 100 + SecuenciaDeLaEtapa
+  )
+].TiempoMin
+  \end{lstlisting}
+
+  \begin{center}
+  \small
+  \begin{tabularx}{\linewidth}{L{38mm}C{22mm}C{24mm}Y}
+  \toprule
+  Server & Secuencia & Valor M2A & Key que debe buscar \simio{RowForKey} \\
+  \midrule
+  \simio{Server\_Pesado} & 1 & 5 & \state{ModelEntity.ProductoIdx * 100 + 1} \\
+  \simio{Server\_Amasado} & 2 & 12 & \state{ModelEntity.ProductoIdx * 100 + 2} \\
+  \simio{Server\_Reposo} & 3 & 15 & \state{ModelEntity.ProductoIdx * 100 + 3} \\
+  \simio{Server\_Formado} & 4 & 10 & \state{ModelEntity.ProductoIdx * 100 + 4} \\
+  \simio{Server\_Fermentacion} & 5 & 35 & \state{ModelEntity.ProductoIdx * 100 + 5} \\
+  \simio{Server\_Enfriado} & 7 & 12 & \state{ModelEntity.ProductoIdx * 100 + 7} \\
+  \bottomrule
+  \end{tabularx}
+  \end{center}
+
+  \item Por lo tanto, las expresiones finales que se copian en \simio{Processing Time} son:
+\begin{lstlisting}[language={},basicstyle=\ttfamily\scriptsize]
+Server_Pesado:
+Tbl_EtapasProducto[Tbl_EtapasProducto.ProductoEtapaKey.RowForKey(ModelEntity.ProductoIdx * 100 + 1)].TiempoMin
+
+Server_Amasado:
+Tbl_EtapasProducto[Tbl_EtapasProducto.ProductoEtapaKey.RowForKey(ModelEntity.ProductoIdx * 100 + 2)].TiempoMin
+
+Server_Reposo:
+Tbl_EtapasProducto[Tbl_EtapasProducto.ProductoEtapaKey.RowForKey(ModelEntity.ProductoIdx * 100 + 3)].TiempoMin
+
+Server_Formado:
+Tbl_EtapasProducto[Tbl_EtapasProducto.ProductoEtapaKey.RowForKey(ModelEntity.ProductoIdx * 100 + 4)].TiempoMin
+
+Server_Fermentacion:
+Tbl_EtapasProducto[Tbl_EtapasProducto.ProductoEtapaKey.RowForKey(ModelEntity.ProductoIdx * 100 + 5)].TiempoMin
+
+Server_Enfriado:
+Tbl_EtapasProducto[Tbl_EtapasProducto.ProductoEtapaKey.RowForKey(ModelEntity.ProductoIdx * 100 + 7)].TiempoMin
+\end{lstlisting}
+
+  \item \textbf{Por que \simio{Server\_Enfriado} usa secuencia 7:} la secuencia 6 es \state{HORNEADO}, que se incorpora en M3 cuando se modele el horno. En M2 base se valida la ruta previa/posterior con \simio{Server\_Enfriado} leyendo la fila 7.
+  \item Para avanzar en M2A sin bloquearse, se puede usar primero la columna \textbf{Valor M2A}. Pero la version correcta del modelo debe usar las expresiones con \simio{RowForKey}.
+  \item No dejar tiempos fijos en la version final del modelo, salvo pruebas deterministicas documentadas. En la version final, los tiempos de pesado, amasado, reposo, formado, fermentacion y enfriado vienen de \tabla{Tbl\_EtapasProducto}; mezclado viene de las properties de carga y retiro.
 \end{enumerate}
 
 \aifigure{figures_ai/ai_m2_02_objetos_productivos.png}{Ruta funcional de produccion por lote y propiedades de servers.}{Apoyo visual de M2 para ubicar \simio{Server\_Pesado}, \simio{Server\_Mezclado}, \simio{Server\_Amasado}, \simio{Server\_Reposo}, \simio{Server\_Formado}, \simio{Server\_Fermentacion} y \simio{Server\_Enfriado}, conectados con \simio{Connector}.}
 
 \subsubsection{Registrar WIP y ciclo}
 \begin{enumerate}
-  \item Seleccionar \simio{Server\_Pesado}.
-  \item En \simio{Properties > Add-On Process Triggers}, ubicar \simio{Entered} y \simio{Exited}.
-  \item En \simio{Entered}, llamar \proc{P\_ActualizarWIP} con accion sumar.
-  \item En \simio{Exited}, llamar \proc{P\_ActualizarWIP} con accion restar.
-  \item Repetir para cada server productivo.
-  \item En el primer server, al entrar, asignar \state{ModelEntity.HoraInicioCiclo = TimeNow}.
-  \item En el sink final de lotes, agregar paso \simio{Tally} a \simio{Tally\_TiempoCicloLote} con valor \simio{TimeNow - ModelEntity.HoraInicioCiclo}.
+  \item \textbf{No crear un proceso generico con parametros en M2.} Para evitar ambiguedad, crear procesos simples y explicitos: uno para sumar WIP al entrar a cada server y otro para restar WIP al salir.
+  \item En \simio{Processes}, crear estos procesos. Cada uno contiene solo \simio{Begin -> Assign -> End}, salvo \proc{P\_RegistrarCycleTime}, que contiene \simio{Begin -> Tally -> End}.
+
+  \begin{center}
+  \small
+  \begin{tabularx}{\linewidth}{L{42mm}L{55mm}Y}
+  \toprule
+  Process & Asignacion o tally dentro del proceso & Donde engancharlo \\
+  \midrule
+  \proc{P\_WIP\_Pesado\_Entrar} & \state{WIP\_Pesado = WIP\_Pesado + 1}; \state{ModelEntity.HoraInicioCiclo = TimeNow} & \simio{Server\_Pesado > Add-On Process Triggers > Entered} \\
+  \proc{P\_WIP\_Pesado\_Salir} & \state{WIP\_Pesado = WIP\_Pesado - 1} & \simio{Server\_Pesado > Add-On Process Triggers > Exited} \\
+  \proc{P\_WIP\_Mezclado\_Entrar} & \state{WIP\_Mezclado = WIP\_Mezclado + 1} & \simio{Server\_Mezclado > Add-On Process Triggers > Entered} \\
+  \proc{P\_WIP\_Mezclado\_Salir} & \state{WIP\_Mezclado = WIP\_Mezclado - 1} & \simio{Server\_Mezclado > Add-On Process Triggers > Exited} \\
+  \proc{P\_WIP\_Amasado\_Entrar} & \state{WIP\_Amasado = WIP\_Amasado + 1} & \simio{Server\_Amasado > Add-On Process Triggers > Entered} \\
+  \proc{P\_WIP\_Amasado\_Salir} & \state{WIP\_Amasado = WIP\_Amasado - 1} & \simio{Server\_Amasado > Add-On Process Triggers > Exited} \\
+  \proc{P\_WIP\_Reposo\_Entrar} & \state{WIP\_Reposo = WIP\_Reposo + 1} & \simio{Server\_Reposo > Add-On Process Triggers > Entered} \\
+  \proc{P\_WIP\_Reposo\_Salir} & \state{WIP\_Reposo = WIP\_Reposo - 1} & \simio{Server\_Reposo > Add-On Process Triggers > Exited} \\
+  \proc{P\_WIP\_Formado\_Entrar} & \state{WIP\_Formado = WIP\_Formado + 1} & \simio{Server\_Formado > Add-On Process Triggers > Entered} \\
+  \proc{P\_WIP\_Formado\_Salir} & \state{WIP\_Formado = WIP\_Formado - 1} & \simio{Server\_Formado > Add-On Process Triggers > Exited} \\
+  \proc{P\_WIP\_Fermentacion\_Entrar} & \state{WIP\_Fermentacion = WIP\_Fermentacion + 1} & \simio{Server\_Fermentacion > Add-On Process Triggers > Entered} \\
+  \proc{P\_WIP\_Fermentacion\_Salir} & \state{WIP\_Fermentacion = WIP\_Fermentacion - 1} & \simio{Server\_Fermentacion > Add-On Process Triggers > Exited} \\
+  \proc{P\_WIP\_Enfriado\_Entrar} & \state{WIP\_Enfriado = WIP\_Enfriado + 1} & \simio{Server\_Enfriado > Add-On Process Triggers > Entered} \\
+  \proc{P\_WIP\_Enfriado\_Salir} & \state{WIP\_Enfriado = WIP\_Enfriado - 1} & \simio{Server\_Enfriado > Add-On Process Triggers > Exited} \\
+  \proc{P\_RegistrarCycleTime} & Paso \simio{Tally}: \simio{Tally Statistic Name = Tally\_TiempoCicloLote}; \simio{Value Expression = TimeNow - ModelEntity.HoraInicioCiclo} & \simio{Sink\_LotesFinalizados > Add-On Process Triggers > Entered} \\
+  \bottomrule
+  \end{tabularx}
+  \end{center}
+
+  \item Si tu entidad se llama \simio{ModelEntity1}, cambiar solo las referencias de entidad: \state{ModelEntity.HoraInicioCiclo} pasa a \state{ModelEntity1.HoraInicioCiclo}. Los states de modelo \state{WIP\_Pesado}, \state{WIP\_Mezclado}, etc. se mantienen igual.
+  \item Para enganchar un proceso: seleccionar el server, bajar a \simio{Properties > Add-On Process Triggers}, abrir la fila \simio{Entered} o \simio{Exited} y elegir el proceso correspondiente. Si no aparecen esas filas, revisar que este seleccionado el \simio{Server} y no un nodo azul de transferencia.
+  \item Prueba minima: correr un solo lote. Durante la corrida, cada \state{WIP\_*} puede subir a 1 y luego debe volver a 0 al final. En \simio{Results}, \simio{Tally\_TiempoCicloLote} debe tener una observacion.
 \end{enumerate}
 
 \aifigure{figures_ai/ai_m2_03_wip_ciclo.png}{Registro de WIP y tiempo de ciclo con triggers y \simio{Tally}.}{Referencia visual de M2-3: \simio{Entered} suma WIP, \simio{Exited} resta WIP y el sink final registra \simio{Tally\_TiempoCicloLote}.}
@@ -1328,100 +1413,910 @@ Ejemplo: en M3, crear \proc{P\_EvaluarHorno}, \proc{P\_FormarCargaHorno}, \proc{
 
 \subsubsection{M3A obligatorio: horno funcional de a un lote}
 \begin{enumerate}
-  \item Crear solo \simio{Server\_Horno1} (un horno base).
-  \item Usar una cola previa unica al horno: el \simio{Input Buffer} de \simio{Server\_Horno1}.
-  \item Procesar lotes de a uno para verificar setup, familia y tiempos antes de formar batch.
-  \item Validar primero:
+  \item \textbf{Objetivo de M3A:} insertar un solo horno entre fermentacion y enfriado, procesando \textbf{un lote a la vez}. No formar batch todavia.
+  \item Completar prerequisitos antes de tocar la ruta. Si ya tienes el prerequisito 2, hacer solo el 1 y el 3:
+  \begin{enumerate}
+    \item \textbf{Prerequisito 1: crear los entity states del lote.}
+    \begin{enumerate}
+      \item Ir a \simio{Facility}.
+      \item Seleccionar \simio{Source\_LotesProduccion}.
+      \item En \simio{Properties > Entity Arrival Logic > Entity Type}, mirar el nombre exacto. Si dice \simio{ModelEntity1}, entonces todos los states y expresiones de lote deben usar \simio{ModelEntity1}. Si dice \simio{ModelEntity}, usar \simio{ModelEntity}.
+      \item En el panel derecho \simio{Navigation}, hacer clic en la entidad detectada: \simio{ModelEntity} o \simio{ModelEntity1}. No hacer clic en \simio{Model\_Panaderia}.
+      \item Abrir la pesta\~na \simio{Definitions}.
+      \item En el panel izquierdo de \simio{Definitions}, seleccionar \simio{States}.
+      \item Crear \simio{Integer State} y nombrar \state{FamiliaHorno}.
+      \item Crear \simio{Real State} y nombrar \state{HoraEntradaColaHorno}.
+      \item Crear \simio{Real State} y nombrar \state{HoraFinHorno}.
+      \item Para los tres states, confirmar \simio{Dimension Type = Scalar} e \simio{Initial State Value = 0}.
+      \item Guardar. Si en formulas posteriores Simio marca rojo \state{ModelEntity.FamiliaHorno}, pero tu \simio{Source\_LotesProduccion} crea \simio{ModelEntity1}, escribir \state{ModelEntity1.FamiliaHorno}. El nombre debe coincidir con el \simio{Entity Type} del Source.
+    \end{enumerate}
+    \item \textbf{Prerequisito 2: ya debe existir en el modelo.} En \simio{Model\_Panaderia > Definitions > States} deben estar \state{FamiliaActualHorno\_1}, \state{SetupCountHorno\_1} y \state{TiempoSetupTotal\_1}. Estos son \textbf{model states}, no entity states.
+    \item \textbf{Prerequisito 3: crear el tally de espera de horno.}
+    \begin{enumerate}
+      \item En el panel derecho \simio{Navigation}, seleccionar \simio{Model\_Panaderia}.
+      \item Abrir \simio{Definitions}.
+      \item Entrar a \simio{Elements}.
+      \item En la seccion de estadisticos, crear un \simio{Tally Statistic}.
+      \item Nombrarlo exactamente \simio{Tally\_EsperaHorno}.
+      \item No escribir ninguna formula aqui. Este elemento solo guarda observaciones; la formula se pone mas adelante en el paso \simio{Tally} de \proc{P\_Horno1\_Entrar}.
+      \item Si \simio{Tally\_EsperaHorno} ya existe, no crear otro duplicado.
+    \end{enumerate}
+  \end{enumerate}
+  \item En \simio{Facility}, arrastrar un \simio{Server} y renombrarlo \simio{Server\_Horno1}.
+  \item Ubicar \simio{Server\_Horno1} entre \simio{Server\_Fermentacion} y \simio{Server\_Enfriado}. Quitar el conector directo \simio{Server\_Fermentacion -> Server\_Enfriado} si ya existia.
+  \item Conectar:
   \begin{itemize}
-    \item Familia igual \(\Rightarrow\) setup 0.
-    \item Familia distinta \(\Rightarrow\) setup 5 min.
-    \item No mezcla de familias en una corrida.
+    \item \simio{Server\_Fermentacion -> Server\_Horno1}
+    \item \simio{Server\_Horno1 -> Server\_Enfriado}
   \end{itemize}
-  \item Registrar \state{SetupCountHorno\_1} y \state{Tally\_EsperaHorno}.
+  \item Configurar \simio{Server\_Horno1}:
+  \begin{itemize}
+    \item \simio{Capacity Type = Fixed}
+    \item \simio{Initial Capacity = 1}
+    \item \simio{Process Type = Specific Time}
+    \item \simio{Processing Time = 18}
+    \item \simio{Units = Minutes}
+  \end{itemize}
+  Este \simio{18} es temporal para M3A con \state{ProductoIdx = 1}. En M3B/M4 se reemplaza por lectura desde tabla de familia.
+  \item En \proc{P\_CrearLote}, agregar una asignacion temporal para que el lote tenga familia de horno:
+  \begin{itemize}
+    \item Si usas \simio{ModelEntity}: \state{ModelEntity.FamiliaHorno = 1}
+    \item Si usas \simio{ModelEntity1}: \state{ModelEntity1.FamiliaHorno = 1}
+  \end{itemize}
+  \item En \proc{P\_WIP\_Fermentacion\_Salir}, agregar una segunda asignacion:
+  \begin{itemize}
+    \item \state{ModelEntity.HoraEntradaColaHorno = TimeNow} o \state{ModelEntity1.HoraEntradaColaHorno = TimeNow}
+  \end{itemize}
+  Esto marca el instante en que el lote sale de fermentacion y empieza a esperar por horno.
+  \item Crear \proc{P\_Horno1\_Entrar} en \simio{Processes}. Estructura:
+  \begin{enumerate}
+    \item \simio{Begin}
+    \item \simio{Tally\_Espera}: paso \simio{Tally} con \simio{Tally Statistic Name = Tally\_EsperaHorno} y \simio{Value Expression = TimeNow - ModelEntity.HoraEntradaColaHorno}. Usar \state{ModelEntity1.HoraEntradaColaHorno} si corresponde.
+    \item \simio{Decide\_SetupNecesario}: condicion \state{FamiliaActualHorno\_1 == 0 || FamiliaActualHorno\_1 == ModelEntity.FamiliaHorno}. Usar \state{ModelEntity1.FamiliaHorno} si corresponde.
+    \item Rama \simio{True}: \simio{Assign\_FamiliaSinSetup} con \state{FamiliaActualHorno\_1 = ModelEntity.FamiliaHorno}.
+    \item Rama \simio{False}: \simio{Delay\_Setup} de \simio{5 Minutes}, luego \simio{Assign\_FamiliaConSetup}.
+    \item En \simio{Assign\_FamiliaConSetup}, poner:
+      \state{SetupCountHorno\_1 = SetupCountHorno\_1 + 1}, \state{TiempoSetupTotal\_1 = TiempoSetupTotal\_1 + 5}, \state{FamiliaActualHorno\_1 = ModelEntity.FamiliaHorno}.
+    \item Ambas ramas terminan en \simio{End}.
+  \end{enumerate}
+  \item Crear \proc{P\_Horno1\_Salir}: \simio{Begin -> Assign -> End}, con \state{ModelEntity.HoraFinHorno = TimeNow} o \state{ModelEntity1.HoraFinHorno = TimeNow}.
+  \item Enganchar los procesos:
+  \begin{itemize}
+    \item \simio{Server\_Horno1 > Add-On Process Triggers > Entered = P\_Horno1\_Entrar}
+    \item \simio{Server\_Horno1 > Add-On Process Triggers > Exited = P\_Horno1\_Salir}
+  \end{itemize}
+  \item Validar M3A con un lote:
+  \begin{itemize}
+    \item El lote debe pasar por \simio{Server\_Horno1} antes de \simio{Server\_Enfriado}.
+    \item \simio{Tally\_EsperaHorno} debe tener una observacion.
+    \item \state{FamiliaActualHorno\_1} debe quedar en 1.
+    \item \state{SetupCountHorno\_1} debe quedar 0 si es el primer lote y \state{FamiliaActualHorno\_1} partia en 0.
+  \end{itemize}
 \end{enumerate}
 
 \aifigure{figures_ai/ai_m3_01_horno_un_lote.png}{M3A: horno funcional de a un lote.}{Referencia visual para construir primero \simio{Server\_Horno1} sin batch completo: un lote entra, se evalua setup 0/5 min, se procesa el horneado y se registra \simio{Tally\_EsperaHorno}.}
 
-\subsubsection{M3B obligatorio: batch completo por familia y carros}
+\subsubsection{M3B obligatorio: horno por familia y carros en Simio Student}
+
+\textbf{Idea central de esta version:} en la ruta base, una entidad de produccion ya representa una \textbf{hornada}. Esa entidad trae \state{ProductoIdx}, \state{KgLote}, \state{FamiliaHorno}, \state{BandejasReq} y \state{CarrosReq}. Por eso M3B no intenta sacar varios lotes desde tres colas invisibles: valida la hornada actual, aplica setup si cambia familia, carga, hornea y descarga.
+
+\risk{} En tu Simio Student no usar \simio{Buffer}, \simio{Storage}, \simio{Tank}, \simio{FlowNode}, \simio{Combiner} ni \simio{Separator} para M3B base. Tampoco intentar que \simio{BasicNode} actue como cola inteligente. Si se usan \simio{BasicNode}, son solo marcadores visuales o puntos de paso, no una lista consultable de entidades.
+
 \begin{enumerate}
-  \item Mantener un solo horno base: \simio{Server\_Horno1}.
-  \item Crear tres buffers logicos previos: \simio{Buffer\_Horno\_F1}, \simio{Buffer\_Horno\_F2} y \simio{Buffer\_Horno\_F3}. Cada lote entra al buffer que corresponde a \state{ModelEntity.FamiliaHorno}.
-  \item El batch se forma con procesos; no usar \simio{Combiner} en esta guia.
-  \item Crear \proc{P\_EvaluarHorno}, \proc{P\_FormarCargaHorno}, \proc{P\_AplicarSetupHorno}, \proc{P\_CargarHorno}, \proc{P\_DescargarHorno}.
-  \item En \proc{P\_FormarCargaHorno}, agregar lotes solo si \(\sum CarrosReq \leq 6\).
-  \item Aplicar regla de espera maxima: si no se cumple carga minima, iniciar corrida al llegar a 15 min de espera.
-  \item \proc{P\_AplicarSetupHorno}: para \simio{Server\_Horno1}, comparar \state{FamiliaActualHorno\_1} vs familia objetivo.
-  \item Si cambia familia: \simio{Delay 5 min} y sumar \state{SetupCountHorno\_1}; si no cambia: \simio{Delay 0}.
-  \item Carga y descarga: \simio{Seize} manipulador + \simio{Delay 5 min} + \simio{Release}.
-  \item Coccion: \simio{Delay} de 14/18/21 min segun familia.
-  \item Enviar todos los lotes del batch a \simio{Server\_Enfriado} en bloque (sin retiro parcial).
+  \item \textbf{No empezar M3B hasta que M3A corra sin errores.} Antes de cambiar nada, guardar una copia del archivo como version M3A funcionando.
+  \item Mantener \simio{Server\_Horno1}. No crear un segundo horno en M3B.
+  \item Revisar o crear los states escalares del horno en \simio{Model\_Panaderia > Definitions > States}:
+  \begin{itemize}
+    \item \state{FamiliaActualHorno\_1}: \simio{Integer State}, inicial 0.
+    \item \state{FamiliaObjetivoHorno\_1}: \simio{Integer State}, inicial 0.
+    \item \state{CarrosCargaHorno\_1}: \simio{Integer State}, inicial 0.
+    \item \state{KgCargaHorno\_1}: \simio{Real State}, inicial 0.
+    \item \state{SetupCountHorno\_1}: \simio{Integer State}, inicial 0.
+    \item \state{TiempoSetupTotal\_1}: \simio{Real State}, inicial 0.
+  \end{itemize}
+  Estos son \textbf{model states}; no van dentro de \simio{ModelEntity}.
+
+  \item Revisar que la entidad de lotes tenga estos \textbf{entity states}. Si tu \simio{Source\_LotesProduccion} crea \simio{ModelEntity1}, crearlos en \simio{ModelEntity1}; si crea \simio{ModelEntity}, crearlos en \simio{ModelEntity}:
+  \begin{itemize}
+    \item \state{FamiliaHorno}: \simio{Integer State}.
+    \item \state{KgLote}: \simio{Real State}.
+    \item \state{CarrosReq}: \simio{Integer State}.
+    \item \state{HoraEntradaColaHorno}: \simio{Real State}.
+    \item \state{HoraFinHorno}: \simio{Real State}.
+  \end{itemize}
+
+  \item Mantener la ruta fisica simple:
+  \begin{itemize}
+    \item \simio{Server\_Fermentacion -> Server\_Horno1}
+    \item \simio{Server\_Horno1 -> Server\_Enfriado}
+  \end{itemize}
+  No dividir el flujo real en tres ramas F1/F2/F3 en la version base. Eso evita depender de propiedades de seleccion que pueden no aparecer en tu interfaz.
+
+  \item Si ya creaste \simio{Node\_Horno\_F1}, \simio{Node\_Horno\_F2} y \simio{Node\_Horno\_F3}, puedes dejarlos como referencia visual al lado del horno. No los uses como mecanismo obligatorio de ruteo. Si todavia no los creaste, no son necesarios para que M3B base funcione.
+
+  \item Crear primero los procesos vacios en \simio{Processes}. Todos deben existir antes de llamar uno desde otro:
+  \begin{itemize}
+    \item \proc{P\_EvaluarHorno}
+    \item \proc{P\_FormarCargaHorno}
+    \item \proc{P\_AplicarSetupHorno}
+    \item \proc{P\_CargarHorno}
+    \item \proc{P\_DescargarHorno}
+  \end{itemize}
+  Cada proceso parte como \simio{Begin -> End}. Despues se edita la logica.
+
+  \item En \proc{P\_WIP\_Fermentacion\_Salir}, confirmar que exista esta asignacion antes de que la entidad llegue al horno:
+  \begin{itemize}
+    \item Si usas \simio{ModelEntity}: \state{ModelEntity.HoraEntradaColaHorno = TimeNow}
+    \item Si usas \simio{ModelEntity1}: \state{ModelEntity1.HoraEntradaColaHorno = TimeNow}
+  \end{itemize}
+
+  \item Completar \proc{P\_EvaluarHorno}. Este proceso se ejecuta al entrar al horno y solo evalua la hornada actual:
+  \begin{enumerate}
+    \item \simio{Begin}
+    \item Agregar \simio{Assign\_DatosCargaHorno} con tres filas:
+    \begin{itemize}
+      \item \state{FamiliaObjetivoHorno\_1 = ModelEntity.FamiliaHorno}
+      \item \state{CarrosCargaHorno\_1 = ModelEntity.CarrosReq}
+      \item \state{KgCargaHorno\_1 = ModelEntity.KgLote}
+    \end{itemize}
+    Si usas \simio{ModelEntity1}, cambiar solo el prefijo: \state{ModelEntity1.FamiliaHorno}, \state{ModelEntity1.CarrosReq}, \state{ModelEntity1.KgLote}.
+    \item Agregar \simio{Tally\_EsperaHorno}: \simio{Tally Statistic Name = Tally\_EsperaHorno}.
+    \item En \simio{Tally\_EsperaHorno}, usar \simio{Value Expression = TimeNow - ModelEntity.HoraEntradaColaHorno}. Si usas \simio{ModelEntity1}, usar \state{TimeNow - ModelEntity1.HoraEntradaColaHorno}.
+    \item Agregar \simio{Decide\_CabeEnHorno} con condicion \state{CarrosCargaHorno\_1 <= 6}.
+    \item Rama \simio{True}: agregar \simio{Execute\_FormarCargaHorno} y llamar \proc{P\_FormarCargaHorno}.
+    \item Rama \simio{False}: enviar a \simio{End} y corregir el calculo de \state{CarrosReq} en \proc{P\_CrearLote}. No fuerces el lote a entrar si no cabe.
+    \item \simio{End}
+  \end{enumerate}
+
+  \item Completar \proc{P\_FormarCargaHorno}. En esta version, "formar carga" significa validar la hornada actual, no seleccionar multiples entidades:
+  \begin{enumerate}
+    \item \simio{Begin}
+    \item Agregar \simio{Decide\_FamiliaValida} con condicion: \state{FamiliaObjetivoHorno\_1 >= 1 AND FamiliaObjetivoHorno\_1 <= 3}.
+    \item Si Simio no acepta \state{AND}, usar el operador logico disponible en tu version, por ejemplo \state{\&\&}.
+    \item Rama \simio{True}: agregar \simio{Execute\_AplicarSetupHorno} y llamar \proc{P\_AplicarSetupHorno}.
+    \item Rama \simio{False}: terminar en \simio{End}. Si pasa por esta rama, el error esta en \proc{P\_CrearLote}: la entidad salio sin \state{FamiliaHorno} valida.
+    \item \simio{End}
+  \end{enumerate}
+
+  \item Completar \proc{P\_AplicarSetupHorno}:
+  \begin{enumerate}
+    \item \simio{Begin}
+    \item Agregar \simio{Decide\_RequiereSetup} con condicion \state{FamiliaActualHorno\_1 == 0 OR FamiliaActualHorno\_1 == FamiliaObjetivoHorno\_1}.
+    \item Rama \simio{True}: agregar \simio{Assign\_FamiliaSinSetup} con \state{FamiliaActualHorno\_1 = FamiliaObjetivoHorno\_1}.
+    \item Rama \simio{False}: agregar \simio{Delay\_SetupHorno} de 5 minutos.
+    \item Despues del delay de la rama \simio{False}, agregar \simio{Assign\_FamiliaConSetup} con:
+    \begin{itemize}
+      \item \state{SetupCountHorno\_1 = SetupCountHorno\_1 + 1}
+      \item \state{TiempoSetupTotal\_1 = TiempoSetupTotal\_1 + 5}
+      \item \state{FamiliaActualHorno\_1 = FamiliaObjetivoHorno\_1}
+    \end{itemize}
+    \item Unir ambas ramas en \simio{Execute\_CargarHorno}, que llama \proc{P\_CargarHorno}.
+    \item \simio{End}
+  \end{enumerate}
+
+  \item Completar \proc{P\_CargarHorno}:
+  \begin{enumerate}
+    \item \simio{Begin}
+    \item Agregar \simio{Delay\_CargaHorno} de 5 minutos.
+    \item \simio{End}
+  \end{enumerate}
+  En M4 este delay se rodea con \simio{Seize/Release} del manipulador. En M3B todavia es solo tiempo fijo.
+
+  \item Configurar \simio{Server\_Horno1.Processing Time}. Reemplazar el \state{18} fijo de M3A por una expresion por familia:
+  \begin{itemize}
+    \item Si usas \simio{ModelEntity}: \state{If(ModelEntity.FamiliaHorno == 1, 14, If(ModelEntity.FamiliaHorno == 2, 18, 21))}
+    \item Si usas \simio{ModelEntity1}: \state{If(ModelEntity1.FamiliaHorno == 1, 14, If(ModelEntity1.FamiliaHorno == 2, 18, 21))}
+  \end{itemize}
+  Dejar \simio{Units = Minutes}.
+
+  \item Completar \proc{P\_DescargarHorno}:
+  \begin{enumerate}
+    \item \simio{Begin}
+    \item Agregar \simio{Delay\_DescargaHorno} de 5 minutos.
+    \item Agregar \simio{Assign\_FinHorno}:
+    \begin{itemize}
+      \item Si usas \simio{ModelEntity}: \state{ModelEntity.HoraFinHorno = TimeNow}
+      \item Si usas \simio{ModelEntity1}: \state{ModelEntity1.HoraFinHorno = TimeNow}
+    \end{itemize}
+    \item \simio{End}
+  \end{enumerate}
+
+  \item Enganchar los procesos al horno:
+  \begin{itemize}
+    \item \simio{Server\_Horno1 > Add-On Process Triggers > Entered = P\_EvaluarHorno}
+    \item \simio{Server\_Horno1 > Add-On Process Triggers > Exited = P\_DescargarHorno}
+  \end{itemize}
+  Si todavia tienes \proc{P\_Horno1\_Entrar} o \proc{P\_Horno1\_Salir} desde M3A, dejarlos creados no molesta, pero ya no deben estar conectados al horno en M3B.
+
+  \item Validar con tres hornadas:
+  \begin{itemize}
+    \item Hornada 1: \state{FamiliaHorno = 1}, \state{CarrosReq <= 6}.
+    \item Hornada 2: \state{FamiliaHorno = 1}, \state{CarrosReq <= 6}.
+    \item Hornada 3: \state{FamiliaHorno = 2}, \state{CarrosReq <= 6}.
+  \end{itemize}
+  Resultado esperado: la primera hornada no requiere setup si \state{FamiliaActualHorno\_1} parte en 0; la segunda tampoco requiere setup; la tercera aumenta \state{SetupCountHorno\_1} en 1 y suma 5 minutos a \state{TiempoSetupTotal\_1}.
+
+  \item Criterio de cierre de M3B:
+  \begin{itemize}
+    \item El modelo corre sin errores.
+    \item \simio{Tally\_EsperaHorno} tiene observaciones.
+    \item \state{FamiliaActualHorno\_1} queda igual a la ultima familia procesada.
+    \item \state{CarrosCargaHorno\_1} nunca supera 6.
+    \item Cada corrida contiene una sola \state{FamiliaHorno}.
+  \end{itemize}
 \end{enumerate}
 
-\ok{} Prueba de avance: dos lotes familia 1 y un lote familia 2 esperando. La corrida debe contener una sola familia; si cambia, setup = 5 min.
+\ok{} Prueba de avance: dos hornadas familia 1 y una hornada familia 2. Cada corrida contiene una sola familia; cuando cambia de familia, setup = 5 min.
 
-\aifigure{figures_ai/ai_m3_02_batch_familia_carros.png}{M3B: batch completo por familia y carros.}{Referencia visual para crear buffers por familia, formar carga compatible, respetar \(\sum CarrosReq \leq 6\), aplicar espera maxima de 15 minutos y llamar los procesos de horno.}
+\aifigure{figures_ai/ai_m3_02_batch_familia_carros.png}{M3B: horno por familia y carros en Simio Student.}{Referencia visual para la ruta base: flujo directo a \simio{Server\_Horno1}, familia controlada por states, validacion de \state{CarrosReq <= 6}, setup por cambio de familia, carga y descarga de 5 minutos.}
 
-\subsection{M4 paso a paso: workers, schedules y secondary resources}
+\subsection{M4 paso a paso: recursos, turnos y mano de obra en Simio Student}
 
 \aifigure{figures_ai/ai_07_workers_schedules.jpg}{Configuracion de workers y schedules.}{Referencia visual para asignar recursos humanos y turnos.}
 
-\textbf{Orden obligatorio de implementacion en M4 (para aislar errores):}
+\textbf{Idea central de M4:} agregar mano de obra sin romper M3B. La ruta base usa dos mecanismos simples:
+\begin{itemize}
+  \item \textbf{Panadero:} \simio{Resource\_Panadero\_1} como recurso secundario en servers manuales. En M4 base representa un panadero logico; para varios panaderos se aumenta la capacidad disponible del mismo recurso, no se duplican los procesos.
+  \item \textbf{Manipulador:} \simio{Worker\_Manipulador\_1} tomado con \simio{Seize/Release} dentro de \proc{P\_CargarHorno} y \proc{P\_DescargarHorno}.
+\end{itemize}
+
+\risk{} No poner el manipulador como \simio{Secondary Resource} de \simio{Server\_Horno1}. Si lo haces, queda ocupado durante toda la coccion. En esta guia el manipulador trabaja solo durante carga y descarga; el horno trabaja durante el \simio{Processing Time}.
+
+\textbf{Orden obligatorio de M4:}
 \begin{enumerate}
-  \item Primero dejar M2--M3 funcionando \textbf{sin workers} (solo capacidad fija).
-  \item Luego agregar schedules.
-  \item Luego agregar workers sin movimiento fisico.
-  \item Finalmente agregar paths/movimientos de workers.
+  \item M3B debe correr sin errores.
+  \item Crear schedules.
+  \item Crear \simio{Resource\_Panadero\_1} y \simio{Worker\_Manipulador\_1}.
+  \item Agregar panadero como recurso secundario solo en servers manuales.
+  \item Editar carga y descarga de horno con \simio{Seize/Release} del manipulador.
+  \item Validar. El movimiento fisico con paths queda opcional y posterior.
 \end{enumerate}
 
-\textbf{No avanzar de capa} si la anterior aun genera errores de logica.
+\subsubsection{M4A Crear schedules base}
+\textbf{Resultado esperado:} existen schedules seleccionables desde la pantalla real de tu Simio Student: \simio{Data > Views > Work Schedules}. Todavia no bloquean nada.
 
-
-\subsubsection{Crear schedules}
 \begin{enumerate}
   \item Seleccionar \simio{Model\_Panaderia}.
-  \item Abrir \simio{Definitions}.
-  \item Seleccionar el panel \simio{Schedules}.
-  \item En la version base, crear exactamente tres schedules de instancia: \simio{Sch\_Panadero\_1}, \simio{Sch\_Panadero\_2} y \simio{Sch\_Manipulador\_1}.
-  \item Crear disponibilidad 1 durante trabajo y 0 durante colacion/descanso.
-  \item Escalonar descansos: no poner todos los manipuladores en 0 al mismo tiempo.
-  \item En M4 base, usar \simio{Work Schedule} por instancia de worker. No usar capacidad agregada en servers hasta validar workers.
+  \item Abrir la pesta\~na superior \simio{Data}.
+  \item En el panel izquierdo \simio{Views}, hacer clic en \simio{Work Schedules}. En tu interfaz aparece debajo de \simio{Rate Tables}.
+  \item Confirmar que estas en la vista \simio{Pattern Based}. Deben verse dos grillas:
+  \begin{itemize}
+    \item arriba: \simio{Work Schedules}
+    \item abajo: \simio{Day Patterns}
+  \end{itemize}
+  \item Para esta version base, usar \textbf{Pattern Based}. No usar \simio{Table Based Work Schedule} todavia.
+  \item Si solo aparece \simio{StandardWeek}, no esta mal: es el schedule ejemplo de Simio. Para no romper la prueba, puedes duplicarlo o crear uno nuevo con el boton superior \simio{Pattern Based Work Schedule}.
+  \item Crear o duplicar un schedule y renombrarlo exactamente \simio{Sch\_Panadero\_1}. Si Simio no te deja renombrar de inmediato, selecciona la fila nueva en \simio{Work Schedules} y cambia el campo \simio{Name} en la misma grilla.
+  \item Crear o duplicar otro schedule y renombrarlo exactamente \simio{Sch\_Manipulador\_1}.
+  \item Crear un \simio{Day Pattern} para la primera validacion. Puedes usar el boton superior \simio{Day Pattern} o duplicar \simio{StandardDay}. Nombrarlo \simio{Day\_0600\_2100}.
+  \item Configurar \simio{Day\_0600\_2100} como disponibilidad continua de 06:00 a 21:00. La idea logica es:
+  \begin{itemize}
+    \item 00:00--06:00: disponibilidad 0
+    \item 06:00--21:00: disponibilidad 1 para la version base
+    \item 21:00--24:00: disponibilidad 0
+  \end{itemize}
+  En un \simio{Resource} con \simio{Capacity Type = WorkSchedule}, el valor del periodo es la cantidad disponible. Por eso, si mas adelante quieres simular 2 panaderos, el valor del periodo 06:00--21:00 debe ser 2; para 3 panaderos debe ser 3. No crear un proceso distinto por cada panadero.
+  Si tu grilla muestra filas desplegables con un signo \simio{+}, expandir el day pattern y escribir esos cortes horarios ahi.
+  \item En la fila \simio{Sch\_Panadero\_1}, asignar \simio{Day\_0600\_2100} en \simio{Monday}, \simio{Tuesday}, \simio{Wednesday}, \simio{Thursday} y \simio{Friday}. Para una prueba que corre solo el lunes 11/05/2026, basta con que \simio{Monday} este correcto, pero dejar lunes a viernes evita errores despues.
+  \item En la fila \simio{Sch\_Manipulador\_1}, repetir la misma asignacion de \simio{Day\_0600\_2100}.
+  \item Dejar \simio{Saturday} y \simio{Sunday} vacios si no vas a simular fin de semana. Si Simio obliga a poner algo, usar el mismo \simio{Day\_0600\_2100} solo para la prueba inicial.
+  \item No agregar colaciones ni descansos todavia. Primero validar que los recursos se toman y se liberan.
+  \item Guardar y confirmar que los nombres exactos sean \simio{Sch\_Panadero\_1}, \simio{Sch\_Manipulador\_1} y \simio{Day\_0600\_2100}.
 \end{enumerate}
 
-\aifigure{figures_ai/ai_m4_01_schedules.png}{M4: schedules escalonados de turnos y descansos.}{Referencia visual para crear \simio{Sch\_Panadero\_1}, \simio{Sch\_Panadero\_2} y \simio{Sch\_Manipulador\_1} sin dejar todos los recursos criticos en capacidad cero al mismo tiempo.}
+\ok{} Cierre de M4A: los schedules existen en \simio{Data > Work Schedules}; no quedaron como \simio{StandardWeek}, \simio{WorkSchedule1} o nombres por defecto si vas a referenciarlos desde recursos.
 
-\subsubsection{Crear workers}
-\aifigure{figures_ai/ai_m4_02_workers.png}{M4: workers de panadero y manipulador.}{Referencia visual para arrastrar \simio{Worker}, renombrarlo, asignar \simio{Initial Node}, elegir \simio{Work Schedule} y usarlo despues con \simio{Seize/Release}.}
+\aifigure{figures_ai/ai_m4_01_schedules.png}{M4A: Work Schedules en modo Pattern Based.}{La imagen es una referencia IA conceptual. En tu interfaz real, esta subseccion se hace en \simio{Data > Views > Work Schedules}, con las pesta\~nas \simio{Pattern Based} y \simio{Table Based}, y con los botones \simio{Pattern Based Work Schedule}, \simio{Day Pattern} y \simio{Table Based Work Schedule}.}
+
+\subsubsection{M4B Crear recurso panadero y worker manipulador}
+\textbf{Resultado esperado:} hay un recurso logico de panadero y un worker de manipulador. Todavia no se usan en procesos.
 
 \begin{enumerate}
   \item Abrir \simio{Facility}.
+  \item Desde \simio{Standard Library}, arrastrar \simio{Resource}.
+  \item Renombrarlo exactamente \simio{Resource\_Panadero\_1}.
+  \item Seleccionar \simio{Resource\_Panadero\_1} y revisar sus propiedades.
+  \item En \simio{Resource Logic}, configurar \simio{Capacity Type = WorkSchedule}.
+  \item En \simio{Initial Work Schedule}, seleccionar \simio{Sch\_Panadero\_1}.
+  \item Si tu Simio no muestra \simio{Capacity Type = WorkSchedule}, usar \simio{Capacity Type = Fixed} e \simio{Initial Capacity = 1} para la version base. En ese caso, la cantidad de panaderos se cambia ahi, no en el schedule.
   \item Desde \simio{Standard Library}, arrastrar \simio{Worker}.
-  \item Renombrar como \simio{Worker\_Manipulador} o \simio{Worker\_Panadero}.
-  \item En \simio{Properties}, definir \simio{Initial Node} cerca de su zona base.
-  \item Asignar \simio{Work Schedule}.
-  \item En processes de carga/descarga/reposicion, usar pasos \simio{Seize} y \simio{Release} para tomar/liberar worker.
-  \item En M4 base, usar \simio{Seize} y \simio{Release} logicos sin movimiento fisico. En M4C, cuando ya existan nodos y paths, agregar \simio{Request Move} hacia el nodo de trabajo antes del \simio{Delay}.
+  \item Renombrarlo exactamente \simio{Worker\_Manipulador\_1}.
+  \item Crear un \simio{BasicNode} cerca del horno y nombrarlo \simio{Node\_BaseManipulador}.
+  \item Seleccionar \simio{Worker\_Manipulador\_1}.
+  \item En \simio{Initial Node}, elegir \simio{Node\_BaseManipulador}.
+  \item En \simio{Work Schedule}, seleccionar \simio{Sch\_Manipulador\_1}.
+  \item No crear paths de movimiento todavia.
+  \item Correr una corrida corta. Resultado esperado: no cambia el flujo de M3B y no aparece error por crear recursos.
 \end{enumerate}
 
-\subsubsection{Usar Secondary Resources en servers manuales}
-\aifigure{figures_ai/ai_m4_03_secondary_resources.png}{M4: secondary resources en servers manuales.}{Referencia visual para seleccionar un server manual, abrir \simio{Secondary Resources}, agregar \simio{Worker\_Panadero} como recurso requerido y verificar que se libere al salir del proceso.}
+\risk{} No usar \simio{Worker\_Panadero\_1} en la ruta base. El panadero es recurso logico, no persona caminando. Si ya lo creaste, dejalo sin conectar o renombralo solo si estas seguro de que no se usa.
+
+\aifigure{figures_ai/ai_m4_02_workers.png}{M4B: recurso panadero y worker manipulador.}{La version base usa \simio{Resource\_Panadero\_1} para trabajo manual y \simio{Worker\_Manipulador\_1} para carga/descarga de horno.}
+
+\subsubsection{M4C Agregar panadero a servers manuales}
+\textbf{Resultado esperado:} pesado, mezclado, amasado y formado esperan al panadero. Reposo, fermentacion, horno y enfriado no usan panadero.
 
 \begin{enumerate}
-  \item Seleccionar \simio{Server\_Pesado} o el server manual correspondiente.
-  \item En \simio{Properties}, buscar \simio{Secondary Resources}.
-  \item Agregar una fila en el editor repetitivo.
-  \item Elegir el recurso: \simio{Worker\_Panadero} o un \simio{Resource\_Panadero}.
-  \item Definir cantidad requerida.
-  \item En M4 base, dejar el recurso como asignacion logica con \simio{Seize/Release}. Agregar \simio{Request Move} solo en M4C, despues de crear nodos y paths.
-  \item Verificar que el recurso se libere al terminar el procesamiento.
+  \item Empezar solo con \simio{Server\_Pesado}.
+  \item Seleccionar \simio{Server\_Pesado}.
+  \item En \simio{Properties}, buscar \simio{Secondary Resources}. Normalmente esta dentro de \simio{Process Logic}.
+  \item Abrir el editor de filas de \simio{Secondary Resources}.
+  \item Agregar una fila:
+  \begin{itemize}
+    \item \simio{Resource Object} u \simio{Object Name}: \simio{Resource\_Panadero\_1}
+    \item \simio{Number of Objects}: 1
+    \item \simio{Seize}: al iniciar procesamiento.
+    \item \simio{Release}: al terminar procesamiento.
+  \end{itemize}
+  \item Correr una prueba corta con una hornada. Resultado esperado: no aparece error y \simio{Server\_Pesado} procesa usando el recurso.
+  \item Cuando \simio{Server\_Pesado} funcione, repetir exactamente en:
+  \begin{itemize}
+    \item \simio{Server\_Mezclado}
+    \item \simio{Server\_Amasado}
+    \item \simio{Server\_Formado}
+  \end{itemize}
+  \item No agregar panadero en:
+  \begin{itemize}
+    \item \simio{Server\_Reposo}
+    \item \simio{Server\_Fermentacion}
+    \item \simio{Server\_Horno1}
+    \item \simio{Server\_Enfriado}
+  \end{itemize}
+  \item Si tu Simio no muestra \simio{Secondary Resources}, no inventes un proceso con \simio{Seize} en \simio{Entered}. Dejar M4C documentado como limitacion de la version Student y continuar con M4D, que si es implementable con \simio{Seize/Release}.
 \end{enumerate}
 
-\subsection{M5 paso a paso: KPIs, verificacion y validacion}
+\ok{} Cierre de M4C: los servers manuales usan panadero; el horno no usa panadero ni manipulador como recurso secundario.
 
-\textbf{Ejecucion lineal de M5:} esta fase no crea la logica operacional desde cero; consolida, verifica y valida lo que ya nacio en M1--M4. Por eso se divide en tres bloques obligatorios: KPIs, verificacion y validacion.
+\aifigure{figures_ai/ai_m4_03_secondary_resources.png}{M4C: panadero como recurso secundario.}{Configurar de a un server. Primero \simio{Server\_Pesado}; despues copiar el patron a mezclado, amasado y formado.}
 
-\subsubsection{M5A Consolidar KPIs y statistics}
+\subsubsection{M4D Usar manipulador en carga y descarga de horno}
+\textbf{Resultado esperado:} el manipulador se ocupa durante carga y descarga, pero queda libre durante la coccion.
 
-\aifigure{figures_ai/ai_m5_01_kpis_por_fase.png}{M5A: KPIs y statistics consolidados.}{Referencia visual para revisar \simio{Definitions > Elements}: los \simio{Tally Statistic} existen, pero solo tienen datos si fueron alimentados por pasos \simio{Tally} en los procesos de M1, M2, M3 y M4.}
+\begin{enumerate}
+  \item Confirmar que existe \simio{Worker\_Manipulador\_1}. Si no existe, volver a M4B.
+  \item Confirmar que existe \simio{Tally\_EsperaManipHorno}. Si falta:
+  \begin{itemize}
+    \item Seleccionar \simio{Model\_Panaderia}.
+    \item Ir a \simio{Definitions > Elements}.
+    \item Crear \simio{Tally Statistic}.
+    \item Nombrarlo \simio{Tally\_EsperaManipHorno}.
+  \end{itemize}
+  \item Confirmar que la entidad de lotes tiene \state{HoraSolicitudManipHorno} como \simio{Real State}. Si tu lote es \simio{ModelEntity1}, el state debe estar en \simio{ModelEntity1}.
+  \item Abrir \proc{P\_CargarHorno}. Reemplazar el proceso completo por:
+  \begin{enumerate}
+    \item \simio{Begin}
+    \item \simio{Assign\_InicioEsperaManip}: \state{ModelEntity.HoraSolicitudManipHorno = TimeNow}. Si usas \simio{ModelEntity1}, usar \state{ModelEntity1.HoraSolicitudManipHorno = TimeNow}.
+    \item \simio{Seize\_Manipulador}: recurso \simio{Worker\_Manipulador\_1}; cantidad 1.
+    \item \simio{Tally\_EsperaManip}: \simio{Tally Statistic Name = Tally\_EsperaManipHorno}; \simio{Value Expression = TimeNow - ModelEntity.HoraSolicitudManipHorno}. Si usas \simio{ModelEntity1}, cambiar el prefijo.
+    \item \simio{Delay\_CargaHorno}: 5 minutos.
+    \item \simio{Release\_Manipulador}: recurso \simio{Worker\_Manipulador\_1}; cantidad 1.
+    \item \simio{End}
+  \end{enumerate}
+  \item Abrir \proc{P\_DescargarHorno}. Reemplazar el proceso completo por:
+  \begin{enumerate}
+    \item \simio{Begin}
+    \item \simio{Assign\_InicioEsperaManip}: \state{ModelEntity.HoraSolicitudManipHorno = TimeNow}. Si usas \simio{ModelEntity1}, usar \state{ModelEntity1.HoraSolicitudManipHorno = TimeNow}.
+    \item \simio{Seize\_Manipulador}: recurso \simio{Worker\_Manipulador\_1}; cantidad 1.
+    \item \simio{Tally\_EsperaManip}: \simio{Tally Statistic Name = Tally\_EsperaManipHorno}; \simio{Value Expression = TimeNow - ModelEntity.HoraSolicitudManipHorno}. Si usas \simio{ModelEntity1}, cambiar el prefijo.
+    \item \simio{Delay\_DescargaHorno}: 5 minutos.
+    \item \simio{Assign\_FinHorno}: \state{ModelEntity.HoraFinHorno = TimeNow}. Si usas \simio{ModelEntity1}, usar \state{ModelEntity1.HoraFinHorno = TimeNow}.
+    \item \simio{Release\_Manipulador}: recurso \simio{Worker\_Manipulador\_1}; cantidad 1.
+    \item \simio{End}
+  \end{enumerate}
+  \item Revisar que \proc{P\_AplicarSetupHorno} siga llamando \proc{P\_CargarHorno}.
+  \item Revisar que \simio{Server\_Horno1 > Add-On Process Triggers > Exited = P\_DescargarHorno}.
+  \item Correr tres hornadas. Resultado esperado:
+  \begin{itemize}
+    \item \simio{Tally\_EsperaManipHorno} tiene observaciones.
+    \item \simio{Worker\_Manipulador\_1} se ocupa en carga.
+    \item \simio{Worker\_Manipulador\_1} se libera durante coccion.
+    \item \simio{Worker\_Manipulador\_1} se vuelve a ocupar en descarga.
+  \end{itemize}
+\end{enumerate}
+
+\subsubsection{M4E Agregar descansos y movimiento fisico solo despues}
+\textbf{Resultado esperado:} M4 base ya funciona antes de agregar caminata o descansos.
+
+\begin{enumerate}
+  \item Primero cerrar M4D sin errores.
+  \item Luego volver a \simio{Sch\_Panadero\_1} y agregar descanso, por ejemplo 12:00--12:30 con valor 0.
+  \item Volver a \simio{Sch\_Manipulador\_1} y agregar descanso no simultaneo, por ejemplo 13:00--13:30 con valor 0.
+  \item Correr una jornada completa. Si aparecen colas durante descansos, eso es esperable; si aparecen errores de recurso, revisar schedules.
+  \item El movimiento fisico es opcional. Solo si se requiere:
+  \begin{itemize}
+    \item Crear \simio{Node\_HornoCarga} y \simio{Node\_HornoDescarga}.
+    \item Conectar con \simio{Path} o \simio{TimePath}.
+    \item Agregar \simio{Request Move} despues del \simio{Seize\_Manipulador} y antes del \simio{Delay}.
+  \end{itemize}
+  \item No agregar movimiento fisico a panaderos en la ruta base.
+\end{enumerate}
+
+\subsubsection{M4F Criterio de cierre}
+\begin{itemize}
+  \item El modelo corre sin errores.
+  \item Los servers manuales usan \simio{Resource\_Panadero\_1}, o queda documentado que tu Student no muestra \simio{Secondary Resources}.
+  \item \simio{Worker\_Manipulador\_1} no queda capturado durante toda la coccion.
+  \item \simio{Tally\_EsperaManipHorno} tiene observaciones.
+  \item Al apagar recursos o volver a la copia M3B, el flujo base sigue siendo comparable.
+\end{itemize}
+
+\subsubsection{M4G Escalar de un panadero a varios}
+\textbf{Resultado esperado:} el modelo no cambia de estructura; solo cambia la capacidad disponible de \simio{Resource\_Panadero\_1}.
+
+\begin{enumerate}
+  \item Mantener un solo recurso logico: \simio{Resource\_Panadero\_1}. No crear \simio{Resource\_Panadero\_2} para la version base, porque obligaria a repetir configuraciones en cada server.
+  \item Mantener en cada server manual la misma fila de \simio{Secondary Resources}:
+  \begin{itemize}
+    \item \simio{Resource Name}: \simio{Resource\_Panadero\_1}
+    \item \simio{Number Of Resources}: 1
+    \item \simio{Units Per Resource}: 1
+  \end{itemize}
+  Esto significa que cada operacion manual consume una unidad de panadero.
+  \item Si \simio{Resource\_Panadero\_1} usa \simio{Capacity Type = WorkSchedule}, abrir \simio{Data > Work Schedules}, expandir \simio{Day\_0600\_2100} y cambiar el valor del periodo 06:00--21:00:
+  \begin{itemize}
+    \item 1 panadero: valor 1
+    \item 2 panaderos: valor 2
+    \item 3 panaderos: valor 3
+  \end{itemize}
+  \item Si tu version de Simio acepta expresiones en el campo \simio{Value} del day pattern, puedes usar \state{Prop\_NumPanaderos} en el periodo 06:00--21:00. Si lo marca rojo, no usar esa property ahi: dejar el valor numerico y documentar el escenario.
+  \item Si no usas work schedule y el recurso quedo con \simio{Capacity Type = Fixed}, cambiar \simio{Initial Capacity} a 2, 3, etc.
+  \item Validar con el trace:
+  \begin{itemize}
+    \item Con valor 1, nunca debe haber mas de una operacion manual usando \simio{Resource\_Panadero\_1}.
+    \item Con valor 2, pueden existir hasta dos operaciones manuales simultaneas usando \simio{Resource\_Panadero\_1}.
+    \item El numero de \simio{Seize} y \simio{Release} debe quedar balanceado por server.
+  \end{itemize}
+\end{enumerate}
+
+\ok{} En esta guia, multiples panaderos estan planificados como cambio de capacidad de \simio{Resource\_Panadero\_1}. No se modela caminata fisica de varios panaderos en la ruta base.
+
+\subsection{M5 paso a paso: layout funcional 2D de panaderia}
+
+\textbf{Objetivo operacional de M5:} convertir el modelo M4 en una panaderia funcional visible, sin modelado 3D decorativo, pero con zonas, rutas, colas y etiquetas que permitan detectar errores de flujo a simple vista.
+
+\textbf{Regla cerrada de M5:} esta fase no cambia la logica de negocio de M1--M4. Solo agrega estructura visual operativa y verificable.
+
+\textbf{Orden obligatorio de M5:}
+\begin{enumerate}
+  \item Congelar una copia funcional de M4.
+  \item Crear zonas y anclas 2D.
+  \item Definir paths/timepaths de traslado entre zonas.
+  \item Hacer visible la cola antes de horno.
+  \item Hacer visible stock por producto y WIP por etapa.
+  \item Activar animacion basica de clientes y lotes.
+  \item Cerrar con una prueba visual guiada.
+\end{enumerate}
+
+\subsubsection{M5A Preparar version de trabajo y contrato de no-regresion}
+\textbf{Resultado esperado:} existe una version M5 dedicada a layout; M4 queda intacto para comparar.
+
+\begin{enumerate}
+  \item Guardar una copia exacta de M4 como \simio{Panaderia\_M5\_Layout2D.spfx}.
+  \item Confirmar que M4 corre sin errores antes de mover objetos.
+  \item En M5, no editar procesos de demanda, consumo, horno ni recursos en este bloque.
+  \item Activar corrida corta de control (por ejemplo 2 horas) y guardar tres referencias base:
+  \begin{itemize}
+    \item \state{DemandaTotal[1]} y \state{DemandaPerdida[1]}.
+    \item \state{StockSala[1]}.
+    \item \simio{Tally\_TiempoCicloLote} (si ya tiene observaciones).
+  \end{itemize}
+  \item Si despues de editar layout esos valores cambian sin tocar logica, revertir la ultima edicion visual y repetir.
+\end{enumerate}
+
+\subsubsection{M5B Crear layout funcional por zonas}
+\textbf{Resultado esperado:} la planta queda separada en cinco zonas operacionales visibles y con nombre fijo.
+
+\begin{enumerate}
+  \item En \simio{Facility}, crear cinco anclas con \simio{BasicNode}:
+  \begin{itemize}
+    \item \simio{Node\_ZonaProduccion}
+    \item \simio{Node\_ZonaHornos}
+    \item \simio{Node\_ZonaEnfriado}
+    \item \simio{Node\_ZonaSalaVenta}
+    \item \simio{Node\_ZonaBufferCarros}
+  \end{itemize}
+  \item Dibujar rectangulos de referencia (capa \simio{Drawing}) y etiquetarlos exactamente:
+  \begin{itemize}
+    \item \simio{ZONA PRODUCCION}
+    \item \simio{ZONA HORNOS}
+    \item \simio{ZONA ENFRIADO}
+    \item \simio{SALA DE VENTA}
+    \item \simio{BODEGA / BUFFER CARROS}
+  \end{itemize}
+  \item Reubicar objetos sin cambiar conexiones logicas:
+  \begin{itemize}
+    \item Produccion: \simio{Server\_Pesado}, \simio{Server\_Mezclado}, \simio{Server\_Amasado}, \simio{Server\_Reposo}, \simio{Server\_Formado}, \simio{Server\_Fermentacion}.
+    \item Hornos: \simio{Server\_Horno1} (y \simio{Server\_Horno2} si existe).
+    \item Enfriado: \simio{Server\_Enfriado}.
+    \item Venta: \simio{Source\_Clientes}, \simio{Sink\_Clientes}.
+    \item Buffer: nodo y etiquetas de carros/bandejas en espera.
+  \end{itemize}
+  \item Mantener lectura izquierda-derecha para que el flujo se entienda sin abrir procesos.
+\end{enumerate}
+
+\subsubsection{M5C Definir rutas de traslado entre zonas}
+\textbf{Resultado esperado:} los movimientos entre zonas son visibles y con tiempo operativo, no saltos instantaneos.
+
+\begin{enumerate}
+  \item Crear \simio{TimePath} entre anclas:
+  \begin{itemize}
+    \item \simio{Node\_ZonaProduccion -> Node\_ZonaHornos}
+    \item \simio{Node\_ZonaHornos -> Node\_ZonaEnfriado}
+    \item \simio{Node\_ZonaEnfriado -> Node\_ZonaSalaVenta}
+    \item \simio{Node\_ZonaBufferCarros -> Node\_ZonaHornos}
+  \end{itemize}
+  \item Usar tiempos base cerrados para esta fase (antes de calibrar detalle):
+  \begin{itemize}
+    \item Produccion a hornos: 2 min.
+    \item Hornos a enfriado: 1 min.
+    \item Enfriado a sala: 1 min.
+    \item Buffer a hornos: 1 min.
+  \end{itemize}
+  \item Si ya usas \state{Prop\_TransferTimeMult}, aplicar \simio{TiempoBase * Prop\_TransferTimeMult}.
+  \item No crear caminos alternativos en M5. Solo una ruta funcional por tramo para evitar ambiguedad visual.
+\end{enumerate}
+
+\subsubsection{M5D Hacer visible la cola antes de horno}
+\textbf{Resultado esperado:} se ve claramente cuando el cuello esta en la entrada del horno.
+
+\begin{enumerate}
+  \item Ubicar fisicamente la entrada de \simio{Server\_Horno1} dentro de \simio{ZONA HORNOS}.
+  \item Reservar espacio visual frente al horno para que la animacion de cola no se superponga con otros objetos.
+  \item Agregar \simio{Status Label} llamado \simio{Lbl\_ColaHorno\_1} con expresion de contenido de cola de entrada del horno.
+  \item Formato obligatorio de etiqueta:
+  \[
+  \texttt{Cola Horno1 = valor\_actual}
+  \]
+  \item Si hay segundo horno, duplicar patron con \simio{Lbl\_ColaHorno\_2}.
+  \item Criterio de cierre: al aumentar demanda, la etiqueta de cola cambia en tiempo real y coincide con lo observado en animacion.
+\end{enumerate}
+
+\subsubsection{M5E Etiquetas de stock y WIP}
+\textbf{Resultado esperado:} el estado del sistema se puede leer sin abrir \simio{Watch} ni procesos.
+
+\begin{enumerate}
+  \item En \simio{SALA DE VENTA}, crear 10 \simio{Status Label} para inventario:
+  \begin{itemize}
+    \item \simio{Lbl\_StockSala\_P1} a \simio{Lbl\_StockSala\_P10}.
+    \item Expresion de cada etiqueta: \state{StockSala[i]}.
+  \end{itemize}
+  \item En cada etapa productiva, agregar una etiqueta WIP:
+  \begin{itemize}
+    \item \simio{Lbl\_WIP\_Pesado}, \simio{Lbl\_WIP\_Mezclado}, \simio{Lbl\_WIP\_Amasado}, \simio{Lbl\_WIP\_Reposo}, \simio{Lbl\_WIP\_Formado}, \simio{Lbl\_WIP\_Fermentacion}, \simio{Lbl\_WIP\_Horno}, \simio{Lbl\_WIP\_Enfriado}.
+    \item Expresion: state WIP correspondiente.
+  \end{itemize}
+  \item Ubicar cada etiqueta junto al objeto que representa, no en un panel aparte.
+  \item Si una etiqueta no actualiza, revisar que el state exista y que el nombre exacto coincida.
+\end{enumerate}
+
+\subsubsection{M5F Animacion basica de clientes y lotes}
+\textbf{Resultado esperado:} clientes y lotes se distinguen visualmente y permiten auditar flujo.
+
+\begin{enumerate}
+  \item Mantener una convencion visual fija:
+  \begin{itemize}
+    \item Clientes: color azul (o simbolo humano).
+    \item Lotes: color naranja (o simbolo de caja/bandeja).
+  \end{itemize}
+  \item Ajustar velocidad de animacion para depuracion: no usar velocidad maxima durante pruebas de M5.
+  \item Verificar que los lotes recorran siempre: produccion \(\rightarrow\) horno \(\rightarrow\) enfriado \(\rightarrow\) sala.
+  \item Verificar que clientes solo aparezcan en sala y nunca entren a zona de produccion.
+  \item Si observas salto visual directo de fermentacion a sala, revisar conectores/path y trigger de reposicion.
+\end{enumerate}
+
+\subsubsection{M5G Cierre obligatorio de fase}
+\begin{itemize}
+  \item M5 corre sin errores.
+  \item Las cinco zonas quedan visibles y etiquetadas.
+  \item Existen paths/timepaths entre zonas criticas.
+  \item La cola de horno se ve y se actualiza.
+  \item Stock por producto y WIP por etapa se muestran en pantalla.
+  \item La corrida de control mantiene comportamiento logico equivalente a M4.
+\end{itemize}
+
+\ok{} M5 queda aceptado solo si el layout permite detectar errores de flujo en minutos, sin abrir procesos internos.
+
+\subsection{M6 paso a paso: cliente individual y canasta de compra}
+\textbf{Objetivo operacional de M6:} reemplazar la demanda dummy de M1 por clientes individuales con canasta estocastica completa, usando \tabla{Rate\_ClientesHora}, \tabla{Tbl\_MixCompraCliente} y \tabla{Tbl\_ProbEleccionHoraLong}, sin dejar decisiones abiertas.
+
+\textbf{Regla cerrada de M6:} cada cliente compra 1, 2 o 3 productos; cuando compra 2 o 3, no puede repetir producto dentro de su misma visita.
+
+\textbf{Orden obligatorio de M6:}
+\begin{enumerate}
+  \item Congelar una copia de M5 y abrir \simio{Panaderia\_M6\_ClienteCanasta.spfx}.
+  \item Validar integridad de tablas de demanda.
+  \item Crear/ajustar states de entidad cliente.
+  \item Reemplazar la logica de \proc{P\_GenerarDemandaCliente} por flujo canasta M6.
+  \item Consumir inventario por item de canasta (no solo por un item).
+  \item Validar con stock infinito contra demanda objetivo por hora.
+\end{enumerate}
+
+\subsubsection{M6A Preparar version y contrato de no-regresion}
+\textbf{Resultado esperado:} existe version M6 separada y comparable con M5.
+
+\begin{enumerate}
+  \item Guardar copia de trabajo como \simio{Panaderia\_M6\_ClienteCanasta.spfx}.
+  \item No tocar logica de produccion, horno ni recursos de M4--M5 en esta fase.
+  \item Ejecutar corrida corta de referencia (2 horas) y registrar:
+  \begin{itemize}
+    \item \state{DemandaTotal[1]}, \state{DemandaSatisfecha[1]}, \state{DemandaPerdida[1]}.
+    \item \state{StockSala[1]}.
+    \item Conteo de entidades en \simio{Sink\_Clientes}.
+  \end{itemize}
+  \item Usar esa corrida como comparacion de regresion cuando cierres M6.
+\end{enumerate}
+
+\subsubsection{M6B Validar contrato de tablas (sin excepciones)}
+\textbf{Resultado esperado:} datos listos para muestreo estocastico sin reinterpretacion manual.
+
+\begin{enumerate}
+  \item \tabla{Rate\_ClientesHora}:
+  \begin{itemize}
+    \item \simio{Source\_Clientes.Arrival Mode} debe usar esta rate table.
+    \item \simio{RatePerHour} debe estar en clientes/hora, no kg/hora.
+  \end{itemize}
+  \item \tabla{Tbl\_MixCompraCliente}:
+  \begin{itemize}
+    \item Debe tener exactamente 3 filas con \state{NProductos} = 1, 2, 3.
+    \item La suma de \state{Probabilidad} debe ser 1.0.
+    \item Orden obligatorio de filas: 1, luego 2, luego 3.
+  \end{itemize}
+  \item \tabla{Tbl\_ProbEleccionHoraLong}:
+  \begin{itemize}
+    \item Debe tener 10 filas por cada \state{HoraIdx}.
+    \item En cada hora, \(\sum_{p=1}^{10} Probabilidad(h,p) = 1.0\) (tolerancia 0.001).
+    \item Orden obligatorio: primero por \state{HoraIdx} ascendente, despues por \state{ProductoIdx} ascendente.
+  \end{itemize}
+  \item En M6 se usa indexacion deterministica por fila:
+  \[
+  \text{FilaProb}(h,p) = (h-1)\cdot 10 + p
+  \]
+  donde \(h\) es \state{HoraIdx} y \(p\) es \state{ProductoIdx}.
+\end{enumerate}
+
+\risk{} Si \tabla{Tbl\_ProbEleccionHoraLong} no respeta ese orden, el muestreo de producto queda sesgado aunque el modelo no muestre error.
+
+\subsubsection{M6C States de entidad cliente obligatorios}
+\textbf{Resultado esperado:} cada cliente guarda su canasta completa antes de consumir inventario.
+
+\begin{enumerate}
+  \item En el \simio{Entity Type} real de \simio{Source\_Clientes} (\simio{ModelEntity} o \simio{ModelEntity1}), crear estos states escalares:
+  \begin{itemize}
+    \item \state{HoraLlegada} (Real)
+    \item \state{HoraIdxCliente} (Integer)
+    \item \state{NProductosCompra} (Integer)
+    \item \state{ProductoIdx\_1}, \state{ProductoIdx\_2}, \state{ProductoIdx\_3} (Integer)
+    \item \state{ProductoIdx\_Candidato} (Integer)
+    \item \state{KgSolicitado\_1}, \state{KgSolicitado\_2}, \state{KgSolicitado\_3} (Real)
+    \item \state{uMix}, \state{c1Mix}, \state{c2Mix} (Real)
+    \item \state{IntentosSeleccion} (Integer)
+  \end{itemize}
+  \item Mantener estos states existentes para el consumo unitario:
+  \begin{itemize}
+    \item \state{ProductoIdx} (Integer)
+    \item \state{KgSolicitado} (Real)
+  \end{itemize}
+  \item Inicializar al crear cliente:
+  \begin{itemize}
+    \item \state{ProductoIdx\_1 = 0}, \state{ProductoIdx\_2 = 0}, \state{ProductoIdx\_3 = 0}
+    \item \state{KgSolicitado\_1 = 0}, \state{KgSolicitado\_2 = 0}, \state{KgSolicitado\_3 = 0}
+    \item \state{IntentosSeleccion = 0}
+  \end{itemize}
+\end{enumerate}
+
+\subsubsection{M6D Reemplazar proceso generador de demanda por canasta}
+\textbf{Resultado esperado:} \proc{P\_GenerarDemandaCliente} crea canasta completa y luego consume item por item.
+
+\begin{enumerate}
+  \item Mantener trigger:
+  \begin{itemize}
+    \item \simio{Output@Source\_Clientes > Add-On Process Triggers > Entered = P\_GenerarDemandaCliente}
+  \end{itemize}
+  \item Reemplazar internamente \proc{P\_GenerarDemandaCliente} por este orden exacto:
+  \begin{enumerate}
+    \item \simio{Assign\_HoraLlegada}: \state{HoraLlegada = TimeNow}.
+    \item \simio{Assign\_HoraIdxCliente}: derivar \state{HoraIdxCliente} desde el reloj de simulacion del dia.
+    \item \simio{Execute\_DeterminarMix}: llamar \proc{P\_M6\_DeterminarNProductos}.
+    \item \simio{Execute\_Seleccion1}: llamar \proc{P\_M6\_SeleccionarProducto1}.
+    \item Si \state{NProductosCompra >= 2}, ejecutar \proc{P\_M6\_SeleccionarProducto2}.
+    \item Si \state{NProductosCompra = 3}, ejecutar \proc{P\_M6\_SeleccionarProducto3}.
+    \item \simio{Execute\_GenerarKgCanasta}: llamar \proc{P\_M6\_GenerarKgCanasta}.
+    \item \simio{Execute\_ConsumirCanasta}: llamar \proc{P\_M6\_ConsumirCanasta}.
+    \item Salir a \simio{Sink\_Clientes}.
+  \end{enumerate}
+  \item No consumir inventario durante la seleccion de productos; el consumo ocurre solo al final en \proc{P\_M6\_ConsumirCanasta}.
+\end{enumerate}
+
+\subsubsection{M6E Determinar numero de productos por cliente}
+\textbf{Resultado esperado:} \state{NProductosCompra} queda en 1, 2 o 3, segun \tabla{Tbl\_MixCompraCliente}.
+
+\begin{enumerate}
+  \item Crear proceso \proc{P\_M6\_DeterminarNProductos} con:
+  \begin{itemize}
+    \item \simio{Assign\_u}: \state{uMix = Random.Uniform(0,1)}.
+    \item \simio{Assign\_c1}: \state{c1Mix = Tbl\_MixCompraCliente[1].Probabilidad}.
+    \item \simio{Assign\_c2}: \state{c2Mix = c1Mix + Tbl\_MixCompraCliente[2].Probabilidad}.
+    \item \simio{Decide}:
+    \begin{itemize}
+      \item si \state{uMix <= c1Mix} \(\rightarrow\) \state{NProductosCompra = 1}
+      \item si \state{uMix > c1Mix and uMix <= c2Mix} \(\rightarrow\) \state{NProductosCompra = 2}
+      \item en otro caso \(\rightarrow\) \state{NProductosCompra = 3}
+    \end{itemize}
+  \end{itemize}
+  \item Criterio de cierre de este bloque: nunca aparece \state{NProductosCompra} fuera de \(\{1,2,3\}\).
+\end{enumerate}
+
+\subsubsection{M6F Seleccionar productos por hora sin repeticion}
+\textbf{Resultado esperado:} canasta de 2 o 3 productos sin duplicados, con probabilidades horarias.
+
+\textbf{Funcion de muestreo que usa M6:}
+\begin{enumerate}
+  \item Para la hora \(h = \state{HoraIdxCliente}\), leer probabilidades:
+  \[
+  p_j = Tbl\_ProbEleccionHoraLong[\text{FilaProb}(h,j)].Probabilidad,\quad j=1..10
+  \]
+  \item Muestrear un candidato con \simio{Random.Discrete} sobre esos 10 valores.
+\end{enumerate}
+
+\textbf{Implementacion obligatoria:}
+\begin{enumerate}
+  \item \proc{P\_M6\_SeleccionarProducto1}:
+  \begin{itemize}
+    \item Muestrear candidato por la distribucion horaria y guardarlo en \state{ProductoIdx\_Candidato}.
+    \item Asignar \state{ProductoIdx\_1 = ProductoIdx\_Candidato}.
+  \end{itemize}
+  \item \proc{P\_M6\_SeleccionarProducto2}:
+  \begin{itemize}
+    \item Inicializar \state{IntentosSeleccion = 0}.
+    \item Muestrear candidato horario en \state{ProductoIdx\_Candidato}.
+    \item Si \state{ProductoIdx\_Candidato = ProductoIdx\_1}, repetir muestreo hasta distinto.
+    \item Limite duro: 20 intentos. Si llega al limite, forzar:
+    \[
+    ProductoIdx\_2 = 1 + \text{Math.Remainder}(ProductoIdx\_1,10)
+    \]
+    \item En caso normal, asignar \state{ProductoIdx\_2 = ProductoIdx\_Candidato}.
+  \end{itemize}
+  \item \proc{P\_M6\_SeleccionarProducto3}:
+  \begin{itemize}
+    \item Inicializar \state{IntentosSeleccion = 0}.
+    \item Muestrear candidato horario en \state{ProductoIdx\_Candidato}.
+    \item Si \state{ProductoIdx\_Candidato} coincide con \state{ProductoIdx\_1} o \state{ProductoIdx\_2}, repetir.
+    \item Limite duro: 20 intentos. Si llega al limite, asignar el menor indice entre 1..10 que no este en \(\{ProductoIdx\_1, ProductoIdx\_2\}\).
+    \item En caso normal, asignar \state{ProductoIdx\_3 = ProductoIdx\_Candidato}.
+  \end{itemize}
+\end{enumerate}
+
+\risk{} No usar la misma extraccion para producto 2 o 3 sin control de repeticion. Eso viola el contrato del caso y distorsiona el mix de compra.
+
+\subsubsection{M6G Generar kg por item y consumir inventario}
+\textbf{Resultado esperado:} cada item de canasta genera kg triangular y actualiza demanda/inventario por producto.
+
+\begin{enumerate}
+  \item Crear proceso \proc{P\_M6\_GenerarKgCanasta}:
+  \begin{itemize}
+    \item Para \state{ProductoIdx\_1}: generar
+    \[
+    KgSolicitado\_1 = \text{Random.Triangular}(MinKgCompra, ModaKgCompra, MaxKgCompra)
+    \]
+    leyendo min/moda/max desde \tabla{Tbl\_ProductoIndice} para ese producto.
+    \item Si \state{NProductosCompra >= 2}, generar \state{KgSolicitado\_2} igual logica.
+    \item Si \state{NProductosCompra = 3}, generar \state{KgSolicitado\_3} igual logica.
+  \end{itemize}
+  \item Crear proceso \proc{P\_M6\_ConsumirCanasta}:
+  \begin{enumerate}
+    \item Copiar item 1 a states base:
+    \begin{itemize}
+      \item \state{ProductoIdx = ProductoIdx\_1}
+      \item \state{KgSolicitado = KgSolicitado\_1}
+    \end{itemize}
+    \item Llamar \proc{P\_ConsumirInventario}.
+    \item Si \state{NProductosCompra >= 2}, repetir con item 2.
+    \item Si \state{NProductosCompra = 3}, repetir con item 3.
+  \end{enumerate}
+  \item \proc{P\_ConsumirInventario} no se modifica en su contrato:
+  \begin{itemize}
+    \item suma \state{DemandaTotal[p]}
+    \item descuenta \state{StockSala[p]} si hay stock
+    \item acumula \state{DemandaSatisfecha[p]} o \state{DemandaPerdida[p]}
+    \item incrementa \state{StockoutCount[p]} y \simio{Tally\_StockoutKg} cuando corresponde
+  \end{itemize}
+\end{enumerate}
+
+\subsubsection{M6H Validacion obligatoria con stock infinito}
+\textbf{Resultado esperado:} la demanda simulada replica la forma horaria del objetivo antes de introducir quiebres.
+
+\begin{enumerate}
+  \item Crear corrida de validacion con stock infinito:
+  \begin{itemize}
+    \item Cargar \state{StockSala[1..10]} con valor alto fijo (ejemplo: 1e9).
+    \item Mantener produccion activa o inactiva; no afecta mientras el stock inicial sea infinito.
+  \end{itemize}
+  \item Medir por hora y por producto:
+  \begin{itemize}
+    \item \state{DemandaTotal[p]} simulada.
+    \item \tabla{Tbl\_DemandaHoraLong.KgObjetivoHora} objetivo.
+  \end{itemize}
+  \item Criterio de aceptacion M6:
+  \begin{itemize}
+    \item Tendencia horaria simulada coherente con tendencia objetivo.
+    \item Demanda diaria total simulada en rango \(\pm 5\%\) del objetivo (con replicas suficientes).
+    \item Con stock infinito, \state{DemandaPerdida[1..10]} debe ser aproximadamente 0.
+  \end{itemize}
+  \item Si no cumple, corregir en este orden:
+  \begin{enumerate}
+    \item Rate table de llegadas.
+    \item Probabilidades por hora.
+    \item Mix de canasta 1/2/3.
+    \item Parametros triangular min/moda/max.
+  \end{enumerate}
+\end{enumerate}
+
+\subsubsection{M6I Cierre obligatorio de fase}
+\begin{itemize}
+  \item El modelo corre sin errores con canasta 1, 2 y 3 productos.
+  \item No hay repeticion de producto dentro del mismo cliente cuando compra 2 o 3.
+  \item El consumo se ejecuta item por item y actualiza vectores por producto.
+  \item Con stock infinito, la demanda simulada reproduce la forma de la demanda objetivo.
+  \item M6 queda trazable: proceso, tabla y formula de cada decision estan documentados.
+\end{itemize}
+
+\subsection{M7 paso a paso: control de produccion y reposicion}
+\textbf{Estado de esta version:} alcance definido y numeracion reservada. Desarrollo detallado pendiente.
+
+\begin{itemize}
+  \item Objetivo cerrado: comparar politicas push, pull e hibrida sin reconstruir el modelo.
+  \item Push: secuencia/plan horario predefinido.
+  \item Pull: gatillar lote cuando \state{StockSala[p] <= PuntoReposicionKg[p]}.
+  \item Hibrida: base programada + reposicion por bajo stock o quiebre.
+\end{itemize}
+
+\subsection{M8 paso a paso: dotacion y recursos multiples}
+\textbf{Estado de esta version:} alcance definido y numeracion reservada. Desarrollo detallado pendiente.
+
+\begin{itemize}
+  \item Objetivo cerrado: evaluar configuraciones 1/2/3 panaderos y 1/2 manipuladores.
+  \item Incluir capacidad de mezcladora, amasadora, carros y hornos como variables de escenario.
+  \item Incluir turnos escalonados y descansos para recursos criticos.
+  \item Comparar recurso logico agregado vs workers individuales.
+\end{itemize}
+
+\subsection{M9 paso a paso: horno batch operacional}
+\textbf{Estado de esta version:} alcance definido y numeracion reservada. Desarrollo detallado pendiente.
+
+\begin{itemize}
+  \item Objetivo cerrado: horno como restriccion real, no solo delay.
+  \item Incluir colas por familia, formacion de carga, setup A-A = 0 y A-B = 5.
+  \item Respetar regla \(\sum CarrosReq \le 6\).
+  \item Registrar setups, espera de horno y descarga hacia enfriado/reposicion.
+\end{itemize}
+
+\subsection{M10 paso a paso: reposicion a sala e inventario vendible}
+\textbf{Estado de esta version:} alcance definido y numeracion reservada. Desarrollo detallado pendiente.
+
+\begin{itemize}
+  \item Objetivo cerrado: cerrar ciclo produccion \(\rightarrow\) enfriado \(\rightarrow\) sala \(\rightarrow\) venta.
+  \item Incluir tiempo de traslado a sala y competencia por manipulador si aplica.
+  \item Mostrar inventario vendible por producto y sobrante de cierre.
+  \item Balance objetivo: producido = vendido + sobrante + WIP final.
+\end{itemize}
+
+\subsection{M11 paso a paso: pruebas de comportamiento}
+\textbf{Estado de esta version:} alcance definido y numeracion reservada. Desarrollo detallado pendiente.
+
+\begin{itemize}
+  \item Objetivo cerrado: stress test formal antes de consolidar KPIs.
+  \item Casos minimos: demanda cero, stock inicial cero/infinito, un producto, demanda alta, setup A-A y A-B.
+  \item Pruebas de capacidad: dos panaderos vs uno, dos hornos vs uno.
+  \item Criterio: no avanzar a KPIs sin pasar todas las pruebas dinamicas.
+\end{itemize}
+
+\subsection{M12 paso a paso: KPIs, verificacion y validacion}
+
+\textbf{Ejecucion lineal de M12:} esta fase no crea la logica operacional desde cero; consolida, verifica y valida lo que ya nacio en M1--M11. Por eso se divide en tres bloques obligatorios: KPIs, verificacion y validacion.
+
+\subsubsection{M12A Consolidar KPIs y statistics}
+
+\aifigure{figures_ai/ai_m5_01_kpis_por_fase.png}{M12A: KPIs y statistics consolidados.}{Referencia visual para revisar \simio{Definitions > Elements}: los \simio{Tally Statistic} existen, pero solo tienen datos si fueron alimentados por pasos \simio{Tally} en los procesos de M1 a M11.}
 
 \begin{enumerate}
   \item Ir a \simio{Definitions > Elements}.
@@ -1444,12 +2339,12 @@ Ejemplo: en M3, crear \proc{P\_EvaluarHorno}, \proc{P\_FormarCargaHorno}, \proc{
   \item Registrar en la bitacora el lugar exacto donde se alimenta cada KPI. Si un tally existe pero queda sin observaciones, el error esta en el trigger o en el paso \simio{Tally}, no en el elemento estadistico.
 \end{enumerate}
 
-\subsubsection{M5B Ejecutar pruebas de verificacion}
+\subsubsection{M12B Ejecutar pruebas de verificacion}
 
-\aifigure{figures_ai/ai_m5_02_verificacion_pruebas.png}{M5B: pruebas de verificacion del modelo.}{Referencia visual para ejecutar pruebas pequenas con \simio{Trace}, \simio{Errors} y procesos de prueba; cada prueba debe tener configuracion, resultado esperado y error tipico detectado.}
+\aifigure{figures_ai/ai_m5_02_verificacion_pruebas.png}{M12B: pruebas de verificacion del modelo.}{Referencia visual para ejecutar pruebas pequenas con \simio{Trace}, \simio{Errors} y procesos de prueba; cada prueba debe tener configuracion, resultado esperado y error tipico detectado.}
 
 \begin{enumerate}
-  \item Crear una copia del modelo o guardar version \simio{M5\_Verificacion}.
+  \item Crear una copia del modelo o guardar version \simio{M12\_Verificacion}.
   \item Activar \simio{Trace} solo para corridas cortas; no usarlo en corridas largas.
   \item Ejecutar prueba \textbf{demanda cero}: configurar \tabla{Rate\_ClientesHora} con tasas 0. Resultado esperado: no llegan clientes y todas las filas \state{DemandaTotal[1]}, ..., \state{DemandaTotal[10]} quedan en 0.
   \item Ejecutar prueba \textbf{inventario inicial cero}: dejar en 0 todas las filas \state{StockSala[1]}, ..., \state{StockSala[10]}. Resultado esperado: toda demanda queda perdida y ninguna fila de \state{StockSala} baja de cero.
@@ -1460,12 +2355,12 @@ Ejemplo: en M3, crear \proc{P\_EvaluarHorno}, \proc{P\_FormarCargaHorno}, \proc{
   \item Ejecutar prueba \textbf{capacidad horno}: intentar formar batch con \(\sum CarrosReq > 6\). Resultado esperado: el ultimo lote no entra a la corrida.
   \item Ejecutar prueba \textbf{sin mezcla de familias}: cargar lotes de familia 1 y 2. Resultado esperado: una corrida contiene solo familia 1 o solo familia 2.
   \item Ejecutar prueba \textbf{turnos y descansos}: correr una jornada corta con schedules. Resultado esperado: recursos respetan colacion/descanso y no desaparecen operaciones criticas ya iniciadas.
-  \item Cerrar M5B solo si el panel \simio{Errors} queda sin errores operacionales y cada prueba produce el resultado esperado.
+  \item Cerrar M12B solo si el panel \simio{Errors} queda sin errores operacionales y cada prueba produce el resultado esperado.
 \end{enumerate}
 
-\subsubsection{M5C Validar baseline y documentar desviaciones}
+\subsubsection{M12C Validar baseline y documentar desviaciones}
 
-\aifigure{figures_ai/ai_m5_03_validacion_resultados.png}{M5C: validacion del baseline con resultados y tolerancias.}{Referencia visual para comparar resultados simulados contra historico u objetivo: demanda total, produccion, fill rate, stockout kg, utilizacion de horno y desviacion porcentual.}
+\aifigure{figures_ai/ai_m5_03_validacion_resultados.png}{M12C: validacion del baseline con resultados y tolerancias.}{Referencia visual para comparar resultados simulados contra historico u objetivo: demanda total, produccion, fill rate, stockout kg, utilizacion de horno y desviacion porcentual.}
 
 \begin{enumerate}
   \item Correr el baseline con los supuestos activos de \tabla{Tbl\_Supuestos}.
@@ -1480,10 +2375,10 @@ Ejemplo: en M3, crear \proc{P\_EvaluarHorno}, \proc{P\_FormarCargaHorno}, \proc{
   \]
   La demanda perdida no se suma como salida fisica de produccion; se reporta aparte como venta no atendida.
   \item Documentar cada desviacion en una tabla con: KPI, valor simulado, valor historico/objetivo, error porcentual, causa probable, accion tomada y estado.
-  \item No usar la animacion como unica validacion. La animacion ayuda a encontrar errores, pero la aceptacion de M5 depende de KPIs, pruebas extremas, balances y comparacion contra datos o juicio experto.
+  \item No usar la animacion como unica validacion. La animacion ayuda a encontrar errores, pero la aceptacion de M12 depende de KPIs, pruebas extremas, balances y comparacion contra datos o juicio experto.
 \end{enumerate}
 
-\subsection{M6 paso a paso: experimentos, controls y responses}
+\subsection{M13 paso a paso: experimentos, controls y responses}
 
 \aifigure{figures_ai/ai_09_experiments_results.jpg}{Configuracion de experimentos y lectura de resultados.}{Referencia visual para Controls, Responses, replicas y comparacion de escenarios.}
 
@@ -1491,8 +2386,8 @@ Ejemplo: en M3, crear \proc{P\_EvaluarHorno}, \proc{P\_FormarCargaHorno}, \proc{
   \item Guardar el modelo base antes de experimentar.
   \item Ir a \simio{Project Home > Experiments > New Experiment}.
   \item Nombrar \simio{Exp\_Screening}.
-  \item Verificar \textbf{antes} de crear controls que cada property ya este conectada al modelo (ejemplo: \state{Prop\_NumPanaderos} afecta capacidad/recurso, \state{Prop\_DemandMult} afecta demanda, \state{Prop\_NumHornos} afecta hornos activos).
-  \item En \simio{Controls}, agregar \textbf{solo} estas \simio{Referenced Properties} creadas desde M0: \state{Prop\_NumPanaderos}, \state{Prop\_NumManipuladores}, \state{Prop\_NumHornos}, \state{Prop\_NumMezcladoras}, \state{Prop\_NumAmasadoras}, \state{Prop\_DemandMult}, \state{Prop\_StockInicialMult}, \state{Prop\_TransferTimeMult}, \state{Prop\_TiempoCargaMezcladoraMin}, \state{Prop\_TiempoRetiroMezclaMin}, \state{Prop\_PoliticaProduccion}, \state{Prop\_PoliticaHorno}.
+  \item Verificar \textbf{antes} de crear controls que cada property ya este conectada al modelo. Ejemplo: \state{Prop\_NumPanaderos} solo afecta el modelo si lo conectaste segun M8, ya sea al valor del work schedule o a la capacidad fija del recurso.
+  \item En \simio{Controls}, agregar \textbf{solo} las \simio{Referenced Properties} que esten realmente conectadas. Si \state{Prop\_NumPanaderos} queda rojo en el schedule o no se usa en \simio{Initial Capacity}, no agregarla como control todavia. La lista objetivo, una vez conectada, es: \state{Prop\_NumPanaderos}, \state{Prop\_NumManipuladores}, \state{Prop\_NumHornos}, \state{Prop\_NumMezcladoras}, \state{Prop\_NumAmasadoras}, \state{Prop\_DemandMult}, \state{Prop\_StockInicialMult}, \state{Prop\_TransferTimeMult}, \state{Prop\_TiempoCargaMezcladoraMin}, \state{Prop\_TiempoRetiroMezclaMin}, \state{Prop\_PoliticaProduccion}, \state{Prop\_PoliticaHorno}.
   \item En \simio{Responses}, agregar: \resp{FillRateTotal}, \resp{KgPerdidosTotal}, \resp{SobranteFinalKg}, \resp{UtilHornos}, \resp{TiempoCicloPromedio}.
   \item Crear una fila por escenario. No cambiar objetos manualmente entre escenarios; todo debe venir de controls.
   \item Configurar 20 replicas para screening.
@@ -1501,16 +2396,16 @@ Ejemplo: en M3, crear \proc{P\_EvaluarHorno}, \proc{P\_FormarCargaHorno}, \proc{
   \item Dejar solo los mejores escenarios y subir replicas hasta cumplir half-width objetivo.
 \end{enumerate}
 
-\subsection{M7 paso a paso: documentacion final y reproducibilidad}
+\subsection{M14 paso a paso: documentacion final y reproducibilidad}
 
 \uifigure{figures_ai/ai_22_versioning.jpg}{Estado visual esperado de cierre documental.}{Referencia IA para organizar versionado, bitacora y entregables.}
 
 
 \begin{enumerate}
   \item Mantener desde M0 la bitacora de cambios, supuestos y errores.
-  \item En M7 consolidar (no inventar al final): decisiones, supuestos, validaciones, resultados y version final.
+  \item En M14 consolidar (no inventar al final): decisiones, supuestos, validaciones, resultados y version final.
   \item Exportar tablas de resultados por escenario y dejar trazabilidad de parametros.
-  \item Verificar que cada grafico y conclusion se pueda reproducir desde el modelo M6 guardado.
+  \item Verificar que cada grafico y conclusion se pueda reproducir desde el modelo M13 guardado.
 \end{enumerate}
 
 \subsection{Herramientas de depuracion que se deben usar}
@@ -1576,7 +2471,7 @@ Los Excel no deben conectarse directamente al modelo sin normalizacion. Antes de
   \item Transformar demanda a \tabla{Tbl\_DemandaHoraLong}: una fila por hora y producto, con kg objetivo.
   \item Transformar probabilidades a \tabla{Tbl\_ProbEleccionHoraLong}: una fila por hora y producto, validando que cada hora sume 1.
   \item Derivar \tabla{Rate\_ClientesHora}. La ruta base modela clientes individuales; no usar kg/hora como tasa de llegada.
-  \item Guardar una hoja \tabla{Tbl\_Supuestos} con todo dato no observado: traslado, stock inicial, buffers, turnos, politicas y sensibilidad.
+  \item Guardar una hoja \tabla{Tbl\_Supuestos} con todo dato no observado: traslado, stock inicial, colas/esperas, turnos, politicas y sensibilidad.
 \end{enumerate}
 
 
@@ -1643,7 +2538,7 @@ Tiempos de traslado & Panadero 0.9--1.2 m/s; manipulador con carro 0.8 m/s. & Mu
 Distancias internas & Usar layout funcional simple con distancias estimadas. & Distancias corta/media/larga por ruta. & Convertir traslados en decoracion. \\
 Politica real de reposicion & Pull por stock minimo con prioridad a menor stock relativo. & Push horario, pull, hibrida. & Evaluar politica equivocada. \\
 \rowcolor{tabrow}
-Capacidad real de buffers & Capacidad finita por etapa segun espacio razonable. & Infinita, base, base - 25\%. & Ocultar bloqueos. \\
+Capacidad real de colas/esperas & Capacidad finita por etapa segun espacio razonable. & Infinita, base, base - 25\%. & Ocultar bloqueos. \\
 Stock inicial por producto & Cubrir al menos una hora esperada de demanda por producto. & 0.5h, 1h, 1.5h. & Sobredimensionar servicio inicial. \\
 \rowcolor{tabrow}
 Horarios exactos de turnos & 8 horas, colacion 45 min, dos descansos 15 min escalonados. & Inicio temprano/medio/tarde. & Disponibilidad irreal. \\
@@ -1690,24 +2585,24 @@ Crear recursos con la siguiente decision cerrada para la ruta base:
   \item \textbf{Panaderos:} usar \simio{Resource} o \simio{Secondary Resource} logico; no activar desplazamiento fisico en M4 base.
   \item \textbf{Manipuladores de horno/despacho:} usar \simio{Worker}, porque carga, descarga y reposicion compiten por la misma persona.
   \item \textbf{Mezcladoras y amasadoras:} \simio{Server} con capacidad por escenario. La mezcladora usa tiempos de manejo parametrizados; la amasadora usa el tiempo \textit{Amasado} del archivo de parametros.
-  \item \textbf{Mesas/formado y camaras/fermentacion:} \simio{Server} o \simio{Storage} con capacidad finita.
+  \item \textbf{Mesas/formado y camaras/fermentacion:} \simio{Server} con capacidad finita si se quiere limitar espacio. No usar \simio{Storage} en la ruta base de tu version Student.
   \item \textbf{Hornos:} \simio{Server\_Horno1} batch controlado por procesos. Para dos hornos, crear \simio{Server\_Horno2}.
   \item \textbf{Carros/bandejas/racks:} no crear objeto fisico en M3 base; usar \state{ModelEntity.CarrosReq} y validar \(\sum CarrosReq \le 6\).
 \end{itemize}
 
-\textbf{Tabla de decision obligatoria para no improvisar recursos.} Esta tabla es un contrato de implementacion; no se crea como \simio{Data Table}. Sirve para configurar los \simio{Server}, \simio{Secondary Resources}, capacidades y supuestos de M2--M4.
+\textbf{Tabla de decision obligatoria para no improvisar recursos.} Esta tabla es un contrato de implementacion; no se crea como \simio{Data Table}. Sirve para configurar los \simio{Server}, \simio{Secondary Resources}, capacidades y supuestos de M2--M8.
 
 {\scriptsize
 \begin{longtable}{L{2.7cm}L{2.5cm}L{2.7cm}L{2.7cm}L{3.0cm}L{2.6cm}}
 \caption{Contrato etapa--recurso--dato para implementar la produccion.}\\
 \toprule
 \rowcolor{tabhead}
-\color{white}Etapa & \color{white}Humano & \color{white}Maquina/objeto & \color{white}Capacidad/buffer & \color{white}Tiempo en Simio & \color{white}Fuente \\
+\color{white}Etapa & \color{white}Humano & \color{white}Maquina/objeto & \color{white}Capacidad/cola & \color{white}Tiempo en Simio & \color{white}Fuente \\
 \midrule
 \endfirsthead
 \toprule
 \rowcolor{tabhead}
-\color{white}Etapa & \color{white}Humano & \color{white}Maquina/objeto & \color{white}Capacidad/buffer & \color{white}Tiempo en Simio & \color{white}Fuente \\
+\color{white}Etapa & \color{white}Humano & \color{white}Maquina/objeto & \color{white}Capacidad/cola & \color{white}Tiempo en Simio & \color{white}Fuente \\
 \midrule
 \endhead
 Pesado y dosificacion & Panadero & \simio{Server\_Pesado} & Cola del server & \tabla{Tbl\_EtapasProducto.TiempoMin} & Excel parametros \\
@@ -1715,13 +2610,13 @@ Pesado y dosificacion & Panadero & \simio{Server\_Pesado} & Cola del server & \t
 Mezclado manejo & Panadero & \simio{Server\_Mezclado}/mezcladora & Capacidad mezcladora & \state{Prop\_TiempoCargaMezcladoraMin + Prop\_TiempoRetiroMezclaMin} & Supuesto documentado \\
 Amasado & Panadero segun regla & \simio{Server\_Amasado}/amasadora & Capacidad amasadora & \tabla{Tbl\_EtapasProducto.TiempoMin} para \textit{Amasado} & Excel parametros \\
 \rowcolor{tabrow}
-Reposo & Ninguno & \simio{Server\_Reposo} & Buffer reposo & \tabla{Tbl\_EtapasProducto.TiempoMin} & Excel parametros \\
+Reposo & Ninguno & \simio{Server\_Reposo} & Cola/input buffer del server & \tabla{Tbl\_EtapasProducto.TiempoMin} & Excel parametros \\
 Formado & Panadero & \simio{Server\_Formado}/mesa & Capacidad mesa & \tabla{Tbl\_EtapasProducto.TiempoMin} & Excel parametros \\
 \rowcolor{tabrow}
 Fermentacion & Ninguno & \simio{Server\_Fermentacion}/camara & Capacidad camara & \tabla{Tbl\_EtapasProducto.TiempoMin} & Excel parametros + supuesto capacidad \\
 Horno & Manipulador & \simio{Server\_Horno1} & 6 carros maximo & 14/18/21 min + setup/carga/descarga & Enunciado + Excel \\
 \rowcolor{tabrow}
-Enfriado & Ninguno & \simio{Server\_Enfriado} & Buffer terminado & \tabla{Tbl\_EtapasProducto.TiempoMin} & Excel parametros \\
+Enfriado & Ninguno & \simio{Server\_Enfriado} & Cola/input buffer del server & \tabla{Tbl\_EtapasProducto.TiempoMin} & Excel parametros \\
 Reposicion sala & Manipulador & \simio{Server\_ReposicionSala} & Sala por producto & Tiempo traslado/manipulacion & Supuesto + sensibilidad \\
 \bottomrule
 \end{longtable}
@@ -1747,7 +2642,7 @@ Reposicion sala & Manipulador & \simio{Server\_ReposicionSala} & Sala por produc
 Inventario en sala & Kg disponibles para venta por producto. & Vector \state{StockSala[1]}, ..., \state{StockSala[10]}. \\
 \rowcolor{tabrow}
 Inventario en proceso & Kg/lotes dentro del proceso productivo. & States escalares de etapa: \state{WIP\_Pesado}, \state{WIP\_Mezclado}, \state{WIP\_Amasado}, \state{WIP\_Reposo}, \state{WIP\_Formado}, \state{WIP\_Fermentacion}, \state{WIP\_Horno}, \state{WIP\_Enfriado}. \\
-Terminado esperando reposicion & Producto enfriado aun no vendible. & Buffer/Storage previo a reposicion. \\
+Terminado esperando reposicion & Producto enfriado aun no vendible. & \simio{Node\_TerminadoNoVendido} como punto logico previo a reposicion. \\
 \rowcolor{tabrow}
 Llegada de cliente & Demanda por hora. & \proc{P\_GenerarDemandaCliente}. \\
 Consumo de inventario & Descuento de kg solicitados. & \proc{P\_ConsumirInventario}. \\
@@ -1789,7 +2684,7 @@ Cierre del dia & Congelar KPIs y registrar sobrantes. & \proc{P\_CierreDia}. \\
 \simio{Worker} & Panaderos y manipuladores con movimiento. & \simio{Work Schedule}, \simio{Initial Node}, \simio{Travel Logic}. \\
 \rowcolor{tabrow}
 \makecell[l]{\simio{Path}, \simio{TimePath}\\o \simio{Connector}} & Movimiento entre etapas. & Distancia, tiempo de viaje, capacidad si aplica. \\
-\makecell[l]{\simio{Storage}, \simio{Material}\\o \simio{Inventory}} & Inventario fisico o buffers limitados. & Capacidad, cantidad inicial, regla de retiro. \\
+\simio{BasicNode} & Punto logico de ruteo o espera visual cuando no existe objeto \simio{Buffer}. & Nombre exacto, conexiones y proceso que controla la espera. \\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -1818,7 +2713,7 @@ Para evitar que dos modeladores construyan modelos distintos, esta guia fija una
 
 \begin{table}[H]
 \centering
-\caption{Decisiones canonicas de modelado para M0--M6.}
+\caption{Decisiones canonicas de modelado para M0--M13.}
 \scriptsize
 \begin{tabularx}{\textwidth}{L{3.0cm}Y Y}
 \toprule
@@ -1851,7 +2746,7 @@ La clave numerica \state{ProductoIdx} debe propagarse por todo el modelo. No usa
   \item En tablas hijas, usar \state{ProductoIdx} como foreign key: \tabla{Tbl\_EtapasProducto}, \tabla{Tbl\_DemandaHoraLong}, \tabla{Tbl\_ProbEleccionHoraLong}, \tabla{Tbl\_StockPolitica}.
   \item En \proc{P\_CrearLote}, usar \state{ModelEntity.ProductoIdx} para leer tablas. En \proc{P\_ConsumirInventario}, usar \state{ModelEntity.ProductoIdx} para entrar a la rama del producto correcto.
   \item En demanda, el token o entidad cliente debe guardar \state{ProductoIdxCompra[i]} antes de llamar \proc{P\_ConsumirInventario}.
-  \item En cada etapa productiva, buscar el tiempo por \state{ProductoIdx} y \state{EtapaCod}; no escribir tiempos en las propiedades de cada server.
+  \item En cada etapa productiva, buscar el tiempo con \state{ProductoEtapaKey = ProductoIdx * 100 + Secuencia} y \simio{RowForKey}; no escribir tiempos fijos en las propiedades de cada server.
   \item En experiments, vincular cada \simio{Control} a una \simio{Referenced Property}; no editar procesos a mano para cambiar escenarios.
 \end{enumerate}
 
@@ -1888,16 +2783,16 @@ Crear los processes en \simio{Definitions > Processes}. Luego enlazarlos desde t
 \proc{P\_ConsumirInventario} & \simio{Called} & Proceso & Descontar stock, acumular demanda satisfecha/perdida, evitar negativos. \\
 \proc{P\_CrearLote} & Politica push/pull & \simio{Source\_LotesProduccion} o proceso & Asignar \state{ProductoIdx}, kg, bandejas y carros. \\
 \rowcolor{tabrow}
-\proc{P\_ActualizarWIP} & \simio{Entered/Exited} & Cada \simio{Server\_*} & Sumar/restar WIP por etapa y registrar cola. \\
-\proc{P\_EvaluarHorno} & Llegada a cola y fin de descarga & Colas F1/F2/F3, \simio{Server\_Horno*} & Seleccionar familia, formar carga, setup, carga, horneado y descarga. \\
+\makecell[l]{\proc{P\_WIP\_*}\\\proc{\_Entrar/Salir}} & \simio{Entered/Exited} & Cada \simio{Server\_*} & Procesos explicitos por etapa para sumar/restar WIP; no usan parametros. \\
+\proc{P\_EvaluarHorno} & Llegada a cola y fin de descarga & \simio{Node\_Horno\_F1/F2/F3}, \simio{Server\_Horno*} & Seleccionar familia, formar carga, setup, carga, horneado y descarga. \\
 \rowcolor{tabrow}
-\proc{P\_FormarCargaHorno} & \simio{Called} & Proceso & Seleccionar lotes con misma familia mientras \(\sum CarrosReq \leq 6\). \\
+\proc{P\_FormarCargaHorno} & \simio{Called} & Proceso & En ruta base valida la hornada actual: familia 1/2/3 y \state{CarrosReq <= 6}. La seleccion multi-lote queda para version avanzada con listas. \\
 \proc{P\_AplicarSetupHorno} & \simio{Called} & Proceso & Leer setup, demorar si corresponde, actualizar familia y contadores. \\
 \rowcolor{tabrow}
-\proc{P\_ReponerSala} & \simio{Exited} & \simio{Server\_Enfriado} o buffer & Tomar manipulador/carro, trasladar, aumentar stock sala. \\
+\proc{P\_ReponerSala} & \simio{Exited} & \simio{Server\_Enfriado} o \simio{Node\_TerminadoNoVendido} & Tomar manipulador/carro, trasladar, aumentar stock sala. \\
 \proc{P\_MuestrearInventario} & Evento periodico & Modelo & Acumular inventario para promedio o registrar estado time-weighted. \\
 \rowcolor{tabrow}
-\proc{P\_RegistrarCycleTime} & \simio{Entered} & \simio{Sink\_LotesFinalizados} & Registrar \simio{Tally} de ciclo, espera a horno y tiempo a sala. \\
+\proc{P\_RegistrarCycleTime} & \simio{Entered} & \simio{Sink\_LotesFinalizados} & Registrar \simio{Tally\_TiempoCicloLote} con \state{TimeNow - ModelEntity.HoraInicioCiclo}. \\
 \bottomrule
 \end{longtable}
 }
@@ -1978,7 +2873,7 @@ Las tablas siguientes son la version ejecutable recomendada. En el modelo final 
 \endhead
 \makecell[l]{\tabla{Tbl\_Producto}\\\tabla{Indice}} & \simio{Data Table} & \makecell[l]{ProductoIdx(Integer PK), ProductoID(Text Unique),\\FamiliaHorno(Integer), KgBatchRef(Real),\\CapacidadKgPor\\CarroRef(Real), KgPor\\BandejaRef(Real),\\MinKgCompra(Real), ModaKgCompra(Real),\\MaxKgCompra(Real)} & Tabla maestra. Todo lookup y toda rama por producto usa \state{ProductoIdx}. \\
 \rowcolor{tabrow}
-\makecell[l]{\tabla{Tbl\_Etapas}\\\tabla{Producto}} & \simio{Data Table} & \makecell[l]{ProductoIdx(Integer FK), Secuencia(Integer),\\EtapaCod(Text), TiempoMin(Real),\\UsaPanadero(Boolean),\\UsaManip(Boolean), UsaMaquina(Boolean)} & Ruta unica de 7 macroetapas con tiempos por producto. \\
+\makecell[l]{\tabla{Tbl\_Etapas}\\\tabla{Producto}} & \simio{Data Table} & \makecell[l]{ProductoIdx(Integer FK), Secuencia(Integer),\\ProductoEtapaKey(Integer Key), EtapaCod(Text),\\TiempoMin(Real), UsaPanadero(Boolean),\\UsaManip(Boolean), UsaMaquina(Boolean)} & Ruta unica de 7 macroetapas con tiempos por producto; \state{ProductoEtapaKey = ProductoIdx * 100 + Secuencia} alimenta los \simio{Processing Time}. \\
 \makecell[l]{\tabla{Tbl\_Demanda}\\\tabla{HoraLong}} & \makecell[l]{\simio{Data Table}\\\simio{Time-Indexed}} & \makecell[l]{HoraInicio(Time), HoraFin(Time),\\ProductoIdx(Integer FK), KgObjetivoHora(Real)} & Demanda objetivo para validacion, stock futuro y calibracion. \\
 \rowcolor{tabrow}
 \makecell[l]{\tabla{Tbl\_ProbEleccion}\\\tabla{HoraLong}} & \makecell[l]{\simio{Data Table}\\\simio{Time-Indexed}} & \makecell[l]{HoraInicio(Time), ProductoIdx(Integer FK),\\ProbPrimera\\Eleccion(Real)} & Seleccion de producto en clientes individuales. \\
@@ -2070,7 +2965,7 @@ Estos estados cierran las ambiguedades principales: indice numerico, capacidad f
 {\scriptsize
 \setlength{\tabcolsep}{2pt}
 \begin{longtable}{@{}L{3.6cm}L{1.6cm}L{2.0cm}L{3.2cm}L{4.4cm}@{}}
-\caption{States y properties adicionales para M0--M6.}\\
+\caption{States y properties adicionales para M0--M13.}\\
 \toprule
 \rowcolor{tabhead}
 \color{white}Nombre exacto & \color{white}Tipo & \color{white}Inicial & \color{white}Donde se asigna & \color{white}Uso \\
@@ -2110,7 +3005,7 @@ Estos estados cierran las ambiguedades principales: indice numerico, capacidad f
 
 
 Estas properties se crean en \simio{Navigation: Model\_Panaderia > Definitions > Properties > Add Property}.\\
-En esta guia se crean en M0 y se reutilizan en M6 (\simio{Experiments > Controls}).
+En esta guia se crean en M0 y se reutilizan en M13 (\simio{Experiments > Controls}).
 \vspace{1mm}
 
 Crear \simio{Model Properties} para parametros de escenario que se usaran como \simio{Controls}. Todas se crean en M0, antes de construir M1.
@@ -2334,10 +3229,10 @@ El state \state{StockSala} se configura en \simio{Definitions > States} con \sim
 No crear diez rutas fisicas para diez panes en la primera version. La estructura de datos permite una ruta unica y estable:
 
 \begin{enumerate}
-  \item Crear los servers en este orden: \simio{Server\_Pesado}, \simio{Server\_Mezclado}, \simio{Server\_Amasado}, \simio{Server\_Reposo}, \simio{Server\_Formado}, \simio{Server\_Fermentacion}, \simio{Buffer\_HornoFamilia}.
-  \item En cada server, configurar \simio{Processing Time} como expresion que busca \state{ModelEntity.ProductoIdx} y \state{EtapaCod} en \tabla{Tbl\_EtapasProducto}.
+  \item Crear los servers en este orden: \simio{Server\_Pesado}, \simio{Server\_Mezclado}, \simio{Server\_Amasado}, \simio{Server\_Reposo}, \simio{Server\_Formado}, \simio{Server\_Fermentacion}. Los nodos \simio{Node\_Horno\_F1/F2/F3} se agregan recien en M3B con \simio{BasicNode}.
+  \item En cada server, configurar \simio{Processing Time} como expresion que busca \state{ProductoEtapaKey} en \tabla{Tbl\_EtapasProducto}: \state{ModelEntity.ProductoIdx * 100 + SecuenciaDeLaEtapa}.
   \item Si una etapa no aplica a algun producto, dejar \state{TiempoMin=0} y verificar que el lote no desaparezca.
-  \item Usar \proc{P\_ActualizarWIP} en \simio{Entered} y \simio{Exited} de cada server.
+  \item Usar los procesos explicitos \proc{P\_WIP\_<Etapa>\_Entrar} y \proc{P\_WIP\_<Etapa>\_Salir} en \simio{Entered} y \simio{Exited} de cada server.
   \item Registrar \simio{Tally\_TiempoCicloLote} al final, no en cada etapa.
 \end{enumerate}
 
@@ -2367,7 +3262,7 @@ Amasado & \simio{Server\_Amasado} & Amasadora; panadero si corresponde & Tiempo 
 Reposo masa & \simio{Server\_Reposo} o delay & Sin humano & No consume panadero. \\
 Dividido o formado & \simio{Server\_Formado} & Panadero + mesa & Se forma cola si mesa/panadero saturan. \\
 \rowcolor{tabrow}
-Fermentacion final & \makecell[l]{\simio{Server\_}\\\simio{Fermentacion}} & Camara o buffer & Capacidad finita si aplica. \\
+Fermentacion final & \makecell[l]{\simio{Server\_}\\\simio{Fermentacion}} & Camara representada como \simio{Server} & Capacidad finita si aplica. \\
 Horneado & Horno batch & Manipulador + horno & Familia compatible. \\
 \rowcolor{tabrow}
 Enfriado & \simio{Server\_Enfriado} & Sin humano & Producto aun no vendible. \\
@@ -2438,15 +3333,15 @@ Crear descansos escalonados. Regla: nunca programar colacion o descanso simultan
 \uifigure{figures_ai/ai_23_interface_real_map.jpg}{Estado visual esperado de la subseccion.}{Referencia IA basada en la interfaz real de Simio para seguir el bloque sin interpretar ubicaciones.}
 
 
-Crear una cola logica por familia y un servidor por horno:
+Crear un nodo logico por familia y un servidor por horno. En tu Simio Student no se usa un objeto \simio{Buffer}; se usan \simio{BasicNode} y la seleccion de familias se controla en procesos:
 \begin{itemize}
-  \item \simio{Queue\_Horno\_F1}: productos familia 1, 14 minutos.
-  \item \simio{Queue\_Horno\_F2}: productos familia 2, 18 minutos.
-  \item \simio{Queue\_Horno\_F3}: productos familia 3, 21 minutos.
+  \item \simio{Node\_Horno\_F1}: productos familia 1, 14 minutos.
+  \item \simio{Node\_Horno\_F2}: productos familia 2, 18 minutos.
+  \item \simio{Node\_Horno\_F3}: productos familia 3, 21 minutos.
   \item En M3 base crear solo \simio{Server\_Horno1}. En escenarios con dos hornos, crear \simio{Server\_Horno2} y duplicar los states de horno con sufijo \state{\_2}.
 \end{itemize}
 
-Si Simio no permite facilmente colas custom con seleccion avanzada en el nivel del usuario, usar un \simio{Storage} previo por familia y activar \proc{P\_EvaluarColaHorno} cada vez que llega un lote o se libera un horno.
+No usar \simio{Storage}, \simio{Tank}, \simio{FlowNode}, \simio{Combiner} ni \simio{Separator} para simular esos puntos en la ruta base. Los \simio{BasicNode} sirven como puntos de ruteo; la regla de espera, seleccion de familia y capacidad por carros vive en \proc{P\_EvaluarHorno} y \proc{P\_FormarCargaHorno}.
 
 \subsection{Reglas obligatorias}
 
@@ -2477,7 +3372,7 @@ La restriccion primaria del horno debe ser fisica: carros, racks o bandejas. Los
   \item Al crear cada lote, calcular \state{ModelEntity.BandejasReq = Ceiling(ModelEntity.KgLote / KgPorBandejaRef)}.
   \item Calcular \state{ModelEntity.CarrosReq = Ceiling(ModelEntity.KgLote / CapacidadKgPorCarroRef)}.
   \item Leer \state{MaxCarros} desde \tabla{Tbl\_HornoFamilia}; valor base: 6 carros por corrida.
-  \item En \proc{P\_FormarCargaHorno}, aceptar un lote solo si \(\sum ModelEntity.CarrosReq \leq MaxCarros\).
+  \item En la version base, aceptar la hornada solo si \state{CarrosCargaHorno\_1 <= MaxCarros}. En una version avanzada con listas, aceptar varios lotes solo si \(\sum ModelEntity.CarrosReq \leq MaxCarros\).
   \item Registrar \state{KgTotal} del batch solo despues de confirmar que la carga es fisicamente factible.
   \item Evaluar \state{Prop\_CargaMinKg} despues de la factibilidad por carros. Cuando la carga minima no cabe fisicamente, registrar la inconsistencia en \tabla{Tbl\_Supuestos} y activar corrida por espera maxima o por carga maxima de carros.
 \end{enumerate}
@@ -2495,6 +3390,7 @@ No codificar 600 kg como constante dentro de un proceso. Debe venir de \tabla{Tb
 
 \uifigure{figures_ai/ai_06_oven_batch_process.jpg}{Estado visual esperado de la logica de horno.}{Referencia IA para revisar cola, setup, carga, horneado y descarga en la interfaz de Simio.}
 
+El siguiente pseudocodigo describe la \textbf{version avanzada} con listas/colas consultables. No es el camino base de 3.7.2 para Simio Student. En la ruta base, una entidad ya representa una hornada y \proc{P\_FormarCargaHorno} solo valida \state{FamiliaHorno} y \state{CarrosReq}.
 
 \begin{lstlisting}[caption={P EvaluarColaHorno}]
 P_EvaluarColaHorno(horno)
@@ -2619,12 +3515,12 @@ Sin ese trigger, el lote termina enfriado pero nunca aumenta inventario de sala.
 
 \begin{enumerate}
   \item El pan no esta disponible al salir del horno; primero debe pasar por \simio{Server\_Enfriado}.
-  \item Al finalizar enfriado, el lote entra a \simio{Buffer\_TerminadoNoVendido}.
+  \item Al finalizar enfriado, el lote entra a \simio{Node\_TerminadoNoVendido} si decides separar visualmente la espera antes de reposicion. Si no lo creas, \proc{P\_ReponerSala} puede ejecutarse directamente desde \simio{Server\_Enfriado > Exited}.
   \item \proc{P\_ReponerSala} toma manipulador/reponedor y carro si corresponde.
   \item Aplicar traslado por \simio{TimePath} o delay segun \tabla{Tbl\_RutasMovimiento}.
   \item Al llegar a sala, sumar \state{ModelEntity.KgLote} a la fila del vector del producto. La asignacion exacta es: \state{StockSala[ModelEntity.ProductoIdx] = StockSala[ModelEntity.ProductoIdx] + ModelEntity.KgLote}. Ejemplo: \state{ProductoIdx=5} suma a \state{StockSala[5]}.
   \item Registrar \resp{TiempoFinHornoADisponible} desde descarga hasta reposicion.
-  \item Si se decide capacidad limitada, crear \simio{Storage\_Terminado} con capacidad en kg o lotes.
+  \item Si se decide capacidad limitada, documentarla como supuesto y controlarla con states/procesos. No crear \simio{Storage\_Terminado} en la ruta base si tu libreria no muestra un objeto \simio{Storage}.
 \end{enumerate}
 
 Supuesto si no hay datos: enfriado segun \dato{Min7} del Excel, traslado base 3 minutos a sala, sensibilidad 1, 3 y 5 minutos.
@@ -2995,7 +3891,7 @@ Stock inicial & Debe salir de cobertura temporal explicita, no de juicio informa
 Politica de liberacion & Parametrizada por tabla/property; no embebida en procesos. & \state{Prop\_PoliticaProduccion} y \tabla{Tbl\_PoliticasProduccion}. \\
 \rowcolor{tabrow}
 Distancias y traslados & Base declarada y multiplicador de sensibilidad. & \state{Prop\_TransferTimeMult}; \tabla{Tbl\_Supuestos}. \\
-Capacidad de buffers & Declarar infinito, finito o fuera de alcance. & Pruebas de bloqueo si se usa capacidad finita. \\
+Capacidad de colas/nodos de espera & Declarar infinito, finito o fuera de alcance. & Pruebas de bloqueo si se usa capacidad finita. \\
 \rowcolor{tabrow}
 Horizonte & Modelo terminante diario para baseline; multidia solo como extension. & Sin warm-up en terminante diario; documentar si se conserva inventario. \\
 \bottomrule
@@ -3357,9 +4253,9 @@ Resume la secuencia operacional de construccion del modelo, desde datos hasta re
 \node[diagbox] (m2) [right=of m1] {M2\\Produccion\\base};
 \node[diagboxred] (m3) [right=of m2] {M3\\Horno\\batch};
 \node[diagboxred] (m4) [below=of m3] {M4\\Recursos\\y turnos};
-\node[diagboxgreen] (m5) [left=of m4] {M5\\KPIs\\y V\&V};
-\node[diagboxgreen] (m6) [left=of m5] {M6\\Experimentos};
-\node[diagboxgreen] (m7) [left=of m6] {M7\\Documentacion\\LaTeX};
+\node[diagboxgreen] (m5) [left=of m4] {M5\\Layout\\funcional 2D};
+\node[diagboxgreen] (m6) [left=of m5] {M6--M11\\Logica\\operativa};
+\node[diagboxgreen] (m7) [left=of m6] {M12--M14\\KPIs, exp.\\y doc.};
 \foreach \x/\y in {m0/m1,m1/m2,m2/m3,m3/m4,m4/m5,m5/m6,m6/m7}
   \draw[diagarrow] (\x)--(\y);
 \end{tikzpicture}}
@@ -3399,7 +4295,7 @@ Resume la secuencia operacional de construccion del modelo, desde datos hasta re
 \makecell[l]{\proc{P\_Aplicar}\\\proc{SetupHorno}} & Aplicar setup y actualizar familia actual. \\
 \proc{P\_ReponerSala} & Llevar producto enfriado a inventario vendible. \\
 \rowcolor{tabrow}
-\proc{P\_ActualizarWIP} & Sumar/restar WIP por etapa en \simio{Entered} y \simio{Exited}. \\
+\makecell[l]{\proc{P\_WIP\_*}\\\proc{\_Entrar/Salir}} & Sumar/restar WIP por etapa en \simio{Entered} y \simio{Exited}, usando procesos explicitos por server. \\
 \proc{P\_MuestrearInventario} & Acumular inventario promedio o alimentar state statistics. \\
 \rowcolor{tabrow}
 \proc{P\_RegistrarCycleTime} & Registrar tallies de ciclo, espera a horno y tiempo a sala. \\
