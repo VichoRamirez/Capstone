@@ -1,71 +1,71 @@
-﻿ProductoIdx,ProductoID,Secuencia,EtapaCod,EtapaNombre,TiempoMin,UsaPanadero,UsaManipulador,UsaMaquina,RecursoPreferente
-1,Marraqueta,1,PESADO_Y_DOSIFICACION,Pesado y dosificación,5,True,False,False,Panadero
-1,Marraqueta,2,AMASADO,Amasado,12,True,False,True,Panadero
-1,Marraqueta,3,REPOSO_EN_MASA,Reposo en masa,15,False,False,False,Ninguno
-1,Marraqueta,4,DIVIDIDO_Y_FORMADO,Dividido y formado,10,True,False,False,Panadero
-1,Marraqueta,5,FERMENTACION_FINAL,Fermentación final,35,False,False,False,Ninguno
-1,Marraqueta,6,HORNEADO,Horneado,18,False,True,True,Manipulador
-1,Marraqueta,7,ENFRIADO_Y_TRASLADO,Enfriado y traslado,12,False,True,False,Manipulador
-2,Hallulla,1,PESADO_Y_DOSIFICACION,Pesado y dosificación,5,True,False,False,Panadero
-2,Hallulla,2,AMASADO,Amasado,14,True,False,True,Panadero
-2,Hallulla,3,REPOSO_EN_MASA,Reposo en masa,20,False,False,False,Ninguno
-2,Hallulla,4,LAMINADO_PICADO_Y_FORMADO,"Laminado, picado y formado",12,True,False,False,Panadero
-2,Hallulla,5,FERMENTACION_FINAL,Fermentación final,30,False,False,False,Ninguno
-2,Hallulla,6,HORNEADO,Horneado,18,False,True,True,Manipulador
-2,Hallulla,7,ENFRIADO_Y_TRASLADO,Enfriado y traslado,12,False,True,False,Manipulador
-3,Marraqueta_Integral,1,PESADO_Y_DOSIFICACION,Pesado y dosificación,5,True,False,False,Panadero
-3,Marraqueta_Integral,2,AMASADO,Amasado,13,True,False,True,Panadero
-3,Marraqueta_Integral,3,REPOSO_EN_MASA,Reposo en masa,18,False,False,False,Ninguno
-3,Marraqueta_Integral,4,DIVIDIDO_Y_FORMADO,Dividido y formado,10,True,False,False,Panadero
-3,Marraqueta_Integral,5,FERMENTACION_FINAL,Fermentación final,40,False,False,False,Ninguno
-3,Marraqueta_Integral,6,HORNEADO,Horneado,21,False,True,True,Manipulador
-3,Marraqueta_Integral,7,ENFRIADO_Y_TRASLADO,Enfriado y traslado,12,False,True,False,Manipulador
-4,Hallulla_Integral,1,PESADO_Y_DOSIFICACION,Pesado y dosificación,5,True,False,False,Panadero
-4,Hallulla_Integral,2,AMASADO,Amasado,15,True,False,True,Panadero
-4,Hallulla_Integral,3,REPOSO_EN_MASA,Reposo en masa,20,False,False,False,Ninguno
-4,Hallulla_Integral,4,LAMINADO_PICADO_Y_FORMADO,"Laminado, picado y formado",12,True,False,False,Panadero
-4,Hallulla_Integral,5,FERMENTACION_FINAL,Fermentación final,35,False,False,False,Ninguno
-4,Hallulla_Integral,6,HORNEADO,Horneado,18,False,True,True,Manipulador
-4,Hallulla_Integral,7,ENFRIADO_Y_TRASLADO,Enfriado y traslado,12,False,True,False,Manipulador
-5,Pan_Hot_Dog,1,PESADO_Y_DOSIFICACION,Pesado y dosificación,5,True,False,False,Panadero
-5,Pan_Hot_Dog,2,AMASADO,Amasado,12,True,False,True,Panadero
-5,Pan_Hot_Dog,3,REPOSO_EN_MASA,Reposo en masa,15,False,False,False,Ninguno
-5,Pan_Hot_Dog,4,DIVIDIDO_BOLEADO_Y_MOLDEADO,"Dividido, boleado y moldeado",12,True,False,False,Panadero
-5,Pan_Hot_Dog,5,FERMENTACION_FINAL,Fermentación final,40,False,False,False,Ninguno
-5,Pan_Hot_Dog,6,HORNEADO,Horneado,14,False,True,True,Manipulador
-5,Pan_Hot_Dog,7,ENFRIADO_Y_TRASLADO,Enfriado y traslado,12,False,True,False,Manipulador
-6,Ciabatta,1,PESADO_Y_DOSIFICACION,Pesado y dosificación,5,True,False,False,Panadero
-6,Ciabatta,2,AMASADO,Amasado,10,True,False,True,Panadero
-6,Ciabatta,3,REPOSO_EN_MASA,Reposo en masa,30,False,False,False,Ninguno
-6,Ciabatta,4,DIVIDIDO_Y_FORMADO_SUAVE,Dividido y formado suave,8,True,False,False,Panadero
-6,Ciabatta,5,FERMENTACION_FINAL,Fermentación final,45,False,False,False,Ninguno
-6,Ciabatta,6,HORNEADO,Horneado,21,False,True,True,Manipulador
-6,Ciabatta,7,ENFRIADO_Y_TRASLADO,Enfriado y traslado,15,False,True,False,Manipulador
-7,Baguette,1,PESADO_Y_DOSIFICACION,Pesado y dosificación,5,True,False,False,Panadero
-7,Baguette,2,AMASADO,Amasado,10,True,False,True,Panadero
-7,Baguette,3,REPOSO_EN_MASA,Reposo en masa,25,False,False,False,Ninguno
-7,Baguette,4,DIVIDIDO_PREFORMADO_Y_FORMADO,"Dividido, preformado y formado",12,True,False,False,Panadero
-7,Baguette,5,FERMENTACION_FINAL,Fermentación final,45,False,False,False,Ninguno
-7,Baguette,6,HORNEADO,Horneado,21,False,True,True,Manipulador
-7,Baguette,7,ENFRIADO_Y_TRASLADO,Enfriado y traslado,15,False,True,False,Manipulador
-8,Dobladita,1,PESADO_Y_DOSIFICACION,Pesado y dosificación,5,True,False,False,Panadero
-8,Dobladita,2,AMASADO,Amasado,13,True,False,True,Panadero
-8,Dobladita,3,REPOSO_EN_MASA,Reposo en masa,15,False,False,False,Ninguno
-8,Dobladita,4,LAMINADO_CORTE_Y_DOBLADO,"Laminado, corte y doblado",10,False,False,False,Ninguno
-8,Dobladita,5,FERMENTACION_FINAL,Fermentación final,20,False,False,False,Ninguno
-8,Dobladita,6,HORNEADO,Horneado,14,False,True,True,Manipulador
-8,Dobladita,7,ENFRIADO_Y_TRASLADO,Enfriado y traslado,10,False,True,False,Manipulador
-9,Bocado_de_Dama,1,PESADO_Y_DOSIFICACION,Pesado y dosificación,5,True,False,False,Panadero
-9,Bocado_de_Dama,2,AMASADO,Amasado,12,True,False,True,Panadero
-9,Bocado_de_Dama,3,REPOSO_EN_MASA,Reposo en masa,15,False,False,False,Ninguno
-9,Bocado_de_Dama,4,DIVIDIDO_Y_BOLEADO,Dividido y boleado,10,False,False,False,Ninguno
-9,Bocado_de_Dama,5,FERMENTACION_FINAL,Fermentación final,30,False,False,False,Ninguno
-9,Bocado_de_Dama,6,HORNEADO,Horneado,14,False,True,True,Manipulador
-9,Bocado_de_Dama,7,ENFRIADO_Y_TRASLADO,Enfriado y traslado,10,False,True,False,Manipulador
-10,Amasado,1,PESADO_Y_DOSIFICACION,Pesado y dosificación,5,True,False,False,Panadero
-10,Amasado,2,AMASADO,Amasado,15,True,False,True,Panadero
-10,Amasado,3,REPOSO_EN_MASA,Reposo en masa,20,False,False,False,Ninguno
-10,Amasado,4,DIVIDIDO_Y_FORMADO,Dividido y formado,10,True,False,False,Panadero
-10,Amasado,5,FERMENTACION_FINAL,Fermentación final,35,False,False,False,Ninguno
-10,Amasado,6,HORNEADO,Horneado,18,False,True,True,Manipulador
-10,Amasado,7,ENFRIADO_Y_TRASLADO,Enfriado y traslado,12,False,True,False,Manipulador
+﻿ProductoIdx,ProductoID,Secuencia,ProductoEtapaKey,EtapaCod,EtapaNombre,TiempoMin,UsaPanadero,UsaManipulador,UsaMaquina,RecursoPreferente
+1,Marraqueta,1,101,PESADO_Y_DOSIFICACION,Pesado y dosificación,5,True,False,False,Panadero
+1,Marraqueta,2,102,AMASADO,Amasado,12,True,False,True,Panadero
+1,Marraqueta,3,103,REPOSO_EN_MASA,Reposo en masa,15,False,False,False,Ninguno
+1,Marraqueta,4,104,DIVIDIDO_Y_FORMADO,Dividido y formado,10,True,False,False,Panadero
+1,Marraqueta,5,105,FERMENTACION_FINAL,Fermentación final,35,False,False,False,Ninguno
+1,Marraqueta,6,106,HORNEADO,Horneado,18,False,True,True,Manipulador
+1,Marraqueta,7,107,ENFRIADO_Y_TRASLADO,Enfriado y traslado,12,False,True,False,Manipulador
+2,Hallulla,1,201,PESADO_Y_DOSIFICACION,Pesado y dosificación,5,True,False,False,Panadero
+2,Hallulla,2,202,AMASADO,Amasado,14,True,False,True,Panadero
+2,Hallulla,3,203,REPOSO_EN_MASA,Reposo en masa,20,False,False,False,Ninguno
+2,Hallulla,4,204,LAMINADO_PICADO_Y_FORMADO,"Laminado, picado y formado",12,True,False,False,Panadero
+2,Hallulla,5,205,FERMENTACION_FINAL,Fermentación final,30,False,False,False,Ninguno
+2,Hallulla,6,206,HORNEADO,Horneado,18,False,True,True,Manipulador
+2,Hallulla,7,207,ENFRIADO_Y_TRASLADO,Enfriado y traslado,12,False,True,False,Manipulador
+3,Marraqueta_Integral,1,301,PESADO_Y_DOSIFICACION,Pesado y dosificación,5,True,False,False,Panadero
+3,Marraqueta_Integral,2,302,AMASADO,Amasado,13,True,False,True,Panadero
+3,Marraqueta_Integral,3,303,REPOSO_EN_MASA,Reposo en masa,18,False,False,False,Ninguno
+3,Marraqueta_Integral,4,304,DIVIDIDO_Y_FORMADO,Dividido y formado,10,True,False,False,Panadero
+3,Marraqueta_Integral,5,305,FERMENTACION_FINAL,Fermentación final,40,False,False,False,Ninguno
+3,Marraqueta_Integral,6,306,HORNEADO,Horneado,21,False,True,True,Manipulador
+3,Marraqueta_Integral,7,307,ENFRIADO_Y_TRASLADO,Enfriado y traslado,12,False,True,False,Manipulador
+4,Hallulla_Integral,1,401,PESADO_Y_DOSIFICACION,Pesado y dosificación,5,True,False,False,Panadero
+4,Hallulla_Integral,2,402,AMASADO,Amasado,15,True,False,True,Panadero
+4,Hallulla_Integral,3,403,REPOSO_EN_MASA,Reposo en masa,20,False,False,False,Ninguno
+4,Hallulla_Integral,4,404,LAMINADO_PICADO_Y_FORMADO,"Laminado, picado y formado",12,True,False,False,Panadero
+4,Hallulla_Integral,5,405,FERMENTACION_FINAL,Fermentación final,35,False,False,False,Ninguno
+4,Hallulla_Integral,6,406,HORNEADO,Horneado,18,False,True,True,Manipulador
+4,Hallulla_Integral,7,407,ENFRIADO_Y_TRASLADO,Enfriado y traslado,12,False,True,False,Manipulador
+5,Pan_Hot_Dog,1,501,PESADO_Y_DOSIFICACION,Pesado y dosificación,5,True,False,False,Panadero
+5,Pan_Hot_Dog,2,502,AMASADO,Amasado,12,True,False,True,Panadero
+5,Pan_Hot_Dog,3,503,REPOSO_EN_MASA,Reposo en masa,15,False,False,False,Ninguno
+5,Pan_Hot_Dog,4,504,DIVIDIDO_BOLEADO_Y_MOLDEADO,"Dividido, boleado y moldeado",12,True,False,False,Panadero
+5,Pan_Hot_Dog,5,505,FERMENTACION_FINAL,Fermentación final,40,False,False,False,Ninguno
+5,Pan_Hot_Dog,6,506,HORNEADO,Horneado,14,False,True,True,Manipulador
+5,Pan_Hot_Dog,7,507,ENFRIADO_Y_TRASLADO,Enfriado y traslado,12,False,True,False,Manipulador
+6,Ciabatta,1,601,PESADO_Y_DOSIFICACION,Pesado y dosificación,5,True,False,False,Panadero
+6,Ciabatta,2,602,AMASADO,Amasado,10,True,False,True,Panadero
+6,Ciabatta,3,603,REPOSO_EN_MASA,Reposo en masa,30,False,False,False,Ninguno
+6,Ciabatta,4,604,DIVIDIDO_Y_FORMADO_SUAVE,Dividido y formado suave,8,True,False,False,Panadero
+6,Ciabatta,5,605,FERMENTACION_FINAL,Fermentación final,45,False,False,False,Ninguno
+6,Ciabatta,6,606,HORNEADO,Horneado,21,False,True,True,Manipulador
+6,Ciabatta,7,607,ENFRIADO_Y_TRASLADO,Enfriado y traslado,15,False,True,False,Manipulador
+7,Baguette,1,701,PESADO_Y_DOSIFICACION,Pesado y dosificación,5,True,False,False,Panadero
+7,Baguette,2,702,AMASADO,Amasado,10,True,False,True,Panadero
+7,Baguette,3,703,REPOSO_EN_MASA,Reposo en masa,25,False,False,False,Ninguno
+7,Baguette,4,704,DIVIDIDO_PREFORMADO_Y_FORMADO,"Dividido, preformado y formado",12,True,False,False,Panadero
+7,Baguette,5,705,FERMENTACION_FINAL,Fermentación final,45,False,False,False,Ninguno
+7,Baguette,6,706,HORNEADO,Horneado,21,False,True,True,Manipulador
+7,Baguette,7,707,ENFRIADO_Y_TRASLADO,Enfriado y traslado,15,False,True,False,Manipulador
+8,Dobladita,1,801,PESADO_Y_DOSIFICACION,Pesado y dosificación,5,True,False,False,Panadero
+8,Dobladita,2,802,AMASADO,Amasado,13,True,False,True,Panadero
+8,Dobladita,3,803,REPOSO_EN_MASA,Reposo en masa,15,False,False,False,Ninguno
+8,Dobladita,4,804,LAMINADO_CORTE_Y_DOBLADO,"Laminado, corte y doblado",10,False,False,False,Ninguno
+8,Dobladita,5,805,FERMENTACION_FINAL,Fermentación final,20,False,False,False,Ninguno
+8,Dobladita,6,806,HORNEADO,Horneado,14,False,True,True,Manipulador
+8,Dobladita,7,807,ENFRIADO_Y_TRASLADO,Enfriado y traslado,10,False,True,False,Manipulador
+9,Bocado_de_Dama,1,901,PESADO_Y_DOSIFICACION,Pesado y dosificación,5,True,False,False,Panadero
+9,Bocado_de_Dama,2,902,AMASADO,Amasado,12,True,False,True,Panadero
+9,Bocado_de_Dama,3,903,REPOSO_EN_MASA,Reposo en masa,15,False,False,False,Ninguno
+9,Bocado_de_Dama,4,904,DIVIDIDO_Y_BOLEADO,Dividido y boleado,10,False,False,False,Ninguno
+9,Bocado_de_Dama,5,905,FERMENTACION_FINAL,Fermentación final,30,False,False,False,Ninguno
+9,Bocado_de_Dama,6,906,HORNEADO,Horneado,14,False,True,True,Manipulador
+9,Bocado_de_Dama,7,907,ENFRIADO_Y_TRASLADO,Enfriado y traslado,10,False,True,False,Manipulador
+10,Amasado,1,1001,PESADO_Y_DOSIFICACION,Pesado y dosificación,5,True,False,False,Panadero
+10,Amasado,2,1002,AMASADO,Amasado,15,True,False,True,Panadero
+10,Amasado,3,1003,REPOSO_EN_MASA,Reposo en masa,20,False,False,False,Ninguno
+10,Amasado,4,1004,DIVIDIDO_Y_FORMADO,Dividido y formado,10,True,False,False,Panadero
+10,Amasado,5,1005,FERMENTACION_FINAL,Fermentación final,35,False,False,False,Ninguno
+10,Amasado,6,1006,HORNEADO,Horneado,18,False,True,True,Manipulador
+10,Amasado,7,1007,ENFRIADO_Y_TRASLADO,Enfriado y traslado,12,False,True,False,Manipulador

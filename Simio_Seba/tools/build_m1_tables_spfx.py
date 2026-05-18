@@ -69,6 +69,7 @@ TABLES: tuple[TableSpec, ...] = (
             Column("ProductoIdx", "Integer", "0"),
             Column("ProductoID", "String"),
             Column("Secuencia", "Integer", "0"),
+            Column("ProductoEtapaKey", "Integer", "0"),
             Column("EtapaCod", "String"),
             Column("EtapaNombre", "String"),
             Column("TiempoMin", "Real", "0.0"),
@@ -77,6 +78,7 @@ TABLES: tuple[TableSpec, ...] = (
             Column("UsaMaquina", "Boolean", "False"),
             Column("RecursoPreferente", "String"),
         ),
+        "ProductoEtapaKey",
     ),
     TableSpec(
         "Tbl_DemandaHoraLong",

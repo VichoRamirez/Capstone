@@ -1,0 +1,804 @@
+Time(Minutes);EntityID;ObjectName;ProcessID;StepName;Action
+0;--;--;--;--;System initialization completed.
+0;--;--;--;--;Time until next event of timer 'Source_InitModel.EntityArrivals' is '0' Minutes.
+0;--;--;--;--;Time until next event of timer 'Source_LotesProduccion.EntityArrivals' is '0' Minutes.
+0;--;--;--;--;Created object 'Worker_Manipulador_1[1]'.
+0;Worker_Manipulador_1[1];Worker_Manipulador_1[1];0.OnCreated;[Begin];Process 'Worker_Manipulador_1[1].OnCreated' execution started.
+0;Worker_Manipulador_1[1];Worker_Manipulador_1[1];0.OnCreated;[Assign] OnCreatedAssignments;Assigning state variable 'Worker_Manipulador_1[1].OnEvaluatingRiderReservation.Enabled' the value '1'. Previous value was '1'.
+0;Worker_Manipulador_1[1];Worker_Manipulador_1[1];0.OnCreated;[Assign] OnCreatedAssignments;Assigning state variable 'Worker_Manipulador_1[1].OnEvaluatingRiderReservation.ReturnValue' the value '1'. Previous value was '1'.
+0;Worker_Manipulador_1[1];Worker_Manipulador_1[1];0.OnCreated;[Assign] OnCreatedAssignments;Assigning state variable 'Worker_Manipulador_1[1].OnEvaluatingSeizeRequest.Enabled' the value '1'. Previous value was '1'.
+0;Worker_Manipulador_1[1];Worker_Manipulador_1[1];0.OnCreated;[Assign] OnCreatedAssignments;Assigning state variable 'Worker_Manipulador_1[1].OnEvaluatingSeizeRequest.ReturnValue' the value '1'. Previous value was '1'.
+0;Worker_Manipulador_1[1];Worker_Manipulador_1[1];0.OnCreated;[Assign] OnCreatedAssignments;Assigning state variable 'Worker_Manipulador_1[1].OnEvaluatingRiderAtPickup.Enabled' the value '1'. Previous value was '1'.
+0;Worker_Manipulador_1[1];Worker_Manipulador_1[1];0.OnCreated;[Assign] OnCreatedAssignments;Assigning state variable 'Worker_Manipulador_1[1].OnEvaluatingRiderAtPickup.ReturnValue' the value '1'. Previous value was '1'.
+0;Worker_Manipulador_1[1];Worker_Manipulador_1[1];0.OnCreated;[Assign] OnCreatedAssignments;Assigning state variable 'Worker_Manipulador_1[1].HomeNode' the value 'Node_BaseManipulador'. Previous value was 'Nothing'.
+0;Worker_Manipulador_1[1];Worker_Manipulador_1[1];0.OnCreated;[End];Process 'Worker_Manipulador_1[1].OnCreated' execution ended.
+0;Worker_Manipulador_1[1];Worker_Manipulador_1[1];0.OnRunInitialized;[Begin];Process 'Worker_Manipulador_1[1].OnRunInitialized' execution started.
+0;Worker_Manipulador_1[1];Worker_Manipulador_1[1];0.OnRunInitialized;[Park] AtInitialNode;Entity 'Worker_Manipulador_1[1]' transferring from '[FreeSpace] Model_Panaderia' into station 'Node_BaseManipulador.ParkingStation'.
+0;Worker_Manipulador_1[1];Node_BaseManipulador;1.OnEnteredParking;[Begin];Process 'Node_BaseManipulador.OnEnteredParking' execution started.
+0;Worker_Manipulador_1[1];Node_BaseManipulador;1.OnEnteredParking;[EndTransfer] EndTransfer;Entity 'Worker_Manipulador_1[1]' ending transfer into station 'Node_BaseManipulador.ParkingStation'.
+0;Worker_Manipulador_1[1];Node_BaseManipulador;1.OnEnteredParking;[End];Process 'Node_BaseManipulador.OnEnteredParking' execution ended.
+0;Worker_Manipulador_1[1];Worker_Manipulador_1[1];0.OnRunInitialized;[Decide] IfOnShift;Token branching on condition 'ResourceState!=List.ResourceStateName.OffShift'.
+0;Worker_Manipulador_1[1];Worker_Manipulador_1[1];0.OnRunInitialized;[Decide] IfOnShift;Token sent to 'True' exit.
+0;Worker_Manipulador_1[1];Worker_Manipulador_1[1];0.OnRunInitialized;[PlanVisit] InitialMoveOrTransportRequests;Entity 'Worker_Manipulador_1[1]' searching 'Model_Panaderia.Global.VisitRequestQueue' which contains '0' request(s).
+0;Worker_Manipulador_1[1];Worker_Manipulador_1[1];0.OnRunInitialized;[PlanVisit] InitialMoveOrTransportRequests;Entity 'Worker_Manipulador_1[1]' failed to find and plan an eligible visit request.
+0;Worker_Manipulador_1[1];Worker_Manipulador_1[1];0.OnRunInitialized;[End];Process 'Worker_Manipulador_1[1].OnRunInitialized' execution ended.
+0;--;--;--;--;Firing event 'Source_InitModel.EntityArrivals.Event'.
+0;--;--;--;--;Timer ‘Source_InitModel.EntityArrivals’ stopping condition detected.
+0;Source_InitModel;Source_InitModel;0.OnEntityArrival;[Begin];Process 'Source_InitModel.OnEntityArrival' execution started.
+0;Source_InitModel;Source_InitModel;0.OnEntityArrival;[Create] Entities;Creating '1' new object(s) of entity type 'ModelEntity1'.
+0;Source_InitModel;Source_InitModel;0.OnEntityArrival;[Create] Entities;Created object 'ModelEntity1.56'.
+0;ModelEntity1.56;Source_InitModel;1.OnEntityArrival;[Transfer] ToProcessing;Entity 'ModelEntity1.56' transferring from '[FreeSpace] Source_InitModel' into station 'Source_InitModel.Processing'.
+0;Source_InitModel;Source_InitModel;0.OnEntityArrival;[End];Process 'Source_InitModel.OnEntityArrival' execution ended.
+0;ModelEntity1.56;Source_InitModel;2.OnEnteredProcessing;[Begin];Process 'Source_InitModel.OnEnteredProcessing' execution started.
+0;ModelEntity1.56;Source_InitModel;2.OnEnteredProcessing;[EndTransfer] IntoProcessing;Entity 'ModelEntity1.56' ending transfer into station 'Source_InitModel.Processing'.
+0;ModelEntity1.56;Source_InitModel;2.OnEnteredProcessing;[Execute] CreatedEntityAddOnProcess;Executing process 'P_InitModel'.
+0;ModelEntity1.56;Model_Panaderia;0.P_InitModel;[Begin];Process 'P_InitModel' execution started.
+0;ModelEntity1.56;Model_Panaderia;0.P_InitModel;[Assign] Assign_InitVectors;Assigning state variable 'Model_Panaderia.StockSala[1]' the value '126,19'. Previous value was '0'.
+0;ModelEntity1.56;Model_Panaderia;0.P_InitModel;[Assign] Assign_InitVectors;Assigning state variable 'Model_Panaderia.DemandaTotal[1]' the value '0'. Previous value was '0'.
+0;ModelEntity1.56;Model_Panaderia;0.P_InitModel;[Assign] Assign_InitVectors;Assigning state variable 'Model_Panaderia.DemandaSatisfecha[1]' the value '0'. Previous value was '0'.
+0;ModelEntity1.56;Model_Panaderia;0.P_InitModel;[Assign] Assign_InitVectors;Assigning state variable 'Model_Panaderia.DemandaPerdida[1]' the value '0'. Previous value was '0'.
+0;ModelEntity1.56;Model_Panaderia;0.P_InitModel;[Assign] Assign_InitVectors;Assigning state variable 'Model_Panaderia.StockoutCount[1]' the value '0'. Previous value was '0'.
+0;ModelEntity1.56;Model_Panaderia;0.P_InitModel;[Assign] Assign_InitVectors;Assigning state variable 'Model_Panaderia.StockSala[2]' the value '107,26'. Previous value was '0'.
+0;ModelEntity1.56;Model_Panaderia;0.P_InitModel;[Assign] Assign_InitVectors;Assigning state variable 'Model_Panaderia.StockSala[3]' the value '50,48'. Previous value was '0'.
+0;ModelEntity1.56;Model_Panaderia;0.P_InitModel;[Assign] Assign_InitVectors;Assigning state variable 'Model_Panaderia.StockSala[4]' the value '50,48'. Previous value was '0'.
+0;ModelEntity1.56;Model_Panaderia;0.P_InitModel;[Assign] Assign_InitVectors;Assigning state variable 'Model_Panaderia.StockSala[5]' the value '26,06'. Previous value was '0'.
+0;ModelEntity1.56;Model_Panaderia;0.P_InitModel;[Assign] Assign_InitVectors;Assigning state variable 'Model_Panaderia.StockSala[6]' the value '15,13'. Previous value was '0'.
+0;ModelEntity1.56;Model_Panaderia;0.P_InitModel;[Assign] Assign_InitVectors;Assigning state variable 'Model_Panaderia.StockSala[7]' the value '13,24'. Previous value was '0'.
+0;ModelEntity1.56;Model_Panaderia;0.P_InitModel;[Assign] Assign_InitVectors;Assigning state variable 'Model_Panaderia.StockSala[8]' the value '29,17'. Previous value was '0'.
+0;ModelEntity1.56;Model_Panaderia;0.P_InitModel;[Assign] Assign_InitVectors;Assigning state variable 'Model_Panaderia.StockSala[9]' the value '18,33'. Previous value was '0'.
+0;ModelEntity1.56;Model_Panaderia;0.P_InitModel;[Assign] Assign_InitVectors;Assigning state variable 'Model_Panaderia.StockSala[10]' the value '12,43'. Previous value was '0'.
+0;ModelEntity1.56;Model_Panaderia;0.P_InitModel;[Assign] Assign_InitVectors;Assigning state variable 'Model_Panaderia.DemandaTotal[2]' the value '0'. Previous value was '0'.
+0;ModelEntity1.56;Model_Panaderia;0.P_InitModel;[Assign] Assign_InitVectors;Assigning state variable 'Model_Panaderia.DemandaTotal[3]' the value '0'. Previous value was '0'.
+0;ModelEntity1.56;Model_Panaderia;0.P_InitModel;[Assign] Assign_InitVectors;Assigning state variable 'Model_Panaderia.DemandaTotal[4]' the value '0'. Previous value was '0'.
+0;ModelEntity1.56;Model_Panaderia;0.P_InitModel;[Assign] Assign_InitVectors;Assigning state variable 'Model_Panaderia.DemandaTotal[5]' the value '0'. Previous value was '0'.
+0;ModelEntity1.56;Model_Panaderia;0.P_InitModel;[Assign] Assign_InitVectors;Assigning state variable 'Model_Panaderia.DemandaTotal[6]' the value '0'. Previous value was '0'.
+0;ModelEntity1.56;Model_Panaderia;0.P_InitModel;[Assign] Assign_InitVectors;Assigning state variable 'Model_Panaderia.DemandaTotal[7]' the value '0'. Previous value was '0'.
+0;ModelEntity1.56;Model_Panaderia;0.P_InitModel;[Assign] Assign_InitVectors;Assigning state variable 'Model_Panaderia.DemandaTotal[8]' the value '0'. Previous value was '0'.
+0;ModelEntity1.56;Model_Panaderia;0.P_InitModel;[Assign] Assign_InitVectors;Assigning state variable 'Model_Panaderia.DemandaTotal[9]' the value '0'. Previous value was '0'.
+0;ModelEntity1.56;Model_Panaderia;0.P_InitModel;[Assign] Assign_InitVectors;Assigning state variable 'Model_Panaderia.DemandaTotal[10]' the value '0'. Previous value was '0'.
+0;ModelEntity1.56;Model_Panaderia;0.P_InitModel;[Assign] Assign_InitVectors;Assigning state variable 'Model_Panaderia.DemandaSatisfecha[2]' the value '0'. Previous value was '0'.
+0;ModelEntity1.56;Model_Panaderia;0.P_InitModel;[Assign] Assign_InitVectors;Assigning state variable 'Model_Panaderia.DemandaSatisfecha[3]' the value '0'. Previous value was '0'.
+0;ModelEntity1.56;Model_Panaderia;0.P_InitModel;[Assign] Assign_InitVectors;Assigning state variable 'Model_Panaderia.DemandaSatisfecha[4]' the value '0'. Previous value was '0'.
+0;ModelEntity1.56;Model_Panaderia;0.P_InitModel;[Assign] Assign_InitVectors;Assigning state variable 'Model_Panaderia.DemandaSatisfecha[5]' the value '0'. Previous value was '0'.
+0;ModelEntity1.56;Model_Panaderia;0.P_InitModel;[Assign] Assign_InitVectors;Assigning state variable 'Model_Panaderia.DemandaSatisfecha[6]' the value '0'. Previous value was '0'.
+0;ModelEntity1.56;Model_Panaderia;0.P_InitModel;[Assign] Assign_InitVectors;Assigning state variable 'Model_Panaderia.DemandaSatisfecha[7]' the value '0'. Previous value was '0'.
+0;ModelEntity1.56;Model_Panaderia;0.P_InitModel;[Assign] Assign_InitVectors;Assigning state variable 'Model_Panaderia.DemandaSatisfecha[8]' the value '0'. Previous value was '0'.
+0;ModelEntity1.56;Model_Panaderia;0.P_InitModel;[Assign] Assign_InitVectors;Assigning state variable 'Model_Panaderia.DemandaSatisfecha[9]' the value '0'. Previous value was '0'.
+0;ModelEntity1.56;Model_Panaderia;0.P_InitModel;[Assign] Assign_InitVectors;Assigning state variable 'Model_Panaderia.DemandaSatisfecha[10]' the value '0'. Previous value was '0'.
+0;ModelEntity1.56;Model_Panaderia;0.P_InitModel;[Assign] Assign_InitVectors;Assigning state variable 'Model_Panaderia.DemandaPerdida[2]' the value '0'. Previous value was '0'.
+0;ModelEntity1.56;Model_Panaderia;0.P_InitModel;[Assign] Assign_InitVectors;Assigning state variable 'Model_Panaderia.DemandaPerdida[3]' the value '0'. Previous value was '0'.
+0;ModelEntity1.56;Model_Panaderia;0.P_InitModel;[Assign] Assign_InitVectors;Assigning state variable 'Model_Panaderia.DemandaPerdida[4]' the value '0'. Previous value was '0'.
+0;ModelEntity1.56;Model_Panaderia;0.P_InitModel;[Assign] Assign_InitVectors;Assigning state variable 'Model_Panaderia.DemandaPerdida[5]' the value '0'. Previous value was '0'.
+0;ModelEntity1.56;Model_Panaderia;0.P_InitModel;[Assign] Assign_InitVectors;Assigning state variable 'Model_Panaderia.DemandaPerdida[6]' the value '0'. Previous value was '0'.
+0;ModelEntity1.56;Model_Panaderia;0.P_InitModel;[Assign] Assign_InitVectors;Assigning state variable 'Model_Panaderia.DemandaPerdida[7]' the value '0'. Previous value was '0'.
+0;ModelEntity1.56;Model_Panaderia;0.P_InitModel;[Assign] Assign_InitVectors;Assigning state variable 'Model_Panaderia.DemandaPerdida[8]' the value '0'. Previous value was '0'.
+0;ModelEntity1.56;Model_Panaderia;0.P_InitModel;[Assign] Assign_InitVectors;Assigning state variable 'Model_Panaderia.DemandaPerdida[9]' the value '0'. Previous value was '0'.
+0;ModelEntity1.56;Model_Panaderia;0.P_InitModel;[Assign] Assign_InitVectors;Assigning state variable 'Model_Panaderia.DemandaPerdida[10]' the value '0'. Previous value was '0'.
+0;ModelEntity1.56;Model_Panaderia;0.P_InitModel;[Assign] Assign_InitVectors;Assigning state variable 'Model_Panaderia.StockoutCount[2]' the value '0'. Previous value was '0'.
+0;ModelEntity1.56;Model_Panaderia;0.P_InitModel;[Assign] Assign_InitVectors;Assigning state variable 'Model_Panaderia.StockoutCount[3]' the value '0'. Previous value was '0'.
+0;ModelEntity1.56;Model_Panaderia;0.P_InitModel;[Assign] Assign_InitVectors;Assigning state variable 'Model_Panaderia.StockoutCount[4]' the value '0'. Previous value was '0'.
+0;ModelEntity1.56;Model_Panaderia;0.P_InitModel;[Assign] Assign_InitVectors;Assigning state variable 'Model_Panaderia.StockoutCount[5]' the value '0'. Previous value was '0'.
+0;ModelEntity1.56;Model_Panaderia;0.P_InitModel;[Assign] Assign_InitVectors;Assigning state variable 'Model_Panaderia.StockoutCount[6]' the value '0'. Previous value was '0'.
+0;ModelEntity1.56;Model_Panaderia;0.P_InitModel;[Assign] Assign_InitVectors;Assigning state variable 'Model_Panaderia.StockoutCount[7]' the value '0'. Previous value was '0'.
+0;ModelEntity1.56;Model_Panaderia;0.P_InitModel;[Assign] Assign_InitVectors;Assigning state variable 'Model_Panaderia.StockoutCount[8]' the value '0'. Previous value was '0'.
+0;ModelEntity1.56;Model_Panaderia;0.P_InitModel;[Assign] Assign_InitVectors;Assigning state variable 'Model_Panaderia.StockoutCount[9]' the value '0'. Previous value was '0'.
+0;ModelEntity1.56;Model_Panaderia;0.P_InitModel;[Assign] Assign_InitVectors;Assigning state variable 'Model_Panaderia.StockoutCount[10]' the value '0'. Previous value was '0'.
+0;ModelEntity1.56;Model_Panaderia;0.P_InitModel;[End];Process 'P_InitModel' execution ended.
+0;ModelEntity1.56;Source_InitModel;2.OnEnteredProcessing;[Transfer] ToOutputBuffer;Entity 'ModelEntity1.56' transferring from '[Station] Source_InitModel.Processing' into station 'Source_InitModel.OutputBuffer'.
+0;ModelEntity1.56;Source_InitModel;1.OnEntityArrival;[End];Process 'Source_InitModel.OnEntityArrival' execution ended.
+0;ModelEntity1.56;Source_InitModel;0.OnEnteredOutputBuffer;[Begin];Process 'Source_InitModel.OnEnteredOutputBuffer' execution started.
+0;ModelEntity1.56;Source_InitModel;0.OnEnteredOutputBuffer;[EndTransfer] IntoOutputBuffer;Entity 'ModelEntity1.56' ending transfer into station 'Source_InitModel.OutputBuffer'.
+0;ModelEntity1.56;Source_InitModel;0.OnEnteredOutputBuffer;[Transfer] ToOutputNode;Entity 'ModelEntity1.56' transferring from '[Station] Source_InitModel.OutputBuffer' into node 'Output@Source_InitModel'.
+0;ModelEntity1.56;Output@Source_InitModel;1.OnEnteredFromAssociatedObject;[Begin];Process 'Output@Source_InitModel.OnEnteredFromAssociatedObject' execution started.
+0;ModelEntity1.56;Output@Source_InitModel;1.OnEnteredFromAssociatedObject;[Fire] EnteredEvent;Firing event 'Output@Source_InitModel.Entered'.
+0;ModelEntity1.56;Output@Source_InitModel;1.OnEnteredFromAssociatedObject;[Transfer] ToOutboundLink;Entity 'ModelEntity1.56' transferring from '[Node] Output@Source_InitModel' into node 'Input@Sink_InitModel'.
+0;ModelEntity1.56;Input@Sink_InitModel;3.OnEnteredToAssociatedObject;[Begin];Process 'Input@Sink_InitModel.OnEnteredToAssociatedObject' execution started.
+0;ModelEntity1.56;Input@Sink_InitModel;3.OnEnteredToAssociatedObject;[Fire] EnteredEvent;Firing event 'Input@Sink_InitModel.Entered'.
+0;ModelEntity1.56;Input@Sink_InitModel;3.OnEnteredToAssociatedObject;[Transfer] ToAssociatedObject;Entity 'ModelEntity1.56' transferring from '[Node] Input@Sink_InitModel' into object 'Sink_InitModel'.
+0;ModelEntity1.56;Input@Sink_InitModel;3.OnEnteredToAssociatedObject;[Transfer] ToAssociatedObject;Entity 'ModelEntity1.56' transferring from '[Node] Input@Sink_InitModel' into station 'Sink_InitModel.InputBuffer'.
+0;ModelEntity1.56;Source_InitModel;2.OnEnteredProcessing;[End];Process 'Source_InitModel.OnEnteredProcessing' execution ended.
+0;ModelEntity1.56;Sink_InitModel;4.OnEnteredInputBuffer;[Begin];Process 'Sink_InitModel.OnEnteredInputBuffer' execution started.
+0;ModelEntity1.56;Sink_InitModel;4.OnEnteredInputBuffer;[EndTransfer] IntoInputBuffer;Entity 'ModelEntity1.56' ending transfer into station 'Sink_InitModel.InputBuffer'.
+0;ModelEntity1.56;Output@Source_InitModel;2.OnExited;[Begin];Process 'Output@Source_InitModel.OnExited' execution started.
+0;ModelEntity1.56;Output@Source_InitModel;2.OnExited;[Fire] ExitedEvent;Firing event 'Output@Source_InitModel.Exited'.
+0;ModelEntity1.56;Output@Source_InitModel;2.OnExited;[End];Process 'Output@Source_InitModel.OnExited' execution ended.
+0;ModelEntity1.56;Input@Sink_InitModel;2.OnExited;[Begin];Process 'Input@Sink_InitModel.OnExited' execution started.
+0;ModelEntity1.56;Input@Sink_InitModel;2.OnExited;[Fire] ExitedEvent;Firing event 'Input@Sink_InitModel.Exited'.
+0;ModelEntity1.56;Input@Sink_InitModel;2.OnExited;[End];Process 'Input@Sink_InitModel.OnExited' execution ended.
+0;ModelEntity1.56;Sink_InitModel;4.OnEnteredInputBuffer;[Tally] TimeInSystem;Recording ‘1’ observation value(s) of type ‘Expression’ for tally statistic ‘Sink_InitModel.TimeInSystem’.
+0;ModelEntity1.56;Sink_InitModel;4.OnEnteredInputBuffer;[Tally] TimeInSystem;Recording observation value '0' Minutes for tally statistic 'Sink_InitModel.TimeInSystem'.
+0;ModelEntity1.56;Sink_InitModel;4.OnEnteredInputBuffer;[Destroy] Entity;Destroying object 'ModelEntity1.56'.
+0;--;--;--;--;Object 'ModelEntity1.56' destroyed.
+0; ;Sink_InitModel;4.OnEnteredInputBuffer;[End];Process 'Sink_InitModel.OnEnteredInputBuffer' execution ended.
+0; ;Source_InitModel;0.OnEnteredOutputBuffer;[End];Process 'Source_InitModel.OnEnteredOutputBuffer' execution ended.
+0; ;Output@Source_InitModel;1.OnEnteredFromAssociatedObject;[End];Process 'Output@Source_InitModel.OnEnteredFromAssociatedObject' execution ended.
+0; ;Input@Sink_InitModel;3.OnEnteredToAssociatedObject;[End];Process 'Input@Sink_InitModel.OnEnteredToAssociatedObject' execution ended.
+0;--;--;--;--;Firing event 'Source_LotesProduccion.EntityArrivals.Event'.
+0;--;--;--;--;Time until next event of timer 'Source_LotesProduccion.EntityArrivals' is '0' Minutes.
+0;Source_LotesProduccion;Source_LotesProduccion;3.OnEntityArrival;[Begin];Process 'Source_LotesProduccion.OnEntityArrival' execution started.
+0;Source_LotesProduccion;Source_LotesProduccion;3.OnEntityArrival;[Create] Entities;Creating '1' new object(s) of entity type 'ModelEntity1'.
+0;Source_LotesProduccion;Source_LotesProduccion;3.OnEntityArrival;[Create] Entities;Created object 'ModelEntity1.57'.
+0;ModelEntity1.57;Source_LotesProduccion;1.OnEntityArrival;[Transfer] ToProcessing;Entity 'ModelEntity1.57' transferring from '[FreeSpace] Source_LotesProduccion' into station 'Source_LotesProduccion.Processing'.
+0;Source_LotesProduccion;Source_LotesProduccion;3.OnEntityArrival;[End];Process 'Source_LotesProduccion.OnEntityArrival' execution ended.
+0;ModelEntity1.57;Source_LotesProduccion;0.OnEnteredProcessing;[Begin];Process 'Source_LotesProduccion.OnEnteredProcessing' execution started.
+0;ModelEntity1.57;Source_LotesProduccion;0.OnEnteredProcessing;[EndTransfer] IntoProcessing;Entity 'ModelEntity1.57' ending transfer into station 'Source_LotesProduccion.Processing'.
+0;ModelEntity1.57;Source_LotesProduccion;0.OnEnteredProcessing;[Execute] CreatedEntityAddOnProcess;Executing process 'P_CrearLote'.
+0;ModelEntity1.57;Model_Panaderia;3.P_CrearLote;[Begin];Process 'P_CrearLote' execution started.
+0;ModelEntity1.57;Model_Panaderia;3.P_CrearLote;[Assign] Assign_Values;Assigning state variable 'ModelEntity1.57.ProductoIdx' the value '1'. Previous value was '0'.
+0;ModelEntity1.57;Model_Panaderia;3.P_CrearLote;[Assign] Assign_Values;Assigning state variable 'ModelEntity1.57.KgLote' the value '600'. Previous value was '0'.
+0;ModelEntity1.57;Model_Panaderia;3.P_CrearLote;[Assign] Assign_Values;Assigning state variable 'ModelEntity1.57.CarrosReq' the value '1'. Previous value was '0'.
+0;ModelEntity1.57;Model_Panaderia;3.P_CrearLote;[Assign] Assign_Values;Assigning state variable 'ModelEntity1.57.BandejasReq' the value '1'. Previous value was '0'.
+0;ModelEntity1.57;Model_Panaderia;3.P_CrearLote;[Assign] AssignTemp;Assigning state variable 'ModelEntity1.57.FamiliaHorno' the value '1'. Previous value was '0'.
+0;ModelEntity1.57;Model_Panaderia;3.P_CrearLote;[End];Process 'P_CrearLote' execution ended.
+0;ModelEntity1.57;Source_LotesProduccion;0.OnEnteredProcessing;[Transfer] ToOutputBuffer;Entity 'ModelEntity1.57' transferring from '[Station] Source_LotesProduccion.Processing' into station 'Source_LotesProduccion.OutputBuffer'.
+0;ModelEntity1.57;Source_LotesProduccion;1.OnEntityArrival;[End];Process 'Source_LotesProduccion.OnEntityArrival' execution ended.
+0;ModelEntity1.57;Source_LotesProduccion;3.OnEnteredOutputBuffer;[Begin];Process 'Source_LotesProduccion.OnEnteredOutputBuffer' execution started.
+0;ModelEntity1.57;Source_LotesProduccion;3.OnEnteredOutputBuffer;[EndTransfer] IntoOutputBuffer;Entity 'ModelEntity1.57' ending transfer into station 'Source_LotesProduccion.OutputBuffer'.
+0;ModelEntity1.57;Source_LotesProduccion;3.OnEnteredOutputBuffer;[Transfer] ToOutputNode;Entity 'ModelEntity1.57' transferring from '[Station] Source_LotesProduccion.OutputBuffer' into node 'Output@Source_LotesProduccion'.
+0;ModelEntity1.57;Output@Source_LotesProduccion;1.OnEnteredFromAssociatedObject;[Begin];Process 'Output@Source_LotesProduccion.OnEnteredFromAssociatedObject' execution started.
+0;ModelEntity1.57;Output@Source_LotesProduccion;1.OnEnteredFromAssociatedObject;[Fire] EnteredEvent;Firing event 'Output@Source_LotesProduccion.Entered'.
+0;ModelEntity1.57;Output@Source_LotesProduccion;1.OnEnteredFromAssociatedObject;[Transfer] ToOutboundLink;Entity 'ModelEntity1.57' transferring from '[Node] Output@Source_LotesProduccion' into node 'Input@Server_Pesado'.
+0;ModelEntity1.57;Input@Server_Pesado;4.OnEnteredToAssociatedObject;[Begin];Process 'Input@Server_Pesado.OnEnteredToAssociatedObject' execution started.
+0;ModelEntity1.57;Input@Server_Pesado;4.OnEnteredToAssociatedObject;[Fire] EnteredEvent;Firing event 'Input@Server_Pesado.Entered'.
+0;ModelEntity1.57;Input@Server_Pesado;4.OnEnteredToAssociatedObject;[Transfer] ToAssociatedObject;Entity 'ModelEntity1.57' transferring from '[Node] Input@Server_Pesado' into object 'Server_Pesado'.
+0;ModelEntity1.57;Input@Server_Pesado;4.OnEnteredToAssociatedObject;[Transfer] ToAssociatedObject;Entity 'ModelEntity1.57' transferring from '[Node] Input@Server_Pesado' into station 'Server_Pesado.InputBuffer'.
+0;ModelEntity1.57;Source_LotesProduccion;0.OnEnteredProcessing;[End];Process 'Source_LotesProduccion.OnEnteredProcessing' execution ended.
+0;ModelEntity1.57;Server_Pesado;2.OnEnteredInputBuffer;[Begin];Process 'Server_Pesado.OnEnteredInputBuffer' execution started.
+0;ModelEntity1.57;Server_Pesado;2.OnEnteredInputBuffer;[Execute] EnteredAddOnProcess;Executing process 'P_WIP_Pesado_Entrar'.
+0;ModelEntity1.57;Model_Panaderia;0.P_WIP_Pesado_Entrar;[Begin];Process 'P_WIP_Pesado_Entrar' execution started.
+0;ModelEntity1.57;Model_Panaderia;0.P_WIP_Pesado_Entrar;[Assign] Assign11;Assigning state variable 'Model_Panaderia.WIP_Pesado' the value '1'. Previous value was '0'.
+0;ModelEntity1.57;Model_Panaderia;0.P_WIP_Pesado_Entrar;[End];Process 'P_WIP_Pesado_Entrar' execution ended.
+0;ModelEntity1.57;Server_Pesado;2.OnEnteredInputBuffer;[EndTransfer] IntoInputBuffer;Entity 'ModelEntity1.57' ending transfer into station 'Server_Pesado.InputBuffer'.
+0;ModelEntity1.57;Output@Source_LotesProduccion;0.OnExited;[Begin];Process 'Output@Source_LotesProduccion.OnExited' execution started.
+0;ModelEntity1.57;Output@Source_LotesProduccion;0.OnExited;[Fire] ExitedEvent;Firing event 'Output@Source_LotesProduccion.Exited'.
+0;ModelEntity1.57;Output@Source_LotesProduccion;0.OnExited;[End];Process 'Output@Source_LotesProduccion.OnExited' execution ended.
+0;ModelEntity1.57;Input@Server_Pesado;0.OnExited;[Begin];Process 'Input@Server_Pesado.OnExited' execution started.
+0;ModelEntity1.57;Input@Server_Pesado;0.OnExited;[Fire] ExitedEvent;Firing event 'Input@Server_Pesado.Exited'.
+0;ModelEntity1.57;Input@Server_Pesado;0.OnExited;[End];Process 'Input@Server_Pesado.OnExited' execution ended.
+0;ModelEntity1.57;Server_Pesado;2.OnEnteredInputBuffer;[Seize] Server;Object 'ModelEntity1.57' waiting to seize '1' resource(s) of resource type '[ParentObject] Server_Pesado'.
+0;ModelEntity1.57;Source_LotesProduccion;3.OnEnteredOutputBuffer;[End];Process 'Source_LotesProduccion.OnEnteredOutputBuffer' execution ended.
+0;ModelEntity1.57;Output@Source_LotesProduccion;1.OnEnteredFromAssociatedObject;[End];Process 'Output@Source_LotesProduccion.OnEnteredFromAssociatedObject' execution ended.
+0;ModelEntity1.57;Input@Server_Pesado;4.OnEnteredToAssociatedObject;[End];Process 'Input@Server_Pesado.OnEnteredToAssociatedObject' execution ended.
+0;--;--;--;--;Firing event 'Source_LotesProduccion.EntityArrivals.Event'.
+0;--;--;--;--;Time until next event of timer 'Source_LotesProduccion.EntityArrivals' is '0' Minutes.
+0;Source_LotesProduccion;Source_LotesProduccion;4.OnEntityArrival;[Begin];Process 'Source_LotesProduccion.OnEntityArrival' execution started.
+0;Source_LotesProduccion;Source_LotesProduccion;4.OnEntityArrival;[Create] Entities;Creating '1' new object(s) of entity type 'ModelEntity1'.
+0;Source_LotesProduccion;Source_LotesProduccion;4.OnEntityArrival;[Create] Entities;Created object 'ModelEntity1.58'.
+0;ModelEntity1.58;Source_LotesProduccion;1.OnEntityArrival;[Transfer] ToProcessing;Entity 'ModelEntity1.58' transferring from '[FreeSpace] Source_LotesProduccion' into station 'Source_LotesProduccion.Processing'.
+0;Source_LotesProduccion;Source_LotesProduccion;4.OnEntityArrival;[End];Process 'Source_LotesProduccion.OnEntityArrival' execution ended.
+0;ModelEntity1.58;Source_LotesProduccion;3.OnEnteredProcessing;[Begin];Process 'Source_LotesProduccion.OnEnteredProcessing' execution started.
+0;ModelEntity1.58;Source_LotesProduccion;3.OnEnteredProcessing;[EndTransfer] IntoProcessing;Entity 'ModelEntity1.58' ending transfer into station 'Source_LotesProduccion.Processing'.
+0;ModelEntity1.58;Source_LotesProduccion;3.OnEnteredProcessing;[Execute] CreatedEntityAddOnProcess;Executing process 'P_CrearLote'.
+0;ModelEntity1.58;Model_Panaderia;4.P_CrearLote;[Begin];Process 'P_CrearLote' execution started.
+0;ModelEntity1.58;Model_Panaderia;4.P_CrearLote;[Assign] Assign_Values;Assigning state variable 'ModelEntity1.58.ProductoIdx' the value '1'. Previous value was '0'.
+0;ModelEntity1.58;Model_Panaderia;4.P_CrearLote;[Assign] Assign_Values;Assigning state variable 'ModelEntity1.58.KgLote' the value '600'. Previous value was '0'.
+0;ModelEntity1.58;Model_Panaderia;4.P_CrearLote;[Assign] Assign_Values;Assigning state variable 'ModelEntity1.58.CarrosReq' the value '1'. Previous value was '0'.
+0;ModelEntity1.58;Model_Panaderia;4.P_CrearLote;[Assign] Assign_Values;Assigning state variable 'ModelEntity1.58.BandejasReq' the value '1'. Previous value was '0'.
+0;ModelEntity1.58;Model_Panaderia;4.P_CrearLote;[Assign] AssignTemp;Assigning state variable 'ModelEntity1.58.FamiliaHorno' the value '1'. Previous value was '0'.
+0;ModelEntity1.58;Model_Panaderia;4.P_CrearLote;[End];Process 'P_CrearLote' execution ended.
+0;ModelEntity1.58;Source_LotesProduccion;3.OnEnteredProcessing;[Transfer] ToOutputBuffer;Entity 'ModelEntity1.58' transferring from '[Station] Source_LotesProduccion.Processing' into station 'Source_LotesProduccion.OutputBuffer'.
+0;ModelEntity1.58;Source_LotesProduccion;1.OnEntityArrival;[End];Process 'Source_LotesProduccion.OnEntityArrival' execution ended.
+0;ModelEntity1.58;Source_LotesProduccion;4.OnEnteredOutputBuffer;[Begin];Process 'Source_LotesProduccion.OnEnteredOutputBuffer' execution started.
+0;ModelEntity1.58;Source_LotesProduccion;4.OnEnteredOutputBuffer;[EndTransfer] IntoOutputBuffer;Entity 'ModelEntity1.58' ending transfer into station 'Source_LotesProduccion.OutputBuffer'.
+0;ModelEntity1.58;Source_LotesProduccion;4.OnEnteredOutputBuffer;[Transfer] ToOutputNode;Entity 'ModelEntity1.58' transferring from '[Station] Source_LotesProduccion.OutputBuffer' into node 'Output@Source_LotesProduccion'.
+0;ModelEntity1.58;Output@Source_LotesProduccion;1.OnEnteredFromAssociatedObject;[Begin];Process 'Output@Source_LotesProduccion.OnEnteredFromAssociatedObject' execution started.
+0;ModelEntity1.58;Output@Source_LotesProduccion;1.OnEnteredFromAssociatedObject;[Fire] EnteredEvent;Firing event 'Output@Source_LotesProduccion.Entered'.
+0;ModelEntity1.58;Output@Source_LotesProduccion;1.OnEnteredFromAssociatedObject;[Transfer] ToOutboundLink;Entity 'ModelEntity1.58' transferring from '[Node] Output@Source_LotesProduccion' into node 'Input@Server_Pesado'.
+0;ModelEntity1.58;Input@Server_Pesado;0.OnEnteredToAssociatedObject;[Begin];Process 'Input@Server_Pesado.OnEnteredToAssociatedObject' execution started.
+0;ModelEntity1.58;Input@Server_Pesado;0.OnEnteredToAssociatedObject;[Fire] EnteredEvent;Firing event 'Input@Server_Pesado.Entered'.
+0;ModelEntity1.58;Input@Server_Pesado;0.OnEnteredToAssociatedObject;[Transfer] ToAssociatedObject;Entity 'ModelEntity1.58' transferring from '[Node] Input@Server_Pesado' into object 'Server_Pesado'.
+0;ModelEntity1.58;Input@Server_Pesado;0.OnEnteredToAssociatedObject;[Transfer] ToAssociatedObject;Entity 'ModelEntity1.58' transferring from '[Node] Input@Server_Pesado' into station 'Server_Pesado.InputBuffer'.
+0;ModelEntity1.58;Source_LotesProduccion;3.OnEnteredProcessing;[End];Process 'Source_LotesProduccion.OnEnteredProcessing' execution ended.
+0;ModelEntity1.58;Server_Pesado;5.OnEnteredInputBuffer;[Begin];Process 'Server_Pesado.OnEnteredInputBuffer' execution started.
+0;ModelEntity1.58;Server_Pesado;5.OnEnteredInputBuffer;[Execute] EnteredAddOnProcess;Executing process 'P_WIP_Pesado_Entrar'.
+0;ModelEntity1.58;Model_Panaderia;3.P_WIP_Pesado_Entrar;[Begin];Process 'P_WIP_Pesado_Entrar' execution started.
+0;ModelEntity1.58;Model_Panaderia;3.P_WIP_Pesado_Entrar;[Assign] Assign11;Assigning state variable 'Model_Panaderia.WIP_Pesado' the value '2'. Previous value was '1'.
+0;ModelEntity1.58;Model_Panaderia;3.P_WIP_Pesado_Entrar;[End];Process 'P_WIP_Pesado_Entrar' execution ended.
+0;ModelEntity1.58;Server_Pesado;5.OnEnteredInputBuffer;[EndTransfer] IntoInputBuffer;Entity 'ModelEntity1.58' ending transfer into station 'Server_Pesado.InputBuffer'.
+0;ModelEntity1.58;Output@Source_LotesProduccion;3.OnExited;[Begin];Process 'Output@Source_LotesProduccion.OnExited' execution started.
+0;ModelEntity1.58;Output@Source_LotesProduccion;3.OnExited;[Fire] ExitedEvent;Firing event 'Output@Source_LotesProduccion.Exited'.
+0;ModelEntity1.58;Output@Source_LotesProduccion;3.OnExited;[End];Process 'Output@Source_LotesProduccion.OnExited' execution ended.
+0;ModelEntity1.58;Input@Server_Pesado;3.OnExited;[Begin];Process 'Input@Server_Pesado.OnExited' execution started.
+0;ModelEntity1.58;Input@Server_Pesado;3.OnExited;[Fire] ExitedEvent;Firing event 'Input@Server_Pesado.Exited'.
+0;ModelEntity1.58;Input@Server_Pesado;3.OnExited;[End];Process 'Input@Server_Pesado.OnExited' execution ended.
+0;ModelEntity1.58;Server_Pesado;5.OnEnteredInputBuffer;[Seize] Server;Object 'ModelEntity1.58' waiting to seize '1' resource(s) of resource type '[ParentObject] Server_Pesado'.
+0;ModelEntity1.58;Source_LotesProduccion;4.OnEnteredOutputBuffer;[End];Process 'Source_LotesProduccion.OnEnteredOutputBuffer' execution ended.
+0;ModelEntity1.58;Output@Source_LotesProduccion;1.OnEnteredFromAssociatedObject;[End];Process 'Output@Source_LotesProduccion.OnEnteredFromAssociatedObject' execution ended.
+0;ModelEntity1.58;Input@Server_Pesado;0.OnEnteredToAssociatedObject;[End];Process 'Input@Server_Pesado.OnEnteredToAssociatedObject' execution ended.
+0;--;--;--;--;Firing event 'Source_LotesProduccion.EntityArrivals.Event'.
+0;--;--;--;--;Time until next event of timer 'Source_LotesProduccion.EntityArrivals' is '0' Minutes.
+0;Source_LotesProduccion;Source_LotesProduccion;0.OnEntityArrival;[Begin];Process 'Source_LotesProduccion.OnEntityArrival' execution started.
+0;Source_LotesProduccion;Source_LotesProduccion;0.OnEntityArrival;[Create] Entities;Creating '1' new object(s) of entity type 'ModelEntity1'.
+0;Source_LotesProduccion;Source_LotesProduccion;0.OnEntityArrival;[Create] Entities;Created object 'ModelEntity1.59'.
+0;ModelEntity1.59;Source_LotesProduccion;1.OnEntityArrival;[Transfer] ToProcessing;Entity 'ModelEntity1.59' transferring from '[FreeSpace] Source_LotesProduccion' into station 'Source_LotesProduccion.Processing'.
+0;Source_LotesProduccion;Source_LotesProduccion;0.OnEntityArrival;[End];Process 'Source_LotesProduccion.OnEntityArrival' execution ended.
+0;ModelEntity1.59;Source_LotesProduccion;4.OnEnteredProcessing;[Begin];Process 'Source_LotesProduccion.OnEnteredProcessing' execution started.
+0;ModelEntity1.59;Source_LotesProduccion;4.OnEnteredProcessing;[EndTransfer] IntoProcessing;Entity 'ModelEntity1.59' ending transfer into station 'Source_LotesProduccion.Processing'.
+0;ModelEntity1.59;Source_LotesProduccion;4.OnEnteredProcessing;[Execute] CreatedEntityAddOnProcess;Executing process 'P_CrearLote'.
+0;ModelEntity1.59;Model_Panaderia;0.P_CrearLote;[Begin];Process 'P_CrearLote' execution started.
+0;ModelEntity1.59;Model_Panaderia;0.P_CrearLote;[Assign] Assign_Values;Assigning state variable 'ModelEntity1.59.ProductoIdx' the value '1'. Previous value was '0'.
+0;ModelEntity1.59;Model_Panaderia;0.P_CrearLote;[Assign] Assign_Values;Assigning state variable 'ModelEntity1.59.KgLote' the value '600'. Previous value was '0'.
+0;ModelEntity1.59;Model_Panaderia;0.P_CrearLote;[Assign] Assign_Values;Assigning state variable 'ModelEntity1.59.CarrosReq' the value '1'. Previous value was '0'.
+0;ModelEntity1.59;Model_Panaderia;0.P_CrearLote;[Assign] Assign_Values;Assigning state variable 'ModelEntity1.59.BandejasReq' the value '1'. Previous value was '0'.
+0;ModelEntity1.59;Model_Panaderia;0.P_CrearLote;[Assign] AssignTemp;Assigning state variable 'ModelEntity1.59.FamiliaHorno' the value '1'. Previous value was '0'.
+0;ModelEntity1.59;Model_Panaderia;0.P_CrearLote;[End];Process 'P_CrearLote' execution ended.
+0;ModelEntity1.59;Source_LotesProduccion;4.OnEnteredProcessing;[Transfer] ToOutputBuffer;Entity 'ModelEntity1.59' transferring from '[Station] Source_LotesProduccion.Processing' into station 'Source_LotesProduccion.OutputBuffer'.
+0;ModelEntity1.59;Source_LotesProduccion;1.OnEntityArrival;[End];Process 'Source_LotesProduccion.OnEntityArrival' execution ended.
+0;ModelEntity1.59;Source_LotesProduccion;0.OnEnteredOutputBuffer;[Begin];Process 'Source_LotesProduccion.OnEnteredOutputBuffer' execution started.
+0;ModelEntity1.59;Source_LotesProduccion;0.OnEnteredOutputBuffer;[EndTransfer] IntoOutputBuffer;Entity 'ModelEntity1.59' ending transfer into station 'Source_LotesProduccion.OutputBuffer'.
+0;ModelEntity1.59;Source_LotesProduccion;0.OnEnteredOutputBuffer;[Transfer] ToOutputNode;Entity 'ModelEntity1.59' transferring from '[Station] Source_LotesProduccion.OutputBuffer' into node 'Output@Source_LotesProduccion'.
+0;ModelEntity1.59;Output@Source_LotesProduccion;1.OnEnteredFromAssociatedObject;[Begin];Process 'Output@Source_LotesProduccion.OnEnteredFromAssociatedObject' execution started.
+0;ModelEntity1.59;Output@Source_LotesProduccion;1.OnEnteredFromAssociatedObject;[Fire] EnteredEvent;Firing event 'Output@Source_LotesProduccion.Entered'.
+0;ModelEntity1.59;Output@Source_LotesProduccion;1.OnEnteredFromAssociatedObject;[Transfer] ToOutboundLink;Entity 'ModelEntity1.59' transferring from '[Node] Output@Source_LotesProduccion' into node 'Input@Server_Pesado'.
+0;ModelEntity1.59;Input@Server_Pesado;3.OnEnteredToAssociatedObject;[Begin];Process 'Input@Server_Pesado.OnEnteredToAssociatedObject' execution started.
+0;ModelEntity1.59;Input@Server_Pesado;3.OnEnteredToAssociatedObject;[Fire] EnteredEvent;Firing event 'Input@Server_Pesado.Entered'.
+0;ModelEntity1.59;Input@Server_Pesado;3.OnEnteredToAssociatedObject;[Transfer] ToAssociatedObject;Entity 'ModelEntity1.59' transferring from '[Node] Input@Server_Pesado' into object 'Server_Pesado'.
+0;ModelEntity1.59;Input@Server_Pesado;3.OnEnteredToAssociatedObject;[Transfer] ToAssociatedObject;Entity 'ModelEntity1.59' transferring from '[Node] Input@Server_Pesado' into station 'Server_Pesado.InputBuffer'.
+0;ModelEntity1.59;Source_LotesProduccion;4.OnEnteredProcessing;[End];Process 'Source_LotesProduccion.OnEnteredProcessing' execution ended.
+0;ModelEntity1.59;Server_Pesado;6.OnEnteredInputBuffer;[Begin];Process 'Server_Pesado.OnEnteredInputBuffer' execution started.
+0;ModelEntity1.59;Server_Pesado;6.OnEnteredInputBuffer;[Execute] EnteredAddOnProcess;Executing process 'P_WIP_Pesado_Entrar'.
+0;ModelEntity1.59;Model_Panaderia;4.P_WIP_Pesado_Entrar;[Begin];Process 'P_WIP_Pesado_Entrar' execution started.
+0;ModelEntity1.59;Model_Panaderia;4.P_WIP_Pesado_Entrar;[Assign] Assign11;Assigning state variable 'Model_Panaderia.WIP_Pesado' the value '3'. Previous value was '2'.
+0;ModelEntity1.59;Model_Panaderia;4.P_WIP_Pesado_Entrar;[End];Process 'P_WIP_Pesado_Entrar' execution ended.
+0;ModelEntity1.59;Server_Pesado;6.OnEnteredInputBuffer;[EndTransfer] IntoInputBuffer;Entity 'ModelEntity1.59' ending transfer into station 'Server_Pesado.InputBuffer'.
+0;ModelEntity1.59;Output@Source_LotesProduccion;4.OnExited;[Begin];Process 'Output@Source_LotesProduccion.OnExited' execution started.
+0;ModelEntity1.59;Output@Source_LotesProduccion;4.OnExited;[Fire] ExitedEvent;Firing event 'Output@Source_LotesProduccion.Exited'.
+0;ModelEntity1.59;Output@Source_LotesProduccion;4.OnExited;[End];Process 'Output@Source_LotesProduccion.OnExited' execution ended.
+0;ModelEntity1.59;Input@Server_Pesado;4.OnExited;[Begin];Process 'Input@Server_Pesado.OnExited' execution started.
+0;ModelEntity1.59;Input@Server_Pesado;4.OnExited;[Fire] ExitedEvent;Firing event 'Input@Server_Pesado.Exited'.
+0;ModelEntity1.59;Input@Server_Pesado;4.OnExited;[End];Process 'Input@Server_Pesado.OnExited' execution ended.
+0;ModelEntity1.59;Server_Pesado;6.OnEnteredInputBuffer;[Seize] Server;Object 'ModelEntity1.59' waiting to seize '1' resource(s) of resource type '[ParentObject] Server_Pesado'.
+0;ModelEntity1.59;Source_LotesProduccion;0.OnEnteredOutputBuffer;[End];Process 'Source_LotesProduccion.OnEnteredOutputBuffer' execution ended.
+0;ModelEntity1.59;Output@Source_LotesProduccion;1.OnEnteredFromAssociatedObject;[End];Process 'Output@Source_LotesProduccion.OnEnteredFromAssociatedObject' execution ended.
+0;ModelEntity1.59;Input@Server_Pesado;3.OnEnteredToAssociatedObject;[End];Process 'Input@Server_Pesado.OnEnteredToAssociatedObject' execution ended.
+0;--;--;--;--;Firing event 'Source_LotesProduccion.EntityArrivals.Event'.
+0;--;--;--;--;Time until next event of timer 'Source_LotesProduccion.EntityArrivals' is '0' Minutes.
+0;Source_LotesProduccion;Source_LotesProduccion;3.OnEntityArrival;[Begin];Process 'Source_LotesProduccion.OnEntityArrival' execution started.
+0;Source_LotesProduccion;Source_LotesProduccion;3.OnEntityArrival;[Create] Entities;Creating '1' new object(s) of entity type 'ModelEntity1'.
+0;Source_LotesProduccion;Source_LotesProduccion;3.OnEntityArrival;[Create] Entities;Created object 'ModelEntity1.60'.
+0;ModelEntity1.60;Source_LotesProduccion;1.OnEntityArrival;[Transfer] ToProcessing;Entity 'ModelEntity1.60' transferring from '[FreeSpace] Source_LotesProduccion' into station 'Source_LotesProduccion.Processing'.
+0;Source_LotesProduccion;Source_LotesProduccion;3.OnEntityArrival;[End];Process 'Source_LotesProduccion.OnEntityArrival' execution ended.
+0;ModelEntity1.60;Source_LotesProduccion;0.OnEnteredProcessing;[Begin];Process 'Source_LotesProduccion.OnEnteredProcessing' execution started.
+0;ModelEntity1.60;Source_LotesProduccion;0.OnEnteredProcessing;[EndTransfer] IntoProcessing;Entity 'ModelEntity1.60' ending transfer into station 'Source_LotesProduccion.Processing'.
+0;ModelEntity1.60;Source_LotesProduccion;0.OnEnteredProcessing;[Execute] CreatedEntityAddOnProcess;Executing process 'P_CrearLote'.
+0;ModelEntity1.60;Model_Panaderia;3.P_CrearLote;[Begin];Process 'P_CrearLote' execution started.
+0;ModelEntity1.60;Model_Panaderia;3.P_CrearLote;[Assign] Assign_Values;Assigning state variable 'ModelEntity1.60.ProductoIdx' the value '1'. Previous value was '0'.
+0;ModelEntity1.60;Model_Panaderia;3.P_CrearLote;[Assign] Assign_Values;Assigning state variable 'ModelEntity1.60.KgLote' the value '600'. Previous value was '0'.
+0;ModelEntity1.60;Model_Panaderia;3.P_CrearLote;[Assign] Assign_Values;Assigning state variable 'ModelEntity1.60.CarrosReq' the value '1'. Previous value was '0'.
+0;ModelEntity1.60;Model_Panaderia;3.P_CrearLote;[Assign] Assign_Values;Assigning state variable 'ModelEntity1.60.BandejasReq' the value '1'. Previous value was '0'.
+0;ModelEntity1.60;Model_Panaderia;3.P_CrearLote;[Assign] AssignTemp;Assigning state variable 'ModelEntity1.60.FamiliaHorno' the value '1'. Previous value was '0'.
+0;ModelEntity1.60;Model_Panaderia;3.P_CrearLote;[End];Process 'P_CrearLote' execution ended.
+0;ModelEntity1.60;Source_LotesProduccion;0.OnEnteredProcessing;[Transfer] ToOutputBuffer;Entity 'ModelEntity1.60' transferring from '[Station] Source_LotesProduccion.Processing' into station 'Source_LotesProduccion.OutputBuffer'.
+0;ModelEntity1.60;Source_LotesProduccion;1.OnEntityArrival;[End];Process 'Source_LotesProduccion.OnEntityArrival' execution ended.
+0;ModelEntity1.60;Source_LotesProduccion;3.OnEnteredOutputBuffer;[Begin];Process 'Source_LotesProduccion.OnEnteredOutputBuffer' execution started.
+0;ModelEntity1.60;Source_LotesProduccion;3.OnEnteredOutputBuffer;[EndTransfer] IntoOutputBuffer;Entity 'ModelEntity1.60' ending transfer into station 'Source_LotesProduccion.OutputBuffer'.
+0;ModelEntity1.60;Source_LotesProduccion;3.OnEnteredOutputBuffer;[Transfer] ToOutputNode;Entity 'ModelEntity1.60' transferring from '[Station] Source_LotesProduccion.OutputBuffer' into node 'Output@Source_LotesProduccion'.
+0;ModelEntity1.60;Output@Source_LotesProduccion;1.OnEnteredFromAssociatedObject;[Begin];Process 'Output@Source_LotesProduccion.OnEnteredFromAssociatedObject' execution started.
+0;ModelEntity1.60;Output@Source_LotesProduccion;1.OnEnteredFromAssociatedObject;[Fire] EnteredEvent;Firing event 'Output@Source_LotesProduccion.Entered'.
+0;ModelEntity1.60;Output@Source_LotesProduccion;1.OnEnteredFromAssociatedObject;[Transfer] ToOutboundLink;Entity 'ModelEntity1.60' transferring from '[Node] Output@Source_LotesProduccion' into node 'Input@Server_Pesado'.
+0;ModelEntity1.60;Input@Server_Pesado;4.OnEnteredToAssociatedObject;[Begin];Process 'Input@Server_Pesado.OnEnteredToAssociatedObject' execution started.
+0;ModelEntity1.60;Input@Server_Pesado;4.OnEnteredToAssociatedObject;[Fire] EnteredEvent;Firing event 'Input@Server_Pesado.Entered'.
+0;ModelEntity1.60;Input@Server_Pesado;4.OnEnteredToAssociatedObject;[Transfer] ToAssociatedObject;Entity 'ModelEntity1.60' transferring from '[Node] Input@Server_Pesado' into object 'Server_Pesado'.
+0;ModelEntity1.60;Input@Server_Pesado;4.OnEnteredToAssociatedObject;[Transfer] ToAssociatedObject;Entity 'ModelEntity1.60' transferring from '[Node] Input@Server_Pesado' into station 'Server_Pesado.InputBuffer'.
+0;ModelEntity1.60;Source_LotesProduccion;0.OnEnteredProcessing;[End];Process 'Source_LotesProduccion.OnEnteredProcessing' execution ended.
+0;ModelEntity1.60;Server_Pesado;7.OnEnteredInputBuffer;[Begin];Process 'Server_Pesado.OnEnteredInputBuffer' execution started.
+0;ModelEntity1.60;Server_Pesado;7.OnEnteredInputBuffer;[Execute] EnteredAddOnProcess;Executing process 'P_WIP_Pesado_Entrar'.
+0;ModelEntity1.60;Model_Panaderia;0.P_WIP_Pesado_Entrar;[Begin];Process 'P_WIP_Pesado_Entrar' execution started.
+0;ModelEntity1.60;Model_Panaderia;0.P_WIP_Pesado_Entrar;[Assign] Assign11;Assigning state variable 'Model_Panaderia.WIP_Pesado' the value '4'. Previous value was '3'.
+0;ModelEntity1.60;Model_Panaderia;0.P_WIP_Pesado_Entrar;[End];Process 'P_WIP_Pesado_Entrar' execution ended.
+0;ModelEntity1.60;Server_Pesado;7.OnEnteredInputBuffer;[EndTransfer] IntoInputBuffer;Entity 'ModelEntity1.60' ending transfer into station 'Server_Pesado.InputBuffer'.
+0;ModelEntity1.60;Output@Source_LotesProduccion;0.OnExited;[Begin];Process 'Output@Source_LotesProduccion.OnExited' execution started.
+0;ModelEntity1.60;Output@Source_LotesProduccion;0.OnExited;[Fire] ExitedEvent;Firing event 'Output@Source_LotesProduccion.Exited'.
+0;ModelEntity1.60;Output@Source_LotesProduccion;0.OnExited;[End];Process 'Output@Source_LotesProduccion.OnExited' execution ended.
+0;ModelEntity1.60;Input@Server_Pesado;0.OnExited;[Begin];Process 'Input@Server_Pesado.OnExited' execution started.
+0;ModelEntity1.60;Input@Server_Pesado;0.OnExited;[Fire] ExitedEvent;Firing event 'Input@Server_Pesado.Exited'.
+0;ModelEntity1.60;Input@Server_Pesado;0.OnExited;[End];Process 'Input@Server_Pesado.OnExited' execution ended.
+0;ModelEntity1.60;Server_Pesado;7.OnEnteredInputBuffer;[Seize] Server;Object 'ModelEntity1.60' waiting to seize '1' resource(s) of resource type '[ParentObject] Server_Pesado'.
+0;ModelEntity1.60;Source_LotesProduccion;3.OnEnteredOutputBuffer;[End];Process 'Source_LotesProduccion.OnEnteredOutputBuffer' execution ended.
+0;ModelEntity1.60;Output@Source_LotesProduccion;1.OnEnteredFromAssociatedObject;[End];Process 'Output@Source_LotesProduccion.OnEnteredFromAssociatedObject' execution ended.
+0;ModelEntity1.60;Input@Server_Pesado;4.OnEnteredToAssociatedObject;[End];Process 'Input@Server_Pesado.OnEnteredToAssociatedObject' execution ended.
+0;--;--;--;--;Firing event 'Source_LotesProduccion.EntityArrivals.Event'.
+0;--;--;--;--;Time until next event of timer 'Source_LotesProduccion.EntityArrivals' is '0' Minutes.
+0;Source_LotesProduccion;Source_LotesProduccion;4.OnEntityArrival;[Begin];Process 'Source_LotesProduccion.OnEntityArrival' execution started.
+0;Source_LotesProduccion;Source_LotesProduccion;4.OnEntityArrival;[Create] Entities;Creating '1' new object(s) of entity type 'ModelEntity1'.
+0;Source_LotesProduccion;Source_LotesProduccion;4.OnEntityArrival;[Create] Entities;Created object 'ModelEntity1.61'.
+0;ModelEntity1.61;Source_LotesProduccion;1.OnEntityArrival;[Transfer] ToProcessing;Entity 'ModelEntity1.61' transferring from '[FreeSpace] Source_LotesProduccion' into station 'Source_LotesProduccion.Processing'.
+0;Source_LotesProduccion;Source_LotesProduccion;4.OnEntityArrival;[End];Process 'Source_LotesProduccion.OnEntityArrival' execution ended.
+0;ModelEntity1.61;Source_LotesProduccion;3.OnEnteredProcessing;[Begin];Process 'Source_LotesProduccion.OnEnteredProcessing' execution started.
+0;ModelEntity1.61;Source_LotesProduccion;3.OnEnteredProcessing;[EndTransfer] IntoProcessing;Entity 'ModelEntity1.61' ending transfer into station 'Source_LotesProduccion.Processing'.
+0;ModelEntity1.61;Source_LotesProduccion;3.OnEnteredProcessing;[Execute] CreatedEntityAddOnProcess;Executing process 'P_CrearLote'.
+0;ModelEntity1.61;Model_Panaderia;4.P_CrearLote;[Begin];Process 'P_CrearLote' execution started.
+0;ModelEntity1.61;Model_Panaderia;4.P_CrearLote;[Assign] Assign_Values;Assigning state variable 'ModelEntity1.61.ProductoIdx' the value '1'. Previous value was '0'.
+0;ModelEntity1.61;Model_Panaderia;4.P_CrearLote;[Assign] Assign_Values;Assigning state variable 'ModelEntity1.61.KgLote' the value '600'. Previous value was '0'.
+0;ModelEntity1.61;Model_Panaderia;4.P_CrearLote;[Assign] Assign_Values;Assigning state variable 'ModelEntity1.61.CarrosReq' the value '1'. Previous value was '0'.
+0;ModelEntity1.61;Model_Panaderia;4.P_CrearLote;[Assign] Assign_Values;Assigning state variable 'ModelEntity1.61.BandejasReq' the value '1'. Previous value was '0'.
+0;ModelEntity1.61;Model_Panaderia;4.P_CrearLote;[Assign] AssignTemp;Assigning state variable 'ModelEntity1.61.FamiliaHorno' the value '1'. Previous value was '0'.
+0;ModelEntity1.61;Model_Panaderia;4.P_CrearLote;[End];Process 'P_CrearLote' execution ended.
+0;ModelEntity1.61;Source_LotesProduccion;3.OnEnteredProcessing;[Transfer] ToOutputBuffer;Entity 'ModelEntity1.61' transferring from '[Station] Source_LotesProduccion.Processing' into station 'Source_LotesProduccion.OutputBuffer'.
+0;ModelEntity1.61;Source_LotesProduccion;1.OnEntityArrival;[End];Process 'Source_LotesProduccion.OnEntityArrival' execution ended.
+0;ModelEntity1.61;Source_LotesProduccion;4.OnEnteredOutputBuffer;[Begin];Process 'Source_LotesProduccion.OnEnteredOutputBuffer' execution started.
+0;ModelEntity1.61;Source_LotesProduccion;4.OnEnteredOutputBuffer;[EndTransfer] IntoOutputBuffer;Entity 'ModelEntity1.61' ending transfer into station 'Source_LotesProduccion.OutputBuffer'.
+0;ModelEntity1.61;Source_LotesProduccion;4.OnEnteredOutputBuffer;[Transfer] ToOutputNode;Entity 'ModelEntity1.61' transferring from '[Station] Source_LotesProduccion.OutputBuffer' into node 'Output@Source_LotesProduccion'.
+0;ModelEntity1.61;Output@Source_LotesProduccion;1.OnEnteredFromAssociatedObject;[Begin];Process 'Output@Source_LotesProduccion.OnEnteredFromAssociatedObject' execution started.
+0;ModelEntity1.61;Output@Source_LotesProduccion;1.OnEnteredFromAssociatedObject;[Fire] EnteredEvent;Firing event 'Output@Source_LotesProduccion.Entered'.
+0;ModelEntity1.61;Output@Source_LotesProduccion;1.OnEnteredFromAssociatedObject;[Transfer] ToOutboundLink;Entity 'ModelEntity1.61' transferring from '[Node] Output@Source_LotesProduccion' into node 'Input@Server_Pesado'.
+0;ModelEntity1.61;Input@Server_Pesado;0.OnEnteredToAssociatedObject;[Begin];Process 'Input@Server_Pesado.OnEnteredToAssociatedObject' execution started.
+0;ModelEntity1.61;Input@Server_Pesado;0.OnEnteredToAssociatedObject;[Fire] EnteredEvent;Firing event 'Input@Server_Pesado.Entered'.
+0;ModelEntity1.61;Input@Server_Pesado;0.OnEnteredToAssociatedObject;[Transfer] ToAssociatedObject;Entity 'ModelEntity1.61' transferring from '[Node] Input@Server_Pesado' into object 'Server_Pesado'.
+0;ModelEntity1.61;Input@Server_Pesado;0.OnEnteredToAssociatedObject;[Transfer] ToAssociatedObject;Entity 'ModelEntity1.61' transferring from '[Node] Input@Server_Pesado' into station 'Server_Pesado.InputBuffer'.
+0;ModelEntity1.61;Source_LotesProduccion;3.OnEnteredProcessing;[End];Process 'Source_LotesProduccion.OnEnteredProcessing' execution ended.
+0;ModelEntity1.61;Server_Pesado;8.OnEnteredInputBuffer;[Begin];Process 'Server_Pesado.OnEnteredInputBuffer' execution started.
+0;ModelEntity1.61;Server_Pesado;8.OnEnteredInputBuffer;[Execute] EnteredAddOnProcess;Executing process 'P_WIP_Pesado_Entrar'.
+0;ModelEntity1.61;Model_Panaderia;3.P_WIP_Pesado_Entrar;[Begin];Process 'P_WIP_Pesado_Entrar' execution started.
+0;ModelEntity1.61;Model_Panaderia;3.P_WIP_Pesado_Entrar;[Assign] Assign11;Assigning state variable 'Model_Panaderia.WIP_Pesado' the value '5'. Previous value was '4'.
+0;ModelEntity1.61;Model_Panaderia;3.P_WIP_Pesado_Entrar;[End];Process 'P_WIP_Pesado_Entrar' execution ended.
+0;ModelEntity1.61;Server_Pesado;8.OnEnteredInputBuffer;[EndTransfer] IntoInputBuffer;Entity 'ModelEntity1.61' ending transfer into station 'Server_Pesado.InputBuffer'.
+0;ModelEntity1.61;Output@Source_LotesProduccion;3.OnExited;[Begin];Process 'Output@Source_LotesProduccion.OnExited' execution started.
+0;ModelEntity1.61;Output@Source_LotesProduccion;3.OnExited;[Fire] ExitedEvent;Firing event 'Output@Source_LotesProduccion.Exited'.
+0;ModelEntity1.61;Output@Source_LotesProduccion;3.OnExited;[End];Process 'Output@Source_LotesProduccion.OnExited' execution ended.
+0;ModelEntity1.61;Input@Server_Pesado;3.OnExited;[Begin];Process 'Input@Server_Pesado.OnExited' execution started.
+0;ModelEntity1.61;Input@Server_Pesado;3.OnExited;[Fire] ExitedEvent;Firing event 'Input@Server_Pesado.Exited'.
+0;ModelEntity1.61;Input@Server_Pesado;3.OnExited;[End];Process 'Input@Server_Pesado.OnExited' execution ended.
+0;ModelEntity1.61;Server_Pesado;8.OnEnteredInputBuffer;[Seize] Server;Object 'ModelEntity1.61' waiting to seize '1' resource(s) of resource type '[ParentObject] Server_Pesado'.
+0;ModelEntity1.61;Source_LotesProduccion;4.OnEnteredOutputBuffer;[End];Process 'Source_LotesProduccion.OnEnteredOutputBuffer' execution ended.
+0;ModelEntity1.61;Output@Source_LotesProduccion;1.OnEnteredFromAssociatedObject;[End];Process 'Output@Source_LotesProduccion.OnEnteredFromAssociatedObject' execution ended.
+0;ModelEntity1.61;Input@Server_Pesado;0.OnEnteredToAssociatedObject;[End];Process 'Input@Server_Pesado.OnEnteredToAssociatedObject' execution ended.
+0;--;--;--;--;Firing event 'Source_LotesProduccion.EntityArrivals.Event'.
+0;--;--;--;--;Time until next event of timer 'Source_LotesProduccion.EntityArrivals' is '0' Minutes.
+0;Source_LotesProduccion;Source_LotesProduccion;0.OnEntityArrival;[Begin];Process 'Source_LotesProduccion.OnEntityArrival' execution started.
+0;Source_LotesProduccion;Source_LotesProduccion;0.OnEntityArrival;[Create] Entities;Creating '1' new object(s) of entity type 'ModelEntity1'.
+0;Source_LotesProduccion;Source_LotesProduccion;0.OnEntityArrival;[Create] Entities;Created object 'ModelEntity1.62'.
+0;ModelEntity1.62;Source_LotesProduccion;1.OnEntityArrival;[Transfer] ToProcessing;Entity 'ModelEntity1.62' transferring from '[FreeSpace] Source_LotesProduccion' into station 'Source_LotesProduccion.Processing'.
+0;Source_LotesProduccion;Source_LotesProduccion;0.OnEntityArrival;[End];Process 'Source_LotesProduccion.OnEntityArrival' execution ended.
+0;ModelEntity1.62;Source_LotesProduccion;4.OnEnteredProcessing;[Begin];Process 'Source_LotesProduccion.OnEnteredProcessing' execution started.
+0;ModelEntity1.62;Source_LotesProduccion;4.OnEnteredProcessing;[EndTransfer] IntoProcessing;Entity 'ModelEntity1.62' ending transfer into station 'Source_LotesProduccion.Processing'.
+0;ModelEntity1.62;Source_LotesProduccion;4.OnEnteredProcessing;[Execute] CreatedEntityAddOnProcess;Executing process 'P_CrearLote'.
+0;ModelEntity1.62;Model_Panaderia;0.P_CrearLote;[Begin];Process 'P_CrearLote' execution started.
+0;ModelEntity1.62;Model_Panaderia;0.P_CrearLote;[Assign] Assign_Values;Assigning state variable 'ModelEntity1.62.ProductoIdx' the value '1'. Previous value was '0'.
+0;ModelEntity1.62;Model_Panaderia;0.P_CrearLote;[Assign] Assign_Values;Assigning state variable 'ModelEntity1.62.KgLote' the value '600'. Previous value was '0'.
+0;ModelEntity1.62;Model_Panaderia;0.P_CrearLote;[Assign] Assign_Values;Assigning state variable 'ModelEntity1.62.CarrosReq' the value '1'. Previous value was '0'.
+0;ModelEntity1.62;Model_Panaderia;0.P_CrearLote;[Assign] Assign_Values;Assigning state variable 'ModelEntity1.62.BandejasReq' the value '1'. Previous value was '0'.
+0;ModelEntity1.62;Model_Panaderia;0.P_CrearLote;[Assign] AssignTemp;Assigning state variable 'ModelEntity1.62.FamiliaHorno' the value '1'. Previous value was '0'.
+0;ModelEntity1.62;Model_Panaderia;0.P_CrearLote;[End];Process 'P_CrearLote' execution ended.
+0;ModelEntity1.62;Source_LotesProduccion;4.OnEnteredProcessing;[Transfer] ToOutputBuffer;Entity 'ModelEntity1.62' transferring from '[Station] Source_LotesProduccion.Processing' into station 'Source_LotesProduccion.OutputBuffer'.
+0;ModelEntity1.62;Source_LotesProduccion;1.OnEntityArrival;[End];Process 'Source_LotesProduccion.OnEntityArrival' execution ended.
+0;ModelEntity1.62;Source_LotesProduccion;0.OnEnteredOutputBuffer;[Begin];Process 'Source_LotesProduccion.OnEnteredOutputBuffer' execution started.
+0;ModelEntity1.62;Source_LotesProduccion;0.OnEnteredOutputBuffer;[EndTransfer] IntoOutputBuffer;Entity 'ModelEntity1.62' ending transfer into station 'Source_LotesProduccion.OutputBuffer'.
+0;ModelEntity1.62;Source_LotesProduccion;0.OnEnteredOutputBuffer;[Transfer] ToOutputNode;Entity 'ModelEntity1.62' transferring from '[Station] Source_LotesProduccion.OutputBuffer' into node 'Output@Source_LotesProduccion'.
+0;ModelEntity1.62;Output@Source_LotesProduccion;1.OnEnteredFromAssociatedObject;[Begin];Process 'Output@Source_LotesProduccion.OnEnteredFromAssociatedObject' execution started.
+0;ModelEntity1.62;Output@Source_LotesProduccion;1.OnEnteredFromAssociatedObject;[Fire] EnteredEvent;Firing event 'Output@Source_LotesProduccion.Entered'.
+0;ModelEntity1.62;Output@Source_LotesProduccion;1.OnEnteredFromAssociatedObject;[Transfer] ToOutboundLink;Entity 'ModelEntity1.62' transferring from '[Node] Output@Source_LotesProduccion' into node 'Input@Server_Pesado'.
+0;ModelEntity1.62;Input@Server_Pesado;3.OnEnteredToAssociatedObject;[Begin];Process 'Input@Server_Pesado.OnEnteredToAssociatedObject' execution started.
+0;ModelEntity1.62;Input@Server_Pesado;3.OnEnteredToAssociatedObject;[Fire] EnteredEvent;Firing event 'Input@Server_Pesado.Entered'.
+0;ModelEntity1.62;Input@Server_Pesado;3.OnEnteredToAssociatedObject;[Transfer] ToAssociatedObject;Entity 'ModelEntity1.62' transferring from '[Node] Input@Server_Pesado' into object 'Server_Pesado'.
+0;ModelEntity1.62;Input@Server_Pesado;3.OnEnteredToAssociatedObject;[Transfer] ToAssociatedObject;Entity 'ModelEntity1.62' transferring from '[Node] Input@Server_Pesado' into station 'Server_Pesado.InputBuffer'.
+0;ModelEntity1.62;Source_LotesProduccion;4.OnEnteredProcessing;[End];Process 'Source_LotesProduccion.OnEnteredProcessing' execution ended.
+0;ModelEntity1.62;Server_Pesado;9.OnEnteredInputBuffer;[Begin];Process 'Server_Pesado.OnEnteredInputBuffer' execution started.
+0;ModelEntity1.62;Server_Pesado;9.OnEnteredInputBuffer;[Execute] EnteredAddOnProcess;Executing process 'P_WIP_Pesado_Entrar'.
+0;ModelEntity1.62;Model_Panaderia;4.P_WIP_Pesado_Entrar;[Begin];Process 'P_WIP_Pesado_Entrar' execution started.
+0;ModelEntity1.62;Model_Panaderia;4.P_WIP_Pesado_Entrar;[Assign] Assign11;Assigning state variable 'Model_Panaderia.WIP_Pesado' the value '6'. Previous value was '5'.
+0;ModelEntity1.62;Model_Panaderia;4.P_WIP_Pesado_Entrar;[End];Process 'P_WIP_Pesado_Entrar' execution ended.
+0;ModelEntity1.62;Server_Pesado;9.OnEnteredInputBuffer;[EndTransfer] IntoInputBuffer;Entity 'ModelEntity1.62' ending transfer into station 'Server_Pesado.InputBuffer'.
+0;ModelEntity1.62;Output@Source_LotesProduccion;4.OnExited;[Begin];Process 'Output@Source_LotesProduccion.OnExited' execution started.
+0;ModelEntity1.62;Output@Source_LotesProduccion;4.OnExited;[Fire] ExitedEvent;Firing event 'Output@Source_LotesProduccion.Exited'.
+0;ModelEntity1.62;Output@Source_LotesProduccion;4.OnExited;[End];Process 'Output@Source_LotesProduccion.OnExited' execution ended.
+0;ModelEntity1.62;Input@Server_Pesado;4.OnExited;[Begin];Process 'Input@Server_Pesado.OnExited' execution started.
+0;ModelEntity1.62;Input@Server_Pesado;4.OnExited;[Fire] ExitedEvent;Firing event 'Input@Server_Pesado.Exited'.
+0;ModelEntity1.62;Input@Server_Pesado;4.OnExited;[End];Process 'Input@Server_Pesado.OnExited' execution ended.
+0;ModelEntity1.62;Server_Pesado;9.OnEnteredInputBuffer;[Seize] Server;Object 'ModelEntity1.62' waiting to seize '1' resource(s) of resource type '[ParentObject] Server_Pesado'.
+0;ModelEntity1.62;Source_LotesProduccion;0.OnEnteredOutputBuffer;[End];Process 'Source_LotesProduccion.OnEnteredOutputBuffer' execution ended.
+0;ModelEntity1.62;Output@Source_LotesProduccion;1.OnEnteredFromAssociatedObject;[End];Process 'Output@Source_LotesProduccion.OnEnteredFromAssociatedObject' execution ended.
+0;ModelEntity1.62;Input@Server_Pesado;3.OnEnteredToAssociatedObject;[End];Process 'Input@Server_Pesado.OnEnteredToAssociatedObject' execution ended.
+0;--;--;--;--;Firing event 'Source_LotesProduccion.EntityArrivals.Event'.
+0;--;--;--;--;Time until next event of timer 'Source_LotesProduccion.EntityArrivals' is '0' Minutes.
+0;Source_LotesProduccion;Source_LotesProduccion;3.OnEntityArrival;[Begin];Process 'Source_LotesProduccion.OnEntityArrival' execution started.
+0;Source_LotesProduccion;Source_LotesProduccion;3.OnEntityArrival;[Create] Entities;Creating '1' new object(s) of entity type 'ModelEntity1'.
+0;Source_LotesProduccion;Source_LotesProduccion;3.OnEntityArrival;[Create] Entities;Created object 'ModelEntity1.63'.
+0;ModelEntity1.63;Source_LotesProduccion;1.OnEntityArrival;[Transfer] ToProcessing;Entity 'ModelEntity1.63' transferring from '[FreeSpace] Source_LotesProduccion' into station 'Source_LotesProduccion.Processing'.
+0;Source_LotesProduccion;Source_LotesProduccion;3.OnEntityArrival;[End];Process 'Source_LotesProduccion.OnEntityArrival' execution ended.
+0;ModelEntity1.63;Source_LotesProduccion;0.OnEnteredProcessing;[Begin];Process 'Source_LotesProduccion.OnEnteredProcessing' execution started.
+0;ModelEntity1.63;Source_LotesProduccion;0.OnEnteredProcessing;[EndTransfer] IntoProcessing;Entity 'ModelEntity1.63' ending transfer into station 'Source_LotesProduccion.Processing'.
+0;ModelEntity1.63;Source_LotesProduccion;0.OnEnteredProcessing;[Execute] CreatedEntityAddOnProcess;Executing process 'P_CrearLote'.
+0;ModelEntity1.63;Model_Panaderia;3.P_CrearLote;[Begin];Process 'P_CrearLote' execution started.
+0;ModelEntity1.63;Model_Panaderia;3.P_CrearLote;[Assign] Assign_Values;Assigning state variable 'ModelEntity1.63.ProductoIdx' the value '1'. Previous value was '0'.
+0;ModelEntity1.63;Model_Panaderia;3.P_CrearLote;[Assign] Assign_Values;Assigning state variable 'ModelEntity1.63.KgLote' the value '600'. Previous value was '0'.
+0;ModelEntity1.63;Model_Panaderia;3.P_CrearLote;[Assign] Assign_Values;Assigning state variable 'ModelEntity1.63.CarrosReq' the value '1'. Previous value was '0'.
+0;ModelEntity1.63;Model_Panaderia;3.P_CrearLote;[Assign] Assign_Values;Assigning state variable 'ModelEntity1.63.BandejasReq' the value '1'. Previous value was '0'.
+0;ModelEntity1.63;Model_Panaderia;3.P_CrearLote;[Assign] AssignTemp;Assigning state variable 'ModelEntity1.63.FamiliaHorno' the value '1'. Previous value was '0'.
+0;ModelEntity1.63;Model_Panaderia;3.P_CrearLote;[End];Process 'P_CrearLote' execution ended.
+0;ModelEntity1.63;Source_LotesProduccion;0.OnEnteredProcessing;[Transfer] ToOutputBuffer;Entity 'ModelEntity1.63' transferring from '[Station] Source_LotesProduccion.Processing' into station 'Source_LotesProduccion.OutputBuffer'.
+0;ModelEntity1.63;Source_LotesProduccion;1.OnEntityArrival;[End];Process 'Source_LotesProduccion.OnEntityArrival' execution ended.
+0;ModelEntity1.63;Source_LotesProduccion;3.OnEnteredOutputBuffer;[Begin];Process 'Source_LotesProduccion.OnEnteredOutputBuffer' execution started.
+0;ModelEntity1.63;Source_LotesProduccion;3.OnEnteredOutputBuffer;[EndTransfer] IntoOutputBuffer;Entity 'ModelEntity1.63' ending transfer into station 'Source_LotesProduccion.OutputBuffer'.
+0;ModelEntity1.63;Source_LotesProduccion;3.OnEnteredOutputBuffer;[Transfer] ToOutputNode;Entity 'ModelEntity1.63' transferring from '[Station] Source_LotesProduccion.OutputBuffer' into node 'Output@Source_LotesProduccion'.
+0;ModelEntity1.63;Output@Source_LotesProduccion;1.OnEnteredFromAssociatedObject;[Begin];Process 'Output@Source_LotesProduccion.OnEnteredFromAssociatedObject' execution started.
+0;ModelEntity1.63;Output@Source_LotesProduccion;1.OnEnteredFromAssociatedObject;[Fire] EnteredEvent;Firing event 'Output@Source_LotesProduccion.Entered'.
+0;ModelEntity1.63;Output@Source_LotesProduccion;1.OnEnteredFromAssociatedObject;[Transfer] ToOutboundLink;Entity 'ModelEntity1.63' transferring from '[Node] Output@Source_LotesProduccion' into node 'Input@Server_Pesado'.
+0;ModelEntity1.63;Input@Server_Pesado;4.OnEnteredToAssociatedObject;[Begin];Process 'Input@Server_Pesado.OnEnteredToAssociatedObject' execution started.
+0;ModelEntity1.63;Input@Server_Pesado;4.OnEnteredToAssociatedObject;[Fire] EnteredEvent;Firing event 'Input@Server_Pesado.Entered'.
+0;ModelEntity1.63;Input@Server_Pesado;4.OnEnteredToAssociatedObject;[Transfer] ToAssociatedObject;Entity 'ModelEntity1.63' transferring from '[Node] Input@Server_Pesado' into object 'Server_Pesado'.
+0;ModelEntity1.63;Input@Server_Pesado;4.OnEnteredToAssociatedObject;[Transfer] ToAssociatedObject;Entity 'ModelEntity1.63' transferring from '[Node] Input@Server_Pesado' into station 'Server_Pesado.InputBuffer'.
+0;ModelEntity1.63;Source_LotesProduccion;0.OnEnteredProcessing;[End];Process 'Source_LotesProduccion.OnEnteredProcessing' execution ended.
+0;ModelEntity1.63;Server_Pesado;10.OnEnteredInputBuffer;[Begin];Process 'Server_Pesado.OnEnteredInputBuffer' execution started.
+0;ModelEntity1.63;Server_Pesado;10.OnEnteredInputBuffer;[Execute] EnteredAddOnProcess;Executing process 'P_WIP_Pesado_Entrar'.
+0;ModelEntity1.63;Model_Panaderia;0.P_WIP_Pesado_Entrar;[Begin];Process 'P_WIP_Pesado_Entrar' execution started.
+0;ModelEntity1.63;Model_Panaderia;0.P_WIP_Pesado_Entrar;[Assign] Assign11;Assigning state variable 'Model_Panaderia.WIP_Pesado' the value '7'. Previous value was '6'.
+0;ModelEntity1.63;Model_Panaderia;0.P_WIP_Pesado_Entrar;[End];Process 'P_WIP_Pesado_Entrar' execution ended.
+0;ModelEntity1.63;Server_Pesado;10.OnEnteredInputBuffer;[EndTransfer] IntoInputBuffer;Entity 'ModelEntity1.63' ending transfer into station 'Server_Pesado.InputBuffer'.
+0;ModelEntity1.63;Output@Source_LotesProduccion;0.OnExited;[Begin];Process 'Output@Source_LotesProduccion.OnExited' execution started.
+0;ModelEntity1.63;Output@Source_LotesProduccion;0.OnExited;[Fire] ExitedEvent;Firing event 'Output@Source_LotesProduccion.Exited'.
+0;ModelEntity1.63;Output@Source_LotesProduccion;0.OnExited;[End];Process 'Output@Source_LotesProduccion.OnExited' execution ended.
+0;ModelEntity1.63;Input@Server_Pesado;0.OnExited;[Begin];Process 'Input@Server_Pesado.OnExited' execution started.
+0;ModelEntity1.63;Input@Server_Pesado;0.OnExited;[Fire] ExitedEvent;Firing event 'Input@Server_Pesado.Exited'.
+0;ModelEntity1.63;Input@Server_Pesado;0.OnExited;[End];Process 'Input@Server_Pesado.OnExited' execution ended.
+0;ModelEntity1.63;Server_Pesado;10.OnEnteredInputBuffer;[Seize] Server;Object 'ModelEntity1.63' waiting to seize '1' resource(s) of resource type '[ParentObject] Server_Pesado'.
+0;ModelEntity1.63;Source_LotesProduccion;3.OnEnteredOutputBuffer;[End];Process 'Source_LotesProduccion.OnEnteredOutputBuffer' execution ended.
+0;ModelEntity1.63;Output@Source_LotesProduccion;1.OnEnteredFromAssociatedObject;[End];Process 'Output@Source_LotesProduccion.OnEnteredFromAssociatedObject' execution ended.
+0;ModelEntity1.63;Input@Server_Pesado;4.OnEnteredToAssociatedObject;[End];Process 'Input@Server_Pesado.OnEnteredToAssociatedObject' execution ended.
+0;--;--;--;--;Firing event 'Source_LotesProduccion.EntityArrivals.Event'.
+0;--;--;--;--;Time until next event of timer 'Source_LotesProduccion.EntityArrivals' is '0' Minutes.
+0;Source_LotesProduccion;Source_LotesProduccion;4.OnEntityArrival;[Begin];Process 'Source_LotesProduccion.OnEntityArrival' execution started.
+0;Source_LotesProduccion;Source_LotesProduccion;4.OnEntityArrival;[Create] Entities;Creating '1' new object(s) of entity type 'ModelEntity1'.
+0;Source_LotesProduccion;Source_LotesProduccion;4.OnEntityArrival;[Create] Entities;Created object 'ModelEntity1.64'.
+0;ModelEntity1.64;Source_LotesProduccion;1.OnEntityArrival;[Transfer] ToProcessing;Entity 'ModelEntity1.64' transferring from '[FreeSpace] Source_LotesProduccion' into station 'Source_LotesProduccion.Processing'.
+0;Source_LotesProduccion;Source_LotesProduccion;4.OnEntityArrival;[End];Process 'Source_LotesProduccion.OnEntityArrival' execution ended.
+0;ModelEntity1.64;Source_LotesProduccion;3.OnEnteredProcessing;[Begin];Process 'Source_LotesProduccion.OnEnteredProcessing' execution started.
+0;ModelEntity1.64;Source_LotesProduccion;3.OnEnteredProcessing;[EndTransfer] IntoProcessing;Entity 'ModelEntity1.64' ending transfer into station 'Source_LotesProduccion.Processing'.
+0;ModelEntity1.64;Source_LotesProduccion;3.OnEnteredProcessing;[Execute] CreatedEntityAddOnProcess;Executing process 'P_CrearLote'.
+0;ModelEntity1.64;Model_Panaderia;4.P_CrearLote;[Begin];Process 'P_CrearLote' execution started.
+0;ModelEntity1.64;Model_Panaderia;4.P_CrearLote;[Assign] Assign_Values;Assigning state variable 'ModelEntity1.64.ProductoIdx' the value '1'. Previous value was '0'.
+0;ModelEntity1.64;Model_Panaderia;4.P_CrearLote;[Assign] Assign_Values;Assigning state variable 'ModelEntity1.64.KgLote' the value '600'. Previous value was '0'.
+0;ModelEntity1.64;Model_Panaderia;4.P_CrearLote;[Assign] Assign_Values;Assigning state variable 'ModelEntity1.64.CarrosReq' the value '1'. Previous value was '0'.
+0;ModelEntity1.64;Model_Panaderia;4.P_CrearLote;[Assign] Assign_Values;Assigning state variable 'ModelEntity1.64.BandejasReq' the value '1'. Previous value was '0'.
+0;ModelEntity1.64;Model_Panaderia;4.P_CrearLote;[Assign] AssignTemp;Assigning state variable 'ModelEntity1.64.FamiliaHorno' the value '1'. Previous value was '0'.
+0;ModelEntity1.64;Model_Panaderia;4.P_CrearLote;[End];Process 'P_CrearLote' execution ended.
+0;ModelEntity1.64;Source_LotesProduccion;3.OnEnteredProcessing;[Transfer] ToOutputBuffer;Entity 'ModelEntity1.64' transferring from '[Station] Source_LotesProduccion.Processing' into station 'Source_LotesProduccion.OutputBuffer'.
+0;ModelEntity1.64;Source_LotesProduccion;1.OnEntityArrival;[End];Process 'Source_LotesProduccion.OnEntityArrival' execution ended.
+0;ModelEntity1.64;Source_LotesProduccion;4.OnEnteredOutputBuffer;[Begin];Process 'Source_LotesProduccion.OnEnteredOutputBuffer' execution started.
+0;ModelEntity1.64;Source_LotesProduccion;4.OnEnteredOutputBuffer;[EndTransfer] IntoOutputBuffer;Entity 'ModelEntity1.64' ending transfer into station 'Source_LotesProduccion.OutputBuffer'.
+0;ModelEntity1.64;Source_LotesProduccion;4.OnEnteredOutputBuffer;[Transfer] ToOutputNode;Entity 'ModelEntity1.64' transferring from '[Station] Source_LotesProduccion.OutputBuffer' into node 'Output@Source_LotesProduccion'.
+0;ModelEntity1.64;Output@Source_LotesProduccion;1.OnEnteredFromAssociatedObject;[Begin];Process 'Output@Source_LotesProduccion.OnEnteredFromAssociatedObject' execution started.
+0;ModelEntity1.64;Output@Source_LotesProduccion;1.OnEnteredFromAssociatedObject;[Fire] EnteredEvent;Firing event 'Output@Source_LotesProduccion.Entered'.
+0;ModelEntity1.64;Output@Source_LotesProduccion;1.OnEnteredFromAssociatedObject;[Transfer] ToOutboundLink;Entity 'ModelEntity1.64' transferring from '[Node] Output@Source_LotesProduccion' into node 'Input@Server_Pesado'.
+0;ModelEntity1.64;Input@Server_Pesado;0.OnEnteredToAssociatedObject;[Begin];Process 'Input@Server_Pesado.OnEnteredToAssociatedObject' execution started.
+0;ModelEntity1.64;Input@Server_Pesado;0.OnEnteredToAssociatedObject;[Fire] EnteredEvent;Firing event 'Input@Server_Pesado.Entered'.
+0;ModelEntity1.64;Input@Server_Pesado;0.OnEnteredToAssociatedObject;[Transfer] ToAssociatedObject;Entity 'ModelEntity1.64' transferring from '[Node] Input@Server_Pesado' into object 'Server_Pesado'.
+0;ModelEntity1.64;Input@Server_Pesado;0.OnEnteredToAssociatedObject;[Transfer] ToAssociatedObject;Entity 'ModelEntity1.64' transferring from '[Node] Input@Server_Pesado' into station 'Server_Pesado.InputBuffer'.
+0;ModelEntity1.64;Source_LotesProduccion;3.OnEnteredProcessing;[End];Process 'Source_LotesProduccion.OnEnteredProcessing' execution ended.
+0;ModelEntity1.64;Server_Pesado;11.OnEnteredInputBuffer;[Begin];Process 'Server_Pesado.OnEnteredInputBuffer' execution started.
+0;ModelEntity1.64;Server_Pesado;11.OnEnteredInputBuffer;[Execute] EnteredAddOnProcess;Executing process 'P_WIP_Pesado_Entrar'.
+0;ModelEntity1.64;Model_Panaderia;3.P_WIP_Pesado_Entrar;[Begin];Process 'P_WIP_Pesado_Entrar' execution started.
+0;ModelEntity1.64;Model_Panaderia;3.P_WIP_Pesado_Entrar;[Assign] Assign11;Assigning state variable 'Model_Panaderia.WIP_Pesado' the value '8'. Previous value was '7'.
+0;ModelEntity1.64;Model_Panaderia;3.P_WIP_Pesado_Entrar;[End];Process 'P_WIP_Pesado_Entrar' execution ended.
+0;ModelEntity1.64;Server_Pesado;11.OnEnteredInputBuffer;[EndTransfer] IntoInputBuffer;Entity 'ModelEntity1.64' ending transfer into station 'Server_Pesado.InputBuffer'.
+0;ModelEntity1.64;Output@Source_LotesProduccion;3.OnExited;[Begin];Process 'Output@Source_LotesProduccion.OnExited' execution started.
+0;ModelEntity1.64;Output@Source_LotesProduccion;3.OnExited;[Fire] ExitedEvent;Firing event 'Output@Source_LotesProduccion.Exited'.
+0;ModelEntity1.64;Output@Source_LotesProduccion;3.OnExited;[End];Process 'Output@Source_LotesProduccion.OnExited' execution ended.
+0;ModelEntity1.64;Input@Server_Pesado;3.OnExited;[Begin];Process 'Input@Server_Pesado.OnExited' execution started.
+0;ModelEntity1.64;Input@Server_Pesado;3.OnExited;[Fire] ExitedEvent;Firing event 'Input@Server_Pesado.Exited'.
+0;ModelEntity1.64;Input@Server_Pesado;3.OnExited;[End];Process 'Input@Server_Pesado.OnExited' execution ended.
+0;ModelEntity1.64;Server_Pesado;11.OnEnteredInputBuffer;[Seize] Server;Object 'ModelEntity1.64' waiting to seize '1' resource(s) of resource type '[ParentObject] Server_Pesado'.
+0;ModelEntity1.64;Source_LotesProduccion;4.OnEnteredOutputBuffer;[End];Process 'Source_LotesProduccion.OnEnteredOutputBuffer' execution ended.
+0;ModelEntity1.64;Output@Source_LotesProduccion;1.OnEnteredFromAssociatedObject;[End];Process 'Output@Source_LotesProduccion.OnEnteredFromAssociatedObject' execution ended.
+0;ModelEntity1.64;Input@Server_Pesado;0.OnEnteredToAssociatedObject;[End];Process 'Input@Server_Pesado.OnEnteredToAssociatedObject' execution ended.
+0;--;--;--;--;Firing event 'Source_LotesProduccion.EntityArrivals.Event'.
+0;--;--;--;--;Time until next event of timer 'Source_LotesProduccion.EntityArrivals' is '0' Minutes.
+0;Source_LotesProduccion;Source_LotesProduccion;0.OnEntityArrival;[Begin];Process 'Source_LotesProduccion.OnEntityArrival' execution started.
+0;Source_LotesProduccion;Source_LotesProduccion;0.OnEntityArrival;[Create] Entities;Creating '1' new object(s) of entity type 'ModelEntity1'.
+0;Source_LotesProduccion;Source_LotesProduccion;0.OnEntityArrival;[Create] Entities;Created object 'ModelEntity1.65'.
+0;ModelEntity1.65;Source_LotesProduccion;1.OnEntityArrival;[Transfer] ToProcessing;Entity 'ModelEntity1.65' transferring from '[FreeSpace] Source_LotesProduccion' into station 'Source_LotesProduccion.Processing'.
+0;Source_LotesProduccion;Source_LotesProduccion;0.OnEntityArrival;[End];Process 'Source_LotesProduccion.OnEntityArrival' execution ended.
+0;ModelEntity1.65;Source_LotesProduccion;4.OnEnteredProcessing;[Begin];Process 'Source_LotesProduccion.OnEnteredProcessing' execution started.
+0;ModelEntity1.65;Source_LotesProduccion;4.OnEnteredProcessing;[EndTransfer] IntoProcessing;Entity 'ModelEntity1.65' ending transfer into station 'Source_LotesProduccion.Processing'.
+0;ModelEntity1.65;Source_LotesProduccion;4.OnEnteredProcessing;[Execute] CreatedEntityAddOnProcess;Executing process 'P_CrearLote'.
+0;ModelEntity1.65;Model_Panaderia;0.P_CrearLote;[Begin];Process 'P_CrearLote' execution started.
+0;ModelEntity1.65;Model_Panaderia;0.P_CrearLote;[Assign] Assign_Values;Assigning state variable 'ModelEntity1.65.ProductoIdx' the value '1'. Previous value was '0'.
+0;ModelEntity1.65;Model_Panaderia;0.P_CrearLote;[Assign] Assign_Values;Assigning state variable 'ModelEntity1.65.KgLote' the value '600'. Previous value was '0'.
+0;ModelEntity1.65;Model_Panaderia;0.P_CrearLote;[Assign] Assign_Values;Assigning state variable 'ModelEntity1.65.CarrosReq' the value '1'. Previous value was '0'.
+0;ModelEntity1.65;Model_Panaderia;0.P_CrearLote;[Assign] Assign_Values;Assigning state variable 'ModelEntity1.65.BandejasReq' the value '1'. Previous value was '0'.
+0;ModelEntity1.65;Model_Panaderia;0.P_CrearLote;[Assign] AssignTemp;Assigning state variable 'ModelEntity1.65.FamiliaHorno' the value '1'. Previous value was '0'.
+0;ModelEntity1.65;Model_Panaderia;0.P_CrearLote;[End];Process 'P_CrearLote' execution ended.
+0;ModelEntity1.65;Source_LotesProduccion;4.OnEnteredProcessing;[Transfer] ToOutputBuffer;Entity 'ModelEntity1.65' transferring from '[Station] Source_LotesProduccion.Processing' into station 'Source_LotesProduccion.OutputBuffer'.
+0;ModelEntity1.65;Source_LotesProduccion;1.OnEntityArrival;[End];Process 'Source_LotesProduccion.OnEntityArrival' execution ended.
+0;ModelEntity1.65;Source_LotesProduccion;0.OnEnteredOutputBuffer;[Begin];Process 'Source_LotesProduccion.OnEnteredOutputBuffer' execution started.
+0;ModelEntity1.65;Source_LotesProduccion;0.OnEnteredOutputBuffer;[EndTransfer] IntoOutputBuffer;Entity 'ModelEntity1.65' ending transfer into station 'Source_LotesProduccion.OutputBuffer'.
+0;ModelEntity1.65;Source_LotesProduccion;0.OnEnteredOutputBuffer;[Transfer] ToOutputNode;Entity 'ModelEntity1.65' transferring from '[Station] Source_LotesProduccion.OutputBuffer' into node 'Output@Source_LotesProduccion'.
+0;ModelEntity1.65;Output@Source_LotesProduccion;1.OnEnteredFromAssociatedObject;[Begin];Process 'Output@Source_LotesProduccion.OnEnteredFromAssociatedObject' execution started.
+0;ModelEntity1.65;Output@Source_LotesProduccion;1.OnEnteredFromAssociatedObject;[Fire] EnteredEvent;Firing event 'Output@Source_LotesProduccion.Entered'.
+0;ModelEntity1.65;Output@Source_LotesProduccion;1.OnEnteredFromAssociatedObject;[Transfer] ToOutboundLink;Entity 'ModelEntity1.65' transferring from '[Node] Output@Source_LotesProduccion' into node 'Input@Server_Pesado'.
+0;ModelEntity1.65;Input@Server_Pesado;3.OnEnteredToAssociatedObject;[Begin];Process 'Input@Server_Pesado.OnEnteredToAssociatedObject' execution started.
+0;ModelEntity1.65;Input@Server_Pesado;3.OnEnteredToAssociatedObject;[Fire] EnteredEvent;Firing event 'Input@Server_Pesado.Entered'.
+0;ModelEntity1.65;Input@Server_Pesado;3.OnEnteredToAssociatedObject;[Transfer] ToAssociatedObject;Entity 'ModelEntity1.65' transferring from '[Node] Input@Server_Pesado' into object 'Server_Pesado'.
+0;ModelEntity1.65;Input@Server_Pesado;3.OnEnteredToAssociatedObject;[Transfer] ToAssociatedObject;Entity 'ModelEntity1.65' transferring from '[Node] Input@Server_Pesado' into station 'Server_Pesado.InputBuffer'.
+0;ModelEntity1.65;Source_LotesProduccion;4.OnEnteredProcessing;[End];Process 'Source_LotesProduccion.OnEnteredProcessing' execution ended.
+0;ModelEntity1.65;Server_Pesado;12.OnEnteredInputBuffer;[Begin];Process 'Server_Pesado.OnEnteredInputBuffer' execution started.
+0;ModelEntity1.65;Server_Pesado;12.OnEnteredInputBuffer;[Execute] EnteredAddOnProcess;Executing process 'P_WIP_Pesado_Entrar'.
+0;ModelEntity1.65;Model_Panaderia;4.P_WIP_Pesado_Entrar;[Begin];Process 'P_WIP_Pesado_Entrar' execution started.
+0;ModelEntity1.65;Model_Panaderia;4.P_WIP_Pesado_Entrar;[Assign] Assign11;Assigning state variable 'Model_Panaderia.WIP_Pesado' the value '9'. Previous value was '8'.
+0;ModelEntity1.65;Model_Panaderia;4.P_WIP_Pesado_Entrar;[End];Process 'P_WIP_Pesado_Entrar' execution ended.
+0;ModelEntity1.65;Server_Pesado;12.OnEnteredInputBuffer;[EndTransfer] IntoInputBuffer;Entity 'ModelEntity1.65' ending transfer into station 'Server_Pesado.InputBuffer'.
+0;ModelEntity1.65;Output@Source_LotesProduccion;4.OnExited;[Begin];Process 'Output@Source_LotesProduccion.OnExited' execution started.
+0;ModelEntity1.65;Output@Source_LotesProduccion;4.OnExited;[Fire] ExitedEvent;Firing event 'Output@Source_LotesProduccion.Exited'.
+0;ModelEntity1.65;Output@Source_LotesProduccion;4.OnExited;[End];Process 'Output@Source_LotesProduccion.OnExited' execution ended.
+0;ModelEntity1.65;Input@Server_Pesado;4.OnExited;[Begin];Process 'Input@Server_Pesado.OnExited' execution started.
+0;ModelEntity1.65;Input@Server_Pesado;4.OnExited;[Fire] ExitedEvent;Firing event 'Input@Server_Pesado.Exited'.
+0;ModelEntity1.65;Input@Server_Pesado;4.OnExited;[End];Process 'Input@Server_Pesado.OnExited' execution ended.
+0;ModelEntity1.65;Server_Pesado;12.OnEnteredInputBuffer;[Seize] Server;Object 'ModelEntity1.65' waiting to seize '1' resource(s) of resource type '[ParentObject] Server_Pesado'.
+0;ModelEntity1.65;Source_LotesProduccion;0.OnEnteredOutputBuffer;[End];Process 'Source_LotesProduccion.OnEnteredOutputBuffer' execution ended.
+0;ModelEntity1.65;Output@Source_LotesProduccion;1.OnEnteredFromAssociatedObject;[End];Process 'Output@Source_LotesProduccion.OnEnteredFromAssociatedObject' execution ended.
+0;ModelEntity1.65;Input@Server_Pesado;3.OnEnteredToAssociatedObject;[End];Process 'Input@Server_Pesado.OnEnteredToAssociatedObject' execution ended.
+0;--;--;--;--;Firing event 'Source_LotesProduccion.EntityArrivals.Event'.
+0;--;--;--;--;Timer ‘Source_LotesProduccion.EntityArrivals’ stopping condition detected.
+0;Source_LotesProduccion;Source_LotesProduccion;3.OnEntityArrival;[Begin];Process 'Source_LotesProduccion.OnEntityArrival' execution started.
+0;Source_LotesProduccion;Source_LotesProduccion;3.OnEntityArrival;[Create] Entities;Creating '1' new object(s) of entity type 'ModelEntity1'.
+0;Source_LotesProduccion;Source_LotesProduccion;3.OnEntityArrival;[Create] Entities;Created object 'ModelEntity1.66'.
+0;ModelEntity1.66;Source_LotesProduccion;1.OnEntityArrival;[Transfer] ToProcessing;Entity 'ModelEntity1.66' transferring from '[FreeSpace] Source_LotesProduccion' into station 'Source_LotesProduccion.Processing'.
+0;Source_LotesProduccion;Source_LotesProduccion;3.OnEntityArrival;[End];Process 'Source_LotesProduccion.OnEntityArrival' execution ended.
+0;ModelEntity1.66;Source_LotesProduccion;0.OnEnteredProcessing;[Begin];Process 'Source_LotesProduccion.OnEnteredProcessing' execution started.
+0;ModelEntity1.66;Source_LotesProduccion;0.OnEnteredProcessing;[EndTransfer] IntoProcessing;Entity 'ModelEntity1.66' ending transfer into station 'Source_LotesProduccion.Processing'.
+0;ModelEntity1.66;Source_LotesProduccion;0.OnEnteredProcessing;[Execute] CreatedEntityAddOnProcess;Executing process 'P_CrearLote'.
+0;ModelEntity1.66;Model_Panaderia;3.P_CrearLote;[Begin];Process 'P_CrearLote' execution started.
+0;ModelEntity1.66;Model_Panaderia;3.P_CrearLote;[Assign] Assign_Values;Assigning state variable 'ModelEntity1.66.ProductoIdx' the value '1'. Previous value was '0'.
+0;ModelEntity1.66;Model_Panaderia;3.P_CrearLote;[Assign] Assign_Values;Assigning state variable 'ModelEntity1.66.KgLote' the value '600'. Previous value was '0'.
+0;ModelEntity1.66;Model_Panaderia;3.P_CrearLote;[Assign] Assign_Values;Assigning state variable 'ModelEntity1.66.CarrosReq' the value '1'. Previous value was '0'.
+0;ModelEntity1.66;Model_Panaderia;3.P_CrearLote;[Assign] Assign_Values;Assigning state variable 'ModelEntity1.66.BandejasReq' the value '1'. Previous value was '0'.
+0;ModelEntity1.66;Model_Panaderia;3.P_CrearLote;[Assign] AssignTemp;Assigning state variable 'ModelEntity1.66.FamiliaHorno' the value '1'. Previous value was '0'.
+0;ModelEntity1.66;Model_Panaderia;3.P_CrearLote;[End];Process 'P_CrearLote' execution ended.
+0;ModelEntity1.66;Source_LotesProduccion;0.OnEnteredProcessing;[Transfer] ToOutputBuffer;Entity 'ModelEntity1.66' transferring from '[Station] Source_LotesProduccion.Processing' into station 'Source_LotesProduccion.OutputBuffer'.
+0;ModelEntity1.66;Source_LotesProduccion;1.OnEntityArrival;[End];Process 'Source_LotesProduccion.OnEntityArrival' execution ended.
+0;ModelEntity1.66;Source_LotesProduccion;3.OnEnteredOutputBuffer;[Begin];Process 'Source_LotesProduccion.OnEnteredOutputBuffer' execution started.
+0;ModelEntity1.66;Source_LotesProduccion;3.OnEnteredOutputBuffer;[EndTransfer] IntoOutputBuffer;Entity 'ModelEntity1.66' ending transfer into station 'Source_LotesProduccion.OutputBuffer'.
+0;ModelEntity1.66;Source_LotesProduccion;3.OnEnteredOutputBuffer;[Transfer] ToOutputNode;Entity 'ModelEntity1.66' transferring from '[Station] Source_LotesProduccion.OutputBuffer' into node 'Output@Source_LotesProduccion'.
+0;ModelEntity1.66;Output@Source_LotesProduccion;1.OnEnteredFromAssociatedObject;[Begin];Process 'Output@Source_LotesProduccion.OnEnteredFromAssociatedObject' execution started.
+0;ModelEntity1.66;Output@Source_LotesProduccion;1.OnEnteredFromAssociatedObject;[Fire] EnteredEvent;Firing event 'Output@Source_LotesProduccion.Entered'.
+0;ModelEntity1.66;Output@Source_LotesProduccion;1.OnEnteredFromAssociatedObject;[Transfer] ToOutboundLink;Entity 'ModelEntity1.66' transferring from '[Node] Output@Source_LotesProduccion' into node 'Input@Server_Pesado'.
+0;ModelEntity1.66;Input@Server_Pesado;4.OnEnteredToAssociatedObject;[Begin];Process 'Input@Server_Pesado.OnEnteredToAssociatedObject' execution started.
+0;ModelEntity1.66;Input@Server_Pesado;4.OnEnteredToAssociatedObject;[Fire] EnteredEvent;Firing event 'Input@Server_Pesado.Entered'.
+0;ModelEntity1.66;Input@Server_Pesado;4.OnEnteredToAssociatedObject;[Transfer] ToAssociatedObject;Entity 'ModelEntity1.66' transferring from '[Node] Input@Server_Pesado' into object 'Server_Pesado'.
+0;ModelEntity1.66;Input@Server_Pesado;4.OnEnteredToAssociatedObject;[Transfer] ToAssociatedObject;Entity 'ModelEntity1.66' transferring from '[Node] Input@Server_Pesado' into station 'Server_Pesado.InputBuffer'.
+0;ModelEntity1.66;Source_LotesProduccion;0.OnEnteredProcessing;[End];Process 'Source_LotesProduccion.OnEnteredProcessing' execution ended.
+0;ModelEntity1.66;Server_Pesado;13.OnEnteredInputBuffer;[Begin];Process 'Server_Pesado.OnEnteredInputBuffer' execution started.
+0;ModelEntity1.66;Server_Pesado;13.OnEnteredInputBuffer;[Execute] EnteredAddOnProcess;Executing process 'P_WIP_Pesado_Entrar'.
+0;ModelEntity1.66;Model_Panaderia;0.P_WIP_Pesado_Entrar;[Begin];Process 'P_WIP_Pesado_Entrar' execution started.
+0;ModelEntity1.66;Model_Panaderia;0.P_WIP_Pesado_Entrar;[Assign] Assign11;Assigning state variable 'Model_Panaderia.WIP_Pesado' the value '10'. Previous value was '9'.
+0;ModelEntity1.66;Model_Panaderia;0.P_WIP_Pesado_Entrar;[End];Process 'P_WIP_Pesado_Entrar' execution ended.
+0;ModelEntity1.66;Server_Pesado;13.OnEnteredInputBuffer;[EndTransfer] IntoInputBuffer;Entity 'ModelEntity1.66' ending transfer into station 'Server_Pesado.InputBuffer'.
+0;ModelEntity1.66;Output@Source_LotesProduccion;0.OnExited;[Begin];Process 'Output@Source_LotesProduccion.OnExited' execution started.
+0;ModelEntity1.66;Output@Source_LotesProduccion;0.OnExited;[Fire] ExitedEvent;Firing event 'Output@Source_LotesProduccion.Exited'.
+0;ModelEntity1.66;Output@Source_LotesProduccion;0.OnExited;[End];Process 'Output@Source_LotesProduccion.OnExited' execution ended.
+0;ModelEntity1.66;Input@Server_Pesado;0.OnExited;[Begin];Process 'Input@Server_Pesado.OnExited' execution started.
+0;ModelEntity1.66;Input@Server_Pesado;0.OnExited;[Fire] ExitedEvent;Firing event 'Input@Server_Pesado.Exited'.
+0;ModelEntity1.66;Input@Server_Pesado;0.OnExited;[End];Process 'Input@Server_Pesado.OnExited' execution ended.
+0;ModelEntity1.66;Server_Pesado;13.OnEnteredInputBuffer;[Seize] Server;Object 'ModelEntity1.66' waiting to seize '1' resource(s) of resource type '[ParentObject] Server_Pesado'.
+0;ModelEntity1.66;Source_LotesProduccion;3.OnEnteredOutputBuffer;[End];Process 'Source_LotesProduccion.OnEnteredOutputBuffer' execution ended.
+0;ModelEntity1.66;Output@Source_LotesProduccion;1.OnEnteredFromAssociatedObject;[End];Process 'Output@Source_LotesProduccion.OnEnteredFromAssociatedObject' execution ended.
+0;ModelEntity1.66;Input@Server_Pesado;4.OnEnteredToAssociatedObject;[End];Process 'Input@Server_Pesado.OnEnteredToAssociatedObject' execution ended.
+0;--;--;--;--;Resource 'Server_Pesado' checking allocation queue which contains '10' item(s).
+0;ModelEntity1.57;Server_Pesado;2.OnEnteredInputBuffer;[Seize] Server;Object 'ModelEntity1.57' checking availability to seize '1' resource(s) of resource type '[ParentObject] Server_Pesado'.
+0;ModelEntity1.57;Server_Pesado;2.OnEnteredInputBuffer;[Seize] Server;Object 'ModelEntity1.57' checking availability to seize '1' capacity unit(s) of resource 'Server_Pesado’.
+0;ModelEntity1.57;Server_Pesado;2.OnEnteredInputBuffer;[Seize] Server;Object 'ModelEntity1.57' found ‘1’ currently available capacity unit(s) of resource 'Server_Pesado’.
+0;ModelEntity1.57;Server_Pesado;2.OnEnteredInputBuffer;[Seize] Server;Object 'ModelEntity1.57' found '1' currently available resource(s) of resource type '[ParentObject] Server_Pesado'.
+0;--;--;--;--;Resource 'Server_Pesado' selecting object 'ModelEntity1.57' waiting at rank position '1' in allocation queue which contains '10' item(s).
+0;ModelEntity1.57;Server_Pesado;2.OnEnteredInputBuffer;[Seize] Server;Object 'ModelEntity1.57' seized '1' capacity unit(s) of resource 'Server_Pesado'.
+0;--;--;--;--;Changing from AutoState 'Starved' to 'Busy' on resource 'Server_Pesado'.
+0;--;--;--;--;Assigning state variable 'Server_Pesado.ResourceState' the value '1'. Previous value was '0'.
+0;ModelEntity1.57;Server_Pesado;2.OnEnteredInputBuffer;[Seize] Server;Object 'ModelEntity1.57' completed seize of '1' resource(s) of resource type '[ParentObject] Server_Pesado'.
+0;--;--;--;--;Resource 'Server_Pesado' checking allocation queue which contains '9' item(s).
+0;--;--;--;--;Resource 'Server_Pesado' unable to select any items waiting in its allocation queue. Resource is fully allocated or off shift.
+0;ModelEntity1.57;Server_Pesado;2.OnEnteredInputBuffer;[Seize] SecondaryResources;Object 'ModelEntity1.57' waiting to seize '1' resource(s) of resource type '[Specific] Resource_Panadero_1'.
+0;--;--;--;--;Resource 'Resource_Panadero_1' checking allocation queue which contains '1' item(s).
+0;ModelEntity1.57;Server_Pesado;2.OnEnteredInputBuffer;[Seize] SecondaryResources;Object 'ModelEntity1.57' checking availability to seize '1' resource(s) of resource type '[Specific] Resource_Panadero_1'.
+0;ModelEntity1.57;Server_Pesado;2.OnEnteredInputBuffer;[Seize] SecondaryResources;Object 'ModelEntity1.57' checking availability to seize '1' capacity unit(s) of resource 'Resource_Panadero_1’.
+0;ModelEntity1.57;Server_Pesado;2.OnEnteredInputBuffer;[Seize] SecondaryResources;Object 'ModelEntity1.57' found ‘1’ currently available capacity unit(s) of resource 'Resource_Panadero_1’.
+0;ModelEntity1.57;Server_Pesado;2.OnEnteredInputBuffer;[Seize] SecondaryResources;Object 'ModelEntity1.57' found '1' currently available resource(s) of resource type '[Specific] Resource_Panadero_1'.
+0;--;--;--;--;Resource 'Resource_Panadero_1' selecting object 'ModelEntity1.57' waiting at rank position '1' in allocation queue which contains '1' item(s).
+0;ModelEntity1.57;Server_Pesado;2.OnEnteredInputBuffer;[Seize] SecondaryResources;Object 'ModelEntity1.57' seized '1' capacity unit(s) of resource 'Resource_Panadero_1'.
+0;--;--;--;--;Changing from AutoState 'Starved' to 'Busy' on resource 'Resource_Panadero_1'.
+0;--;--;--;--;Assigning state variable 'Resource_Panadero_1.ResourceState' the value '1'. Previous value was '0'.
+0;ModelEntity1.57;Resource_Panadero_1;4.OnCapacityAllocated;[Begin];Process 'Resource_Panadero_1.OnCapacityAllocated' execution started.
+0;ModelEntity1.57;Resource_Panadero_1;4.OnCapacityAllocated;[Fire] AllocatedEvent;Firing event 'Resource_Panadero_1.Allocated'.
+0;ModelEntity1.57;Resource_Panadero_1;4.OnCapacityAllocated;[End];Process 'Resource_Panadero_1.OnCapacityAllocated' execution ended.
+0;ModelEntity1.57;Server_Pesado;2.OnEnteredInputBuffer;[Seize] SecondaryResources;Object 'ModelEntity1.57' completed seize of '1' resource(s) of resource type '[Specific] Resource_Panadero_1'.
+0;--;--;--;--;Changing from AutoState 'Busy' to 'Blocked' on resource 'Server_Pesado'.
+0;--;--;--;--;Assigning state variable 'Server_Pesado.ResourceState' the value '2'. Previous value was '1'.
+0;ModelEntity1.57;Server_Pesado;2.OnEnteredInputBuffer;[Transfer] ToProcessing;Entity 'ModelEntity1.57' transferring from '[Station] Server_Pesado.InputBuffer' into station 'Server_Pesado.Processing'.
+0;--;--;--;--;Changing from AutoState 'Blocked' to 'Busy' on resource 'Server_Pesado'.
+0;--;--;--;--;Assigning state variable 'Server_Pesado.ResourceState' the value '1'. Previous value was '2'.
+0;ModelEntity1.57;Server_Pesado;4.OnEnteredProcessing;[Begin];Process 'Server_Pesado.OnEnteredProcessing' execution started.
+0;ModelEntity1.57;Server_Pesado;4.OnEnteredProcessing;[EndTransfer] IntoProcessing;Entity 'ModelEntity1.57' ending transfer into station 'Server_Pesado.Processing'.
+0;ModelEntity1.57;Server_Pesado;4.OnEnteredProcessing;[Decide] IfProcessTypeSpecificTime;Token branching on condition 'ProcessType==Enum.TaskProcessType.SpecificTime'.
+0;ModelEntity1.57;Server_Pesado;4.OnEnteredProcessing;[Decide] IfProcessTypeSpecificTime;Token sent to 'True' exit.
+0;ModelEntity1.57;Server_Pesado;4.OnEnteredProcessing;[Delay] ProcessingTime;Delaying token for '5' Minutes until time '5' Minutes. Delay multiplier was '1'.
+0;ModelEntity1.57;Server_Pesado;2.OnEnteredInputBuffer;[End];Process 'Server_Pesado.OnEnteredInputBuffer' execution ended.
+5;ModelEntity1.57;Server_Pesado;4.OnEnteredProcessing;[Release] SecondaryResources;Object 'ModelEntity1.57' attempting to release '1' resource(s) of resource type '[Specific] Resource_Panadero_1'.
+5;ModelEntity1.57;Server_Pesado;4.OnEnteredProcessing;[Release] SecondaryResources;Object 'ModelEntity1.57' released '1' capacity unit(s) of resource 'Resource_Panadero_1'.
+5;--;--;--;--;Changing from AutoState 'Busy' to 'Starved' on resource 'Resource_Panadero_1'.
+5;--;--;--;--;Assigning state variable 'Resource_Panadero_1.ResourceState' the value '0'. Previous value was '1'.
+5;ModelEntity1.57;Resource_Panadero_1;2.OnCapacityReleased;[Begin];Process 'Resource_Panadero_1.OnCapacityReleased' execution started.
+5;ModelEntity1.57;Resource_Panadero_1;2.OnCapacityReleased;[Assign] ResourceState;Assigning state variable 'Resource_Panadero_1.ResourceState' the value '0'. Previous value was '0'.
+5;ModelEntity1.57;Resource_Panadero_1;2.OnCapacityReleased;[Fire] ReleasedEvent;Firing event 'Resource_Panadero_1.Released'.
+5;ModelEntity1.57;Resource_Panadero_1;2.OnCapacityReleased;[End];Process 'Resource_Panadero_1.OnCapacityReleased' execution ended.
+5;--;--;--;--;Changing from AutoState 'Busy' to 'Blocked' on resource 'Server_Pesado'.
+5;--;--;--;--;Assigning state variable 'Server_Pesado.ResourceState' the value '2'. Previous value was '1'.
+5;ModelEntity1.57;Server_Pesado;4.OnEnteredProcessing;[Transfer] ToOutputBuffer;Entity 'ModelEntity1.57' transferring from '[Station] Server_Pesado.Processing' into station 'Server_Pesado.OutputBuffer'.
+5;--;--;--;--;Changing from AutoState 'Blocked' to 'Busy' on resource 'Server_Pesado'.
+5;--;--;--;--;Assigning state variable 'Server_Pesado.ResourceState' the value '1'. Previous value was '2'.
+5;ModelEntity1.57;Server_Pesado;2.OnEnteredOutputBuffer;[Begin];Process 'Server_Pesado.OnEnteredOutputBuffer' execution started.
+5;ModelEntity1.57;Server_Pesado;2.OnEnteredOutputBuffer;[EndTransfer] IntoOutputBuffer;Entity 'ModelEntity1.57' ending transfer into station 'Server_Pesado.OutputBuffer'.
+5;ModelEntity1.57;Server_Pesado;2.OnEnteredOutputBuffer;[Release] Server;Object 'ModelEntity1.57' attempting to release '1' resource(s) of resource type '[ParentObject] Server_Pesado'.
+5;ModelEntity1.57;Server_Pesado;2.OnEnteredOutputBuffer;[Release] Server;Object 'ModelEntity1.57' released '1' capacity unit(s) of resource 'Server_Pesado'.
+5;--;--;--;--;Changing from AutoState 'Busy' to 'Starved' on resource 'Server_Pesado'.
+5;--;--;--;--;Assigning state variable 'Server_Pesado.ResourceState' the value '0'. Previous value was '1'.
+5;--;--;--;--;Resource 'Server_Pesado' checking allocation queue which contains '9' item(s).
+5;ModelEntity1.58;Server_Pesado;5.OnEnteredInputBuffer;[Seize] Server;Object 'ModelEntity1.58' checking availability to seize '1' resource(s) of resource type '[ParentObject] Server_Pesado'.
+5;ModelEntity1.58;Server_Pesado;5.OnEnteredInputBuffer;[Seize] Server;Object 'ModelEntity1.58' checking availability to seize '1' capacity unit(s) of resource 'Server_Pesado’.
+5;ModelEntity1.58;Server_Pesado;5.OnEnteredInputBuffer;[Seize] Server;Object 'ModelEntity1.58' found ‘1’ currently available capacity unit(s) of resource 'Server_Pesado’.
+5;ModelEntity1.58;Server_Pesado;5.OnEnteredInputBuffer;[Seize] Server;Object 'ModelEntity1.58' found '1' currently available resource(s) of resource type '[ParentObject] Server_Pesado'.
+5;--;--;--;--;Resource 'Server_Pesado' selecting object 'ModelEntity1.58' waiting at rank position '1' in allocation queue which contains '9' item(s).
+5;ModelEntity1.58;Server_Pesado;5.OnEnteredInputBuffer;[Seize] Server;Object 'ModelEntity1.58' seized '1' capacity unit(s) of resource 'Server_Pesado'.
+5;--;--;--;--;Changing from AutoState 'Starved' to 'Busy' on resource 'Server_Pesado'.
+5;--;--;--;--;Assigning state variable 'Server_Pesado.ResourceState' the value '1'. Previous value was '0'.
+5;ModelEntity1.58;Server_Pesado;5.OnEnteredInputBuffer;[Seize] Server;Object 'ModelEntity1.58' completed seize of '1' resource(s) of resource type '[ParentObject] Server_Pesado'.
+5;--;--;--;--;Resource 'Server_Pesado' checking allocation queue which contains '8' item(s).
+5;--;--;--;--;Resource 'Server_Pesado' unable to select any items waiting in its allocation queue. Resource is fully allocated or off shift.
+5;ModelEntity1.57;Server_Pesado;2.OnEnteredOutputBuffer;[Transfer] ToOutputNode;Entity 'ModelEntity1.57' transferring from '[Station] Server_Pesado.OutputBuffer' into node 'Output@Server_Pesado'.
+5;ModelEntity1.57;Output@Server_Pesado;1.OnEnteredFromAssociatedObject;[Begin];Process 'Output@Server_Pesado.OnEnteredFromAssociatedObject' execution started.
+5;ModelEntity1.57;Output@Server_Pesado;1.OnEnteredFromAssociatedObject;[Fire] EnteredEvent;Firing event 'Output@Server_Pesado.Entered'.
+5;ModelEntity1.57;Output@Server_Pesado;1.OnEnteredFromAssociatedObject;[Transfer] ToOutboundLink;Entity 'ModelEntity1.57' transferring from '[Node] Output@Server_Pesado' into node 'Input@Server_Mezclado'.
+5;ModelEntity1.57;Input@Server_Mezclado;3.OnEnteredToAssociatedObject;[Begin];Process 'Input@Server_Mezclado.OnEnteredToAssociatedObject' execution started.
+5;ModelEntity1.57;Input@Server_Mezclado;3.OnEnteredToAssociatedObject;[Fire] EnteredEvent;Firing event 'Input@Server_Mezclado.Entered'.
+5;ModelEntity1.57;Input@Server_Mezclado;3.OnEnteredToAssociatedObject;[Transfer] ToAssociatedObject;Entity 'ModelEntity1.57' transferring from '[Node] Input@Server_Mezclado' into object 'Server_Mezclado'.
+5;ModelEntity1.57;Input@Server_Mezclado;3.OnEnteredToAssociatedObject;[Transfer] ToAssociatedObject;Entity 'ModelEntity1.57' transferring from '[Node] Input@Server_Mezclado' into station 'Server_Mezclado.InputBuffer'.
+5;ModelEntity1.57;Server_Pesado;4.OnEnteredProcessing;[End];Process 'Server_Pesado.OnEnteredProcessing' execution ended.
+5;ModelEntity1.58;Server_Pesado;5.OnEnteredInputBuffer;[Seize] SecondaryResources;Object 'ModelEntity1.58' waiting to seize '1' resource(s) of resource type '[Specific] Resource_Panadero_1'.
+5;ModelEntity1.57;Server_Pesado;0.OnExitedOutputBuffer;[Begin];Process 'Server_Pesado.OnExitedOutputBuffer' execution started.
+5;ModelEntity1.57;Server_Pesado;0.OnExitedOutputBuffer;[Execute] ExitedAddOnProcess;Executing process 'P_WIP_Pesado_Salir'.
+5;ModelEntity1.57;Model_Panaderia;4.P_WIP_Pesado_Salir;[Begin];Process 'P_WIP_Pesado_Salir' execution started.
+5;ModelEntity1.57;Model_Panaderia;4.P_WIP_Pesado_Salir;[Assign] Assign12;Assigning state variable 'Model_Panaderia.WIP_Pesado' the value '9'. Previous value was '10'.
+5;ModelEntity1.57;Model_Panaderia;4.P_WIP_Pesado_Salir;[End];Process 'P_WIP_Pesado_Salir' execution ended.
+5;ModelEntity1.57;Server_Pesado;0.OnExitedOutputBuffer;[End];Process 'Server_Pesado.OnExitedOutputBuffer' execution ended.
+5;ModelEntity1.57;Server_Mezclado;14.OnEnteredInputBuffer;[Begin];Process 'Server_Mezclado.OnEnteredInputBuffer' execution started.
+5;ModelEntity1.57;Server_Mezclado;14.OnEnteredInputBuffer;[Execute] EnteredAddOnProcess;Executing process 'P_WIP_Mezclado_Entrar'.
+5;ModelEntity1.57;Model_Panaderia;0.P_WIP_Mezclado_Entrar;[Begin];Process 'P_WIP_Mezclado_Entrar' execution started.
+5;ModelEntity1.57;Model_Panaderia;0.P_WIP_Mezclado_Entrar;[Assign] Assign9;Assigning state variable 'Model_Panaderia.WIP_Mezclado' the value '1'. Previous value was '0'.
+5;ModelEntity1.57;Model_Panaderia;0.P_WIP_Mezclado_Entrar;[End];Process 'P_WIP_Mezclado_Entrar' execution ended.
+5;ModelEntity1.57;Server_Mezclado;14.OnEnteredInputBuffer;[EndTransfer] IntoInputBuffer;Entity 'ModelEntity1.57' ending transfer into station 'Server_Mezclado.InputBuffer'.
+5;ModelEntity1.57;Output@Server_Pesado;0.OnExited;[Begin];Process 'Output@Server_Pesado.OnExited' execution started.
+5;ModelEntity1.57;Output@Server_Pesado;0.OnExited;[Fire] ExitedEvent;Firing event 'Output@Server_Pesado.Exited'.
+5;ModelEntity1.57;Output@Server_Pesado;0.OnExited;[End];Process 'Output@Server_Pesado.OnExited' execution ended.
+5;ModelEntity1.57;Input@Server_Mezclado;0.OnExited;[Begin];Process 'Input@Server_Mezclado.OnExited' execution started.
+5;ModelEntity1.57;Input@Server_Mezclado;0.OnExited;[Fire] ExitedEvent;Firing event 'Input@Server_Mezclado.Exited'.
+5;ModelEntity1.57;Input@Server_Mezclado;0.OnExited;[End];Process 'Input@Server_Mezclado.OnExited' execution ended.
+5;ModelEntity1.57;Server_Mezclado;14.OnEnteredInputBuffer;[Seize] Server;Object 'ModelEntity1.57' waiting to seize '1' resource(s) of resource type '[ParentObject] Server_Mezclado'.
+5;ModelEntity1.57;Server_Pesado;2.OnEnteredOutputBuffer;[End];Process 'Server_Pesado.OnEnteredOutputBuffer' execution ended.
+5;ModelEntity1.57;Output@Server_Pesado;1.OnEnteredFromAssociatedObject;[End];Process 'Output@Server_Pesado.OnEnteredFromAssociatedObject' execution ended.
+5;ModelEntity1.57;Input@Server_Mezclado;3.OnEnteredToAssociatedObject;[End];Process 'Input@Server_Mezclado.OnEnteredToAssociatedObject' execution ended.
+5;--;--;--;--;Resource 'Resource_Panadero_1' checking allocation queue which contains '1' item(s).
+5;ModelEntity1.58;Server_Pesado;5.OnEnteredInputBuffer;[Seize] SecondaryResources;Object 'ModelEntity1.58' checking availability to seize '1' resource(s) of resource type '[Specific] Resource_Panadero_1'.
+5;ModelEntity1.58;Server_Pesado;5.OnEnteredInputBuffer;[Seize] SecondaryResources;Object 'ModelEntity1.58' checking availability to seize '1' capacity unit(s) of resource 'Resource_Panadero_1’.
+5;ModelEntity1.58;Server_Pesado;5.OnEnteredInputBuffer;[Seize] SecondaryResources;Object 'ModelEntity1.58' found ‘1’ currently available capacity unit(s) of resource 'Resource_Panadero_1’.
+5;ModelEntity1.58;Server_Pesado;5.OnEnteredInputBuffer;[Seize] SecondaryResources;Object 'ModelEntity1.58' found '1' currently available resource(s) of resource type '[Specific] Resource_Panadero_1'.
+5;--;--;--;--;Resource 'Resource_Panadero_1' selecting object 'ModelEntity1.58' waiting at rank position '1' in allocation queue which contains '1' item(s).
+5;ModelEntity1.58;Server_Pesado;5.OnEnteredInputBuffer;[Seize] SecondaryResources;Object 'ModelEntity1.58' seized '1' capacity unit(s) of resource 'Resource_Panadero_1'.
+5;--;--;--;--;Changing from AutoState 'Starved' to 'Busy' on resource 'Resource_Panadero_1'.
+5;--;--;--;--;Assigning state variable 'Resource_Panadero_1.ResourceState' the value '1'. Previous value was '0'.
+5;ModelEntity1.58;Resource_Panadero_1;3.OnCapacityAllocated;[Begin];Process 'Resource_Panadero_1.OnCapacityAllocated' execution started.
+5;ModelEntity1.58;Resource_Panadero_1;3.OnCapacityAllocated;[Fire] AllocatedEvent;Firing event 'Resource_Panadero_1.Allocated'.
+5;ModelEntity1.58;Resource_Panadero_1;3.OnCapacityAllocated;[End];Process 'Resource_Panadero_1.OnCapacityAllocated' execution ended.
+5;ModelEntity1.58;Server_Pesado;5.OnEnteredInputBuffer;[Seize] SecondaryResources;Object 'ModelEntity1.58' completed seize of '1' resource(s) of resource type '[Specific] Resource_Panadero_1'.
+5;--;--;--;--;Changing from AutoState 'Busy' to 'Blocked' on resource 'Server_Pesado'.
+5;--;--;--;--;Assigning state variable 'Server_Pesado.ResourceState' the value '2'. Previous value was '1'.
+5;ModelEntity1.58;Server_Pesado;5.OnEnteredInputBuffer;[Transfer] ToProcessing;Entity 'ModelEntity1.58' transferring from '[Station] Server_Pesado.InputBuffer' into station 'Server_Pesado.Processing'.
+5;--;--;--;--;Changing from AutoState 'Blocked' to 'Busy' on resource 'Server_Pesado'.
+5;--;--;--;--;Assigning state variable 'Server_Pesado.ResourceState' the value '1'. Previous value was '2'.
+5;ModelEntity1.58;Server_Pesado;3.OnEnteredProcessing;[Begin];Process 'Server_Pesado.OnEnteredProcessing' execution started.
+5;ModelEntity1.58;Server_Pesado;3.OnEnteredProcessing;[EndTransfer] IntoProcessing;Entity 'ModelEntity1.58' ending transfer into station 'Server_Pesado.Processing'.
+5;ModelEntity1.58;Server_Pesado;3.OnEnteredProcessing;[Decide] IfProcessTypeSpecificTime;Token branching on condition 'ProcessType==Enum.TaskProcessType.SpecificTime'.
+5;ModelEntity1.58;Server_Pesado;3.OnEnteredProcessing;[Decide] IfProcessTypeSpecificTime;Token sent to 'True' exit.
+5;ModelEntity1.58;Server_Pesado;3.OnEnteredProcessing;[Delay] ProcessingTime;Delaying token for '5' Minutes until time '10' Minutes. Delay multiplier was '1'.
+5;ModelEntity1.58;Server_Pesado;5.OnEnteredInputBuffer;[End];Process 'Server_Pesado.OnEnteredInputBuffer' execution ended.
+5;--;--;--;--;Resource 'Server_Mezclado' checking allocation queue which contains '1' item(s).
+5;ModelEntity1.57;Server_Mezclado;14.OnEnteredInputBuffer;[Seize] Server;Object 'ModelEntity1.57' checking availability to seize '1' resource(s) of resource type '[ParentObject] Server_Mezclado'.
+5;ModelEntity1.57;Server_Mezclado;14.OnEnteredInputBuffer;[Seize] Server;Object 'ModelEntity1.57' checking availability to seize '1' capacity unit(s) of resource 'Server_Mezclado’.
+5;ModelEntity1.57;Server_Mezclado;14.OnEnteredInputBuffer;[Seize] Server;Object 'ModelEntity1.57' found ‘1’ currently available capacity unit(s) of resource 'Server_Mezclado’.
+5;ModelEntity1.57;Server_Mezclado;14.OnEnteredInputBuffer;[Seize] Server;Object 'ModelEntity1.57' found '1' currently available resource(s) of resource type '[ParentObject] Server_Mezclado'.
+5;--;--;--;--;Resource 'Server_Mezclado' selecting object 'ModelEntity1.57' waiting at rank position '1' in allocation queue which contains '1' item(s).
+5;ModelEntity1.57;Server_Mezclado;14.OnEnteredInputBuffer;[Seize] Server;Object 'ModelEntity1.57' seized '1' capacity unit(s) of resource 'Server_Mezclado'.
+5;--;--;--;--;Changing from AutoState 'Starved' to 'Busy' on resource 'Server_Mezclado'.
+5;--;--;--;--;Assigning state variable 'Server_Mezclado.ResourceState' the value '1'. Previous value was '0'.
+5;ModelEntity1.57;Server_Mezclado;14.OnEnteredInputBuffer;[Seize] Server;Object 'ModelEntity1.57' completed seize of '1' resource(s) of resource type '[ParentObject] Server_Mezclado'.
+5;ModelEntity1.57;Server_Mezclado;14.OnEnteredInputBuffer;[Seize] SecondaryResources;Object 'ModelEntity1.57' waiting to seize '1' resource(s) of resource type '[Specific] Resource_Panadero_1'.
+5;--;--;--;--;Resource 'Resource_Panadero_1' checking allocation queue which contains '1' item(s).
+5;--;--;--;--;Resource 'Resource_Panadero_1' unable to select any items waiting in its allocation queue. Resource is fully allocated or off shift.
+10;ModelEntity1.58;Server_Pesado;3.OnEnteredProcessing;[Release] SecondaryResources;Object 'ModelEntity1.58' attempting to release '1' resource(s) of resource type '[Specific] Resource_Panadero_1'.
+10;ModelEntity1.58;Server_Pesado;3.OnEnteredProcessing;[Release] SecondaryResources;Object 'ModelEntity1.58' released '1' capacity unit(s) of resource 'Resource_Panadero_1'.
+10;--;--;--;--;Changing from AutoState 'Busy' to 'Starved' on resource 'Resource_Panadero_1'.
+10;--;--;--;--;Assigning state variable 'Resource_Panadero_1.ResourceState' the value '0'. Previous value was '1'.
+10;ModelEntity1.58;Resource_Panadero_1;5.OnCapacityReleased;[Begin];Process 'Resource_Panadero_1.OnCapacityReleased' execution started.
+10;ModelEntity1.58;Resource_Panadero_1;5.OnCapacityReleased;[Assign] ResourceState;Assigning state variable 'Resource_Panadero_1.ResourceState' the value '0'. Previous value was '0'.
+10;ModelEntity1.58;Resource_Panadero_1;5.OnCapacityReleased;[Fire] ReleasedEvent;Firing event 'Resource_Panadero_1.Released'.
+10;ModelEntity1.58;Resource_Panadero_1;5.OnCapacityReleased;[End];Process 'Resource_Panadero_1.OnCapacityReleased' execution ended.
+10;--;--;--;--;Changing from AutoState 'Busy' to 'Blocked' on resource 'Server_Pesado'.
+10;--;--;--;--;Assigning state variable 'Server_Pesado.ResourceState' the value '2'. Previous value was '1'.
+10;ModelEntity1.58;Server_Pesado;3.OnEnteredProcessing;[Transfer] ToOutputBuffer;Entity 'ModelEntity1.58' transferring from '[Station] Server_Pesado.Processing' into station 'Server_Pesado.OutputBuffer'.
+10;--;--;--;--;Changing from AutoState 'Blocked' to 'Busy' on resource 'Server_Pesado'.
+10;--;--;--;--;Assigning state variable 'Server_Pesado.ResourceState' the value '1'. Previous value was '2'.
+10;ModelEntity1.58;Server_Pesado;5.OnEnteredOutputBuffer;[Begin];Process 'Server_Pesado.OnEnteredOutputBuffer' execution started.
+10;ModelEntity1.58;Server_Pesado;5.OnEnteredOutputBuffer;[EndTransfer] IntoOutputBuffer;Entity 'ModelEntity1.58' ending transfer into station 'Server_Pesado.OutputBuffer'.
+10;ModelEntity1.58;Server_Pesado;5.OnEnteredOutputBuffer;[Release] Server;Object 'ModelEntity1.58' attempting to release '1' resource(s) of resource type '[ParentObject] Server_Pesado'.
+10;ModelEntity1.58;Server_Pesado;5.OnEnteredOutputBuffer;[Release] Server;Object 'ModelEntity1.58' released '1' capacity unit(s) of resource 'Server_Pesado'.
+10;--;--;--;--;Changing from AutoState 'Busy' to 'Starved' on resource 'Server_Pesado'.
+10;--;--;--;--;Assigning state variable 'Server_Pesado.ResourceState' the value '0'. Previous value was '1'.
+10;--;--;--;--;Resource 'Server_Pesado' checking allocation queue which contains '8' item(s).
+10;ModelEntity1.59;Server_Pesado;6.OnEnteredInputBuffer;[Seize] Server;Object 'ModelEntity1.59' checking availability to seize '1' resource(s) of resource type '[ParentObject] Server_Pesado'.
+10;ModelEntity1.59;Server_Pesado;6.OnEnteredInputBuffer;[Seize] Server;Object 'ModelEntity1.59' checking availability to seize '1' capacity unit(s) of resource 'Server_Pesado’.
+10;ModelEntity1.59;Server_Pesado;6.OnEnteredInputBuffer;[Seize] Server;Object 'ModelEntity1.59' found ‘1’ currently available capacity unit(s) of resource 'Server_Pesado’.
+10;ModelEntity1.59;Server_Pesado;6.OnEnteredInputBuffer;[Seize] Server;Object 'ModelEntity1.59' found '1' currently available resource(s) of resource type '[ParentObject] Server_Pesado'.
+10;--;--;--;--;Resource 'Server_Pesado' selecting object 'ModelEntity1.59' waiting at rank position '1' in allocation queue which contains '8' item(s).
+10;ModelEntity1.59;Server_Pesado;6.OnEnteredInputBuffer;[Seize] Server;Object 'ModelEntity1.59' seized '1' capacity unit(s) of resource 'Server_Pesado'.
+10;--;--;--;--;Changing from AutoState 'Starved' to 'Busy' on resource 'Server_Pesado'.
+10;--;--;--;--;Assigning state variable 'Server_Pesado.ResourceState' the value '1'. Previous value was '0'.
+10;ModelEntity1.59;Server_Pesado;6.OnEnteredInputBuffer;[Seize] Server;Object 'ModelEntity1.59' completed seize of '1' resource(s) of resource type '[ParentObject] Server_Pesado'.
+10;--;--;--;--;Resource 'Server_Pesado' checking allocation queue which contains '7' item(s).
+10;--;--;--;--;Resource 'Server_Pesado' unable to select any items waiting in its allocation queue. Resource is fully allocated or off shift.
+10;ModelEntity1.58;Server_Pesado;5.OnEnteredOutputBuffer;[Transfer] ToOutputNode;Entity 'ModelEntity1.58' transferring from '[Station] Server_Pesado.OutputBuffer' into node 'Output@Server_Pesado'.
+10;ModelEntity1.58;Output@Server_Pesado;1.OnEnteredFromAssociatedObject;[Begin];Process 'Output@Server_Pesado.OnEnteredFromAssociatedObject' execution started.
+10;ModelEntity1.58;Output@Server_Pesado;1.OnEnteredFromAssociatedObject;[Fire] EnteredEvent;Firing event 'Output@Server_Pesado.Entered'.
+10;ModelEntity1.58;Output@Server_Pesado;1.OnEnteredFromAssociatedObject;[Transfer] ToOutboundLink;Entity 'ModelEntity1.58' transferring from '[Node] Output@Server_Pesado' into node 'Input@Server_Mezclado'.
+10;ModelEntity1.58;Input@Server_Mezclado;2.OnEnteredToAssociatedObject;[Begin];Process 'Input@Server_Mezclado.OnEnteredToAssociatedObject' execution started.
+10;ModelEntity1.58;Input@Server_Mezclado;2.OnEnteredToAssociatedObject;[Fire] EnteredEvent;Firing event 'Input@Server_Mezclado.Entered'.
+10;ModelEntity1.58;Input@Server_Mezclado;2.OnEnteredToAssociatedObject;[Transfer] ToAssociatedObject;Entity 'ModelEntity1.58' transferring from '[Node] Input@Server_Mezclado' into object 'Server_Mezclado'.
+10;ModelEntity1.58;Input@Server_Mezclado;2.OnEnteredToAssociatedObject;[Transfer] ToAssociatedObject;Entity 'ModelEntity1.58' transferring from '[Node] Input@Server_Mezclado' into station 'Server_Mezclado.InputBuffer'.
+10;ModelEntity1.58;Server_Pesado;3.OnEnteredProcessing;[End];Process 'Server_Pesado.OnEnteredProcessing' execution ended.
+10;ModelEntity1.59;Server_Pesado;6.OnEnteredInputBuffer;[Seize] SecondaryResources;Object 'ModelEntity1.59' waiting to seize '1' resource(s) of resource type '[Specific] Resource_Panadero_1'.
+10;ModelEntity1.58;Server_Pesado;0.OnExitedOutputBuffer;[Begin];Process 'Server_Pesado.OnExitedOutputBuffer' execution started.
+10;ModelEntity1.58;Server_Pesado;0.OnExitedOutputBuffer;[Execute] ExitedAddOnProcess;Executing process 'P_WIP_Pesado_Salir'.
+10;ModelEntity1.58;Model_Panaderia;3.P_WIP_Pesado_Salir;[Begin];Process 'P_WIP_Pesado_Salir' execution started.
+10;ModelEntity1.58;Model_Panaderia;3.P_WIP_Pesado_Salir;[Assign] Assign12;Assigning state variable 'Model_Panaderia.WIP_Pesado' the value '8'. Previous value was '9'.
+10;ModelEntity1.58;Model_Panaderia;3.P_WIP_Pesado_Salir;[End];Process 'P_WIP_Pesado_Salir' execution ended.
+10;ModelEntity1.58;Server_Pesado;0.OnExitedOutputBuffer;[End];Process 'Server_Pesado.OnExitedOutputBuffer' execution ended.
+10;ModelEntity1.58;Server_Mezclado;4.OnEnteredInputBuffer;[Begin];Process 'Server_Mezclado.OnEnteredInputBuffer' execution started.
+10;ModelEntity1.58;Server_Mezclado;4.OnEnteredInputBuffer;[Execute] EnteredAddOnProcess;Executing process 'P_WIP_Mezclado_Entrar'.
+10;ModelEntity1.58;Model_Panaderia;0.P_WIP_Mezclado_Entrar;[Begin];Process 'P_WIP_Mezclado_Entrar' execution started.
+10;ModelEntity1.58;Model_Panaderia;0.P_WIP_Mezclado_Entrar;[Assign] Assign9;Assigning state variable 'Model_Panaderia.WIP_Mezclado' the value '2'. Previous value was '1'.
+10;ModelEntity1.58;Model_Panaderia;0.P_WIP_Mezclado_Entrar;[End];Process 'P_WIP_Mezclado_Entrar' execution ended.
+10;ModelEntity1.58;Server_Mezclado;4.OnEnteredInputBuffer;[EndTransfer] IntoInputBuffer;Entity 'ModelEntity1.58' ending transfer into station 'Server_Mezclado.InputBuffer'.
+10;ModelEntity1.58;Output@Server_Pesado;0.OnExited;[Begin];Process 'Output@Server_Pesado.OnExited' execution started.
+10;ModelEntity1.58;Output@Server_Pesado;0.OnExited;[Fire] ExitedEvent;Firing event 'Output@Server_Pesado.Exited'.
+10;ModelEntity1.58;Output@Server_Pesado;0.OnExited;[End];Process 'Output@Server_Pesado.OnExited' execution ended.
+10;ModelEntity1.58;Input@Server_Mezclado;0.OnExited;[Begin];Process 'Input@Server_Mezclado.OnExited' execution started.
+10;ModelEntity1.58;Input@Server_Mezclado;0.OnExited;[Fire] ExitedEvent;Firing event 'Input@Server_Mezclado.Exited'.
+10;ModelEntity1.58;Input@Server_Mezclado;0.OnExited;[End];Process 'Input@Server_Mezclado.OnExited' execution ended.
+10;ModelEntity1.58;Server_Mezclado;4.OnEnteredInputBuffer;[Seize] Server;Object 'ModelEntity1.58' waiting to seize '1' resource(s) of resource type '[ParentObject] Server_Mezclado'.
+10;ModelEntity1.58;Server_Pesado;5.OnEnteredOutputBuffer;[End];Process 'Server_Pesado.OnEnteredOutputBuffer' execution ended.
+10;ModelEntity1.58;Output@Server_Pesado;1.OnEnteredFromAssociatedObject;[End];Process 'Output@Server_Pesado.OnEnteredFromAssociatedObject' execution ended.
+10;ModelEntity1.58;Input@Server_Mezclado;2.OnEnteredToAssociatedObject;[End];Process 'Input@Server_Mezclado.OnEnteredToAssociatedObject' execution ended.
+10;--;--;--;--;Resource 'Resource_Panadero_1' checking allocation queue which contains '2' item(s).
+10;ModelEntity1.57;Server_Mezclado;14.OnEnteredInputBuffer;[Seize] SecondaryResources;Object 'ModelEntity1.57' checking availability to seize '1' resource(s) of resource type '[Specific] Resource_Panadero_1'.
+10;ModelEntity1.57;Server_Mezclado;14.OnEnteredInputBuffer;[Seize] SecondaryResources;Object 'ModelEntity1.57' checking availability to seize '1' capacity unit(s) of resource 'Resource_Panadero_1’.
+10;ModelEntity1.57;Server_Mezclado;14.OnEnteredInputBuffer;[Seize] SecondaryResources;Object 'ModelEntity1.57' found ‘1’ currently available capacity unit(s) of resource 'Resource_Panadero_1’.
+10;ModelEntity1.57;Server_Mezclado;14.OnEnteredInputBuffer;[Seize] SecondaryResources;Object 'ModelEntity1.57' found '1' currently available resource(s) of resource type '[Specific] Resource_Panadero_1'.
+10;--;--;--;--;Resource 'Resource_Panadero_1' selecting object 'ModelEntity1.57' waiting at rank position '1' in allocation queue which contains '2' item(s).
+10;ModelEntity1.57;Server_Mezclado;14.OnEnteredInputBuffer;[Seize] SecondaryResources;Object 'ModelEntity1.57' seized '1' capacity unit(s) of resource 'Resource_Panadero_1'.
+10;--;--;--;--;Changing from AutoState 'Starved' to 'Busy' on resource 'Resource_Panadero_1'.
+10;--;--;--;--;Assigning state variable 'Resource_Panadero_1.ResourceState' the value '1'. Previous value was '0'.
+10;ModelEntity1.57;Resource_Panadero_1;2.OnCapacityAllocated;[Begin];Process 'Resource_Panadero_1.OnCapacityAllocated' execution started.
+10;ModelEntity1.57;Resource_Panadero_1;2.OnCapacityAllocated;[Fire] AllocatedEvent;Firing event 'Resource_Panadero_1.Allocated'.
+10;ModelEntity1.57;Resource_Panadero_1;2.OnCapacityAllocated;[End];Process 'Resource_Panadero_1.OnCapacityAllocated' execution ended.
+10;ModelEntity1.57;Server_Mezclado;14.OnEnteredInputBuffer;[Seize] SecondaryResources;Object 'ModelEntity1.57' completed seize of '1' resource(s) of resource type '[Specific] Resource_Panadero_1'.
+10;--;--;--;--;Resource 'Resource_Panadero_1' checking allocation queue which contains '1' item(s).
+10;--;--;--;--;Resource 'Resource_Panadero_1' unable to select any items waiting in its allocation queue. Resource is fully allocated or off shift.
+10;--;--;--;--;Changing from AutoState 'Busy' to 'Blocked' on resource 'Server_Mezclado'.
+10;--;--;--;--;Assigning state variable 'Server_Mezclado.ResourceState' the value '2'. Previous value was '1'.
+10;ModelEntity1.57;Server_Mezclado;14.OnEnteredInputBuffer;[Transfer] ToProcessing;Entity 'ModelEntity1.57' transferring from '[Station] Server_Mezclado.InputBuffer' into station 'Server_Mezclado.Processing'.
+10;--;--;--;--;Changing from AutoState 'Blocked' to 'Busy' on resource 'Server_Mezclado'.
+10;--;--;--;--;Assigning state variable 'Server_Mezclado.ResourceState' the value '1'. Previous value was '2'.
+10;ModelEntity1.57;Server_Mezclado;2.OnEnteredProcessing;[Begin];Process 'Server_Mezclado.OnEnteredProcessing' execution started.
+10;ModelEntity1.57;Server_Mezclado;2.OnEnteredProcessing;[EndTransfer] IntoProcessing;Entity 'ModelEntity1.57' ending transfer into station 'Server_Mezclado.Processing'.
+10;ModelEntity1.57;Server_Mezclado;2.OnEnteredProcessing;[Decide] IfProcessTypeSpecificTime;Token branching on condition 'ProcessType==Enum.TaskProcessType.SpecificTime'.
+10;ModelEntity1.57;Server_Mezclado;2.OnEnteredProcessing;[Decide] IfProcessTypeSpecificTime;Token sent to 'True' exit.
+10;ModelEntity1.57;Server_Mezclado;2.OnEnteredProcessing;[Delay] ProcessingTime;Delaying token for '12' Minutes until time '22' Minutes. Delay multiplier was '1'.
+10;ModelEntity1.57;Server_Mezclado;14.OnEnteredInputBuffer;[End];Process 'Server_Mezclado.OnEnteredInputBuffer' execution ended.
+10;--;--;--;--;Resource 'Server_Mezclado' checking allocation queue which contains '1' item(s).
+10;--;--;--;--;Resource 'Server_Mezclado' unable to select any items waiting in its allocation queue. Resource is fully allocated or off shift.
+

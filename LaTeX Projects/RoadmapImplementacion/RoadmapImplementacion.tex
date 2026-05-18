@@ -1,0 +1,1205 @@
+\documentclass[12pt]{article}
+
+% -- Codificacion y tipografia -------------------------------------------------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[spanish,es-tabla]{babel}
+\usepackage{microtype}
+
+% -- Geometria -----------------------------------------------------------------
+\usepackage[left=2.6cm,right=2.3cm,top=2.7cm,bottom=2.4cm]{geometry}
+\setlength{\headheight}{24pt}
+
+% -- Graficos y diagramas ------------------------------------------------------
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{pgfgantt}
+\usepackage{tikz}
+\usetikzlibrary{
+  arrows.meta,
+  positioning,
+  shapes.geometric,
+  shapes.misc,
+  calc,
+  fit,
+  backgrounds,
+  matrix
+}
+
+% -- Tablas --------------------------------------------------------------------
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{makecell}
+\usepackage{float}
+
+% -- Formato -------------------------------------------------------------------
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{parskip}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{eso-pic}
+\usepackage[htt]{hyphenat}
+
+% -- Paleta institucional -------------------------------------------------------
+\definecolor{azulppal}{RGB}{0,70,127}
+\definecolor{azulmedio}{RGB}{28,112,166}
+\definecolor{azulclaro}{RGB}{222,238,249}
+\definecolor{grisoscuro}{RGB}{64,64,64}
+\definecolor{grismedio}{RGB}{115,124,135}
+\definecolor{grisclaro}{RGB}{245,247,250}
+\definecolor{tabhead}{RGB}{0,70,127}
+\definecolor{tabrow}{RGB}{235,243,252}
+\definecolor{verdeok}{RGB}{34,139,34}
+\definecolor{naranja}{RGB}{204,85,0}
+\definecolor{rojoriesgo}{RGB}{166,42,42}
+\definecolor{moradodata}{RGB}{111,80,161}
+\definecolor{amarillo}{RGB}{245,184,66}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=azulppal,
+  urlcolor=azulppal,
+  citecolor=azulppal,
+  pdftitle={Roadmap de Implementacion SIMIO -- Panaderia de Supermercado},
+  pdfauthor={Joaquin Parraud, Sebastian Ramirez, Vicente Ramirez}
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\color{azulppal}\textbf{Roadmap de Implementacion SIMIO}}
+\fancyhead[R]{\small\color{grisoscuro}Proyecto Capstone Analytics}
+\fancyfoot[C]{\small\thepage}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{azulppal}\leaders\hrule height 0.5pt\hfill}}
+
+\titleformat{\section}{\large\bfseries\color{azulppal}}{\thesection.}{0.5em}{}[\titlerule]
+\titleformat{\subsection}{\normalsize\bfseries\color{grisoscuro}}{\thesubsection.}{0.5em}{}
+\titleformat{\subsubsection}{\normalsize\itshape\color{grisoscuro}}{\thesubsubsection.}{0.5em}{}
+\setlist[itemize]{topsep=2pt,itemsep=2pt,leftmargin=*}
+\setlist[enumerate]{topsep=2pt,itemsep=2pt,leftmargin=*}
+\setcounter{tocdepth}{2}
+
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+
+\tikzset{
+  stage/.style={
+    rectangle,
+    rounded corners=2pt,
+    draw=azulppal,
+    fill=azulclaro,
+    thick,
+    align=center,
+    minimum height=0.88cm,
+    text width=2.55cm,
+    font=\scriptsize
+  },
+  datastore/.style={
+    cylinder,
+    shape border rotate=90,
+    draw=moradodata,
+    fill=moradodata!12,
+    thick,
+    align=center,
+    aspect=0.25,
+    minimum height=1.2cm,
+    text width=2.35cm,
+    font=\scriptsize
+  },
+  decision/.style={
+    diamond,
+    draw=naranja,
+    fill=naranja!12,
+    thick,
+    aspect=1.9,
+    align=center,
+    inner sep=1pt,
+    text width=2.25cm,
+    font=\scriptsize
+  },
+  resource/.style={
+    rectangle,
+    rounded corners=2pt,
+    draw=verdeok,
+    fill=verdeok!10,
+    thick,
+    align=center,
+    minimum height=0.75cm,
+    text width=2.2cm,
+    font=\scriptsize
+  },
+  risk/.style={
+    rectangle,
+    rounded corners=2pt,
+    draw=rojoriesgo,
+    fill=rojoriesgo!8,
+    thick,
+    align=center,
+    minimum height=0.75cm,
+    text width=2.4cm,
+    font=\scriptsize
+  },
+  arrow/.style={-Latex, thick, draw=azulppal},
+  softarrow/.style={-Latex, thick, draw=grismedio},
+  dasharrow/.style={-Latex, thick, dashed, draw=grisoscuro},
+  lane/.style={draw=grismedio!45, fill=grisclaro, rounded corners=3pt}
+}
+
+\newcommand{\checkpoint}[1]{\textcolor{verdeok}{\textbf{#1}}}
+\newcommand{\alerta}[1]{\textcolor{rojoriesgo}{\textbf{#1}}}
+\newcommand{\archivo}[1]{\texttt{#1}}
+
+\begin{document}
+\pdfpagewidth=210mm
+\pdfpageheight=297mm
+\pagecolor{white}
+\AddToShipoutPictureBG{\AtPageLowerLeft{\color{white}\rule{\paperwidth}{\paperheight}}}
+\setlength{\parskip}{6pt}
+
+% -----------------------------------------------------------------------------
+% Portada
+% -----------------------------------------------------------------------------
+\begin{titlepage}
+\centering
+\vspace*{0.35cm}
+\includegraphics[width=0.34\linewidth]{../UDD.png}\\[0.9cm]
+{\color{azulppal}\rule{\linewidth}{2.5pt}}\\[0.55em]
+{\Huge\bfseries\color{azulppal} Roadmap de Implementacion SIMIO}\\[0.35em]
+{\large\bfseries\color{grisoscuro} Proyecto Capstone Analytics}\\[0.2em]
+{\color{azulppal}\rule{\linewidth}{1pt}}\\[0.9em]
+{\Large\itshape\color{grisoscuro}
+  Simulacion de Eventos Discretos:\\[0.25em]
+  Proceso de Fabricacion de Pan\\
+  en Panaderia de Supermercado}
+
+\vspace{0.9cm}
+\begin{tabular}{@{}ll@{}}
+  \textbf{Universidad:} & Universidad del Desarrollo \\[3pt]
+  \textbf{Ramo:} & Capstone Analytics \\[3pt]
+  \textbf{Codigo:} & IIC511AD \\[3pt]
+  \textbf{Profesor:} & Victor Vera, PhD \\[3pt]
+  \textbf{Documento:} & Roadmap riguroso de implementacion SIMIO \\[3pt]
+  \textbf{Version:} & 1.0 \\[3pt]
+  \textbf{Horizonte:} & 20 de abril -- 20 de mayo de 2026 \\[3pt]
+\end{tabular}
+
+\vspace{0.85cm}
+\begin{tabularx}{0.92\linewidth}{>{\bfseries}L{3.1cm}Y}
+\toprule
+\rowcolor{tabhead}
+\color{white}Integrante & \color{white}Foco de trabajo dentro del roadmap \\
+\midrule
+\rowcolor{tabrow}
+Joaquin Parraud & Construccion 3D del modelo fisico en SIMIO: layout, objetos, recursos, estaciones, caminos, animacion y pruebas operacionales. \\
+Sebastian Ramirez & Logica de proceso: reglas de produccion, lotes, hornos, inventarios, restricciones, verificacion estructural y supuestos. \\
+\rowcolor{tabrow}
+Vicente Ramirez & Analisis de datos: demanda horaria, probabilidades de eleccion, calibracion, escenarios, resultados y sensibilidad. \\
+\bottomrule
+\end{tabularx}
+
+\vfill
+{\color{azulppal}\rule{\linewidth}{2.5pt}}\\[0.3em]
+{\small\color{grisoscuro} Documento autonomo para implementar un modelo SIMIO realista, trazable y defendible}
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+% -----------------------------------------------------------------------------
+\section{Resumen Ejecutivo}
+% -----------------------------------------------------------------------------
+
+Este roadmap traduce el enunciado de la panaderia de supermercado en una ruta de construccion concreta para SIMIO. El objetivo no es solo ``hacer un modelo'', sino construir un gemelo operacional suficientemente realista para responder una pregunta gerencial: que combinacion minima de recursos, horarios y politica de secuenciamiento permite sostener un buen nivel de servicio con bajo quiebre de stock.
+
+El documento organiza la implementacion del modelo en cinco fases: especificacion funcional y datos, baseline logico minimo viable, recursos/movimientos/3D util, verificacion-validacion-calibracion, y experimentacion-recomendacion. La logica operacional se construye primero y la capa visual 3D se agrega despues como mecanismo de comunicacion, verificacion y credibilidad, no como sustituto de validacion estadistica.
+
+El estandar de calidad buscado es operacionalmente exigente: el modelo debe ser data-driven, el layout 3D debe mostrar el recorrido real de lotes y personas, los traslados no se deben esconder dentro de tiempos globales, los hornos deben respetar familias, carga, descarga, setup y espera maxima, la demanda debe operar por inventario en sala y perdida de venta, y cada resultado debe poder trazarse a un dato, supuesto o regla del modelo.
+
+\begin{center}
+\colorbox{grisclaro}{%
+\parbox{0.92\textwidth}{%
+\textbf{Criterio rector.} Cada decision de modelacion debe quedar vinculada a cuatro elementos: fuente de datos, supuesto operacional, implementacion SIMIO y KPI que permite evaluar su efecto. Si una decision no afecta la capacidad, el nivel de servicio, el costo operativo o la trazabilidad, se simplifica.
+}}
+\end{center}
+
+% -----------------------------------------------------------------------------
+\section{Mandato Operacional}
+% -----------------------------------------------------------------------------
+
+\subsection{Problema a resolver}
+
+La panaderia produce diez tipos de pan fresco para abastecer una zona de autoservicio entre las 09:00 y las 21:00 horas. La operacion debe comenzar antes de la apertura para asegurar disponibilidad inicial. Si un cliente no encuentra el tipo de pan que desea, la venta se pierde y no existe sustitucion. El problema observado es un alto nivel de quiebres de stock, asociado a coordinacion insuficiente entre demanda, produccion, hornos, reposicion y dotacion.
+
+\subsection{Pregunta de decision}
+
+\begin{center}
+\colorbox{azulclaro}{%
+\parbox{0.9\textwidth}{%
+\centering
+\textit{Que dotacion, cantidad de equipos, horario de inicio y politica de secuencia de produccion minimizan los quiebres de stock sin sobredimensionar recursos?}
+}}
+\end{center}
+
+\subsection{Alcance minimo que debe quedar en SIMIO}
+
+\begin{itemize}
+  \item Produccion por lote desde pesado y dosificacion hasta reposicion en sala.
+  \item Recursos humanos diferenciados: panaderos y manipuladores de horno/despacho.
+  \item Recursos fisicos limitados: mezcladoras, amasadoras, estaciones de formado, camaras, hornos, carros, bandejas y racks.
+  \item Layout 3D con caminos, distancias y traslados explicitos.
+  \item Inventario en sala por tipo de pan, demanda estocastica y quiebres.
+  \item Hornos batch con compatibilidad por familia, setup, carga, descarga y espera maxima.
+  \item Turnos de 8 horas, colacion de 45 minutos y dos descansos de 15 minutos escalonados.
+  \item Escenarios comparables y resultados con replicaciones.
+\end{itemize}
+
+\subsection{Fuera del alcance}
+
+Quedan fuera compras de materias primas, transporte externo, mantenciones mayores, fallas electricas, ventas de otros productos, sustitucion de compra entre panes y deterioro de producto dentro del horizonte diario. Si alguno de estos elementos aparece como explicacion de resultados, debe documentarse como limitacion y no como comportamiento simulado.
+
+\subsection{Criterio de diseno: logica primero, 3D despues}
+
+El modelo debe construirse en dos capas. La capa logica-operacional representa producto, ruta, recurso, inventario, demanda, reposicion, quiebre y KPIs. La capa visual-3D representa layout, rutas, simbolos, distancias, camaras y animacion. La segunda capa solo se considera terminada si ayuda a verificar o comunicar la primera; no debe consumir tiempo de modelado sin mejorar decision, trazabilidad o credibilidad.
+
+\begin{table}[H]
+\centering
+\caption{Separacion entre capa logica y capa visual del modelo.}
+\begin{tabularx}{\textwidth}{L{3.1cm}Y Y}
+\toprule
+\rowcolor{tabhead}
+\color{white}Capa & \color{white}Debe resolver & \color{white}No debe usarse para \\
+\midrule
+Logica-operacional & Rutas por producto, uso de recursos, inventario, demanda, quiebres, turnos, hornos y KPIs. & Embellecer el modelo sin pruebas, ocultar supuestos o reemplazar validacion. \\
+\rowcolor{tabrow}
+Visual-3D & Ubicacion de estaciones, caminos, movimiento de workers/carros, colas visibles y comunicacion del flujo. & Justificar resultados si la logica, los datos o las pruebas no cierran. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+% -----------------------------------------------------------------------------
+\section{Arquitectura General del Sistema}
+% -----------------------------------------------------------------------------
+
+\subsection{Diagrama macro del sistema}
+
+\begin{figure}[H]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tikzpicture}[node distance=1.1cm and 1.35cm]
+  \node[datastore] (data) {Datos de entrada\\Excel y enunciado};
+  \node[stage, right=of data] (plan) {Tabla maestra\\supuestos y parametros};
+  \node[stage, right=of plan] (prod) {Produccion\\por lotes};
+  \node[stage, right=of prod] (oven) {Hornos\\batch por familia};
+  \node[stage, right=of oven] (stock) {Inventario\\sala de ventas};
+  \node[decision, right=of stock] (demand) {Cliente encuentra\\stock?};
+  \node[stage, below=of demand] (lost) {Venta perdida\\quiebre registrado};
+  \node[stage, above=of demand] (sale) {Venta satisfecha\\stock disminuye};
+
+  \node[resource, below=1.25cm of prod] (workers) {Panaderos\\manipuladores};
+  \node[resource, below=1.25cm of oven] (machines) {Mezcladoras\\amasadoras\\hornos};
+  \node[resource, below=1.25cm of stock] (transport) {Carros\\bandejas\\racks};
+
+  \draw[arrow] (data) -- (plan);
+  \draw[arrow] (plan) -- (prod);
+  \draw[arrow] (prod) -- (oven);
+  \draw[arrow] (oven) -- (stock);
+  \draw[arrow] (stock) -- (demand);
+  \draw[arrow] (demand) -- node[right,font=\scriptsize]{No} (lost);
+  \draw[arrow] (demand) -- node[right,font=\scriptsize]{Si} (sale);
+  \draw[dasharrow] (workers) -- (prod);
+  \draw[dasharrow] (workers) -- (oven);
+  \draw[dasharrow] (machines) -- (prod);
+  \draw[dasharrow] (machines) -- (oven);
+  \draw[dasharrow] (transport) -- (oven);
+  \draw[dasharrow] (transport) -- (stock);
+\end{tikzpicture}}
+\caption{Vista macro de datos, flujo fisico, recursos y demanda.}
+\end{figure}
+
+\subsection{Arquitectura de datos}
+
+\begin{figure}[H]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tikzpicture}[node distance=0.95cm and 1.15cm]
+  \node[datastore] (p1) {\archivo{parametros\_proceso}\\tiempos, lotes, capacidades};
+  \node[datastore, below=of p1] (p2) {\archivo{perfil\_demanda}\\kg/hora por producto};
+  \node[datastore, below=of p2] (p3) {\archivo{probabilidades}\\eleccion por hora};
+  \node[datastore, below=of p3] (p4) {Enunciado\\reglas y restricciones};
+
+  \node[stage, right=2.1cm of p2] (master) {Tabla maestra\\Producto -- proceso -- familia};
+  \node[stage, above=of master] (demand) {Motor de demanda\\clientes, mix, kg};
+  \node[stage, below=of master] (rules) {Reglas operativas\\turnos, hornos, reposicion};
+
+  \node[stage, right=1.8cm of master] (simio) {Modelo SIMIO\\3D ejecutable};
+  \node[stage, right=1.8cm of simio] (outputs) {Resultados\\KPIs y escenarios};
+  \node[stage, below=of outputs] (reports) {Paquete\\tecnico final};
+
+  \draw[arrow] (p1) -- (master);
+  \draw[arrow] (p2) -- (demand);
+  \draw[arrow] (p3) -- (demand);
+  \draw[arrow] (p4) -- (rules);
+  \draw[arrow] (master) -- (simio);
+  \draw[arrow] (demand) -- (simio);
+  \draw[arrow] (rules) -- (simio);
+  \draw[arrow] (simio) -- (outputs);
+  \draw[arrow] (outputs) -- (reports);
+\end{tikzpicture}}
+\caption{Trazabilidad desde archivos de entrada hasta resultados y paquete tecnico final.}
+\end{figure}
+
+% -----------------------------------------------------------------------------
+\section{Datos Base y Dimensionamiento Inicial}
+% -----------------------------------------------------------------------------
+
+\subsection{Tabla maestra de productos}
+
+{\scriptsize
+\setlength{\tabcolsep}{2.2pt}
+\begin{longtable}{@{}L{2.65cm}C{1.05cm}C{1.05cm}C{0.95cm}C{0.9cm}C{1.0cm}C{1.05cm}C{0.95cm}L{2.15cm}@{}}
+\caption{Parametros principales a cargar en SIMIO.}\\
+\toprule
+\rowcolor{tabhead}
+\color{white}Producto & \color{white}Horno & \makecell{\color{white}Kg\\dia} & \makecell{\color{white}Kg\\lote} & \color{white}Lotes & \makecell{\color{white}Kg\\carro} & \makecell{\color{white}Carros\\lote} & \color{white}Temp. & \makecell{\color{white}Familia\\proceso} \\
+\midrule
+\endfirsthead
+\toprule
+\rowcolor{tabhead}
+\color{white}Producto & \color{white}Horno & \makecell{\color{white}Kg\\dia} & \makecell{\color{white}Kg\\lote} & \color{white}Lotes & \makecell{\color{white}Kg\\carro} & \makecell{\color{white}Carros\\lote} & \color{white}Temp. & \makecell{\color{white}Familia\\proceso} \\
+\midrule
+\endhead
+Marraqueta & 18 min & 1999.98 & 60 & 34 & 40 & 2 & 210 C & Directo \\
+\rowcolor{tabrow}
+Hallulla & 18 min & 1699.97 & 55 & 31 & 45 & 2 & 220 C & Directo con materia grasa \\
+Marraqueta Integral & 21 min & 800.01 & 60 & 14 & 38 & 2 & 205 C & Directo integral \\
+\rowcolor{tabrow}
+Hallulla Integral & 18 min & 800.01 & 55 & 15 & 42 & 2 & 210 C & Integral con materia grasa \\
+Pan Hot Dog & 14 min & 1200.01 & 55 & 22 & 35 & 2 & 200 C & Enriquecido \\
+\rowcolor{tabrow}
+Ciabatta & 21 min & 399.98 & 50 & 8 & 35 & 2 & 230 C & Alta hidratacion \\
+Baguette & 21 min & 350.01 & 45 & 8 & 32 & 2 & 235 C & Frances artesanal \\
+\rowcolor{tabrow}
+Dobladita & 14 min & 350.04 & 50 & 8 & 45 & 2 & 215 C & Masa grasa laminada \\
+Bocado de Dama & 14 min & 219.96 & 25 & 9 & 28 & 1 & 200 C & Pan pequeno enriquecido \\
+\rowcolor{tabrow}
+Amasado & 18 min & 380.00 & 60 & 7 & 40 & 2 & 210 C & Tradicional chileno \\
+\bottomrule
+\end{longtable}
+}
+
+\subsection{Perfil de demanda diaria}
+
+La demanda total esperada es de 8.200 kg/dia. El primer punto de presion esta entre 12:00 y 15:00; el segundo, mucho mas exigente, esta entre 18:00 y 20:00. El modelo debe partir antes de las 09:00 con stock inicial disponible y con una politica de reposicion capaz de absorber esos peaks.
+
+\begin{table}[H]
+\centering
+\caption{Demanda total esperada por hora.}
+\begin{tabular}{L{2.7cm}C{2.0cm}L{8.0cm}}
+\toprule
+\rowcolor{tabhead}
+\color{white}Franja & \color{white}Kg esperados & \color{white}Interpretacion operacional \\
+\midrule
+09:00--10:00 & 448.77 & Apertura: exige stock inicial completo y reposicion temprana. \\
+\rowcolor{tabrow}
+10:00--11:00 & 448.77 & Demanda estable; buena ventana para acumular inventario. \\
+11:00--12:00 & 448.77 & Ultima hora antes del primer aumento. \\
+\rowcolor{tabrow}
+12:00--13:00 & 750.15 & Primer peak de almuerzo; requiere horneadas ya enfriadas. \\
+13:00--14:00 & 689.35 & Mantencion del peak. \\
+\rowcolor{tabrow}
+14:00--15:00 & 689.35 & Cierre del bloque de alta demanda. \\
+15:00--16:00 & 448.77 & Recuperacion de inventario. \\
+\rowcolor{tabrow}
+16:00--17:00 & 448.77 & Preparacion para peak vespertino. \\
+17:00--18:00 & 499.49 & Transicion; punto de liberacion anticipada. \\
+\rowcolor{tabrow}
+18:00--19:00 & 1451.29 & Peak critico diario; dimensiona hornos, reposicion y stock. \\
+19:00--20:00 & 1416.55 & Segundo bloque critico; prueba robustez de politica. \\
+\rowcolor{tabrow}
+20:00--21:00 & 459.94 & Cierre; controlar sobrantes sin generar quiebres finales. \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Inconsistencia critica a tratar}
+
+El enunciado indica una carga minima recomendada de 600 kg, equivalente al 50\% de la capacidad del horno. Sin embargo, al usar las capacidades por carro del archivo de parametros, seis carros entregan una capacidad maxima entre 168 kg y 270 kg segun el producto. Por tanto, el roadmap exige que esta diferencia quede documentada antes de cerrar escenarios.
+
+\begin{center}
+\colorbox{rojoriesgo!8}{%
+\parbox{0.92\textwidth}{%
+\alerta{Decision pendiente de validacion academica.} Se debe consultar si 600 kg corresponde a capacidad agregada de varios hornos, a una escala teorica del enunciado o a una simplificacion que debe reemplazarse por capacidades por carro. Mientras no exista respuesta, el modelo debe parametrizar ambos enfoques y reportar sensibilidad.
+}}
+\end{center}
+
+% -----------------------------------------------------------------------------
+\section{Glosario Operacional}
+% -----------------------------------------------------------------------------
+
+\begin{longtable}{L{3.2cm}L{5.2cm}L{6.2cm}}
+\caption{Conceptos que deben usarse de manera consistente en el modelo y su documentacion tecnica.}\\
+\toprule
+\rowcolor{tabhead}
+\color{white}Concepto & \color{white}Definicion & \color{white}Uso en SIMIO \\
+\midrule
+\endfirsthead
+\toprule
+\rowcolor{tabhead}
+\color{white}Concepto & \color{white}Definicion & \color{white}Uso en SIMIO \\
+\midrule
+\endhead
+Lote de pan & Unidad de produccion de un tipo especifico de pan, con kg de referencia. & Entidad principal del proceso productivo. \\
+\rowcolor{tabrow}
+Cliente/orden & Evento de demanda que puede requerir uno, dos o tres tipos de pan. & Entidad o evento que descuenta inventario por producto. \\
+Familia de horneado & Grupo compatible de productos con mismo tiempo de coccion: 14, 18 o 21 minutos. & Atributo que restringe la carga del horno. \\
+\rowcolor{tabrow}
+Stock en sala & Inventario disponible para venta por tipo de pan. & Estado o tabla de inventario que se actualiza con ventas y reposiciones. \\
+Quiebre & Demanda no satisfecha por ausencia de inventario. & Contador por producto y kg perdidos. \\
+\rowcolor{tabrow}
+Setup de horno & Tiempo adicional al cambiar familia de horneado. & Proceso condicional de 0 o 5 minutos. \\
+Traslado explicito & Movimiento fisico entre estaciones, con distancia y recurso. & Path, transporter o demora parametrizada por tramo. \\
+\rowcolor{tabrow}
+Reposicion & Movimiento desde enfriado/despacho a sala. & Actividad del manipulador que habilita inventario vendible. \\
+Replica & Corrida independiente con semilla aleatoria. & Base estadistica para intervalos de confianza. \\
+\bottomrule
+\end{longtable}
+
+% -----------------------------------------------------------------------------
+\section{Fases de Implementacion en SIMIO}
+% -----------------------------------------------------------------------------
+
+\subsection{Vista general de fases}
+
+\begin{table}[H]
+\centering
+\caption{Cinco fases de implementacion SIMIO.}
+\begin{tabularx}{\textwidth}{C{0.9cm}L{3.5cm}Y L{3.4cm}}
+\toprule
+\rowcolor{tabhead}
+\color{white}Fase & \color{white}Nombre & \color{white}Resultado esperado & \color{white}Criterio de cierre \\
+\midrule
+1 & Especificacion funcional y datos & Alcance, KPIs, unidad de modelacion, datos y supuestos cerrados. & Especificacion funcional auditada. \\
+\rowcolor{tabrow}
+2 & Baseline logico minimo viable & Proceso extremo a extremo con demanda, inventario, hornos y quiebres. & Un dia simulado corre sin errores logicos. \\
+3 & Recursos, movimientos y 3D util & Workers, carros, paths, turnos, cambios y layout 3D funcional. & Animacion explica la logica y no la reemplaza. \\
+\rowcolor{tabrow}
+4 & Verificacion, validacion y calibracion & Modelo probado con casos pequenos y demanda base. & Lista de chequeo sin fallas criticas. \\
+5 & Experimentacion y recomendacion & Escenarios, sensibilidad y recomendacion de capacidad. & Tabla comparativa y decision defendible. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Fase 1 -- Especificacion funcional y datos}
+
+\textbf{Objetivo.} Cerrar que se va a modelar, con que nivel de detalle, que datos gobiernan el modelo y que criterios determinan exito. Esta fase evita construir una animacion atractiva pero metodologicamente debil.
+
+\textbf{Actividades.}
+\begin{enumerate}
+  \item Redactar especificacion funcional: stakeholders, objetivo, frontera del sistema, horizonte, unidad de modelacion, reportes, nivel 3D requerido y fecha limite.
+  \item Consolidar una tabla maestra por producto con tipo, familia de proceso, tiempo por etapa, kg por lote, temperatura, kg por carro y familia de horneado.
+  \item Validar que las probabilidades de eleccion por hora sumen 1 y que la demanda horaria agregue 8.200 kg/dia.
+  \item Calcular lotes minimos por producto y familia, distinguiendo demanda diaria de produccion programada.
+  \item Definir la unidad de modelacion base: lote para produccion, cliente/orden para demanda y carro/bandeja como restriccion fisica si afecta capacidad.
+  \item Abrir una bitacora de supuestos con codigo, descripcion, fuente, confianza, impacto y estado.
+\end{enumerate}
+
+\textbf{Entregables.}
+\begin{itemize}
+  \item Tabla maestra de productos.
+  \item Tabla de demanda horaria.
+  \item Tabla de probabilidades de eleccion.
+  \item Registro de supuestos, incluyendo la inconsistencia de 600 kg.
+  \item Especificacion funcional firmable por el equipo.
+  \item Diccionario de atributos SIMIO: \archivo{TipoPan}, \archivo{FamiliaHorno}, \archivo{KgLote}, \archivo{HoraLiberacion}, \archivo{Prioridad}, \archivo{TiempoCiclo}.
+\end{itemize}
+
+\subsection{Fase 2 -- Baseline logico minimo viable}
+
+\textbf{Objetivo.} Tener un modelo que corra extremo a extremo, aunque sea visualmente simple. El baseline debe producir KPIs correctos antes de enriquecer workers, carros o layout 3D.
+
+\textbf{Construccion minima.}
+\begin{enumerate}
+  \item Crear productos/lotes guiados por tablas, no cableados manualmente en cada objeto.
+  \item Implementar proceso principal con servers para pesado, mezclado, amasado, formado, fermentacion, horno, enfriado y reposicion.
+  \item Implementar inventario terminal por producto, demanda horaria, consumo de stock y quiebre.
+  \item Modelar hornos como servidores batch por familia, con tiempos 14, 18 y 21 minutos y setup 0/5 minutos.
+  \item Registrar KPIs iniciales: fill rate, kg no vendidos, sobrante, produccion, utilizacion de hornos y tiempo de ciclo.
+\end{enumerate}
+
+\textbf{Criterio de cierre.} Un dia operativo simulado corre sin errores; el balance de masa cierra; la demanda descuenta inventario o registra perdida; y los hornos no mezclan familias.
+
+\subsection{Fase 3 -- Recursos, movimientos y 3D util}
+
+\textbf{Objetivo.} Agregar realismo operacional relevante: workers, carros, turnos, caminos, cambios de producto y visual 3D liviano. El layout debe explicar donde ocurre cada actividad, que recurso se mueve y cuanto tiempo toma moverse.
+
+\textbf{Zonas 3D obligatorias.}
+\begin{itemize}
+  \item Recepcion y pesado/dosificacion.
+  \item Mezclado y amasado.
+  \item Reposo en masa.
+  \item Dividido, laminado, formado o moldeado.
+  \item Fermentacion final.
+  \item Horno batch.
+  \item Enfriado.
+  \item Despacho/reposicion.
+  \item Sala de ventas.
+\end{itemize}
+
+\textbf{Supuestos de movimiento iniciales.}
+\begin{table}[H]
+\centering
+\caption{Supuestos base para modelar traslados explicitos.}
+\begingroup
+\small
+\setlength{\tabcolsep}{3pt}
+\begin{tabularx}{\textwidth}{@{}L{3.0cm}L{2.55cm}C{1.7cm}Y@{}}
+\toprule
+\rowcolor{tabhead}
+\color{white}Movimiento & \color{white}Recurso & \color{white}Velocidad & \color{white}Regla de implementacion \\
+\midrule
+Panadero sin carga & Panadero & 1.2 m/s & Usar red de paths del layout; agregar tiempo fijo si toma utensilios. \\
+\rowcolor{tabrow}
+Panadero con bandeja o masa & Panadero & 0.9 m/s & Usar cuando mueve masa corta distancia entre estaciones. \\
+Manipulador con carro & Manipulador & 0.8 m/s & Usar entre horno, enfriado y sala; requiere carro disponible. \\
+\rowcolor{tabrow}
+Carga de horno & Manipulador & 5 min & Tiempo fijo antes de iniciar coccion. \\
+Descarga de horno & Manipulador & 5 min & Tiempo fijo al finalizar coccion; bloquea siguiente corrida. \\
+\bottomrule
+\end{tabularx}
+\endgroup
+\end{table}
+
+\textbf{Proceso por lote enriquecido.}
+\begin{enumerate}
+  \item Pesado y dosificacion: requiere panadero.
+  \item Mezclado: requiere panadero para ingresar ingredientes, ciclo automatico de maquina y panadero para retirar masa.
+  \item Amasado: requiere panadero o amasadora segun decision de modelacion.
+  \item Reposo en masa: espera sin recurso humano.
+  \item Dividido/formado: requiere panadero y estacion.
+  \item Fermentacion final: espera sin recurso humano, limitada por capacidad.
+  \item Horneado: requiere familia compatible, carga, coccion y descarga.
+  \item Enfriado: espera sin recurso humano.
+  \item Reposicion: requiere manipulador y carro/rack.
+\end{enumerate}
+
+\textbf{Demanda.} Cada cliente de panaderia compra uno, dos o tres tipos de pan con probabilidades 50\%, 35\% y 15\%. La primera eleccion usa la tabla horaria de probabilidades; las siguientes elecciones usan las mismas proporciones relativas excluyendo productos ya elegidos. La cantidad por producto se modela triangularmente segun minimo, moda y maximo del enunciado.
+
+\textbf{Hornos.} Cada corrida procesa una sola familia. El setup es 0 minutos si la familia no cambia y 5 minutos si cambia. Si no se alcanza carga minima, el horno puede esperar acumulacion, pero no mas de 15 minutos antes de evaluar corrida anticipada por riesgo de quiebre.
+
+\textbf{Criterio de cierre.} La animacion 3D debe permitir seguir un lote desde pesado hasta sala, incluyendo por donde se mueve, que recurso lo atiende y que colas se forman. Si un simbolo 3D no corresponde a una regla, recurso, cola o KPI, se elimina o simplifica.
+
+\subsection{Fase 4 -- Verificacion, validacion y calibracion}
+
+\textbf{Objetivo.} Demostrar que el modelo esta bien construido y que representa de manera aceptable la operacion propuesta.
+
+\begin{longtable}{L{3.3cm}L{5.2cm}L{6.0cm}}
+\caption{Checklist de verificacion y validacion.}\\
+\toprule
+\rowcolor{tabhead}
+\color{white}Prueba & \color{white}Como se ejecuta & \color{white}Criterio de aprobacion \\
+\midrule
+\endfirsthead
+\toprule
+\rowcolor{tabhead}
+\color{white}Prueba & \color{white}Como se ejecuta & \color{white}Criterio de aprobacion \\
+\midrule
+\endhead
+Balance de masa & Comparar kg producidos, vendidos, perdidos y sobrantes. & La diferencia no explicada debe ser cero. \\
+\rowcolor{tabrow}
+Inventario no negativo & Forzar demanda alta con poco stock. & El stock nunca baja de cero; se registra quiebre. \\
+Compatibilidad de horno & Cargar productos de familias distintas en cola. & Ninguna corrida mezcla familias. \\
+\rowcolor{tabrow}
+Setup & Alternar familias 14, 18 y 21. & Setup 5 min solo cuando cambia familia. \\
+Traslados & Seguir un lote por animacion. & Los movimientos ocurren por paths definidos. \\
+\rowcolor{tabrow}
+Turnos y descansos & Revisar disponibilidad por calendario. & Siempre queda al menos una persona de cada funcion cuando corresponde. \\
+Demanda horaria & Correr varias replicas base. & Promedio simulado cercano al perfil esperado por hora. \\
+\rowcolor{tabrow}
+Tiempos de ciclo & Correr un lote aislado por producto. & Tiempo minimo coincide con suma de etapas y movimientos. \\
+\bottomrule
+\end{longtable}
+
+\subsection{Fase 5 -- Experimentacion, sensibilidad y recomendacion}
+
+\textbf{Objetivo.} Comparar configuraciones y transformar resultados en decisiones operacionales.
+
+\textbf{Escenarios minimos.}
+\begin{itemize}
+  \item Dotacion baja, media y alta de panaderos.
+  \item Dotacion baja, media y alta de manipuladores.
+  \item Uno, dos y tres hornos, si la capacidad base lo justifica.
+  \item Mezcladoras y amasadoras como posibles cuellos de botella.
+  \item Inicio de operacion a distintas horas antes de apertura.
+  \item Politicas de secuencia: menor stock, mayor demanda esperada, secuencia fija 14--18--21 e hibrida.
+\end{itemize}
+
+\textbf{Criterio de recomendacion.} La configuracion final debe priorizar el menor costo operacional que cumpla el nivel de servicio definido. Si dos escenarios cumplen, se selecciona el de menor sobreproduccion y menor sensibilidad a variaciones de demanda.
+
+% -----------------------------------------------------------------------------
+\section{Flujos y Mockups de Implementacion}
+% -----------------------------------------------------------------------------
+
+\subsection{Flujo productivo por tipo de pan}
+
+\begin{figure}[H]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tikzpicture}[node distance=0.85cm and 0.75cm]
+  \node[stage] (s1) {Pesado y\\dosificacion\\Panadero};
+  \node[stage, right=of s1] (s2) {Mezclado\\2 min carga +\\ciclo automatico};
+  \node[stage, right=of s2] (s3) {Retiro masa\\1 min + traslado};
+  \node[stage, right=of s3] (s4) {Amasado\\manual o maquina};
+  \node[stage, right=of s4] (s5) {Reposo\\en masa};
+
+  \node[stage, below=1.15cm of s5] (s6) {Dividido y\\formado};
+  \node[stage, left=of s6] (s7) {Fermentacion\\final};
+  \node[stage, left=of s7] (s8) {Cola horno\\por familia};
+  \node[stage, left=of s8] (s9) {Horneado\\batch};
+  \node[stage, left=of s9] (s10) {Enfriado};
+  \node[stage, below=1.15cm of s10] (s11) {Reposicion\\a sala};
+  \node[stage, right=of s11] (s12) {Inventario\\vendible};
+
+  \draw[arrow] (s1) -- (s2);
+  \draw[arrow] (s2) -- (s3);
+  \draw[arrow] (s3) -- (s4);
+  \draw[arrow] (s4) -- (s5);
+  \draw[arrow] (s5) -- (s6);
+  \draw[arrow] (s6) -- (s7);
+  \draw[arrow] (s7) -- (s8);
+  \draw[arrow] (s8) -- (s9);
+  \draw[arrow] (s9) -- (s10);
+  \draw[arrow] (s10) -- (s11);
+  \draw[arrow] (s11) -- (s12);
+\end{tikzpicture}}
+\caption{Flujo minimo que debe seguir cada lote dentro de SIMIO.}
+\end{figure}
+
+\subsection{Mockup isometrico del layout 3D}
+
+\begin{figure}[H]
+\centering
+\resizebox{0.98\textwidth}{!}{%
+\begin{tikzpicture}
+  \begin{scope}[x={(0.92cm,0.42cm)}, y={(-0.92cm,0.42cm)}]
+    \filldraw[fill=grisclaro, draw=azulppal, thick] (0,0) rectangle (12,8);
+    \draw[step=1, draw=grismedio!25] (0,0) grid (12,8);
+
+    \node[stage, minimum width=2.0cm, text width=1.75cm] (pesado) at (1.3,6.8) {Pesado\\dosif.};
+    \node[stage, minimum width=2.0cm, text width=1.75cm] (mezcla) at (3.6,6.8) {Mezclado};
+    \node[stage, minimum width=2.0cm, text width=1.75cm] (amasado) at (5.9,6.8) {Amasado};
+    \node[stage, minimum width=2.0cm, text width=1.75cm] (reposo) at (8.2,6.8) {Reposo};
+    \node[stage, minimum width=2.0cm, text width=1.75cm] (formado) at (10.5,6.8) {Formado};
+
+    \node[stage, fill=amarillo!20, draw=naranja, minimum width=2.2cm, text width=1.9cm] (ferm) at (9.6,4.5) {Fermentacion\\final};
+    \node[stage, fill=rojoriesgo!10, draw=rojoriesgo, minimum width=2.2cm, text width=1.9cm] (horno1) at (6.8,4.3) {Hornos\\batch};
+    \node[stage, fill=verdeok!10, draw=verdeok, minimum width=2.2cm, text width=1.9cm] (enfria) at (4.0,4.2) {Enfriado};
+    \node[stage, fill=azulclaro, minimum width=2.2cm, text width=1.9cm] (desp) at (2.0,2.7) {Despacho\\reposicion};
+    \node[stage, fill=moradodata!12, draw=moradodata, minimum width=2.6cm, text width=2.2cm] (sala) at (5.4,1.5) {Sala de ventas\\inventario};
+
+    \draw[arrow] (pesado) -- (mezcla);
+    \draw[arrow] (mezcla) -- (amasado);
+    \draw[arrow] (amasado) -- (reposo);
+    \draw[arrow] (reposo) -- (formado);
+    \draw[arrow] (formado) -- (ferm);
+    \draw[arrow] (ferm) -- (horno1);
+    \draw[arrow] (horno1) -- (enfria);
+    \draw[arrow] (enfria) -- (desp);
+    \draw[arrow] (desp) -- (sala);
+
+    \draw[dasharrow, rojoriesgo] (horno1) -- ++(0,-1.3) node[midway, below, sloped, font=\scriptsize] {carros};
+    \draw[dasharrow, verdeok] (desp) -- ++(-1.4,0.9) node[midway, above, sloped, font=\scriptsize] {manipulador};
+  \end{scope}
+  \node[font=\small\bfseries, color=azulppal] at (0,-0.45) {Mockup conceptual 3D: debe replicarse con objetos, paths y animacion en SIMIO.};
+\end{tikzpicture}}
+\caption{Layout isometrico conceptual para construir el modelo 3D.}
+\end{figure}
+
+\subsection{Logica de hornos}
+
+\begin{figure}[H]
+\centering
+\resizebox{0.96\textwidth}{!}{%
+\begin{tikzpicture}[node distance=1.0cm and 1.3cm]
+  \node[stage] (cola) {Colas por\\familia 14/18/21};
+  \node[decision, right=of cola] (fam) {Familia\\seleccionada?};
+  \node[decision, right=of fam] (cap) {Carga suficiente\\o espera 15 min?};
+  \node[decision, right=of cap] (setup) {Cambio de\\familia?};
+  \node[stage, right=of setup] (prep) {Setup\\0 o 5 min};
+  \node[stage, below=of prep] (load) {Carga\\5 min\\manipulador};
+  \node[stage, left=of load] (cook) {Coccion\\14/18/21 min};
+  \node[stage, left=of cook] (unload) {Descarga\\5 min\\manipulador};
+  \node[stage, left=of unload] (cool) {Enfriado\\no vendible};
+
+  \draw[arrow] (cola) -- (fam);
+  \draw[arrow] (fam) -- (cap);
+  \draw[arrow] (cap) -- (setup);
+  \draw[arrow] (setup) -- (prep);
+  \draw[arrow] (prep) -- (load);
+  \draw[arrow] (load) -- (cook);
+  \draw[arrow] (cook) -- (unload);
+  \draw[arrow] (unload) -- (cool);
+  \draw[dasharrow] (cap.south) |- ++(0,-1.2) -| node[pos=0.25, below, font=\scriptsize]{espera acumulacion} (cola.south);
+\end{tikzpicture}}
+\caption{Decision de carga, setup y uso de manipulador en hornos batch.}
+\end{figure}
+
+\subsection{Inventario, demanda y quiebre}
+
+\begin{figure}[H]
+\centering
+\resizebox{0.94\textwidth}{!}{%
+\begin{tikzpicture}[node distance=1.0cm and 1.1cm]
+  \node[datastore] (prob) {Probabilidades\\por hora};
+  \node[datastore, below=of prob] (perfil) {Perfil kg/hora\\por producto};
+  \node[stage, right=of prob] (cliente) {Generar cliente\\de panaderia};
+  \node[decision, right=of cliente] (nprod) {Compra\\1, 2 o 3 tipos};
+  \node[stage, right=of nprod] (kg) {Cantidad triangular\\por producto};
+  \node[decision, right=of kg] (stock) {Stock\\suficiente?};
+  \node[stage, above=of stock] (venta) {Venta satisfecha\\descontar kg};
+  \node[stage, below=of stock] (quiebre) {Quiebre\\kg no vendidos};
+  \node[datastore, right=of stock] (kpi) {KPIs\\fill rate\\perdidas\\sobrantes};
+
+  \draw[arrow] (prob) -- (cliente);
+  \draw[arrow] (perfil) -| (cliente);
+  \draw[arrow] (cliente) -- (nprod);
+  \draw[arrow] (nprod) -- (kg);
+  \draw[arrow] (kg) -- (stock);
+  \draw[arrow] (stock) -- node[right,font=\scriptsize]{Si} (venta);
+  \draw[arrow] (stock) -- node[right,font=\scriptsize]{No} (quiebre);
+  \draw[arrow] (venta) -| (kpi);
+  \draw[arrow] (quiebre) -| (kpi);
+\end{tikzpicture}}
+\caption{Motor de demanda e inventario por producto.}
+\end{figure}
+
+% -----------------------------------------------------------------------------
+\section{Arquitectura Tecnica Recomendada en SIMIO}
+% -----------------------------------------------------------------------------
+
+\subsection{Objetos y elementos base}
+
+\begin{table}[H]
+\centering
+\caption{Uso recomendado de objetos SIMIO para la panaderia.}
+\begin{tabularx}{\textwidth}{L{2.7cm}L{4.4cm}Y}
+\toprule
+\rowcolor{tabhead}
+\color{white}Componente & \color{white}Uso recomendado & \color{white}Observacion de modelado \\
+\midrule
+Source & Liberacion de lotes y generacion de clientes. & Usar tasas dependientes del tiempo para demanda horaria y tablas si hay llegadas observadas. \\
+\rowcolor{tabrow}
+Server & Mezclado, formado, fermentacion, horneado, enfriado y reposicion. & Activar capacity, ranking rules y add-on triggers solo donde aporten logica. \\
+Worker & Panadero, manipulador de horno y repositor. & Usar worker si importa ubicacion/traslado; si no, basta seize/release. \\
+\rowcolor{tabrow}
+Vehicle o Transporter & Carros o racks moviles. & Usarlo cuando el carro sea restriccion fisica con ubicacion y capacidad. \\
+Path, TimePath o Connector & Red de movimiento. & Path o TimePath cuando la distancia importa; Connector si solo importa precedencia logica. \\
+\rowcolor{tabrow}
+Combiner o Separator & Agrupar lote, bandejas y carro. & Util para representar batch fisico o rack portador. \\
+Inventory o Material & Stock en sala o insumos si se decide modelarlos. & Obligatorio para producto terminado; insumos quedan fuera salvo sensibilidad. \\
+\rowcolor{tabrow}
+Tally y Output Statistics & KPIs personalizados. & Necesarios para fill rate, stockout, cycle time, WIP, esperas y merma/sobrante. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Tablas de datos SIMIO}
+
+El modelo debe ser guiado por datos. En vez de cablear productos y rutas dentro de objetos individuales, cada producto debe leer su receta, ruta, tiempos, prioridad, lote y reglas desde tablas. Esto permite agregar escenarios sin reconstruir el modelo.
+
+\scriptsize
+\begin{longtable}{L{3.1cm}L{2.6cm}L{6.7cm}L{2.2cm}}
+\caption{Tablas recomendadas para un modelo data-driven.}\\
+\toprule
+\rowcolor{tabhead}
+\color{white}Tabla & \color{white}Tipo & \color{white}Campos minimos & \color{white}Estado \\
+\midrule
+\endfirsthead
+\toprule
+\rowcolor{tabhead}
+\color{white}Tabla & \color{white}Tipo & \color{white}Campos minimos & \color{white}Estado \\
+\midrule
+\endhead
+\archivo{Tbl\_Productos} & Data Table & ProductoID, Nombre, FamiliaHorno, BatchSize, PrioridadServicio, VidaUtilHoras. & Obligatoria \\
+\rowcolor{tabrow}
+\archivo{Tbl\_RutasProducto} & Sequence Table & Sequence, ProductoID, Etapa, Destino, ProcTimeExpr, ReqWorker, ReqCarro. & Obligatoria \\
+\archivo{Tbl\_ParametrosProceso} & Data Table & ProductoID, Etapa, DistribucionTiempo, Min, Moda, Max, CapacidadLote. & Obligatoria \\
+\rowcolor{tabrow}
+\archivo{Tbl\_DemandaHora} & Rate/Data Table & HoraInicio, HoraFin, ProductoID, KgEsperados, TasaClientes. & Obligatoria \\
+\archivo{Tbl\_ProbEleccionHora} & Data Table & Hora, ProductoID, Probabilidad. & Obligatoria \\
+\rowcolor{tabrow}
+\archivo{Tbl\_Recursos} & Data Table & RecursoID, Tipo, HomeNode, Capacidad, CostoHora. & Obligatoria \\
+\archivo{Tbl\_Turnos} & Schedule Table & RecursoID, HoraInicio, HoraFin, Valor, Descanso. & Obligatoria \\
+\rowcolor{tabrow}
+\archivo{Tbl\_CambioProducto} & Matrix/Data Table & FromFamilia, ToFamilia, TiempoCambio. & Recomendable \\
+\archivo{Tbl\_RutasMovimiento} & Data Table & Origen, Destino, Distancia, Modo, TiempoBase. & Recomendable \\
+\rowcolor{tabrow}
+\archivo{Tbl\_SupuestosEstimados} & Data Table & Parametro, ValorBase, Fuente, Confianza, NivelSensibilidad. & Recomendable \\
+\archivo{Tbl\_ResultadosExport} & Data/export & Escenario, Replica, KPI, Producto, Valor. & Recomendable \\
+\bottomrule
+\end{longtable}
+\normalsize
+
+\subsection{States, processes, schedules y experiments}
+
+\begin{table}[H]
+\centering
+\caption{Estados globales y de entidad recomendados.}
+\begin{tabularx}{\textwidth}{L{4.2cm}L{2.2cm}Y}
+\toprule
+\rowcolor{tabhead}
+\color{white}State & \color{white}Tipo & \color{white}Proposito \\
+\midrule
+\archivo{Model.DemandScale} & Real & Escalar demanda para sensibilidad. \\
+\rowcolor{tabrow}
+\makecell[l]{\archivo{Model.Transfer}\\\archivo{TimeMult}} & Real & Multiplicar tiempos de traslado no observados. \\
+\archivo{Model.OvenCapAdj} & Real & Ajustar capacidad efectiva del horno. \\
+\rowcolor{tabrow}
+\makecell[l]{\archivo{Model.Stockout}\\\archivo{Count[Producto]}} & Array & Contar quiebres por producto. \\
+\makecell[l]{\archivo{Model.FillRate}\\\archivo{Units[Producto]}} & Array & Acumular unidades o kg atendidos. \\
+\rowcolor{tabrow}
+\makecell[l]{\archivo{Model.Lost}\\\archivo{Sales[Producto]}} & Array & Acumular kg perdidos por quiebre. \\
+\archivo{Entity.ProductoID} & Texto o entero & Identidad del producto/lote. \\
+\rowcolor{tabrow}
+\archivo{Entity.Priority} & Real & Prioridad dinamica de produccion y reposicion. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Processes, schedules y experiments minimos.}
+\begin{tabularx}{\textwidth}{L{4.0cm}L{4.1cm}Y}
+\toprule
+\rowcolor{tabhead}
+\color{white}Elemento & \color{white}Disparo/uso & \color{white}Logica \\
+\midrule
+\archivo{P\_InitModel} & OnRunInitialized & Inicializar states, inventarios y acumuladores. \\
+\rowcolor{tabrow}
+\archivo{P\_AsignarProductoDemanda} & Creacion de cliente & Elegir productos segun probabilidad horaria sin repeticion. \\
+\archivo{P\_ConsumirInventario} & Intento de compra & Atender venta o registrar stockout y kg perdidos. \\
+\rowcolor{tabrow}
+\archivo{P\_LiberarLote} & Plan de produccion & Crear lote segun politica y prioridad. \\
+\archivo{P\_CambioProducto} & Antes de horno & Aplicar setup por cambio de familia. \\
+\rowcolor{tabrow}
+\archivo{P\_RecordKPI} & Venta/salida de etapa & Acumular fill rate, cycle time, WIP y esperas. \\
+\archivo{Sch\_Panaderos/Manipuladores} & Calendarios & Turnos, colacion y descansos escalonados. \\
+\rowcolor{tabrow}
+\archivo{Exp\_ValidacionBase} & Baseline & Reproducir operacion actual con 30 replicas. \\
+\archivo{Exp\_Screening} & Screening & Filtrar factores influyentes antes de confirmar top escenarios. \\
+\rowcolor{tabrow}
+\archivo{Exp\_ConfirmacionTop} & Confirmacion & Correr mas replicas sobre mejores configuraciones. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+% -----------------------------------------------------------------------------
+\section{Matrices de Control y Experimentos}
+% -----------------------------------------------------------------------------
+
+\subsection{Matriz de supuestos}
+
+\begin{longtable}{L{1.4cm}L{4.1cm}L{4.1cm}L{4.9cm}}
+\caption{Supuestos que deben quedar cubiertos en el modelo y en la documentacion tecnica.}\\
+\toprule
+\rowcolor{tabhead}
+\color{white}ID & \color{white}Supuesto & \color{white}Impacto & \color{white}Tratamiento \\
+\midrule
+\endfirsthead
+\toprule
+\rowcolor{tabhead}
+\color{white}ID & \color{white}Supuesto & \color{white}Impacto & \color{white}Tratamiento \\
+\midrule
+\endhead
+S01 & No hay sustitucion entre productos. & Aumenta quiebres por producto especifico. & Registrar venta perdida aunque exista otro pan disponible. \\
+\rowcolor{tabrow}
+S02 & Producto no vendido no se deteriora dentro del dia. & Permite medir sobrante sin merma. & Reportar sobrantes al cierre como KPI. \\
+S03 & Todos los hornos son equivalentes. & Facilita escenarios por cantidad de hornos. & Parametrizar capacidad por horno identica. \\
+\rowcolor{tabrow}
+S04 & Movimientos internos se modelan explicitamente. & Afecta utilizacion de personas y tiempos de ciclo. & Usar velocidades base y distancias del layout. \\
+S05 & Fermentacion y enfriado no requieren personas. & Puede crear colas de capacidad, no de dotacion. & Modelar como espera con capacidad limitada si aplica. \\
+\rowcolor{tabrow}
+S06 & Descansos no son simultaneos. & Afecta disponibilidad efectiva. & Crear calendarios escalonados por funcion. \\
+S07 & Carga minima 600 kg es inconsistente con carros. & Puede cambiar fuertemente la politica de horno. & Mantener parametro y correr sensibilidad/consulta. \\
+\rowcolor{tabrow}
+S08 & Demanda de cada hora puede representarse por clientes. & Hace mas realista la eleccion de productos. & Calibrar clientes/hora a kg esperados. \\
+\bottomrule
+\end{longtable}
+
+\subsection{Matriz de recursos}
+
+\begin{table}[H]
+\centering
+\caption{Recursos que deben existir como capacidad limitada.}
+\begin{tabularx}{\textwidth}{@{}L{3.0cm}L{3.2cm}Y L{3.0cm}@{}}
+\toprule
+\rowcolor{tabhead}
+\color{white}Recurso & \color{white}Funcion & \color{white}Uso en modelo & \color{white}KPI asociado \\
+\midrule
+Panaderos & Produccion manual & Pesado, carga/retira mezcla, amasado, formado y apoyo. & Utilizacion, esperas, tiempo de ciclo. \\
+\rowcolor{tabrow}
+Manipuladores & Horno y despacho & Carga/descarga, carros, reposicion a sala. & Utilizacion, ocio de horno, reposicion. \\
+Mezcladoras & Ciclo automatico & Procesan mezcla despues de carga manual. & Utilizacion, cola de mezcla. \\
+\rowcolor{tabrow}
+Amasadoras & Proceso mecanico/manual & Segun escenario, limitan amasado. & Utilizacion, cola de amasado. \\
+Mesas/formado & Estaciones fisicas & Capacidad de formado por lote. & Cola y tiempo de espera. \\
+\rowcolor{tabrow}
+Camaras & Fermentacion & Capacidad de espera controlada. & Ocupacion y bloqueo. \\
+Hornos & Horneado batch & Corridas por familia, setup y carga. & Utilizacion, setups, throughput. \\
+\rowcolor{tabrow}
+Carros, bandejas y racks & Transporte y capacidad & Mueven lotes y limitan carga. & Requerimiento maximo, bloqueo. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Matriz de trazabilidad}
+
+\scriptsize
+\begin{longtable}{L{3.0cm}L{3.3cm}L{4.1cm}L{4.1cm}}
+\caption{Trazabilidad minima requisito--dato--implementacion--resultado.}\\
+\toprule
+\rowcolor{tabhead}
+\color{white}Requisito & \color{white}Fuente & \color{white}Implementacion SIMIO & \color{white}KPI/evidencia \\
+\midrule
+\endfirsthead
+\toprule
+\rowcolor{tabhead}
+\color{white}Requisito & \color{white}Fuente & \color{white}Implementacion SIMIO & \color{white}KPI/evidencia \\
+\midrule
+\endhead
+Inventario por tipo & Enunciado & Estado por producto en sala & Inventario promedio/minimo, quiebre. \\
+\rowcolor{tabrow}
+Demanda horaria & \archivo{perfil\_demanda} & Llegadas por franja calibradas a kg & Demanda simulada vs esperada. \\
+Eleccion de producto & \archivo{probabilidades} & Seleccion sin repeticion por cliente & Mix de compra por hora. \\
+\rowcolor{tabrow}
+Tiempos de proceso & \archivo{parametros\_proceso} & Delays y procesos por tipo de pan & Tiempo de ciclo por lote. \\
+Familias de horno & Enunciado y Min6 & Atributo \archivo{FamiliaHorno} & Cero mezclas incompatibles. \\
+\rowcolor{tabrow}
+Setup de horno & Enunciado & Logica condicional 0/5 min & Frecuencia y tiempo de setup. \\
+Turnos y descansos & Enunciado & Calendarios por recurso & Disponibilidad y utilizacion. \\
+\rowcolor{tabrow}
+Traslados internos & Supuesto operativo & Paths y velocidades por recurso & Tiempo de ciclo y uso de personas. \\
+\bottomrule
+\end{longtable}
+\normalsize
+
+\subsection{Matriz de KPIs}
+
+\begin{table}[H]
+\centering
+\caption{Indicadores minimos de salida.}
+\begin{tabularx}{\textwidth}{L{4.0cm}Y L{3.3cm}}
+\toprule
+\rowcolor{tabhead}
+\color{white}KPI & \color{white}Lectura operacional & \color{white}Nivel \\
+\midrule
+Quiebres de stock por tipo & Donde la politica falla en servicio. & Producto/hora \\
+\rowcolor{tabrow}
+Kg no vendidos & Perdida directa por falta de inventario. & Producto/dia \\
+Porcentaje de demanda satisfecha & Criterio principal de servicio. & Producto y total \\
+\rowcolor{tabrow}
+Sobrantes finales & Sobreproduccion y costo oculto. & Producto/dia \\
+Produccion total & Esfuerzo productivo y balance de masa. & Producto/lotes \\
+\rowcolor{tabrow}
+Inventario promedio y minimo & Robustez del abastecimiento. & Producto/hora \\
+Utilizacion de recursos & Identificacion de cuello de botella. & Recurso/dia \\
+\rowcolor{tabrow}
+Tiempo promedio de ciclo & Fluidez del proceso completo. & Producto/lote \\
+Tiempo de espera por recurso & Colas y saturacion. & Recurso/estacion \\
+\rowcolor{tabrow}
+Frecuencia de setups & Costo de secuenciamiento. & Horno/familia \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Matriz experimental concreta}
+
+La experimentacion se divide en cuatro bloques: baseline, screening, confirmacion y extension multidia opcional. La regla es simple: primero filtrar muchos factores con pocas corridas, luego confirmar pocos candidatos con mas replicas.
+
+\begin{table}[H]
+\centering
+\caption{Diseno experimental recomendado.}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{3.2cm}Y C{1.6cm}C{1.6cm}}
+\toprule
+\rowcolor{tabhead}
+\color{white}Bloque & \color{white}Diseno & \color{white}Objetivo & \color{white}Escen. & \color{white}Replicas \\
+\midrule
+Baseline & Escenario actual & Reproducir operacion base y calibrar comparacion. & 1 & 30 \\
+\rowcolor{tabrow}
+Screening & Ortogonal L18 o factorial reducido & Filtrar factores influyentes sin sobredimensionar corridas. & 18 & 30 \\
+Confirmacion & Top 5 escenarios & Confirmar diferencias con mayor poder estadistico. & 5 & 100 \\
+\rowcolor{tabrow}
+Extension multidia & Top 2 politicas & Probar carry-over de inventario y robustez semanal si aplica. & 2 & 30 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Factores y niveles para sensibilidad inicial.}
+\begin{tabularx}{\textwidth}{L{4.0cm}C{2.7cm}C{2.7cm}C{2.7cm}}
+\toprule
+\rowcolor{tabhead}
+\color{white}Factor & \color{white}Bajo & \color{white}Medio & \color{white}Alto \\
+\midrule
+Multiplicador de demanda horaria & 0.90x & 1.00x & 1.10x \\
+\rowcolor{tabrow}
+Multiplicador de tiempo de traslado & 0.80x & 1.00x & 1.20x \\
+Capacidad efectiva de horno & Base - 1 rack/lote & Base & Base + 1 rack/lote \\
+\rowcolor{tabrow}
+Carros disponibles & Base & Base + 1 & Base + 2 \\
+Politica de reposicion & Reactiva & Umbral stock objetivo & Hibrida por prioridad \\
+\rowcolor{tabrow}
+Intervalo de liberacion de lotes & 45 min & 30 min & 15 min \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Plan de validacion formal}
+
+\begin{longtable}{L{3.2cm}L{5.1cm}L{6.1cm}}
+\caption{Pruebas formales de verificacion y validacion.}\\
+\toprule
+\rowcolor{tabhead}
+\color{white}Tipo & \color{white}Prueba & \color{white}Criterio \\
+\midrule
+\endfirsthead
+\toprule
+\rowcolor{tabhead}
+\color{white}Tipo & \color{white}Prueba & \color{white}Criterio \\
+\midrule
+\endhead
+Verificacion logica & Seguir una entidad/lote paso a paso. & Toda entidad sigue ruta correcta y no salta etapas. \\
+\rowcolor{tabrow}
+Verificacion de balance & Conservacion de flujo. & Entradas = salidas + WIP + perdidas + sobrantes. \\
+Prueba extrema & Demanda cero, demanda muy alta y un solo producto. & Comportamiento coherente y sin errores logicos. \\
+\rowcolor{tabrow}
+Prueba deterministica & Tiempos fijos en vez de distribuciones. & Resultados trazables manualmente. \\
+Schedules & Inicio/fin de turno y descansos. & Recursos respetan agenda y no desaparecen durante tareas criticas. \\
+\rowcolor{tabrow}
+Changeover & Secuencias A--B, B--A y A--A. & Setup coincide con matriz. \\
+Validacion cara a cara & Walkthrough con experto de operacion. & Reglas, cuellos y comportamientos son reconocibles. \\
+\rowcolor{tabrow}
+Validacion historica & Comparar baseline con ventas/quiebres reales si existen. & Throughput y stockout dentro de tolerancia definida. \\
+Sensibilidad & Cambios de input generan direccion esperada. & Monotonicidades razonables y sin paradojas no explicadas. \\
+\bottomrule
+\end{longtable}
+
+\subsection{Riesgos y mitigaciones}
+
+\begin{table}[H]
+\centering
+\caption{Riesgos principales del proyecto.}
+\begin{tabularx}{\textwidth}{L{3.4cm}C{1.8cm}C{1.8cm}Y}
+\toprule
+\rowcolor{tabhead}
+\color{white}Riesgo & \color{white}Prob. & \color{white}Impacto & \color{white}Mitigacion \\
+\midrule
+Capacidad de horno ambigua & Alta & Alto & Parametrizar dos interpretaciones y documentar consulta. \\
+\rowcolor{tabrow}
+Modelo demasiado agregado & Media & Alto & Exigir traslados, recursos y colas explicitas desde Fase 2. \\
+Demanda mal calibrada & Media & Alto & Comparar kg simulados vs perfil por hora y producto. \\
+\rowcolor{tabrow}
+Animacion 3D decorativa sin logica & Media & Medio & Verificar que cada objeto visual corresponda a recurso o proceso. \\
+Falta de tiempo para experimentos & Media & Alto & Definir matriz experimental minima antes de terminar construccion. \\
+\rowcolor{tabrow}
+Documentacion desconectada del modelo & Media & Medio & Mantener matriz requisito--SIMIO--KPI durante todo el desarrollo. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Datos faltantes y estrategia de estimacion}
+
+\begin{table}[H]
+\centering
+\caption{Datos adicionales necesarios para robustecer el baseline.}
+\begin{tabularx}{\textwidth}{L{3.7cm}Y L{3.5cm}}
+\toprule
+\rowcolor{tabhead}
+\color{white}Dato & \color{white}Uso & \color{white}Tratamiento si falta \\
+\midrule
+Layout real de planta/tienda & Distancias, paths, tiempos de movimiento y ubicacion de buffers. & Estimar distancias en mockup y sensibilizar traslados. \\
+\rowcolor{tabrow}
+Turnos reales de personal & Schedules, descansos y disponibilidad efectiva. & Usar turnos del enunciado y escalonamiento documentado. \\
+Capacidad fisica de hornos y carros & Restricciones de batch, carga minima y escenarios de capacidad. & Parametrizar interpretaciones alternativas. \\
+\rowcolor{tabrow}
+Tiempos observados de traslado & Worker, vehicle o delays de movimiento. & Medir 20--30 ciclos por ruta o usar multiplicadores 0.8x, 1.0x y 1.2x. \\
+Historico de ventas/quiebres & Validacion del baseline. & Validar contra consistencia logica y sensibilidad si no existe historico. \\
+\rowcolor{tabrow}
+Changeover o limpieza & Setup por cambio de familia o producto. & Usar 0 o 5 min del enunciado y ampliar si se observan cambios reales. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+% -----------------------------------------------------------------------------
+\section{Gantt Integrado}
+% -----------------------------------------------------------------------------
+
+\begin{figure}[H]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{ganttchart}[
+  hgrid,
+  vgrid,
+  x unit=0.36cm,
+  y unit chart=0.55cm,
+  title height=1,
+  bar height=0.55,
+  group height=0.35,
+  milestone height=0.65,
+  title/.append style={fill=azulppal!18, draw=azulppal},
+  bar/.append style={fill=azulmedio!35, draw=azulppal},
+  group/.append style={fill=grisoscuro!25, draw=grisoscuro},
+  milestone/.append style={fill=rojoriesgo, draw=rojoriesgo},
+  bar label font=\scriptsize,
+  group label font=\scriptsize\bfseries,
+  milestone label font=\scriptsize\itshape
+]{1}{31}
+\gantttitle{20 abril -- 20 mayo 2026}{31}\\
+\gantttitlelist{1,...,31}{1}\\
+\ganttgroup{Implementacion SIMIO}{1}{29}\\
+\ganttbar{F1 Especificacion y datos}{1}{5}\\
+\ganttbar{F2 Baseline logico}{5}{12}\\
+\ganttbar{F3 Recursos y 3D util}{11}{18}\\
+\ganttbar{F4 Verificacion y validacion}{17}{22}\\
+\ganttbar{F5 Experimentos y recomendacion}{22}{29}\\
+\ganttmilestone{Modelo defendible}{29}\\
+\ganttbar{Paquete de entrega tecnica}{27}{31}\\
+\ganttmilestone{Entrega final}{31}
+\end{ganttchart}}
+\caption{Calendario integrado de implementacion SIMIO.}
+\end{figure}
+
+% -----------------------------------------------------------------------------
+\section{Criterios de Aceptacion Final}
+% -----------------------------------------------------------------------------
+
+El proyecto se considera listo para defensa cuando cumple simultaneamente las siguientes condiciones:
+
+\begin{enumerate}
+  \item El modelo SIMIO corre un dia completo sin errores, bloqueos no explicados ni entidades perdidas.
+  \item Cada tipo de pan tiene parametros propios de proceso, lote, capacidad, demanda e inventario.
+  \item La demanda simulada reproduce la estructura horaria y registra ventas satisfechas y perdidas.
+  \item Los hornos no mezclan familias, aplican setup y requieren manipulador para carga y descarga.
+  \item Los turnos y descansos modifican la disponibilidad real de panaderos y manipuladores.
+  \item El layout 3D muestra estaciones, caminos y movimientos que afectan tiempos y utilizacion.
+  \item Los KPIs obligatorios se exportan por escenario y replica.
+  \item Existe una matriz experimental con escenarios comparables y sensibilidad.
+  \item La documentacion tecnica entrega una recomendacion operacional concreta.
+  \item El paquete final documenta decisiones, dificultades, supuestos, resultados y limitaciones.
+\end{enumerate}
+
+\begin{center}
+\colorbox{azulclaro}{%
+\parbox{0.92\textwidth}{%
+\textbf{Producto esperado.} Un modelo SIMIO 3D que no solo se vea realista, sino que se comporte como una panaderia operativa: personas se mueven, equipos se ocupan, hornos esperan, inventarios se agotan, clientes generan ventas perdidas y las decisiones de capacidad aparecen en los KPIs.
+}}
+\end{center}
+
+\end{document}

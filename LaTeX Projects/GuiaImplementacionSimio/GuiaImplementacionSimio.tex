@@ -1658,6 +1658,7 @@ Tbl_EtapasProducto[Tbl_EtapasProducto.ProductoEtapaKey.RowForKey(ModelEntity.Pro
 \begin{itemize}
   \item \textbf{Panadero:} \simio{Resource\_Panadero\_1} como recurso secundario en servers manuales. En M4 base representa un panadero logico; para varios panaderos se aumenta la capacidad disponible del mismo recurso, no se duplican los procesos.
   \item \textbf{Manipulador:} \simio{Worker\_Manipulador\_1} tomado con \simio{Seize/Release} dentro de \proc{P\_CargarHorno} y \proc{P\_DescargarHorno}.
+  \item \textbf{Extension avanzada M4F:} migrar panaderos a \simio{Worker} fisicos con horarios por persona, velocidad de desplazamiento y retorno automatico a su silla cuando quedan ociosos.
 \end{itemize}
 
 \risk{} No poner el manipulador como \simio{Secondary Resource} de \simio{Server\_Horno1}. Si lo haces, queda ocupado durante toda la coccion. En esta guia el manipulador trabaja solo durante carga y descarga; el horno trabaja durante el \simio{Processing Time}.
@@ -1669,7 +1670,8 @@ Tbl_EtapasProducto[Tbl_EtapasProducto.ProductoEtapaKey.RowForKey(ModelEntity.Pro
   \item Crear \simio{Resource\_Panadero\_1} y \simio{Worker\_Manipulador\_1}.
   \item Agregar panadero como recurso secundario solo en servers manuales.
   \item Editar carga y descarga de horno con \simio{Seize/Release} del manipulador.
-  \item Validar. El movimiento fisico con paths queda opcional y posterior.
+  \item Validar base M4.
+  \item Ejecutar M4F si quieres panaderos como workers con movimiento real (recomendado para el nivel que buscas).
 \end{enumerate}
 
 \subsubsection{M4A Crear schedules base}
@@ -1831,44 +1833,109 @@ Tbl_EtapasProducto[Tbl_EtapasProducto.ProductoEtapaKey.RowForKey(ModelEntity.Pro
   \item No agregar movimiento fisico a panaderos en la ruta base.
 \end{enumerate}
 
-\subsubsection{M4F Criterio de cierre}
-\begin{itemize}
-  \item El modelo corre sin errores.
-  \item Los servers manuales usan \simio{Resource\_Panadero\_1}, o queda documentado que tu Student no muestra \simio{Secondary Resources}.
-  \item \simio{Worker\_Manipulador\_1} no queda capturado durante toda la coccion.
-  \item \simio{Tally\_EsperaManipHorno} tiene observaciones.
-  \item Al apagar recursos o volver a la copia M3B, el flujo base sigue siendo comparable.
-\end{itemize}
+\subsubsection{M4F Modelar panaderos como \simio{Worker} con horarios distintos y movimiento real}
+\textbf{Resultado esperado:} cada panadero es una persona fisica (worker), camina a estaciones con velocidad real, tiene turno propio, y cuando no tiene trabajo vuelve a su silla base.
 
-\subsubsection{M4G Escalar de un panadero a varios}
-\textbf{Resultado esperado:} el modelo no cambia de estructura; solo cambia la capacidad disponible de \simio{Resource\_Panadero\_1}.
+\textbf{Esta fase reemplaza el enfoque arcaico de panadero agregado en \simio{Resource\_Panadero\_1}.}
 
 \begin{enumerate}
-  \item Mantener un solo recurso logico: \simio{Resource\_Panadero\_1}. No crear \simio{Resource\_Panadero\_2} para la version base, porque obligaria a repetir configuraciones en cada server.
-  \item Mantener en cada server manual la misma fila de \simio{Secondary Resources}:
+  \item Guardar una copia de seguridad antes de migrar:
   \begin{itemize}
-    \item \simio{Resource Name}: \simio{Resource\_Panadero\_1}
-    \item \simio{Number Of Resources}: 1
-    \item \simio{Units Per Resource}: 1
+    \item \simio{Panaderia\_M4\_Base\_ResourcePanadero.spfx}
+    \item \simio{Panaderia\_M4F\_PanaderosWorker.spfx}
   \end{itemize}
-  Esto significa que cada operacion manual consume una unidad de panadero.
-  \item Si \simio{Resource\_Panadero\_1} usa \simio{Capacity Type = WorkSchedule}, abrir \simio{Data > Work Schedules}, expandir \simio{Day\_0600\_2100} y cambiar el valor del periodo 06:00--21:00:
+  \item Crear nodos fisicos obligatorios:
   \begin{itemize}
-    \item 1 panadero: valor 1
-    \item 2 panaderos: valor 2
-    \item 3 panaderos: valor 3
+    \item Sillas/base: \simio{Node\_Silla\_Panadero\_1}, \simio{Node\_Silla\_Panadero\_2}, \simio{Node\_Silla\_Panadero\_3}.
+    \item Estaciones: \simio{Node\_Est\_Pesado}, \simio{Node\_Est\_Mezclado}, \simio{Node\_Est\_Amasado}, \simio{Node\_Est\_Formado}.
   \end{itemize}
-  \item Si tu version de Simio acepta expresiones en el campo \simio{Value} del day pattern, puedes usar \state{Prop\_NumPanaderos} en el periodo 06:00--21:00. Si lo marca rojo, no usar esa property ahi: dejar el valor numerico y documentar el escenario.
-  \item Si no usas work schedule y el recurso quedo con \simio{Capacity Type = Fixed}, cambiar \simio{Initial Capacity} a 2, 3, etc.
-  \item Validar con el trace:
+  \item Crear red de desplazamiento:
   \begin{itemize}
-    \item Con valor 1, nunca debe haber mas de una operacion manual usando \simio{Resource\_Panadero\_1}.
-    \item Con valor 2, pueden existir hasta dos operaciones manuales simultaneas usando \simio{Resource\_Panadero\_1}.
-    \item El numero de \simio{Seize} y \simio{Release} debe quedar balanceado por server.
+    \item Conectar sillas y estaciones usando \simio{Path} o \simio{TimePath}.
+    \item No dejar estaciones aisladas; si no hay red, el worker ``salta'' en vez de caminar.
+  \end{itemize}
+  \item Crear tres workers panadero:
+  \begin{itemize}
+    \item \simio{Worker\_Panadero\_1}, \simio{Worker\_Panadero\_2}, \simio{Worker\_Panadero\_3}.
+    \item \simio{Initial Node}: su silla respectiva.
+    \item \simio{Work Schedule}: uno distinto por persona.
+    \item \simio{Idle Action}: \simio{Go To Home} (o \simio{Park At Home} si tu version lo nombra asi).
+    \item Velocidad de desplazamiento: usar \state{1.2 m/s} como base y documentar en \tabla{Tbl\_Supuestos}.
+  \end{itemize}
+  \item Crear horarios distintos por panadero (ejemplo cerrado de referencia):
+  \begin{itemize}
+    \item \simio{Sch\_Panadero\_1}: 05:30--14:00, colacion 09:30--10:00.
+    \item \simio{Sch\_Panadero\_2}: 07:00--15:30, colacion 11:30--12:00.
+    \item \simio{Sch\_Panadero\_3}: 09:00--17:30, colacion 13:30--14:00.
+  \end{itemize}
+  \item Crear conjunto de workers:
+  \begin{itemize}
+    \item \simio{WorkerSet\_Panaderos} con los tres workers.
+  \end{itemize}
+  \item Desactivar panadero como recurso agregado:
+  \begin{itemize}
+    \item En \simio{Server\_Pesado}, \simio{Server\_Mezclado}, \simio{Server\_Amasado}, \simio{Server\_Formado}, eliminar la fila \simio{Resource\_Panadero\_1} desde \simio{Secondary Resources}.
+    \item No borrar el objeto \simio{Resource\_Panadero\_1}; dejarlo solo para comparacion historica.
+  \end{itemize}
+  \item Para cada server manual crear add-on de toma/liberacion de panadero:
+  \begin{itemize}
+    \item \simio{Before Processing = P\_M4F\_Panadero\_Pesado\_Before} (y equivalente para Mezclado, Amasado y Formado).
+    \item \simio{After Processing = P\_M4F\_Panadero\_Pesado\_After} (y equivalente para Mezclado, Amasado y Formado).
+  \end{itemize}
+  \item Contenido de cada proceso \simio{Before}:
+  \begin{enumerate}
+    \item \simio{Begin}
+    \item \simio{Seize\_Panadero} desde \simio{WorkerSet\_Panaderos}, cantidad 1.
+    \item En \simio{Seize\_Panadero > Advanced Options}, usar \simio{Request Move} al nodo de estacion correspondiente (\simio{Node\_Est\_Pesado}, \simio{Node\_Est\_Mezclado}, \simio{Node\_Est\_Amasado} o \simio{Node\_Est\_Formado}).
+    \item \simio{End}
+  \end{enumerate}
+  \item Contenido de cada proceso \simio{After}:
+  \begin{enumerate}
+    \item \simio{Begin}
+    \item \simio{Release\_Panadero} (el worker tomado en el \simio{Before}).
+    \item \simio{End}
+  \end{enumerate}
+  \item Regla operativa de ``si no tiene trabajo vuelve a su silla'':
+  \begin{itemize}
+    \item No forzar retorno manual en cada \simio{Release}.
+    \item El retorno se controla con \simio{Idle Action = Go To Home}: si hay nuevo trabajo pendiente, el worker va directo a ese trabajo; si no hay, vuelve a su silla.
+  \end{itemize}
+  \item Prueba guiada obligatoria:
+  \begin{itemize}
+    \item Correr 2 horas con demanda media.
+    \item Verificar en animacion: cada panadero sale de su silla, camina a estacion, trabaja, y si queda ocioso retorna.
+    \item Verificar que no exista teletransporte (si aparece, falta red de \simio{Path/TimePath} o falta \simio{Request Move}).
   \end{itemize}
 \end{enumerate}
 
-\ok{} En esta guia, multiples panaderos estan planificados como cambio de capacidad de \simio{Resource\_Panadero\_1}. No se modela caminata fisica de varios panaderos en la ruta base.
+\subsubsection{M4G Criterio de cierre}
+\begin{itemize}
+  \item El modelo corre sin errores con panaderos como \simio{Worker}.
+  \item Cada estacion manual toma 1 panadero desde \simio{WorkerSet\_Panaderos} en \simio{Before Processing} y lo libera en \simio{After Processing}.
+  \item Los panaderos tienen horarios distintos y se respeta su disponibilidad.
+  \item Los panaderos caminan a estaciones a velocidad real; no saltan entre nodos.
+  \item Si no hay trabajo, retornan a su silla; si hay trabajo pendiente, van directo al siguiente.
+  \item La logica de horno y manipulador de M4D sigue funcionando sin regresion.
+\end{itemize}
+
+\subsubsection{M4H Escalar escenarios 1, 2 y 3 panaderos en modo \simio{Worker}}
+\textbf{Resultado esperado:} comparas dotacion fisica sin reescribir procesos.
+
+\begin{enumerate}
+  \item Mantener siempre el mismo \simio{WorkerSet\_Panaderos}; no duplicar procesos por escenario.
+  \item Crear \simio{Sch\_Panadero\_Off} con disponibilidad 0 todo el dia.
+  \item Reglas cerradas por escenario:
+  \begin{itemize}
+    \item \textbf{Escenario 1 panadero:} \simio{Worker\_Panadero\_1} activo; \simio{Worker\_Panadero\_2} y \simio{Worker\_Panadero\_3} con \simio{Sch\_Panadero\_Off}.
+    \item \textbf{Escenario 2 panaderos:} activos \simio{Worker\_Panadero\_1} y \simio{Worker\_Panadero\_2}; \simio{Worker\_Panadero\_3} con \simio{Sch\_Panadero\_Off}.
+    \item \textbf{Escenario 3 panaderos:} los tres activos.
+  \end{itemize}
+  \item Validar direccion de resultados:
+  \begin{itemize}
+    \item 2 panaderos vs 1 \(\Rightarrow\) baja espera en estaciones manuales.
+    \item 3 panaderos vs 2 \(\Rightarrow\) mejora marginal menor (rendimientos decrecientes).
+  \end{itemize}
+\end{enumerate}
 
 \subsection{M5 paso a paso: layout funcional 2D de panaderia}
 
@@ -2063,26 +2130,56 @@ Tbl_EtapasProducto[Tbl_EtapasProducto.ProductoEtapaKey.RowForKey(ModelEntity.Pro
   \end{itemize}
   \item \tabla{Tbl\_ProbEleccionHoraLong}:
   \begin{itemize}
-    \item Debe tener 10 filas por cada \state{HoraIdx}.
-    \item En cada hora, \(\sum_{p=1}^{10} Probabilidad(h,p) = 1.0\) (tolerancia 0.001).
-    \item Orden obligatorio: primero por \state{HoraIdx} ascendente, despues por \state{ProductoIdx} ascendente.
+    \item Debe tener \textbf{exactamente} 10 filas por cada \state{HoraIdx} (sin faltantes ni duplicados por producto dentro de la misma hora).
+    \item En cada hora, \(\sum_{p=1}^{10} Probabilidad(h,p) = 1.0\) con tolerancia absoluta \(\le 0.001\).
+    \item Orden obligatorio de carga y exportacion: primero \state{HoraIdx} ascendente, despues \state{ProductoIdx} ascendente.
+    \item Crear columna \state{HoraProductoKey} (\simio{Integer}, \simio{Key}, unica por fila):
+    \[
+    HoraProductoKey = HoraIdx \cdot 100 + ProductoIdx
+    \]
+    \item Las lecturas en procesos deben usar \state{RowForKey(HoraProductoKey)}; no usar \state{RowNumber} ni posicion fisica de fila.
   \end{itemize}
-  \item En M6 se usa indexacion deterministica por fila:
+  \item \tabla{Tbl\_DemandaHoraLong}:
+  \begin{itemize}
+    \item Crear la misma columna \state{HoraProductoKey} (\simio{Integer}, \simio{Key}):
+    \[
+    HoraProductoKey = HoraIdx \cdot 100 + ProductoIdx
+    \]
+    \item Validar por esa llave compuesta al comparar demanda objetivo vs simulada; no comparar por posicion de fila.
+  \end{itemize}
+  \item Regla general de llaves compuestas:
   \[
-  \text{FilaProb}(h,p) = (h-1)\cdot 10 + p
+  \text{KeyCompuesta} = \text{IndiceA} \cdot 10^k + \text{IndiceB}
   \]
-  donde \(h\) es \state{HoraIdx} y \(p\) es \state{ProductoIdx}.
+  con \(k\) elegido para evitar colisiones. Regla practica:
+  \[
+  k = \left\lceil \log_{10}(\text{IndiceB}_{max}+1)\right\rceil
+  \]
+  de modo que \(\text{IndiceA}\) y \(\text{IndiceB}\) queden separables de forma univoca.
 \end{enumerate}
 
-\risk{} Si \tabla{Tbl\_ProbEleccionHoraLong} no respeta ese orden, el muestreo de producto queda sesgado aunque el modelo no muestre error.
+\risk{} Si \tabla{Tbl\_ProbEleccionHoraLong} no tiene \state{HoraProductoKey} unica y consistente, o si por hora no suma 1.0, el muestreo horario puede sesgarse aunque no haya error visible.
 
-\subsubsection{M6C States de entidad cliente obligatorios}
-\textbf{Resultado esperado:} cada cliente guarda su canasta completa antes de consumir inventario.
+\subsubsection{M6C Alinear entidad activa de clientes (sin inventar nombres)}
+\textbf{Resultado esperado:} toda la logica de clientes usa el \simio{Entity Type} real que ya esta configurado en \simio{Source\_Clientes}, sin crear referencias a entidades inexistentes.
 
 \begin{enumerate}
-  \item En el \simio{Entity Type} real de \simio{Source\_Clientes} (\simio{ModelEntity} o \simio{ModelEntity1}), crear estos states escalares:
+  \item Identificar la entidad activa real de clientes:
+  \begin{itemize}
+    \item Ir a \simio{Source\_Clientes > Properties > Entity Arrival Logic > Entity Type}.
+    \item Copiar ese nombre exacto y llamarlo \textbf{EntidadClienteActiva} en esta fase.
+    \item Ejemplos validos: \simio{ModelEntity}, \simio{ModelEntity1}, \simio{Entity\_Cliente1}.
+  \end{itemize}
+  \item Regla de implementacion de M6:
+  \begin{itemize}
+    \item \textbf{No} crear una entidad nueva solo por nombre.
+    \item Si la entidad activa ya existe y recibe clientes, usarla tal cual.
+    \item Solo crear entidad separada en una refactorizacion posterior planificada.
+  \end{itemize}
+  \item En \simio{EntidadClienteActiva > Definitions > States}, crear estos states escalares:
   \begin{itemize}
     \item \state{HoraLlegada} (Real)
+    \item \state{MinutoDia} (Real)
     \item \state{HoraIdxCliente} (Integer)
     \item \state{NProductosCompra} (Integer)
     \item \state{ProductoIdx\_1}, \state{ProductoIdx\_2}, \state{ProductoIdx\_3} (Integer)
@@ -2090,19 +2187,35 @@ Tbl_EtapasProducto[Tbl_EtapasProducto.ProductoEtapaKey.RowForKey(ModelEntity.Pro
     \item \state{KgSolicitado\_1}, \state{KgSolicitado\_2}, \state{KgSolicitado\_3} (Real)
     \item \state{uMix}, \state{c1Mix}, \state{c2Mix} (Real)
     \item \state{IntentosSeleccion} (Integer)
+    \item \state{ProductoIdx} (Integer) para consumo item a item
+    \item \state{KgSolicitado} (Real) para consumo item a item
   \end{itemize}
-  \item Mantener estos states existentes para el consumo unitario:
+  \item Configurar \simio{Source\_Clientes} sin romper compatibilidad:
   \begin{itemize}
-    \item \state{ProductoIdx} (Integer)
-    \item \state{KgSolicitado} (Real)
+    \item Mantener \simio{Entity Type} en el nombre real detectado (EntidadClienteActiva).
+    \item En \simio{State Assignments > Before Exiting}, inicializar:
+    \begin{itemize}
+      \item \state{ProductoIdx\_1 = 0}, \state{ProductoIdx\_2 = 0}, \state{ProductoIdx\_3 = 0}
+      \item \state{KgSolicitado\_1 = 0}, \state{KgSolicitado\_2 = 0}, \state{KgSolicitado\_3 = 0}
+      \item \state{IntentosSeleccion = 0}
+    \end{itemize}
+    \item Mantener \simio{Source\_Clientes > Created Entity} vacio y conservar el trigger en \simio{Output@Source\_Clientes > Entered}.
   \end{itemize}
-  \item Inicializar al crear cliente:
+  \item Mapa obligatorio de cambios sobre logica previa a M6 (solo lo relacionado con clientes):
   \begin{itemize}
-    \item \state{ProductoIdx\_1 = 0}, \state{ProductoIdx\_2 = 0}, \state{ProductoIdx\_3 = 0}
-    \item \state{KgSolicitado\_1 = 0}, \state{KgSolicitado\_2 = 0}, \state{KgSolicitado\_3 = 0}
-    \item \state{IntentosSeleccion = 0}
+    \item \textbf{M1 (demanda):} en \proc{P\_GenerarDemandaCliente}, \proc{P\_M6\_DeterminarNProductos}, \proc{P\_M6\_ElegirProductosCanasta}, \proc{P\_M6\_GenerarKgCanasta}, \proc{P\_M6\_ConsumirCanasta} y \proc{P\_M6\_ConsumirInventarioItem}, toda referencia de entidad cliente debe apuntar a \simio{EntidadClienteActiva}.
+    \item \textbf{M1 (consumo):} \proc{P\_ConsumirInventario} mantiene el mismo contrato y los mismos \textit{model states} (\state{StockSala}, \state{DemandaTotal}, \state{DemandaSatisfecha}, \state{DemandaPerdida}, \state{StockoutCount}); solo cambia que \state{ProductoIdx} y \state{KgSolicitado} ahora vienen desde \simio{EntidadClienteActiva}.
+    \item \textbf{M2--M5 (produccion, horno, layout):} no requieren cambio por esta migracion, siempre que sigan usando su entidad de lotes.
+  \end{itemize}
+  \item Check de no-regresion inmediato (obligatorio):
+  \begin{itemize}
+    \item Ejecutar 10 minutos de simulacion con clientes activos.
+    \item Confirmar que no hay expresiones en rojo por mezcla de prefijos (\simio{ModelEntity}, \simio{ModelEntity1}, \simio{Entity\_Cliente1}, etc.).
+    \item Confirmar que los lotes siguen fluyendo por M2--M5 sin depender de states de cliente.
   \end{itemize}
 \end{enumerate}
+
+\risk{} Si en una expresion escribes un prefijo distinto al \simio{Entity Type} real de \simio{Source\_Clientes}, Simio puede mostrar errores de contexto o de estado inexistente aunque el proceso parezca bien conectado.
 
 \subsubsection{M6D Reemplazar proceso generador de demanda por canasta}
 \textbf{Resultado esperado:} \proc{P\_GenerarDemandaCliente} crea canasta completa y luego consume item por item.
@@ -2112,19 +2225,35 @@ Tbl_EtapasProducto[Tbl_EtapasProducto.ProductoEtapaKey.RowForKey(ModelEntity.Pro
   \begin{itemize}
     \item \simio{Output@Source\_Clientes > Add-On Process Triggers > Entered = P\_GenerarDemandaCliente}
   \end{itemize}
+  \item Justificacion tecnica de este proceso (obligatoria):
+  \begin{itemize}
+    \item \proc{P\_GenerarDemandaCliente} \textbf{si} debe calcular \state{HoraIdxCliente}, porque \tabla{Tbl\_ProbEleccionHoraLong} esta indexada por hora y producto.
+    \item Si no se calcula \state{HoraIdxCliente} en rango valido, el muestreo por \state{RowForKey(HoraProductoKey)} puede leer mal la tabla o forzar indices invalidos.
+  \end{itemize}
   \item Reemplazar internamente \proc{P\_GenerarDemandaCliente} por este orden exacto:
   \begin{enumerate}
     \item \simio{Assign\_HoraLlegada}: \state{HoraLlegada = TimeNow}.
-    \item \simio{Assign\_HoraIdxCliente}: derivar \state{HoraIdxCliente} desde el reloj de simulacion del dia.
+    \item \simio{Assign\_MinutoDia}: \state{MinutoDia = Math.Remainder(TimeNow, 1440)}.
+    \item \simio{Decide\_EnHorarioDemanda} (ConditionBased):
+    \[
+    MinutoDia >= 540 \text{ and } MinutoDia < 1260
+    \]
+    \item Rama \simio{True} de \simio{Decide\_EnHorarioDemanda}:
+    \[
+    HoraIdxCliente = 1 + \text{Math.Floor}\left(\frac{MinutoDia - 540}{60}\right)
+    \]
+    \item Rama \simio{False} de \simio{Decide\_EnHorarioDemanda}:
+    \[
+    HoraIdxCliente = 1
+    \]
+    (en esta guia base se fija a 1 para evitar indice 0; en una version avanzada puedes enviar fuera de horario a un sink separado).
     \item \simio{Execute\_DeterminarMix}: llamar \proc{P\_M6\_DeterminarNProductos}.
-    \item \simio{Execute\_Seleccion1}: llamar \proc{P\_M6\_SeleccionarProducto1}.
-    \item Si \state{NProductosCompra >= 2}, ejecutar \proc{P\_M6\_SeleccionarProducto2}.
-    \item Si \state{NProductosCompra = 3}, ejecutar \proc{P\_M6\_SeleccionarProducto3}.
+    \item \simio{Execute\_ElegirCanasta}: llamar \proc{P\_M6\_ElegirProductosCanasta} (internamente usa \proc{P\_M6\_SeleccionarProducto1}, \proc{P\_M6\_SeleccionarProducto2}, \proc{P\_M6\_SeleccionarProducto3}).
     \item \simio{Execute\_GenerarKgCanasta}: llamar \proc{P\_M6\_GenerarKgCanasta}.
     \item \simio{Execute\_ConsumirCanasta}: llamar \proc{P\_M6\_ConsumirCanasta}.
     \item Salir a \simio{Sink\_Clientes}.
   \end{enumerate}
-  \item No consumir inventario durante la seleccion de productos; el consumo ocurre solo al final en \proc{P\_M6\_ConsumirCanasta}.
+  \item No llamar \proc{P\_ConsumirInventario} directo desde el inicio de \proc{P\_GenerarDemandaCliente}. El consumo ocurre solo al final en \proc{P\_M6\_ConsumirCanasta}, cuando \state{ProductoIdx} y \state{KgSolicitado} ya fueron cargados item por item.
 \end{enumerate}
 
 \subsubsection{M6E Determinar numero de productos por cliente}
@@ -2153,7 +2282,10 @@ Tbl_EtapasProducto[Tbl_EtapasProducto.ProductoEtapaKey.RowForKey(ModelEntity.Pro
 \begin{enumerate}
   \item Para la hora \(h = \state{HoraIdxCliente}\), leer probabilidades:
   \[
-  p_j = Tbl\_ProbEleccionHoraLong[\text{FilaProb}(h,j)].Probabilidad,\quad j=1..10
+  fila_j = Tbl\_ProbEleccionHoraLong.HoraProductoKey.RowForKey(h \cdot 100 + j)
+  \]
+  \[
+  p_j = Tbl\_ProbEleccionHoraLong[fila_j].Probabilidad,\quad j=1..10
   \]
   \item Muestrear un candidato con \simio{Random.Discrete} sobre esos 10 valores.
 \end{enumerate}
@@ -2204,21 +2336,26 @@ Tbl_EtapasProducto[Tbl_EtapasProducto.ProductoEtapaKey.RowForKey(ModelEntity.Pro
   \end{itemize}
   \item Crear proceso \proc{P\_M6\_ConsumirCanasta}:
   \begin{enumerate}
-    \item Copiar item 1 a states base:
-    \begin{itemize}
-      \item \state{ProductoIdx = ProductoIdx\_1}
-      \item \state{KgSolicitado = KgSolicitado\_1}
-    \end{itemize}
-    \item Llamar \proc{P\_ConsumirInventario}.
-    \item Si \state{NProductosCompra >= 2}, repetir con item 2.
-    \item Si \state{NProductosCompra = 3}, repetir con item 3.
+    \item Si \state{ProductoIdx\_1 > 0}, llamar \proc{P\_M6\_ConsumirInventarioItem} con item 1.
+    \item Si \state{ProductoIdx\_2 > 0}, llamar \proc{P\_M6\_ConsumirInventarioItem} con item 2.
+    \item Si \state{ProductoIdx\_3 > 0}, llamar \proc{P\_M6\_ConsumirInventarioItem} con item 3.
   \end{enumerate}
+  \item \proc{P\_M6\_ConsumirInventarioItem}:
+  \begin{itemize}
+    \item Copia el item activo a \state{ProductoIdx} y \state{KgSolicitado}.
+    \item Ejecuta \proc{P\_ConsumirInventario}.
+  \end{itemize}
   \item \proc{P\_ConsumirInventario} no se modifica en su contrato:
   \begin{itemize}
     \item suma \state{DemandaTotal[p]}
     \item descuenta \state{StockSala[p]} si hay stock
     \item acumula \state{DemandaSatisfecha[p]} o \state{DemandaPerdida[p]}
     \item incrementa \state{StockoutCount[p]} y \simio{Tally\_StockoutKg} cuando corresponde
+  \end{itemize}
+  \item Regla explicita de perdida en canasta:
+  \begin{itemize}
+    \item la perdida se evalua \textbf{por item de producto}, no por cliente completo.
+    \item si un cliente compra 3 items y solo falta stock en uno, se pierde solo ese item.
   \end{itemize}
 \end{enumerate}
 
@@ -2242,6 +2379,17 @@ Tbl_EtapasProducto[Tbl_EtapasProducto.ProductoEtapaKey.RowForKey(ModelEntity.Pro
     \item Demanda diaria total simulada en rango \(\pm 5\%\) del objetivo (con replicas suficientes).
     \item Con stock infinito, \state{DemandaPerdida[1..10]} debe ser aproximadamente 0.
   \end{itemize}
+  \item Pruebas obligatorias adicionales de cierre M6:
+  \begin{itemize}
+    \item \textbf{Stock cero:} toda la demanda debe terminar en \state{DemandaPerdida}.
+    \item \textbf{Cliente forzado a 3 productos:} debe elegir tres \state{ProductoIdx} distintos.
+    \item \textbf{Producto con probabilidad 0:} nunca debe ser elegido.
+    \item \textbf{Balance por producto:}
+    \[
+    DemandaTotal[p] = DemandaSatisfecha[p] + DemandaPerdida[p]
+    \]
+    para cada \(p=1..10\).
+  \end{itemize}
   \item Si no cumple, corregir en este orden:
   \begin{enumerate}
     \item Rate table de llegadas.
@@ -2260,54 +2408,1330 @@ Tbl_EtapasProducto[Tbl_EtapasProducto.ProductoEtapaKey.RowForKey(ModelEntity.Pro
   \item M6 queda trazable: proceso, tabla y formula de cada decision estan documentados.
 \end{itemize}
 
-\subsection{M7 paso a paso: control de produccion y reposicion}
-\textbf{Estado de esta version:} alcance definido y numeracion reservada. Desarrollo detallado pendiente.
+\subsection{M7 paso a paso: politicas de produccion y liberacion de lotes}
+\textbf{Objetivo operacional de M7:} que la produccion deje de depender de una fuente fija y pase a responder a una politica explicitamente seleccionable, comparable y trazable (\simio{Push}, \simio{PullMin}, \simio{Hibrida}).
 
+\textbf{Regla cerrada de M7:} toda liberacion de lotes debe estar explicada por una de estas tres reglas; no se permiten creaciones manuales ad-hoc fuera de politica.
+
+\textbf{Orden obligatorio de M7:}
+\begin{enumerate}
+  \item Congelar version M6 y abrir \simio{Panaderia\_M7\_PoliticasProduccion.spfx}.
+  \item Parametrizar politica activa.
+  \item Implementar push.
+  \item Implementar pull por punto de reposicion.
+  \item Implementar hibrida (push preapertura + pull en venta).
+  \item Ejecutar comparacion controlada de politicas.
+\end{enumerate}
+
+\subsubsection{M7A Preparar version y baseline}
+\textbf{Resultado esperado:} M7 queda aislada de M6 y permite comparar escenarios en igualdad de condiciones.
+
+\begin{enumerate}
+  \item Guardar copia como \simio{Panaderia\_M7\_PoliticasProduccion.spfx}.
+  \item Mantener sin cambios la logica validada en M6 de demanda por cliente.
+  \item Ejecutar corrida baseline de referencia y registrar:
+  \begin{itemize}
+    \item \state{DemandaPerdida[1..10]} total.
+    \item \state{StockSala[1..10]} al cierre.
+    \item \simio{Tally\_TiempoCicloLote} promedio.
+  \end{itemize}
+  \item Ese baseline se usara para evaluar impacto de politica, no para recalibrar datos.
+\end{enumerate}
+
+\subsubsection{M7B Contrato de parametrizacion de politica}
+\textbf{Resultado esperado:} una sola variable de control selecciona la politica activa.
+
+\begin{enumerate}
+  \item Usar \state{Prop\_PoliticaProduccion} como selector oficial.
+  \item Valores cerrados admitidos en esta guia:
+  \begin{itemize}
+    \item \simio{Push}
+    \item \simio{PullMin}
+    \item \simio{Hibrida}
+  \end{itemize}
+  \item Si \tabla{Tbl\_PoliticasProduccion.Tipo} trae \simio{Pull}, mapearlo explicitamente a \simio{PullMin} para evitar ambiguedad semantica.
+  \item Inputs obligatorios por producto (desde \tabla{Tbl\_StockPolitica}):
+  \begin{itemize}
+    \item \state{StockInicialKg}
+    \item \state{PuntoReposicionKg}
+    \item \state{StockObjetivoKg}
+  \end{itemize}
+  \item Formula canonica de brecha de reposicion por producto \(p\):
+  \[
+  BrechaKg[p] = PuntoReposicionKg[p] - StockSala[p]
+  \]
+  Si \(BrechaKg[p] > 0\), el producto \(p\) es candidato a \textbf{liberacion de lote} en M7.
+\end{enumerate}
+
+\subsubsection{M7C Proceso orquestador de politica}
+\textbf{Resultado esperado:} un solo proceso decide que politica ejecutar en cada gatillo.
+
+\begin{enumerate}
+  \item Crear \proc{P\_M7\_EvaluarPoliticaProduccion} con tres ramas exclusivas:
+  \begin{itemize}
+    \item Rama 1: \state{Prop\_PoliticaProduccion = Push} \(\rightarrow\) ejecutar \proc{P\_M7\_PushLiberar}.
+    \item Rama 2: \state{Prop\_PoliticaProduccion = PullMin} \(\rightarrow\) ejecutar \proc{P\_M7\_PullEvaluar}.
+    \item Rama 3: \state{Prop\_PoliticaProduccion = Hibrida} \(\rightarrow\) ejecutar \proc{P\_M7\_HibridaEvaluar}.
+  \end{itemize}
+  \item Si el valor de \state{Prop\_PoliticaProduccion} no coincide con ninguna rama, enviar warning con \simio{Notify} y forzar fallback a \simio{PullMin}.
+  \item Contrato tecnico de entidad lote (obligatorio):
+  \begin{itemize}
+    \item \proc{P\_CrearLote} solo se ejecuta sobre entidad de tipo lote.
+    \item Nunca ejecutar \proc{P\_CrearLote} sobre entidad cliente o token de control.
+    \item Recomendado: encapsular en \proc{P\_M7\_CrearEntidadLote} los pasos \simio{Create} \(\rightarrow\) \simio{Assign ProductoIdx} \(\rightarrow\) \simio{Execute P\_CrearLote}.
+    \item Alternativa valida: mantener \simio{Source\_LotesProduccion} y dispararlo con señal/state de liberacion, siempre asegurando que \proc{P\_CrearLote} reciba entidad lote.
+  \end{itemize}
+\end{enumerate}
+
+\subsubsection{M7D Implementar Push (programa horario)}
+\textbf{Resultado esperado:} se liberan lotes por programa, sin esperar quiebre de stock.
+
+\begin{enumerate}
+  \item Crear un \simio{Timer Element} llamado \simio{Timer\_PushProduccion}.
+  \item Configurar \simio{Interval Type = Time} y un \simio{Time Interval} fijo inicial (por ejemplo 30 min) para la ruta base.
+  \item Asociar evento del timer a un proceso \proc{P\_M7\_EventoPush} que solo hace:
+  \begin{itemize}
+    \item ejecutar \proc{P\_M7\_EvaluarPoliticaProduccion}.
+  \end{itemize}
+  \item En \proc{P\_M7\_PushLiberar}:
+  \begin{enumerate}
+    \item Seleccionar producto objetivo por secuencia ciclica 1..10.
+    \item Guardar producto en \state{ProductoObjetivoLiberacion}.
+    \item Ejecutar \simio{Create} para generar entidad de lote (mismo tipo de entidad de \simio{Source\_LotesProduccion}).
+    \item Asignar \state{ProductoIdx = ProductoObjetivoLiberacion} en la entidad creada.
+    \item Ejecutar \proc{P\_CrearLote} sobre esa entidad lote.
+  \end{enumerate}
+  \item Regla de consistencia: en politica push no se consulta \state{StockSala[p]} para autorizar liberacion; el control lo hace el calendario.
+\end{enumerate}
+
+\subsubsection{M7E Implementar Pull (reorden por stock minimo)}
+\textbf{Resultado esperado:} cuando baja el stock, se gatilla liberacion de un nuevo lote del producto afectado.
+
+\begin{enumerate}
+  \item Gatilhar pull desde consumo real: al final de \proc{P\_ConsumirInventario}, ejecutar \proc{P\_M7\_PullEvaluar}.
+  \item En \proc{P\_M7\_PullEvaluar}:
+  \begin{enumerate}
+    \item Leer \(p = \state{ModelEntity.ProductoIdx}\) del item efectivamente demandado.
+    \item Evaluar \state{StockSala[p] <= PuntoReposicionKg[p]}.
+    \item Si se cumple, guardar \state{ProductoObjetivoLiberacion = p}, crear entidad lote con \simio{Create}, asignar \state{ProductoIdx = ProductoObjetivoLiberacion} y ejecutar \proc{P\_CrearLote} sobre esa entidad.
+    \item Si no se cumple, terminar proceso sin liberar lote.
+  \end{enumerate}
+  \item Anti-disparo duplicado (obligatorio): crear \state{PendienteReposicion} como vector de 10 filas.
+  \begin{itemize}
+    \item Antes de crear lote por pull, verificar \state{PendienteReposicion[p] = 0}.
+    \item Al crear lote, setear \state{PendienteReposicion[p] = 1}.
+    \item Al reponer en sala ese producto (en \proc{P\_ReponerSala}), resetear \state{PendienteReposicion[p] = 0}.
+  \end{itemize}
+\end{enumerate}
+
+\risk{} Si no aplicas \state{PendienteReposicion}, una rafaga de clientes puede crear muchos lotes redundantes para el mismo producto en segundos de simulacion.
+
+\subsubsection{M7F Implementar Hibrida}
+\textbf{Resultado esperado:} push construye base de stock y pull corrige durante la venta.
+
+\begin{enumerate}
+  \item En \proc{P\_M7\_HibridaEvaluar}, separar dos ventanas:
+  \begin{itemize}
+    \item Preapertura: usar \proc{P\_M7\_PushLiberar}.
+    \item Venta: usar \proc{P\_M7\_PullEvaluar}.
+  \end{itemize}
+  \item Ventana recomendada de referencia:
+  \begin{itemize}
+    \item Preapertura: 06:00 a 09:00.
+    \item Venta: 09:00 a 21:00.
+  \end{itemize}
+  \item Implementar la transicion en el proceso con condicion de hora simulada; no cambiar manualmente objetos al correr.
+  \item Durante venta, mantener activo el control anti-duplicado \state{PendienteReposicion}.
+\end{enumerate}
+
+\subsubsection{M7G Seleccion de producto cuando hay multiples candidatos}
+\textbf{Resultado esperado:} el modelo elige de forma consistente que producto reponer primero.
+
+\begin{enumerate}
+  \item Regla primaria de M7: \textbf{menor stock relativo}.
+  \item Definir para cada producto candidato \(p\):
+  \[
+  StockRel[p] = \frac{StockSala[p]}{\max(StockObjetivoKg[p], 0.001)}
+  \]
+  \item Seleccionar el producto con menor \(StockRel[p]\) entre los que cumplen \state{StockSala[p] <= PuntoReposicionKg[p]}.
+  \item Desempate cerrado:
+  \begin{itemize}
+    \item primero mayor \state{BrechaKg[p]}
+    \item luego menor indice de producto \(p\)
+  \end{itemize}
+  \item La seleccion se encapsula en \proc{P\_M7\_SeleccionarProductoReposicion}; no repartir esta logica en varios procesos.
+\end{enumerate}
+
+\subsubsection{M7H Matriz minima de prueba de politicas}
+\textbf{Resultado esperado:} comparacion limpia entre \simio{Push}, \simio{PullMin} y \simio{Hibrida}.
+
+\begin{enumerate}
+  \item Correr tres escenarios con mismos datos y misma semilla:
+  \begin{itemize}
+    \item Escenario A: \state{Prop\_PoliticaProduccion = Push}
+    \item Escenario B: \state{Prop\_PoliticaProduccion = PullMin}
+    \item Escenario C: \state{Prop\_PoliticaProduccion = Hibrida}
+  \end{itemize}
+  \item En cada escenario medir:
+  \begin{itemize}
+    \item \(\sum DemandaPerdida[p]\)
+    \item \(\sum StockSala[p]\) al cierre
+    \item \(\sum LotesProducidos[p]\)
+    \item Espera media de horno y tiempo de ciclo
+  \end{itemize}
+  \item Criterio esperado:
+  \begin{itemize}
+    \item Push tiende a menor quiebre temprano y mayor sobrante final.
+    \item Pull tiende a menor sobrante y mas riesgo de quiebre en peak.
+    \item Hibrida debe balancear ambos efectos.
+  \end{itemize}
+\end{enumerate}
+
+\subsubsection{M7I Cierre obligatorio de fase}
 \begin{itemize}
-  \item Objetivo cerrado: comparar politicas push, pull e hibrida sin reconstruir el modelo.
-  \item Push: secuencia/plan horario predefinido.
-  \item Pull: gatillar lote cuando \state{StockSala[p] <= PuntoReposicionKg[p]}.
-  \item Hibrida: base programada + reposicion por bajo stock o quiebre.
+  \item El modelo corre sin errores en las tres politicas.
+  \item Cada lote liberado queda trazable a una regla concreta.
+  \item Pull y hibrida respetan \state{PuntoReposicionKg} por producto.
+  \item No hay multiplicacion espuria de lotes por eventos repetidos.
+  \item Existe tabla comparativa de resultados A/B/C para sustentar decision.
 \end{itemize}
 
 \subsection{M8 paso a paso: dotacion y recursos multiples}
-\textbf{Estado de esta version:} alcance definido y numeracion reservada. Desarrollo detallado pendiente.
+\textbf{Objetivo operacional de M8:} representar dotacion realista y escalable (personas y equipos), de forma que la produccion responda a cambios de capacidad, turnos y descansos sin reescribir logica.
 
+\textbf{Regla cerrada de M8:} toda comparacion de personal/equipos se hace solo cambiando parametros de escenario. No se permite editar objetos manualmente entre corridas A/B.
+
+\textbf{Orden obligatorio de M8:}
+\begin{enumerate}
+  \item Congelar M7 y crear version \simio{Panaderia\_M8\_DotacionRecursos.spfx}.
+  \item Definir contrato de parametros y matriz cerrada de escenarios.
+  \item Implementar primero nivel aceptable: recurso logico agregado.
+  \item Agregar turnos escalonados y descansos sin dejar funciones criticas en cero.
+  \item Escalar equipos (mezcladora, amasadora, hornos, carros).
+  \item Ejecutar pruebas minimas 1 vs 2 vs 3 recursos.
+  \item Implementar comparacion con workers individuales (nivel alto).
+\end{enumerate}
+
+\subsubsection{M8A Preparar version y baseline}
+\textbf{Resultado esperado:} M8 corre igual que M7 en su escenario base antes de tocar dotacion.
+
+\begin{enumerate}
+  \item Guardar copia del modelo M7 como \simio{Panaderia\_M8\_DotacionRecursos.spfx}.
+  \item Mantener politica de produccion en \simio{Hibrida} durante la construccion de M8 para evitar ruido por cambio de politica.
+  \item Ejecutar un baseline corto (por ejemplo 1 dia, 5 replicas) y registrar:
+  \begin{itemize}
+    \item \(\sum DemandaPerdida[p]\)
+    \item \(\sum StockSala[p]\) al cierre
+    \item \simio{Tally\_TiempoCicloLote} promedio
+    \item \simio{Tally\_EsperaHorno} promedio
+  \end{itemize}
+  \item Estos valores son referencia. Si se rompen despues de un cambio de dotacion, el error esta en M8.
+\end{enumerate}
+
+\subsubsection{M8B Contrato de parametros de dotacion}
+\textbf{Resultado esperado:} toda dotacion queda expresada en properties con dominio cerrado.
+
+\begin{enumerate}
+  \item Confirmar (o crear) en \simio{Definitions > Properties}:
+  \begin{itemize}
+    \item \state{Prop\_NumPanaderos} (Integer)
+    \item \state{Prop\_NumManipuladores} (Integer)
+    \item \state{Prop\_NumHornos} (Integer)
+    \item \state{Prop\_NumMezcladoras} (Integer)
+    \item \state{Prop\_NumAmasadoras} (Integer)
+    \item \state{Prop\_NumCarros} (Integer)
+  \end{itemize}
+  \item Definir dominios obligatorios de M8:
+  \begin{itemize}
+    \item \state{Prop\_NumPanaderos} \(\in \{1,2,3\}\)
+    \item \state{Prop\_NumManipuladores} \(\in \{1,2\}\)
+    \item \state{Prop\_NumHornos} \(\in \{1,2\}\)
+    \item \state{Prop\_NumMezcladoras} \(\in \{1,2\}\)
+    \item \state{Prop\_NumAmasadoras} \(\in \{1,2\}\)
+    \item \state{Prop\_NumCarros} \(\in \{4,6,8\}\)
+  \end{itemize}
+  \item Crear property de modo de modelado:
+  \begin{itemize}
+    \item \state{Prop\_ModoDotacion} (String), valores: \simio{Agregado} o \simio{Individual}.
+  \end{itemize}
+  \item Valor inicial obligatorio para construir M8: \state{Prop\_ModoDotacion = Agregado}.
+\end{enumerate}
+
+\subsubsection{M8C Matriz cerrada de escenarios de dotacion}
+\textbf{Resultado esperado:} existe una bateria A/B minima para comparar capacidad.
+
+\begin{enumerate}
+  \item Crear o actualizar \tabla{Tbl\_Escenarios} con estas 6 filas minimas:
+  \begin{itemize}
+    \item \textbf{Esc\_A\_Base:} Pan=1, Manip=1, Hornos=1, Mezcladoras=1, Amasadoras=1, Carros=6.
+    \item \textbf{Esc\_B\_Pan2:} Pan=2, Manip=1, Hornos=1, Mezcladoras=1, Amasadoras=1, Carros=6.
+    \item \textbf{Esc\_C\_Pan3:} Pan=3, Manip=1, Hornos=1, Mezcladoras=1, Amasadoras=1, Carros=6.
+    \item \textbf{Esc\_D\_Manip2:} Pan=2, Manip=2, Hornos=1, Mezcladoras=1, Amasadoras=1, Carros=6.
+    \item \textbf{Esc\_E\_Horno2:} Pan=2, Manip=2, Hornos=2, Mezcladoras=1, Amasadoras=1, Carros=8.
+    \item \textbf{Esc\_F\_Equip2:} Pan=2, Manip=2, Hornos=2, Mezcladoras=2, Amasadoras=2, Carros=8.
+  \end{itemize}
+  \item Definir \textbf{Esc\_A\_Base} como referencia de comparacion para todos los KPIs de M8.
+  \item No crear escenarios adicionales hasta que estas 6 filas corran sin error.
+\end{enumerate}
+
+\subsubsection{M8D Implementar nivel aceptable: recurso logico agregado}
+\textbf{Resultado esperado:} el modelo escala capacidades sin crear workers fisicos todavia.
+
+\begin{enumerate}
+  \item En \simio{Resource\_Panadero\_1}:
+  \begin{itemize}
+    \item Configurar \simio{Capacity Type = Fixed}.
+    \item Configurar \simio{Initial Capacity = Prop\_NumPanaderos}.
+  \end{itemize}
+  \item En \simio{Resource\_Manipulador\_1}:
+  \begin{itemize}
+    \item \simio{Capacity Type = Fixed}
+    \item \simio{Initial Capacity = Prop\_NumManipuladores}
+  \end{itemize}
+  \item En \simio{Server\_Mezclado}:
+  \begin{itemize}
+    \item \simio{Capacity Type = Fixed}
+    \item \simio{Initial Capacity = Prop\_NumMezcladoras}
+  \end{itemize}
+  \item En \simio{Server\_Amasado}:
+  \begin{itemize}
+    \item \simio{Capacity Type = Fixed}
+    \item \simio{Initial Capacity = Prop\_NumAmasadoras}
+  \end{itemize}
+  \item En \simio{Server\_Horno1} (aproximacion de M8 previa a M9):
+  \begin{itemize}
+    \item \simio{Capacity Type = Fixed}
+    \item \simio{Initial Capacity = Prop\_NumHornos}
+  \end{itemize}
+  \item Si ya tienes pool de carros, dejar \simio{Initial Capacity = Prop\_NumCarros}. Si aun no existe pool de carros, crearlo en M9; en M8 solo se deja la property definida.
+\end{enumerate}
+
+\risk{} Este nivel agregado no representa caminata ni interferencia espacial entre personas; solo capacidad logica. Eso es esperado en M8D.
+
+\subsubsection{M8E Turnos escalonados y descansos (modo agregado)}
+\textbf{Resultado esperado:} hay variacion horaria de capacidad sin dejar funciones criticas bloqueadas.
+
+\begin{enumerate}
+  \item Cambiar \simio{Resource\_Panadero\_1} a \simio{Capacity Type = WorkSchedule}.
+  \item Crear 3 schedules de panaderos en \simio{Data > Work Schedules}:
+  \begin{itemize}
+    \item \simio{Sch\_Panaderos\_1}
+    \item \simio{Sch\_Panaderos\_2}
+    \item \simio{Sch\_Panaderos\_3}
+  \end{itemize}
+  \item Cargar estos periodos exactos (valor = capacidad activa):
+  \begin{enumerate}
+    \item \textbf{\simio{Sch\_Panaderos\_1}}:
+    \begin{itemize}
+      \item 05:30--10:00 = 1
+      \item 10:00--10:30 = 0 (colacion)
+      \item 10:30--15:00 = 1
+      \item 15:00--24:00 = 0
+    \end{itemize}
+    \item \textbf{\simio{Sch\_Panaderos\_2}}:
+    \begin{itemize}
+      \item 05:30--07:30 = 1
+      \item 07:30--10:00 = 2
+      \item 10:00--10:30 = 1 (colacion turno A)
+      \item 10:30--12:30 = 2
+      \item 12:30--13:00 = 1 (colacion turno B)
+      \item 13:00--16:30 = 2
+      \item 16:30--24:00 = 0
+    \end{itemize}
+    \item \textbf{\simio{Sch\_Panaderos\_3}}:
+    \begin{itemize}
+      \item 05:30--07:00 = 1
+      \item 07:00--09:30 = 2
+      \item 09:30--10:00 = 1 (colacion turno A)
+      \item 10:00--12:30 = 3
+      \item 12:30--13:00 = 2 (colacion turno B)
+      \item 13:00--15:30 = 3
+      \item 15:30--16:00 = 2 (colacion turno C)
+      \item 16:00--19:30 = 2
+      \item 19:30--24:00 = 0
+    \end{itemize}
+  \end{enumerate}
+  \item Repetir la misma logica para manipuladores:
+  \begin{itemize}
+    \item \simio{Sch\_Manipuladores\_1}: 06:30--11:30=1, 11:30--12:00=0, 12:00--17:00=1, 17:00--24:00=0.
+    \item \simio{Sch\_Manipuladores\_2}: 06:30--09:00=1, 09:00--11:30=2, 11:30--12:00=1, 12:00--15:30=2, 15:30--16:00=1, 16:00--20:30=2, 20:30--24:00=0.
+  \end{itemize}
+  \item Asignacion cerrada de schedules:
+  \begin{itemize}
+    \item Si \state{Prop\_NumPanaderos = 1}, usar \simio{Sch\_Panaderos\_1}.
+    \item Si \state{Prop\_NumPanaderos = 2}, usar \simio{Sch\_Panaderos\_2}.
+    \item Si \state{Prop\_NumPanaderos = 3}, usar \simio{Sch\_Panaderos\_3}.
+    \item Si \state{Prop\_NumManipuladores = 1}, usar \simio{Sch\_Manipuladores\_1}.
+    \item Si \state{Prop\_NumManipuladores = 2}, usar \simio{Sch\_Manipuladores\_2}.
+  \end{itemize}
+\end{enumerate}
+
+\risk{} Nunca usar un schedule que deje simultaneamente en 0 panaderos y 0 manipuladores durante una ventana de produccion activa.
+
+\subsubsection{M8F Proceso de carga de escenario (sin edicion manual)}
+\textbf{Resultado esperado:} la dotacion se maneja sin ambiguedad entre \simio{properties} (escenarios) y \simio{states} (dinamica interna).
+
+\begin{enumerate}
+  \item Regla de arquitectura obligatoria:
+  \begin{itemize}
+    \item Si el valor cambia entre escenarios: usar \simio{Property} controlada por \simio{Experiments > Controls}.
+    \item Si el valor cambia durante la simulacion: usar \simio{State} operativa.
+  \end{itemize}
+  \item Crear states activas de dotacion:
+  \begin{itemize}
+    \item \state{State\_NumPanaderosActiva}
+    \item \state{State\_NumManipuladoresActiva}
+    \item \state{State\_NumHornosActiva}
+    \item \state{State\_NumMezcladorasActiva}
+    \item \state{State\_NumAmasadorasActiva}
+    \item \state{State\_NumCarrosActiva}
+  \end{itemize}
+  \item Opcion recomendada para escenarios formales: \textbf{no} usar \proc{P\_M8\_CargarEscenarioRecursos}; dejar que \simio{Experiments} asigne directamente \state{Prop\_*}.
+  \item Si necesitas cargar una fila de \tabla{Tbl\_Escenarios} dentro del modelo, crear \proc{P\_M8\_CargarEscenarioRecursos} (trigger \simio{Run Initialized}) y:
+  \begin{enumerate}
+    \item Leer fila activa de \tabla{Tbl\_Escenarios}.
+    \item Asignar valores a \textbf{states activas}, no a \simio{properties}.
+    \item Ejecutar \proc{P\_M8\_AplicarDotacion}.
+  \end{enumerate}
+  \item En \proc{P\_M8\_AplicarDotacion}, asignar capacidades finales usando states activas o \simio{Prop\_*} segun el modo elegido, pero sin mutar \simio{properties} en medio de la corrida.
+  \item Si \state{Prop\_ModoDotacion = Agregado}, aplicar logica de M8D y M8E.
+  \item Si \state{Prop\_ModoDotacion = Individual}, desviar a M8H.
+\end{enumerate}
+
+\subsubsection{M8G Pruebas minimas obligatorias del modo agregado}
+\textbf{Resultado esperado:} la sensibilidad de capacidad se refleja en tiempos de espera y nivel de servicio.
+
+\begin{enumerate}
+  \item Correr \textbf{Esc\_A\_Base} y guardar KPIs base.
+  \item Correr \textbf{Esc\_B\_Pan2} y verificar:
+  \begin{itemize}
+    \item baja espera por panadero
+    \item baja tiempo de ciclo
+  \end{itemize}
+  \item Correr \textbf{Esc\_C\_Pan3} y verificar mejora marginal menor que de 1 a 2 (rendimientos decrecientes).
+  \item Correr \textbf{Esc\_D\_Manip2} y verificar baja en espera de carga/descarga de horno.
+  \item Correr \textbf{Esc\_E\_Horno2} y verificar baja en \simio{Tally\_EsperaHorno}.
+  \item Correr \textbf{Esc\_F\_Equip2} y verificar que el cuello se desplaza fuera de mezclado/amasado.
+  \item Si algun escenario mejora todo simultaneamente sin costo ni trade-off, revisar porque suele indicar error de conexion de recursos.
+\end{enumerate}
+
+\subsubsection{M8H Nivel alto: workers individuales}
+\textbf{Resultado esperado:} misma logica operacional, pero ahora con personas fisicas separadas.
+
+\begin{enumerate}
+  \item Cambiar \state{Prop\_ModoDotacion} a \simio{Individual}.
+  \item Crear workers:
+  \begin{itemize}
+    \item \simio{Worker\_Panadero\_1}, \simio{Worker\_Panadero\_2}, \simio{Worker\_Panadero\_3}
+    \item \simio{Worker\_Manip\_1}, \simio{Worker\_Manip\_2}
+  \end{itemize}
+  \item Asignar a cada worker:
+  \begin{itemize}
+    \item \simio{Initial Node} segun su zona (produccion u horno/sala)
+    \item \simio{Work Schedule} con turnos y descansos
+    \item velocidad constante de prueba (ejemplo 1.2 m/s) para no mezclar calibraciones.
+  \end{itemize}
+  \item Crear conjuntos:
+  \begin{itemize}
+    \item \simio{WorkerSet\_Panaderos}
+    \item \simio{WorkerSet\_Manipuladores}
+  \end{itemize}
+  \item En procesos donde hoy se usa \simio{Seize Resource\_Panadero\_1}, migrar a toma/liberacion de worker del set correspondiente.
+  \item En carga/descarga de horno, migrar a \simio{WorkerSet\_Manipuladores}.
+  \item Activacion por dotacion:
+  \begin{itemize}
+    \item con 1 panadero, solo \simio{Worker\_Panadero\_1} activo
+    \item con 2 panaderos, activos \simio{Worker\_Panadero\_1} y \simio{Worker\_Panadero\_2}
+    \item con 3 panaderos, activos los tres
+  \end{itemize}
+\end{enumerate}
+
+\risk{} En modo individual, si no modelas tiempo de desplazamiento entre nodos, el resultado puede parecer igual al agregado y perderas el valor de este nivel.
+
+\subsubsection{M8I Comparacion Agregado vs Individual}
+\textbf{Resultado esperado:} diferencia explicada y trazable entre ambas representaciones.
+
+\begin{enumerate}
+  \item Seleccionar un escenario comun (recomendado \textbf{Esc\_D\_Manip2}).
+  \item Correrlo en \simio{Agregado} y luego en \simio{Individual} con misma semilla y mismas replicas.
+  \item Comparar al menos:
+  \begin{itemize}
+    \item Fill rate total
+    \item Kg perdidos
+    \item \simio{Tally\_TiempoCicloLote}
+    \item \simio{Tally\_EsperaManipHorno}
+  \end{itemize}
+  \item Criterio de lectura:
+  \begin{itemize}
+    \item si \simio{Individual} empeora, revisar tiempos de viaje y bloqueos fisicos.
+    \item si ambos modos son casi identicos, el sistema esta dominado por equipos (horno/mezcladora) mas que por movimiento humano.
+  \end{itemize}
+\end{enumerate}
+
+\subsubsection{M8J Cierre obligatorio de fase}
 \begin{itemize}
-  \item Objetivo cerrado: evaluar configuraciones 1/2/3 panaderos y 1/2 manipuladores.
-  \item Incluir capacidad de mezcladora, amasadora, carros y hornos como variables de escenario.
-  \item Incluir turnos escalonados y descansos para recursos criticos.
-  \item Comparar recurso logico agregado vs workers individuales.
+  \item El modelo corre sin errores en las 6 filas de \tabla{Tbl\_Escenarios}.
+  \item Cambiar dotacion no requiere editar objetos manualmente.
+  \item Se observan efectos coherentes de 1, 2 y 3 panaderos sobre espera y ciclo.
+  \item Se observan efectos coherentes de 1 y 2 manipuladores en operaciones de horno/reposicion.
+  \item La comparacion \simio{Agregado vs Individual} queda documentada con supuestos y resultados.
 \end{itemize}
 
 \subsection{M9 paso a paso: horno batch operacional}
-\textbf{Estado de esta version:} alcance definido y numeracion reservada. Desarrollo detallado pendiente.
+\textbf{Objetivo operacional de M9:} convertir el horno en una restriccion real de capacidad y secuencia, con logica batch por familia, setup dependiente de cambio de familia y criterio de espera maxima.
 
+\textbf{Regla cerrada de M9:} ninguna hornada entra a horneado directo. Toda carga debe seguir esta secuencia: encolar por familia \(\rightarrow\) seleccionar familia \(\rightarrow\) formar carga \(\rightarrow\) setup \(\rightarrow\) cargar \(\rightarrow\) hornear \(\rightarrow\) descargar.
+
+\textbf{Orden obligatorio de M9:}
+\begin{enumerate}
+  \item Congelar M8 y crear \simio{Panaderia\_M9\_HornoBatchOperacional.spfx}.
+  \item Validar contrato de datos de horno (\tabla{Tbl\_HornoFamilia} y \tabla{Tbl\_SetupHorno}).
+  \item Implementar colas por familia y proceso de encolado.
+  \item Implementar seleccion de familia y formacion de carga con regla de carros.
+  \item Implementar setup dependiente de secuencia.
+  \item Implementar carga, horneado, descarga y salida a enfriado.
+  \item Ejecutar matriz minima de pruebas de horno.
+\end{enumerate}
+
+\subsubsection{M9A Preparar version y baseline}
+\textbf{Resultado esperado:} M9 queda aislada y comparable contra M8.
+
+\begin{enumerate}
+  \item Guardar copia como \simio{Panaderia\_M9\_HornoBatchOperacional.spfx}.
+  \item Mantener \state{Prop\_PoliticaProduccion = Hibrida} durante construccion de M9.
+  \item Ejecutar baseline corto de referencia (1 dia, 5 replicas) y registrar:
+  \begin{itemize}
+    \item \simio{Tally\_EsperaHorno}
+    \item \simio{Tally\_TiempoCicloLote}
+    \item \state{SetupCountHorno\_1}
+    \item \state{TiempoSetupTotal\_1}
+  \end{itemize}
+  \item Estos valores base se usan para verificar que M9 agrega logica sin romper trazabilidad.
+\end{enumerate}
+
+\subsubsection{M9B Contrato de datos de horno}
+\textbf{Resultado esperado:} el horno decide con tablas, no con constantes escondidas.
+
+\begin{enumerate}
+  \item Verificar \tabla{Tbl\_HornoFamilia} con columnas minimas:
+  \begin{itemize}
+    \item \state{FamiliaHorno} (1,2,3)
+    \item \state{TiempoHorneadoMin}
+    \item \state{MaxCarros}
+    \item \state{CargaMinKgBase}
+    \item \state{EsperaMaxMin}
+  \end{itemize}
+  \item Para la ruta base, dejar \state{MaxCarros = 6} en las 3 familias.
+  \item Verificar \tabla{Tbl\_SetupHorno} con columnas:
+  \begin{itemize}
+    \item \state{SetupKey} (Integer, Key), con:
+    \[
+    SetupKey = FamiliaDesde \cdot 10 + FamiliaHasta
+    \]
+    \item \state{FamiliaDesde}
+    \item \state{FamiliaHasta}
+    \item \state{SetupMin}
+  \end{itemize}
+  \item Cargar matriz completa 3x3. Minimo obligatorio:
+  \begin{itemize}
+    \item misma familia: \state{SetupMin = 0}
+    \item cambio de familia: \state{SetupMin = 5}
+  \end{itemize}
+  \item Prohibicion de M9: no escribir \simio{Delay 5} fijo dentro de \proc{P\_AplicarSetupHorno}. Siempre leer desde \tabla{Tbl\_SetupHorno}.
+  \item Lookup obligatorio por llave compuesta:
+  \[
+  filaSetup = Tbl\_SetupHorno.SetupKey.RowForKey(FamiliaDesde \cdot 10 + FamiliaHasta)
+  \]
+  \[
+  SetupMin = Tbl\_SetupHorno[filaSetup].SetupMin
+  \]
+\end{enumerate}
+
+\subsubsection{M9C Estados y estructuras de cola por familia}
+\textbf{Resultado esperado:} cada hornada queda asignada a una cola de familia trazable.
+
+\begin{enumerate}
+  \item Confirmar entity states en \simio{ModelEntity}:
+  \begin{itemize}
+    \item \state{FamiliaHorno}
+    \item \state{CarrosReq}
+    \item \state{KgLote}
+    \item \state{HoraEntradaColaHorno}
+    \item \state{HoraFinHorno}
+  \end{itemize}
+  \item Confirmar model states del horno 1:
+  \begin{itemize}
+    \item \state{FamiliaActualHorno\_1}
+    \item \state{FamiliaObjetivoHorno\_1}
+    \item \state{CarrosCargaHorno\_1}
+    \item \state{KgCargaHorno\_1}
+    \item \state{SetupCountHorno\_1}
+    \item \state{TiempoSetupTotal\_1}
+  \end{itemize}
+  \item Crear tres colas logicas por familia (listas o nodos dedicados):
+  \begin{itemize}
+    \item \simio{ColaHorno\_F1}
+    \item \simio{ColaHorno\_F2}
+    \item \simio{ColaHorno\_F3}
+  \end{itemize}
+  \item Crear tabla de debug \tabla{Tbl\_LoteHornoDebug} con al menos:
+  \begin{itemize}
+    \item \state{LoteID}
+    \item \state{ProductoIdx}
+    \item \state{FamiliaHorno}
+    \item \state{CarrosReq}
+    \item \state{HoraEntradaColaHorno}
+    \item \state{HoraInicioHorneado}
+    \item \state{HoraFinHorno}
+  \end{itemize}
+\end{enumerate}
+
+\subsubsection{M9D Encolado por familia}
+\textbf{Resultado esperado:} todo lote que sale de fermentacion queda en la cola correcta.
+
+\begin{enumerate}
+  \item Crear proceso \proc{P\_M9\_EncolarLoteHorno}.
+  \item Trigger de entrada: salida de \simio{Server\_Fermentacion} o punto equivalente antes de horno.
+  \item En \proc{P\_M9\_EncolarLoteHorno}:
+  \begin{enumerate}
+    \item Asignar \state{ModelEntity.HoraEntradaColaHorno = TimeNow}.
+    \item Decidir por \state{ModelEntity.FamiliaHorno}.
+    \item Enviar a \simio{ColaHorno\_F1}, \simio{ColaHorno\_F2} o \simio{ColaHorno\_F3}.
+    \item Si familia no esta en 1..3, registrar error y no permitir ingreso al horno.
+  \end{enumerate}
+  \item Registrar fila en \tabla{Tbl\_LoteHornoDebug} al momento de encolar.
+\end{enumerate}
+
+\subsubsection{M9E Seleccion de familia para la corrida}
+\textbf{Resultado esperado:} el horno elige familia de forma consistente y trazable.
+
+\begin{enumerate}
+  \item Crear \proc{P\_SeleccionarFamiliaHorno}.
+  \item Este proceso se dispara cuando el horno queda libre y cuando llega un lote nuevo con horno ocioso.
+  \item Regla de seleccion cerrada (en este orden):
+  \begin{enumerate}
+    \item Si hay lotes en la familia actual del horno, mantener familia actual (evita setup).
+    \item Si no hay lotes en la familia actual, elegir la familia cuyo primer lote tenga \state{HoraEntradaColaHorno} mas antigua.
+    \item Si hay empate, elegir menor indice de familia.
+  \end{enumerate}
+  \item Guardar resultado en \state{FamiliaObjetivoHorno\_1}.
+  \item Si no hay lotes en ninguna cola, terminar proceso sin cargar horno.
+\end{enumerate}
+
+\subsubsection{M9F Formacion de carga batch}
+\textbf{Resultado esperado:} la carga respeta capacidad fisica por carros y criterio de espera maxima.
+
+\begin{enumerate}
+  \item Crear \proc{P\_FormarCargaHorno}.
+  \item Entrada del proceso: \state{FamiliaObjetivoHorno\_1} ya definida.
+  \item Inicializar:
+  \begin{itemize}
+    \item \state{CarrosCargaHorno\_1 = 0}
+    \item \state{KgCargaHorno\_1 = 0}
+  \end{itemize}
+  \item Tomar lotes en FIFO desde la cola de la familia objetivo, uno por uno.
+  \item Regla de factibilidad primaria por cada lote candidato \(l\):
+  \[
+  CarrosCargaHorno\_1 + l.CarrosReq \le MaxCarros(FamiliaObjetivoHorno\_1)
+  \]
+  \item Si cabe, agregar el lote a la carga; si no cabe, cerrar carga con lo ya acumulado.
+  \item Si la carga queda vacia, no forzar ingreso: terminar y esperar siguiente evento.
+  \item Regla de despacho de carga (cerrada):
+  \begin{enumerate}
+    \item Despachar inmediato si \state{KgCargaHorno\_1 >= CargaMinKgBase} de la familia.
+    \item Si no alcanza carga minima, esperar hasta que:
+    \[
+    TimeNow - HoraEntradaPrimerLote \ge EsperaMaxMin
+    \]
+    y despachar la mejor carga factible actual.
+  \end{enumerate}
+  \item Decision tecnica obligatoria para implementacion:
+  \begin{itemize}
+    \item \textbf{Alternativa simple defendible (recomendada en Student):} batch logico. El horno procesa una entidad lote por corrida, respetando familia/setup/carros; la acumulacion se lleva en states.
+    \item \textbf{Alternativa avanzada:} batch fisico multi-lote, usando \simio{Storage} o entidad \simio{CargaHorno} para retener/descargar varios lotes de una corrida.
+    \item Si usas alternativa simple, documentar explicitamente que la liberacion fisica de lotes es individual aunque el control de carga sea batch logico.
+  \end{itemize}
+\end{enumerate}
+
+\risk{} Nunca priorizar kg por sobre carros. Si una carga cumple kg pero viola carros, es fisicamente invalida y debe rechazarse.
+
+\subsubsection{M9G Setup dependiente de secuencia}
+\textbf{Resultado esperado:} el setup se calcula por matriz y queda contabilizado.
+
+\begin{enumerate}
+  \item Crear \proc{P\_AplicarSetupHorno}.
+  \item Leer:
+  \begin{itemize}
+    \item \state{FamiliaDesde = FamiliaActualHorno\_1}
+    \item \state{FamiliaHasta = FamiliaObjetivoHorno\_1}
+  \end{itemize}
+  \item Obtener \state{SetupMin} desde \tabla{Tbl\_SetupHorno}.
+  \item Ejecutar \simio{Delay = SetupMin}.
+  \item Si \state{SetupMin > 0}:
+  \begin{itemize}
+    \item \state{SetupCountHorno\_1 = SetupCountHorno\_1 + 1}
+    \item \state{TiempoSetupTotal\_1 = TiempoSetupTotal\_1 + SetupMin}
+  \end{itemize}
+  \item Actualizar \state{FamiliaActualHorno\_1 = FamiliaObjetivoHorno\_1}.
+\end{enumerate}
+
+\subsubsection{M9H Carga, horneado y descarga}
+\textbf{Resultado esperado:} la corrida batch completa queda ejecutada y cada lote sale a enfriado.
+
+\begin{enumerate}
+  \item Crear secuencia de procesos:
+  \begin{itemize}
+    \item \proc{P\_CargarHorno}
+    \item \proc{P\_HornearCarga}
+    \item \proc{P\_DescargarHorno}
+  \end{itemize}
+  \item \proc{P\_CargarHorno}:
+  \begin{itemize}
+    \item si usa manipulador, hacer \simio{Seize} de manipulador
+    \item registrar espera en \simio{Tally\_EsperaManipHorno}
+    \item delay de carga (ruta base: 5 min)
+  \end{itemize}
+  \item \proc{P\_HornearCarga}:
+  \begin{itemize}
+    \item leer \state{TiempoHorneadoMin} desde \tabla{Tbl\_HornoFamilia} de la familia objetivo
+    \item ejecutar delay de horneado
+  \end{itemize}
+  \item \proc{P\_DescargarHorno}:
+  \begin{itemize}
+    \item delay de descarga (ruta base: 5 min)
+    \item liberar manipulador si fue tomado
+    \item para cada lote de la carga: \state{HoraFinHorno = TimeNow}
+    \item enrutar lotes a \simio{Server\_Enfriado}
+  \end{itemize}
+\end{enumerate}
+
+\subsubsection{M9I Orquestador de horno}
+\textbf{Resultado esperado:} existe un unico punto de control del ciclo batch.
+
+\begin{enumerate}
+  \item Crear \proc{P\_M9\_CicloHorno}.
+  \item Orden cerrado interno:
+  \begin{enumerate}
+    \item \proc{P\_SeleccionarFamiliaHorno}
+    \item \proc{P\_FormarCargaHorno}
+    \item \proc{P\_AplicarSetupHorno}
+    \item \proc{P\_CargarHorno}
+    \item \proc{P\_HornearCarga}
+    \item \proc{P\_DescargarHorno}
+  \end{enumerate}
+  \item Gatilhos obligatorios de \proc{P\_M9\_CicloHorno}:
+  \begin{itemize}
+    \item llegada de nuevo lote a cola con horno libre
+    \item fin de descarga de la corrida anterior
+    \item vencimiento de espera maxima del primer lote en cola
+  \end{itemize}
+\end{enumerate}
+
+\subsubsection{M9J Instrumentacion y KPIs de horno}
+\textbf{Resultado esperado:} setup, espera y carga quedan medidos para comparar escenarios.
+
+\begin{enumerate}
+  \item Alimentar \simio{Tally\_EsperaHorno} con:
+  \[
+  TimeNow - ModelEntity.HoraEntradaColaHorno
+  \]
+  justo antes de iniciar carga efectiva.
+  \item Alimentar \simio{Tally\_EsperaManipHorno} alrededor de cada \simio{Seize} de manipulador.
+  \item Registrar por corrida en tabla de debug:
+  \begin{itemize}
+    \item familia corrida
+    \item carros totales de carga
+    \item kg totales de carga
+    \item setup aplicado
+    \item hora inicio y fin de corrida
+  \end{itemize}
+  \item Verificar coherencia:
+  \[
+  \text{TiempoSetupTotal\_1} = \sum \text{SetupMin aplicados}
+  \]
+\end{enumerate}
+
+\subsubsection{M9K Matriz minima de pruebas de horno}
+\textbf{Resultado esperado:} el horno se comporta como restriccion operacional real.
+
+\begin{enumerate}
+  \item \textbf{Misma familia consecutiva:} cargar F1 seguido de F1. Esperado: setup 0.
+  \item \textbf{Cambio de familia:} F1 seguido de F2. Esperado: setup 5.
+  \item \textbf{Capacidad de carros:} intentar carga con \(\sum CarrosReq > 6\). Esperado: lote excedente queda en cola.
+  \item \textbf{Espera maxima:} cola con baja carga. Esperado: al vencer \state{EsperaMaxMin}, horno despacha carga parcial.
+  \item \textbf{Sin mezcla de familias:} cola F1 y F2 simultanea. Esperado: una corrida solo contiene una familia.
+  \item \textbf{Manipulador critico:} reducir manipuladores a 1. Esperado: sube \simio{Tally\_EsperaManipHorno}.
+\end{enumerate}
+
+\subsubsection{M9L Cierre obligatorio de fase}
 \begin{itemize}
-  \item Objetivo cerrado: horno como restriccion real, no solo delay.
-  \item Incluir colas por familia, formacion de carga, setup A-A = 0 y A-B = 5.
-  \item Respetar regla \(\sum CarrosReq \le 6\).
-  \item Registrar setups, espera de horno y descarga hacia enfriado/reposicion.
+  \item Todo lote pasa por cola de familia antes de horno.
+  \item Toda corrida respeta \(\sum CarrosReq \le 6\).
+  \item Setup sale de \tabla{Tbl\_SetupHorno}, no de constantes en procesos.
+  \item Existe evidencia de corrida con setup 0 y setup 5.
+  \item Espera maxima evita que el horno quede esperando carga indefinidamente.
+  \item Los lotes descargados fluyen a enfriado para continuar con M10.
 \end{itemize}
 
 \subsection{M10 paso a paso: reposicion a sala e inventario vendible}
-\textbf{Estado de esta version:} alcance definido y numeracion reservada. Desarrollo detallado pendiente.
+\textbf{Objetivo operacional de M10:} cerrar el ciclo fisico y contable desde enfriado hasta inventario vendible, de modo que cada kg producido termine en venta, sobrante o WIP final, sin saltos logicos.
 
+\textbf{Frontera con M7:} M7 decide \textbf{cuando y que lote liberar}. M10 ejecuta la \textbf{reposicion fisica y contable} desde enfriado hacia sala vendible.
+
+\textbf{Regla cerrada de M10:} ningun lote aumenta \state{StockSala[p]} si no paso por \proc{P\_ReponerSala}. Queda prohibido sumar stock de sala desde otros procesos.
+
+\textbf{Orden obligatorio de M10:}
+\begin{enumerate}
+  \item Congelar M9 y crear \simio{Panaderia\_M10\_ReposicionSala.spfx}.
+  \item Definir contrato de inventario vendible y trazabilidad de lote.
+  \item Implementar proceso \proc{P\_ReponerSala}.
+  \item Conectar traslado, manipulador y actualizacion de stock.
+  \item Implementar indicadores de sobrante y producto no vendido.
+  \item Ejecutar pruebas de cierre de ciclo.
+\end{enumerate}
+
+\subsubsection{M10A Preparar version y baseline}
+\textbf{Resultado esperado:} M10 parte desde M9 estable y medible.
+
+\begin{enumerate}
+  \item Guardar copia como \simio{Panaderia\_M10\_ReposicionSala.spfx}.
+  \item Mantener la logica de horno de M9 sin cambios al iniciar M10.
+  \item Ejecutar corrida baseline corta (1 dia, 5 replicas) y registrar:
+  \begin{itemize}
+    \item \(\sum StockSala[p]\) al cierre
+    \item \(\sum DemandaSatisfecha[p]\)
+    \item \(\sum DemandaPerdida[p]\)
+    \item \simio{Tally\_FinHornoADisponible}
+  \end{itemize}
+  \item Usar este baseline para verificar que la nueva reposicion no rompa demanda ni horno.
+\end{enumerate}
+
+\subsubsection{M10B Contrato de inventario vendible}
+\textbf{Resultado esperado:} la contabilidad de producto terminado queda cerrada por vector de producto.
+
+\begin{enumerate}
+  \item Confirmar model states vectoriales de 10 filas:
+  \begin{itemize}
+    \item \state{StockSala}
+    \item \state{ProduccionTotal}
+    \item \state{DemandaSatisfecha}
+    \item \state{DemandaPerdida}
+  \end{itemize}
+  \item Confirmar entity states usados en reposicion:
+  \begin{itemize}
+    \item \state{ModelEntity.ProductoIdx}
+    \item \state{ModelEntity.KgLote}
+    \item \state{ModelEntity.HoraFinHorno}
+    \item \state{ModelEntity.HoraSolicitudManipHorno} (si mide espera de manipulador)
+  \end{itemize}
+  \item Definir equivalencias cerradas por producto \(p\):
+  \[
+  Vendible[p] \equiv StockSala[p]
+  \]
+  \[
+  Vendido[p] \equiv DemandaSatisfecha[p]
+  \]
+  \[
+  Producido[p] \equiv ProduccionTotal[p]
+  \]
+\end{enumerate}
+
+\subsubsection{M10C Punto unico de entrada a reposicion}
+\textbf{Resultado esperado:} todo lote enfriado entra por el mismo proceso.
+
+\begin{enumerate}
+  \item En \simio{Server\_Enfriado > Add-On Process Triggers > Exited}, asignar \proc{P\_ReponerSala}.
+  \item Si usas nodo intermedio \simio{Node\_TerminadoNoVendido}, mantenerlo solo como punto visual. El aumento de stock sigue ocurriendo en \proc{P\_ReponerSala}.
+  \item No duplicar triggers de reposicion en otros objetos para evitar doble suma de stock.
+\end{enumerate}
+
+\subsubsection{M10D Implementar \proc{P\_ReponerSala}}
+\textbf{Resultado esperado:} reposicion operacional completa: espera, traslado y alta de inventario vendible.
+
+\begin{enumerate}
+  \item Estructura base de proceso:
+  \begin{itemize}
+    \item \simio{Begin}
+    \item \simio{Assign\_InicioEsperaManip} (si aplica)
+    \item \simio{Seize\_Manipulador} (si aplica)
+    \item \simio{Tally\_EsperaManip}
+    \item \simio{Delay\_TrasladoSala}
+    \item \simio{Assign\_ActualizarStockSala}
+    \item \simio{Assign\_ActualizarProduccion}
+    \item \simio{Tally\_FinHornoADisponible}
+    \item \simio{Release\_Manipulador} (si aplica)
+    \item \simio{End}
+  \end{itemize}
+  \item En \simio{Assign\_ActualizarStockSala} usar formula exacta:
+  \[
+  StockSala[ModelEntity.ProductoIdx] =
+  StockSala[ModelEntity.ProductoIdx] + ModelEntity.KgLote
+  \]
+  \item En \simio{Assign\_ActualizarProduccion} usar:
+  \[
+  ProduccionTotal[ModelEntity.ProductoIdx] =
+  ProduccionTotal[ModelEntity.ProductoIdx] + ModelEntity.KgLote
+  \]
+  \item Si en M7 activaste \state{PendienteReposicion[p]}, resetear en este mismo proceso:
+  \[
+  PendienteReposicion[ModelEntity.ProductoIdx] = 0
+  \]
+\end{enumerate}
+
+\subsubsection{M10E Tiempo de traslado a sala}
+\textbf{Resultado esperado:} la disponibilidad para venta respeta un tiempo operacional observable.
+
+\begin{enumerate}
+  \item Definir tiempo base de traslado en supuestos (ruta base recomendada): \state{TiempoBaseTrasladoSalaMin = 2.0}.
+  \item Calcular delay de traslado:
+  \[
+  DelayTrasladoSala = TiempoBaseTrasladoSalaMin \times Prop\_TransferTimeMult
+  \]
+  \item Configurar \simio{Delay\_TrasladoSala = DelayTrasladoSala}.
+  \item No fijar traslado en 0 por defecto. Si quieres probar traslado instantaneo, hacerlo solo en escenario de prueba explicito.
+\end{enumerate}
+
+\subsubsection{M10F Competencia por manipulador}
+\textbf{Resultado esperado:} reposicion compite por el mismo recurso que carga/descarga de horno.
+
+\begin{enumerate}
+  \item Reutilizar \simio{Resource\_Manipulador\_1} o \simio{WorkerSet\_Manipuladores} segun modo de M8.
+  \item Antes de \simio{Seize}, guardar:
+  \[
+  ModelEntity.HoraSolicitudManipHorno = TimeNow
+  \]
+  \item Luego del \simio{Seize}, alimentar:
+  \[
+  Tally\_EsperaManipHorno = TimeNow - ModelEntity.HoraSolicitudManipHorno
+  \]
+  \item Liberar manipulador al final de \proc{P\_ReponerSala}.
+  \item Si corrida usa \state{Prop\_NumManipuladores = 1}, esperar aumento de espera de reposicion en horas peak.
+\end{enumerate}
+
+\subsubsection{M10G Inventario visible por producto y WIP final}
+\textbf{Resultado esperado:} el estado del sistema se ve en tiempo real y se audita al cierre.
+
+\begin{enumerate}
+  \item Mantener etiquetas visuales por producto con expresion \state{StockSala[p]}.
+  \item Agregar etiqueta de WIP final de enfriado con \state{WIP\_Enfriado}.
+  \item Al cierre del dia, registrar:
+  \begin{itemize}
+    \item \state{StockSala[1]} ... \state{StockSala[10]} (sobrante por producto)
+    \item \state{WIP\_Enfriado} y otros WIP relevantes
+  \end{itemize}
+  \item Si un producto muestra demanda perdida alta y stock alto simultaneo, revisar desfase de reposicion o error de indice de producto.
+\end{enumerate}
+
+\subsubsection{M10H Indicadores derivados de reposicion}
+\textbf{Resultado esperado:} quedan listos indicadores de negocio para comparar politicas.
+
+\begin{enumerate}
+  \item Definir:
+  \[
+  SobranteFinalKg = \sum_{p=1}^{10} StockSala[p]
+  \]
+  \item Definir:
+  \[
+  ProducidoTotalKg = \sum_{p=1}^{10} ProduccionTotal[p]
+  \]
+  \item Definir:
+  \[
+  VendidoTotalKg = \sum_{p=1}^{10} DemandaSatisfecha[p]
+  \]
+  \item Definir:
+  \[
+  ProductoNoVendidoKg = ProducidoTotalKg - VendidoTotalKg
+  \]
+  \item Reportar \simio{Tally\_FinHornoADisponible} como indicador de agilidad de reposicion.
+\end{enumerate}
+
+\subsubsection{M10I Balance de masa obligatorio}
+\textbf{Resultado esperado:} se puede defender numericamente el cierre diario.
+
+\begin{enumerate}
+  \item Verificar al cierre:
+  \[
+  ProducidoTotalKg = VendidoTotalKg + SobranteFinalKg + WIPFinalKg
+  \]
+  donde:
+  \[
+  WIPFinalKg = WIP\_Pesado + WIP\_Mezclado + WIP\_Amasado + WIP\_Reposo + WIP\_Formado + WIP\_Fermentacion + WIP\_Horno + WIP\_Enfriado
+  \]
+  (si tus WIP estan en unidades, convertir a kg antes del balance).
+  \item No incluir \state{DemandaPerdida} en el lado fisico del balance: es venta no atendida, no salida de produccion.
+  \item Si el error absoluto del balance supera \(1\%\) de \state{ProducidoTotalKg}, no cerrar M10.
+\end{enumerate}
+
+\subsubsection{M10J Matriz minima de pruebas de reposicion}
+\textbf{Resultado esperado:} la reposicion funciona en condiciones normales y extremas.
+
+\begin{enumerate}
+  \item \textbf{Prueba 1 (un lote, un producto):} forzar lote de producto 1. Esperado: sube solo \state{StockSala[1]} y \state{ProduccionTotal[1]}.
+  \item \textbf{Prueba 2 (traslado alto):} \state{Prop\_TransferTimeMult = 2.0}. Esperado: sube \simio{Tally\_FinHornoADisponible}.
+  \item \textbf{Prueba 3 (traslado bajo):} \state{Prop\_TransferTimeMult = 0.5}. Esperado: baja \simio{Tally\_FinHornoADisponible}.
+  \item \textbf{Prueba 4 (manipulador escaso):} \state{Prop\_NumManipuladores = 1}. Esperado: sube espera por manipulador.
+  \item \textbf{Prueba 5 (manipulador adicional):} \state{Prop\_NumManipuladores = 2}. Esperado: baja espera y mejora disponibilidad en sala.
+  \item \textbf{Prueba 6 (demanda cero):} no ventas. Esperado: todo lo repuesto queda en sobrante final.
+\end{enumerate}
+
+\subsubsection{M10K Errores tipicos y correccion}
+\textbf{Resultado esperado:} deteccion rapida de fallas frecuentes de implementacion.
+
+\begin{enumerate}
+  \item \textbf{Doble suma de stock:} \state{StockSala} sube dos veces por lote. Causa: dos triggers llamando \proc{P\_ReponerSala}. Correccion: dejar un solo trigger en \simio{Exited}.
+  \item \textbf{Producto cruzado:} sube \state{StockSala[2]} cuando el lote era producto 1. Causa: \state{ProductoIdx} pisado antes de reposicion. Correccion: fijar y rastrear \state{ModelEntity.ProductoIdx}.
+  \item \textbf{Sin efecto de traslado:} \simio{Tally\_FinHornoADisponible} no cambia con \state{Prop\_TransferTimeMult}. Causa: delay fijo. Correccion: usar formula de M10E.
+  \item \textbf{Espera manipulador cero permanente:} no hay competencia real. Causa: reposicion sin \simio{Seize}. Correccion: incorporar \simio{Seize/Release} en \proc{P\_ReponerSala}.
+\end{enumerate}
+
+\subsubsection{M10L Cierre obligatorio de fase}
 \begin{itemize}
-  \item Objetivo cerrado: cerrar ciclo produccion \(\rightarrow\) enfriado \(\rightarrow\) sala \(\rightarrow\) venta.
-  \item Incluir tiempo de traslado a sala y competencia por manipulador si aplica.
-  \item Mostrar inventario vendible por producto y sobrante de cierre.
-  \item Balance objetivo: producido = vendido + sobrante + WIP final.
+  \item Todo lote enfriado pasa por \proc{P\_ReponerSala} antes de ser vendible.
+  \item \state{StockSala[p]} solo aumenta en reposicion y solo para \(p = ModelEntity.ProductoIdx\).
+  \item \simio{Tally\_FinHornoADisponible} registra observaciones validas.
+  \item Hay evidencia de competencia por manipulador en reposicion.
+  \item El balance de masa diario cierra dentro de tolerancia.
+  \item Queda documentado sobrante final, vendido total, producido total y demanda perdida.
 \end{itemize}
 
 \subsection{M11 paso a paso: pruebas de comportamiento}
-\textbf{Estado de esta version:} alcance definido y numeracion reservada. Desarrollo detallado pendiente.
+\textbf{Objetivo operacional de M11:} ejecutar un stress test formal y repetible del modelo completo (M1--M10) para demostrar que el sistema se comporta correctamente antes de reportar KPIs.
 
+\textbf{Regla cerrada de M11:} no se permite avanzar a M12 si una sola prueba critica de comportamiento falla. En M11 no se ``maquillan'' resultados; se corrige logica y se vuelve a correr.
+
+\textbf{Orden obligatorio de M11:}
+\begin{enumerate}
+  \item Congelar M10 y crear \simio{Panaderia\_M11\_PruebasComportamiento.spfx}.
+  \item Preparar protocolo reproducible de corrida.
+  \item Ejecutar bateria funcional minima.
+  \item Ejecutar bateria de hornos y recursos.
+  \item Ejecutar bateria de estres de demanda.
+  \item Validar invariantes fisicas y contables.
+  \item Clasificar fallas, corregir y recertificar.
+\end{enumerate}
+
+\subsubsection{M11A Preparar version de pruebas y baseline}
+\textbf{Resultado esperado:} existe una version de validacion separada y auditable.
+
+\begin{enumerate}
+  \item Guardar copia como \simio{Panaderia\_M11\_PruebasComportamiento.spfx}.
+  \item No modificar estructura de proceso de M10 antes de correr la primera bateria.
+  \item Ejecutar baseline de referencia (1 dia, 10 replicas) y guardar:
+  \begin{itemize}
+    \item \resp{FillRateTotal}
+    \item \resp{KgPerdidosTotal}
+    \item \resp{SobranteFinalKg}
+    \item \simio{Tally\_TiempoCicloLote}
+    \item \simio{Tally\_EsperaHorno}
+    \item \simio{Tally\_EsperaManipHorno}
+    \item \simio{Tally\_FinHornoADisponible}
+  \end{itemize}
+  \item Registrar en bitacora: fecha, nombre de archivo, seed y parametros usados.
+\end{enumerate}
+
+\subsubsection{M11B Protocolo reproducible de corrida}
+\textbf{Resultado esperado:} cada prueba se puede repetir exactamente y comparar contra su expected result.
+
+\begin{enumerate}
+  \item Fijar \textbf{seed base} para pruebas deterministicas.
+  \item Definir dos modos de corrida:
+  \begin{itemize}
+    \item \textbf{Modo Debug:} 1 replica, horizonte corto, \simio{Trace} activado.
+    \item \textbf{Modo Certificacion:} 20 replicas, horizonte diario completo, \simio{Trace} desactivado.
+  \end{itemize}
+  \item Activar en \simio{Watch} estos states minimos:
+  \begin{itemize}
+    \item \state{StockSala[1..10]}
+    \item \state{DemandaTotal[1..10]}
+    \item \state{DemandaSatisfecha[1..10]}
+    \item \state{DemandaPerdida[1..10]}
+    \item \state{SetupCountHorno\_1}
+    \item \state{TiempoSetupTotal\_1}
+  \end{itemize}
+  \item En cada prueba guardar evidencia minima:
+  \begin{itemize}
+    \item configuracion aplicada
+    \item resultado esperado
+    \item resultado observado
+    \item estado final: \textbf{PASS} o \textbf{FAIL}
+  \end{itemize}
+\end{enumerate}
+
+\subsubsection{M11C Invariantes globales que nunca se pueden romper}
+\textbf{Resultado esperado:} existe lista de chequeo transversal para todas las pruebas.
+
+\begin{enumerate}
+  \item Invariante de no negatividad:
+  \[
+  StockSala[p] \ge 0,\quad DemandaPerdida[p] \ge 0,\quad DemandaSatisfecha[p] \ge 0
+  \]
+  para todo \(p=1,\ldots,10\).
+  \item Invariante de demanda por producto:
+  \[
+  DemandaTotal[p] = DemandaSatisfecha[p] + DemandaPerdida[p]
+  \]
+  con tolerancia numerica maxima \(10^{-6}\).
+  \item Invariante de horno:
+  \[
+  \sum CarrosReq\_\text{carga} \le 6
+  \]
+  en cada corrida batch.
+  \item Invariante de reposicion:
+  \[
+  \Delta StockSala[p] > 0 \Rightarrow \text{evento en } \proc{P\_ReponerSala}
+  \]
+  \item Invariante de setup:
+  \[
+  SetupCountHorno\_1 = \#\{\text{cambios de familia con } SetupMin>0\}
+  \]
+\end{enumerate}
+
+\subsubsection{M11D Bateria funcional minima (demanda e inventario)}
+\textbf{Resultado esperado:} la logica base de venta/perdida funciona sin ambiguedad.
+
+\begin{enumerate}
+  \item \textbf{Caso D1 --- Demanda cero}
+  \begin{itemize}
+    \item Configuracion: \tabla{Rate\_ClientesHora} con tasas 0 en todas las horas.
+    \item Esperado:
+    \begin{itemize}
+      \item no se crean clientes
+      \item \state{DemandaTotal[1..10]} queda en 0
+      \item \state{DemandaPerdida[1..10]} queda en 0
+    \end{itemize}
+  \end{itemize}
+  \item \textbf{Caso D2 --- Stock inicial infinito}
+  \begin{itemize}
+    \item Configuracion: \state{StockSala[1..10]} inicial muy alto (ejemplo \(10^9\)).
+    \item Esperado:
+    \begin{itemize}
+      \item \state{DemandaPerdida[1..10]} aproximadamente 0
+      \item \state{DemandaSatisfecha} reproduce la demanda generada
+    \end{itemize}
+  \end{itemize}
+  \item \textbf{Caso D3 --- Stock inicial cero}
+  \begin{itemize}
+    \item Configuracion: \state{StockSala[1..10]} inicial en 0, con demanda activa.
+    \item Esperado:
+    \begin{itemize}
+      \item quiebres inmediatos
+      \item \state{DemandaPerdida} sube desde primeras llegadas
+      \item nunca aparece \state{StockSala[p]} negativo
+    \end{itemize}
+  \end{itemize}
+  \item \textbf{Caso D4 --- Un solo producto}
+  \begin{itemize}
+    \item Configuracion: forzar \state{ProductoIdx = 1} en llegadas.
+    \item Esperado:
+    \begin{itemize}
+      \item solo cambian filas \([1]\) de demanda/stock
+      \item filas \([2..10]\) permanecen sin movimiento por demanda
+    \end{itemize}
+  \end{itemize}
+\end{enumerate}
+
+\subsubsection{M11E Bateria de horno batch}
+\textbf{Resultado esperado:} setup, familia y capacidad del horno se comportan como restriccion real.
+
+\begin{enumerate}
+  \item \textbf{Caso H1 --- Setup A-A}
+  \begin{itemize}
+    \item Configuracion: dos corridas consecutivas con misma familia.
+    \item Esperado: \state{SetupMin = 0}; \state{SetupCountHorno\_1} no aumenta.
+  \end{itemize}
+  \item \textbf{Caso H2 --- Setup A-B}
+  \begin{itemize}
+    \item Configuracion: segunda corrida con familia distinta.
+    \item Esperado: \state{SetupMin = 5}; \state{SetupCountHorno\_1} aumenta en 1.
+  \end{itemize}
+  \item \textbf{Caso H3 --- Capacidad carros}
+  \begin{itemize}
+    \item Configuracion: cola con carga candidata que excede \(\sum CarrosReq > 6\).
+    \item Esperado: lote excedente no entra en la corrida y espera siguiente batch.
+  \end{itemize}
+  \item \textbf{Caso H4 --- Sin mezcla de familias en una corrida}
+  \begin{itemize}
+    \item Configuracion: lotes de dos familias disponibles simultaneamente.
+    \item Esperado: cada corrida contiene una sola familia.
+  \end{itemize}
+  \item \textbf{Caso H5 --- Espera maxima}
+  \begin{itemize}
+    \item Configuracion: carga insuficiente para \state{CargaMinKgBase}.
+    \item Esperado: al cumplir \state{EsperaMaxMin}, se despacha carga parcial factible.
+  \end{itemize}
+\end{enumerate}
+
+\subsubsection{M11F Bateria de recursos y dotacion}
+\textbf{Resultado esperado:} el modelo responde en direccion correcta al escalar personal/equipos.
+
+\begin{enumerate}
+  \item \textbf{Caso R1 --- Panaderos 1 vs 2 vs 3}
+  \begin{itemize}
+    \item Configuracion: correr escenarios con \state{Prop\_NumPanaderos = 1,2,3}.
+    \item Esperado:
+    \begin{itemize}
+      \item baja espera por panadero al subir capacidad
+      \item mejora de ciclo con rendimientos decrecientes
+    \end{itemize}
+  \end{itemize}
+  \item \textbf{Caso R2 --- Manipuladores 1 vs 2}
+  \begin{itemize}
+    \item Configuracion: \state{Prop\_NumManipuladores = 1} y luego 2.
+    \item Esperado: disminuye \simio{Tally\_EsperaManipHorno} al pasar a 2.
+  \end{itemize}
+  \item \textbf{Caso R3 --- Hornos 1 vs 2}
+  \begin{itemize}
+    \item Configuracion: \state{Prop\_NumHornos = 1} y luego 2 (segun implementacion M8/M9).
+    \item Esperado: disminuye \simio{Tally\_EsperaHorno} y riesgo de cola extensa.
+  \end{itemize}
+  \item \textbf{Caso R4 --- Turnos y descansos}
+  \begin{itemize}
+    \item Configuracion: activar schedules escalonados.
+    \item Esperado: no existe ventana operativa critica con capacidad simultanea en cero para funciones indispensables.
+  \end{itemize}
+\end{enumerate}
+
+\subsubsection{M11G Bateria de estres de demanda}
+\textbf{Resultado esperado:} el modelo no colapsa logica ni numercamente en extremos de carga.
+
+\begin{enumerate}
+  \item \textbf{Caso S1 --- Demanda alta}
+  \begin{itemize}
+    \item Configuracion: \state{Prop\_DemandMult = 1.5} (o valor extremo definido en supuestos).
+    \item Esperado:
+    \begin{itemize}
+      \item aumento de colas y quiebres
+      \item sin errores de corrida ni estados imposibles
+    \end{itemize}
+  \end{itemize}
+  \item \textbf{Caso S2 --- Demanda muy alta}
+  \begin{itemize}
+    \item Configuracion: \state{Prop\_DemandMult = 2.0}.
+    \item Esperado:
+    \begin{itemize}
+      \item fill rate cae, perdidas suben
+      \item invariantes de M11C se mantienen
+    \end{itemize}
+  \end{itemize}
+  \item \textbf{Caso S3 --- Traslado lento}
+  \begin{itemize}
+    \item Configuracion: \state{Prop\_TransferTimeMult = 2.0}.
+    \item Esperado:
+    \begin{itemize}
+      \item sube \simio{Tally\_FinHornoADisponible}
+      \item puede aumentar quiebre por reposicion tardia
+    \end{itemize}
+  \end{itemize}
+\end{enumerate}
+
+\subsubsection{M11H Protocolo de ejecucion por prueba}
+\textbf{Resultado esperado:} todas las pruebas siguen exactamente la misma rutina.
+
+\begin{enumerate}
+  \item Seleccionar caso y aplicar configuracion.
+  \item Correr \textbf{Modo Debug}:
+  \begin{itemize}
+    \item validar trayectoria de entidades en \simio{Trace}
+    \item revisar \simio{Errors}
+    \item revisar states en \simio{Watch}
+  \end{itemize}
+  \item Si debug pasa, correr \textbf{Modo Certificacion} (20 replicas).
+  \item Registrar media y dispersion de indicadores del caso.
+  \item Determinar \textbf{PASS/FAIL} segun criterios de M11I.
+  \item Si falla, no continuar al siguiente bloque hasta corregir.
+\end{enumerate}
+
+\subsubsection{M11I Criterios de aceptacion cuantitativos}
+\textbf{Resultado esperado:} decision objetiva de avance o bloqueo.
+
+\begin{enumerate}
+  \item Criterios duros (bloqueantes):
+  \begin{itemize}
+    \item cero errores en panel \simio{Errors}
+    \item invariantes M11C cumplidos al 100\%
+    \item ninguna corrida con \state{StockSala[p]} negativo
+  \end{itemize}
+  \item Criterios esperados por direccion:
+  \begin{itemize}
+    \item mas demanda \(\Rightarrow\) mas perdidas o mas espera
+    \item mas capacidad \(\Rightarrow\) igual o menor espera (no mayor sistematico)
+    \item setup A-B \(\Rightarrow\) tiempo de setup mayor que A-A
+  \end{itemize}
+  \item Criterio de balance:
+  \[
+  \left|
+  ProducidoTotalKg - (VendidoTotalKg + SobranteFinalKg + WIPFinalKg)
+  \right|
+  \le 1\% \cdot ProducidoTotalKg
+  \]
+\end{enumerate}
+
+\subsubsection{M11J Registro de resultados y evidencia}
+\textbf{Resultado esperado:} existe trazabilidad completa de que se probo, como se probo y que ocurrio.
+
+\begin{enumerate}
+  \item Crear tabla de evidencia con columnas:
+  \begin{itemize}
+    \item \textbf{CasoID}
+    \item \textbf{Configuracion}
+    \item \textbf{Expected}
+    \item \textbf{Observed}
+    \item \textbf{PASS/FAIL}
+    \item \textbf{Causa si falla}
+    \item \textbf{Accion correctiva}
+    \item \textbf{Fecha}
+  \end{itemize}
+  \item Guardar capturas de \simio{Trace}/\simio{Watch} solo en casos FALLA o borderline.
+  \item Mantener un ID unico por bug detectado para no perder historial de correccion.
+\end{enumerate}
+
+\subsubsection{M11K Gestion de fallas y recertificacion}
+\textbf{Resultado esperado:} cada falla termina con correccion confirmada, no solo con hipotesis.
+
+\begin{enumerate}
+  \item Clasificar falla en una de estas categorias:
+  \begin{itemize}
+    \item Datos (tabla mal cargada o inconsistente)
+    \item Logica de proceso (ruta, decide, assign, seize/release)
+    \item Recursos/capacidad (schedules o capacidades mal conectadas)
+    \item Instrumentacion (tally no alimentado o formula incorrecta)
+  \end{itemize}
+  \item Aplicar correccion minima necesaria.
+  \item Repetir primero el caso que fallo en Modo Debug.
+  \item Si pasa, repetir bloque completo relacionado para descartar regresion.
+  \item Solo cerrar bug cuando:
+  \begin{itemize}
+    \item caso original pasa
+    \item no rompe pruebas ya aprobadas
+  \end{itemize}
+\end{enumerate}
+
+\subsubsection{M11L Paquete de salida de M11}
+\textbf{Resultado esperado:} M11 deja un expediente de validacion listo para respaldar M12.
+
+\begin{enumerate}
+  \item Entregables minimos:
+  \begin{itemize}
+    \item archivo \simio{Panaderia\_M11\_PruebasComportamiento.spfx}
+    \item matriz de pruebas ejecutadas con PASS/FAIL
+    \item lista de fallas corregidas
+    \item baseline y post-fix comparables
+  \end{itemize}
+  \item Condicion de salida formal:
+  \begin{itemize}
+    \item todos los casos criticos en PASS
+    \item sin errores operacionales en \simio{Errors}
+    \item invariantes y balance cumplidos
+  \end{itemize}
+\end{enumerate}
+
+\subsubsection{M11M Cierre obligatorio de fase}
 \begin{itemize}
-  \item Objetivo cerrado: stress test formal antes de consolidar KPIs.
-  \item Casos minimos: demanda cero, stock inicial cero/infinito, un producto, demanda alta, setup A-A y A-B.
-  \item Pruebas de capacidad: dos panaderos vs uno, dos hornos vs uno.
-  \item Criterio: no avanzar a KPIs sin pasar todas las pruebas dinamicas.
+  \item M11 ejecuta stress test formal antes de KPIs, no solo pruebas ad-hoc.
+  \item El modelo supera pruebas funcionales, de horno, de dotacion y de demanda extrema.
+  \item Toda falla detectada queda corregida y recertificada.
+  \item La salida de M11 deja trazabilidad suficiente para defender M12 y experimentos posteriores.
+  \item Si un caso critico falla, M11 permanece abierta y M12 no inicia.
 \end{itemize}
 
 \subsection{M12 paso a paso: KPIs, verificacion y validacion}
@@ -3087,7 +4511,7 @@ M1 queda aceptado solo cuando se cumplen estas condiciones:
   \item \simio{Source\_Clientes} usa \tabla{Rate\_ClientesHora}.
   \item Cada cliente creado ejecuta \proc{P\_GenerarDemandaCliente}.
   \item \proc{P\_GenerarDemandaCliente} asigna hora, numero de productos, producto y kg solicitados.
-  \item \proc{P\_ConsumirInventario} actualiza el state correcto segun \state{ModelEntity.ProductoIdx}.
+  \item \proc{P\_ConsumirInventario} actualiza el state correcto segun \state{EntidadClienteActiva.ProductoIdx} (reemplazar por el \simio{Entity Type} real de \simio{Source\_Clientes}).
   \item \simio{Sink\_Clientes} elimina la entidad cliente despues de consumir inventario.
 \end{enumerate}
 
@@ -3098,12 +4522,12 @@ M1 queda aceptado solo cuando se cumplen estas condiciones:
 
 \begin{enumerate}
   \item Crear \simio{Source\_Clientes}. Configurar \simio{Arrival Mode} con tasa dependiente del tiempo basada en \tabla{Rate\_ClientesHora}.
-  \item En \simio{Source\_Clientes > State Assignments > Before Exiting}, asignar los states temporales de M1: \state{ModelEntity.HoraLlegada}, \state{ModelEntity.NProductosCompra}, \state{ModelEntity.ProductoIdx} y \state{ModelEntity.KgSolicitado}.
-  \item En \simio{Output@Source\_Clientes > Add-On Process Triggers > Entered}, llamar \proc{P\_GenerarDemandaCliente}. No usar \simio{Source\_Clientes > Created Entity} para este proceso, porque queda con contexto de \simio{Source} y falla al leer states de \simio{ModelEntity}.
-  \item En \proc{P\_GenerarDemandaCliente}, asignar hora actual, definir cantidad de productos a comprar y llamar \proc{P\_ElegirProductos}.
-  \item En \proc{P\_ElegirProductos}, seleccionar productos usando \tabla{Tbl\_ProbEleccionHoraLong}. Para segundo y tercer producto, excluir los ya elegidos y renormalizar probabilidades.
-  \item Para cada producto elegido, generar kg comprados con distribucion triangular: minimo, moda y maximo segun enunciado.
-  \item Llamar \proc{P\_ConsumirInventario}. Ese proceso no tiene diez ramas por producto: usa directamente la fila del vector indicada por \state{ModelEntity.ProductoIdx}. La condicion principal es \state{StockSala[ModelEntity.ProductoIdx] >= ModelEntity.KgSolicitado}. Si el stock del producto no alcanza, la demanda completa de ese item se registra como perdida en \state{DemandaPerdida[ModelEntity.ProductoIdx]}.
+  \item En \simio{Source\_Clientes > State Assignments > Before Exiting}, asignar los states temporales de M1 sobre \state{EntidadClienteActiva} (nombre real de \simio{Entity Type}): \state{HoraLlegada}, \state{NProductosCompra}, \state{ProductoIdx} y \state{KgSolicitado}.
+  \item En \simio{Output@Source\_Clientes > Add-On Process Triggers > Entered}, llamar \proc{P\_GenerarDemandaCliente}. No usar \simio{Source\_Clientes > Created Entity} para este proceso, porque queda con contexto de \simio{Source} y falla al leer states de la entidad activa.
+  \item En \proc{P\_GenerarDemandaCliente}, asignar hora actual, definir cantidad de productos via \tabla{Tbl\_MixCompraCliente}, llamar \proc{P\_M6\_ElegirProductosCanasta}, luego \proc{P\_M6\_GenerarKgCanasta} y \proc{P\_M6\_ConsumirCanasta}.
+  \item En \proc{P\_M6\_ElegirProductosCanasta}, usar \tabla{Tbl\_ProbEleccionHoraLong} con \state{HoraProductoKey} y muestreo por rechazo para evitar repetidos (sin renormalizacion dinamica en proceso).
+  \item La canasta se representa con states fijos: \state{ProductoIdx\_1}, \state{ProductoIdx\_2}, \state{ProductoIdx\_3} y \state{KgSolicitado\_1}, \state{KgSolicitado\_2}, \state{KgSolicitado\_3}.
+  \item En \proc{P\_M6\_ConsumirCanasta}, consumir item por item. La perdida se evalua por item, no por cliente completo.
   \item Enviar cliente a \simio{Sink\_Clientes}.
 \end{enumerate}
 
@@ -3112,33 +4536,56 @@ M1 queda aceptado solo cuando se cumplen estas condiciones:
 \uifigure{figures_ai/ai_23_interface_real_map.jpg}{Estado visual esperado de la subseccion.}{Referencia IA basada en la interfaz real de Simio para seguir el bloque sin interpretar ubicaciones.}
 
 
-\begin{lstlisting}[caption={P GenerarDemandaCliente}]
+\begin{lstlisting}[caption={P GenerarDemandaCliente (M6 implementable)}]
 P_GenerarDemandaCliente
-  hora <- CurrentTimeHour()
-  r <- Random.Uniform(0,1)
-  if r <= 0.50 then ModelEntity.NProductos <- 1
-  else if r <= 0.85 then ModelEntity.NProductos <- 2
-  else ModelEntity.NProductos <- 3
-  Call P_ElegirProductos(hora, ModelEntity.NProductos)
-  For each producto in ModelEntity.ListaProductos:
-      kg <- Triangular(MinKg_del_producto,
-                       ModaKg_del_producto,
-                       MaxKg_del_producto)
-      Call P_ConsumirInventario(producto, kg)
-  Destroy entity or send to Sink_Clientes
+  EntidadClienteActiva.HoraLlegada <- TimeNow
+  EntidadClienteActiva.MinutoDia <- Math.Remainder(TimeNow,1440)
+  if EntidadClienteActiva.MinutoDia >= 540 and EntidadClienteActiva.MinutoDia < 1260 then
+      EntidadClienteActiva.HoraIdxCliente <- 1 + Math.Floor((EntidadClienteActiva.MinutoDia - 540)/60)
+  else
+      EntidadClienteActiva.HoraIdxCliente <- 1
+  Call P_M6_DeterminarNProductos()   // usa Tbl_MixCompraCliente
+  Call P_M6_ElegirProductosCanasta() // deja ProductoIdx_1..3
+  Call P_M6_GenerarKgCanasta()       // deja KgSolicitado_1..3
+  Call P_M6_ConsumirCanasta()        // consume item por item
+  Send entity to Sink_Clientes
 \end{lstlisting}
 
-\begin{lstlisting}[caption={P ElegirProductos}]
-P_ElegirProductos(hora, n)
-  Lista <- empty
-  ProbDisponibles <- Tbl_ProbEleccionHoraLong where HoraInicio == hora
-  Repeat until Count(Lista) == n:
-      producto <- RandomDiscrete(ProbDisponibles.ProductoID,
-                                 ProbDisponibles.Probabilidad)
-      Add producto to Lista
-      Remove producto from ProbDisponibles
-      Renormalize ProbDisponibles.Probabilidad
-  ModelEntity.ListaProductos <- Lista
+\begin{lstlisting}[caption={P M6 ElegirProductosCanasta (sin listas dinamicas)}]
+P_M6_ElegirProductosCanasta
+  h <- EntidadClienteActiva.HoraIdxCliente
+  ProductoIdx_1 <- SampleProductoPorHora(h)
+  if NProductosCompra >= 2:
+      repeat:
+         cand <- SampleProductoPorHora(h)
+      until cand != ProductoIdx_1
+      ProductoIdx_2 <- cand
+  else ProductoIdx_2 <- 0
+
+  if NProductosCompra == 3:
+      repeat:
+         cand <- SampleProductoPorHora(h)
+      until cand != ProductoIdx_1 and cand != ProductoIdx_2
+      ProductoIdx_3 <- cand
+  else ProductoIdx_3 <- 0
+
+SampleProductoPorHora(h):
+  For j in 1..10:
+     fila_j <- Tbl_ProbEleccionHoraLong.HoraProductoKey.RowForKey(h*100 + j)
+     p_j <- Tbl_ProbEleccionHoraLong[fila_j].Probabilidad
+  return RandomDiscrete(1..10, p_1..p_10)
+\end{lstlisting}
+
+\begin{lstlisting}[caption={P M6 ConsumirCanasta (perdida por item)}]
+P_M6_ConsumirCanasta
+  if ProductoIdx_1 > 0: ConsumirItem(ProductoIdx_1, KgSolicitado_1)
+  if ProductoIdx_2 > 0: ConsumirItem(ProductoIdx_2, KgSolicitado_2)
+  if ProductoIdx_3 > 0: ConsumirItem(ProductoIdx_3, KgSolicitado_3)
+
+ConsumirItem(p, kg):
+  ModelEntity.ProductoIdx <- p
+  ModelEntity.KgSolicitado <- kg
+  Call P_ConsumirInventario
 \end{lstlisting}
 
 \begin{lstlisting}[caption={P ConsumirInventario con states vectoriales}]
@@ -4281,9 +5728,11 @@ Resume la secuencia operacional de construccion del modelo, desde datos hasta re
 \proc{P\_InitModel} & Inicializar \state{StockSala[1]}, ..., \state{StockSala[10]}, vectores de demanda y parametros de escenario. \\
 \rowcolor{tabrow}
 \makecell[l]{\proc{P\_Generar}\\\proc{DemandaCliente}} & Crear solicitud de compra y numero de productos. \\
-\proc{P\_ElegirProductos} & Seleccionar productos sin repeticion segun probabilidad horaria. \\
+\proc{P\_M6\_ElegirProductosCanasta} & Seleccionar productos sin repeticion segun probabilidad horaria y dejar \state{ProductoIdx\_1..3}. \\
 \rowcolor{tabrow}
 \makecell[l]{\proc{P\_Consumir}\\\proc{Inventario}} & Descontar inventario o gatillar quiebre. \\
+\proc{P\_M6\_ConsumirCanasta} & Consumir canasta item por item y registrar perdida por item. \\
+\rowcolor{tabrow}
 \proc{P\_RegistrarQuiebre} & Acumular stockout y kg perdidos. \\
 \rowcolor{tabrow}
 \proc{P\_CrearLote} & Crear lote segun politica, asignar \state{ProductoIdx}, kg, bandejas y carros. \\
@@ -4304,29 +5753,27 @@ Resume la secuencia operacional de construccion del modelo, desde datos hasta re
 \end{tabularx}
 \end{table}
 
-\subsection{Checklist de implementacion}
+\subsection{Checklist de implementacion (alineado M0--M14)}
 
 \uifigure{figures_ai/ai_08_verification_debug.jpg}{Estado visual esperado de verificacion.}{Referencia IA para usar Trace, Errors, Watch y pruebas controladas.}
 
 
 \begin{enumerate}
-  \item Crear proyecto, unidades y schedules.
-  \item Ejecutar ETL, crear \state{ProductoIdx} y cargar tablas largas.
-  \item Crear states/properties.
-  \item Probar foreign keys y lecturas por \state{ProductoIdx}. No crear \state{RefProducto} en la ruta base.
-  \item Implementar demanda e inventario.
-  \item Verificar demanda sin produccion.
-  \item Implementar produccion por lote.
-  \item Verificar ciclo de un producto.
-  \item Implementar hornos batch.
-  \item Verificar compatibilidad y setup.
-  \item Verificar \(\sum CarrosReq \leq 6\) en toda corrida de horno.
-  \item Implementar recursos humanos y turnos.
-  \item Implementar reposicion y movimientos.
-  \item Verificar balance de kg.
-  \item Crear experiments, controls y responses.
-  \item Ejecutar baseline.
-  \item Ejecutar escenarios y sensibilidad.
+  \item \textbf{M0}: datos, ETL, tablas, states y properties listos; llaves y \simio{RowForKey} validadas.
+  \item \textbf{M1}: demanda e inventario base implementados y sin stock negativo.
+  \item \textbf{M2}: produccion base por lote desde pesado hasta enfriado.
+  \item \textbf{M3}: horno inicial funcional con setup base y restriccion de carros.
+  \item \textbf{M4}: recursos y turnos implementados (incluida opcion avanzada de panaderos worker en M4F).
+  \item \textbf{M5}: layout funcional 2D operativo con zonas, colas y etiquetas.
+  \item \textbf{M6}: cliente individual y canasta estocastica sin repeticion de producto.
+  \item \textbf{M7}: politicas push/pull/hibrida y liberacion de lotes con creacion fisica correcta de entidad lote.
+  \item \textbf{M8}: dotacion y recursos multiples comparables (agregado vs individual).
+  \item \textbf{M9}: horno batch operacional con decision tecnica (simple o avanzada) documentada.
+  \item \textbf{M10}: reposicion a sala e inventario vendible cerrados y trazables.
+  \item \textbf{M11}: pruebas de comportamiento completas en PASS.
+  \item \textbf{M12}: KPIs, verificacion y validacion consolidados.
+  \item \textbf{M13}: experiments, controls, responses, replicas y sensibilidad ejecutados.
+  \item \textbf{M14}: documentacion final, bitacora, supuestos y reproducibilidad cerrados.
 \end{enumerate}
 
 \subsection{Errores tipicos}
