@@ -2164,19 +2164,17 @@ Tbl_EtapasProducto[Tbl_EtapasProducto.ProductoEtapaKey.RowForKey(ModelEntity.Pro
 \textbf{Resultado esperado:} toda la logica de clientes usa el \simio{Entity Type} real que ya esta configurado en \simio{Source\_Clientes}, sin crear referencias a entidades inexistentes.
 
 \begin{enumerate}
-  \item Identificar la entidad activa real de clientes:
+  \item Verificar entidad de clientes:
   \begin{itemize}
     \item Ir a \simio{Source\_Clientes > Properties > Entity Arrival Logic > Entity Type}.
-    \item Copiar ese nombre exacto y llamarlo \textbf{EntidadClienteActiva} en esta fase.
-    \item Ejemplos validos: \simio{ModelEntity}, \simio{ModelEntity1}, \simio{Entity\_Cliente1}.
+    \item Esta guia queda cerrada con \simio{Entity Type = Entity\_Cliente}.
   \end{itemize}
   \item Regla de implementacion de M6:
   \begin{itemize}
-    \item \textbf{No} crear una entidad nueva solo por nombre.
-    \item Si la entidad activa ya existe y recibe clientes, usarla tal cual.
-    \item Solo crear entidad separada en una refactorizacion posterior planificada.
+    \item \textbf{No} usar alias en formulas de cliente.
+    \item Todas las expresiones de cliente deben usar el prefijo \state{Entity\_Cliente.}
   \end{itemize}
-  \item En \simio{EntidadClienteActiva > Definitions > States}, crear estos states escalares:
+  \item En \simio{Entity\_Cliente > Definitions > States}, crear estos states escalares:
   \begin{itemize}
     \item \state{HoraLlegada} (Real)
     \item \state{MinutoDia} (Real)
@@ -2186,36 +2184,37 @@ Tbl_EtapasProducto[Tbl_EtapasProducto.ProductoEtapaKey.RowForKey(ModelEntity.Pro
     \item \state{ProductoIdx\_Candidato} (Integer)
     \item \state{KgSolicitado\_1}, \state{KgSolicitado\_2}, \state{KgSolicitado\_3} (Real)
     \item \state{uMix}, \state{c1Mix}, \state{c2Mix} (Real)
-    \item \state{IntentosSeleccion} (Integer)
+    \item \state{uSelProducto} (Real, auxiliar de seleccion por hora)
+    \item \state{p} (Real, Vector, Rows = 10; probabilidades por producto para la hora activa)
+    \item \state{cp} (Real, Vector, Rows = 10; probabilidades acumuladas para los bloques \simio{Decide\_Cand1..Decide\_Cand9})
     \item \state{ProductoIdx} (Integer) para consumo item a item
     \item \state{KgSolicitado} (Real) para consumo item a item
   \end{itemize}
   \item Configurar \simio{Source\_Clientes} sin romper compatibilidad:
   \begin{itemize}
-    \item Mantener \simio{Entity Type} en el nombre real detectado (EntidadClienteActiva).
+    \item Fijar \simio{Entity Type = Entity\_Cliente}.
     \item En \simio{State Assignments > Before Exiting}, inicializar:
     \begin{itemize}
       \item \state{ProductoIdx\_1 = 0}, \state{ProductoIdx\_2 = 0}, \state{ProductoIdx\_3 = 0}
       \item \state{KgSolicitado\_1 = 0}, \state{KgSolicitado\_2 = 0}, \state{KgSolicitado\_3 = 0}
-      \item \state{IntentosSeleccion = 0}
     \end{itemize}
     \item Mantener \simio{Source\_Clientes > Created Entity} vacio y conservar el trigger en \simio{Output@Source\_Clientes > Entered}.
   \end{itemize}
   \item Mapa obligatorio de cambios sobre logica previa a M6 (solo lo relacionado con clientes):
   \begin{itemize}
-    \item \textbf{M1 (demanda):} en \proc{P\_GenerarDemandaCliente}, \proc{P\_M6\_DeterminarNProductos}, \proc{P\_M6\_ElegirProductosCanasta}, \proc{P\_M6\_GenerarKgCanasta}, \proc{P\_M6\_ConsumirCanasta} y \proc{P\_M6\_ConsumirInventarioItem}, toda referencia de entidad cliente debe apuntar a \simio{EntidadClienteActiva}.
-    \item \textbf{M1 (consumo):} \proc{P\_ConsumirInventario} mantiene el mismo contrato y los mismos \textit{model states} (\state{StockSala}, \state{DemandaTotal}, \state{DemandaSatisfecha}, \state{DemandaPerdida}, \state{StockoutCount}); solo cambia que \state{ProductoIdx} y \state{KgSolicitado} ahora vienen desde \simio{EntidadClienteActiva}.
+    \item \textbf{M1 (demanda):} en \proc{P\_GenerarDemandaCliente}, \proc{P\_M6\_DeterminarNProductos}, \proc{P\_M6\_ElegirProductosCanasta}, \proc{P\_M6\_GenerarKgCanasta}, \proc{P\_M6\_ConsumirCanasta} y \proc{P\_ConsumirInventario}, toda referencia de entidad cliente debe apuntar a \simio{Entity\_Cliente}.
+    \item \textbf{M1 (consumo):} \proc{P\_ConsumirInventario} mantiene el mismo contrato y los mismos \textit{model states} (\state{StockSala}, \state{DemandaTotal}, \state{DemandaSatisfecha}, \state{DemandaPerdida}, \state{StockoutCount}); solo cambia que \state{ProductoIdx} y \state{KgSolicitado} ahora vienen desde \simio{Entity\_Cliente}.
     \item \textbf{M2--M5 (produccion, horno, layout):} no requieren cambio por esta migracion, siempre que sigan usando su entidad de lotes.
   \end{itemize}
   \item Check de no-regresion inmediato (obligatorio):
   \begin{itemize}
     \item Ejecutar 10 minutos de simulacion con clientes activos.
-    \item Confirmar que no hay expresiones en rojo por mezcla de prefijos (\simio{ModelEntity}, \simio{ModelEntity1}, \simio{Entity\_Cliente1}, etc.).
+    \item Confirmar que no hay expresiones en rojo por mezcla de prefijos (\simio{ModelEntity} en clientes o \simio{Entity\_Cliente} en lotes).
     \item Confirmar que los lotes siguen fluyendo por M2--M5 sin depender de states de cliente.
   \end{itemize}
 \end{enumerate}
 
-\risk{} Si en una expresion escribes un prefijo distinto al \simio{Entity Type} real de \simio{Source\_Clientes}, Simio puede mostrar errores de contexto o de estado inexistente aunque el proceso parezca bien conectado.
+\risk{} Si en una expresion de cliente usas \state{ModelEntity.*} en lugar de \state{Entity\_Cliente.*}, Simio puede lanzar errores de contexto o indices invalidos.
 
 \subsubsection{M6D Reemplazar proceso generador de demanda por canasta}
 \textbf{Resultado esperado:} \proc{P\_GenerarDemandaCliente} crea canasta completa y luego consume item por item.
@@ -2232,23 +2231,23 @@ Tbl_EtapasProducto[Tbl_EtapasProducto.ProductoEtapaKey.RowForKey(ModelEntity.Pro
   \end{itemize}
   \item Reemplazar internamente \proc{P\_GenerarDemandaCliente} por este orden exacto:
   \begin{enumerate}
-    \item \simio{Assign\_HoraLlegada}: \state{HoraLlegada = TimeNow}.
-    \item \simio{Assign\_MinutoDia}: \state{MinutoDia = Math.Remainder(TimeNow, 1440)}.
+    \item \simio{Assign\_HoraLlegada}: \state{Entity\_Cliente.HoraLlegada = TimeNow}.
+    \item \simio{Assign\_MinutoDia}: \state{Entity\_Cliente.MinutoDia = Math.Remainder(TimeNow, 1440)}.
     \item \simio{Decide\_EnHorarioDemanda} (ConditionBased):
     \[
-    MinutoDia >= 540 \text{ and } MinutoDia < 1260
+    Entity\_Cliente.MinutoDia >= 540 \text{ and } Entity\_Cliente.MinutoDia < 1260
     \]
     \item Rama \simio{True} de \simio{Decide\_EnHorarioDemanda}:
     \[
-    HoraIdxCliente = 1 + \text{Math.Floor}\left(\frac{MinutoDia - 540}{60}\right)
+    Entity\_Cliente.HoraIdxCliente = 1 + \text{Math.Floor}\left(\frac{Entity\_Cliente.MinutoDia - 540}{60}\right)
     \]
     \item Rama \simio{False} de \simio{Decide\_EnHorarioDemanda}:
     \[
-    HoraIdxCliente = 1
+    Entity\_Cliente.HoraIdxCliente = 1
     \]
     (en esta guia base se fija a 1 para evitar indice 0; en una version avanzada puedes enviar fuera de horario a un sink separado).
     \item \simio{Execute\_DeterminarMix}: llamar \proc{P\_M6\_DeterminarNProductos}.
-    \item \simio{Execute\_ElegirCanasta}: llamar \proc{P\_M6\_ElegirProductosCanasta} (internamente usa \proc{P\_M6\_SeleccionarProducto1}, \proc{P\_M6\_SeleccionarProducto2}, \proc{P\_M6\_SeleccionarProducto3}).
+    \item \simio{Execute\_ElegirCanasta}: llamar \proc{P\_M6\_ElegirProductosCanasta}. Ese proceso llama a \proc{P\_M6\_MuestrearProductoPorHora} y corrige duplicados dentro del mismo flujo; no crear procesos separados tipo \proc{P\_M6\_SeleccionarProducto1}, \proc{P\_M6\_SeleccionarProducto2} o \proc{P\_M6\_SeleccionarProducto3}.
     \item \simio{Execute\_GenerarKgCanasta}: llamar \proc{P\_M6\_GenerarKgCanasta}.
     \item \simio{Execute\_ConsumirCanasta}: llamar \proc{P\_M6\_ConsumirCanasta}.
     \item Salir a \simio{Sink\_Clientes}.
@@ -2259,341 +2258,1223 @@ Tbl_EtapasProducto[Tbl_EtapasProducto.ProductoEtapaKey.RowForKey(ModelEntity.Pro
 \subsubsection{M6E Determinar numero de productos por cliente}
 \textbf{Resultado esperado:} \state{NProductosCompra} queda en 1, 2 o 3, segun \tabla{Tbl\_MixCompraCliente}.
 
+\textbf{Convencion obligatoria desde M6E:} en cada expresion de cliente, usar \state{Entity\_Cliente.*} de forma explicita.
+
 \begin{enumerate}
   \item Crear proceso \proc{P\_M6\_DeterminarNProductos} con:
   \begin{itemize}
-    \item \simio{Assign\_u}: \state{uMix = Random.Uniform(0,1)}.
-    \item \simio{Assign\_c1}: \state{c1Mix = Tbl\_MixCompraCliente[1].Probabilidad}.
-    \item \simio{Assign\_c2}: \state{c2Mix = c1Mix + Tbl\_MixCompraCliente[2].Probabilidad}.
+    \item \simio{Assign\_u}: \state{Entity\_Cliente.uMix = Random.Uniform(0,1)}.
+    \item \simio{Assign\_c1}: \state{Entity\_Cliente.c1Mix = Tbl\_MixCompraCliente[1].Probabilidad}.
+    \item \simio{Assign\_c2}: \state{Entity\_Cliente.c2Mix = Entity\_Cliente.c1Mix + Tbl\_MixCompraCliente[2].Probabilidad}.
     \item \simio{Decide}:
     \begin{itemize}
-      \item si \state{uMix <= c1Mix} \(\rightarrow\) \state{NProductosCompra = 1}
-      \item si \state{uMix > c1Mix and uMix <= c2Mix} \(\rightarrow\) \state{NProductosCompra = 2}
-      \item en otro caso \(\rightarrow\) \state{NProductosCompra = 3}
+      \item si \state{Entity\_Cliente.uMix <= Entity\_Cliente.c1Mix} \(\rightarrow\) \state{Entity\_Cliente.NProductosCompra = 1}
+      \item si \state{Entity\_Cliente.uMix > Entity\_Cliente.c1Mix and Entity\_Cliente.uMix <= Entity\_Cliente.c2Mix} \(\rightarrow\) \state{Entity\_Cliente.NProductosCompra = 2}
+      \item en otro caso \(\rightarrow\) \state{Entity\_Cliente.NProductosCompra = 3}
     \end{itemize}
   \end{itemize}
-  \item Criterio de cierre de este bloque: nunca aparece \state{NProductosCompra} fuera de \(\{1,2,3\}\).
+  \item Criterio de cierre de este bloque: nunca aparece \state{Entity\_Cliente.NProductosCompra} fuera de \(\{1,2,3\}\).
 \end{enumerate}
+
+
 
 \subsubsection{M6F Seleccionar productos por hora sin repeticion}
-\textbf{Resultado esperado:} canasta de 2 o 3 productos sin duplicados, con probabilidades horarias.
+\textbf{Resultado esperado:} cada cliente queda con \state{ProductoIdx\_1}, \state{ProductoIdx\_2} y \state{ProductoIdx\_3}. Si compra 1 producto, solo se llena el primero; si compra 2, se llenan dos distintos; si compra 3, se llenan tres distintos.
 
-\textbf{Funcion de muestreo que usa M6:}
+\textbf{Decision de diseno para mantener M6 implementable:} esta fase base no usa listas dinamicas, no usa procesos de reintento, no renormaliza probabilidades dentro de Simio y no usa \state{IntentosSeleccion}. La probabilidad horaria se usa para sortear un candidato. Si el candidato repite un producto ya elegido, se corrige con una regla deterministica simple. La correccion puede introducir un sesgo pequeno, pero deja el modelo implementable y estable en Simio Student.
+
+\textbf{Estados necesarios en \simio{Entity\_Cliente}.} Crear estos states en \simio{Entity\_Cliente > Definitions > States}. En la pantalla de states se crean sin prefijo; en las expresiones se escriben con prefijo \state{Entity\_Cliente.}.
+
+\begin{lstlisting}[caption={States minimos de Entity Cliente para M6F}]
+Nombre exacto                  Tipo       Dimension Type / Rows     Initial Value
+-------------------------------------------------------------------------------
+p                              Real       Vector / 10             0
+cp                             Real       Vector / 10             0
+uSelProducto                   Real       Scalar                  0
+ProductoIdx_Candidato          Integer    Scalar                  0
+ProductoIdx_1                  Integer    Scalar                  0
+ProductoIdx_2                  Integer    Scalar                  0
+ProductoIdx_3                  Integer    Scalar                  0
+\end{lstlisting}
+
+\textbf{Importante:} si ya creaste \state{p} y \state{cp} como vectores, no crees \state{p\_1}, ..., \state{p\_10} ni \state{cp\_1}, ..., \state{cp\_10}. En Simio, cada fila se referencia como \state{Entity\_Cliente.p[1]}, \state{Entity\_Cliente.p[2]}, ..., \state{Entity\_Cliente.p[10]}.
+
+\textbf{No crear para esta version:} \state{IntentosSeleccion}, \state{ProductoElegido}, \state{ListaProductos}, \state{ClienteActivo} ni \state{EntidadClienteActiva}. En esta guia la entidad real es \simio{Entity\_Cliente}; no se inventan alias.
+
+\textbf{Estructura completa de M6F.} Solo se crean dos procesos:
+
 \begin{enumerate}
-  \item Para la hora \(h = \state{HoraIdxCliente}\), leer probabilidades:
-  \[
-  fila_j = Tbl\_ProbEleccionHoraLong.HoraProductoKey.RowForKey(h \cdot 100 + j)
-  \]
-  \[
-  p_j = Tbl\_ProbEleccionHoraLong[fila_j].Probabilidad,\quad j=1..10
-  \]
-  \item Muestrear un candidato con \simio{Random.Discrete} sobre esos 10 valores.
+  \item \proc{P\_M6\_MuestrearProductoPorHora}: sortea un producto candidato entre 1 y 10 usando la hora del cliente.
+  \item \proc{P\_M6\_ElegirProductosCanasta}: llama al muestreo una, dos o tres veces y corrige duplicados.
 \end{enumerate}
 
-\textbf{Implementacion obligatoria:}
-\begin{enumerate}
-  \item \proc{P\_M6\_SeleccionarProducto1}:
-  \begin{itemize}
-    \item Muestrear candidato por la distribucion horaria y guardarlo en \state{ProductoIdx\_Candidato}.
-    \item Asignar \state{ProductoIdx\_1 = ProductoIdx\_Candidato}.
-  \end{itemize}
-  \item \proc{P\_M6\_SeleccionarProducto2}:
-  \begin{itemize}
-    \item Inicializar \state{IntentosSeleccion = 0}.
-    \item Muestrear candidato horario en \state{ProductoIdx\_Candidato}.
-    \item Si \state{ProductoIdx\_Candidato = ProductoIdx\_1}, repetir muestreo hasta distinto.
-    \item Limite duro: 20 intentos. Si llega al limite, forzar:
-    \[
-    ProductoIdx\_2 = 1 + \text{Math.Remainder}(ProductoIdx\_1,10)
-    \]
-    \item En caso normal, asignar \state{ProductoIdx\_2 = ProductoIdx\_Candidato}.
-  \end{itemize}
-  \item \proc{P\_M6\_SeleccionarProducto3}:
-  \begin{itemize}
-    \item Inicializar \state{IntentosSeleccion = 0}.
-    \item Muestrear candidato horario en \state{ProductoIdx\_Candidato}.
-    \item Si \state{ProductoIdx\_Candidato} coincide con \state{ProductoIdx\_1} o \state{ProductoIdx\_2}, repetir.
-    \item Limite duro: 20 intentos. Si llega al limite, asignar el menor indice entre 1..10 que no este en \(\{ProductoIdx\_1, ProductoIdx\_2\}\).
-    \item En caso normal, asignar \state{ProductoIdx\_3 = ProductoIdx\_Candidato}.
-  \end{itemize}
-\end{enumerate}
+\paragraph{Proceso 1: \proc{P\_M6\_MuestrearProductoPorHora}.}
+\textbf{Objetivo:} dejar un valor entre 1 y 10 en \state{Entity\_Cliente.ProductoIdx\_Candidato}. Este proceso no decide si el producto se acepta; solo sortea.
 
-\risk{} No usar la misma extraccion para producto 2 o 3 sin control de repeticion. Eso viola el contrato del caso y distorsiona el mix de compra.
+\begin{lstlisting}[caption={Diagrama corto de P M6 MuestrearProductoPorHora}]
+Begin
+  -> Assign_LeerProbHora
+  -> Assign_ProbAcumHora
+  -> Assign_uSelProducto
+  -> Decide_Cand1
+  -> Decide_Cand2
+  -> ...
+  -> Decide_Cand9
+  -> Assign_Candidato10
+End
+\end{lstlisting}
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[node distance=7mm and 8mm, scale=0.86, transform shape]
+  \node[diagbox] (leer) {Leer\\$p[1..10]$};
+  \node[diagbox, right=of leer] (acum) {Calcular\\$cp[1..10]$};
+  \node[diagbox, right=of acum] (u) {Sortear\\$u$};
+  \node[diagdecision, right=of u] (dec) {$u \leq cp[i]$?};
+  \node[diagboxgreen, right=of dec] (ok) {Asignar\\candidato $i$};
+  \node[diagboxgray, below=of dec] (next) {Si falso,\\probar $i+1$};
+  \draw[diagarrow] (leer) -- (acum);
+  \draw[diagarrow] (acum) -- (u);
+  \draw[diagarrow] (u) -- (dec);
+  \draw[diagarrow] (dec) -- node[above, font=\scriptsize]{True} (ok);
+  \draw[diagarrowgray] (dec) -- node[right, font=\scriptsize]{False} (next);
+  \draw[diagarrowgray] (next.west) .. controls +(-1.0,0) and +(0,-0.8) .. (dec.south);
+\end{tikzpicture}
+\caption{Diagrama complementario de \proc{P\_M6\_MuestrearProductoPorHora} usando vectores \state{p} y \state{cp}.}
+\end{figure}
+
+
+\textbf{Bloque 1: \simio{Assign\_LeerProbHora}.} Crear un \simio{Assign} con estas 10 asignaciones. Todas leen \tabla{Tbl\_ProbEleccionHoraLong} usando \state{HoraProductoKey = HoraIdxCliente*100 + ProductoIdx}.
+
+\begin{lstlisting}[caption={Assign LeerProbHora}]
+Entity_Cliente.p[1]  = Tbl_ProbEleccionHoraLong[Tbl_ProbEleccionHoraLong.HoraProductoKey.RowForKey(Entity_Cliente.HoraIdxCliente*100+1)].Probabilidad
+Entity_Cliente.p[2]  = Tbl_ProbEleccionHoraLong[Tbl_ProbEleccionHoraLong.HoraProductoKey.RowForKey(Entity_Cliente.HoraIdxCliente*100+2)].Probabilidad
+Entity_Cliente.p[3]  = Tbl_ProbEleccionHoraLong[Tbl_ProbEleccionHoraLong.HoraProductoKey.RowForKey(Entity_Cliente.HoraIdxCliente*100+3)].Probabilidad
+Entity_Cliente.p[4]  = Tbl_ProbEleccionHoraLong[Tbl_ProbEleccionHoraLong.HoraProductoKey.RowForKey(Entity_Cliente.HoraIdxCliente*100+4)].Probabilidad
+Entity_Cliente.p[5]  = Tbl_ProbEleccionHoraLong[Tbl_ProbEleccionHoraLong.HoraProductoKey.RowForKey(Entity_Cliente.HoraIdxCliente*100+5)].Probabilidad
+Entity_Cliente.p[6]  = Tbl_ProbEleccionHoraLong[Tbl_ProbEleccionHoraLong.HoraProductoKey.RowForKey(Entity_Cliente.HoraIdxCliente*100+6)].Probabilidad
+Entity_Cliente.p[7]  = Tbl_ProbEleccionHoraLong[Tbl_ProbEleccionHoraLong.HoraProductoKey.RowForKey(Entity_Cliente.HoraIdxCliente*100+7)].Probabilidad
+Entity_Cliente.p[8]  = Tbl_ProbEleccionHoraLong[Tbl_ProbEleccionHoraLong.HoraProductoKey.RowForKey(Entity_Cliente.HoraIdxCliente*100+8)].Probabilidad
+Entity_Cliente.p[9]  = Tbl_ProbEleccionHoraLong[Tbl_ProbEleccionHoraLong.HoraProductoKey.RowForKey(Entity_Cliente.HoraIdxCliente*100+9)].Probabilidad
+Entity_Cliente.p[10] = Tbl_ProbEleccionHoraLong[Tbl_ProbEleccionHoraLong.HoraProductoKey.RowForKey(Entity_Cliente.HoraIdxCliente*100+10)].Probabilidad
+\end{lstlisting}
+
+\textbf{Bloque 2: \simio{Assign\_ProbAcumHora}.} Crear un \simio{Assign} con estas 10 asignaciones.
+
+\begin{lstlisting}[caption={Assign ProbAcumHora}]
+Entity_Cliente.cp[1]  = Entity_Cliente.p[1]
+Entity_Cliente.cp[2]  = Entity_Cliente.cp[1] + Entity_Cliente.p[2]
+Entity_Cliente.cp[3]  = Entity_Cliente.cp[2] + Entity_Cliente.p[3]
+Entity_Cliente.cp[4]  = Entity_Cliente.cp[3] + Entity_Cliente.p[4]
+Entity_Cliente.cp[5]  = Entity_Cliente.cp[4] + Entity_Cliente.p[5]
+Entity_Cliente.cp[6]  = Entity_Cliente.cp[5] + Entity_Cliente.p[6]
+Entity_Cliente.cp[7]  = Entity_Cliente.cp[6] + Entity_Cliente.p[7]
+Entity_Cliente.cp[8]  = Entity_Cliente.cp[7] + Entity_Cliente.p[8]
+Entity_Cliente.cp[9]  = Entity_Cliente.cp[8] + Entity_Cliente.p[9]
+Entity_Cliente.cp[10] = 1
+\end{lstlisting}
+
+\textbf{Bloque 3: \simio{Assign\_uSelProducto}.}
+
+\begin{lstlisting}[caption={Assign uSelProducto}]
+Entity_Cliente.uSelProducto = Random.Uniform(0,1)
+\end{lstlisting}
+
+\textbf{Bloques 4 a 12: cadena de \simio{Decide}.} Crear 9 bloques \simio{Decide}. Cada \simio{Decide} es \simio{ConditionBased}. La rama \simio{True} asigna el producto y termina el proceso. La rama \simio{False} pasa al siguiente \simio{Decide}. Si falla hasta \simio{Decide\_Cand9}, se asigna producto 10.
+
+\begin{lstlisting}[caption={Decides de P M6 MuestrearProductoPorHora}]
+Decide_Cand1
+  Condition Or Probability = Entity_Cliente.uSelProducto <= Entity_Cliente.cp[1]
+  True  -> Assign_Candidato1: Entity_Cliente.ProductoIdx_Candidato = 1 -> End
+  False -> Decide_Cand2
+
+Decide_Cand2
+  Condition Or Probability = Entity_Cliente.uSelProducto <= Entity_Cliente.cp[2]
+  True  -> Assign_Candidato2: Entity_Cliente.ProductoIdx_Candidato = 2 -> End
+  False -> Decide_Cand3
+
+Decide_Cand3
+  Condition Or Probability = Entity_Cliente.uSelProducto <= Entity_Cliente.cp[3]
+  True  -> Assign_Candidato3: Entity_Cliente.ProductoIdx_Candidato = 3 -> End
+  False -> Decide_Cand4
+
+Decide_Cand4
+  Condition Or Probability = Entity_Cliente.uSelProducto <= Entity_Cliente.cp[4]
+  True  -> Assign_Candidato4: Entity_Cliente.ProductoIdx_Candidato = 4 -> End
+  False -> Decide_Cand5
+
+Decide_Cand5
+  Condition Or Probability = Entity_Cliente.uSelProducto <= Entity_Cliente.cp[5]
+  True  -> Assign_Candidato5: Entity_Cliente.ProductoIdx_Candidato = 5 -> End
+  False -> Decide_Cand6
+
+Decide_Cand6
+  Condition Or Probability = Entity_Cliente.uSelProducto <= Entity_Cliente.cp[6]
+  True  -> Assign_Candidato6: Entity_Cliente.ProductoIdx_Candidato = 6 -> End
+  False -> Decide_Cand7
+
+Decide_Cand7
+  Condition Or Probability = Entity_Cliente.uSelProducto <= Entity_Cliente.cp[7]
+  True  -> Assign_Candidato7: Entity_Cliente.ProductoIdx_Candidato = 7 -> End
+  False -> Decide_Cand8
+
+Decide_Cand8
+  Condition Or Probability = Entity_Cliente.uSelProducto <= Entity_Cliente.cp[8]
+  True  -> Assign_Candidato8: Entity_Cliente.ProductoIdx_Candidato = 8 -> End
+  False -> Decide_Cand9
+
+Decide_Cand9
+  Condition Or Probability = Entity_Cliente.uSelProducto <= Entity_Cliente.cp[9]
+  True  -> Assign_Candidato9: Entity_Cliente.ProductoIdx_Candidato = 9 -> End
+  False -> Assign_Candidato10: Entity_Cliente.ProductoIdx_Candidato = 10 -> End
+\end{lstlisting}
+
+\paragraph{Proceso 2: \proc{P\_M6\_ElegirProductosCanasta}.}
+\textbf{Objetivo:} llenar \state{ProductoIdx\_1}, \state{ProductoIdx\_2} y \state{ProductoIdx\_3} segun \state{NProductosCompra}. Este proceso es el que evita repetidos.
+
+\begin{lstlisting}[caption={Diagrama corto de P M6 ElegirProductosCanasta}]
+Begin
+  -> Assign_ResetCanasta
+  -> Execute_Muestrear1
+  -> Assign_Producto1
+  -> Decide_TieneItem2
+       False -> End
+       True  -> Execute_Muestrear2
+                -> Decide_Cand2Distinto
+                    True  -> Assign_Producto2_Normal
+                    False -> Assign_Producto2_Fallback
+                -> Decide_TieneItem3
+                    False -> End
+                    True  -> Execute_Muestrear3
+                             -> Decide_Cand3Distinto
+                                 True  -> Assign_Producto3_Normal
+                                 False -> Assign_Producto3_FallbackA
+                                          -> Decide_Fallback3ChocaCon1
+                                               True  -> Assign_Producto3_FallbackB
+                                               False -> End
+\end{lstlisting}
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[node distance=6mm and 11mm, scale=0.82, transform shape]
+  \node[diagbox] (reset) {Reset\\canasta};
+  \node[diagbox, below=of reset] (p1) {Muestrear\\producto 1};
+  \node[diagdecision, below=of p1] (d2) {$N \geq 2$?};
+  \node[diagbox, below=of d2] (p2) {Muestrear\\producto 2};
+  \node[diagdecision, below=of p2] (rep2) {Repite\\producto 1?};
+  \node[diagboxgreen, left=of rep2] (ok2) {Guardar\\candidato};
+  \node[diagboxgray, right=of rep2] (fb2) {Fallback\\siguiente};
+  \node[diagdecision, below=of rep2] (d3) {$N = 3$?};
+  \node[diagbox, below=of d3] (p3) {Muestrear\\producto 3};
+  \node[diagdecision, below=of p3] (rep3) {Repite\\producto 1 o 2?};
+  \node[diagboxgreen, left=of rep3] (ok3) {Guardar\\candidato};
+  \node[diagboxgray, right=of rep3] (fb3) {Fallback\\siguiente libre};
+  \node[diagboxgreen, below=of rep3] (end) {Canasta\\lista};
+  \draw[diagarrow] (reset) -- (p1);
+  \draw[diagarrow] (p1) -- (d2);
+  \draw[diagarrow] (d2) -- node[right, font=\scriptsize]{True} (p2);
+  \draw[diagarrowgray] (d2.east) -- ++(1.1,0) |- node[pos=0.25, right, font=\scriptsize]{False} (end.east);
+  \draw[diagarrow] (p2) -- (rep2);
+  \draw[diagarrow] (rep2) -- node[above, font=\scriptsize]{False} (ok2);
+  \draw[diagarrowgray] (rep2) -- node[above, font=\scriptsize]{True} (fb2);
+  \draw[diagarrow] (ok2.south) |- (d3.west);
+  \draw[diagarrow] (fb2.south) |- (d3.east);
+  \draw[diagarrow] (d3) -- node[right, font=\scriptsize]{True} (p3);
+  \draw[diagarrowgray] (d3.east) -- ++(1.1,0) |- node[pos=0.25, right, font=\scriptsize]{False} (end.east);
+  \draw[diagarrow] (p3) -- (rep3);
+  \draw[diagarrow] (rep3) -- node[above, font=\scriptsize]{False} (ok3);
+  \draw[diagarrowgray] (rep3) -- node[above, font=\scriptsize]{True} (fb3);
+  \draw[diagarrow] (ok3.south) |- (end.west);
+  \draw[diagarrow] (fb3.south) |- (end.east);
+\end{tikzpicture}
+\caption{Diagrama complementario de \proc{P\_M6\_ElegirProductosCanasta}: el codigo exacto sigue siendo el listado de bloques.}
+\end{figure}
+
+
+\textbf{Bloques exactos de \proc{P\_M6\_ElegirProductosCanasta}.}
+
+\begin{lstlisting}[caption={Bloques de P M6 ElegirProductosCanasta}]
+Begin
+
+Assign_ResetCanasta
+  Entity_Cliente.ProductoIdx_1 = 0
+  Entity_Cliente.ProductoIdx_2 = 0
+  Entity_Cliente.ProductoIdx_3 = 0
+  Entity_Cliente.ProductoIdx_Candidato = 0
+
+Execute_Muestrear1
+  Process Name = P_M6_MuestrearProductoPorHora
+
+Assign_Producto1
+  Entity_Cliente.ProductoIdx_1 = Entity_Cliente.ProductoIdx_Candidato
+
+Decide_TieneItem2
+  Condition Or Probability = Entity_Cliente.NProductosCompra >= 2
+  True  -> Execute_Muestrear2
+  False -> End
+
+Execute_Muestrear2
+  Process Name = P_M6_MuestrearProductoPorHora
+
+Decide_Cand2Distinto
+  Condition Or Probability = Entity_Cliente.ProductoIdx_Candidato != Entity_Cliente.ProductoIdx_1
+  True  -> Assign_Producto2_Normal
+  False -> Assign_Producto2_Fallback
+
+Assign_Producto2_Normal
+  Entity_Cliente.ProductoIdx_2 = Entity_Cliente.ProductoIdx_Candidato
+  -> Decide_TieneItem3
+
+Assign_Producto2_Fallback
+  Entity_Cliente.ProductoIdx_2 = 1 + Math.Remainder(Entity_Cliente.ProductoIdx_1,10)
+  -> Decide_TieneItem3
+
+Decide_TieneItem3
+  Condition Or Probability = Entity_Cliente.NProductosCompra == 3
+  True  -> Execute_Muestrear3
+  False -> End
+
+Execute_Muestrear3
+  Process Name = P_M6_MuestrearProductoPorHora
+
+Decide_Cand3Distinto
+  Condition Or Probability = Entity_Cliente.ProductoIdx_Candidato != Entity_Cliente.ProductoIdx_1 and Entity_Cliente.ProductoIdx_Candidato != Entity_Cliente.ProductoIdx_2
+  True  -> Assign_Producto3_Normal
+  False -> Assign_Producto3_FallbackA
+
+Assign_Producto3_Normal
+  Entity_Cliente.ProductoIdx_3 = Entity_Cliente.ProductoIdx_Candidato
+  -> End
+
+Assign_Producto3_FallbackA
+  Entity_Cliente.ProductoIdx_3 = 1 + Math.Remainder(Entity_Cliente.ProductoIdx_2,10)
+  -> Decide_Fallback3ChocaCon1
+
+Decide_Fallback3ChocaCon1
+  Condition Or Probability = Entity_Cliente.ProductoIdx_3 == Entity_Cliente.ProductoIdx_1
+  True  -> Assign_Producto3_FallbackB
+  False -> End
+
+Assign_Producto3_FallbackB
+  Entity_Cliente.ProductoIdx_3 = 1 + Math.Remainder(Entity_Cliente.ProductoIdx_3,10)
+  -> End
+
+End
+\end{lstlisting}
+
+\textbf{Por que este fallback funciona.}
+\begin{itemize}
+  \item Para el segundo producto, \state{1 + Math.Remainder(ProductoIdx\_1,10)} siempre devuelve el producto siguiente en ciclo: si el primero es 1, devuelve 2; si es 10, devuelve 1. Por eso no repite el primer producto.
+  \item Para el tercer producto, primero se toma el producto siguiente a \state{ProductoIdx\_2}. Eso nunca repite el segundo. Si justo coincide con el primero, se avanza una posicion mas. Con 10 productos y solo 2 ya usados, esa segunda posicion queda libre.
+\end{itemize}
+
+\textbf{Check rapido al terminar M6F.}
+\begin{lstlisting}[caption={Validacion minima de productos elegidos}]
+Si Entity_Cliente.NProductosCompra = 1:
+  ProductoIdx_1 debe estar entre 1 y 10
+  ProductoIdx_2 debe ser 0
+  ProductoIdx_3 debe ser 0
+
+Si Entity_Cliente.NProductosCompra = 2:
+  ProductoIdx_1 y ProductoIdx_2 deben estar entre 1 y 10
+  ProductoIdx_1 != ProductoIdx_2
+  ProductoIdx_3 debe ser 0
+
+Si Entity_Cliente.NProductosCompra = 3:
+  ProductoIdx_1, ProductoIdx_2 y ProductoIdx_3 deben estar entre 1 y 10
+  ProductoIdx_1 != ProductoIdx_2
+  ProductoIdx_1 != ProductoIdx_3
+  ProductoIdx_2 != ProductoIdx_3
+\end{lstlisting}
+
+\risk{} La regla de fallback es una simplificacion. Para un capstone es defendible como version base porque preserva canastas sin repeticion y evita errores de implementacion. Si despues se quiere exactitud estadistica fina, se puede reemplazar por una tabla externa de canastas precomputadas por hora.
 
 \subsubsection{M6G Generar kg por item y consumir inventario}
-\textbf{Resultado esperado:} cada item de canasta genera kg triangular y actualiza demanda/inventario por producto.
+\textbf{Resultado esperado:} cada producto elegido recibe kg solicitados y luego se consume inventario item por item.
 
-\begin{enumerate}
-  \item Crear proceso \proc{P\_M6\_GenerarKgCanasta}:
-  \begin{itemize}
-    \item Para \state{ProductoIdx\_1}: generar
-    \[
-    KgSolicitado\_1 = \text{Random.Triangular}(MinKgCompra, ModaKgCompra, MaxKgCompra)
-    \]
-    leyendo min/moda/max desde \tabla{Tbl\_ProductoIndice} para ese producto.
-    \item Si \state{NProductosCompra >= 2}, generar \state{KgSolicitado\_2} igual logica.
-    \item Si \state{NProductosCompra = 3}, generar \state{KgSolicitado\_3} igual logica.
-  \end{itemize}
-  \item Crear proceso \proc{P\_M6\_ConsumirCanasta}:
-  \begin{enumerate}
-    \item Si \state{ProductoIdx\_1 > 0}, llamar \proc{P\_M6\_ConsumirInventarioItem} con item 1.
-    \item Si \state{ProductoIdx\_2 > 0}, llamar \proc{P\_M6\_ConsumirInventarioItem} con item 2.
-    \item Si \state{ProductoIdx\_3 > 0}, llamar \proc{P\_M6\_ConsumirInventarioItem} con item 3.
-  \end{enumerate}
-  \item \proc{P\_M6\_ConsumirInventarioItem}:
-  \begin{itemize}
-    \item Copia el item activo a \state{ProductoIdx} y \state{KgSolicitado}.
-    \item Ejecuta \proc{P\_ConsumirInventario}.
-  \end{itemize}
-  \item \proc{P\_ConsumirInventario} no se modifica en su contrato:
-  \begin{itemize}
-    \item suma \state{DemandaTotal[p]}
-    \item descuenta \state{StockSala[p]} si hay stock
-    \item acumula \state{DemandaSatisfecha[p]} o \state{DemandaPerdida[p]}
-    \item incrementa \state{StockoutCount[p]} y \simio{Tally\_StockoutKg} cuando corresponde
-  \end{itemize}
-  \item Regla explicita de perdida en canasta:
-  \begin{itemize}
-    \item la perdida se evalua \textbf{por item de producto}, no por cliente completo.
-    \item si un cliente compra 3 items y solo falta stock en uno, se pierde solo ese item.
-  \end{itemize}
-\end{enumerate}
+\textbf{Proceso: \proc{P\_M6\_GenerarKgCanasta}}
 
-\subsubsection{M6H Validacion obligatoria con stock infinito}
-\textbf{Resultado esperado:} la demanda simulada replica la forma horaria del objetivo antes de introducir quiebres.
+\begin{lstlisting}[caption={Diagrama de P M6 GenerarKgCanasta}]
+Begin
+  -> resetear KgSolicitado_1, KgSolicitado_2, KgSolicitado_3
+  -> generar KgSolicitado_1
+  -> si NProductosCompra >= 2, generar KgSolicitado_2
+  -> si NProductosCompra == 3, generar KgSolicitado_3
+  -> End
+\end{lstlisting}
 
-\begin{enumerate}
-  \item Crear corrida de validacion con stock infinito:
-  \begin{itemize}
-    \item Cargar \state{StockSala[1..10]} con valor alto fijo (ejemplo: 1e9).
-    \item Mantener produccion activa o inactiva; no afecta mientras el stock inicial sea infinito.
-  \end{itemize}
-  \item Medir por hora y por producto:
-  \begin{itemize}
-    \item \state{DemandaTotal[p]} simulada.
-    \item \tabla{Tbl\_DemandaHoraLong.KgObjetivoHora} objetivo.
-  \end{itemize}
-  \item Criterio de aceptacion M6:
-  \begin{itemize}
-    \item Tendencia horaria simulada coherente con tendencia objetivo.
-    \item Demanda diaria total simulada en rango \(\pm 5\%\) del objetivo (con replicas suficientes).
-    \item Con stock infinito, \state{DemandaPerdida[1..10]} debe ser aproximadamente 0.
-  \end{itemize}
-  \item Pruebas obligatorias adicionales de cierre M6:
-  \begin{itemize}
-    \item \textbf{Stock cero:} toda la demanda debe terminar en \state{DemandaPerdida}.
-    \item \textbf{Cliente forzado a 3 productos:} debe elegir tres \state{ProductoIdx} distintos.
-    \item \textbf{Producto con probabilidad 0:} nunca debe ser elegido.
-    \item \textbf{Balance por producto:}
-    \[
+\begin{lstlisting}[caption={Bloques de P M6 GenerarKgCanasta}]
+Begin
+Assign_ResetKg
+  Entity_Cliente.KgSolicitado_1 = 0
+  Entity_Cliente.KgSolicitado_2 = 0
+  Entity_Cliente.KgSolicitado_3 = 0
+Assign_KgItem1
+  Entity_Cliente.KgSolicitado_1 =
+    Random.Triangular(
+      Tbl_ProductoIndice[Tbl_ProductoIndice.ProductoIdx.RowForKey(Entity_Cliente.ProductoIdx_1)].MinKgCompra,
+      Tbl_ProductoIndice[Tbl_ProductoIndice.ProductoIdx.RowForKey(Entity_Cliente.ProductoIdx_1)].ModaKgCompra,
+      Tbl_ProductoIndice[Tbl_ProductoIndice.ProductoIdx.RowForKey(Entity_Cliente.ProductoIdx_1)].MaxKgCompra)
+Decide_TieneItem2
+  Condition Or Probability = Entity_Cliente.NProductosCompra >= 2
+  True  -> Assign_KgItem2
+  False -> End
+Assign_KgItem2
+  Entity_Cliente.KgSolicitado_2 =
+    Random.Triangular(
+      Tbl_ProductoIndice[Tbl_ProductoIndice.ProductoIdx.RowForKey(Entity_Cliente.ProductoIdx_2)].MinKgCompra,
+      Tbl_ProductoIndice[Tbl_ProductoIndice.ProductoIdx.RowForKey(Entity_Cliente.ProductoIdx_2)].ModaKgCompra,
+      Tbl_ProductoIndice[Tbl_ProductoIndice.ProductoIdx.RowForKey(Entity_Cliente.ProductoIdx_2)].MaxKgCompra)
+Decide_TieneItem3
+  Condition Or Probability = Entity_Cliente.NProductosCompra == 3
+  True  -> Assign_KgItem3
+  False -> End
+Assign_KgItem3
+  Entity_Cliente.KgSolicitado_3 =
+    Random.Triangular(
+      Tbl_ProductoIndice[Tbl_ProductoIndice.ProductoIdx.RowForKey(Entity_Cliente.ProductoIdx_3)].MinKgCompra,
+      Tbl_ProductoIndice[Tbl_ProductoIndice.ProductoIdx.RowForKey(Entity_Cliente.ProductoIdx_3)].ModaKgCompra,
+      Tbl_ProductoIndice[Tbl_ProductoIndice.ProductoIdx.RowForKey(Entity_Cliente.ProductoIdx_3)].MaxKgCompra)
+End
+\end{lstlisting}
+
+\textbf{Proceso: \proc{P\_M6\_ConsumirCanasta}}
+
+\begin{lstlisting}[caption={Diagrama de P M6 ConsumirCanasta}]
+Begin
+  -> si ProductoIdx_1 > 0: copiar item 1 y ejecutar P_ConsumirInventario
+  -> si ProductoIdx_2 > 0: copiar item 2 y ejecutar P_ConsumirInventario
+  -> si ProductoIdx_3 > 0: copiar item 3 y ejecutar P_ConsumirInventario
+  -> End
+\end{lstlisting}
+
+\begin{lstlisting}[caption={Bloques de P M6 ConsumirCanasta}]
+Begin
+Decide_Item1Valido
+  Condition Or Probability = Entity_Cliente.ProductoIdx_1 > 0
+  True  -> Assign_CopiarItem1
+  False -> Decide_Item2Valido
+Assign_CopiarItem1
+  Entity_Cliente.ProductoIdx = Entity_Cliente.ProductoIdx_1
+  Entity_Cliente.KgSolicitado = Entity_Cliente.KgSolicitado_1
+Execute_ConsumirItem1
+  Process Name = P_ConsumirInventario
+  -> Decide_Item2Valido
+Decide_Item2Valido
+  Condition Or Probability = Entity_Cliente.ProductoIdx_2 > 0
+  True  -> Assign_CopiarItem2
+  False -> Decide_Item3Valido
+Assign_CopiarItem2
+  Entity_Cliente.ProductoIdx = Entity_Cliente.ProductoIdx_2
+  Entity_Cliente.KgSolicitado = Entity_Cliente.KgSolicitado_2
+Execute_ConsumirItem2
+  Process Name = P_ConsumirInventario
+  -> Decide_Item3Valido
+Decide_Item3Valido
+  Condition Or Probability = Entity_Cliente.ProductoIdx_3 > 0
+  True  -> Assign_CopiarItem3
+  False -> End
+Assign_CopiarItem3
+  Entity_Cliente.ProductoIdx = Entity_Cliente.ProductoIdx_3
+  Entity_Cliente.KgSolicitado = Entity_Cliente.KgSolicitado_3
+Execute_ConsumirItem3
+  Process Name = P_ConsumirInventario
+End
+\end{lstlisting}
+
+\textbf{Proceso existente: \proc{P\_ConsumirInventario}}
+
+No se llama al inicio de \proc{P\_GenerarDemandaCliente}. Solo se llama desde \proc{P\_M6\_ConsumirCanasta}, despues de copiar un item valido a \state{Entity\_Cliente.ProductoIdx} y \state{Entity\_Cliente.KgSolicitado}.
+
+\begin{lstlisting}[caption={Diagrama de P ConsumirInventario}]
+Begin
+  -> Decide_StockSuficiente
+       True  -> venta satisfecha: sumar demanda, descontar StockSala, End
+       False -> quiebre: sumar demanda perdida, registrar stockout, End
+\end{lstlisting}
+
+\begin{lstlisting}[caption={Condicion y asignaciones esperadas en P ConsumirInventario}]
+Decide_StockSuficiente
+  Condition Or Probability =
+    StockSala[Entity_Cliente.ProductoIdx] >= Entity_Cliente.KgSolicitado
+
+Assign_VentaSatisfecha
+  DemandaTotal[Entity_Cliente.ProductoIdx] =
+    DemandaTotal[Entity_Cliente.ProductoIdx] + Entity_Cliente.KgSolicitado
+  DemandaSatisfecha[Entity_Cliente.ProductoIdx] =
+    DemandaSatisfecha[Entity_Cliente.ProductoIdx] + Entity_Cliente.KgSolicitado
+  StockSala[Entity_Cliente.ProductoIdx] =
+    StockSala[Entity_Cliente.ProductoIdx] - Entity_Cliente.KgSolicitado
+
+Assign_Quiebre
+  DemandaTotal[Entity_Cliente.ProductoIdx] =
+    DemandaTotal[Entity_Cliente.ProductoIdx] + Entity_Cliente.KgSolicitado
+  DemandaPerdida[Entity_Cliente.ProductoIdx] =
+    DemandaPerdida[Entity_Cliente.ProductoIdx] + Entity_Cliente.KgSolicitado
+  StockoutCount[Entity_Cliente.ProductoIdx] =
+    StockoutCount[Entity_Cliente.ProductoIdx] + 1
+
+Tally_StockoutKg
+  Value Expression = Entity_Cliente.KgSolicitado
+\end{lstlisting}
+
+\risk{} Si \proc{P\_ConsumirInventario} recibe \state{Entity\_Cliente.ProductoIdx = 0}, Simio intentara leer \state{StockSala[0]} y aparecera \textit{Bad index into the state array}.
+
+\subsubsection{M6H Validacion obligatoria}
+\textbf{Resultado esperado:} antes de avanzar a M7, el flujo de clientes debe correr y cerrar balance.
+
+\begin{lstlisting}[caption={Pruebas obligatorias de cierre M6}]
+V1_StockInfinito
+  StockSala[1..10] = 1e9
+  Resultado esperado: DemandaPerdida[1..10] cercana a 0
+
+V2_StockCero
+  StockSala[1..10] = 0
+  Resultado esperado: DemandaSatisfecha[1..10] = 0
+  Resultado esperado: toda la demanda se acumula en DemandaPerdida
+
+V3_Canasta3Forzada
+  Forzar Entity_Cliente.NProductosCompra = 3
+  Resultado esperado:
+    ProductoIdx_1 != ProductoIdx_2
+    ProductoIdx_1 != ProductoIdx_3
+    ProductoIdx_2 != ProductoIdx_3
+
+V4_ProductoProbabilidadCero
+  Poner probabilidad 0 a un producto en Tbl_ProbEleccionHoraLong
+  Resultado esperado: ese producto no aparece en ProductoIdx_1, ProductoIdx_2 ni ProductoIdx_3
+
+Balance_por_producto
+  Para p = 1..10:
     DemandaTotal[p] = DemandaSatisfecha[p] + DemandaPerdida[p]
-    \]
-    para cada \(p=1..10\).
-  \end{itemize}
-  \item Si no cumple, corregir en este orden:
-  \begin{enumerate}
-    \item Rate table de llegadas.
-    \item Probabilidades por hora.
-    \item Mix de canasta 1/2/3.
-    \item Parametros triangular min/moda/max.
-  \end{enumerate}
-\end{enumerate}
+\end{lstlisting}
 
 \subsubsection{M6I Cierre obligatorio de fase}
+\textbf{M6 se considera cerrada cuando:}
 \begin{itemize}
-  \item El modelo corre sin errores con canasta 1, 2 y 3 productos.
-  \item No hay repeticion de producto dentro del mismo cliente cuando compra 2 o 3.
-  \item El consumo se ejecuta item por item y actualiza vectores por producto.
-  \item Con stock infinito, la demanda simulada reproduce la forma de la demanda objetivo.
-  \item M6 queda trazable: proceso, tabla y formula de cada decision estan documentados.
+  \item \proc{P\_GenerarDemandaCliente} llama en orden a \proc{P\_M6\_DeterminarNProductos}, \proc{P\_M6\_ElegirProductosCanasta}, \proc{P\_M6\_GenerarKgCanasta} y \proc{P\_M6\_ConsumirCanasta}.
+  \item La canasta de 2 o 3 productos nunca repite producto.
+  \item \proc{P\_ConsumirInventario} nunca recibe \state{ProductoIdx=0}.
+  \item Las pruebas V1, V2, V3, V4 y balance por producto pasan.
+  \item Recién después de esto se avanza a M7.
 \end{itemize}
 
 \subsection{M7 paso a paso: politicas de produccion y liberacion de lotes}
-\textbf{Objetivo operacional de M7:} que la produccion deje de depender de una fuente fija y pase a responder a una politica explicitamente seleccionable, comparable y trazable (\simio{Push}, \simio{PullMin}, \simio{Hibrida}).
+\textbf{Objetivo operacional de M7:} reemplazar la fuente fija de lotes por una decision operacional trazable. Desde M7, cada lote debe nacer por una politica: \simio{Push}, \simio{PullMin} o \simio{Hibrida}.
 
-\textbf{Regla cerrada de M7:} toda liberacion de lotes debe estar explicada por una de estas tres reglas; no se permiten creaciones manuales ad-hoc fuera de politica.
+\textbf{Separacion conceptual obligatoria:}
+\begin{itemize}
+  \item \textbf{M7 decide que producir y cuando liberarlo.}
+  \item \textbf{M10 repone fisicamente a sala e inventario vendible.}
+  \item En M7 no se suma producto a \state{StockSala}. Solo se libera un lote productivo para que recorra M2--M4 y despues llegue a M10.
+\end{itemize}
+
+\textbf{Contrato de entidades:}
+\begin{itemize}
+  \item \simio{Entity\_Cliente}: entidad de cliente. Puede gatillar pull despues de consumir o perder demanda. Nunca recibe states de lote.
+  \item \simio{ModelEntity}: entidad de lote de produccion. Recibe \state{ProductoIdx}, \state{KgLote}, \state{FamiliaHorno}, \state{CarrosReq} y el resto de atributos productivos.
+  \item \simio{Model\_Panaderia}: guarda los states globales de politica, stock y gatillos.
+\end{itemize}
+
+\risk{} No ejecutar \proc{P\_CrearLote} desde \simio{Entity\_Cliente}. Esa fue la fuente de ambiguedad anterior: el cliente compra, pero el lote productivo es otra entidad. En esta fase, el cliente solo deja escrito que producto gatillo la reposicion.
+
+\textbf{Decision tecnica cerrada para M7:} no usar un \simio{Create Step} dentro de pull o push. Para evitar asignar atributos de lote a un cliente o a un token de proceso, M7 usa \simio{Source\_LotesProduccion} controlado por un evento. La politica escribe \state{State\_ProductoObjetivoLiberacion}; luego dispara \simio{Evt\_LiberarLoteProduccion}; el \simio{Source} crea una entidad \simio{ModelEntity}; y recien esa entidad ejecuta \proc{P\_CrearLote}.
 
 \textbf{Orden obligatorio de M7:}
 \begin{enumerate}
-  \item Congelar version M6 y abrir \simio{Panaderia\_M7\_PoliticasProduccion.spfx}.
-  \item Parametrizar politica activa.
-  \item Implementar push.
-  \item Implementar pull por punto de reposicion.
-  \item Implementar hibrida (push preapertura + pull en venta).
-  \item Ejecutar comparacion controlada de politicas.
+  \item Guardar version M6 como \simio{Panaderia\_M7\_PoliticasProduccion.spfx}.
+  \item Crear properties, states, eventos y tallies de M7.
+  \item Convertir \simio{Source\_LotesProduccion} a fuente controlada por evento.
+  \item Ajustar \proc{P\_CrearLote} para que ya no fije \state{ProductoIdx = 1}.
+  \item Agregar el gatillo post-consumo en \proc{P\_ConsumirInventario}.
+  \item Construir el orquestador \proc{P\_M7\_EvaluarPoliticaProduccion}.
+  \item Construir \simio{Push}.
+  \item Construir \simio{PullMin}.
+  \item Construir \simio{Hibrida}.
+  \item Probar las tres politicas con escenarios controlados.
 \end{enumerate}
 
-\subsubsection{M7A Preparar version y baseline}
-\textbf{Resultado esperado:} M7 queda aislada de M6 y permite comparar escenarios en igualdad de condiciones.
+\subsubsection{M7A Preparar version y congelar baseline}
+\textbf{Resultado esperado:} M7 parte desde una M6 funcional, sin cambiar demanda ni consumo.
 
 \begin{enumerate}
+  \item Abrir el archivo validado de M6.
   \item Guardar copia como \simio{Panaderia\_M7\_PoliticasProduccion.spfx}.
-  \item Mantener sin cambios la logica validada en M6 de demanda por cliente.
-  \item Ejecutar corrida baseline de referencia y registrar:
+  \item No modificar \simio{Source\_Clientes}.
+  \item No modificar \simio{Entity\_Cliente}.
+  \item No modificar la seleccion de canasta de M6.
+  \item Correr una simulacion corta de control antes de tocar M7.
+  \item Registrar estos valores base:
   \begin{itemize}
-    \item \state{DemandaPerdida[1..10]} total.
-    \item \state{StockSala[1..10]} al cierre.
-    \item \simio{Tally\_TiempoCicloLote} promedio.
+    \item \state{DemandaTotal[1..10]}
+    \item \state{DemandaSatisfecha[1..10]}
+    \item \state{DemandaPerdida[1..10]}
+    \item \state{StockSala[1..10]} al cierre
+    \item \simio{Tally\_TiempoCicloLote} si ya existe
+    \item \simio{Tally\_EsperaHorno} si ya existe
   \end{itemize}
-  \item Ese baseline se usara para evaluar impacto de politica, no para recalibrar datos.
+  \item Si M6 no corre sin errores antes de M7, no avanzar. M7 asume que el cliente ya consume item por item correctamente.
 \end{enumerate}
 
-\subsubsection{M7B Contrato de parametrizacion de politica}
-\textbf{Resultado esperado:} una sola variable de control selecciona la politica activa.
+\subsubsection{M7B Crear properties, states, evento y estadisticos}
+\textbf{Resultado esperado:} todos los nombres existen antes de construir procesos. Esto evita expresiones rojas por objetos inexistentes.
 
+\textbf{Properties del modelo}
 \begin{enumerate}
-  \item Usar \state{Prop\_PoliticaProduccion} como selector oficial.
-  \item Valores cerrados admitidos en esta guia:
+  \item Ir a \simio{Model\_Panaderia > Definitions > Properties}.
+  \item Crear o reemplazar el selector de politica por un integer:
   \begin{itemize}
-    \item \simio{Push}
-    \item \simio{PullMin}
-    \item \simio{Hibrida}
+    \item \state{Prop\_PoliticaProduccionCod} (Integer, inicial 3)
   \end{itemize}
-  \item Si \tabla{Tbl\_PoliticasProduccion.Tipo} trae \simio{Pull}, mapearlo explicitamente a \simio{PullMin} para evitar ambiguedad semantica.
-  \item Inputs obligatorios por producto (desde \tabla{Tbl\_StockPolitica}):
+  \item Usar esta codificacion cerrada:
   \begin{itemize}
-    \item \state{StockInicialKg}
-    \item \state{PuntoReposicionKg}
-    \item \state{StockObjetivoKg}
+    \item 1 = Push
+    \item 2 = PullMin
+    \item 3 = Hibrida
   \end{itemize}
-  \item Formula canonica de brecha de reposicion por producto \(p\):
-  \[
-  BrechaKg[p] = PuntoReposicionKg[p] - StockSala[p]
-  \]
-  Si \(BrechaKg[p] > 0\), el producto \(p\) es candidato a \textbf{liberacion de lote} en M7.
+  \item Mantener \state{Prop\_PoliticaProduccion} textual solo como descripcion si ya existe. No usar texto en bloques \simio{Decide}; usar \state{Prop\_PoliticaProduccionCod}.
+  \item Crear estas properties numericas:
+  \begin{itemize}
+    \item \state{Prop\_M7\_PushCadaMin} (Real, inicial 30)
+    \item \state{Prop\_M7\_PreaperturaInicioMin} (Real, inicial 360)
+    \item \state{Prop\_M7\_VentaInicioMin} (Real, inicial 540)
+    \item \state{Prop\_M7\_VentaFinMin} (Real, inicial 1260)
+  \end{itemize}
 \end{enumerate}
 
-\subsubsection{M7C Proceso orquestador de politica}
-\textbf{Resultado esperado:} un solo proceso decide que politica ejecutar en cada gatillo.
-
+\textbf{States escalares del modelo}
 \begin{enumerate}
-  \item Crear \proc{P\_M7\_EvaluarPoliticaProduccion} con tres ramas exclusivas:
-  \begin{itemize}
-    \item Rama 1: \state{Prop\_PoliticaProduccion = Push} \(\rightarrow\) ejecutar \proc{P\_M7\_PushLiberar}.
-    \item Rama 2: \state{Prop\_PoliticaProduccion = PullMin} \(\rightarrow\) ejecutar \proc{P\_M7\_PullEvaluar}.
-    \item Rama 3: \state{Prop\_PoliticaProduccion = Hibrida} \(\rightarrow\) ejecutar \proc{P\_M7\_HibridaEvaluar}.
-  \end{itemize}
-  \item Si el valor de \state{Prop\_PoliticaProduccion} no coincide con ninguna rama, enviar warning con \simio{Notify} y forzar fallback a \simio{PullMin}.
-  \item Contrato tecnico de entidad lote (obligatorio):
-  \begin{itemize}
-    \item \proc{P\_CrearLote} solo se ejecuta sobre entidad de tipo lote.
-    \item Nunca ejecutar \proc{P\_CrearLote} sobre entidad cliente o token de control.
-    \item Recomendado: encapsular en \proc{P\_M7\_CrearEntidadLote} los pasos \simio{Create} \(\rightarrow\) \simio{Assign ProductoIdx} \(\rightarrow\) \simio{Execute P\_CrearLote}.
-    \item Alternativa valida: mantener \simio{Source\_LotesProduccion} y dispararlo con señal/state de liberacion, siempre asegurando que \proc{P\_CrearLote} reciba entidad lote.
-  \end{itemize}
+  \item Ir a \simio{Model\_Panaderia > Definitions > States}.
+  \item Crear estos states escalares:
 \end{enumerate}
 
-\subsubsection{M7D Implementar Push (programa horario)}
-\textbf{Resultado esperado:} se liberan lotes por programa, sin esperar quiebre de stock.
+\begin{lstlisting}[caption={States escalares del modelo para M7}]
+State_M7_MinutoDia                 Real,    Initial Value = 0
+State_M7_HoraIdx                   Integer, Initial Value = 1
+State_OrigenGatilloPolitica        Integer, Initial Value = 0
+State_ProductoDemandadoActual      Integer, Initial Value = 0
+State_ProductoObjetivoLiberacion   Integer, Initial Value = 0
+State_CodigoPoliticaLiberacion     Integer, Initial Value = 0
+State_SecuenciaPushIdx             Integer, Initial Value = 0
+State_M7_PuntoReposicionTmp        Real,    Initial Value = 0
+State_M7_StockObjetivoTmp          Real,    Initial Value = 0
+State_M7_StockActualTmp            Real,    Initial Value = 0
+State_M7_BrechaTmp                 Real,    Initial Value = 0
+State_M7_LoteSolicitadoOK          Integer, Initial Value = 0
+\end{lstlisting}
 
-\begin{enumerate}
-  \item Crear un \simio{Timer Element} llamado \simio{Timer\_PushProduccion}.
-  \item Configurar \simio{Interval Type = Time} y un \simio{Time Interval} fijo inicial (por ejemplo 30 min) para la ruta base.
-  \item Asociar evento del timer a un proceso \proc{P\_M7\_EventoPush} que solo hace:
-  \begin{itemize}
-    \item ejecutar \proc{P\_M7\_EvaluarPoliticaProduccion}.
-  \end{itemize}
-  \item En \proc{P\_M7\_PushLiberar}:
-  \begin{enumerate}
-    \item Seleccionar producto objetivo por secuencia ciclica 1..10.
-    \item Guardar producto en \state{ProductoObjetivoLiberacion}.
-    \item Ejecutar \simio{Create} para generar entidad de lote (mismo tipo de entidad de \simio{Source\_LotesProduccion}).
-    \item Asignar \state{ProductoIdx = ProductoObjetivoLiberacion} en la entidad creada.
-    \item Ejecutar \proc{P\_CrearLote} sobre esa entidad lote.
-  \end{enumerate}
-  \item Regla de consistencia: en politica push no se consulta \state{StockSala[p]} para autorizar liberacion; el control lo hace el calendario.
-\end{enumerate}
-
-\subsubsection{M7E Implementar Pull (reorden por stock minimo)}
-\textbf{Resultado esperado:} cuando baja el stock, se gatilla liberacion de un nuevo lote del producto afectado.
-
-\begin{enumerate}
-  \item Gatilhar pull desde consumo real: al final de \proc{P\_ConsumirInventario}, ejecutar \proc{P\_M7\_PullEvaluar}.
-  \item En \proc{P\_M7\_PullEvaluar}:
-  \begin{enumerate}
-    \item Leer \(p = \state{ModelEntity.ProductoIdx}\) del item efectivamente demandado.
-    \item Evaluar \state{StockSala[p] <= PuntoReposicionKg[p]}.
-    \item Si se cumple, guardar \state{ProductoObjetivoLiberacion = p}, crear entidad lote con \simio{Create}, asignar \state{ProductoIdx = ProductoObjetivoLiberacion} y ejecutar \proc{P\_CrearLote} sobre esa entidad.
-    \item Si no se cumple, terminar proceso sin liberar lote.
-  \end{enumerate}
-  \item Anti-disparo duplicado (obligatorio): crear \state{PendienteReposicion} como vector de 10 filas.
-  \begin{itemize}
-    \item Antes de crear lote por pull, verificar \state{PendienteReposicion[p] = 0}.
-    \item Al crear lote, setear \state{PendienteReposicion[p] = 1}.
-    \item Al reponer en sala ese producto (en \proc{P\_ReponerSala}), resetear \state{PendienteReposicion[p] = 0}.
-  \end{itemize}
-\end{enumerate}
-
-\risk{} Si no aplicas \state{PendienteReposicion}, una rafaga de clientes puede crear muchos lotes redundantes para el mismo producto en segundos de simulacion.
-
-\subsubsection{M7F Implementar Hibrida}
-\textbf{Resultado esperado:} push construye base de stock y pull corrige durante la venta.
-
-\begin{enumerate}
-  \item En \proc{P\_M7\_HibridaEvaluar}, separar dos ventanas:
-  \begin{itemize}
-    \item Preapertura: usar \proc{P\_M7\_PushLiberar}.
-    \item Venta: usar \proc{P\_M7\_PullEvaluar}.
-  \end{itemize}
-  \item Ventana recomendada de referencia:
-  \begin{itemize}
-    \item Preapertura: 06:00 a 09:00.
-    \item Venta: 09:00 a 21:00.
-  \end{itemize}
-  \item Implementar la transicion en el proceso con condicion de hora simulada; no cambiar manualmente objetos al correr.
-  \item Durante venta, mantener activo el control anti-duplicado \state{PendienteReposicion}.
-\end{enumerate}
-
-\subsubsection{M7G Seleccion de producto cuando hay multiples candidatos}
-\textbf{Resultado esperado:} el modelo elige de forma consistente que producto reponer primero.
-
-\begin{enumerate}
-  \item Regla primaria de M7: \textbf{menor stock relativo}.
-  \item Definir para cada producto candidato \(p\):
-  \[
-  StockRel[p] = \frac{StockSala[p]}{\max(StockObjetivoKg[p], 0.001)}
-  \]
-  \item Seleccionar el producto con menor \(StockRel[p]\) entre los que cumplen \state{StockSala[p] <= PuntoReposicionKg[p]}.
-  \item Desempate cerrado:
-  \begin{itemize}
-    \item primero mayor \state{BrechaKg[p]}
-    \item luego menor indice de producto \(p\)
-  \end{itemize}
-  \item La seleccion se encapsula en \proc{P\_M7\_SeleccionarProductoReposicion}; no repartir esta logica en varios procesos.
-\end{enumerate}
-
-\subsubsection{M7H Matriz minima de prueba de politicas}
-\textbf{Resultado esperado:} comparacion limpia entre \simio{Push}, \simio{PullMin} y \simio{Hibrida}.
-
-\begin{enumerate}
-  \item Correr tres escenarios con mismos datos y misma semilla:
-  \begin{itemize}
-    \item Escenario A: \state{Prop\_PoliticaProduccion = Push}
-    \item Escenario B: \state{Prop\_PoliticaProduccion = PullMin}
-    \item Escenario C: \state{Prop\_PoliticaProduccion = Hibrida}
-  \end{itemize}
-  \item En cada escenario medir:
-  \begin{itemize}
-    \item \(\sum DemandaPerdida[p]\)
-    \item \(\sum StockSala[p]\) al cierre
-    \item \(\sum LotesProducidos[p]\)
-    \item Espera media de horno y tiempo de ciclo
-  \end{itemize}
-  \item Criterio esperado:
-  \begin{itemize}
-    \item Push tiende a menor quiebre temprano y mayor sobrante final.
-    \item Pull tiende a menor sobrante y mas riesgo de quiebre en peak.
-    \item Hibrida debe balancear ambos efectos.
-  \end{itemize}
-\end{enumerate}
-
-\subsubsection{M7I Cierre obligatorio de fase}
+\textbf{Codigos de gatillo}
 \begin{itemize}
-  \item El modelo corre sin errores en las tres politicas.
-  \item Cada lote liberado queda trazable a una regla concreta.
-  \item Pull y hibrida respetan \state{PuntoReposicionKg} por producto.
-  \item No hay multiplicacion espuria de lotes por eventos repetidos.
-  \item Existe tabla comparativa de resultados A/B/C para sustentar decision.
+  \item \state{State\_OrigenGatilloPolitica = 1}: timer push.
+  \item \state{State\_OrigenGatilloPolitica = 2}: consumo o quiebre de cliente.
+  \item \state{State\_OrigenGatilloPolitica = 3}: prueba manual.
+\end{itemize}
+
+\textbf{Codigos de liberacion}
+\begin{itemize}
+  \item \state{State\_CodigoPoliticaLiberacion = 1}: lote liberado por Push puro.
+  \item \state{State\_CodigoPoliticaLiberacion = 2}: lote liberado por PullMin puro.
+  \item \state{State\_CodigoPoliticaLiberacion = 3}: lote liberado por parte Push de Hibrida.
+  \item \state{State\_CodigoPoliticaLiberacion = 4}: lote liberado por parte Pull de Hibrida.
+\end{itemize}
+
+\textbf{States vectoriales del modelo}
+\begin{enumerate}
+  \item En \simio{Model\_Panaderia > Definitions > States}, crear estos vectores con 10 filas:
+\end{enumerate}
+
+\begin{lstlisting}[caption={States vectoriales del modelo para M7}]
+PendienteReposicion[1..10]       Integer, Initial Value = 0
+LotesLiberadosTotal[1..10]       Integer, Initial Value = 0
+LotesLiberadosPush[1..10]        Integer, Initial Value = 0
+LotesLiberadosPull[1..10]        Integer, Initial Value = 0
+LotesLiberadosHibridaPush[1..10] Integer, Initial Value = 0
+LotesLiberadosHibridaPull[1..10] Integer, Initial Value = 0
+\end{lstlisting}
+
+\textbf{States de la entidad lote}
+\begin{enumerate}
+  \item Seleccionar la entidad que crea \simio{Source\_LotesProduccion}. En esta guia se usa \simio{ModelEntity}.
+  \item Ir a \simio{ModelEntity > Definitions > States}.
+  \item Confirmar que ya exista \state{ProductoIdx}. Si no existe, crearlo como Integer.
+  \item Crear estos states adicionales:
+\end{enumerate}
+
+\begin{lstlisting}[caption={States de ModelEntity para trazabilidad M7}]
+PoliticaLiberacionCod  Integer, Initial Value = 0
+OrigenGatilloPolitica  Integer, Initial Value = 0
+HoraLiberacionLote     Real,    Initial Value = 0
+\end{lstlisting}
+
+\textbf{Evento y tally}
+\begin{enumerate}
+  \item En \simio{Model\_Panaderia > Definitions > Elements}, crear un \simio{Event}.
+  \item Nombrarlo exactamente \simio{Evt\_LiberarLoteProduccion}.
+  \item Crear un \simio{Tally Statistic}.
+  \item Nombrarlo exactamente \simio{Tally\_M7\_LoteLiberado}.
+  \item No poner formulas dentro del tally; el valor se escribe en el bloque \simio{Tally}.
+\end{enumerate}
+
+\subsubsection{M7C Configurar Source\_LotesProduccion controlado por evento}
+\textbf{Resultado esperado:} los lotes ya no nacen por interarrival fijo; nacen solo cuando M7 dispara \simio{Evt\_LiberarLoteProduccion}.
+
+\begin{enumerate}
+  \item Ir a \simio{Facility}.
+  \item Seleccionar \simio{Source\_LotesProduccion}.
+  \item En \simio{Properties > Entity Arrival Logic}, configurar:
+  \begin{itemize}
+    \item \simio{Entity Type = ModelEntity}
+    \item \simio{Entities Per Arrival = 1}
+    \item \simio{Arrival Mode = On Event}
+    \item \simio{Triggering Event Name = Evt\_LiberarLoteProduccion}
+  \end{itemize}
+  \item Si el source tenia \simio{Interarrival Time}, dejarlo sin uso. Desde M7 no debe crear lotes por tiempo fijo.
+  \item En \simio{Source\_LotesProduccion > Add-On Process Triggers}, conectar:
+  \begin{itemize}
+    \item \simio{Created Entity = P\_M7\_PrepararLoteLiberado}
+  \end{itemize}
+  \item Si tu panel muestra el trigger como \simio{Created} en vez de \simio{Created Entity}, usar ese campo. Lo importante es que el proceso se ejecute en el contexto de la entidad recien creada, no en el contexto del cliente.
+  \item No conectar \proc{P\_CrearLote} directamente al cliente ni a \proc{P\_ConsumirInventario}. Desde M7, \proc{P\_CrearLote} se llama solo dentro de \proc{P\_M7\_PrepararLoteLiberado}.
+\end{enumerate}
+
+\subsubsection{M7D Ajustar P\_CrearLote para que reciba el producto}
+\textbf{Resultado esperado:} \proc{P\_CrearLote} prepara un lote del producto que M7 solicito, no un producto fijo.
+
+\begin{enumerate}
+  \item Abrir \proc{P\_CrearLote}.
+  \item Buscar cualquier fila que diga algo equivalente a:
+\end{enumerate}
+
+\begin{lstlisting}[caption={Linea que debe eliminarse o desactivarse en P CrearLote}]
+ModelEntity.ProductoIdx = 1
+\end{lstlisting}
+
+\begin{enumerate}[resume]
+  \item Eliminar esa asignacion o dejarla comentada en tu documento de control. No debe quedar activa.
+  \item La primera validacion de \proc{P\_CrearLote} debe ser que el producto venga entre 1 y 10.
+\end{enumerate}
+
+\begin{lstlisting}[caption={Bloques iniciales obligatorios de P CrearLote desde M7}]
+Begin
+Decide_ProductoValido
+  Condition Or Probability = ModelEntity.ProductoIdx >= 1 and ModelEntity.ProductoIdx <= 10
+  True  -> Assign_AtributosLote
+  False -> End
+Assign_AtributosLote
+  Mantener aqui las asignaciones ya construidas en M2/M3:
+  KgLote
+  BandejasReq
+  CarrosReq
+  FamiliaHorno
+  HoraInicioCiclo
+End
+\end{lstlisting}
+
+\risk{} Si \proc{P\_CrearLote} vuelve a escribir \state{ModelEntity.ProductoIdx = 1}, M7 parecera funcionar, pero todas las politicas produciran siempre el producto 1.
+
+\subsubsection{M7E Proceso P\_M7\_PrepararLoteLiberado}
+\textbf{Resultado esperado:} cada entidad creada por el source recibe el producto objetivo y luego ejecuta \proc{P\_CrearLote}.
+
+\begin{lstlisting}[caption={Bloques de P M7 PrepararLoteLiberado}]
+Begin
+Assign_DatosLiberacion
+  ModelEntity.ProductoIdx = State_ProductoObjetivoLiberacion
+  ModelEntity.PoliticaLiberacionCod = State_CodigoPoliticaLiberacion
+  ModelEntity.OrigenGatilloPolitica = State_OrigenGatilloPolitica
+  ModelEntity.HoraLiberacionLote = TimeNow
+Execute_CrearLote
+  Process Name = P_CrearLote
+Tally_LoteLiberado
+  Tally Statistic Name = Tally_M7_LoteLiberado
+  Value Expression = ModelEntity.ProductoIdx
+End
+\end{lstlisting}
+
+\textbf{Check inmediato:}
+\begin{itemize}
+  \item Si \state{ModelEntity.ProductoIdx} queda 0, el source no esta leyendo \state{State\_ProductoObjetivoLiberacion}.
+  \item Si \proc{P\_CrearLote} marca states inexistentes, estas ejecutandolo sobre una entidad que no es \simio{ModelEntity}.
+\end{itemize}
+
+\subsubsection{M7F Proceso P\_M7\_ActualizarRelojPolitica}
+\textbf{Resultado esperado:} todo proceso de M7 usa el mismo calculo de minuto del dia y hora comercial.
+
+\begin{lstlisting}[caption={Bloques de P M7 ActualizarRelojPolitica}]
+Begin
+Assign_MinutoDiaPolitica
+  State_M7_MinutoDia = Math.Remainder(TimeNow,1440)
+Decide_AntesVenta
+  Condition Or Probability = State_M7_MinutoDia < Prop_M7_VentaInicioMin
+  True  -> Assign_HoraIdxPreventa
+  False -> Decide_DentroVenta
+Assign_HoraIdxPreventa
+  State_M7_HoraIdx = 1
+  -> End
+Decide_DentroVenta
+  Condition Or Probability = State_M7_MinutoDia < Prop_M7_VentaFinMin
+  True  -> Assign_HoraIdxVenta
+  False -> Assign_HoraIdxPostventa
+Assign_HoraIdxVenta
+  State_M7_HoraIdx = 1 + Math.Floor((State_M7_MinutoDia - Prop_M7_VentaInicioMin)/60)
+  -> End
+Assign_HoraIdxPostventa
+  State_M7_HoraIdx = 12
+End
+\end{lstlisting}
+
+\textbf{Por que existe este proceso:} no es para consumo de cliente; es para que push, pull e hibrida sepan si estan en preapertura, venta o postventa sin repetir expresiones en todos lados.
+
+\subsubsection{M7G Gatillo post-consumo desde P\_ConsumirInventario}
+\textbf{Resultado esperado:} cada item de la canasta puede gatillar reposicion de su propio producto, sin perder toda la canasta y sin usar \simio{ModelEntity}.
+
+\textbf{Modificar \proc{P\_ConsumirInventario}:}
+\begin{enumerate}
+  \item En la rama \simio{True} de \simio{Decide\_StockSuficiente}, despues de \simio{Assign\_VentaSatisfecha}, agregar:
+  \begin{itemize}
+    \item \simio{Execute\_PostConsumoM7}
+  \end{itemize}
+  \item En la rama \simio{False}, despues de \simio{Assign\_Quiebre} y despues de \simio{Tally\_StockoutKg}, agregar:
+  \begin{itemize}
+    \item \simio{Execute\_PostConsumoM7}
+  \end{itemize}
+  \item En ambos bloques \simio{Execute\_PostConsumoM7}, configurar:
+  \begin{itemize}
+    \item \simio{Process Name = P\_M7\_PostConsumoCliente}
+  \end{itemize}
+\end{enumerate}
+
+\textbf{Proceso: \proc{P\_M7\_PostConsumoCliente}}
+
+\begin{lstlisting}[caption={Bloques de P M7 PostConsumoCliente}]
+Begin
+Decide_ProductoClienteValido
+  Condition Or Probability = Entity_Cliente.ProductoIdx >= 1 and Entity_Cliente.ProductoIdx <= 10
+  True  -> Assign_GatilloCliente
+  False -> End
+Assign_GatilloCliente
+  State_ProductoDemandadoActual = Entity_Cliente.ProductoIdx
+  State_OrigenGatilloPolitica = 2
+Execute_EvaluarPolitica
+  Process Name = P_M7_EvaluarPoliticaProduccion
+End
+\end{lstlisting}
+
+\risk{} En este proceso la entidad activa es \simio{Entity\_Cliente}. Por eso aqui se usa \state{Entity\_Cliente.ProductoIdx}. No usar \state{ModelEntity.ProductoIdx} en \proc{P\_M7\_PostConsumoCliente}.
+
+\subsubsection{M7H Timer de push}
+\textbf{Resultado esperado:} existe un pulso horario que puede liberar produccion programada sin depender de clientes.
+
+\begin{enumerate}
+  \item En \simio{Model\_Panaderia > Definitions > Elements}, crear un \simio{Timer}.
+  \item Nombrarlo \simio{Timer\_M7\_PushTick}.
+  \item Configurar:
+  \begin{itemize}
+    \item \simio{Interval Type = Time}
+    \item \simio{Time Interval = Prop\_M7\_PushCadaMin}
+    \item \simio{Units = Minutes}
+    \item \simio{First Event Time = Prop\_M7\_PreaperturaInicioMin}
+  \end{itemize}
+  \item En el evento del timer, conectar \proc{P\_M7\_EventoTimerPush}.
+\end{enumerate}
+
+\textbf{Proceso: \proc{P\_M7\_EventoTimerPush}}
+
+\begin{lstlisting}[caption={Bloques de P M7 EventoTimerPush}]
+Begin
+Assign_GatilloTimer
+  State_OrigenGatilloPolitica = 1
+  State_ProductoDemandadoActual = 0
+Execute_EvaluarPolitica
+  Process Name = P_M7_EvaluarPoliticaProduccion
+End
+\end{lstlisting}
+
+\subsubsection{M7I Orquestador P\_M7\_EvaluarPoliticaProduccion}
+\textbf{Resultado esperado:} un solo proceso decide que politica responde a cada gatillo.
+
+\begin{lstlisting}[caption={Bloques de P M7 EvaluarPoliticaProduccion}]
+Begin
+Execute_ActualizarReloj
+  Process Name = P_M7_ActualizarRelojPolitica
+Decide_EsPush
+  Condition Or Probability = Prop_PoliticaProduccionCod == 1
+  True  -> Execute_PushPolitica
+  False -> Decide_EsPull
+Execute_PushPolitica
+  Process Name = P_M7_PushEvaluar
+  -> End
+Decide_EsPull
+  Condition Or Probability = Prop_PoliticaProduccionCod == 2
+  True  -> Execute_PullPolitica
+  False -> Decide_EsHibrida
+Execute_PullPolitica
+  Process Name = P_M7_PullEvaluarProductoDemandado
+  -> End
+Decide_EsHibrida
+  Condition Or Probability = Prop_PoliticaProduccionCod == 3
+  True  -> Execute_HibridaPolitica
+  False -> Assign_FallbackPull
+Execute_HibridaPolitica
+  Process Name = P_M7_HibridaEvaluar
+  -> End
+Assign_FallbackPull
+  State_CodigoPoliticaLiberacion = 2
+Execute_FallbackPull
+  Process Name = P_M7_PullEvaluarProductoDemandado
+End
+\end{lstlisting}
+
+\textbf{Lectura correcta del orquestador:}
+\begin{itemize}
+  \item Si la property vale 1, solo se ejecuta \simio{Push}.
+  \item Si la property vale 2, solo se ejecuta \simio{PullMin}.
+  \item Si la property vale 3, se ejecuta \simio{Hibrida}.
+  \item Si la property tiene otro valor, el modelo cae a \simio{PullMin} para no crear lotes por accidente.
+\end{itemize}
+
+\subsubsection{M7J Politica Push}
+\textbf{Resultado esperado:} el timer libera lotes por secuencia fija 1..10, sin consultar stock para decidir si corresponde producir.
+
+\textbf{Proceso: \proc{P\_M7\_PushEvaluar}}
+
+\begin{lstlisting}[caption={Bloques de P M7 PushEvaluar}]
+Begin
+Decide_GatilloEsTimer
+  Condition Or Probability = State_OrigenGatilloPolitica == 1
+  True  -> Decide_DentroVentanaPush
+  False -> End
+Decide_DentroVentanaPush
+  Condition Or Probability = State_M7_MinutoDia >= Prop_M7_PreaperturaInicioMin and State_M7_MinutoDia < Prop_M7_VentaFinMin
+  True  -> Assign_CodigoPush
+  False -> End
+Assign_CodigoPush
+  State_CodigoPoliticaLiberacion = 1
+Execute_PushLiberar
+  Process Name = P_M7_PushLiberar
+End
+\end{lstlisting}
+
+\textbf{Proceso: \proc{P\_M7\_PushLiberar}}
+
+\begin{lstlisting}[caption={Bloques de P M7 PushLiberar}]
+Begin
+Assign_AvanzarSecuencia
+  State_SecuenciaPushIdx = State_SecuenciaPushIdx + 1
+Decide_SecuenciaMayor10
+  Condition Or Probability = State_SecuenciaPushIdx > 10
+  True  -> Assign_ResetSecuencia
+  False -> Assign_ProductoPush
+Assign_ResetSecuencia
+  State_SecuenciaPushIdx = 1
+Assign_ProductoPush
+  State_ProductoObjetivoLiberacion = State_SecuenciaPushIdx
+Execute_SolicitarLote
+  Process Name = P_M7_SolicitarLote
+End
+\end{lstlisting}
+
+\textbf{Detalle de la secuencia push base:}
+\begin{itemize}
+  \item Primer tick: producto 1.
+  \item Segundo tick: producto 2.
+  \item Despues del producto 10, vuelve al producto 1.
+  \item \state{Prop\_M7\_PushCadaMin} controla cada cuantos minutos avanza la secuencia.
+  \item En \simio{Push} no se revisa \state{StockSala} para decidir produccion. Solo se evita duplicar si ya hay un lote pendiente del mismo producto.
+\end{itemize}
+
+\subsubsection{M7K Politica PullMin}
+\textbf{Resultado esperado:} despues de cada item comprado o perdido, se revisa el stock del producto demandado y se libera un lote solo si esta bajo punto de reposicion.
+
+\textbf{Proceso: \proc{P\_M7\_PullEvaluarProductoDemandado}}
+
+\begin{lstlisting}[caption={Bloques de P M7 PullEvaluarProductoDemandado}]
+Begin
+Decide_GatilloEsCliente
+  Condition Or Probability = State_OrigenGatilloPolitica == 2
+  True  -> Decide_ProductoDemandadoValido
+  False -> End
+Decide_ProductoDemandadoValido
+  Condition Or Probability = State_ProductoDemandadoActual >= 1 and State_ProductoDemandadoActual <= 10
+  True  -> Assign_LeerPoliticaStock
+  False -> End
+Assign_LeerPoliticaStock
+  State_M7_PuntoReposicionTmp = Tbl_StockPolitica[Tbl_StockPolitica.ProductoIdx.RowForKey(State_ProductoDemandadoActual)].PuntoReposicionKg
+  State_M7_StockObjetivoTmp = Tbl_StockPolitica[Tbl_StockPolitica.ProductoIdx.RowForKey(State_ProductoDemandadoActual)].StockObjetivoKg
+  State_M7_StockActualTmp = StockSala[State_ProductoDemandadoActual]
+  State_M7_BrechaTmp = State_M7_PuntoReposicionTmp - State_M7_StockActualTmp
+Decide_StockBajoPunto
+  Condition Or Probability = State_M7_StockActualTmp <= State_M7_PuntoReposicionTmp
+  True  -> Decide_NoHayLotePendiente
+  False -> End
+Decide_NoHayLotePendiente
+  Condition Or Probability = PendienteReposicion[State_ProductoDemandadoActual] == 0
+  True  -> Assign_ProductoPull
+  False -> End
+Assign_ProductoPull
+  State_ProductoObjetivoLiberacion = State_ProductoDemandadoActual
+Decide_CodigoPullYaAsignado
+  Condition Or Probability = State_CodigoPoliticaLiberacion == 4
+  True  -> Execute_SolicitarLote
+  False -> Assign_CodigoPull
+Assign_CodigoPull
+  State_CodigoPoliticaLiberacion = 2
+Execute_SolicitarLote
+  Process Name = P_M7_SolicitarLote
+End
+\end{lstlisting}
+
+\textbf{Regla de perdida:} si el cliente no encontro stock, igual se ejecuta pull. Eso es correcto: el quiebre es una senal fuerte de reposicion.
+
+\textbf{Regla anti-duplicado:} \state{PendienteReposicion[p]} evita que 20 clientes seguidos creen 20 lotes del mismo producto antes de que el primer lote termine.
+
+\subsubsection{M7L Politica Hibrida}
+\textbf{Resultado esperado:} antes y durante la apertura temprana se usa push; durante venta se usa pull desde clientes.
+
+\textbf{Ventanas cerradas de M7:}
+\begin{itemize}
+  \item Preapertura y carga base: desde \state{Prop\_M7\_PreaperturaInicioMin = 360} hasta \state{Prop\_M7\_VentaInicioMin = 540}. Equivale a 06:00--09:00.
+  \item Venta: desde \state{Prop\_M7\_VentaInicioMin = 540} hasta \state{Prop\_M7\_VentaFinMin = 1260}. Equivale a 09:00--21:00.
+\end{itemize}
+
+\textbf{Proceso: \proc{P\_M7\_HibridaEvaluar}}
+
+\begin{lstlisting}[caption={Bloques de P M7 HibridaEvaluar}]
+Begin
+Decide_GatilloTimer
+  Condition Or Probability = State_OrigenGatilloPolitica == 1
+  True  -> Decide_TimerEnPreapertura
+  False -> Decide_GatilloCliente
+Decide_TimerEnPreapertura
+  Condition Or Probability = State_M7_MinutoDia >= Prop_M7_PreaperturaInicioMin and State_M7_MinutoDia < Prop_M7_VentaInicioMin
+  True  -> Assign_CodigoHibridaPush
+  False -> End
+Assign_CodigoHibridaPush
+  State_CodigoPoliticaLiberacion = 3
+Execute_PushLiberar
+  Process Name = P_M7_PushLiberar
+  -> End
+Decide_GatilloCliente
+  Condition Or Probability = State_OrigenGatilloPolitica == 2
+  True  -> Decide_ClienteEnVenta
+  False -> End
+Decide_ClienteEnVenta
+  Condition Or Probability = State_M7_MinutoDia >= Prop_M7_VentaInicioMin and State_M7_MinutoDia < Prop_M7_VentaFinMin
+  True  -> Assign_CodigoHibridaPull
+  False -> End
+Assign_CodigoHibridaPull
+  State_CodigoPoliticaLiberacion = 4
+Execute_PullDemandado
+  Process Name = P_M7_PullEvaluarProductoDemandado
+End
+\end{lstlisting}
+
+\textbf{Lectura correcta de la hibrida:}
+\begin{itemize}
+  \item Un tick de timer antes de las 09:00 puede producir base.
+  \item Un tick de timer despues de las 09:00 no libera por hibrida.
+  \item Un cliente antes de las 09:00 no gatilla pull hibrido.
+  \item Un cliente entre 09:00 y 21:00 si puede gatillar pull hibrido.
+\end{itemize}
+
+\subsubsection{M7M Proceso P\_M7\_SolicitarLote}
+\textbf{Resultado esperado:} todo lote, venga de push, pull o hibrida, pasa por el mismo punto de control antes de disparar el source.
+
+\begin{lstlisting}[caption={Bloques de P M7 SolicitarLote}]
+Begin
+Assign_ResetSolicitud
+  State_M7_LoteSolicitadoOK = 0
+Decide_ProductoObjetivoValido
+  Condition Or Probability = State_ProductoObjetivoLiberacion >= 1 and State_ProductoObjetivoLiberacion <= 10
+  True  -> Decide_NoPendiente
+  False -> End
+Decide_NoPendiente
+  Condition Or Probability = PendienteReposicion[State_ProductoObjetivoLiberacion] == 0
+  True  -> Assign_MarcarPendiente
+  False -> End
+Assign_MarcarPendiente
+  PendienteReposicion[State_ProductoObjetivoLiberacion] = 1
+  LotesLiberadosTotal[State_ProductoObjetivoLiberacion] = LotesLiberadosTotal[State_ProductoObjetivoLiberacion] + 1
+  State_M7_LoteSolicitadoOK = 1
+Execute_RegistrarLiberacion
+  Process Name = P_M7_RegistrarLiberacion
+Fire_LiberarLote
+  Event Name = Evt_LiberarLoteProduccion
+End
+\end{lstlisting}
+
+\textbf{Proceso: \proc{P\_M7\_RegistrarLiberacion}}
+
+\begin{lstlisting}[caption={Bloques de P M7 RegistrarLiberacion}]
+Begin
+Decide_EsPush
+  Condition Or Probability = State_CodigoPoliticaLiberacion == 1
+  True  -> Assign_CountPush
+  False -> Decide_EsPull
+Assign_CountPush
+  LotesLiberadosPush[State_ProductoObjetivoLiberacion] = LotesLiberadosPush[State_ProductoObjetivoLiberacion] + 1
+  -> End
+Decide_EsPull
+  Condition Or Probability = State_CodigoPoliticaLiberacion == 2
+  True  -> Assign_CountPull
+  False -> Decide_EsHibridaPush
+Assign_CountPull
+  LotesLiberadosPull[State_ProductoObjetivoLiberacion] = LotesLiberadosPull[State_ProductoObjetivoLiberacion] + 1
+  -> End
+Decide_EsHibridaPush
+  Condition Or Probability = State_CodigoPoliticaLiberacion == 3
+  True  -> Assign_CountHibridaPush
+  False -> Decide_EsHibridaPull
+Assign_CountHibridaPush
+  LotesLiberadosHibridaPush[State_ProductoObjetivoLiberacion] = LotesLiberadosHibridaPush[State_ProductoObjetivoLiberacion] + 1
+  -> End
+Decide_EsHibridaPull
+  Condition Or Probability = State_CodigoPoliticaLiberacion == 4
+  True  -> Assign_CountHibridaPull
+  False -> End
+Assign_CountHibridaPull
+  LotesLiberadosHibridaPull[State_ProductoObjetivoLiberacion] = LotesLiberadosHibridaPull[State_ProductoObjetivoLiberacion] + 1
+End
+\end{lstlisting}
+
+\risk{} \state{PendienteReposicion} se marca antes de disparar el evento. Eso es intencional: evita que dos tokens simultaneos soliciten el mismo producto en el mismo instante.
+
+\subsubsection{M7N Reset temporal de PendienteReposicion}
+\textbf{Resultado esperado:} mientras M10 no este implementado, el producto pendiente se libera al terminar el lote. En M10 este reset se mueve a \proc{P\_ReponerSala}.
+
+\textbf{Proceso temporal: \proc{P\_M7\_ResetPendienteFinLote}}
+
+\begin{lstlisting}[caption={Bloques de P M7 ResetPendienteFinLote}]
+Begin
+Decide_ProductoLoteValido
+  Condition Or Probability = ModelEntity.ProductoIdx >= 1 and ModelEntity.ProductoIdx <= 10
+  True  -> Assign_ResetPendiente
+  False -> End
+Assign_ResetPendiente
+  PendienteReposicion[ModelEntity.ProductoIdx] = 0
+End
+\end{lstlisting}
+
+\textbf{Donde conectarlo en M7:}
+\begin{itemize}
+  \item Si el flujo termina en \simio{Sink\_LotesFinalizados}, conectar \proc{P\_M7\_ResetPendienteFinLote} en \simio{Sink\_LotesFinalizados > Add-On Process Triggers > Entered}.
+  \item Si todavia no hay sink final y el ultimo server es \simio{Server\_Enfriado}, conectar temporalmente en \simio{Server\_Enfriado > Add-On Process Triggers > Exited}.
+  \item En M10, quitar este reset temporal y resetear despues de sumar el producto a \state{StockSala}.
+\end{itemize}
+
+\subsubsection{M7O Pruebas unitarias de procesos}
+\textbf{Resultado esperado:} cada proceso falla o pasa de forma observable. No se valida M7 solo porque "corre".
+
+\begin{lstlisting}[caption={Pruebas unitarias obligatorias de M7}]
+T1_SourceEvento
+  Setear manualmente:
+    State_ProductoObjetivoLiberacion = 4
+    State_CodigoPoliticaLiberacion = 1
+    State_OrigenGatilloPolitica = 3
+  Disparar Evt_LiberarLoteProduccion.
+  Resultado esperado:
+    Source_LotesProduccion crea 1 ModelEntity.
+    ModelEntity.ProductoIdx = 4.
+    P_CrearLote no cambia ProductoIdx a 1.
+
+T2_PushSecuencia
+  Prop_PoliticaProduccionCod = 1
+  State_OrigenGatilloPolitica = 1
+  Ejecutar P_M7_EvaluarPoliticaProduccion 3 veces.
+  Resultado esperado:
+    Lotes objetivo: 1, luego 2, luego 3.
+
+T3_PullStockAlto
+  Prop_PoliticaProduccionCod = 2
+  Entity_Cliente.ProductoIdx = 5
+  StockSala[5] > Tbl_StockPolitica[Tbl_StockPolitica.ProductoIdx.RowForKey(5)].PuntoReposicionKg
+  Ejecutar P_M7_PostConsumoCliente.
+  Resultado esperado:
+    No se dispara lote.
+    PendienteReposicion[5] sigue 0.
+
+T4_PullStockBajo
+  Prop_PoliticaProduccionCod = 2
+  Entity_Cliente.ProductoIdx = 5
+  StockSala[5] <= Tbl_StockPolitica[Tbl_StockPolitica.ProductoIdx.RowForKey(5)].PuntoReposicionKg
+  PendienteReposicion[5] = 0
+  Ejecutar P_M7_PostConsumoCliente.
+  Resultado esperado:
+    Se dispara 1 lote producto 5.
+    PendienteReposicion[5] queda 1.
+
+T5_PullAntiDuplicado
+  Repetir T4 sin resetear PendienteReposicion[5].
+  Resultado esperado:
+    No se crea segundo lote de producto 5.
+
+T6_HibridaPreapertura
+  Prop_PoliticaProduccionCod = 3
+  State_M7_MinutoDia entre 360 y 539
+  Gatillo timer.
+  Resultado esperado:
+    Libera por codigo 3.
+
+T7_HibridaVenta
+  Prop_PoliticaProduccionCod = 3
+  State_M7_MinutoDia entre 540 y 1259
+  Gatillo cliente con stock bajo.
+  Resultado esperado:
+    Libera por codigo 4.
+\end{lstlisting}
+
+\subsubsection{M7P Escenarios comparativos minimos}
+\textbf{Resultado esperado:} las politicas se comparan con el mismo modelo, cambiando solo la property de control.
+
+\begin{enumerate}
+  \item Crear tres escenarios en \simio{Experiments}.
+  \item Mantener iguales semillas, demanda, stock inicial, recursos y tiempos.
+  \item Cambiar solo:
+\end{enumerate}
+
+\begin{lstlisting}[caption={Controles de escenarios M7}]
+Esc_M7_A_Push
+  Prop_PoliticaProduccionCod = 1
+
+Esc_M7_B_PullMin
+  Prop_PoliticaProduccionCod = 2
+
+Esc_M7_C_Hibrida
+  Prop_PoliticaProduccionCod = 3
+\end{lstlisting}
+
+\textbf{Resultados que se deben registrar por escenario}
+\begin{itemize}
+  \item \state{DemandaPerdida[1..10]} y total.
+  \item \state{DemandaSatisfecha[1..10]} y total.
+  \item \state{StockSala[1..10]} final.
+  \item \state{LotesLiberadosTotal[1..10]}.
+  \item \state{LotesLiberadosPush[1..10]}.
+  \item \state{LotesLiberadosPull[1..10]}.
+  \item \state{LotesLiberadosHibridaPush[1..10]}.
+  \item \state{LotesLiberadosHibridaPull[1..10]}.
+  \item \simio{Tally\_TiempoCicloLote}.
+  \item \simio{Tally\_EsperaHorno}.
+\end{itemize}
+
+\textbf{Patron esperado de resultados}
+\begin{itemize}
+  \item \simio{Push}: mas lotes tempranos, menor dependencia de clientes, mayor riesgo de sobrante.
+  \item \simio{PullMin}: menos sobrante, mayor riesgo de quiebre si el lead time de produccion es largo.
+  \item \simio{Hibrida}: stock base temprano y correccion por demanda durante venta.
+\end{itemize}
+
+\subsubsection{M7Q Cierre obligatorio de fase}
+\textbf{M7 se considera cerrada cuando:}
+\begin{itemize}
+  \item \simio{Source\_LotesProduccion} crea lotes solo por \simio{Evt\_LiberarLoteProduccion}.
+  \item \proc{P\_CrearLote} no contiene \state{ModelEntity.ProductoIdx = 1} fijo.
+  \item \proc{P\_ConsumirInventario} gatilla \proc{P\_M7\_PostConsumoCliente} tanto en venta satisfecha como en quiebre.
+  \item \simio{Push} crea lotes por timer y secuencia 1..10.
+  \item \simio{PullMin} crea lote solo si \state{StockSala[p] <= PuntoReposicionKg[p]} y \state{PendienteReposicion[p] == 0}.
+  \item \simio{Hibrida} usa push antes de venta y pull durante venta.
+  \item Cada lote creado guarda \state{ModelEntity.PoliticaLiberacionCod}.
+  \item Las pruebas T1 a T7 pasan.
+  \item Existen resultados comparativos para \simio{Esc\_M7\_A\_Push}, \simio{Esc\_M7\_B\_PullMin} y \simio{Esc\_M7\_C\_Hibrida}.
 \end{itemize}
 
 \subsection{M8 paso a paso: dotacion y recursos multiples}
@@ -4463,11 +5344,12 @@ Crear \simio{Model Properties} para parametros de escenario que se usaran como \
 
 La ruta base de esta guia usa \textbf{clientes individuales}. Cada entidad creada por \simio{Source\_Clientes} representa una visita de compra y ejecuta esta secuencia:
 \begin{enumerate}
-  \item guardar hora de llegada en \state{ModelEntity.HoraLlegada};
-  \item definir cuantos productos compra en \state{ModelEntity.NProductosCompra};
-  \item elegir producto por \state{ProductoIdx};
-  \item calcular kg solicitados en \state{ModelEntity.KgSolicitado};
-  \item llamar \proc{P\_ConsumirInventario};
+  \item guardar hora de llegada en \state{Entity\_Cliente.HoraLlegada};
+  \item calcular \state{Entity\_Cliente.HoraIdxCliente};
+  \item definir cuantos productos compra en \state{Entity\_Cliente.NProductosCompra};
+  \item elegir \state{ProductoIdx\_1}, \state{ProductoIdx\_2} y \state{ProductoIdx\_3} sin repetidos;
+  \item calcular \state{KgSolicitado\_1}, \state{KgSolicitado\_2} y \state{KgSolicitado\_3};
+  \item consumir inventario item por item;
   \item salir por \simio{Sink\_Clientes}.
 \end{enumerate}
 
@@ -4511,7 +5393,7 @@ M1 queda aceptado solo cuando se cumplen estas condiciones:
   \item \simio{Source\_Clientes} usa \tabla{Rate\_ClientesHora}.
   \item Cada cliente creado ejecuta \proc{P\_GenerarDemandaCliente}.
   \item \proc{P\_GenerarDemandaCliente} asigna hora, numero de productos, producto y kg solicitados.
-  \item \proc{P\_ConsumirInventario} actualiza el state correcto segun \state{EntidadClienteActiva.ProductoIdx} (reemplazar por el \simio{Entity Type} real de \simio{Source\_Clientes}).
+  \item \proc{P\_ConsumirInventario} actualiza el state correcto segun \state{Entity\_Cliente.ProductoIdx} (reemplazar por el \simio{Entity Type} real de \simio{Source\_Clientes}).
   \item \simio{Sink\_Clientes} elimina la entidad cliente despues de consumir inventario.
 \end{enumerate}
 
@@ -4522,92 +5404,93 @@ M1 queda aceptado solo cuando se cumplen estas condiciones:
 
 \begin{enumerate}
   \item Crear \simio{Source\_Clientes}. Configurar \simio{Arrival Mode} con tasa dependiente del tiempo basada en \tabla{Rate\_ClientesHora}.
-  \item En \simio{Source\_Clientes > State Assignments > Before Exiting}, asignar los states temporales de M1 sobre \state{EntidadClienteActiva} (nombre real de \simio{Entity Type}): \state{HoraLlegada}, \state{NProductosCompra}, \state{ProductoIdx} y \state{KgSolicitado}.
+  \item En \simio{Source\_Clientes > State Assignments > Before Exiting}, asignar los states temporales de M1 sobre \state{Entity\_Cliente} (nombre real de \simio{Entity Type}): \state{HoraLlegada}, \state{NProductosCompra}, \state{ProductoIdx} y \state{KgSolicitado}.
   \item En \simio{Output@Source\_Clientes > Add-On Process Triggers > Entered}, llamar \proc{P\_GenerarDemandaCliente}. No usar \simio{Source\_Clientes > Created Entity} para este proceso, porque queda con contexto de \simio{Source} y falla al leer states de la entidad activa.
   \item En \proc{P\_GenerarDemandaCliente}, asignar hora actual, definir cantidad de productos via \tabla{Tbl\_MixCompraCliente}, llamar \proc{P\_M6\_ElegirProductosCanasta}, luego \proc{P\_M6\_GenerarKgCanasta} y \proc{P\_M6\_ConsumirCanasta}.
-  \item En \proc{P\_M6\_ElegirProductosCanasta}, usar \tabla{Tbl\_ProbEleccionHoraLong} con \state{HoraProductoKey} y muestreo por rechazo para evitar repetidos (sin renormalizacion dinamica en proceso).
+  \item En \proc{P\_M6\_ElegirProductosCanasta}, usar \tabla{Tbl\_ProbEleccionHoraLong} con \state{HoraProductoKey}; si un producto sorteado se repite, corregirlo con el fallback deterministico descrito en M6F.
   \item La canasta se representa con states fijos: \state{ProductoIdx\_1}, \state{ProductoIdx\_2}, \state{ProductoIdx\_3} y \state{KgSolicitado\_1}, \state{KgSolicitado\_2}, \state{KgSolicitado\_3}.
   \item En \proc{P\_M6\_ConsumirCanasta}, consumir item por item. La perdida se evalua por item, no por cliente completo.
   \item Enviar cliente a \simio{Sink\_Clientes}.
 \end{enumerate}
 
-\subsection{Pseudocodigo}
+
+\subsection{Resumen ejecutable de procesos M6}
 
 \uifigure{figures_ai/ai_23_interface_real_map.jpg}{Estado visual esperado de la subseccion.}{Referencia IA basada en la interfaz real de Simio para seguir el bloque sin interpretar ubicaciones.}
 
 
-\begin{lstlisting}[caption={P GenerarDemandaCliente (M6 implementable)}]
-P_GenerarDemandaCliente
-  EntidadClienteActiva.HoraLlegada <- TimeNow
-  EntidadClienteActiva.MinutoDia <- Math.Remainder(TimeNow,1440)
-  if EntidadClienteActiva.MinutoDia >= 540 and EntidadClienteActiva.MinutoDia < 1260 then
-      EntidadClienteActiva.HoraIdxCliente <- 1 + Math.Floor((EntidadClienteActiva.MinutoDia - 540)/60)
-  else
-      EntidadClienteActiva.HoraIdxCliente <- 1
-  Call P_M6_DeterminarNProductos()   // usa Tbl_MixCompraCliente
-  Call P_M6_ElegirProductosCanasta() // deja ProductoIdx_1..3
-  Call P_M6_GenerarKgCanasta()       // deja KgSolicitado_1..3
-  Call P_M6_ConsumirCanasta()        // consume item por item
-  Send entity to Sink_Clientes
+Esta subseccion no reemplaza el paso a paso de M6F--M6G. Solo resume el flujo en lenguaje de bloques de Simio. La regla es la misma que en M6: no usar \simio{if}, no usar \simio{repeat/until}, no crear listas dinamicas y no inventar entidades auxiliares.
+
+\begin{lstlisting}[caption={P GenerarDemandaCliente, resumen por bloques Simio}]
+Begin
+Assign_HoraLlegada
+  Entity_Cliente.HoraLlegada = TimeNow
+Assign_MinutoDia
+  Entity_Cliente.MinutoDia = Math.Remainder(TimeNow,1440)
+Decide_EnHorarioDemanda
+  Condition Or Probability = Entity_Cliente.MinutoDia >= 540 and Entity_Cliente.MinutoDia < 1260
+  True  -> Assign_HoraIdxEnHorario
+  False -> Assign_HoraIdxDefault
+Assign_HoraIdxEnHorario
+  Entity_Cliente.HoraIdxCliente = 1 + Math.Floor((Entity_Cliente.MinutoDia - 540)/60)
+  -> Execute_DeterminarMix
+Assign_HoraIdxDefault
+  Entity_Cliente.HoraIdxCliente = 1
+  -> Execute_DeterminarMix
+Execute_DeterminarMix
+  Process Name = P_M6_DeterminarNProductos
+Execute_ElegirCanasta
+  Process Name = P_M6_ElegirProductosCanasta
+Execute_GenerarKgCanasta
+  Process Name = P_M6_GenerarKgCanasta
+Execute_ConsumirCanasta
+  Process Name = P_M6_ConsumirCanasta
+End
 \end{lstlisting}
 
-\begin{lstlisting}[caption={P M6 ElegirProductosCanasta (sin listas dinamicas)}]
-P_M6_ElegirProductosCanasta
-  h <- EntidadClienteActiva.HoraIdxCliente
-  ProductoIdx_1 <- SampleProductoPorHora(h)
-  if NProductosCompra >= 2:
-      repeat:
-         cand <- SampleProductoPorHora(h)
-      until cand != ProductoIdx_1
-      ProductoIdx_2 <- cand
-  else ProductoIdx_2 <- 0
-
-  if NProductosCompra == 3:
-      repeat:
-         cand <- SampleProductoPorHora(h)
-      until cand != ProductoIdx_1 and cand != ProductoIdx_2
-      ProductoIdx_3 <- cand
-  else ProductoIdx_3 <- 0
-
-SampleProductoPorHora(h):
-  For j in 1..10:
-     fila_j <- Tbl_ProbEleccionHoraLong.HoraProductoKey.RowForKey(h*100 + j)
-     p_j <- Tbl_ProbEleccionHoraLong[fila_j].Probabilidad
-  return RandomDiscrete(1..10, p_1..p_10)
+\begin{lstlisting}[caption={P M6 ElegirProductosCanasta, resumen sin reintentos}]
+Begin
+Assign_ResetCanasta
+Execute_Muestrear1
+Assign_Producto1
+Decide_TieneItem2
+  False -> End
+  True  -> Execute_Muestrear2
+           -> Decide_Cand2Distinto
+                True  -> Assign_Producto2_Normal
+                False -> Assign_Producto2_Fallback
+           -> Decide_TieneItem3
+                False -> End
+                True  -> Execute_Muestrear3
+                         -> Decide_Cand3Distinto
+                              True  -> Assign_Producto3_Normal
+                              False -> Assign_Producto3_FallbackA
+                                       -> Decide_Fallback3ChocaCon1
+                                            True  -> Assign_Producto3_FallbackB
+                                            False -> End
 \end{lstlisting}
 
-\begin{lstlisting}[caption={P M6 ConsumirCanasta (perdida por item)}]
-P_M6_ConsumirCanasta
-  if ProductoIdx_1 > 0: ConsumirItem(ProductoIdx_1, KgSolicitado_1)
-  if ProductoIdx_2 > 0: ConsumirItem(ProductoIdx_2, KgSolicitado_2)
-  if ProductoIdx_3 > 0: ConsumirItem(ProductoIdx_3, KgSolicitado_3)
-
-ConsumirItem(p, kg):
-  ModelEntity.ProductoIdx <- p
-  ModelEntity.KgSolicitado <- kg
-  Call P_ConsumirInventario
+\begin{lstlisting}[caption={P M6 ConsumirCanasta, perdida por item}]
+Begin
+Decide_Item1Valido
+  True  -> copiar ProductoIdx_1/KgSolicitado_1 a ProductoIdx/KgSolicitado
+           -> Execute P_ConsumirInventario
+  False -> Decide_Item2Valido
+Decide_Item2Valido
+  True  -> copiar ProductoIdx_2/KgSolicitado_2 a ProductoIdx/KgSolicitado
+           -> Execute P_ConsumirInventario
+  False -> Decide_Item3Valido
+Decide_Item3Valido
+  True  -> copiar ProductoIdx_3/KgSolicitado_3 a ProductoIdx/KgSolicitado
+           -> Execute P_ConsumirInventario
+  False -> End
 \end{lstlisting}
 
-\begin{lstlisting}[caption={P ConsumirInventario con states vectoriales}]
-P_ConsumirInventario
-  p <- ModelEntity.ProductoIdx
-  DemandaTotal[p] += ModelEntity.KgSolicitado
-  if StockSala[p] >= ModelEntity.KgSolicitado then
-      StockSala[p] -= ModelEntity.KgSolicitado
-      DemandaSatisfecha[p] += ModelEntity.KgSolicitado
-  else
-      DemandaPerdida[p] += ModelEntity.KgSolicitado
-      StockoutCount[p] += 1
-      Record Tally_StockoutKg(ModelEntity.KgSolicitado)
-  InventarioMinimo[p] = min(InventarioMinimo[p], StockSala[p])
-\end{lstlisting}
-
-\begin{lstlisting}[caption={P RegistrarQuiebre}]
-P_RegistrarQuiebre(producto, kgPerdido)
-  p <- producto.ProductoIdx
-  StockoutCount[p] += 1
-  DemandaPerdida[p] += kgPerdido
-  Record Tally_StockoutKg(producto, kgPerdido)
+\begin{lstlisting}[caption={P ConsumirInventario, condicion central}]
+Decide_StockSuficiente
+  Condition Or Probability = StockSala[Entity_Cliente.ProductoIdx] >= Entity_Cliente.KgSolicitado
+  True  -> sumar DemandaTotal y DemandaSatisfecha; descontar StockSala
+  False -> sumar DemandaTotal y DemandaPerdida; sumar StockoutCount; registrar Tally_StockoutKg
 \end{lstlisting}
 
 \subsection{Verificacion de demanda}
