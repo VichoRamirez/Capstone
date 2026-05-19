@@ -3477,6 +3477,659 @@ Esc_M7_C_Hibrida
   \item Existen resultados comparativos para \simio{Esc\_M7\_A\_Push}, \simio{Esc\_M7\_B\_PullMin} y \simio{Esc\_M7\_C\_Hibrida}.
 \end{itemize}
 
+\subsection{M7A puente entre M7 y M8: observabilidad, trazabilidad y valor ejecutivo antes de M10}
+\textbf{Objetivo operacional de M7A:} dejar el modelo observable, trazable y presentable antes de implementar la reposicion fisica completa de M10.
+
+\textbf{M7A no busca optimizar:}
+\begin{itemize}
+  \item No hacer optimizacion de dotacion.
+  \item No comparar politicas con diseno experimental formal.
+  \item No cerrar balance fisico completo de inventario vendible.
+\end{itemize}
+
+\textbf{Regla cerrada de M7A:} se puede mejorar visualizacion y trazabilidad, pero no se cambia el contrato logico de M6/M7 para demanda y liberacion de lotes.
+
+\textbf{Prioridades obligatorias de M7A}
+\begin{lstlisting}[caption={Backlog cerrado de M7A antes de M8/M10}]
+1  Congelar baseline M6/M7 funcional                         (obligatorio)
+2  Fila visual de clientes                                   (muy recomendable)
+3  Ruta visual de lotes por etapas                           (muy recomendable)
+4  Etiquetas visibles de producto en cada lote               (muy recomendable)
+5  Contadores de lotes liberados por producto y politica     (obligatorio)
+6  PendienteReposicion temporal anti-duplicado               (obligatorio)
+7  Reset temporal de pendiente al terminar lote              (obligatorio)
+8  Registro observable de quiebres por producto              (obligatorio)
+9  Panel visual de KPIs basicos                              (muy recomendable)
+10 Separacion visual clientes vs produccion                  (muy recomendable)
+11 Stock visible por producto                                (recomendable)
+12 Trace limpio y validable de M7A                           (obligatorio)
+\end{lstlisting}
+
+\textbf{Orden obligatorio de M7A}
+\begin{enumerate}
+  \item Congelar baseline M7.
+  \item Separar visualmente los dos flujos (clientes y lotes).
+  \item Configurar fila visual de clientes sin tocar logica de consumo.
+  \item Configurar ruta visual de lotes sin tocar logica de liberacion M7.
+  \item Agregar etiquetas de lote y estados de trazabilidad faltantes.
+  \item Verificar contadores de lotes liberados por producto y politica.
+  \item Asegurar anti-duplicado con \state{PendienteReposicion[p]}.
+  \item Conectar reset temporal de pendiente a fin de lote.
+  \item Exponer quiebres por producto y gatillo de politica.
+  \item Construir panel visual de KPIs basicos.
+  \item Limpiar trace y ejecutar mini-validaciones manuales.
+  \item Recién despues de esto avanzar a M8.
+\end{enumerate}
+
+\subsubsection{M7A1 Congelar baseline M7 (obligatorio)}
+\textbf{Resultado esperado:} existe una copia segura y comparable antes de agregar observabilidad.
+
+\begin{enumerate}
+  \item Abrir el archivo validado de M7.
+  \item Guardar copia como \simio{Panaderia\_M7A\_Observabilidad.spfx}.
+  \item Ejecutar una corrida corta de control (minimo 1 dia) y registrar:
+  \begin{itemize}
+    \item \state{DemandaTotal[1..10]}
+    \item \state{DemandaSatisfecha[1..10]}
+    \item \state{DemandaPerdida[1..10]}
+    \item \state{StockSala[1..10]} final
+    \item \state{LotesLiberadosTotal[1..10]}
+  \end{itemize}
+  \item Guardar estos valores como \textbf{Baseline\_M7A\_PreVisual}.
+  \item Si el baseline no corre limpio, no iniciar M7A.
+\end{enumerate}
+
+\subsubsection{M7A2 Separar visualmente demanda y produccion (muy recomendable)}
+\textbf{Resultado esperado:} en layout se distinguen dos flujos no mezclados.
+
+\begin{enumerate}
+  \item En \simio{Facility}, ubicar la linea de produccion en la zona superior:
+  \begin{itemize}
+    \item \simio{Source\_LotesProduccion -> Pesado -> Mezclado -> Amasado -> Formado -> Horno -> Enfriado -> Sink\_LotesFinalizados}
+  \end{itemize}
+  \item Ubicar el flujo de clientes en la zona inferior:
+  \begin{itemize}
+    \item \simio{Source\_Clientes -> tramo visual de compra/consumo -> Sink\_Clientes}
+  \end{itemize}
+  \item No compartir objetos entre ambos flujos salvo procesos de politica que ya existen en M7.
+  \item Crear una zona central para paneles de estados y KPIs.
+\end{enumerate}
+
+\subsubsection{M7A3 Fila visual de clientes (muy recomendable)}
+\textbf{Resultado esperado:} se observa llegada, espera corta y salida de clientes.
+
+\textbf{Caso A: ya existe ruta visual de clientes}
+\begin{enumerate}
+  \item Mantener la logica actual.
+  \item Ajustar tiempos de desplazamiento visual para evitar movimientos instantaneos.
+  \item No mover \proc{P\_GenerarDemandaCliente} ni \proc{P\_M6\_ConsumirCanasta}.
+\end{enumerate}
+
+\textbf{Caso B: no existe ruta visual de clientes}
+\begin{enumerate}
+  \item Crear \simio{TimePath\_ClientesEntrada} desde \simio{Output@Source\_Clientes} hacia un nodo intermedio de salida.
+  \item Configurar \simio{Travel Time = Random.Uniform(1,3)} minutos.
+  \item Conectar nodo intermedio a \simio{Sink\_Clientes} con un path corto (0.2--0.5 min).
+  \item Mantener los \simio{Add-On Process Triggers} de demanda/consumo en los mismos objetos de M6/M7.
+  \item Verificar que el flujo visual no altere \state{DemandaTotal[p]}.
+\end{enumerate}
+
+\textbf{Secuencia visible esperada}
+\begin{lstlisting}[caption={Secuencia visual esperada de clientes en M7A}]
+Llegada cliente
+  -> generacion canasta (M6)
+  -> consumo inventario item por item (M6/M7)
+  -> gatillo de politica post-consumo (M7)
+  -> salida cliente
+\end{lstlisting}
+
+\subsubsection{M7A4 Ruta visual de lotes (muy recomendable)}
+\textbf{Resultado esperado:} cada lote liberado por M7 se observa en etapas productivas.
+
+\begin{enumerate}
+  \item Verificar que \simio{Source\_LotesProduccion} sigue en \simio{Arrival Mode = On Event}.
+  \item Confirmar ruta visual completa:
+  \begin{itemize}
+    \item \simio{Source\_LotesProduccion}
+    \item \simio{Server\_Pesado}
+    \item \simio{Server\_Mezclado}
+    \item \simio{Server\_Amasado}
+    \item \simio{Server\_Formado}
+    \item \simio{Server\_Horno}
+    \item \simio{Server\_Enfriado}
+    \item \simio{Sink\_LotesFinalizados}
+  \end{itemize}
+  \item Si algun server aun no existe, usar un \simio{Server\_DummyEtapaX} temporal con tiempo fijo para no romper continuidad visual.
+  \item No sumar stock de sala al terminar ruta en M7A. Eso sigue reservado a M10.
+\end{enumerate}
+
+\subsubsection{M7A5 Etiquetas de lote (muy recomendable)}
+\textbf{Resultado esperado:} cada lote muestra producto, kg y origen de politica.
+
+\textbf{States minimos de entidad lote}
+\begin{lstlisting}[caption={States obligatorios de ModelEntity para etiquetas M7A}]
+ProductoIdx            Integer
+KgLote                 Real
+PoliticaLiberacionCod  Integer
+OrigenGatilloPolitica  Integer
+\end{lstlisting}
+
+\textbf{Que mostrar sobre cada lote}
+\begin{enumerate}
+  \item En simbolo de entidad lote, activar etiqueta de estado.
+  \item Texto minimo recomendado:
+\end{enumerate}
+
+\begin{lstlisting}[caption={Etiqueta minima recomendada en entidades lote}]
+P: ModelEntity.ProductoIdx
+Kg: ModelEntity.KgLote
+Pol: ModelEntity.PoliticaLiberacionCod
+\end{lstlisting}
+
+\textbf{Control obligatorio}
+\begin{itemize}
+  \item Si todos los lotes muestran \state{P = 1}, revisar \proc{P\_CrearLote}; no debe fijar producto 1.
+\end{itemize}
+
+\subsubsection{M7A6 Contadores de lotes liberados por politica (obligatorio)}
+\textbf{Resultado esperado:} se puede demostrar con estados que la politica realmente libera lotes.
+
+\begin{enumerate}
+  \item Verificar estos vectores en \simio{Model\_Panaderia > States}:
+\end{enumerate}
+
+\begin{lstlisting}[caption={Vectores obligatorios de conteo M7/M7A}]
+LotesLiberadosTotal[1..10]
+LotesLiberadosPush[1..10]
+LotesLiberadosPull[1..10]
+LotesLiberadosHibridaPush[1..10]
+LotesLiberadosHibridaPull[1..10]
+\end{lstlisting}
+
+\begin{enumerate}[resume]
+  \item Confirmar que \proc{P\_M7\_RegistrarLiberacion} sigue siendo el unico punto que incrementa contadores por politica.
+  \item Confirmar que \proc{P\_M7\_SolicitarLote} incrementa \state{LotesLiberadosTotal[p]} una sola vez por lote.
+\end{enumerate}
+
+\subsubsection{M7A7 PendienteReposicion temporal anti-duplicado (obligatorio)}
+\textbf{Resultado esperado:} pull e hibrida no liberan lotes duplicados del mismo producto en rafaga.
+
+\begin{enumerate}
+  \item Verificar vector:
+\end{enumerate}
+
+\begin{lstlisting}[caption={Vector anti-duplicado obligatorio en M7A}]
+PendienteReposicion[1..10] Integer, Initial Value = 0
+\end{lstlisting}
+
+\begin{enumerate}[resume]
+  \item En \proc{P\_M7\_SolicitarLote}, mantener este orden exacto:
+  \begin{itemize}
+    \item validar producto objetivo
+    \item validar \state{PendienteReposicion[p] == 0}
+    \item marcar \state{PendienteReposicion[p] = 1}
+    \item registrar contadores
+    \item disparar \simio{Evt\_LiberarLoteProduccion}
+  \end{itemize}
+  \item Prohibido marcar pendiente despues de disparar evento; eso abre carrera de duplicados.
+\end{enumerate}
+
+\subsubsection{M7A8 Reset temporal de pendiente a fin de lote (obligatorio antes de M10)}
+\textbf{Resultado esperado:} mientras M10 no repone sala, el mismo producto puede volver a ser solicitado despues de terminar lote.
+
+\textbf{Proceso obligatorio: \proc{P\_M7\_ResetPendienteFinLote}}
+\begin{lstlisting}[caption={Bloques cerrados de reset temporal en M7A}]
+Begin
+Decide_ProductoLoteValido
+  Condition Or Probability = ModelEntity.ProductoIdx >= 1 and ModelEntity.ProductoIdx <= 10
+  True  -> Assign_ResetPendiente
+  False -> End
+Assign_ResetPendiente
+  PendienteReposicion[ModelEntity.ProductoIdx] = 0
+End
+\end{lstlisting}
+
+\textbf{Donde conectarlo}
+\begin{itemize}
+  \item Caso 1 (preferido): \simio{Sink\_LotesFinalizados > Add-On Process Triggers > Entered}.
+  \item Caso 2 (temporal): \simio{Server\_Enfriado > Add-On Process Triggers > Exited}.
+\end{itemize}
+
+\textbf{Nota de migracion a M10}
+\begin{itemize}
+  \item En M10, mover el reset al final de \proc{P\_ReponerSala} despues de sumar stock a \state{StockSala[p]}.
+\end{itemize}
+
+\subsubsection{M7A9 Registro de quiebres por producto (obligatorio)}
+\textbf{Resultado esperado:} se puede justificar gatillos pull/hibrida con evidencia observable.
+
+\textbf{Estados minimos ya existentes que deben quedar visibles}
+\begin{lstlisting}[caption={Estados minimos de quiebre a exponer en M7A}]
+DemandaPerdida[1..10]
+StockoutCount[1..10]
+State_ProductoDemandadoActual
+State_OrigenGatilloPolitica
+\end{lstlisting}
+
+\textbf{Conexion operativa obligatoria}
+\begin{enumerate}
+  \item En \proc{P\_ConsumirInventario}, rama de quiebre:
+  \begin{itemize}
+    \item ejecutar \simio{Execute\_PostConsumoM7} despues de \simio{Assign\_Quiebre}
+  \end{itemize}
+  \item Confirmar que \proc{P\_M7\_PostConsumoCliente} copia \state{Entity\_Cliente.ProductoIdx} a \state{State\_ProductoDemandadoActual}.
+  \item Confirmar que \state{State\_OrigenGatilloPolitica = 2} para gatillo de cliente.
+\end{enumerate}
+
+\subsubsection{M7A10 Panel visual de KPIs basicos (muy recomendable)}
+\textbf{Resultado esperado:} el modelo se puede presentar sin abrir tablas internas.
+
+\textbf{Zona recomendada: centro del layout}
+\begin{enumerate}
+  \item Crear etiquetas de texto para estos indicadores:
+  \begin{itemize}
+    \item \(\sum DemandaTotal[p]\)
+    \item \(\sum DemandaSatisfecha[p]\)
+    \item \(\sum DemandaPerdida[p]\)
+    \item \(\sum StockSala[p]\) final parcial
+    \item \(\sum LotesLiberadosTotal[p]\)
+  \end{itemize}
+  \item Agregar \textbf{Fill Rate aproximado}:
+\end{enumerate}
+
+\begin{lstlisting}[caption={Expresion recomendada de fill rate para panel M7A}]
+if (Sum(DemandaTotal[1..10]) > 0)
+  Sum(DemandaSatisfecha[1..10]) / Sum(DemandaTotal[1..10])
+else
+  0
+\end{lstlisting}
+
+\textbf{Regla de mensaje en panel}
+\begin{itemize}
+  \item Mostrar explicitamente: \textit{M7A libera lotes; reposicion fisica de sala se implementa en M10}.
+\end{itemize}
+
+\subsubsection{M7A11 Stock visible por producto (recomendable)}
+\textbf{Resultado esperado:} se ve que productos se agotan primero.
+
+\begin{enumerate}
+  \item Crear 10 etiquetas en panel lateral:
+  \begin{itemize}
+    \item \simio{Lbl\_StockSala\_P1} ... \simio{Lbl\_StockSala\_P10}
+  \end{itemize}
+  \item Asignar expresiones:
+  \begin{itemize}
+    \item \state{StockSala[1]} ... \state{StockSala[10]}
+  \end{itemize}
+  \item Si quieres ranking rapido, agregar color condicional:
+  \begin{itemize}
+    \item rojo cuando \state{StockSala[p] <= Tbl\_StockPolitica[p].PuntoReposicionKg}
+  \end{itemize}
+\end{enumerate}
+
+\subsubsection{M7A12 Trace limpio de politica (obligatorio)}
+\textbf{Resultado esperado:} el trace permite auditar la politica sin ruido irrelevante.
+
+\begin{enumerate}
+  \item Ejecutar corrida corta con trace activado.
+  \item Verificar presencia de hitos:
+  \begin{itemize}
+    \item \simio{P\_M7\_SolicitarLote}
+    \item \simio{P\_M7\_RegistrarLiberacion}
+    \item \simio{P\_M7\_PostConsumoCliente}
+    \item \simio{Evt\_LiberarLoteProduccion}
+  \end{itemize}
+  \item Verificar ausencia de anti-patrones:
+  \begin{itemize}
+    \item lotes por interarrival fijo
+    \item \state{ModelEntity.ProductoIdx = 1} fijo
+    \item multiples lotes del mismo producto en el mismo instante con pendiente activo
+  \end{itemize}
+\end{enumerate}
+
+\subsubsection{M7A13 Mini-validaciones operativas sin experimentos}
+\textbf{Resultado esperado:} push, pull e hibrida responden como se espera con pruebas manuales simples.
+
+\begin{lstlisting}[caption={Pruebas manuales obligatorias de M7A antes de M8}]
+V1_LiberacionManualProducto4
+  Set:
+    State_ProductoObjetivoLiberacion = 4
+    State_CodigoPoliticaLiberacion = 1
+    State_OrigenGatilloPolitica = 3
+  Fire:
+    Evt_LiberarLoteProduccion
+  Esperado:
+    nace 1 lote con ProductoIdx = 4
+
+V2_PushTimer
+  Set:
+    Prop_PoliticaProduccionCod = 1
+  Esperado:
+    libera lotes por secuencia y timer
+
+V3_PullPorStockBajoOQuiebre
+  Set:
+    Prop_PoliticaProduccionCod = 2
+    StockSala[p] <= PuntoReposicionKg[p] o forzar quiebre de p
+  Esperado:
+    libera lote de p si PendienteReposicion[p] = 0
+\end{lstlisting}
+
+\subsubsection{M7A14 Cierre obligatorio de fase puente}
+\textbf{M7A se considera cerrada cuando:}
+\begin{itemize}
+  \item Existe archivo \simio{Panaderia\_M7A\_Observabilidad.spfx} estable y corrible.
+  \item El layout separa visualmente clientes y produccion.
+  \item Se observan clientes entrando y saliendo con movimiento visible.
+  \item Se observan lotes recorriendo etapas productivas.
+  \item Cada lote muestra \state{ProductoIdx}, \state{KgLote} y codigo de politica.
+  \item Los contadores \state{LotesLiberados*} cambian coherentemente por politica.
+  \item \state{PendienteReposicion[p]} evita duplicados y se resetea a fin de lote en forma temporal.
+  \item Quiebres por producto quedan visibles en \state{DemandaPerdida[p]} y \state{StockoutCount[p]}.
+  \item Existe panel visual minimo de KPIs para presentacion ejecutiva.
+  \item El trace permite demostrar que M7 libera lotes por evento y no por fuente fija.
+  \item Recién despues de cumplir este cierre se avanza a M8.
+\end{itemize}
+
+\subsubsection{M7A15 Contrato de implementacion sin decisiones abiertas}
+\textbf{Resultado esperado:} cualquier persona del equipo puede ejecutar M7A sin interpretar ni inventar.
+
+\textbf{Regla de ownership por bloques}
+\begin{itemize}
+  \item \textbf{Demanda y cliente:} conservar exactamente lo validado en M6/M7.
+  \item \textbf{Politica de liberacion:} conservar procesos M7 sin crear variantes paralelas.
+  \item \textbf{Observabilidad M7A:} agregar solo layout, etiquetas, paneles, timers de refresco y trazabilidad.
+\end{itemize}
+
+\textbf{Prohibiciones explicitas de M7A}
+\begin{itemize}
+  \item No crear un segundo \simio{Source\_LotesProduccion}.
+  \item No crear un segundo evento de liberacion distinto de \simio{Evt\_LiberarLoteProduccion}.
+  \item No editar \proc{P\_M6\_ElegirProductosCanasta}, \proc{P\_M6\_GenerarKgCanasta} ni \proc{P\_M6\_ConsumirCanasta} para resolver temas visuales.
+  \item No sumar \state{StockSala[p]} fuera de M10.
+  \item No borrar \state{PendienteReposicion[p]} por script externo; solo por proceso controlado.
+\end{itemize}
+
+\textbf{Politica de cambios cerrada}
+\begin{enumerate}
+  \item Si el cambio afecta logica de demanda, no es M7A.
+  \item Si el cambio afecta reposicion fisica a sala, no es M7A.
+  \item Si el cambio afecta experimento/optimizacion, no es M7A.
+  \item Si el cambio mejora visualizacion, rastreo o defensa de resultados, si es M7A.
+\end{enumerate}
+
+\subsubsection{M7A16 Matriz exacta objeto-campo-valor (checklist operativo)}
+\textbf{Resultado esperado:} configuracion verificable objeto por objeto, sin omisiones.
+
+\begin{lstlisting}[caption={Matriz cerrada de configuracion M7A}]
+OBJETO: Source_LotesProduccion
+  Entity Type             = ModelEntity
+  Arrival Mode            = On Event
+  Triggering Event Name   = Evt_LiberarLoteProduccion
+  Entities Per Arrival    = 1
+  Created Entity Trigger  = P_M7_PrepararLoteLiberado
+
+OBJETO: Source_Clientes
+  (sin cambios logicos respecto a M6/M7)
+
+OBJETO: Timer_M7_PushTick
+  Time Interval           = Prop_M7_PushCadaMin
+  First Event Time        = Prop_M7_PreaperturaInicioMin
+  Event Process           = P_M7_EventoTimerPush
+
+OBJETO: Timer_M7A_KPIRefresh (nuevo en M7A)
+  Time Interval           = 1
+  Units                   = Minutes
+  First Event Time        = Prop_M7_VentaInicioMin
+  Event Process           = P_M7A_ActualizarKPIsVisibles
+
+OBJETO: Sink_LotesFinalizados (si existe)
+  Entered Trigger         = P_M7_ResetPendienteFinLote
+
+OBJETO: Server_Enfriado (si no hay sink final)
+  Exited Trigger          = P_M7_ResetPendienteFinLote
+\end{lstlisting}
+
+\textbf{Regla de auditoria}
+\begin{itemize}
+  \item Completar esta matriz y marcar \simio{OK/NO} por fila antes de pasar a pruebas.
+\end{itemize}
+
+\subsubsection{M7A17 Proceso de refresco de KPIs visibles (detalle absoluto)}
+\textbf{Resultado esperado:} el panel muestra indicadores consistentes en tiempo de simulacion, sin formulas ocultas en cada label.
+
+\textbf{States escalares nuevos de M7A (crear en Model\_Panaderia > States)}
+\begin{lstlisting}[caption={States escalares de panel recomendados en M7A}]
+State_M7A_DemandaTotalKg        Real, Initial Value = 0
+State_M7A_DemandaSatisfechaKg   Real, Initial Value = 0
+State_M7A_DemandaPerdidaKg      Real, Initial Value = 0
+State_M7A_StockSalaTotalKg      Real, Initial Value = 0
+State_M7A_LotesLiberadosTot     Real, Initial Value = 0
+State_M7A_FillRate              Real, Initial Value = 0
+\end{lstlisting}
+
+\textbf{Proceso nuevo: \proc{P\_M7A\_ActualizarKPIsVisibles}}
+\begin{lstlisting}[caption={Bloques cerrados de P M7A ActualizarKPIsVisibles}]
+Begin
+Assign_KPI_DemandaTotal
+  State_M7A_DemandaTotalKg =
+    DemandaTotal[1] + DemandaTotal[2] + DemandaTotal[3] + DemandaTotal[4] + DemandaTotal[5] +
+    DemandaTotal[6] + DemandaTotal[7] + DemandaTotal[8] + DemandaTotal[9] + DemandaTotal[10]
+
+Assign_KPI_DemandaSatisfecha
+  State_M7A_DemandaSatisfechaKg =
+    DemandaSatisfecha[1] + DemandaSatisfecha[2] + DemandaSatisfecha[3] + DemandaSatisfecha[4] + DemandaSatisfecha[5] +
+    DemandaSatisfecha[6] + DemandaSatisfecha[7] + DemandaSatisfecha[8] + DemandaSatisfecha[9] + DemandaSatisfecha[10]
+
+Assign_KPI_DemandaPerdida
+  State_M7A_DemandaPerdidaKg =
+    DemandaPerdida[1] + DemandaPerdida[2] + DemandaPerdida[3] + DemandaPerdida[4] + DemandaPerdida[5] +
+    DemandaPerdida[6] + DemandaPerdida[7] + DemandaPerdida[8] + DemandaPerdida[9] + DemandaPerdida[10]
+
+Assign_KPI_StockTotal
+  State_M7A_StockSalaTotalKg =
+    StockSala[1] + StockSala[2] + StockSala[3] + StockSala[4] + StockSala[5] +
+    StockSala[6] + StockSala[7] + StockSala[8] + StockSala[9] + StockSala[10]
+
+Assign_KPI_LotesLiberados
+  State_M7A_LotesLiberadosTot =
+    LotesLiberadosTotal[1] + LotesLiberadosTotal[2] + LotesLiberadosTotal[3] + LotesLiberadosTotal[4] + LotesLiberadosTotal[5] +
+    LotesLiberadosTotal[6] + LotesLiberadosTotal[7] + LotesLiberadosTotal[8] + LotesLiberadosTotal[9] + LotesLiberadosTotal[10]
+
+Decide_DemandaPositiva
+  Condition Or Probability = State_M7A_DemandaTotalKg > 0
+  True  -> Assign_FillRate
+  False -> Assign_FillRateCero
+
+Assign_FillRate
+  State_M7A_FillRate = State_M7A_DemandaSatisfechaKg / State_M7A_DemandaTotalKg
+  -> End
+
+Assign_FillRateCero
+  State_M7A_FillRate = 0
+End
+\end{lstlisting}
+
+\textbf{Donde ejecutarlo}
+\begin{enumerate}
+  \item Crear \simio{Timer\_M7A\_KPIRefresh} y conectar \proc{P\_M7A\_ActualizarKPIsVisibles}.
+  \item Ejecutar ademas una vez en \simio{Run Initialized} para no mostrar panel en cero artificial por mucho tiempo.
+\end{enumerate}
+
+\textbf{Binding de labels (cerrado)}
+\begin{itemize}
+  \item \simio{Lbl\_DemandaTotalKg} \(\rightarrow\) \state{State\_M7A\_DemandaTotalKg}
+  \item \simio{Lbl\_DemandaSatisfechaKg} \(\rightarrow\) \state{State\_M7A\_DemandaSatisfechaKg}
+  \item \simio{Lbl\_DemandaPerdidaKg} \(\rightarrow\) \state{State\_M7A\_DemandaPerdidaKg}
+  \item \simio{Lbl\_StockSalaTotalKg} \(\rightarrow\) \state{State\_M7A\_StockSalaTotalKg}
+  \item \simio{Lbl\_LotesLiberadosTot} \(\rightarrow\) \state{State\_M7A\_LotesLiberadosTot}
+  \item \simio{Lbl\_FillRate} \(\rightarrow\) \state{State\_M7A\_FillRate}
+\end{itemize}
+
+\subsubsection{M7A18 Etiquetas y codigos de politica (lectura ejecutiva obligatoria)}
+\textbf{Resultado esperado:} cualquier lector identifica rapido origen de cada lote.
+
+\textbf{Codificacion cerrada de \state{PoliticaLiberacionCod}}
+\begin{lstlisting}[caption={Diccionario de codigos de politica para panel y etiquetas}]
+1 = Push
+2 = PullMin
+3 = HibridaPush
+4 = HibridaPull
+\end{lstlisting}
+
+\textbf{Codificacion cerrada de \state{OrigenGatilloPolitica}}
+\begin{lstlisting}[caption={Diccionario de origen de gatillo para trazabilidad}]
+1 = TimerPush
+2 = PostConsumoCliente
+3 = PruebaManual
+\end{lstlisting}
+
+\textbf{Regla visual minima}
+\begin{itemize}
+  \item Si \state{PoliticaLiberacionCod} no esta entre 1 y 4, mostrar la etiqueta como \simio{POL?} y detener pruebas.
+\end{itemize}
+
+\subsubsection{M7A19 Integridad de flujo cliente vs flujo lote (sin mezcla de entidades)}
+\textbf{Resultado esperado:} no hay cruce ilegal de states entre entidades.
+
+\textbf{Checks obligatorios}
+\begin{enumerate}
+  \item En \proc{P\_M7\_PostConsumoCliente}, usar solo \state{Entity\_Cliente.*} para datos de cliente.
+  \item En \proc{P\_M7\_PrepararLoteLiberado} y \proc{P\_CrearLote}, usar solo \state{ModelEntity.*} para datos de lote.
+  \item Nunca escribir \state{Entity\_Cliente.KgLote}.
+  \item Nunca escribir \state{ModelEntity.KgSolicitado}.
+  \item Nunca ejecutar \proc{P\_CrearLote} directo desde proceso que corra en contexto de cliente.
+\end{enumerate}
+
+\textbf{Prueba rapida de integridad}
+\begin{lstlisting}[caption={Prueba de integridad entidad-clase en M7A}]
+Forzar un quiebre de cliente (ProductoIdx = 5, stock bajo)
+  -> validar que se dispara politica
+  -> validar que nace ModelEntity de lote
+  -> validar que Entity_Cliente sale al sink de clientes
+  -> validar que ModelEntity sigue ruta productiva
+\end{lstlisting}
+
+\subsubsection{M7A20 Matriz de pruebas extendidas (sin experimentos, con criterios cerrados)}
+\textbf{Resultado esperado:} cobertura funcional de observabilidad y trazabilidad antes de M8.
+
+\begin{lstlisting}[caption={Matriz extendida de pruebas manuales M7A}]
+T01_BaselineIntacto
+  Accion: correr modelo sin tocar inputs
+  Esperado: KPIs base en rango cercano a Baseline_M7A_PreVisual
+
+T02_FlujoVisualClientes
+  Accion: observar 10 llegadas consecutivas
+  Esperado: entrada, trayecto visible, salida sin teletransporte
+
+T03_FlujoVisualLotes
+  Accion: disparar 3 liberaciones manuales
+  Esperado: los 3 lotes recorren etapas productivas
+
+T04_EtiquetaProducto
+  Accion: liberar producto 7 manual
+  Esperado: etiqueta muestra P:7 en lote creado
+
+T05_EtiquetaPolitica
+  Accion: liberar codigos 1,2,3,4
+  Esperado: etiqueta/trace distingue el codigo correcto
+
+T06_ContadorPush
+  Accion: politica push, 5 ticks
+  Esperado: sube LotesLiberadosPush y LotesLiberadosTotal
+
+T07_ContadorPull
+  Accion: politica pull, stock bajo en p
+  Esperado: sube LotesLiberadosPull[p]
+
+T08_ContadorHibridaPush
+  Accion: hibrida en preapertura con timer
+  Esperado: sube LotesLiberadosHibridaPush
+
+T09_ContadorHibridaPull
+  Accion: hibrida en venta con gatillo cliente
+  Esperado: sube LotesLiberadosHibridaPull
+
+T10_AntiDuplicadoPendiente
+  Accion: 3 gatillos seguidos mismo producto p con pendiente=1
+  Esperado: solo 1 lote nuevo de p
+
+T11_ResetPendienteFinLote
+  Accion: esperar fin de lote de p
+  Esperado: PendienteReposicion[p] vuelve a 0
+
+T12_QuiebreObservable
+  Accion: stock cero y demanda positiva de p
+  Esperado: suben DemandaPerdida[p] y StockoutCount[p]
+
+T13_PanelActualiza
+  Accion: esperar 3 minutos simulados
+  Esperado: labels KPI cambian via Timer_M7A_KPIRefresh
+
+T14_TraceEventoCorrecto
+  Accion: activar trace y disparar liberacion
+  Esperado: aparece Evt_LiberarLoteProduccion y procesos M7
+\end{lstlisting}
+
+\subsubsection{M7A21 Catalogo de fallas tipicas y correccion inmediata}
+\textbf{Resultado esperado:} diagnostico rapido sin ensayo-error desordenado.
+
+\begin{itemize}
+  \item \textbf{Falla:} todos los lotes salen producto 1.
+  \item \textbf{Causa probable:} \proc{P\_CrearLote} fija \state{ModelEntity.ProductoIdx = 1}.
+  \item \textbf{Correccion:} eliminar asignacion fija; usar \state{State\_ProductoObjetivoLiberacion}.
+\end{itemize}
+
+\begin{itemize}
+  \item \textbf{Falla:} pull libera muchos lotes iguales en segundos.
+  \item \textbf{Causa probable:} pendiente se marca tarde o se resetea en proceso incorrecto.
+  \item \textbf{Correccion:} marcar pendiente antes de \simio{Fire Event}; reset solo al fin de lote.
+\end{itemize}
+
+\begin{itemize}
+  \item \textbf{Falla:} no nacen lotes en push.
+  \item \textbf{Causa probable:} timer no dispara proceso, o source sigue por interarrival anterior.
+  \item \textbf{Correccion:} revisar \simio{Timer\_M7\_PushTick} y \simio{Arrival Mode = On Event}.
+\end{itemize}
+
+\begin{itemize}
+  \item \textbf{Falla:} panel no cambia.
+  \item \textbf{Causa probable:} no existe timer KPI o labels no estan binded a states.
+  \item \textbf{Correccion:} crear \simio{Timer\_M7A\_KPIRefresh} y revisar bindings.
+\end{itemize}
+
+\begin{itemize}
+  \item \textbf{Falla:} lotes no recorren etapas.
+  \item \textbf{Causa probable:} conectores/path incompletos o sink mal conectado.
+  \item \textbf{Correccion:} validar secuencia completa hasta \simio{Sink\_LotesFinalizados}.
+\end{itemize}
+
+\subsubsection{M7A22 Gate formal de salida hacia M8}
+\textbf{Resultado esperado:} criterio objetivo para habilitar trabajo de dotacion.
+
+\textbf{Regla de aprobacion}
+\begin{enumerate}
+  \item Todas las pruebas T01--T14 en estado \simio{PASS}.
+  \item Sin errores de indice (\textit{Bad index into state array}) en trace.
+  \item Sin lotes por interarrival fijo.
+  \item Sin mezcla de contexto cliente/lote.
+  \item Sin cambios de logica M6 no documentados.
+\end{enumerate}
+
+\textbf{Evidencia minima que debe quedar guardada}
+\begin{itemize}
+  \item Captura del layout con dos flujos separados.
+  \item Captura del panel KPI en corrida activa.
+  \item Extracto de trace con liberacion por evento.
+  \item Tabla de resultados de T01--T14.
+\end{itemize}
+
+\textbf{Decision final cerrada}
+\begin{itemize}
+  \item Si falta una evidencia, M7A sigue abierta.
+  \item Solo con gate completo se habilita \simio{M8}.
+\end{itemize}
+
 \subsection{M8 paso a paso: dotacion y recursos multiples}
 \textbf{Objetivo operacional de M8:} representar dotacion realista y escalable (personas y equipos), de forma que la produccion responda a cambios de capacidad, turnos y descansos sin reescribir logica.
 
