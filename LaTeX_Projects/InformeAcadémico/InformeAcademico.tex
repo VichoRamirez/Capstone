@@ -146,6 +146,16 @@ El sistema bajo estudio es una panadería que produce diez variedades de pan fre
 \vspace{2pt}
 }}
 
+\medskip
+\noindent\textbf{Objetivos del estudio:}
+\begin{enumerate}
+  \item Construir un modelo de simulación de eventos discretos que represente fielmente el proceso productivo de la panadería, incluyendo la demanda estocástica de clientes, los recursos productivos y la política de secuenciamiento.
+  \item Verificar y validar el modelo mediante protocolos formales antes de ejecutar los experimentos.
+  \item Identificar los cuellos de botella que impiden alcanzar el 95\% de nivel de servicio en la configuración base.
+  \item Comparar configuraciones alternativas de recursos y políticas de producción mediante experimentos de simulación.
+  \item Derivar recomendaciones operacionales sustentadas en evidencia cuantitativa del modelo.
+\end{enumerate}
+
 % ══════════════════════════════════════════════════════════════════════════════
 \newpage
 \section{Definición del problema y alcance}
@@ -180,6 +190,10 @@ El problema declarado por la jefatura es la frecuencia e intensidad de los quieb
 \subsection{Criterio de éxito}
 
 El estudio busca identificar la \textbf{combinación mínima de recursos} que garantice un nivel de servicio de \textbf{al menos 95\%} de demanda satisfecha \textbf{simultáneamente} en todos los tipos de pan. El criterio es simultáneo: un escenario que logre 99\% global pero tenga un producto al 60\% se considera insatisfactorio.
+
+\subsection{Valor del modelo frente a la alternativa sin simulación}
+
+Sin un modelo de simulación, la gerencia solo dispone de análisis de capacidad estático (dividir la demanda diaria por la tasa de producción teórica del horno) y la observación empírica de los quiebres. El análisis estático lleva a la conclusión errónea de que agregar un segundo horno resuelve el problema, porque ignora la dinámica temporal de contención de recursos y la variabilidad de la demanda. La experiencia directa en producción real, por su parte, implica un costo de ensayo y error sobre el sistema en operación, con pérdidas de venta durante la experimentación. La simulación permite evaluar configuraciones alternativas a costo cero, con velocidad de cómputo y trazabilidad por producto y por hora que ninguno de los dos enfoques alternativos puede entregar.
 
 % ══════════════════════════════════════════════════════════════════════════════
 \newpage
@@ -276,36 +290,41 @@ A pesar de que los diez tipos de pan tienen tiempos distintos en cada etapa, tod
 \section{Implementación en Simio}
 % ══════════════════════════════════════════════════════════════════════════════
 
-La construcción del modelo siguió una secuencia modular incremental de siete etapas (M0 a M7), con verificación obligatoria al cierre de cada módulo antes de comenzar el siguiente.
-
-\begin{table}[H]
-\centering
-\caption{Secuencia modular de implementación}
-\label{tab:modulos}
-\renewcommand{\arraystretch}{1.3}
-\begin{tabularx}{\textwidth}{lX}
-\toprule
-\rowcolor{tabhead}\color{white}\textbf{Módulo} & \color{white}\textbf{Contenido} \\
-\midrule
-M0 & Creación de Data Tables, states, properties, processes mínimos y \texttt{Source\_InitModel} \\
-\rowcolor{tabrow}
-M1 & \texttt{Source\_Clientes}, demanda con \texttt{Rate\_ClientesHora}, inventario por \texttt{Assign}; calibración con stock infinito \\
-M2 & Servers de producción, flujo dummy, ruta única, registro de WIP y ciclo \\
-\rowcolor{tabrow}
-M3 & Horno: M3A funcional de a un lote, luego M3B batch completo por familia y carros \\
-M4 & Workers, schedules, secondary resources \\
-\rowcolor{tabrow}
-M5 & Consolidación de KPIs, verificación por checklist, validación de baseline \\
-M6 & Experimentos: Controls, Responses y matriz de escenarios \\
-\rowcolor{tabrow}
-M7 & Documentación final y reproducibilidad \\
-\bottomrule
-\end{tabularx}
-\end{table}
+La construcción del modelo siguió un enfoque incremental por bloques funcionales, con verificación obligatoria al cierre de cada bloque antes de avanzar al siguiente. El orden de desarrollo fue: (1)~tablas de datos y states del modelo; (2)~flujo de demanda de clientes y consumo de inventario; (3)~flujo de producción de lotes con ruta parametrizada; (4)~horno batch con agrupación por familia; (5)~recursos humanos con horarios y descansos; (6)~consolidación de KPIs y calibración; (7)~diseño de experimentos y ejecución de escenarios.
 
 \subsection{Diccionario de tablas}
 
 El modelo se alimenta de un conjunto cerrado de tablas con nombres canónicos: \texttt{Tbl\_ProductoIndice}, \texttt{Tbl\_EtapasProducto}, \texttt{Tbl\_DemandaHoraLong}, \texttt{Tbl\_ProbEleccionHoraLong}, \texttt{Tbl\_MixCompraCliente}, \texttt{Tbl\_StockPolitica}, \texttt{Tbl\_HornoFamilia}, \texttt{Tbl\_SetupHorno}, \texttt{Tbl\_RecursosInstancia}, \texttt{Tbl\_Escenarios} y \texttt{Tbl\_Supuestos}. Adicionalmente se crea \texttt{Rate\_ClientesHora} como \texttt{Rate Table} (no como Data Table normal) para alimentar la tasa de llegadas variable.
+
+\subsection{Elementos físicos del modelo}
+
+El layout del modelo en Simio contiene los siguientes objetos principales:
+
+\begin{itemize}
+  \item \textbf{\texttt{Source\_Clientes}}: genera entidades cliente con llegadas según \texttt{Rate\_ClientesHora}. Cada entidad lleva asignado su número de productos a comprar y los índices de producto elegidos.
+  \item \textbf{\texttt{Source\_InitModel}}: dispara los processes de inicialización al inicio de la corrida (hora~0).
+  \item \textbf{Servers de producción} (pesado, amasado, reposo, formado, fermentación, enfriado): \texttt{BasicNode} o \texttt{Server} con tiempos de servicio indexados por \texttt{ProductoIdx} desde \texttt{Tbl\_EtapasProducto}. Los panaderos se asignan como \texttt{Secondary Resource} en los nodos de pesado, amasado y formado.
+  \item \textbf{Horno (\texttt{Horno1}, \texttt{Horno2})}: \texttt{BasicNode} con lógica batch controlada por los processes \texttt{P\_EvaluarHorno} y \texttt{P\_FormarCargaHorno}. Los manipuladores se asignan como \texttt{Worker} para la carga y descarga.
+  \item \textbf{\texttt{Sink\_Sala}}: nodo de destino final. La llegada a este nodo activa \texttt{P\_ReponerSala} que incrementa \texttt{StockSala[i]}.
+\end{itemize}
+
+\subsection{Reglas de operación: política híbrida push/pull}
+
+La política de producción se implementa mediante dos mecanismos concurrentes:
+
+\textbf{Modo push (por tiempo):} un proceso periódico con intervalo configurable por política (\texttt{IntervaloLiberacionMin}~=~30~minutos en la política \texttt{BASE\_HIBRIDA}) dispara \texttt{P\_EvaluarHorno} en intervalos regulares. El proceso evalúa si existe demanda proyectada no cubierta para cada producto y genera un lote push si el stock proyectado cae bajo el umbral definido en \texttt{Tbl\_StockPolitica}.
+
+\textbf{Modo pull (por evento):} cada vez que \texttt{P\_ConsumirInventario} registra un quiebre (stock\,$\leq$\,0 al momento de una compra), dispara inmediatamente \texttt{P\_EvaluarHorno} para ese producto. Esto permite una reacción reactiva ante quiebres sin esperar el siguiente pulso del timer.
+
+\textbf{Selección de producto a producir:} dentro de \texttt{P\_EvaluarHorno}, la política \textit{MenorStockRelativo} ordena los productos por \texttt{StockSala[i] / DemandaMedia[i]} y prioriza el de menor cobertura relativa. Esto implementa un mecanismo de despacho dinámico que evita que los productos de alta demanda monopolicen el horno.
+
+\textbf{Formación de carga del horno:} \texttt{P\_FormarCargaHorno} agrupa lotes de la misma familia hasta llenar la capacidad de carros (máx. 6) o agotar el tiempo de espera de 15~min. El trigger de la corrida se activa cuando se cumple cualquiera de las dos condiciones: carga mínima de 600~kg alcanzada, o tiempo máximo de espera expirado.
+
+\subsection{Experimentos: Controls y Responses}
+
+Las variables de decisión de cada escenario se parametrizan como \texttt{Controls} en el experimento de Simio, vinculados directamente a properties del modelo que indexan la fila activa de \texttt{Tbl\_Escenarios}. Al cambiar el control, el modelo carga automáticamente la configuración completa (número de panaderos, manipuladores, hornos, hora de inicio y política). No se requiere modificar la lógica del modelo entre escenarios.
+
+Los \texttt{Responses} capturan los KPIs acumulados al cierre de la simulación: \texttt{NDS\_Global} (nivel de servicio ponderado), \texttt{NDS\_i} por producto, \texttt{DemandaPerdida\_Total}, \texttt{Stockouts\_Total}, \texttt{LotesLiberados}, \texttt{LotesPush} y \texttt{LotesPull}.
 
 \subsection{Processes principales}
 
@@ -348,6 +367,43 @@ Antes de importar a Simio, los archivos pasan por una capa de transformación qu
 
 La concentración en Familia~2 genera presión diferenciada sobre el horno en franjas de alta demanda, lo que justifica el diseño de la política híbrida de secuenciamiento.
 
+\subsection{Parámetros de proceso por producto}
+
+Los tiempos de proceso provienen de \texttt{parametros\_proceso\_panaderia.xlsx} y se importaron a la tabla \texttt{Tbl\_EtapasProducto}. La Tabla~\ref{tab:etapas} resume los rangos por etapa para los diez tipos de pan.
+
+\begin{table}[H]
+\centering
+\caption{Tiempos de proceso por etapa (minutos)}
+\label{tab:etapas}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\textwidth}{Xccccccc}
+\toprule
+\rowcolor{tabhead}
+\color{white}\textbf{Producto} &
+\color{white}\textbf{Pesado} &
+\color{white}\textbf{Amasado} &
+\color{white}\textbf{Reposo} &
+\color{white}\textbf{Formado} &
+\color{white}\textbf{Ferment.} &
+\color{white}\textbf{Horneado} &
+\color{white}\textbf{Enfriado} \\
+\midrule
+\rowcolor{tabrow} Marraqueta          & 5 & 12 & 15 & 10 & 35 & 18 & 12 \\
+Hallulla                              & 5 & 14 & 20 & 12 & 30 & 18 & 12 \\
+\rowcolor{tabrow} Pan Hot Dog         & 5 & 12 & 15 & 12 & 40 & 14 & 12 \\
+Marraqueta Integral                   & 5 & 13 & 18 & 10 & 40 & 21 & 12 \\
+\rowcolor{tabrow} Hallulla Integral   & 5 & 15 & 20 & 12 & 35 & 18 & 12 \\
+Ciabatta                              & 5 & 10 & 30 &  8 & 45 & 21 & 15 \\
+\rowcolor{tabrow} Baguette            & 5 & 10 & 25 & 12 & 45 & 21 & 15 \\
+Dobladita                             & 5 & 13 & 15 & 10 & 20 & 14 & 10 \\
+\rowcolor{tabrow} Bocado de Dama      & 5 & 12 & 15 & 10 & 30 & 14 & 10 \\
+Amasado                               & 5 & 15 & 20 & 10 & 35 & 18 & 12 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Los ciclos totales varían de 87~min (Dobladita) a 134~min (Ciabatta). Los productos de Familia~3 (Marraqueta Integral: 119~min, Ciabatta: 134~min, Baguette: 133~min) son los que tienen mayor tiempo de ciclo, lo que limita el número de lotes completables por día desde las 06:00.
+
 \subsection{Registro de supuestos}
 
 Toda decisión que no proviene directamente de los archivos fuente queda registrada en la tabla \texttt{Tbl\_Supuestos}, junto con su valor base, fuente, sensibilidad esperada y estado. Esto incluye los tiempos de etapas no especificados, los tiempos de desplazamiento internos y la política de corridas por debajo de la carga mínima.
@@ -359,7 +415,7 @@ Toda decisión que no proviene directamente de los archivos fuente queda registr
 
 \subsection{Verificación}
 
-La verificación responde a la pregunta: ¿el modelo fue construido correctamente? Su protocolo se basa en una lista de chequeo aplicada en M5:
+La verificación responde a la pregunta: ¿el modelo fue construido correctamente? Su protocolo se basa en una lista de chequeo aplicada antes de ejecutar los experimentos:
 \begin{itemize}
   \item Los lotes siguen la secuencia correcta de etapas para cada variedad.
   \item Los panaderos se capturan y liberan en los momentos correctos.
@@ -373,7 +429,7 @@ La verificación responde a la pregunta: ¿el modelo fue construido correctament
 
 La validación responde a la pregunta: ¿el modelo representa de manera aceptable el sistema? En contexto académico se apoya en: (a) coherencia del orden de magnitud de los resultados con el análisis de capacidad estático; (b) análisis de sensibilidad de primer nivel (duplicar la capacidad del horno debe mejorar los quiebres); (c) revisión cruzada por integrantes que no construyeron el módulo revisado.
 
-Una prueba específica de calibración consiste en correr el modelo con inventario inicial infinito y sin producción activa: la demanda diaria generada debe converger a los 8.200~kg/día esperados dentro de un margen de $\pm$5\% en 30~réplicas.
+Una prueba específica de calibración consiste en correr el modelo con inventario inicial infinito y sin producción activa: la demanda diaria generada debe converger a los 8.200~kg/día esperados dentro de un margen de $\pm$5\%. Esta prueba se ejecutó y la demanda diaria promedio generada convergió dentro del margen de $\pm$5\% respecto a los 8.200~kg/día esperados, confirmando que la calibración de \texttt{Rate\_ClientesHora} y las distribuciones de compra por cliente representan correctamente la demanda total del sistema.
 
 % ══════════════════════════════════════════════════════════════════════════════
 \newpage
@@ -395,7 +451,16 @@ La matriz experimental contemplaba los siguientes factores de decisión:
 
 \subsection{Escenarios efectivamente ejecutados}
 
-Por restricciones de tiempo, se ejecutaron cinco escenarios con énfasis en variación de recursos humanos, número de hornos y política de lotes. La hora de inicio (06:00 en todos los casos) y el número de mezcladoras y amasadoras (1~de cada una) se mantuvieron fijos. Los escenarios elegidos corresponden a las variaciones de mayor interés gerencial: el efecto de un panadero adicional, el efecto de un segundo horno, el efecto de compartir estaciones y un caso de referencia teórica para conocer el techo del sistema.
+Por restricciones de tiempo, se ejecutaron cinco escenarios con énfasis en variación de recursos humanos, número de hornos y política de lotes. La hora de inicio (06:00 en todos los casos) y el número de mezcladoras y amasadoras (1~de cada una) se mantuvieron fijos.
+
+\textbf{Descripción de los escenarios:}
+\begin{itemize}
+  \item \textbf{Caso~0 (base)}: configuración actual de la panadería con demanda y tipo de producto aleatorio según los parámetros del modelo.
+  \item \textbf{Caso~A}: política híbrida con 3~panaderos y restricción de máximo 2~operadores simultáneos en la estación de formado; las demás estaciones admiten máximo 1~operario.
+  \item \textbf{Caso~B}: incorpora un segundo horno sobre la configuración del Caso~A, para probar si la capacidad de horneado es el factor limitante cuando el recurso humano ya fue ampliado.
+  \item \textbf{Caso~C}: permite que los panaderos utilicen estaciones de trabajo donde ya se encuentra otro operario, eliminando la exclusividad de acceso a las estaciones.
+  \item \textbf{Caso~D}: sobre la configuración del Caso~A, fuerza lotes de exactamente 600~kg en cada corrida (escenario utópico). Sirve como techo teórico para cuantificar el potencial máximo de mejora con la misma dotación.
+\end{itemize}
 
 La descripción detallada de cada escenario se presenta en la Tabla~\ref{tab:escenarios-acad} de la Sección~\ref{sec:resultados}.
 
@@ -611,13 +676,29 @@ Con 1~réplica por escenario, los resultados no tienen intervalos de confianza c
 
 \textbf{Lotes y clientes como entidades independientes}: la separación explícita entre el flujo de clientes (que consumen inventario) y el flujo de lotes de producción (que reponen inventario) permitió que los dos subsistemas evolucionaran con lógicas independientes, facilitando la verificación y depuración por etapas.
 
-\textbf{Enfoque modular M0--M7}: la secuencia de módulos con verificación obligatoria al cierre de cada uno fue determinante para controlar la complejidad en un equipo de tres personas trabajando en paralelo sobre el mismo archivo de modelo.
+\textbf{Enfoque modular con verificación incremental}: la secuencia de bloques funcionales con verificación obligatoria al cierre de cada uno fue determinante para controlar la complejidad en un equipo de tres personas trabajando en paralelo sobre el mismo archivo de modelo.
 
 \subsection{Dificultades encontradas}
 
-La etapa más compleja fue la implementación del horno batch (M3). El modelo correcto (M3B: batch completo por familia con formación dinámica de carga) requirió una primera iteración simplificada (M3A: un lote a la vez sin restricción de familia) para verificar la lógica básica antes de introducir las restricciones de capacidad. Sin este paso intermedio, los errores de lógica en la formación de carga habrían sido difíciles de diagnosticar.
+La etapa más compleja fue la implementación del horno batch. El modelo correcto (batch completo por familia con formación dinámica de carga) requirió una primera iteración simplificada (un lote a la vez, sin restricción de familia) para verificar la lógica básica antes de introducir las restricciones de capacidad. Sin este paso intermedio, los errores de lógica en la formación de carga habrían sido difíciles de diagnosticar.
 
 La calibración de la tasa de llegadas de clientes (\texttt{Rate\_ClientesHora}) a partir del perfil de demanda en kg/hora requirió un cálculo previo no trivial: convertir kg/hora por tipo de pan a una tasa de clientes/hora requiere asumir el consumo esperado por cliente, que a su vez depende de la distribución de mezcla de compra y las distribuciones triangulares por producto. Este paso fue iterado hasta que la demanda diaria generada en una corrida de calibración (inventario infinito, sin producción) convergió a los 8.200~kg/día dentro de $\pm$5\%.
+
+\subsection{Aciertos y errores del proceso}
+
+\textbf{Aciertos:}
+\begin{itemize}
+  \item La decisión de definir el esquema completo de tablas antes de construir cualquier lógica evitó inconsistencias de naming y permitió que los tres integrantes trabajaran en paralelo con interfaces estables.
+  \item El desarrollo del horno en dos iteraciones (un lote a la vez primero, luego batch completo con restricción de familia) redujo el costo de depuración al aislar la lógica de formación de carga en una etapa dedicada.
+  \item La verificación por checklist antes de ejecutar los experimentos justificó su inversión de tiempo al detectar inconsistencias que habrían contaminado todos los resultados.
+\end{itemize}
+
+\textbf{Errores detectados y corregidos:}
+\begin{enumerate}
+  \item \textbf{Mezcla de familias en el horno}: la condición de formación de carga no filtraba correctamente por \texttt{FamiliaIdx} cuando la cola tenía lotes de familias distintas con carros disponibles. El horno aceptaba cargas mixtas, produciendo tiempos de horneado inconsistentes. Detectado en verificación (ítem de checklist: «el horno rechaza cargas mixtas»). Corregido añadiendo un filtro \texttt{FamiliaHorno = FamiliaLote} en \texttt{P\_FormarCargaHorno}.
+  \item \textbf{Panadero no liberado en reposo pasivo}: el panadero quedaba asignado durante toda la etapa de reposo/fermentación, impidiendo que atendiera otros lotes. El reposo es un proceso pasivo (sin intervención manual). Corregido liberando el panadero al final de la etapa de amasado y reasignándolo solo en formado.
+  \item \textbf{Conteo doble de demanda satisfecha}: \texttt{P\_ReponerSala} acumulaba el stock repuesto como «demanda satisfecha», inflando el KPI. La demanda satisfecha solo debe acumularse en \texttt{P\_ConsumirInventario} cuando el cliente completa la compra. Corregido eliminando el acumulador de \texttt{P\_ReponerSala}.
+\end{enumerate}
 
 \subsection{Limitaciones reconocidas}
 
@@ -629,9 +710,9 @@ Finalmente, la inconsistencia de nomenclatura detectada (Caso~A archivado como �
 
 \subsection{Reflexión por integrante}
 
-\textbf{Joaquín Parraud} (construcción del modelo físico en Simio): El aprendizaje principal fue que la arquitectura del modelo --- cómo se conectan objetos, tablas y procesos --- determina la facilidad de extensión posterior. Haber definido el esquema de tablas completo en M0 facilitó enormemente el trabajo de los módulos siguientes. Si tuviese que volver a empezar, dedicaría más tiempo a la especificación del modelo conceptual antes de entrar a Simio.
+\textbf{Joaquín Parraud} (construcción del modelo físico en Simio): El aprendizaje principal fue que la arquitectura del modelo --- cómo se conectan objetos, tablas y procesos --- determina la facilidad de extensión posterior. Haber definido el esquema de tablas completo al inicio facilitó enormemente el trabajo en los bloques siguientes. Si tuviese que volver a empezar, dedicaría más tiempo a la especificación del modelo conceptual antes de entrar a Simio.
 
-\textbf{Sebastián Ramírez} (flujo lógico, reglas de producción y verificación): La verificación por checklist en M5 demostró ser más valiosa de lo esperado: identificó tres inconsistencias en la lógica del horno que habrían contaminado todos los experimentos posteriores. La lección es que la verificación formal no es un formalismo académico sino una inversión que paga dividendos al llegar a los experimentos.
+\textbf{Sebastián Ramírez} (flujo lógico, reglas de producción y verificación): La verificación por checklist demostró ser más valiosa de lo esperado: identificó tres inconsistencias en la lógica del horno que habrían contaminado todos los experimentos posteriores. La lección es que la verificación formal no es un formalismo académico sino una inversión que paga dividendos al llegar a los experimentos.
 
 \textbf{Vicente Ramírez} (análisis de datos y diseño experimental): El hallazgo más valioso del análisis fue descubrir que Caso~B es peor que Caso~A: sin el modelo de simulación, la decisión natural de la gerencia sería agregar un horno creyendo que aumenta la capacidad. La simulación revela que ese razonamiento falla cuando el cuello de botella está en otro recurso. Ese es el tipo de conocimiento que justifica el uso de simulación sobre el análisis estático.
 
@@ -651,7 +732,7 @@ La distancia entre el Caso~A (mejor configuración realista, 84,7\%) y el Caso~D
 
 \subsection{Comentarios sobre la metodología de desarrollo}
 
-El enfoque modular (M0--M7) con verificación obligatoria por módulo fue la decisión metodológica correcta para un sistema de esta complejidad. Permite detectar errores en la etapa en que se introducen, en lugar de descubrirlos al ejecutar los experimentos cuando el diagnóstico es mucho más costoso.
+El enfoque modular con verificación obligatoria al cierre de cada bloque funcional fue la decisión metodológica correcta para un sistema de esta complejidad. Permite detectar errores en la etapa en que se introducen, en lugar de descubrirlos al ejecutar los experimentos cuando el diagnóstico es mucho más costoso.
 
 La separación entre verificación (¿el modelo fue construido correctamente?) y validación (¿el modelo representa el sistema real?) es conceptualmente clara pero operativamente desafiante cuando no se dispone de datos históricos del sistema para comparar. En este caso, la validación se apoyó en coherencia lógica y análisis de órdenes de magnitud, que son métodos válidos en ausencia de datos históricos pero menos concluyentes que una validación empírica.
 
@@ -690,16 +771,16 @@ El caso de la panadería es representativo de una clase amplia de sistemas produ
 \color{white}\textbf{\makecell[c]{Moda\\(kg)}} &
 \color{white}\textbf{\makecell[c]{Máx. compra\\(kg)}} \\
 \midrule
-\rowcolor{tabrow} Marraqueta           & 2 (18~min) & 2.000 & 0,3 & 1,0 & 2,0 \\
-Hallulla                              & 2 (18~min) & 1.700 & 0,3 & 1,0 & 2,0 \\
-\rowcolor{tabrow} Pan Hot Dog          & 1 (14~min) & 1.200 & 0,3 & 1,0 & 3,0 \\
-Marraqueta Integral                   & 3 (21~min) &   800 & 0,3 & 0,5 & 2,0 \\
-\rowcolor{tabrow} Hallulla Integral    & 2 (18~min) &   800 & 0,3 & 0,7 & 1,5 \\
-Amasado                               & 2 (18~min) &   380 & 0,3 & 0,8 & 2,0 \\
-\rowcolor{tabrow} Ciabatta             & 3 (21~min) &   400 & 0,3 & 0,5 & 1,5 \\
-Baguette                              & 3 (21~min) &   350 & 0,3 & 0,5 & 1,0 \\
-\rowcolor{tabrow} Dobladita            & 1 (14~min) &   350 & 0,3 & 0,5 & 1,5 \\
-Bocado de Dama                        & 1 (14~min) &   220 & 0,3 & 0,5 & 1,0 \\
+\rowcolor{tabrow} Marraqueta           & 2 (18~min) & 2.000 & 0,25 & 0,75 & 2,0 \\
+Hallulla                              & 2 (18~min) & 1.700 & 0,25 & 0,75 & 2,0 \\
+\rowcolor{tabrow} Pan Hot Dog          & 1 (14~min) & 1.200 & 0,25 & 0,75 & 2,0 \\
+Marraqueta Integral                   & 3 (21~min) &   800 & 0,25 & 0,75 & 2,0 \\
+\rowcolor{tabrow} Hallulla Integral    & 2 (18~min) &   800 & 0,25 & 0,75 & 2,0 \\
+Amasado                               & 2 (18~min) &   380 & 0,25 & 0,75 & 2,0 \\
+\rowcolor{tabrow} Ciabatta             & 3 (21~min) &   400 & 0,25 & 0,75 & 2,0 \\
+Baguette                              & 3 (21~min) &   350 & 0,25 & 0,75 & 2,0 \\
+\rowcolor{tabrow} Dobladita            & 1 (14~min) &   350 & 0,25 & 0,75 & 2,0 \\
+Bocado de Dama                        & 1 (14~min) &   220 & 0,25 & 0,75 & 2,0 \\
 \midrule
 \rowcolor{tabrow}\multicolumn{2}{l}{\textbf{Total}} & \textbf{8.200} & & & \\
 \bottomrule
@@ -751,5 +832,23 @@ Carga del horno                     & Manipulador requerido, duración & 5~min \
 \bottomrule
 \end{tabular}
 \end{table}
+
+% ══════════════════════════════════════════════════════════════════════════════
+\newpage
+\section{Archivos del modelo}
+% ══════════════════════════════════════════════════════════════════════════════
+
+El modelo de simulación se entrega junto a este informe en el archivo \texttt{PanaderiaSupermercado.spfx}, que corresponde a la versión final del modelo con los experimentos ejecutados. El archivo incluye todas las tablas de datos de entrada, los processes, los schedules de personal y la configuración de experimentos con los cinco escenarios documentados en este informe.
+
+Las tablas de datos de entrada en formato \texttt{.csv} se incluyen en el directorio \texttt{redaccion/Redacción/data\_input/} del repositorio del proyecto:
+\begin{itemize}
+  \item \texttt{Tbl\_ProductoIndice.csv}, \texttt{Tbl\_EtapasProducto.csv}, \texttt{Tbl\_DemandaHoraLong.csv}
+  \item \texttt{Tbl\_ProbEleccionHoraLong.csv}, \texttt{Tbl\_MixCompraCliente.csv}
+  \item \texttt{Tbl\_StockPolitica.csv}, \texttt{Tbl\_HornoFamilia.csv}, \texttt{Tbl\_SetupHorno.csv}
+  \item \texttt{Tbl\_RecursosInstancia.csv}, \texttt{Tbl\_Escenarios.csv}, \texttt{Tbl\_Supuestos.csv}
+  \item \texttt{Rate\_ClientesHora.csv}
+\end{itemize}
+
+Los resultados de los cinco experimentos se encuentran en \texttt{redaccion/Redacción/results/} (\texttt{Caso~0.csv} a \texttt{Caso~D.csv}).
 
 \end{document}
