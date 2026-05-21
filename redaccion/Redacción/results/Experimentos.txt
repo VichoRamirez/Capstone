@@ -1,0 +1,6 @@
+Caso con los parámetros actuales del SIMIO
+Caso 0: Demanda y tipo de producto aleatorio
+Caso A: Metodología Hibrída, 3 panaderos y 2 personas máximo en formado, las demás estaciones máximo 1
+Caso B: Dos hornos
+Caso C: Permite usar a los panaderos estaciones de trabajo donde ya está otro 
+Caso D: Caso A+lotes de 600 kg (Utópico)

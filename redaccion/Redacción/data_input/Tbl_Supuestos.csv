@@ -1,0 +1,11 @@
+﻿Parametro,ValorBase,Unidad,Fuente,Sensibilidad,Confianza
+MinKgCompra,0.25,kg,Supuesto base por falta de ticket/POS,0.15;0.25;0.40,Baja
+ModaKgCompra,0.75,kg,Supuesto base por falta de ticket/POS,0.50;0.75;1.00,Baja
+MaxKgCompra,2.0,kg,Supuesto base por falta de ticket/POS,1.5;2.0;3.0,Baja
+ProbCompra1Producto,0.5,prob,Supuesto de comportamiento cliente,0.40;0.50;0.60,Media
+ProbCompra2Productos,0.35,prob,Supuesto de comportamiento cliente,0.25;0.35;0.45,Media
+ProbCompra3Productos,0.15,prob,Supuesto de comportamiento cliente,0.05;0.15;0.25,Media
+VelocidadPanadero,1.2,m/s,Supuesto operacional,0.9;1.2;1.4,Baja
+VelocidadManipuladorCarro,0.8,m/s,Supuesto operacional,0.6;0.8;1.0,Baja
+CargaMinKgBase,600,kg,Enunciado; inconsistente con capacidad por carro,0;300;600,Baja
+MaxCarrosHorno,6,carros,Enunciado,5;6;7,Media

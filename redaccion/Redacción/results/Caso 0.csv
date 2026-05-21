@@ -1,0 +1,12 @@
+escenario,fuente_trace,producto_idx,producto_id,producto_nombre,demanda_total_kg,demanda_satisfecha_kg,demanda_perdida_kg,nivel_servicio_pct,stockout_count,stock_final_sala_kg,pendiente_reposicion_kg,lotes_liberados_total,lotes_liberados_push,lotes_liberados_pull,setup_horno_count,tiempo_setup_total_min
+Caso 0,PanaderiaSupermercado_M6_Model_Panaderia_trace.csv,1,Marraqueta,Marraqueta,1742.236083,396.032235,1346.203848,22.7313,1342.0,0.157765,1.0,2.0,1.0,1.0,,
+Caso 0,PanaderiaSupermercado_M6_Model_Panaderia_trace.csv,2,Hallulla,Hallulla,1629.7861,1427.075301,202.710799,87.5621,201.0,0.184699,1.0,4.0,3.0,1.0,,
+Caso 0,PanaderiaSupermercado_M6_Model_Panaderia_trace.csv,3,Marraqueta_Integral,Marraqueta Integral,995.104979,581.208156,413.896823,58.4067,411.0,399.271844,1.0,4.0,4.0,0.0,,
+Caso 0,PanaderiaSupermercado_M6_Model_Panaderia_trace.csv,4,Hallulla_Integral,Hallulla Integral,822.486341,320.324089,502.162252,38.9458,513.0,0.155911,1.0,2.0,2.0,0.0,,
+Caso 0,PanaderiaSupermercado_M6_Model_Panaderia_trace.csv,5,Pan_Hot_Dog,Pan Hot Dog,1057.978441,1001.909728,56.068713,94.7004,52.0,14.150272,1.0,4.0,3.0,1.0,,
+Caso 0,PanaderiaSupermercado_M6_Model_Panaderia_trace.csv,6,Ciabatta,Ciabatta,482.750264,482.750264,0.0,100.0,0.0,612.379736,1.0,4.0,4.0,0.0,,
+Caso 0,PanaderiaSupermercado_M6_Model_Panaderia_trace.csv,7,Baguette,Baguette,399.722985,383.464947,16.258038,95.9327,14.0,619.775053,1.0,3.0,3.0,0.0,,
+Caso 0,PanaderiaSupermercado_M6_Model_Panaderia_trace.csv,8,Dobladita,Dobladita,367.548554,332.556155,34.992399,90.4795,34.0,356.613845,1.0,3.0,3.0,0.0,,
+Caso 0,PanaderiaSupermercado_M6_Model_Panaderia_trace.csv,9,Bocado_de_Dama,Bocado de Dama,224.387577,222.81184,1.575736,99.2978,1.0,155.51816,1.0,2.0,2.0,0.0,,
+Caso 0,PanaderiaSupermercado_M6_Model_Panaderia_trace.csv,10,Amasado,Amasado,401.697635,401.697635,0.0,100.0,0.0,300.732365,1.0,3.0,3.0,0.0,,
+Caso 0,PanaderiaSupermercado_M6_Model_Panaderia_trace.csv,TOTAL,TOTAL,Total Escenario,8123.698959,5549.830351,2573.868608,68.3165,2568.0,2458.939649,10.0,31.0,28.0,3.0,32.0,80.0

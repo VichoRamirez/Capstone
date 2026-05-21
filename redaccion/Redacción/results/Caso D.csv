@@ -1,0 +1,12 @@
+escenario,fuente_trace,producto_idx,producto_id,producto_nombre,demanda_total_kg,demanda_satisfecha_kg,demanda_perdida_kg,nivel_servicio_pct,stockout_count,stock_final_sala_kg,pendiente_reposicion_kg,lotes_liberados_total,lotes_liberados_push,lotes_liberados_pull,setup_horno_count,tiempo_setup_total_min
+Caso D,PanaderiaSupermercado_M6_Model_Panaderia_trace.csv,1,Marraqueta,Marraqueta,1730.77386,1730.77386,0.0,100.0,0.0,195.41614,1.0,4.0,4.0,0.0,,
+Caso D,PanaderiaSupermercado_M6_Model_Panaderia_trace.csv,2,Hallulla,Hallulla,1631.608906,1631.608906,0.0,100.0,0.0,275.651094,1.0,4.0,4.0,0.0,,
+Caso D,PanaderiaSupermercado_M6_Model_Panaderia_trace.csv,3,Marraqueta_Integral,Marraqueta Integral,964.48712,964.48712,0.0,100.0,0.0,885.99288,1.0,4.0,4.0,0.0,,
+Caso D,PanaderiaSupermercado_M6_Model_Panaderia_trace.csv,4,Hallulla_Integral,Hallulla Integral,828.927576,828.927576,0.0,100.0,0.0,1021.552424,1.0,4.0,4.0,0.0,,
+Caso D,PanaderiaSupermercado_M6_Model_Panaderia_trace.csv,5,Pan_Hot_Dog,Pan Hot Dog,1072.488426,1071.263595,1.224832,99.8858,1.0,754.796405,1.0,4.0,4.0,0.0,,
+Caso D,PanaderiaSupermercado_M6_Model_Panaderia_trace.csv,6,Ciabatta,Ciabatta,480.491557,469.269488,11.222069,97.6645,11.0,745.860512,1.0,3.0,3.0,0.0,,
+Caso D,PanaderiaSupermercado_M6_Model_Panaderia_trace.csv,7,Baguette,Baguette,400.4471,376.066021,24.381078,93.9115,23.0,837.173979,1.0,3.0,3.0,0.0,,
+Caso D,PanaderiaSupermercado_M6_Model_Panaderia_trace.csv,8,Dobladita,Dobladita,372.348521,343.317054,29.031467,92.2031,27.0,885.852946,1.0,3.0,3.0,0.0,,
+Caso D,PanaderiaSupermercado_M6_Model_Panaderia_trace.csv,9,Bocado_de_Dama,Bocado de Dama,222.88181,198.839529,24.042281,89.213,26.0,1019.490471,1.0,3.0,3.0,0.0,,
+Caso D,PanaderiaSupermercado_M6_Model_Panaderia_trace.csv,10,Amasado,Amasado,405.839384,383.522293,22.317091,94.501,22.0,828.907707,1.0,3.0,3.0,0.0,,
+Caso D,PanaderiaSupermercado_M6_Model_Panaderia_trace.csv,TOTAL,TOTAL,Total Escenario,8110.294261,7998.075443,112.218818,98.6163,110.0,7450.694557,10.0,35.0,35.0,0.0,30.0,75.0

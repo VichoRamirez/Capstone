@@ -1,0 +1,12 @@
+escenario,fuente_trace,producto_idx,producto_id,producto_nombre,demanda_total_kg,demanda_satisfecha_kg,demanda_perdida_kg,nivel_servicio_pct,stockout_count,stock_final_sala_kg,pendiente_reposicion_kg,lotes_liberados_total,lotes_liberados_push,lotes_liberados_pull,setup_horno_count,tiempo_setup_total_min
+Caso C,PanaderiaSupermercado_M6_Model_Panaderia_trace.csv,1,Marraqueta,Marraqueta,1730.77386,1206.118784,524.655076,69.6867,521.0,0.071216,1.0,4.0,2.0,2.0,,
+Caso C,PanaderiaSupermercado_M6_Model_Panaderia_trace.csv,2,Hallulla,Hallulla,1631.608906,1097.153121,534.455785,67.2436,538.0,0.106879,1.0,4.0,2.0,2.0,,
+Caso C,PanaderiaSupermercado_M6_Model_Panaderia_trace.csv,3,Marraqueta_Integral,Marraqueta Integral,964.48712,905.76749,58.71963,93.9118,51.0,224.71251,1.0,4.0,4.0,0.0,,
+Caso C,PanaderiaSupermercado_M6_Model_Panaderia_trace.csv,4,Hallulla_Integral,Hallulla Integral,828.927576,811.112453,17.815123,97.8508,18.0,229.367547,1.0,4.0,4.0,0.0,,
+Caso C,PanaderiaSupermercado_M6_Model_Panaderia_trace.csv,5,Pan_Hot_Dog,Pan Hot Dog,1072.488426,685.789403,386.699023,63.9438,397.0,0.270597,1.0,3.0,3.0,0.0,,
+Caso C,PanaderiaSupermercado_M6_Model_Panaderia_trace.csv,6,Ciabatta,Ciabatta,480.491557,462.612005,17.879552,96.2789,17.0,152.517995,1.0,3.0,3.0,0.0,,
+Caso C,PanaderiaSupermercado_M6_Model_Panaderia_trace.csv,7,Baguette,Baguette,400.4471,370.164791,30.282309,92.4379,29.0,183.075209,1.0,3.0,3.0,0.0,,
+Caso C,PanaderiaSupermercado_M6_Model_Panaderia_trace.csv,8,Dobladita,Dobladita,372.348521,333.783323,38.565198,89.6427,37.0,595.386677,1.0,4.0,4.0,0.0,,
+Caso C,PanaderiaSupermercado_M6_Model_Panaderia_trace.csv,9,Bocado_de_Dama,Bocado de Dama,222.88181,188.702412,34.179399,84.6648,37.0,129.627588,1.0,3.0,3.0,0.0,,
+Caso C,PanaderiaSupermercado_M6_Model_Panaderia_trace.csv,10,Amasado,Amasado,405.839384,368.949597,36.889787,90.9102,36.0,363.480403,1.0,3.0,3.0,0.0,,
+Caso C,PanaderiaSupermercado_M6_Model_Panaderia_trace.csv,TOTAL,TOTAL,Total Escenario,8110.294261,6430.153379,1680.140882,79.2838,1681.0,1878.616621,10.0,35.0,31.0,4.0,30.0,75.0

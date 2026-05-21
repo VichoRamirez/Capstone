@@ -1,0 +1,11 @@
+﻿ProductoIdx,ProductoID,StockInicialKg,PuntoReposicionKg,StockObjetivoKg,CoberturaObjetivoMin,PuntoReposicionMin,SafetyFactor
+1,Marraqueta,126.19,124.99875,249.9975,90,45,1.0
+2,Hallulla,107.26,106.248125,212.49625,90,45,1.0
+3,Marraqueta_Integral,50.48,50.000625,100.00125,90,45,1.0
+4,Hallulla_Integral,50.48,50.000625,100.00125,90,45,1.0
+5,Pan_Hot_Dog,26.06,75.000625,150.00125,90,45,1.0
+6,Ciabatta,15.13,24.99875,49.9975,90,45,1.0
+7,Baguette,13.24,21.875625,43.75125,90,45,1.0
+8,Dobladita,29.17,21.8775,43.755,90,45,1.0
+9,Bocado_de_Dama,18.33,13.7475,27.495,90,45,1.0
+10,Amasado,12.43,23.75,47.5,90,45,1.0

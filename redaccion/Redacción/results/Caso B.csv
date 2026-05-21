@@ -1,0 +1,12 @@
+escenario,fuente_trace,producto_idx,producto_id,producto_nombre,demanda_total_kg,demanda_satisfecha_kg,demanda_perdida_kg,nivel_servicio_pct,stockout_count,stock_final_sala_kg,pendiente_reposicion_kg,lotes_liberados_total,lotes_liberados_push,lotes_liberados_pull,setup_horno_count,tiempo_setup_total_min
+Caso B,PanaderiaSupermercado_M6_Model_Panaderia_trace.csv,1,Marraqueta,Marraqueta,1730.77386,1205.938624,524.835236,69.6763,522.0,0.251376,1.0,4.0,2.0,2.0,,
+Caso B,PanaderiaSupermercado_M6_Model_Panaderia_trace.csv,2,Hallulla,Hallulla,1631.608906,1097.20855,534.400356,67.247,538.0,0.05145,1.0,4.0,2.0,2.0,,
+Caso B,PanaderiaSupermercado_M6_Model_Panaderia_trace.csv,3,Marraqueta_Integral,Marraqueta Integral,964.48712,905.76749,58.71963,93.9118,51.0,224.71251,1.0,4.0,4.0,0.0,,
+Caso B,PanaderiaSupermercado_M6_Model_Panaderia_trace.csv,4,Hallulla_Integral,Hallulla Integral,828.927576,807.797046,21.13053,97.4509,23.0,232.682954,1.0,4.0,4.0,0.0,,
+Caso B,PanaderiaSupermercado_M6_Model_Panaderia_trace.csv,5,Pan_Hot_Dog,Pan Hot Dog,1072.488426,685.789403,386.699023,63.9438,397.0,0.270597,1.0,3.0,3.0,0.0,,
+Caso B,PanaderiaSupermercado_M6_Model_Panaderia_trace.csv,6,Ciabatta,Ciabatta,480.491557,459.519947,20.97161,95.6354,20.0,155.610053,1.0,3.0,3.0,0.0,,
+Caso B,PanaderiaSupermercado_M6_Model_Panaderia_trace.csv,7,Baguette,Baguette,400.4471,367.313233,33.133867,91.7258,32.0,185.926767,1.0,3.0,3.0,0.0,,
+Caso B,PanaderiaSupermercado_M6_Model_Panaderia_trace.csv,8,Dobladita,Dobladita,372.348521,332.113595,40.234927,89.1943,39.0,297.056405,1.0,3.0,3.0,0.0,,
+Caso B,PanaderiaSupermercado_M6_Model_Panaderia_trace.csv,9,Bocado_de_Dama,Bocado de Dama,222.88181,186.622064,36.259746,83.7314,39.0,131.707936,1.0,3.0,3.0,0.0,,
+Caso B,PanaderiaSupermercado_M6_Model_Panaderia_trace.csv,10,Amasado,Amasado,405.839384,368.949597,36.889787,90.9102,36.0,363.480403,0.0,2.0,2.0,0.0,,
+Caso B,PanaderiaSupermercado_M6_Model_Panaderia_trace.csv,TOTAL,TOTAL,Total Escenario,8110.294261,6417.019549,1693.274712,79.1219,1697.0,1591.750451,9.0,33.0,29.0,4.0,28.0,70.0

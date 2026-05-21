@@ -1,0 +1,11 @@
+﻿ProductoIdx,ProductoID,NombreProducto,FamiliaProceso,FamiliaHorno,TiempoHorneadoMin,KgBatchRef,TempHornoC,CapacidadKgPorCarroRef,CarrosReqBatchRef,MinKgCompra,ModaKgCompra,MaxKgCompra,Activo
+1,Marraqueta,Marraqueta,Directo,2,18.0,60.0,210,40.0,2,0.25,0.75,2.0,True
+2,Hallulla,Hallulla,Directo con materia grasa,2,18.0,55.0,220,45.0,2,0.25,0.75,2.0,True
+3,Marraqueta_Integral,Marraqueta Integral,Directo integral,3,21.0,60.0,205,38.0,2,0.25,0.75,2.0,True
+4,Hallulla_Integral,Hallulla Integral,Directo integral con materia grasa,2,18.0,55.0,210,42.0,2,0.25,0.75,2.0,True
+5,Pan_Hot_Dog,Pan Hot Dog,Enriquecido,1,14.0,55.0,200,35.0,2,0.25,0.75,2.0,True
+6,Ciabatta,Ciabatta,Alta hidratación,3,21.0,50.0,230,35.0,2,0.25,0.75,2.0,True
+7,Baguette,Baguette,Francés/artesanal,3,21.0,45.0,235,32.0,2,0.25,0.75,2.0,True
+8,Dobladita,Dobladita,Masa grasa laminada simple,1,14.0,50.0,215,45.0,2,0.25,0.75,2.0,True
+9,Bocado_de_Dama,Bocado de Dama,Pan pequeño enriquecido,1,14.0,25.0,200,28.0,1,0.25,0.75,2.0,True
+10,Amasado,Amasado,Tradicional chileno,2,18.0,60.0,210,40.0,2,0.25,0.75,2.0,True
