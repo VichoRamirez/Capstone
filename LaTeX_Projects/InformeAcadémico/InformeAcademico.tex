@@ -53,6 +53,7 @@
 \definecolor{g5}{RGB}{192,57,43}
 \definecolor{tabhead}{RGB}{0,70,127}
 \definecolor{tabrow}{RGB}{235,243,252}
+\definecolor{rojoriesgo}{RGB}{180,30,30}
 
 % ── hyperref ──────────────────────────────────────────────────────────────────
 \hypersetup{
@@ -415,15 +416,29 @@ Toda decisión que no proviene directamente de los archivos fuente queda registr
 
 \subsection{Verificación}
 
-La verificación responde a la pregunta: ¿el modelo fue construido correctamente? Su protocolo se basa en una lista de chequeo aplicada antes de ejecutar los experimentos:
-\begin{itemize}
-  \item Los lotes siguen la secuencia correcta de etapas para cada variedad.
-  \item Los panaderos se capturan y liberan en los momentos correctos.
-  \item El horno rechaza cargas mixtas entre familias.
-  \item La carga del horno no excede 6~carros ni 108~bandejas.
-  \item Los descansos del personal son escalonados y nunca simultáneos para una misma función.
-  \item No existen entidades bloqueadas ni colas con crecimiento ilimitado.
-\end{itemize}
+La verificación responde a la pregunta: ¿el modelo fue construido correctamente? Su protocolo se instrumentalizó como una lista de chequeo PASS/FAIL aplicada antes de ejecutar los experimentos. La Tabla~\ref{tab:verificacion} resume las pruebas ejecutadas, la condición esperada y el resultado obtenido.
+
+\begin{table}[H]
+\centering
+\caption{Protocolo de verificación: pruebas y resultados}
+\label{tab:verificacion}
+\renewcommand{\arraystretch}{1.35}
+\begin{tabularx}{\textwidth}{Xll}
+\toprule
+\rowcolor{tabhead}
+\color{white}\textbf{Prueba} &
+\color{white}\textbf{Condición esperada} &
+\color{white}\textbf{Estado} \\
+\midrule
+\rowcolor{tabrow} Secuencia de etapas por lote & Los lotes recorren Pesado→Amasado→Reposo→Formado→Ferment.→Horneado→Enfriado en ese orden. & \textcolor{verdeok}{\textbf{PASS}} \\
+Captura/liberación del panadero & El panadero se asigna en Pesado, Amasado y Formado; se libera al inicio del Reposo pasivo. & \textcolor{verdeok}{\textbf{PASS}} \\
+\rowcolor{tabrow} Rechazo de familias mixtas & El horno rechaza cargas con lotes de más de una familia en la misma corrida. & \textcolor{verdeok}{\textbf{PASS}} \\
+Límite de carros y bandejas & La carga de cada corrida no excede 6~carros ni 108~bandejas totales. & \textcolor{verdeok}{\textbf{PASS}} \\
+\rowcolor{tabrow} Descansos escalonados & Los descansos de panaderos y manipuladores nunca son simultáneos para la misma función. & \textcolor{verdeok}{\textbf{PASS}} \\
+No hay colas infinitas ni bloqueos & Inspección visual en warm-up: ninguna cola crece sin límite y no hay entidades atrapadas. & \textcolor{verdeok}{\textbf{PASS}} \\
+\bottomrule
+\end{tabularx}
+\end{table}
 
 \subsection{Validación}
 
@@ -573,6 +588,35 @@ Amasado                                & 100,00\% & 94,50\% & 90,91\% & 90,91\% 
 \bottomrule
 \end{tabularx}
 \end{table}
+
+\subsection{Cuadro comparativo de escenarios (dashboard)}
+
+\begin{table}[H]
+\centering
+\caption{Dashboard: KPIs clave por escenario}
+\label{tab:dashboard-acad}
+\renewcommand{\arraystretch}{1.35}
+\begin{tabularx}{\textwidth}{lcccccc}
+\toprule
+\rowcolor{tabhead}
+\color{white}\textbf{Caso} &
+\color{white}\textbf{\makecell{NDS\\global}} &
+\color{white}\textbf{\makecell{Prod.\\$<$95\%}} &
+\color{white}\textbf{\makecell{Dem. perdida\\(kg)}} &
+\color{white}\textbf{\makecell{Stockouts\\(eventos)}} &
+\color{white}\textbf{\makecell{Lotes\\Push/Pull}} &
+\color{white}\textbf{Veredicto} \\
+\midrule
+\rowcolor{tabrow} Caso~0 & \cellcolor{rojoriesgo!20}68,3\% & 6 & 2.574 & 2.568 & 28/3 & \textcolor{rojoriesgo}{Descartado} \\
+Caso~A & \cellcolor{rojoriesgo!20}84,7\% & 7 & 1.244 & 1.251 & 34/2 & \textcolor{naranja}{Mejor realista} \\
+\rowcolor{tabrow} Caso~B & \cellcolor{rojoriesgo!20}79,1\% & 8 & 1.693 & 1.697 & 29/4 & \textcolor{rojoriesgo}{Peor que A} \\
+Caso~C & \cellcolor{rojoriesgo!20}79,3\% & 8 & 1.680 & 1.681 & 31/4 & \textcolor{rojoriesgo}{$\approx$ Caso~B} \\
+\rowcolor{tabrow} Caso~D & \cellcolor{verdeok!25}98,6\% & 4 & 112 & 110 & 35/0 & \textcolor{grisoscuro}{Techo teórico} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\noindent\textit{Nota:} «Prod.~$<$95\%» = número de tipos de pan cuyo NDS individual no alcanza el umbral. El criterio del estudio es simultáneo: todos deben superar el 95\%.
 
 \subsection{Demanda perdida y lotes de producción}
 

@@ -377,31 +377,39 @@ Cada corrida del experimento registra las siguientes variables de respuesta por 
 
 \subsection{Procesos principales del modelo}
 
-La lógica del modelo se implementa en ocho procesos con triggers explícitos. La siguiente tabla describe qué hace cada uno y cuándo se activa:
+La lógica del modelo se implementa en ocho procesos con triggers explícitos. Cada entrada indica qué hace el proceso y qué lo activa (en cursiva).
 
 \begin{table}[H]
 \centering
-\caption{Procesos del modelo: función y momento de activación}
+\caption{Procesos del modelo: función y trigger de activación}
 \label{tab:procesos}
-\renewcommand{\arraystretch}{1.3}
-\begin{tabularx}{\textwidth}{lXl}
+\renewcommand{\arraystretch}{1.45}
+\begin{tabularx}{\textwidth}{p{3.4cm}X}
 \toprule
 \rowcolor{tabhead}
 \color{white}\textbf{Proceso} &
-\color{white}\textbf{Función} &
-\color{white}\textbf{Activado por} \\
+\color{white}\textbf{Descripción y trigger} \\
 \midrule
-\rowcolor{tabrow}\texttt{P\_InitModel}              & Inicializa el vector de stock \texttt{StockSala[i]} con los valores de \texttt{Tbl\_StockPolitica}, carga los parámetros de escenario activo y arranca los timers de producción push. & Inicio de corrida (hora~0) \\
-\texttt{P\_GenerarDemandaCliente}   & Sortea el número de tipos de pan a comprar (1, 2 ó 3) según las probabilidades del supuesto de mezcla de compra. Crea las condiciones para la cadena de elección y consumo. & Llegada de entidad cliente desde \texttt{Source\_Clientes} \\
-\rowcolor{tabrow}\texttt{P\_ElegirProductos}        & Selecciona sin reemplazo los índices de producto a comprar en esa visita, ponderando por las probabilidades horarias de \texttt{Tbl\_ProbEleccionHoraLong}. & Salida de \texttt{P\_GenerarDemandaCliente} \\
-\texttt{P\_ConsumirInventario}      & Descuenta \texttt{StockSala[i]} en la cantidad comprada. Si hay stock suficiente, acumula \texttt{demanda\_satisfecha\_kg}; si el stock es $\leq 0$, acumula \texttt{demanda\_perdida\_kg} y registra un stockout. Si hay quiebre, dispara \texttt{P\_EvaluarHorno} inmediatamente (modo pull). & Salida de \texttt{P\_ElegirProductos} \\
-\rowcolor{tabrow}\texttt{P\_EvaluarHorno}           & Evalúa si algún producto requiere un lote de producción: calcula la cobertura proyectada de stock para cada producto y genera un nuevo lote si está por debajo del umbral. Ordena los productos por la política activa (\texttt{MenorStockRelativo}: menor \texttt{StockSala[i] / DemandaMedia[i]}). & Timer periódico (push) o quiebre detectado (pull) \\
-\texttt{P\_FormarCargaHorno}        & Agrupa lotes pendientes de la misma familia hasta alcanzar la capacidad máxima de carros (6) o el tiempo de espera máximo (15~min). Genera la corrida de horno cuando se cumple cualquiera de las dos condiciones: carga mínima de 600~kg o espera máxima vencida. & Llegada de lote al área de espera del horno \\
-\rowcolor{tabrow}\texttt{P\_AplicarSetupHorno}      & Compara la familia de la corrida actual con la familia de la corrida anterior. Si son distintas, aplica 5~min de setup; si son iguales, el setup es 0~min. Acumula \texttt{setup\_horno\_count} y \texttt{tiempo\_setup\_total\_min}. & Antes de cada corrida de horno \\
-\texttt{P\_ReponerSala}             & Incrementa \texttt{StockSala[i]} en los kilogramos del lote recién completado. Se ejecuta cuando el lote llega al nodo final tras el enfriado. El incremento es inmediato (sin demora de traslado adicional). & Llegada del lote al nodo \texttt{Sink\_Sala} \\
+\rowcolor{tabrow}\texttt{P\_InitModel} &
+Inicializa el vector de stock \texttt{StockSala[i]} con los valores de \texttt{Tbl\_StockPolitica}, carga los parámetros del escenario activo y arranca los timers de producción push. \textit{Trigger: hora~0 de la corrida.} \\
+\texttt{P\_Generar\-DemandaCliente} &
+Sortea el número de tipos de pan a comprar (1, 2 ó 3) según las probabilidades de mezcla de compra e inicia la cadena de elección y consumo del cliente. \textit{Trigger: llegada de entidad desde \texttt{Source\_Clientes}.} \\
+\rowcolor{tabrow}\texttt{P\_Elegir\-Productos} &
+Selecciona sin reemplazo los índices de producto a comprar en esa visita, ponderando por las probabilidades horarias de \texttt{Tbl\_ProbEleccionHoraLong}. \textit{Trigger: salida de \texttt{P\_GenerarDemandaCliente}.} \\
+\texttt{P\_Consumir\-Inventario} &
+Descuenta \texttt{StockSala[i]} en la cantidad comprada. Si hay stock, acumula demanda satisfecha; si el stock es $\leq$0, acumula demanda perdida y registra un stockout. Si hay quiebre, dispara \texttt{P\_EvaluarHorno} en modo pull. \textit{Trigger: salida de \texttt{P\_ElegirProductos}.} \\
+\rowcolor{tabrow}\texttt{P\_Evaluar\-Horno} &
+Calcula la cobertura proyectada de stock para cada producto y genera un lote si cae bajo el umbral. Ordena por \texttt{MenorStockRelativo} (\texttt{StockSala[i]/DemandaMedia[i]}). \textit{Trigger: timer periódico de 30~min (push) o quiebre detectado (pull).} \\
+\texttt{P\_Formar\-CargaHorno} &
+Agrupa lotes pendientes de la misma familia hasta la capacidad máxima (6~carros) o el tiempo de espera máximo (15~min). Dispara la corrida al cumplirse cualquiera de las dos condiciones. \textit{Trigger: llegada de lote al área de espera del horno.} \\
+\rowcolor{tabrow}\texttt{P\_Aplicar\-SetupHorno} &
+Compara la familia de la corrida actual con la anterior: aplica 5~min de setup si cambia de familia, 0~min si es la misma. Acumula \texttt{setup\_horno\_count} y \texttt{tiempo\_setup\_total\_min}. \textit{Trigger: antes de cada corrida de horno.} \\
+\texttt{P\_Reponer\-Sala} &
+Incrementa \texttt{StockSala[i]} en los kilogramos del lote recién completado al llegar al nodo final (post-enfriado). \textit{Trigger: llegada del lote a \texttt{Sink\_Sala}.} \\
 \bottomrule
 \end{tabularx}
 \end{table}
+
 
 % ══════════════════════════════════════════════════════════════════════════════
 \newpage
@@ -571,13 +579,40 @@ Stockouts (eventos)                        & 2.568 & 1.251 & 1.697 & 1.681 & 110
 \end{tabularx}
 \end{table}
 
+\subsection{Cuadro comparativo (dashboard)}
+
+\begin{table}[H]
+\centering
+\caption{Dashboard comparativo de escenarios: KPIs clave y decisión}
+\label{tab:dashboard}
+\renewcommand{\arraystretch}{1.35}
+\begin{tabularx}{\textwidth}{lcccccc}
+\toprule
+\rowcolor{tabhead}
+\color{white}\textbf{Caso} &
+\color{white}\textbf{\makecell{NDS\\global}} &
+\color{white}\textbf{\makecell{Prod.\\$<$95\%}} &
+\color{white}\textbf{\makecell{Dem. perdida\\(kg)}} &
+\color{white}\textbf{\makecell{Stockouts\\(eventos)}} &
+\color{white}\textbf{\makecell{Lotes\\Push/Pull}} &
+\color{white}\textbf{Veredicto} \\
+\midrule
+\rowcolor{tabrow} Caso~0 & \cellcolor{rojoriesgo!20}68,3\% & 6 & 2.574 & 2.568 & 28/3 & \textcolor{rojoriesgo}{Descartado} \\
+Caso~A & \cellcolor{rojoriesgo!20}84,7\% & 7 & 1.244 & 1.251 & 34/2 & \textcolor{naranja}{Base recomendada} \\
+\rowcolor{tabrow} Caso~B & \cellcolor{rojoriesgo!20}79,1\% & 8 & 1.693 & 1.697 & 29/4 & \textcolor{rojoriesgo}{Descartado ($<$A)} \\
+Caso~C & \cellcolor{rojoriesgo!20}79,3\% & 8 & 1.680 & 1.681 & 31/4 & \textcolor{rojoriesgo}{Descartado ($\approx$B)} \\
+\rowcolor{tabrow} Caso~D & \cellcolor{verdeok!25}98,6\% & 4 & 112 & 110 & 35/0 & \textcolor{grisoscuro}{Techo teórico} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
 \subsection{Observaciones clave}
 
 \begin{itemize}
   \item \textbf{Caso~0 es insostenible}: 2.574~kg no vendidos al día, 2.568 eventos de quiebre. Marraqueta solo alcanza un 22,7\% de satisfacción.
   \item \textbf{Caso~A reduce los quiebres a la mitad}: de 2.574~kg perdidos a 1.244~kg ($-51,7\%$) con solo un panadero adicional.
-  \item \textbf{Caso~B es paradójico}: el 2.°~horno reduce el nivel de servicio global en 5,6~pp respecto a Caso~A. Pan Hot Dog colapsa de 93,1\% a 63,9\% (-386~kg/día no vendidos). La causa: con 2~hornos pero los mismos 3~panaderos, cada panadero debe preparar más corridas en paralelo y dispone de menos tiempo por producto. Los productos que antes eran bien atendidos pierden prioridad; el horno no es el cuello de botella, los panaderos sí.
-  \item \textbf{Caso~D muestra el techo}: con lotes óptimos se alcanzan 98,6\%, pero 4 productos aún no superan el 95\% (Baguette 93,9\%, Dobladita 92,2\%, Bocado de Dama 89,2\%, Amasado 94,5\%), lo que indica que el sistema necesita más tiempo de operación (inicio más temprano) para los productos de menor demanda y ciclo largo.
+  \item \textbf{Caso~B es paradójico}: el 2.°~horno reduce el nivel de servicio global en 5,6~pp respecto a Caso~A. Pan Hot Dog colapsa de 93,1\% a 63,9\% ($-386$~kg/día no vendidos). Con 2~hornos pero los mismos 3~panaderos, cada panadero compite por atender más colas en paralelo; el horno no es el cuello de botella, los panaderos sí.
+  \item \textbf{Caso~D muestra el techo}: con lotes óptimos se alcanzan 98,6\%, pero 4 productos aún no superan el 95\% (Baguette 93,9\%, Dobladita 92,2\%, Bocado de Dama 89,2\%, Amasado 94,5\%), indicando que el limitante restante es el número de ciclos completables en el día, no el tamaño de los lotes.
 \end{itemize}
 
 % ══════════════════════════════════════════════════════════════════════════════
@@ -629,49 +664,45 @@ El horno batch requiere un manipulador para carga (5~min) y descarga (5~min) por
 \section{Recomendaciones operativas}
 % ══════════════════════════════════════════════════════════════════════════════
 
-Las recomendaciones se presentan en orden de prioridad. Las primeras tres son el conjunto mínimo para acercarse al 95\% en todos los productos.
+Las recomendaciones se presentan en orden de prioridad. La columna «Respaldo» indica si la recomendación está directamente simulada o si se infiere de evidencia indirecta del modelo.
 
 \begin{table}[H]
 \centering
 \caption{Plan de acción recomendado}
 \label{tab:recomendaciones}
-\renewcommand{\arraystretch}{1.4}
-\begin{tabularx}{\textwidth}{clXl}
+\renewcommand{\arraystretch}{1.35}
+\begin{tabularx}{\textwidth}{clXll}
 \toprule
 \rowcolor{tabhead}
 \color{white}\textbf{\#} &
 \color{white}\textbf{Acción} &
-\color{white}\textbf{Impacto esperado} &
+\color{white}\textbf{Impacto} &
+\color{white}\textbf{Respaldo} &
 \color{white}\textbf{Prioridad} \\
 \midrule
 \rowcolor{tabrow}
-1 &
-Contratar 1~panadero adicional (total: 3) &
-Nivel global sube de 68,3\% a 84,7\% ($+16,4$~pp). Marraqueta Integral y Hallulla Integral alcanzan 100\%. &
+1 & +1 panadero (total: 3) &
+NDS 68,3\%~$\to$~84,7\% ($+16,4$~pp). Marraqueta Integral y Hallulla Integral a 100\%. &
+Simulado (Caso~A) &
 \textcolor{rojoriesgo}{\textbf{Urgente}} \\
-
-2 &
-Adelantar inicio de producción a 04:00--05:00 &
-Permite 1--2 ciclos adicionales antes del primer pico de demanda (12:00--14:00). Proyecta resolver los 5 productos actualmente limitados por ciclos. &
+2 & Inicio producción 04:00--05:00 &
+1--2 ciclos extra antes del pico 12:00--14:00; proyecta resolver Baguette, Dobladita, Bocado de Dama y Amasado. &
+Inferido (Caso~D) &
 \textcolor{rojoriesgo}{\textbf{Urgente}} \\
-
 \rowcolor{tabrow}
-3 &
-Agregar 1~manipulador (total: 2) &
-Destraba la carga/descarga del horno y acelera la reposición a sala. Libera capacidad efectiva del panadero. &
+3 & +1 manipulador (total: 2) &
+Destraba carga/descarga del horno; reduce esperas de lotes y reposición a sala. &
+Inferido &
 \textcolor{naranja}{\textbf{Alta}} \\
-
-4 &
-Revisar política de secuenciamiento de lotes &
-Priorizar productos con menor cobertura proyectada. La política híbrida actual es correcta pero puede refinarse. &
+4 & Reducir carga mínima del horno &
+Lotes más frecuentes y pequeños; brecha de NDS cae $-91\%$ en escenario utópico. &
+Simulado (Caso~D) &
 \textcolor{naranja}{\textbf{Alta}} \\
-
 \rowcolor{tabrow}
-5 &
-Evaluar 2.° horno SOLO tras implementar R1--R3 &
-El Caso~B demuestra que agregar el horno \emph{antes} de escalar el personal reduce el nivel de servicio de 84,7\% a 79,1\%. El 2.°~horno solo aporta valor si los panaderos y manipuladores ya están dimensionados correctamente. &
+5 & 2.°~horno solo tras R1--R3 &
+Agregar el horno sin escalar el personal baja NDS de 84,7\% a 79,1\%. Solo se justifica con panaderos y manipuladores ya dimensionados. &
+Simulado (Caso~B) &
 \textcolor{grisoscuro}{\textbf{Condicional}} \\
-
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -703,13 +734,13 @@ El escenario de referencia teórica (Caso~D) muestra que el techo del sistema co
 
 \subsection{Impacto esperado en el negocio}
 
-Con la implementación de las tres recomendaciones prioritarias (R1: panadero adicional, R2: inicio a las 04:00--05:00, R3: manipulador adicional):
+Con la implementación de las recomendaciones prioritarias:
 
 \begin{itemize}
-  \item Reducción de quiebres de stock en más del 95\% (de 2.568 a menos de 200 eventos/día proyectados).
-  \item Recuperación de ventas directas equivalente a la demanda actualmente perdida.
-  \item Mejora en la experiencia de compra: disponibilidad consistente de todos los tipos de pan durante toda la jornada.
-  \item Bajo riesgo de sobreproducción: el modelo indica que el sistema trabaja cerca del límite de capacidad, no genera excedentes excesivos.
+  \item \textbf{R1 (simulado)}: el panadero adicional reduce la demanda perdida de 2.574~kg a 1.244~kg ($-51,7\%$) y los stockouts de 2.568 a 1.251 eventos. Evidencia directa del modelo.
+  \item \textbf{R2 (inferido)}: adelantar el inicio de producción a las 04:00--05:00 se proyecta como la acción que cierra la brecha residual en los productos de ciclo largo (Baguette, Dobladita, Bocado de Dama, Amasado). No está simulado directamente; se infiere del análisis de ciclos de producción del Caso~D.
+  \item \textbf{R3 (inferido)}: el segundo manipulador reduce la espera en carga/descarga del horno y acelera la reposición a sala. El impacto cuantitativo no fue simulado.
+  \item La combinación R1+R2+R3 se espera que acerque el sistema al 95\% global, pero requiere ejecución del escenario combinado para confirmarlo con evidencia directa.
 \end{itemize}
 
 El costo de la intervención (2 sueldos operacionales adicionales más el ajuste de turno) debe evaluarse contra el ingreso recuperado por la reducción de quiebres. Dado que la demanda no satisfecha es directamente demanda perdida (el cliente no espera ni regresa por ese producto ese día), la recuperación de ventas es proporcional a la mejora en el nivel de servicio.
